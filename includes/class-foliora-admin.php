@@ -109,7 +109,7 @@ class Foliora_Admin {
 	}
 
 	public function enqueue_admin_assets( $hook ) {
-		$page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- admin screen routing.
+		$page         = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- admin screen routing.
 		$is_dashboard = ( self::PAGE_SLUG === $page || 'toplevel_page_' . self::PAGE_SLUG === $hook );
 		$is_builder   = ( self::BUILDER_SLUG === $page || self::PAGE_SLUG . '_page_' . self::BUILDER_SLUG === $hook || 'foliora_page_' . self::BUILDER_SLUG === $hook );
 		$is_settings  = ( self::SETTINGS_SLUG === $page || self::PAGE_SLUG . '_page_' . self::SETTINGS_SLUG === $hook );
@@ -209,24 +209,41 @@ class Foliora_Admin {
 			'foliora-admin',
 			'FolioraAdmin',
 			array(
-				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
-				'nonce'   => wp_create_nonce( 'foliora_admin' ),
-				'i18n'    => array(
-					'selectPdf'     => __( 'Select PDF', 'foliora' ),
-					'usePdf'        => __( 'Use this PDF', 'foliora' ),
-					'copied'        => __( 'Copied!', 'foliora' ),
-					'copiedToast'   => __( 'Shortcode copied', 'foliora' ),
-					'codeCopied'    => __( 'Code snippet copied to clipboard', 'foliora' ),
-					'dismissed'     => __( 'Dismissed', 'foliora' ),
+				'ajaxUrl'     => admin_url( 'admin-ajax.php' ),
+				'nonce'       => wp_create_nonce( 'foliora_admin' ),
+				'i18n'        => array(
+					'selectPdf'       => __( 'Select PDF', 'foliora' ),
+					'usePdf'          => __( 'Use this PDF', 'foliora' ),
+					'copied'          => __( 'Copied!', 'foliora' ),
+					'copiedToast'     => __( 'Shortcode copied', 'foliora' ),
+					'codeCopied'      => __( 'Code snippet copied to clipboard', 'foliora' ),
+					'dismissed'       => __( 'Dismissed', 'foliora' ),
 					/* translators: 1: completed steps, 2: total steps. */
-					'stepsComplete' => __( '%1$s of %2$s steps complete', 'foliora' ),
-					'setupDone'     => __( 'You are set. New documents go in Documents or the Media Library.', 'foliora' ),
-					'dropHint'      => __( 'Drop a PDF to embed it', 'foliora' ),
-					'uploading'     => __( 'Uploading…', 'foliora' ),
-					'creating'      => __( 'Creating page…', 'foliora' ),
-					'notPdf'        => __( 'Please drop a PDF file.', 'foliora' ),
-					'uploadFail'    => __( 'Upload failed. Try the Media Library.', 'foliora' ),
-					'presetApplied' => __( 'Preset applied', 'foliora' ),
+					'stepsComplete'   => __( '%1$s of %2$s steps complete', 'foliora' ),
+					'setupDone'       => __( 'You are set. New documents go in Documents or the Media Library.', 'foliora' ),
+					'dropHint'        => __( 'Drop a PDF to embed it', 'foliora' ),
+					'uploading'       => __( 'Uploading…', 'foliora' ),
+					'creating'        => __( 'Creating page…', 'foliora' ),
+					'notPdf'          => __( 'Please drop a PDF file.', 'foliora' ),
+					'uploadFail'      => __( 'Upload failed. Try the Media Library.', 'foliora' ),
+					'presetApplied'   => __( 'Preset applied', 'foliora' ),
+					'selectPdfFirst'  => __( 'Please select a PDF file.', 'foliora' ),
+					'previewEmpty'    => __( 'Select or upload a PDF above to see live interactive preview.', 'foliora' ),
+					'saving'          => __( 'Saving…', 'foliora' ),
+					'updateEmbed'     => __( 'Update Embed & Copy', 'foliora' ),
+					'savedCopiedBtn'  => __( '✓ Saved! Copied', 'foliora' ),
+					/* translators: %s: shortcode that was copied. */
+					'toastSaved'      => __( 'Saved! %s copied to clipboard.', 'foliora' ),
+					'saveFailed'      => __( 'Could not save embed.', 'foliora' ),
+					'testPageFailed'  => __( 'Could not create test page.', 'foliora' ),
+					/* translators: %s: text that was copied. */
+					'copiedItem'      => __( 'Copied: %s', 'foliora' ),
+					'embedDuplicated' => __( 'Embed duplicated successfully.', 'foliora' ),
+					'duplicateFailed' => __( 'Could not duplicate embed.', 'foliora' ),
+					/* translators: %s: embed ID. */
+					'confirmDelete'   => __( 'Are you sure you want to delete this embed? Any shortcode using id="%s" will no longer work.', 'foliora' ),
+					'embedDeleted'    => __( 'Embed deleted.', 'foliora' ),
+					'deleteFailed'    => __( 'Could not delete embed.', 'foliora' ),
 				),
 				'uploadNonce' => wp_create_nonce( 'media-form' ),
 				'canUpload'   => current_user_can( 'upload_files' ),
@@ -400,6 +417,9 @@ class Foliora_Admin {
 	 * array of free-plugin keys means extra POST keys cannot persist
 	 * here, and a separately registered option such as
 	 * `foliora_pro_settings` is never read or written.
+	 *
+	 * @param mixed $input Raw submitted option value.
+	 * @return array Sanitized settings.
 	 */
 	public function sanitize_settings( $input ) {
 		$existing = get_option( self::OPTION_NAME, array() );
@@ -417,7 +437,7 @@ class Foliora_Admin {
 		$form = array_key_exists( 'default_width', $input );
 
 		$valid_themes = array( 'light', 'dark', 'sepia' );
-		$theme = isset( $input['default_theme'] ) && in_array( $input['default_theme'], $valid_themes, true )
+		$theme        = isset( $input['default_theme'] ) && in_array( $input['default_theme'], $valid_themes, true )
 			? $input['default_theme']
 			: ( $existing['default_theme'] ?? 'light' );
 
@@ -556,7 +576,6 @@ class Foliora_Admin {
 			checked( $checked, true, false ),
 			esc_html__( 'Show the distraction-free presentation mode button.', 'foliora' )
 		);
-
 	}
 
 	public function field_default_width() {
@@ -663,18 +682,18 @@ class Foliora_Admin {
 			return;
 		}
 
-		$is_pro      = Foliora_Loader::is_pro_active();
-		$pretty      = (bool) get_option( 'permalink_structure' );
-		$pdf_count   = $this->count_pdfs();
-		$embed_count = $this->count_embeds();
-		$settings    = get_option( self::OPTION_NAME, array() );
-		$copied      = ! empty( $settings['setup_copied_shortcode'] );
-		$recent      = $this->get_recent_pdfs( 4 );
-		$prefill     = ! empty( $recent[0] ) ? $recent[0] : null;
-		$prefill_url = $prefill ? $prefill['url'] : '';
+		$is_pro       = Foliora_Loader::is_pro_active();
+		$pretty       = (bool) get_option( 'permalink_structure' );
+		$pdf_count    = $this->count_pdfs();
+		$embed_count  = $this->count_embeds();
+		$settings     = get_option( self::OPTION_NAME, array() );
+		$copied       = ! empty( $settings['setup_copied_shortcode'] );
+		$recent       = $this->get_recent_pdfs( 4 );
+		$prefill      = ! empty( $recent[0] ) ? $recent[0] : null;
+		$prefill_url  = $prefill ? $prefill['url'] : '';
 		$prefill_code = $prefill_url ? sprintf( '[foliora file="%s"]', esc_url_raw( $prefill_url ) ) : '';
 
-		$steps = array(
+		$steps        = array(
 			'uploaded' => $pdf_count > 0,
 			'copied'   => $copied,
 			'embedded' => $embed_count > 0,
@@ -819,13 +838,15 @@ class Foliora_Admin {
 
 					<div class="foliora-stage<?php echo $prefill ? '' : ' is-empty'; ?>" id="foliora-stage">
 						<div class="foliora-stage-cover" aria-hidden="true">
-							<img id="foliora-stage-thumb" alt="" <?php
+							<img id="foliora-stage-thumb" alt="" 
+							<?php
 							if ( $prefill && ! empty( $prefill['thumb'] ) ) {
 								echo ' src="' . esc_url( $prefill['thumb'] ) . '"';
 							} else {
 								echo ' hidden';
 							}
-							?> />
+							?>
+							/>
 							<span class="foliora-stage-fallback dashicons dashicons-media-document" id="foliora-stage-fallback"<?php echo ( $prefill && ! empty( $prefill['thumb'] ) ) ? ' hidden' : ''; ?>></span>
 						</div>
 						<div class="foliora-stage-meta">
@@ -1582,15 +1603,15 @@ class Foliora_Admin {
 
 		$query = new WP_Query(
 			array(
-				'post_type'               => 'attachment',
-				'post_status'             => 'inherit',
-				'post_mime_type'          => 'application/pdf',
-				'posts_per_page'          => 20,
-				'paged'                   => $paged,
-				's'                       => $search,
-				'orderby'                 => 'date',
-				'order'                   => 'DESC',
-				'foliora_content_search'  => ( '' !== $search ),
+				'post_type'              => 'attachment',
+				'post_status'            => 'inherit',
+				'post_mime_type'         => 'application/pdf',
+				'posts_per_page'         => 20,
+				'paged'                  => $paged,
+				's'                      => $search,
+				'orderby'                => 'date',
+				'order'                  => 'DESC',
+				'foliora_content_search' => ( '' !== $search ),
 			)
 		);
 
@@ -1691,17 +1712,17 @@ class Foliora_Admin {
 				</p>
 			</form>
 
-			<?php
-			$untagged_n = 0;
-			if ( $a11y_on && $query->have_posts() ) {
-				foreach ( $query->posts as $attachment ) {
-					if ( Foliora_A11y::is_checked( $attachment->ID ) && ! Foliora_A11y::is_tagged( $attachment->ID ) ) {
-						++$untagged_n;
+				<?php
+				$untagged_n = 0;
+				if ( $a11y_on && $query->have_posts() ) {
+					foreach ( $query->posts as $attachment ) {
+						if ( Foliora_A11y::is_checked( $attachment->ID ) && ! Foliora_A11y::is_tagged( $attachment->ID ) ) {
+							++$untagged_n;
+						}
 					}
 				}
-			}
-			if ( $untagged_n ) :
-				?>
+				if ( $untagged_n ) :
+					?>
 			<div class="notice notice-warning inline foliora-a11y-notice">
 				<p>
 					<?php
@@ -1720,9 +1741,9 @@ class Foliora_Admin {
 					?>
 				</p>
 			</div>
-			<?php endif; ?>
+				<?php endif; ?>
 
-			<?php if ( $query->have_posts() ) : ?>
+				<?php if ( $query->have_posts() ) : ?>
 				<table class="wp-list-table widefat striped foliora-docs-table">
 					<thead>
 						<tr>
@@ -1748,10 +1769,10 @@ class Foliora_Admin {
 							if ( '' === $title ) {
 								$title = wp_basename( $url );
 							}
-							$thumb_id   = Foliora_Thumbnails::get_thumbnail_id( $attachment->ID );
-							$indexed    = Foliora_SEO::is_indexed( $attachment->ID );
-							$has_text   = $indexed && '' !== Foliora_SEO::get_extracted_text( $attachment->ID );
-							$a11y_done  = Foliora_A11y::is_checked( $attachment->ID );
+							$thumb_id    = Foliora_Thumbnails::get_thumbnail_id( $attachment->ID );
+							$indexed     = Foliora_SEO::is_indexed( $attachment->ID );
+							$has_text    = $indexed && '' !== Foliora_SEO::get_extracted_text( $attachment->ID );
+							$a11y_done   = Foliora_A11y::is_checked( $attachment->ID );
 							$a11y_tagged = $a11y_done && Foliora_A11y::is_tagged( $attachment->ID );
 							?>
 							<tr
@@ -1826,7 +1847,7 @@ class Foliora_Admin {
 					</tbody>
 				</table>
 
-				<?php if ( $query->max_num_pages > 1 ) : ?>
+					<?php if ( $query->max_num_pages > 1 ) : ?>
 					<div class="tablenav bottom">
 						<div class="tablenav-pages">
 							<span class="displaying-num">
@@ -1886,10 +1907,10 @@ class Foliora_Admin {
 	 * @param bool $is_pro
 	 */
 		/**
-	 * Render comprehensive user guide and shortcodes cheatsheet.
-	 *
-	 * @param bool $is_pro
-	 */
+		 * Render comprehensive user guide and shortcodes cheatsheet.
+		 *
+		 * @param bool $is_pro
+		 */
 	public function render_user_guide_tab( $is_pro ) {
 		?>
 		<div class="foliora-guide-wrap">
@@ -2735,10 +2756,19 @@ class Foliora_Admin {
 	}
 
 	private function count_pdfs() {
-		// wp_count_attachments() returns a cached stdClass keyed by post_status.
-		// PDFs in the Media Library always have post_status 'inherit'.
-		$counts = wp_count_attachments( 'application/pdf' );
-		return isset( $counts->inherit ) ? (int) $counts->inherit : 0;
+		// wp_count_attachments() is keyed by MIME type (plus 'trash'), not by
+		// post_status, so it can't be read with ->inherit. A direct query also
+		// avoids a cached value going stale when a PDF is added or deleted.
+		$query = new WP_Query(
+			array(
+				'post_type'      => 'attachment',
+				'post_status'    => 'inherit',
+				'post_mime_type' => 'application/pdf',
+				'posts_per_page' => 1,
+				'fields'         => 'ids',
+			)
+		);
+		return (int) $query->found_posts;
 	}
 
 	private function count_embeds() {

@@ -43,36 +43,38 @@ define( 'FOLIORA_BASENAME', plugin_basename( __FILE__ ) );
  * created in the Freemius dashboard. Left commented so the plugin still
  * runs standalone during development; uncomment before shipping.
  */
+// phpcs:disable Squiz.Commenting.InlineComment, Squiz.PHP.CommentedOutCode, Universal.WhiteSpace.DisallowInlineTabs
 // if ( ! function_exists( 'foliora_fs' ) ) {
-// 	function foliora_fs() {
-// 		global $foliora_fs;
+// function foliora_fs() {
+// global $foliora_fs;
 //
-// 		if ( ! isset( $foliora_fs ) ) {
-// 			require_once FOLIORA_DIR . 'freemius/start.php';
+// if ( ! isset( $foliora_fs ) ) {
+// require_once FOLIORA_DIR . 'freemius/start.php';
 //
-// 			$foliora_fs = fs_dynamic_init(
-// 				array(
-// 					'id'                  => 'XXXXX',
-// 					'slug'                => 'foliora',
-// 					'type'                => 'plugin',
-// 					'public_key'          => 'pk_XXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
-// 					'is_premium'          => false,
-// 					'has_addons'          => true,
-// 					'has_paid_plans'      => true,
-// 					'menu'                => array(
-// 						'slug'    => 'foliora-settings',
-// 						'support' => false,
-// 					),
-// 				)
-// 			);
-// 		}
-//
-// 		return $foliora_fs;
-// 	}
-//
-// 	foliora_fs();
-// 	do_action( 'foliora_fs_loaded' );
+// $foliora_fs = fs_dynamic_init(
+// array(
+// 'id'                  => 'XXXXX',
+// 'slug'                => 'foliora',
+// 'type'                => 'plugin',
+// 'public_key'          => 'pk_XXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+// 'is_premium'          => false,
+// 'has_addons'          => true,
+// 'has_paid_plans'      => true,
+// 'menu'                => array(
+// 'slug'    => 'foliora-settings',
+// 'support' => false,
+// ),
+// )
+// );
 // }
+//
+// return $foliora_fs;
+// }
+//
+// foliora_fs();
+// do_action( 'foliora_fs_loaded' );
+// }
+// phpcs:enable Squiz.Commenting.InlineComment, Squiz.PHP.CommentedOutCode, Universal.WhiteSpace.DisallowInlineTabs
 
 /*
  * ---------------------------------------------------------------------
@@ -151,15 +153,19 @@ function foliora_deactivate() {
 register_deactivation_hook( FOLIORA_FILE, 'foliora_deactivate' );
 
 /**
- * Point just-in-time translation loading at bundled /languages files
- * when running on WP 6.7+. For WP 4.6+, translations are automatically
- * loaded by WordPress core from the 'Domain Path: /languages' header.
+ * Make the bundled /languages files load. Core does NOT read the
+ * 'Domain Path' header on its own: on WP.org it only loads language packs
+ * from WP_LANG_DIR. Newer cores expose a registry to add a custom path for
+ * just-in-time loading; older ones need load_plugin_textdomain(). WP.org
+ * language packs in WP_LANG_DIR still take precedence either way.
  */
 function foliora_register_textdomain_path() {
 	if ( isset( $GLOBALS['wp_textdomain_registry'] ) && is_object( $GLOBALS['wp_textdomain_registry'] )
 		&& method_exists( $GLOBALS['wp_textdomain_registry'], 'set_custom_path' ) ) {
 		$GLOBALS['wp_textdomain_registry']->set_custom_path( 'foliora', FOLIORA_DIR . 'languages' );
+		return;
 	}
+	load_plugin_textdomain( 'foliora', false, dirname( FOLIORA_BASENAME ) . '/languages' ); // phpcs:ignore PluginCheck.CodeAnalysis.DiscouragedFunctions.load_plugin_textdomainFound -- only reached on WP < 6.1 (no textdomain registry), where bundled /languages files are otherwise never read.
 }
 add_action( 'plugins_loaded', 'foliora_register_textdomain_path', 1 );
 

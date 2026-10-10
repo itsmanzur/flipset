@@ -17,3 +17,4 @@ blob-report
 .wp-env.override.json
 wp-cli.phar
 composer.phar
+/dist

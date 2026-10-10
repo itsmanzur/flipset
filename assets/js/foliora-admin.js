@@ -703,7 +703,7 @@
 			var file = fileInput ? fileInput.value.trim() : '';
 
 			if ( ! file ) {
-				stage.innerHTML = '<div class="foliora-builder-empty-state"><span class="dashicons dashicons-pdf" aria-hidden="true"></span><p>' + t( 'selectPdf', 'Select a PDF above to see live interactive preview.' ) + '</p></div>';
+				stage.innerHTML = '<div class="foliora-builder-empty-state"><span class="dashicons dashicons-pdf" aria-hidden="true"></span><p>' + t( 'previewEmpty', 'Select or upload a PDF above to see live interactive preview.' ) + '</p></div>';
 				return;
 			}
 
@@ -1041,7 +1041,7 @@
 				e.preventDefault();
 				var file = fileInput ? fileInput.value.trim() : '';
 				if ( ! file ) {
-					alert( t( 'selectPdf', 'Please select a PDF document first.' ) );
+					alert( t( 'selectPdfFirst', 'Please select a PDF file.' ) );
 					return;
 				}
 
@@ -1086,14 +1086,14 @@
 								idInput.value = data.embed_id;
 							}
 							if ( saveBtnText ) {
-								saveBtnText.textContent = '✓ Saved! Copied';
+								saveBtnText.textContent = t( 'savedCopiedBtn', '✓ Saved! Copied' );
 							}
 
 							updateOutput();
 
 							var codeToCopy = data.shortcode || ( '[foliora id="' + data.embed_id + '"]' );
 							copyText( codeToCopy, saveBtn, markCopiedStep );
-							toast( 'Saved! ' + codeToCopy + ' copied to clipboard.' );
+							toast( t( 'toastSaved', 'Saved! %s copied to clipboard.' ).replace( '%s', codeToCopy ) );
 
 							window.setTimeout( function () {
 								if ( saveBtnText ) {
@@ -1107,7 +1107,7 @@
 						if ( saveBtnText ) {
 							saveBtnText.textContent = originalLabel;
 						}
-						alert( ( err && err.message ) || 'Could not save embed.' );
+						alert( ( err && err.message ) || t( 'saveFailed', 'Could not save embed.' ) );
 					}
 				);
 			} );
@@ -1117,7 +1117,7 @@
 			createPageBtn.addEventListener( 'click', function () {
 				var file = fileInput ? fileInput.value.trim() : '';
 				if ( ! file ) {
-					alert( t( 'selectPdf', 'Select a PDF first.' ) );
+					alert( t( 'selectPdfFirst', 'Please select a PDF file.' ) );
 					return;
 				}
 				var shortcode = buildActiveShortcode();
@@ -1138,7 +1138,7 @@
 					function ( err ) {
 						createPageBtn.disabled = false;
 						createPageBtn.innerHTML = originalContent;
-						alert( ( err && err.message ) || 'Could not create test page.' );
+						alert( ( err && err.message ) || t( 'testPageFailed', 'Could not create test page.' ) );
 					}
 				);
 			} );
@@ -1160,7 +1160,7 @@
 				e.preventDefault();
 				var text = chip.getAttribute( 'data-copy' ) || chip.textContent.trim();
 				copyText( text, chip, function () {
-					toast( 'Copied: ' + text );
+					toast( t( 'copiedItem', 'Copied: %s' ).replace( '%s', text ) );
 				} );
 			} );
 		} );
@@ -1177,12 +1177,12 @@
 					'foliora_duplicate_embed',
 					{ embed_id: embId },
 					function ( data ) {
-						toast( 'Embed duplicated successfully!' );
+						toast( t( 'embedDuplicated', 'Embed duplicated successfully.' ) );
 						window.location.reload();
 					},
 					function ( err ) {
 						btn.disabled = false;
-						alert( ( err && err.message ) || 'Could not duplicate embed.' );
+						alert( ( err && err.message ) || t( 'duplicateFailed', 'Could not duplicate embed.' ) );
 					}
 				);
 			} );
@@ -1195,7 +1195,7 @@
 				if ( ! embId ) {
 					return;
 				}
-				if ( ! window.confirm( 'Are you sure you want to delete this embed? Any shortcode using id="' + embId + '" will no longer work.' ) ) {
+				if ( ! window.confirm( t( 'confirmDelete', 'Are you sure you want to delete this embed? Any shortcode using id="%s" will no longer work.' ).replace( '%s', embId ) ) ) {
 					return;
 				}
 				btn.disabled = true;
@@ -1212,11 +1212,11 @@
 							var currentCount = parseInt( badge.textContent, 10 ) || 0;
 							badge.textContent = String( Math.max( 0, currentCount - 1 ) );
 						}
-						toast( 'Embed #' + embId + ' deleted.' );
+						toast( t( 'embedDeleted', 'Embed deleted.' ) );
 					},
 					function ( err ) {
 						btn.disabled = false;
-						alert( ( err && err.message ) || 'Could not delete embed.' );
+						alert( ( err && err.message ) || t( 'deleteFailed', 'Could not delete embed.' ) );
 					}
 				);
 			} );

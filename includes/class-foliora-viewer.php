@@ -54,27 +54,27 @@ class Foliora_Viewer {
 
 		$atts = shortcode_atts(
 			array(
-				'id'        => '',
-				'file'      => '',
-				'width'     => $settings['default_width'] ?? '100%',
-				'height'    => $settings['default_height'] ?? '600px',
-				'mode'      => 'pdf', // 'pdf' (free) or 'epub' (Pro-only).
-				'page'      => '1',
-				'title'     => '',
-				'theme'     => $settings['default_theme'] ?? 'light',
-				'download'  => '',
-				'print'     => '',
-				'search'    => '',
-				'theme_btn' => '',
-				'share'     => '',
-				'shortcuts' => '',
+				'id'           => '',
+				'file'         => '',
+				'width'        => $settings['default_width'] ?? '100%',
+				'height'       => $settings['default_height'] ?? '600px',
+				'mode'         => 'pdf', // 'pdf' (free) or 'epub' (Pro-only).
+				'page'         => '1',
+				'title'        => '',
+				'theme'        => $settings['default_theme'] ?? 'light',
+				'download'     => '',
+				'print'        => '',
+				'search'       => '',
+				'theme_btn'    => '',
+				'share'        => '',
+				'shortcuts'    => '',
 				'presentation' => '',
-				'fullscreen' => '',
-				'loading'   => ! empty( $settings['lazy_loading'] ) ? 'lazy' : 'eager',
-				'hide'      => '',
-				'hash'      => 'true',
-				'view'      => 'page',
-				'resume'    => 'true',
+				'fullscreen'   => '',
+				'loading'      => ! empty( $settings['lazy_loading'] ) ? 'lazy' : 'eager',
+				'hide'         => '',
+				'hash'         => 'true',
+				'view'         => 'page',
+				'resume'       => 'true',
 			),
 			$atts,
 			'foliora'
@@ -227,7 +227,7 @@ class Foliora_Viewer {
 	 */
 	private function render_toolbar( $instance_id, $atts, $settings ) {
 		$file_url = isset( $atts['file'] ) ? (string) $atts['file'] : '';
-		
+
 		$hide_list = array_filter( array_map( 'trim', explode( ',', strtolower( (string) ( $atts['hide'] ?? '' ) ) ) ) );
 
 		$show_nav    = ! in_array( 'nav', $hide_list, true );
@@ -237,31 +237,31 @@ class Foliora_Viewer {
 		$show_view   = ! in_array( 'view', $hide_list, true );
 		$show_pan    = ! in_array( 'pan', $hide_list, true );
 
-		$download = ! in_array( 'download', $hide_list, true ) && $this->att_flag(
+		$download   = ! in_array( 'download', $hide_list, true ) && $this->att_flag(
 			$atts['download'] ?? '',
 			! isset( $settings['allow_download'] ) || ! empty( $settings['allow_download'] )
 		);
-		$print    = ! in_array( 'print', $hide_list, true ) && $this->att_flag(
+		$print      = ! in_array( 'print', $hide_list, true ) && $this->att_flag(
 			$atts['print'] ?? '',
 			! isset( $settings['allow_print'] ) || ! empty( $settings['allow_print'] )
 		);
-		$search   = ! in_array( 'search', $hide_list, true ) && $this->att_flag(
+		$search     = ! in_array( 'search', $hide_list, true ) && $this->att_flag(
 			$atts['search'] ?? '',
 			! isset( $settings['allow_search'] ) || ! empty( $settings['allow_search'] )
 		);
-		$theme_btn = ! in_array( 'theme', $hide_list, true ) && $this->att_flag(
+		$theme_btn  = ! in_array( 'theme', $hide_list, true ) && $this->att_flag(
 			$atts['theme_btn'] ?? '',
 			! isset( $settings['allow_theme'] ) || ! empty( $settings['allow_theme'] )
 		);
-		$share    = ! in_array( 'share', $hide_list, true ) && $this->att_flag(
+		$share      = ! in_array( 'share', $hide_list, true ) && $this->att_flag(
 			$atts['share'] ?? '',
 			! isset( $settings['allow_share'] ) || ! empty( $settings['allow_share'] )
 		);
-		$shortcuts = ! in_array( 'shortcuts', $hide_list, true ) && $this->att_flag(
+		$shortcuts  = ! in_array( 'shortcuts', $hide_list, true ) && $this->att_flag(
 			$atts['shortcuts'] ?? '',
 			! isset( $settings['allow_shortcuts'] ) || ! empty( $settings['allow_shortcuts'] )
 		);
-		$present  = ! in_array( 'presentation', $hide_list, true ) && $this->att_flag(
+		$present    = ! in_array( 'presentation', $hide_list, true ) && $this->att_flag(
 			$atts['presentation'] ?? '',
 			! isset( $settings['allow_presentation'] ) || ! empty( $settings['allow_presentation'] )
 		);
@@ -536,7 +536,7 @@ class Foliora_Viewer {
 			'copy'      => '<rect x="9" y="9" width="13" height="13" rx="2" ry="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />',
 			'check'     => '<polyline points="20 6 9 17 4 12" />',
 		);
-		$body = $paths[ $name ] ?? '';
+		$body  = $paths[ $name ] ?? '';
 		return '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' . $body . '</svg>';
 	}
 

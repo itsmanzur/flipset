@@ -27,6 +27,8 @@ const rootIgnores = new Set([
 	'.idea',
 	'.vscode',
 	'.cursor',
+	'.editorconfig',
+	'.gitattributes',
 	'.wp-env.json',
 	'.wp-env.override.json',
 	'node_modules',
@@ -108,8 +110,27 @@ try {
 		fs.unlinkSync(zipPathRoot);
 	}
 	console.log('📦 Compressing into foliora.zip...');
-	const psCmd = `powershell -NoProfile -Command "Compress-Archive -Path '${stageDir}' -DestinationPath '${zipPathRoot}' -Force"`;
-	execSync(psCmd, { stdio: 'inherit' });
+	// Compress-Archive on Windows PowerShell 5.1 writes backslash entry names,
+	// which extract as literal "foliora\file.php" on Linux hosts. Build the
+	// archive with System.IO.Compression and force forward slashes instead.
+	const psScript = [
+		'Add-Type -AssemblyName System.IO.Compression',
+		'Add-Type -AssemblyName System.IO.Compression.FileSystem',
+		`$stage = '${stageDir}'`,
+		`$zipPath = '${zipPathRoot}'`,
+		'$parent = Split-Path $stage -Parent',
+		'$zip = [System.IO.Compression.ZipFile]::Open($zipPath, [System.IO.Compression.ZipArchiveMode]::Create)',
+		'try {',
+		'  Get-ChildItem -Path $stage -Recurse -File | ForEach-Object {',
+		'    $rel = $_.FullName.Substring($parent.Length).TrimStart([char]92) -replace [regex]::Escape([string][char]92), "/"',
+		'    [void][System.IO.Compression.ZipFileExtensions]::CreateEntryFromFile($zip, $_.FullName, $rel, [System.IO.Compression.CompressionLevel]::Optimal)',
+		'  }',
+		'} finally { $zip.Dispose() }',
+	].join('\n');
+	const psFile = path.join(distDir, 'zip.ps1');
+	fs.writeFileSync(psFile, psScript);
+	execSync(`powershell -NoProfile -ExecutionPolicy Bypass -File "${psFile}"`, { stdio: 'inherit' });
+	fs.unlinkSync(psFile);
 
 	// Copy to dist/foliora.zip as well
 	fs.copyFileSync(zipPathRoot, zipPathDist);

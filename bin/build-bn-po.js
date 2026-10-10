@@ -296,6 +296,9 @@ msgstr ""
 "X-Domain: foliora\\n"
 `;
 
+// Strings added after the first release live in bn-extra.json so this file stays small.
+Object.assign( t, JSON.parse( fs.readFileSync( path.join( root, 'bin', 'bn-extra.json' ), 'utf8' ) ) );
+
 const potBody = pot.replace( /^[\s\S]*?X-Domain: foliora\\n"\n/, '' );
 const blocks = parseBlocks( potBody );
 const missing = [];

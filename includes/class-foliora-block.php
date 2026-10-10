@@ -189,7 +189,16 @@ class Foliora_Block {
 	 * @return string
 	 */
 	public function render_block( $attributes, $content = '', $block = null ) {
-		unset( $content, $block ); // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
+		unset( $content ); // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
+
+		// block.json gives every attribute a default, so $attributes always holds
+		// file="", width="100%", etc. For a saved embed those defaults would
+		// overwrite the stored config. Pass only what the author actually set.
+		if ( ! empty( $attributes['id'] ) && $block instanceof WP_Block
+			&& isset( $block->parsed_block['attrs'] ) && is_array( $block->parsed_block['attrs'] ) ) {
+			$attributes = $block->parsed_block['attrs'];
+		}
+
 		$html = Foliora::instance()->viewer->render_shortcode( $attributes );
 		if ( function_exists( 'get_block_wrapper_attributes' ) ) {
 			return '<div ' . get_block_wrapper_attributes( array( 'class' => 'foliora-block' ) ) . '>' . $html . '</div>';
@@ -200,7 +209,9 @@ class Foliora_Block {
 	/**
 	 * Delegates to the same shortcode renderer used by [foliora_library].
 	 *
-	 * @param array $attributes Block attributes.
+	 * @param array    $attributes Block attributes.
+	 * @param string   $content    Block inner content (unused).
+	 * @param WP_Block $block      Block instance when available.
 	 * @return string
 	 */
 	public function render_library_block( $attributes, $content = '', $block = null ) {

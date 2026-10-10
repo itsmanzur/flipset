@@ -83,6 +83,10 @@ class Foliora_A11y {
 			wp_send_json_error( array( 'message' => __( 'That file is not a PDF attachment.', 'foliora' ) ) );
 		}
 
+		if ( ! current_user_can( 'edit_post', $pdf_id ) ) {
+			wp_send_json_error( array( 'message' => __( 'Forbidden.', 'foliora' ) ), 403 );
+		}
+
 		$tagged = isset( $_POST['tagged'] ) && '1' === (string) wp_unslash( $_POST['tagged'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- compared to literal '1'.
 
 		update_post_meta( $pdf_id, self::META_CHECKED, '1' );

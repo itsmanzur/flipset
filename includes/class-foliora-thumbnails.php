@@ -66,12 +66,16 @@ class Foliora_Thumbnails {
 			wp_send_json_error( array( 'message' => __( 'That file is not a PDF attachment.', 'foliora' ) ) );
 		}
 
+		if ( ! current_user_can( 'edit_post', $pdf_id ) ) {
+			wp_send_json_error( array( 'message' => __( 'Forbidden.', 'foliora' ) ), 403 );
+		}
+
 		$raw = isset( $_POST['thumbnail_data'] ) ? wp_unslash( $_POST['thumbnail_data'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- binary PNG payload, validated below.
 		if ( ! is_string( $raw ) || ! preg_match( '#^data:image/png;base64,#i', $raw ) ) {
 			wp_send_json_error( array( 'message' => __( 'Invalid thumbnail data.', 'foliora' ) ) );
 		}
 
-		$binary = base64_decode( preg_replace( '#^data:image/png;base64,#i', '', $raw ), true );
+		$binary = base64_decode( preg_replace( '#^data:image/png;base64,#i', '', $raw ), true ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode -- decoding the admin-uploaded PNG data URL; strict mode plus a full PNG signature check follow.
 		// Verify the full 8-byte PNG signature (\x89PNG\r\n\x1a\n).
 		// Checking only the first 4 bytes ("\x89PNG") is insufficient; the
 		// complete signature guards against other binary formats that share

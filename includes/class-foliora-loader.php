@@ -93,13 +93,13 @@ class Foliora_Loader {
 	 */
 	public static function pro_features() {
 		return array(
-			'epub_reader'       => __( 'EPUB reader mode', 'foliora' ),
-			'bookmarks'         => __( 'Bookmarks & reading progress', 'foliora' ),
-			'reader_themes'     => __( 'Reader font & custom color themes', 'foliora' ),
-			'protected_links'   => __( 'Password-protected / expiring links', 'foliora' ),
-			'woocommerce_gate'  => __( 'WooCommerce paid-content gating', 'foliora' ),
-			'analytics'         => __( 'Reading analytics', 'foliora' ),
-			'remove_branding'   => __( 'Remove Foliora branding', 'foliora' ),
+			'epub_reader'      => __( 'EPUB reader mode', 'foliora' ),
+			'bookmarks'        => __( 'Bookmarks & reading progress', 'foliora' ),
+			'reader_themes'    => __( 'Reader font & custom color themes', 'foliora' ),
+			'protected_links'  => __( 'Password-protected / expiring links', 'foliora' ),
+			'woocommerce_gate' => __( 'WooCommerce paid-content gating', 'foliora' ),
+			'analytics'        => __( 'Reading analytics', 'foliora' ),
+			'remove_branding'  => __( 'Remove Foliora branding', 'foliora' ),
 		);
 	}
 

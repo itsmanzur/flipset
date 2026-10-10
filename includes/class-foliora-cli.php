@@ -94,7 +94,7 @@ class Foliora_CLI {
 			return;
 		}
 
-		$seo = Foliora::instance()->seo;
+		$seo   = Foliora::instance()->seo;
 		$count = 0;
 
 		$progress = \WP_CLI\Utils\make_progress_bar( 'Reindexing posts embedding PDFs', count( $post_ids ) );

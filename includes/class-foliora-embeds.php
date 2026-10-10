@@ -78,7 +78,7 @@ class Foliora_Embeds {
 			$config = array();
 		}
 
-		$config['id'] = $id;
+		$config['id']   = $id;
 		$config['name'] = $post->post_title;
 
 		return $config;
@@ -91,7 +91,7 @@ class Foliora_Embeds {
 	 * @return array Array of embed data.
 	 */
 	public static function get_all( $args = array() ) {
-		$defaults = array(
+		$defaults   = array(
 			'post_type'      => self::POST_TYPE,
 			'post_status'    => 'publish',
 			'posts_per_page' => 100,
@@ -99,7 +99,7 @@ class Foliora_Embeds {
 			'order'          => 'DESC',
 		);
 		$query_args = wp_parse_args( $args, $defaults );
-		$posts = get_posts( $query_args );
+		$posts      = get_posts( $query_args );
 
 		$embeds = array();
 		foreach ( $posts as $p ) {
@@ -108,17 +108,17 @@ class Foliora_Embeds {
 				$config = array();
 			}
 			$embeds[] = array(
-				'id'         => $p->ID,
-				'name'       => $p->post_title,
-				'file'       => $config['file'] ?? '',
-				'title'      => $config['title'] ?? '',
-				'view'       => $config['view'] ?? 'page',
-				'theme'      => $config['theme'] ?? 'light',
-				'width'      => $config['width'] ?? '100%',
-				'height'     => $config['height'] ?? '520px',
-				'shortcode'  => '[foliora id="' . $p->ID . '"]',
-				'date'       => get_the_date( 'M j, Y', $p ),
-				'date_raw'   => $p->post_date,
+				'id'        => $p->ID,
+				'name'      => $p->post_title,
+				'file'      => $config['file'] ?? '',
+				'title'     => $config['title'] ?? '',
+				'view'      => $config['view'] ?? 'page',
+				'theme'     => $config['theme'] ?? 'light',
+				'width'     => $config['width'] ?? '100%',
+				'height'    => $config['height'] ?? '520px',
+				'shortcode' => '[foliora id="' . $p->ID . '"]',
+				'date'      => get_the_date( 'M j, Y', $p ),
+				'date_raw'  => $p->post_date,
 			);
 		}
 
@@ -133,7 +133,7 @@ class Foliora_Embeds {
 	 * @return int|WP_Error Post ID or error.
 	 */
 	public static function save( $data, $id = 0 ) {
-		$id = absint( $id );
+		$id   = absint( $id );
 		$name = ! empty( $data['name'] ) ? sanitize_text_field( $data['name'] ) : '';
 
 		if ( empty( $name ) ) {
@@ -158,7 +158,7 @@ class Foliora_Embeds {
 				return new WP_Error( 'invalid_id', __( 'Invalid embed ID.', 'foliora' ) );
 			}
 			$post_data['ID'] = $id;
-			$post_id = wp_update_post( $post_data );
+			$post_id         = wp_update_post( $post_data );
 		} else {
 			$post_id = wp_insert_post( $post_data );
 		}
@@ -305,7 +305,7 @@ class Foliora_Embeds {
 			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'foliora' ) ) );
 		}
 
-		$id = isset( $_POST['id'] ) ? absint( $_POST['id'] ) : 0;
+		$id = isset( $_POST['embed_id'] ) ? absint( $_POST['embed_id'] ) : ( isset( $_POST['id'] ) ? absint( $_POST['id'] ) : 0 );
 		if ( ! $id || ! self::delete( $id ) ) {
 			wp_send_json_error( array( 'message' => __( 'Could not delete embed.', 'foliora' ) ) );
 		}
@@ -323,7 +323,7 @@ class Foliora_Embeds {
 			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'foliora' ) ) );
 		}
 
-		$id = isset( $_POST['id'] ) ? absint( $_POST['id'] ) : 0;
+		$id     = isset( $_POST['embed_id'] ) ? absint( $_POST['embed_id'] ) : ( isset( $_POST['id'] ) ? absint( $_POST['id'] ) : 0 );
 		$new_id = self::duplicate( $id );
 		if ( is_wp_error( $new_id ) ) {
 			wp_send_json_error( array( 'message' => $new_id->get_error_message() ) );

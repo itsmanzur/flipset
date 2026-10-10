@@ -11,9 +11,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Foliora_Divi_Viewer extends ET_Builder_Module {
 
-	public $slug       = 'foliora_viewer';
+	/**
+	 * Divi module slug.
+	 *
+	 * @var string
+	 */
+	public $slug = 'foliora_viewer';
+	/**
+	 * Visual Builder support level.
+	 *
+	 * @var string
+	 */
 	public $vb_support = 'partial';
 
+	/**
+	 * Module credits shown in the Divi builder.
+	 *
+	 * @var array
+	 */
 	protected $module_credits = array(
 		'module_uri' => 'https://thereadscope.com/foliora',
 		'author'     => 'The Read Scope',
@@ -21,9 +36,9 @@ class Foliora_Divi_Viewer extends ET_Builder_Module {
 	);
 
 	public function init() {
-		$this->name             = __( 'Foliora Viewer', 'foliora' );
-		$this->icon_path        = '';
-		$this->main_css_element = '%%order_class%%';
+		$this->name                   = __( 'Foliora Viewer', 'foliora' );
+		$this->icon_path              = '';
+		$this->main_css_element       = '%%order_class%%';
 		$this->settings_modal_toggles = array(
 			'general' => array(
 				'toggles' => array(

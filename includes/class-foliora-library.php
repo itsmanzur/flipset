@@ -53,17 +53,17 @@ class Foliora_Library {
 			'foliora_library'
 		);
 
-		$columns  = $this->clamp_int( $atts['columns'], 1, 6, 3 );
-		$per_page = $this->clamp_int( $atts['per_page'], 1, 48, 12 );
-		$orderby  = $this->sanitize_orderby( $atts['orderby'] );
-		$order    = ( 'ASC' === strtoupper( $atts['order'] ) ) ? 'ASC' : 'DESC';
+		$columns   = $this->clamp_int( $atts['columns'], 1, 6, 3 );
+		$per_page  = $this->clamp_int( $atts['per_page'], 1, 48, 12 );
+		$orderby   = $this->sanitize_orderby( $atts['orderby'] );
+		$order     = ( 'ASC' === strtoupper( $atts['order'] ) ) ? 'ASC' : 'DESC';
 		$search_on = $this->att_flag( $atts['search'] ?? 'true', true );
 
 		$uid         = ++self::$instance_n;
 		$instance_id = 'foliora-library-' . $uid;
 		$query_var   = 'foliora_page_' . $uid;
 		$search_var  = 'foliora_q_' . $uid;
-		$paged = 1;
+		$paged       = 1;
 		if ( isset( $_GET[ $query_var ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- public pagination query var.
 			$paged = max( 1, absint( wp_unslash( $_GET[ $query_var ] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- public pagination query var.
 		}
@@ -121,8 +121,8 @@ class Foliora_Library {
 	}
 
 	private function render_item( $attachment ) {
-		$id    = (int) $attachment->ID;
-		$url   = wp_get_attachment_url( $id );
+		$id  = (int) $attachment->ID;
+		$url = wp_get_attachment_url( $id );
 		if ( ! $url ) {
 			return '';
 		}
@@ -141,9 +141,9 @@ class Foliora_Library {
 				'medium',
 				false,
 				array(
-					'class'    => 'foliora-library-image',
-					'loading'  => 'lazy',
-					'alt'      => $title,
+					'class'   => 'foliora-library-image',
+					'loading' => 'lazy',
+					'alt'     => $title,
 				)
 			);
 		}
@@ -292,7 +292,7 @@ class Foliora_Library {
 	}
 
 	private function sanitize_orderby( $value ) {
-		$value = sanitize_key( $value );
+		$value   = sanitize_key( $value );
 		$allowed = array( 'date', 'title', 'modified' );
 		return in_array( $value, $allowed, true ) ? $value : 'date';
 	}

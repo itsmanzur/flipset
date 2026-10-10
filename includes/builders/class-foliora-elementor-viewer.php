@@ -42,10 +42,10 @@ class Foliora_Elementor_Viewer extends \Elementor\Widget_Base {
 		$this->add_control(
 			'file',
 			array(
-				'label'        => __( 'PDF file', 'foliora' ),
-				'type'         => \Elementor\Controls_Manager::MEDIA,
-				'media_types'  => array( 'application/pdf' ),
-				'description'  => __( 'Choose a PDF from the Media Library.', 'foliora' ),
+				'label'       => __( 'PDF file', 'foliora' ),
+				'type'        => \Elementor\Controls_Manager::MEDIA,
+				'media_types' => array( 'application/pdf' ),
+				'description' => __( 'Choose a PDF from the Media Library.', 'foliora' ),
 			)
 		);
 

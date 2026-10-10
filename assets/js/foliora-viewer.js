@@ -2535,12 +2535,12 @@
 		document.addEventListener( 'webkitfullscreenchange', onFsChange );
 
 		function startLoadingDocument() {
-			var loadingTask = window.pdfjsLib.getDocument( {
-				url: fileUrl,
-				onPassword: function ( updatePassword, reason ) {
-					showPasswordForm( updatePassword, reason );
-				},
-			} );
+			var loadingTask = window.pdfjsLib.getDocument( { url: fileUrl } );
+			// pdf.js only calls onPassword when it is set on the task; passing it in the
+			// getDocument() params is ignored and password PDFs just fail to load.
+			loadingTask.onPassword = function ( updatePassword, reason ) {
+				showPasswordForm( updatePassword, reason );
+			};
 			if ( loadingTask.onProgress !== undefined ) {
 				loadingTask.onProgress = function ( ev ) {
 					if ( ! status || ! ev || ! ev.total ) {

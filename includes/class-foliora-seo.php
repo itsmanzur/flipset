@@ -16,12 +16,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Foliora_SEO {
 
-	const META_TEXT     = '_foliora_extracted_text';
-	const META_PAGES    = '_foliora_extracted_pages';
-	const META_INDEXED  = '_foliora_text_indexed';
-	const META_SEARCH   = '_foliora_search_index';
-	const MAX_CHARS     = 80000;
-	const MAX_INDEX     = 200000;
+	const META_TEXT    = '_foliora_extracted_text';
+	const META_PAGES   = '_foliora_extracted_pages';
+	const META_INDEXED = '_foliora_text_indexed';
+	const META_SEARCH  = '_foliora_search_index';
+	const MAX_CHARS    = 80000;
+	const MAX_INDEX    = 200000;
 
 	public function init() {
 		add_action( 'wp_ajax_foliora_save_extracted_text', array( $this, 'ajax_save_extracted_text' ) );
@@ -80,6 +80,10 @@ class Foliora_SEO {
 			wp_send_json_error( array( 'message' => __( 'That file is not a PDF attachment.', 'foliora' ) ) );
 		}
 
+		if ( ! current_user_can( 'edit_post', $pdf_id ) ) {
+			wp_send_json_error( array( 'message' => __( 'Forbidden.', 'foliora' ) ), 403 );
+		}
+
 		$raw = isset( $_POST['text'] ) ? wp_unslash( $_POST['text'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- sanitized below.
 		if ( ! is_string( $raw ) ) {
 			$raw = '';
@@ -118,7 +122,7 @@ class Foliora_SEO {
 	}
 
 	/**
-	 * @param int      $post_id Post ID.
+	 * @param int     $post_id Post ID.
 	 * @param WP_Post $post    Post object.
 	 */
 	public function on_save_post( $post_id, $post ) {
@@ -165,7 +169,7 @@ class Foliora_SEO {
 		}
 
 		global $wpdb;
-		$pattern = '/\(' . preg_quote( $wpdb->posts, '/' ) . '\.post_content LIKE (\'(?:[^\'\\\\]|\\\\.)*\')\)/';
+		$pattern  = '/\(' . preg_quote( $wpdb->posts, '/' ) . '\.post_content LIKE (\'(?:[^\'\\\\]|\\\\.)*\')\)/';
 		$replaced = preg_replace(
 			$pattern,
 			'($0 OR (foliora_search_idx.meta_value LIKE $1))',
@@ -200,7 +204,7 @@ class Foliora_SEO {
 			return;
 		}
 
-		$alt = $this->get_singular_pdf_image_alt();
+		$alt  = $this->get_singular_pdf_image_alt();
 		$size = $this->get_singular_pdf_image_size();
 
 		echo '<meta property="og:image" content="' . esc_url( $url ) . '" />' . "\n";
@@ -434,10 +438,11 @@ class Foliora_SEO {
 			$rows      = wp_cache_get( $cache_key, 'foliora' );
 
 			if ( false === $rows ) {
-				$rows   = array();
-				$offset = 0;
+				$rows      = array();
+				$offset    = 0;
+				$row_total = 0;
 				do {
-					$page = $wpdb->get_col( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- one-off LIKE lookup of posts embedding this PDF; cached in the foliora group.
+					$page       = $wpdb->get_col( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- one-off LIKE lookup of posts embedding this PDF; cached in the foliora group.
 						$wpdb->prepare(
 							"SELECT ID FROM {$wpdb->posts} WHERE post_type NOT IN ('revision','attachment','nav_menu_item') AND post_status IN ('publish','private','draft','pending') AND post_content LIKE %s LIMIT %d OFFSET %d",
 							$like,
@@ -445,15 +450,16 @@ class Foliora_SEO {
 							$offset
 						)
 					);
-					if ( is_array( $page ) ) {
-						$rows = array_merge( $rows, $page );
+					$page_total = is_array( $page ) ? count( $page ) : 0;
+					if ( $page_total ) {
+						$rows       = array_merge( $rows, $page );
+						$row_total += $page_total;
 					}
 					$offset += $batch_size;
-				} while ( is_array( $page ) && count( $page ) === $batch_size && count( $rows ) < $max_rows );
+				} while ( $page_total === $batch_size && $row_total < $max_rows );
 
 				wp_cache_set( $cache_key, $rows, 'foliora', HOUR_IN_SECONDS );
 			}
-
 
 			if ( is_array( $rows ) ) {
 				$found = array_merge( $found, $rows );
@@ -545,14 +551,12 @@ class Foliora_SEO {
 		if ( function_exists( 'parse_blocks' ) && has_block( 'foliora/viewer', $content ) ) {
 			$blocks = parse_blocks( $content );
 			$this->extract_block_urls( $blocks, $urls );
-		} else {
+		} elseif ( preg_match_all( '/<!--\s+wp:foliora\/viewer\s+(\{.*?\})\s+\/?-->/s', $content, $blocks ) ) {
 			// Fallback regex for block comments.
-			if ( preg_match_all( '/<!--\s+wp:foliora\/viewer\s+(\{.*?\})\s+\/?-->/s', $content, $blocks ) ) {
-				foreach ( $blocks[1] as $json ) {
-					$data = json_decode( $json, true );
-					if ( is_array( $data ) && ! empty( $data['file'] ) && is_string( $data['file'] ) ) {
-						$urls[] = $data['file'];
-					}
+			foreach ( $blocks[1] as $json ) {
+				$data = json_decode( $json, true );
+				if ( is_array( $data ) && ! empty( $data['file'] ) && is_string( $data['file'] ) ) {
+					$urls[] = $data['file'];
 				}
 			}
 		}
@@ -627,7 +631,7 @@ class Foliora_SEO {
 	 * @return string[]
 	 */
 	private function extract_urls_from_beaver( $beaver_data ) {
-		$urls = array();
+		$urls  = array();
 		$nodes = is_object( $beaver_data ) ? (array) $beaver_data : $beaver_data;
 		if ( ! is_array( $nodes ) ) {
 			return $urls;
@@ -720,7 +724,7 @@ class Foliora_SEO {
 		if ( 'attachment' === $post->post_type ) {
 			$pdf_id = (int) $post->ID;
 		} else {
-			$ids = $this->find_pdf_ids_for_post( $post->ID, $post->post_content );
+			$ids    = $this->find_pdf_ids_for_post( $post->ID, $post->post_content );
 			$pdf_id = empty( $ids ) ? 0 : (int) $ids[0];
 		}
 		$thumb_id = Foliora_Thumbnails::get_thumbnail_id( $pdf_id );
@@ -798,13 +802,13 @@ class Foliora_SEO {
 	 * @return bool
 	 */
 	private function seo_plugin_handles_og() {
-		return defined( 'WPSEO_VERSION' )                       // Yoast SEO
-			|| defined( 'RANK_MATH_VERSION' )                   // Rank Math
-			|| defined( 'SEOPRESS_VERSION' )                    // SEOPress
-			|| defined( 'AIOSEO_VERSION' )                      // All in One SEO
-			|| defined( 'SLIM_SEO_VER' )                        // Slim SEO
-			|| defined( 'SCHEMA_PRO_VERSION' )                  // Schema Pro
-			|| class_exists( '\The_SEO_Framework\Load' )        // The SEO Framework
-			|| class_exists( 'BSF_AIOSRS_Pro' );                // Schema & Structured Data for WP
+		return defined( 'WPSEO_VERSION' )                       // Yoast SEO.
+			|| defined( 'RANK_MATH_VERSION' )                   // Rank Math.
+			|| defined( 'SEOPRESS_VERSION' )                    // SEOPress.
+			|| defined( 'AIOSEO_VERSION' )                      // All in One SEO.
+			|| defined( 'SLIM_SEO_VER' )                        // Slim SEO.
+			|| defined( 'SCHEMA_PRO_VERSION' )                  // Schema Pro.
+			|| class_exists( '\The_SEO_Framework\Load' )        // The SEO Framework.
+			|| class_exists( 'BSF_AIOSRS_Pro' );                // Schema & Structured Data for WP.
 	}
 }
