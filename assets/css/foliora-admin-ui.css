@@ -1,0 +1,1074 @@
+/**
+ * Foliora admin design system.
+ *
+ * Tokens live on `.foliora-admin` (added to the outer .wrap of every Foliora
+ * admin screen). Components are prefixed `fa-` and take their values from the
+ * Shortcode Builder, which is the source of truth for the look.
+ *
+ * Components: fa-hero, fa-mark, fa-chip, fa-card (+ __head/__body), fa-subhead,
+ * fa-btn (--primary / --secondary / --ghost-dark / --sm), fa-segmented,
+ * fa-pill, fa-icon-btn, fa-link, fa-progress, fa-empty, fa-banner.
+ */
+
+.foliora-admin {
+	--fb-accent: #4f46e5;
+	--fb-accent-2: #7c3aed;
+	--fb-accent-soft: #eef2ff;
+	--fb-ink: #0f172a;
+	--fb-muted: #64748b;
+	--fb-line: #e5e7f0;
+	--fb-radius: 14px;
+	--fb-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px -8px rgba(15, 23, 42, 0.1);
+	--fb-hero-bg: radial-gradient(1200px 300px at 0% 0%, rgba(124, 58, 237, 0.35), transparent 60%), radial-gradient(900px 300px at 100% 100%, rgba(79, 70, 229, 0.4), transparent 60%), linear-gradient(135deg, #0b1020 0%, #151a33 100%);
+	--fb-hero-muted: #a5b0c8;
+	--fb-success: #10b981;
+	--fb-success-soft: #ecfdf5;
+	--fb-sky: #0ea5e9;
+	--fb-sky-soft: #f0f9ff;
+	--fb-violet-soft: #f5f3ff;
+}
+
+/* ---- Hero ---------------------------------------------------------------- */
+.fa-hero {
+	position: relative;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	padding: 24px 28px;
+	margin-block-end: 24px;
+	border: 1px solid rgba(255, 255, 255, 0.06);
+	border-radius: 18px;
+	background: var(--fb-hero-bg);
+	box-shadow: 0 20px 40px -20px rgba(15, 23, 42, 0.6);
+	color: #fff;
+}
+
+.fa-hero__title {
+	margin: 0;
+	padding: 0;
+	font-size: 22px;
+	line-height: 1.2;
+	color: #fff;
+}
+
+.fa-hero__lede {
+	margin: 0;
+	max-width: 800px;
+	font-size: 14px;
+	line-height: 1.5;
+	color: var(--fb-hero-muted);
+}
+
+.fa-hero__divider {
+	height: 1px;
+	background: rgba(255, 255, 255, 0.08);
+}
+
+.fa-hero__label {
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--fb-hero-muted);
+}
+
+/* ---- Hero layout (copy left, actions right) ---------------------------- */
+.fa-hero__top {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 24px;
+}
+
+.fa-hero__kicker {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-block-end: 6px;
+}
+
+.fa-hero__side {
+	display: flex;
+	align-items: center;
+	gap: 18px;
+	flex: 0 0 auto;
+}
+
+.fa-hero__actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 10px;
+}
+
+@media (max-width: 782px) {
+	.fa-hero {
+		padding: 20px;
+	}
+
+	.fa-hero__top {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.fa-hero__side {
+		flex-wrap: wrap;
+		width: 100%;
+	}
+}
+
+/* ---- Mark (gradient icon square) --------------------------------------- */
+.fa-mark {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 auto;
+	width: 34px;
+	height: 34px;
+	font-size: 20px;
+	line-height: 1;
+	color: #fff;
+	border-radius: 10px;
+	background: linear-gradient(135deg, var(--fb-accent), var(--fb-accent-2));
+	box-shadow: 0 6px 16px -4px rgba(124, 58, 237, 0.7);
+}
+
+.fa-mark::before {
+	width: 20px;
+	height: 20px;
+	font-size: 20px;
+}
+
+/* ---- Chips (on dark) ---------------------------------------------------- */
+.fa-chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 5px 13px;
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.06);
+	color: #e2e8f0;
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 1.5;
+	text-decoration: none;
+	white-space: nowrap;
+	cursor: pointer;
+	transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.fa-chip:hover,
+.fa-chip:focus {
+	background: rgba(255, 255, 255, 0.12);
+	border-color: rgba(255, 255, 255, 0.3);
+	color: #fff;
+}
+
+.fa-chip--warn {
+	border-color: rgba(251, 191, 36, 0.5);
+	color: #fde68a;
+	cursor: default;
+}
+
+/* ---- Cards -------------------------------------------------------------- */
+.fa-card {
+	box-sizing: border-box;
+	background: #fff;
+	border: 1px solid var(--fb-line);
+	border-radius: var(--fb-radius);
+	box-shadow: var(--fb-shadow);
+	color: var(--fb-ink);
+	overflow: hidden;
+}
+
+.fa-card--lift {
+	transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.fa-card--lift:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 12px 28px -8px rgba(15, 23, 42, 0.16);
+}
+
+.fa-card__head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 10px;
+	padding: 14px 18px;
+	border-block-end: 1px solid var(--fb-line);
+}
+
+.fa-card__icon {
+	flex: 0 0 auto;
+	width: 20px;
+	height: 20px;
+	font-size: 20px;
+	color: var(--fb-accent);
+}
+
+.fa-card__titles {
+	flex: 1 1 160px;
+	min-width: 0;
+}
+
+.fa-card__title {
+	margin: 0;
+	padding: 0;
+	font-size: 15px;
+	font-weight: 700;
+	line-height: 1.3;
+	color: var(--fb-ink);
+}
+
+.fa-card__sub {
+	margin: 2px 0 0;
+	font-size: 12.5px;
+	color: var(--fb-muted);
+}
+
+.fa-card__action {
+	flex: 0 0 auto;
+	margin-inline-start: auto;
+}
+
+.fa-card__body {
+	padding: 18px;
+}
+
+.fa-card__foot {
+	margin: 16px 0 0;
+}
+
+/* ---- Sub-heading -------------------------------------------------------- */
+.fa-subhead {
+	margin: 20px 0 10px;
+}
+
+.fa-subhead h3 {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin: 0;
+	font-size: 11.5px;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--fb-muted);
+}
+
+.fa-subhead h3::after {
+	content: "";
+	flex: 1;
+	height: 1px;
+	background: var(--fb-line);
+}
+
+/* ---- Buttons ------------------------------------------------------------ */
+.fa-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	box-sizing: border-box;
+	min-height: 38px;
+	padding: 0 16px;
+	border: 1px solid transparent;
+	border-radius: 10px;
+	font-size: 13px;
+	font-weight: 600;
+	line-height: 1;
+	text-decoration: none;
+	white-space: nowrap;
+	cursor: pointer;
+	transition: transform 0.12s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.fa-btn .dashicons {
+	width: 16px;
+	height: 16px;
+	margin: 0;
+	font-size: 16px;
+	line-height: 16px;
+}
+
+.fa-btn--sm {
+	min-height: 32px;
+	padding: 0 14px;
+	font-size: 12.5px;
+}
+
+.fa-btn--primary {
+	border: 0;
+	background: linear-gradient(135deg, var(--fb-accent), var(--fb-accent-2));
+	color: #fff;
+	box-shadow: 0 8px 18px -8px rgba(79, 70, 229, 0.8);
+}
+
+.fa-btn--primary:hover,
+.fa-btn--primary:focus {
+	background: linear-gradient(135deg, #4338ca, #6d28d9);
+	color: #fff;
+	transform: translateY(-1px);
+	box-shadow: 0 12px 22px -8px rgba(79, 70, 229, 0.9);
+}
+
+.fa-btn--secondary {
+	background: #fff;
+	border-color: #d5daea;
+	color: var(--fb-accent);
+}
+
+.fa-btn--secondary:hover,
+.fa-btn--secondary:focus {
+	background: var(--fb-accent-soft);
+	border-color: #c7d2fe;
+	color: #4338ca;
+}
+
+.fa-btn--ghost-dark {
+	background: transparent;
+	border-color: rgba(255, 255, 255, 0.18);
+	color: #fff;
+}
+
+.fa-btn--ghost-dark:hover,
+.fa-btn--ghost-dark:focus {
+	background: rgba(255, 255, 255, 0.1);
+	border-color: rgba(255, 255, 255, 0.32);
+	color: #fff;
+}
+
+.fa-btn[disabled],
+.fa-btn:disabled {
+	opacity: 0.55;
+	cursor: not-allowed;
+	transform: none;
+	box-shadow: none;
+}
+
+.fa-icon-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 30px;
+	height: 30px;
+	padding: 0;
+	border: 1px solid var(--fb-line);
+	border-radius: 8px;
+	background: #fff;
+	color: var(--fb-accent);
+	cursor: pointer;
+	transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.fa-icon-btn:hover,
+.fa-icon-btn:focus {
+	background: var(--fb-accent-soft);
+	border-color: #c7d2fe;
+}
+
+.fa-icon-btn.is-copied {
+	background: var(--fb-success-soft);
+	border-color: var(--fb-success);
+	color: var(--fb-success);
+}
+
+.fa-link {
+	padding: 0;
+	border: 0;
+	background: none;
+	color: var(--fb-accent);
+	font-size: 13px;
+	font-weight: 600;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.fa-link:hover,
+.fa-link:focus {
+	color: #4338ca;
+	text-decoration: underline;
+}
+
+/* ---- Segmented control (same as the Builder's view nav) ---------------- */
+.fa-segmented {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 5px;
+	border: 1px solid #e2e8f0;
+	border-radius: 12px;
+	background: #fff;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.fa-segmented__btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 18px;
+	border: 1px solid transparent;
+	border-radius: 8px;
+	background: transparent;
+	color: var(--fb-muted);
+	font-size: 13.5px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.15s ease;
+}
+
+.fa-segmented__btn:hover {
+	background: #f8fafc;
+	color: var(--fb-ink);
+}
+
+.fa-segmented__btn.is-active {
+	background: var(--fb-accent);
+	color: #fff;
+	box-shadow: 0 2px 8px rgba(79, 70, 229, 0.25);
+}
+
+.fa-segmented a.fa-segmented__btn {
+	text-decoration: none;
+}
+
+.fa-segmented a.fa-segmented__btn:focus {
+	box-shadow: none;
+}
+
+.fa-segmented__btn.is-active .fa-pill {
+	background: rgba(255, 255, 255, 0.22);
+}
+
+/* ---- Pill --------------------------------------------------------------- */
+.fa-pill {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 2px 8px;
+	border-radius: 999px;
+	background: rgba(0, 0, 0, 0.08);
+	color: inherit;
+	font-size: 11px;
+	font-weight: 700;
+}
+
+/* ---- Progress bar ------------------------------------------------------- */
+.fa-progress {
+	height: 6px;
+	border-radius: 999px;
+	background: var(--fb-line);
+	overflow: hidden;
+}
+
+.fa-progress > span {
+	display: block;
+	height: 100%;
+	border-radius: 999px;
+	background: linear-gradient(90deg, var(--fb-accent), var(--fb-accent-2));
+	transition: width 0.3s ease;
+}
+
+/* ---- Banner / empty state ---------------------------------------------- */
+.fa-banner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 12px 16px;
+	margin-block-end: 20px;
+	border: 1px solid #c7d2fe;
+	border-radius: 12px;
+	background: var(--fb-accent-soft);
+	color: #3730a3;
+	font-size: 13.5px;
+}
+
+.fa-banner p {
+	margin: 0;
+}
+
+.fa-banner__dismiss {
+	flex: 0 0 auto;
+	width: 28px;
+	height: 28px;
+	padding: 0;
+	border: 0;
+	border-radius: 8px;
+	background: transparent;
+	color: #3730a3;
+	font-size: 20px;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.fa-banner__dismiss:hover,
+.fa-banner__dismiss:focus {
+	background: rgba(79, 70, 229, 0.12);
+}
+
+.fa-empty {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+	padding: 32px 18px;
+	text-align: center;
+}
+
+.fa-empty__icon {
+	width: 40px;
+	height: 40px;
+	font-size: 40px;
+	color: #c7d2fe;
+}
+
+.fa-empty__title {
+	margin: 0;
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--fb-muted);
+}
+
+/* ---- Accessibility / motion -------------------------------------------- */
+.fa-btn:focus-visible,
+.fa-chip:focus-visible,
+.fa-icon-btn:focus-visible,
+.fa-link:focus-visible,
+.fa-segmented__btn:focus-visible,
+.fa-banner__dismiss:focus-visible,
+.fa-card--lift:focus-visible {
+	outline: 2px solid var(--fb-accent);
+	outline-offset: 2px;
+}
+
+.fa-hero .fa-chip:focus-visible,
+.fa-hero .fa-btn:focus-visible {
+	outline-color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.fa-btn,
+	.fa-chip,
+	.fa-icon-btn,
+	.fa-segmented__btn,
+	.fa-card--lift,
+	.fa-progress > span {
+		transition: none;
+	}
+
+	.fa-card--lift:hover,
+	.fa-btn--primary:hover {
+		transform: none;
+	}
+}
+
+/* ==========================================================================
+   Components added for Docs & Features (reusable on Settings)
+   ========================================================================== */
+
+/* ---- Light chip (filters, sub-nav) ------------------------------------- */
+.fa-chip--light {
+	border-color: var(--fb-line);
+	background: #fff;
+	color: #334155;
+}
+
+.fa-chip--light:hover,
+.fa-chip--light:focus {
+	background: var(--fb-accent-soft);
+	border-color: #c7d2fe;
+	color: var(--fb-accent);
+}
+
+.fa-chip--light.is-active {
+	background: var(--fb-accent);
+	border-color: var(--fb-accent);
+	color: #fff;
+	box-shadow: 0 2px 8px rgba(79, 70, 229, 0.25);
+}
+
+.fa-chip__count {
+	padding: 0 7px;
+	border-radius: 999px;
+	background: rgba(15, 23, 42, 0.08);
+	font-size: 11px;
+	font-weight: 700;
+	line-height: 1.6;
+}
+
+.fa-chip--light.is-active .fa-chip__count {
+	background: rgba(255, 255, 255, 0.22);
+}
+
+.fa-chip .dashicons {
+	width: 16px;
+	height: 16px;
+	font-size: 16px;
+}
+
+/* ---- Status badge (dot + label) ---------------------------------------- */
+.fa-status {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 3px 10px;
+	border-radius: 999px;
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 1.5;
+	white-space: nowrap;
+	cursor: help;
+}
+
+.fa-status::before {
+	content: "";
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: currentColor;
+	flex: 0 0 auto;
+}
+
+.fa-status.is-ready {
+	background: var(--fb-success-soft);
+	color: #047857;
+}
+
+.fa-status.is-pending {
+	background: #fffbeb;
+	color: #92400e;
+}
+
+.fa-status.is-warn {
+	background: #fff7ed;
+	color: #9a3412;
+}
+
+.fa-status.is-empty {
+	background: #f1f5f9;
+	color: #475569;
+}
+
+/* ---- One-line code chip with copy button ------------------------------- */
+.fa-code-chip {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	min-width: 0;
+	max-width: 360px;
+	padding: 3px 3px 3px 10px;
+	border: 1px solid var(--fb-line);
+	border-radius: 10px;
+	background: #f8fafc;
+}
+
+.fa-code-chip code {
+	flex: 1 1 auto;
+	min-width: 0;
+	margin: 0;
+	padding: 0;
+	background: transparent;
+	color: #3730a3;
+	font-size: 12px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.fa-icon-btn {
+	flex: 0 0 auto;
+}
+
+.fa-icon-btn .dashicons {
+	width: 16px;
+	height: 16px;
+	font-size: 16px;
+}
+
+.fa-icon-btn .fa-icon-btn__done {
+	display: none;
+}
+
+.fa-icon-btn.is-copied .fa-icon-btn__done {
+	display: inline-block;
+}
+
+.fa-icon-btn.is-copied .dashicons:not(.fa-icon-btn__done) {
+	display: none;
+}
+
+/* ---- Search field ------------------------------------------------------- */
+.fa-search {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex: 1 1 260px;
+	max-width: 420px;
+	min-width: 0;
+}
+
+.fa-search__icon {
+	position: absolute;
+	inset-inline-start: 10px;
+	top: 50%;
+	width: 16px;
+	height: 16px;
+	margin-block-start: -8px;
+	font-size: 16px;
+	color: var(--fb-muted);
+	pointer-events: none;
+}
+
+.fa-search .fa-search__input {
+	box-sizing: border-box;
+	flex: 1 1 auto;
+	width: 100%;
+	min-width: 0;
+	min-height: 34px;
+	padding-block: 4px;
+	padding-inline: 32px 10px;
+	border: 1px solid var(--fb-line);
+	border-radius: 8px;
+	background: #fff;
+	color: var(--fb-ink);
+	font-size: 13px;
+}
+
+.fa-search .fa-search__input:focus {
+	border-color: var(--fb-accent);
+	box-shadow: 0 0 0 1px var(--fb-accent);
+	outline: none;
+}
+
+/* ---- Data table (inside a card) ---------------------------------------- */
+.fa-table-wrap {
+	overflow-x: auto;
+}
+
+.fa-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.fa-table th {
+	padding: 10px 14px;
+	border-block-end: 1px solid var(--fb-line);
+	background: #f8fafc;
+	color: var(--fb-muted);
+	font-size: 11.5px;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-align: start;
+	text-transform: uppercase;
+	white-space: nowrap;
+}
+
+.fa-table td {
+	padding: 12px 14px;
+	border-block-end: 1px solid var(--fb-line);
+	vertical-align: middle;
+}
+
+.fa-table tbody tr:last-child td {
+	border-block-end: 0;
+}
+
+.fa-table tbody tr:hover td {
+	background: #fafbff;
+}
+
+/* ---- Tiles (mini-cards in a grid) -------------------------------------- */
+.fa-tiles {
+	display: grid;
+	gap: 12px;
+}
+
+.fa-tiles--2 {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.fa-tiles--3 {
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.fa-tiles--4 {
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.fa-tile {
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+	min-width: 0;
+	padding: 14px;
+	border: 1px solid var(--fb-line);
+	border-radius: 12px;
+	background: #fff;
+}
+
+.fa-tile--col {
+	flex-direction: column;
+	gap: 8px;
+}
+
+.fa-tile__head {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.fa-tile__head h4,
+.fa-tile__title,
+.fa-tile__copy h4 {
+	margin: 0;
+	font-size: 13.5px;
+	font-weight: 700;
+	line-height: 1.35;
+	color: var(--fb-ink);
+}
+
+.fa-tile__title {
+	display: block;
+}
+
+.fa-tile__copy {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.fa-tile__copy p,
+.fa-tile--col > p {
+	margin: 4px 0 0;
+	font-size: 12.5px;
+	line-height: 1.55;
+	color: var(--fb-muted);
+}
+
+.fa-tile-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 auto;
+	width: 40px;
+	height: 40px;
+	border-radius: 10px;
+	background: var(--fb-accent-soft);
+	color: var(--fb-accent);
+}
+
+.fa-tile-icon .dashicons {
+	width: 20px;
+	height: 20px;
+	font-size: 20px;
+}
+
+.fa-tile-icon.is-violet {
+	background: var(--fb-violet-soft);
+	color: #6d28d9;
+}
+
+.fa-tile-icon.is-sky {
+	background: var(--fb-sky-soft);
+	color: #0369a1;
+}
+
+.fa-tile-icon.is-green {
+	background: var(--fb-success-soft);
+	color: #047857;
+}
+
+/* ---- Number badge ------------------------------------------------------- */
+.fa-num {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 auto;
+	width: 26px;
+	height: 26px;
+	border-radius: 50%;
+	background: linear-gradient(135deg, var(--fb-accent), var(--fb-accent-2));
+	color: #fff;
+	font-size: 12px;
+	font-weight: 700;
+}
+
+/* ---- Sticky sub-navigation chips --------------------------------------- */
+.fa-subnav {
+	position: sticky;
+	top: 32px;
+	z-index: 20;
+	display: flex;
+	gap: 8px;
+	margin-block: 16px;
+	padding-block: 8px;
+	overflow-x: auto;
+	background: #f0f0f1;
+	scrollbar-width: none;
+}
+
+.fa-subnav::-webkit-scrollbar {
+	display: none;
+}
+
+.fa-subnav .fa-chip.is-active {
+	background: var(--fb-accent);
+	border-color: var(--fb-accent);
+	color: #fff;
+}
+
+/* ---- Info bar / stat chips / tag --------------------------------------- */
+.fa-infobar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px 16px;
+	padding: 12px 18px;
+	border-block-start: 1px solid var(--fb-line);
+	background: var(--fb-accent-soft);
+	font-size: 12.5px;
+	color: #3730a3;
+}
+
+.fa-infobar__text {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.fa-infobar .dashicons {
+	width: 18px;
+	height: 18px;
+	font-size: 18px;
+}
+
+.fa-stats {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.fa-stat {
+	display: inline-flex;
+	align-items: baseline;
+	gap: 6px;
+	padding: 5px 12px;
+	border: 1px solid var(--fb-line);
+	border-radius: 999px;
+	background: #f8fafc;
+	font-size: 12.5px;
+	color: var(--fb-muted);
+}
+
+.fa-stat strong {
+	color: var(--fb-ink);
+}
+
+.fa-tag {
+	display: inline-flex;
+	align-items: center;
+	padding: 2px 9px;
+	border-radius: 999px;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+}
+
+.fa-tag--free {
+	background: var(--fb-success-soft);
+	color: #047857;
+}
+
+/* ---- Pager / empty tile ------------------------------------------------- */
+.fa-pager {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 4px;
+	padding: 14px 18px;
+	border-block-start: 1px solid var(--fb-line);
+}
+
+.fa-pager .page-numbers {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 32px;
+	height: 32px;
+	padding-inline: 8px;
+	border: 1px solid var(--fb-line);
+	border-radius: 8px;
+	background: #fff;
+	color: var(--fb-ink);
+	font-size: 13px;
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.fa-pager .page-numbers.current {
+	background: var(--fb-accent);
+	border-color: var(--fb-accent);
+	color: #fff;
+}
+
+.fa-pager a.page-numbers:hover,
+.fa-pager a.page-numbers:focus {
+	background: var(--fb-accent-soft);
+	border-color: #c7d2fe;
+}
+
+.fa-empty__tile {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 56px;
+	height: 56px;
+	border-radius: 14px;
+	background: var(--fb-accent-soft);
+	color: var(--fb-accent);
+}
+
+.fa-empty__tile::before {
+	width: 28px;
+	height: 28px;
+	font-size: 28px;
+}
+
+/* ---- Focus / responsive for the new components ------------------------- */
+.fa-search .fa-search__input:focus-visible,
+.fa-pager .page-numbers:focus-visible,
+.fa-tile a:focus-visible {
+	outline: 2px solid var(--fb-accent);
+	outline-offset: 2px;
+}
+
+@media (max-width: 1100px) {
+	.fa-tiles--3,
+	.fa-tiles--4 {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 782px) {
+	.fa-subnav {
+		top: 46px;
+	}
+
+	.fa-tiles--2,
+	.fa-tiles--3,
+	.fa-tiles--4 {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
+@media (max-width: 600px) {
+	.fa-subnav {
+		top: 0;
+	}
+}

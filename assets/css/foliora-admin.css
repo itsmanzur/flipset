@@ -1,36 +1,6 @@
-﻿/**
- * Foliora admin dashboard + settings chrome.
- * Scoped under .foliora-dash / .foliora-settings-wrap so it never
- * leaks into other wp-admin screens.
- */
 
-.foliora-dash {
-	max-width: 1080px;
-}
 
-.foliora-dash-hero {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 20px;
-	margin: 8px 0 18px;
-	padding: 22px 24px;
-	border-radius: 14px;
-	background:
-		radial-gradient(1200px 180px at 100% -40%, rgba(114, 174, 230, 0.22), transparent 60%),
-		linear-gradient(135deg, #1d2327 0%, #2c3338 100%);
-	color: #f6f7f7;
-	box-shadow: 0 10px 28px rgba(29, 35, 39, 0.18);
-}
-
-.foliora-dash-kicker {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-	margin-bottom: 6px;
-}
-
-.foliora-mark {
+.foliora-mark{
 	width: 36px;
 	height: 36px;
 	border-radius: 10px;
@@ -42,694 +12,12 @@
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.foliora-dash-hero-copy h1 {
-	margin: 0;
-	padding: 0;
-	color: #fff;
-	font-size: 26px;
-	letter-spacing: -0.02em;
-}
-
-.foliora-dash-lede {
-	margin: 0 0 8px;
-	color: #c3c4c7;
-	max-width: 36rem;
-}
-
-.foliora-dash-hero-side {
-	display: flex;
-	align-items: center;
-	gap: 16px;
-	flex-shrink: 0;
-}
-
-.foliora-dash-hero-actions {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 8px;
-}
-
-.foliora-dash-hero .button {
-	background: transparent;
-	border-color: #8c8f94;
-	color: #fff;
-	box-shadow: none;
-}
-
-.foliora-dash-hero .button:hover,
-.foliora-dash-hero .button:focus {
-	background: #3c434a;
-	border-color: #a7aaad;
-	color: #fff;
-}
-
-.foliora-dash-hero .button-primary {
-	background: #fff;
-	border-color: #fff;
-	color: #1d2327;
-}
-
-.foliora-dash-hero .button-primary:hover,
-.foliora-dash-hero .button-primary:focus {
-	background: #f0f0f1;
-	border-color: #f0f0f1;
-	color: #1d2327;
-}
-
-.foliora-ring-wrap {
-	position: relative;
-	width: 52px;
-	height: 52px;
-	flex-shrink: 0;
-}
-
-.foliora-ring {
-	width: 52px;
-	height: 52px;
-	transform: rotate(-90deg);
-}
-
-.foliora-ring-bg,
-.foliora-ring-fg {
-	fill: none;
-	stroke-width: 3.2;
-}
-
-.foliora-ring-bg {
-	stroke: #3c434a;
-}
-
-.foliora-ring-fg {
-	stroke: #72aee6;
-	stroke-linecap: round;
-	transition: stroke-dasharray 0.45s ease;
-}
-
-.foliora-ring-wrap.is-complete .foliora-ring-fg {
-	stroke: #00ba37;
-}
-
-.foliora-ring-label {
-	position: absolute;
-	inset: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 11px;
-	font-weight: 700;
-	color: #fff;
-}
-
-.foliora-chip {
-	display: inline-flex;
-	align-items: center;
-	margin-right: 6px;
-	padding: 2px 8px;
-	border-radius: 999px;
-	border: 1px solid rgba(255, 255, 255, 0.18);
-	background: rgba(255, 255, 255, 0.08);
-	font-size: 12px;
-	line-height: 1.5;
-	color: #f6f7f7;
-}
-
-.foliora-chip.is-ok {
-	border-color: rgba(0, 186, 55, 0.45);
-	background: rgba(0, 186, 55, 0.16);
-	color: #b8f5c8;
-}
-
-.foliora-chip.is-warn {
-	border-color: rgba(240, 195, 60, 0.5);
-	background: rgba(240, 195, 60, 0.16);
-	color: #fcecad;
-}
-
-.foliora-dash-banner {
-	display: flex;
-	align-items: flex-start;
-	justify-content: space-between;
-	gap: 12px;
-	margin: 0 0 16px;
-	padding: 10px 14px;
-	border: 1px solid #c3c4c7;
-	border-radius: 10px;
-	background: #fff;
-}
-
-.foliora-dash-banner p {
-	margin: 0;
-	color: #50575e;
-}
-
-.foliora-banner-dismiss {
-	margin: 0;
-	padding: 0 4px;
-	border: 0;
-	background: transparent;
-	color: #787c82;
-	font-size: 18px;
-	line-height: 1;
-	cursor: pointer;
-}
-
-.foliora-banner-dismiss:hover,
-.foliora-banner-dismiss:focus {
-	color: #1d2327;
-}
-
-.foliora-metrics {
-	display: grid;
-	grid-template-columns: repeat(3, minmax(0, 1fr));
-	gap: 12px;
-	margin: 0 0 16px;
-	background: transparent;
-	border: 0;
-}
-
-.foliora-metric {
-	display: grid;
-	grid-template-columns: auto 1fr;
-	grid-template-rows: auto auto;
-	column-gap: 12px;
-	align-items: center;
-	margin: 0;
-	padding: 14px 16px;
-	background: #fff;
-	color: inherit;
-	text-decoration: none;
-	box-sizing: border-box;
-	border: 1px solid #dcdcde;
-	border-radius: 12px;
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-	transition: transform 0.18s ease, box-shadow 0.18s ease;
-}
-
-a.foliora-metric:hover,
-a.foliora-metric:focus {
-	background: #fff;
-	color: inherit;
-	transform: translateY(-2px);
-	box-shadow: 0 8px 20px rgba(29, 35, 39, 0.1);
-}
-
-.foliora-metric-icon {
-	grid-row: 1 / span 2;
-	width: 38px;
-	height: 38px;
-	border-radius: 10px;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.foliora-metric-icon .dashicons {
-	width: 20px;
-	height: 20px;
-	font-size: 20px;
-	line-height: 1;
-}
-
-.foliora-metric-icon.is-docs {
-	background: #e7f1fb;
-	color: #135e96;
-}
-
-.foliora-metric-icon.is-pages {
-	background: #f3e8ff;
-	color: #6e4aac;
-}
-
-.foliora-metric-icon.is-setup {
-	background: #e6f6ea;
-	color: #007017;
-}
-
-.foliora-metric-value {
-	font-size: 22px;
-	line-height: 1.1;
-	font-weight: 700;
-	color: #1d2327;
-	letter-spacing: -0.03em;
-}
-
-.foliora-metric-label {
-	color: #646970;
-	font-size: 12px;
-}
-
-.foliora-workspace {
-	display: grid;
-	grid-template-columns: 0.92fr 1.08fr;
-	gap: 16px;
-	margin-bottom: 16px;
-	align-items: stretch;
-}
-
-.foliora-panel {
-	background: #fff;
-	border: 1px solid #dcdcde;
-	border-radius: 12px;
-	padding: 18px 18px 16px;
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-}
-
-.foliora-panel.is-pulse {
-	box-shadow: 0 0 0 3px rgba(34, 113, 177, 0.35);
-}
-
-.foliora-panel-head {
-	display: flex;
-	align-items: flex-start;
-	justify-content: space-between;
-	gap: 12px;
-	margin-bottom: 12px;
-}
-
-.foliora-panel h2 {
-	margin: 0 0 4px;
-	font-size: 15px;
-}
-
-.foliora-card-help {
+.foliora-card-help{
 	margin: 0 0 16px;
 	color: #646970;
 }
 
-.foliora-panel-head .foliora-card-help {
-	margin: 0;
-}
-
-.foliora-progress {
-	height: 4px;
-	background: #f0f0f1;
-	border-radius: 999px;
-	overflow: hidden;
-	margin: 0 0 4px;
-}
-
-.foliora-progress span {
-	display: block;
-	height: 100%;
-	background: linear-gradient(90deg, #2271b1, #72aee6);
-	border-radius: 999px;
-	transition: width 0.35s ease;
-}
-
-.foliora-setup {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	position: relative;
-}
-
-.foliora-setup::before {
-	content: "";
-	position: absolute;
-	left: 9px;
-	top: 18px;
-	bottom: 18px;
-	width: 2px;
-	background: #dcdcde;
-}
-
-.foliora-setup li {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 12px;
-	padding: 12px 0;
-	position: relative;
-}
-
-.foliora-setup-copy {
-	display: flex;
-	align-items: flex-start;
-	gap: 12px;
-	min-width: 0;
-}
-
-.foliora-setup-mark {
-	flex: 0 0 20px;
-	width: 20px;
-	height: 20px;
-	margin-top: 1px;
-	border-radius: 50%;
-	border: 2px solid #c3c4c7;
-	background: #fff;
-	box-sizing: border-box;
-	position: relative;
-	z-index: 1;
-	transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-}
-
-.foliora-setup li.is-done .foliora-setup-mark {
-	border-color: #00a32a;
-	background: #00a32a;
-	transform: scale(1.05);
-}
-
-.foliora-setup li.is-done .foliora-setup-mark::after {
-	content: "";
-	position: absolute;
-	left: 5px;
-	top: 2px;
-	width: 5px;
-	height: 9px;
-	border: solid #fff;
-	border-width: 0 2px 2px 0;
-	transform: rotate(45deg);
-}
-
-.foliora-setup-title {
-	display: block;
-	font-weight: 600;
-}
-
-.foliora-setup-help {
-	display: block;
-	color: #646970;
-	font-size: 13px;
-	margin-top: 2px;
-}
-
-.foliora-panel-embed {
-	position: relative;
-}
-
-.foliora-stage {
-	display: grid;
-	grid-template-columns: 84px 1fr;
-	gap: 16px;
-	align-items: center;
-	position: relative;
-	margin: 0 0 14px;
-	padding: 14px;
-	border-radius: 12px;
-	background:
-		radial-gradient(500px 120px at 100% 0%, rgba(114, 174, 230, 0.16), transparent 55%),
-		linear-gradient(160deg, #2c3338, #1d2327);
-	color: #f6f7f7;
-	min-height: 148px;
-	overflow: hidden;
-}
-
-.foliora-stage-cover {
-	position: relative;
-	width: 84px;
-}
-
-.foliora-stage-cover::before,
-.foliora-cover::before {
-	content: "";
-	position: absolute;
-	top: 0;
-	right: 0;
-	z-index: 1;
-	border-style: solid;
-	border-width: 0 12px 12px 0;
-	pointer-events: none;
-}
-
-.foliora-stage-cover::before {
-	border-color: #8c8f94 #1d2327;
-	border-radius: 0 7px 0 0;
-}
-
-.foliora-cover::before {
-	border-color: #c3c4c7 #fff;
-	border-radius: 0 6px 0 0;
-}
-
-.foliora-stage-cover img,
-.foliora-stage-fallback {
-	display: block;
-	width: 84px;
-	height: 112px;
-	object-fit: cover;
-	border-radius: 3px 7px 7px 3px;
-	background: #dcdcde;
-	box-shadow: 4px 8px 18px rgba(0, 0, 0, 0.35);
-}
-
-.foliora-stage-fallback {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: #646970;
-	font-size: 32px;
-	background: #f0f0f1;
-}
-
-.foliora-stage-cover img[hidden],
-.foliora-stage-fallback[hidden] {
-	display: none !important;
-}
-
-.foliora-stage-title {
-	margin: 0 0 8px;
-	font-weight: 600;
-	font-size: 14px;
-	color: #fff;
-}
-
-.foliora-code {
-	display: flex;
-	gap: 8px;
-	align-items: stretch;
-	cursor: pointer;
-}
-
-.foliora-dash .foliora-code input[type="text"] {
-	flex: 1 1 auto;
-	min-width: 0;
-	margin: 0;
-	padding: 6px 10px;
-	font-family: Consolas, Monaco, monospace;
-	font-size: 12px;
-	color: #72aee6;
-	background: #0a0a0a;
-	border: 1px solid #3c434a;
-	border-radius: 6px;
-	box-shadow: none;
-	cursor: pointer;
-}
-
-.foliora-code.is-flash input[type="text"] {
-	border-color: #00ba37;
-	color: #b8f5c8;
-}
-
-.foliora-stage-actions {
-	display: flex;
-	align-items: center;
-	gap: 12px;
-	flex-wrap: wrap;
-	margin-top: 10px;
-}
-
-.foliora-stage-actions .button-link {
-	color: #72aee6;
-}
-
-.foliora-drop {
-	position: absolute;
-	inset: 0;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	gap: 6px;
-	background: rgba(29, 35, 39, 0.92);
-	color: #fff;
-	font-weight: 600;
-	z-index: 2;
-}
-
-.foliora-drop[hidden] {
-	display: none !important;
-}
-
-.foliora-drop .dashicons {
-	font-size: 28px;
-	width: 28px;
-	height: 28px;
-}
-
-.foliora-covers-label {
-	margin: 0 0 8px;
-	font-size: 11px;
-	font-weight: 700;
-	letter-spacing: 0.06em;
-	text-transform: uppercase;
-	color: #646970;
-}
-
-.foliora-covers {
-	display: flex;
-	gap: 10px;
-	overflow-x: auto;
-	padding: 2px 2px 10px;
-	margin: 0 0 8px;
-}
-
-.foliora-dash .foliora-cover {
-	flex: 0 0 72px;
-	display: flex;
-	flex-direction: column;
-	align-items: stretch;
-	gap: 6px;
-	margin: 0;
-	padding: 0;
-	border: 0;
-	background: transparent;
-	box-shadow: none;
-	min-height: 0;
-	height: auto;
-	text-align: left;
-	cursor: pointer;
-	color: #1d2327;
-	position: relative;
-}
-
-.foliora-dash .foliora-cover img,
-.foliora-cover-fallback {
-	display: block;
-	width: 72px;
-	height: 96px;
-	max-width: 72px;
-	object-fit: cover;
-	border-radius: 3px 6px 6px 3px;
-	background: #dcdcde;
-	border: 1px solid #c3c4c7;
-	box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.12);
-	transition: transform 0.18s ease, box-shadow 0.18s ease;
-}
-
-.foliora-cover-fallback {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: #646970;
-	font-size: 22px;
-}
-
-.foliora-dash .foliora-cover:hover img,
-.foliora-dash .foliora-cover:focus img,
-.foliora-dash .foliora-cover:hover .foliora-cover-fallback,
-.foliora-dash .foliora-cover:focus .foliora-cover-fallback {
-	transform: translateY(-3px) rotate(-1.5deg);
-	box-shadow: 4px 10px 16px rgba(0, 0, 0, 0.16);
-}
-
-.foliora-dash .foliora-cover.is-selected img,
-.foliora-dash .foliora-cover.is-selected .foliora-cover-fallback {
-	box-shadow: 0 0 0 2px #2271b1, 2px 6px 12px rgba(34, 113, 177, 0.28);
-	transform: translateY(-2px);
-}
-
-.foliora-cover-name {
-	display: block;
-	max-width: 72px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	font-size: 11px;
-	line-height: 1.3;
-	color: #646970;
-}
-
-.foliora-quiet-links {
-	font-size: 13px;
-	margin: 0;
-}
-
-.foliora-panel-pro .foliora-panel-head {
-	margin-bottom: 12px;
-}
-
-.foliora-pro-tiles {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 8px;
-}
-
-.foliora-pro-tile {
-	margin: 0;
-	border: 1px solid #dcdcde;
-	border-radius: 10px;
-	background: #fff;
-	overflow: hidden;
-	transition: border-color 0.15s ease, box-shadow 0.15s ease;
-}
-
-.foliora-pro-tile:hover,
-.foliora-pro-tile[open] {
-	border-color: #c3c4c7;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-.foliora-pro-tile summary {
-	display: grid;
-	grid-template-columns: 28px 1fr auto;
-	align-items: center;
-	gap: 8px;
-	padding: 10px 12px;
-	cursor: pointer;
-	list-style: none;
-}
-
-.foliora-pro-tile summary::-webkit-details-marker {
-	display: none;
-}
-
-.foliora-pro-icon {
-	width: 28px;
-	height: 28px;
-	border-radius: 8px;
-	background: #f0f0f1;
-	color: #50575e;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 16px;
-	line-height: 28px;
-	text-align: center;
-}
-
-.foliora-pro-row-title {
-	font-weight: 600;
-	font-size: 13px;
-}
-
-.foliora-pro-tile p {
-	margin: 0;
-	padding: 0 12px 12px 48px;
-	color: #646970;
-}
-
-.foliora-badge {
-	display: inline-block;
-	padding: 1px 7px;
-	border-radius: 999px;
-	font-size: 11px;
-	font-weight: 600;
-	letter-spacing: 0.02em;
-	width: fit-content;
-	flex-shrink: 0;
-}
-
-.foliora-badge.is-active {
-	background: #edfaef;
-	color: #1e4620;
-}
-
-.foliora-badge.is-locked {
-	background: #f0f0f1;
-	color: #646970;
-}
-
-.foliora-toast {
+.foliora-toast{
 	position: fixed;
 	left: 50%;
 	bottom: 28px;
@@ -746,27 +34,27 @@ a.foliora-metric:focus {
 	transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.foliora-toast.is-on {
+.foliora-toast.is-on{
 	opacity: 1;
 	transform: translateX(-50%) translateY(0);
 }
 
-.foliora-settings-wrap {
+.foliora-settings-wrap{
 	max-width: 1180px;
 }
 
-.foliora-settings-wrap .form-table th {
+.foliora-settings-wrap .form-table th{
 	width: 200px;
 }
 
-.foliora-settings-layout {
+.foliora-settings-layout{
 	display: grid;
 	grid-template-columns: minmax(280px, 0.9fr) minmax(320px, 1.1fr);
 	gap: 24px;
 	align-items: start;
 }
 
-.foliora-live-preview {
+.foliora-live-preview{
 	background: #fff;
 	border: 1px solid #dcdcde;
 	border-radius: 8px;
@@ -774,12 +62,12 @@ a.foliora-metric:focus {
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
 }
 
-.foliora-live-preview h2 {
+.foliora-live-preview h2{
 	margin: 0 0 6px;
 	font-size: 16px;
 }
 
-.foliora-live-preview-stage {
+.foliora-live-preview-stage{
 	background: #f6f7f7;
 	border: 1px solid #dcdcde;
 	border-radius: 8px;
@@ -788,11 +76,11 @@ a.foliora-metric:focus {
 	max-height: 70vh;
 }
 
-.foliora-live-preview-stage .foliora-wrap {
+.foliora-live-preview-stage .foliora-wrap{
 	margin: 0;
 }
 
-.foliora-live-preview-empty {
+.foliora-live-preview-empty{
 	padding: 24px;
 	border: 1px dashed #c3c4c7;
 	border-radius: 8px;
@@ -800,143 +88,18 @@ a.foliora-metric:focus {
 	background: #f6f7f7;
 }
 
-.foliora-docs {
-	max-width: 1100px;
-}
-
-.foliora-docs-search {
-	margin: 12px 0 16px;
-}
-
-.foliora-shortcode-row {
-	display: flex;
-	gap: 8px;
-	align-items: center;
-	flex-wrap: wrap;
-}
-
-.foliora-shortcode-row input[type="text"] {
-	flex: 1 1 240px;
-	font-family: Consolas, Monaco, monospace;
-}
-
-.foliora-docs-table .foliora-shortcode-row input[type="text"] {
-	min-width: 220px;
-	font-family: Consolas, Monaco, monospace;
-	font-size: 12px;
-}
-
-.foliora-docs-empty {
-	padding: 32px 16px;
-	text-align: center;
-	background: #fff;
-	border: 1px dashed #c3c4c7;
-	border-radius: 8px;
-}
-
-.foliora-docs-thumb-col {
-	width: 72px;
-}
-
-.foliora-docs-thumb-img,
-.foliora-thumb-placeholder {
-	display: block;
-	width: 56px;
-	height: 72px;
-	object-fit: cover;
-	background: #dcdcde;
-	border-radius: 2px;
-}
-
-.foliora-thumb-status {
-	margin: 8px 0 0;
-	color: #646970;
-}
-
-.foliora-index-status {
-	display: inline-block;
-	padding: 2px 8px;
-	border-radius: 999px;
-	font-size: 12px;
-	line-height: 1.6;
-	white-space: nowrap;
-}
-
-.foliora-index-status.is-ready {
-	background: #edfaef;
-	color: #1e7e34;
-}
-
-.foliora-index-status.is-pending {
-	background: #f0f0f1;
-	color: #50575e;
-}
-
-.foliora-index-status.is-empty,
-.foliora-a11y-status.is-warn {
-	background: #fcf9e8;
-	color: #8a6d00;
-}
-
-.foliora-a11y-status {
-	display: inline-block;
-	padding: 2px 8px;
-	border-radius: 999px;
-	font-size: 12px;
-	line-height: 1.6;
-	white-space: nowrap;
-}
-
-.foliora-a11y-status.is-ready {
-	background: #edfaef;
-	color: #1e7e34;
-}
-
-.foliora-a11y-status.is-pending {
-	background: #f0f0f1;
-	color: #50575e;
-}
-
-.foliora-a11y-notice {
-	margin: 12px 0 16px;
-}
-
 @media (max-width: 960px) {
-	.foliora-workspace,
-	.foliora-metrics,
-	.foliora-pro-tiles,
-	.foliora-settings-layout {
+	.foliora-settings-layout{
 		grid-template-columns: 1fr;
 	}
 
-	.foliora-dash-hero,
-	.foliora-dash-hero-side {
-		flex-direction: column;
-		align-items: flex-start;
-	}
-
-	.foliora-stage {
-		grid-template-columns: 64px 1fr;
-	}
-
-	.foliora-stage-cover img,
-	.foliora-stage-fallback {
-		width: 64px;
-		height: 86px;
-	}
-
-	.foliora-setup-actions .button,
-	#foliora-copy-shortcode {
+	#foliora-copy-shortcode{
 		min-height: 44px;
 	}
 }
 
 @media (prefers-reduced-motion: reduce) {
-	.foliora-progress span,
-	.foliora-ring-fg,
-	.foliora-metric,
-	.foliora-cover img,
-	.foliora-toast {
+	.foliora-toast{
 		transition: none;
 	}
 }
@@ -944,1086 +107,41 @@ a.foliora-metric:focus {
 /* ==========================================================================
    Docs & Features Showcase Styles
    ========================================================================== */
-.foliora-docs-tabs {
-	margin: 16px 0 20px;
-}
-
-.foliora-docs-tabs .nav-tab {
-	display: inline-flex;
-	align-items: center;
-	gap: 6px;
-	font-size: 13px;
-	padding: 7px 14px;
-}
-
-.foliora-docs-tabs .nav-tab .dashicons {
-	font-size: 17px;
-	width: 17px;
-	height: 17px;
-}
-
-.foliora-features-showcase {
-	max-width: 1100px;
-	margin-top: 16px;
-}
-
-.foliora-features-hero {
-	background: #1d2327;
-	color: #fff;
-	border-radius: 10px;
-	padding: 24px 28px;
-	margin-bottom: 24px;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 20px;
-	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-}
-
-.foliora-features-hero-content h2 {
-	margin: 0 0 6px;
-	color: #fff;
-	font-size: 20px;
-}
-
-.foliora-features-hero-content p {
-	margin: 0;
-	color: #c3c4c7;
-	font-size: 14px;
-	line-height: 1.5;
-	max-width: 680px;
-}
-
-.foliora-features-hero-action .button-hero {
-	padding: 10px 22px !important;
-	height: auto !important;
-	font-size: 14px !important;
-	font-weight: 600 !important;
-}
-
-.foliora-features-grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-	gap: 20px;
-}
-
-.foliora-feature-card {
-	background: #fff;
-	border: 1px solid #dcdcde;
-	border-radius: 10px;
-	padding: 20px 22px;
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-	display: flex;
-	flex-direction: column;
-	transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
-}
-
-.foliora-feature-card:hover {
-	transform: translateY(-2px);
-	box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-	border-color: #c3c4c7;
-}
-
-.foliora-feature-card-header {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-	margin-bottom: 14px;
-	padding-bottom: 12px;
-	border-bottom: 1px solid #f0f0f1;
-}
-
-.foliora-feature-icon {
-	color: #2271b1;
-	font-size: 22px;
-	width: 22px;
-	height: 22px;
-}
-
-.foliora-feature-icon-pro {
-	color: #9d4edd;
-	font-size: 22px;
-	width: 22px;
-	height: 22px;
-}
-
-.foliora-feature-card-header h3 {
-	margin: 0;
-	font-size: 15px;
-	font-weight: 600;
-	flex: 1 1 auto;
-	color: #1d2327;
-}
-
-.foliora-badge.is-pro {
-	background: #f3e8ff;
-	color: #7e22ce;
-}
-
-.foliora-feature-list {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
-	font-size: 13px;
-	line-height: 1.45;
-	color: #50575e;
-	flex: 1 1 auto;
-}
-
-.foliora-feature-list li {
-	position: relative;
-	padding-left: 18px;
-	margin: 0;
-}
-
-.foliora-feature-list li::before {
-	content: "\2713";
-	position: absolute;
-	left: 0;
-	top: 0;
-	color: #008a20;
-	font-weight: bold;
-}
-
-.foliora-feature-card-pro {
-	border: 1px solid #d8b4fe;
-	background: linear-gradient(180deg, #faf5ff 0%, #ffffff 100%);
-}
-
-.foliora-feature-card-pro .foliora-feature-list li::before {
-	content: "\2605";
-	color: #9d4edd;
-}
-
-.foliora-feature-card-footer {
-	margin-top: 18px;
-	padding-top: 14px;
-	border-top: 1px solid #f3e8ff;
-}
 
 /* ==========================================================================
    Documents Usage Guide Box Styles (Polished Modern Elevated Look)
    ========================================================================== */
-.foliora-docs-guide-box {
-	background: #ffffff;
-	border: 1px solid #e2e8f0;
-	border-radius: 12px;
-	padding: 22px 24px;
-	margin: 18px 0 24px;
-	box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
-	position: relative;
-	overflow: hidden;
-}
-
-.foliora-docs-guide-box::before {
-	content: "";
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	height: 3px;
-	background: linear-gradient(90deg, #2271b1 0%, #38bdf8 50%, #6366f1 100%);
-}
-
-.foliora-docs-guide-header {
-	display: flex;
-	align-items: center;
-	gap: 14px;
-	margin-bottom: 18px;
-}
-
-.foliora-guide-header-icon {
-	width: 40px;
-	height: 40px;
-	border-radius: 10px;
-	background: #eff6ff;
-	color: #2271b1;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-shrink: 0;
-}
-
-.foliora-guide-header-icon .dashicons {
-	font-size: 22px;
-	width: 22px;
-	height: 22px;
-}
-
-.foliora-guide-header-text h3 {
-	margin: 0 0 3px;
-	font-size: 16px;
-	font-weight: 700;
-	color: #0f172a;
-	letter-spacing: -0.01em;
-}
-
-.foliora-guide-header-text p {
-	margin: 0;
-	font-size: 13px;
-	color: #64748b;
-	line-height: 1.45;
-}
-
-.foliora-docs-guide-grid {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	gap: 14px;
-	margin-bottom: 18px;
-}
-
-@media (max-width: 1200px) {
-	.foliora-docs-guide-grid {
-		grid-template-columns: repeat(2, 1fr);
-	}
-}
-
-@media (max-width: 600px) {
-	.foliora-docs-guide-grid {
-		grid-template-columns: 1fr;
-	}
-}
-
-.foliora-guide-card {
-	background: #f8fafc;
-	border: 1px solid #edf2f7;
-	border-radius: 10px;
-	padding: 14px 16px;
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
-	transition: all 0.2s ease;
-}
-
-.foliora-guide-card:hover {
-	background: #ffffff;
-	border-color: #cbd5e1;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-	transform: translateY(-2px);
-}
-
-.foliora-guide-card-top {
-	display: flex;
-	align-items: center;
-	gap: 8px;
-}
-
-.foliora-guide-step-pill {
-	width: 22px;
-	height: 22px;
-	border-radius: 6px;
-	background: #2271b1;
-	color: #ffffff;
-	font-size: 11px;
-	font-weight: 700;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	flex-shrink: 0;
-}
-
-.foliora-guide-card-title {
-	font-size: 12.5px;
-	font-weight: 700;
-	color: #1e293b;
-	letter-spacing: 0.01em;
-}
-
-.foliora-guide-card p {
-	margin: 0;
-	font-size: 12px;
-	line-height: 1.5;
-	color: #64748b;
-}
-
-.foliora-guide-footer {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 16px;
-	padding-top: 16px;
-	border-top: 1px solid #f1f5f9;
-	flex-wrap: wrap;
-}
-
-.foliora-guide-footer-status {
-	display: flex;
-	align-items: center;
-	gap: 8px;
-	font-size: 12.5px;
-	color: #475569;
-	flex: 1 1 300px;
-}
-
-.foliora-guide-footer-status .dashicons {
-	color: #10b981;
-	font-size: 18px;
-	width: 18px;
-	height: 18px;
-	flex-shrink: 0;
-}
-
-.foliora-guide-btn-doc {
-	display: inline-flex;
-	align-items: center;
-	gap: 6px;
-	background: #ffffff;
-	border: 1px solid #cbd5e1;
-	border-radius: 8px;
-	padding: 7px 14px;
-	font-size: 12.5px;
-	font-weight: 600;
-	color: #0f172a;
-	text-decoration: none;
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-	transition: all 0.15s ease;
-	white-space: nowrap;
-}
-
-.foliora-guide-btn-doc:hover {
-	background: #f8fafc;
-	border-color: #94a3b8;
-	color: #2271b1;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
-	transform: translateY(-1px);
-}
-
-.foliora-guide-btn-doc .dashicons {
-	font-size: 14px;
-	width: 14px;
-	height: 14px;
-	transition: transform 0.15s ease;
-}
-
-.foliora-guide-btn-doc:hover .dashicons {
-	transform: translateX(3px);
-}
 
 /* ==========================================================================
    User Guide & Documentation Tab Styles (Polished Modern Reference)
    ========================================================================== */
-.foliora-guide-wrap {
-	max-width: 1200px;
-	margin-top: 18px;
-}
 
 /* Guide Hero */
-.foliora-guide-hero {
-	background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-	color: #fff;
-	border-radius: 12px;
-	padding: 26px 30px;
-	margin-bottom: 24px;
-	box-shadow: 0 6px 20px -3px rgba(0, 0, 0, 0.12);
-	position: relative;
-	overflow: hidden;
-}
-
-.foliora-guide-hero::after {
-	content: "";
-	position: absolute;
-	top: -50px;
-	right: -50px;
-	width: 200px;
-	height: 200px;
-	border-radius: 50%;
-	background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, rgba(56, 189, 248, 0) 70%);
-	pointer-events: none;
-}
-
-.foliora-guide-hero-badge {
-	display: inline-flex;
-	align-items: center;
-	gap: 6px;
-	background: rgba(255, 255, 255, 0.1);
-	backdrop-filter: blur(8px);
-	border: 1px solid rgba(255, 255, 255, 0.16);
-	padding: 4px 12px;
-	border-radius: 20px;
-	font-size: 11.5px;
-	font-weight: 600;
-	color: #38bdf8;
-	margin-bottom: 12px;
-}
-
-.foliora-guide-hero-badge .dashicons {
-	font-size: 14px;
-	width: 14px;
-	height: 14px;
-}
-
-.foliora-guide-hero h2 {
-	margin: 0 0 6px;
-	color: #ffffff;
-	font-size: 22px;
-	font-weight: 700;
-	letter-spacing: -0.01em;
-}
-
-.foliora-guide-hero p {
-	margin: 0;
-	color: #94a3b8;
-	font-size: 13.5px;
-	line-height: 1.5;
-	max-width: 850px;
-}
-
-.foliora-guide-nav-pills {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 8px;
-	margin-top: 20px;
-	padding-top: 16px;
-	border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.foliora-nav-pill {
-	display: inline-flex;
-	align-items: center;
-	gap: 6px;
-	background: rgba(255, 255, 255, 0.08);
-	border: 1px solid rgba(255, 255, 255, 0.12);
-	border-radius: 6px;
-	padding: 5px 12px;
-	color: #e2e8f0;
-	font-size: 12px;
-	font-weight: 600;
-	text-decoration: none;
-	transition: all 0.15s ease;
-}
-
-.foliora-nav-pill:hover,
-.foliora-nav-pill:focus {
-	background: rgba(255, 255, 255, 0.18);
-	color: #ffffff;
-	border-color: rgba(255, 255, 255, 0.25);
-	transform: translateY(-1px);
-}
-
-.foliora-nav-pill .dashicons {
-	font-size: 14px;
-	width: 14px;
-	height: 14px;
-	color: #38bdf8;
-}
 
 /* Sections */
-.foliora-guide-section {
-	background: #ffffff;
-	border: 1px solid #e2e8f0;
-	border-radius: 12px;
-	padding: 24px 28px;
-	margin-bottom: 24px;
-	box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.04);
-}
-
-.foliora-guide-section-head {
-	display: flex;
-	align-items: center;
-	gap: 14px;
-	margin-bottom: 18px;
-	padding-bottom: 14px;
-	border-bottom: 1px solid #f1f5f9;
-}
-
-.foliora-guide-sec-icon-wrap {
-	width: 38px;
-	height: 38px;
-	border-radius: 10px;
-	background: #eff6ff;
-	color: #2563eb;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-shrink: 0;
-}
-
-.foliora-guide-sec-icon-wrap .dashicons {
-	font-size: 20px;
-	width: 20px;
-	height: 20px;
-}
-
-.foliora-guide-section-head h3 {
-	margin: 0 0 2px;
-	font-size: 16.5px;
-	font-weight: 700;
-	color: #0f172a;
-	letter-spacing: -0.01em;
-}
-
-.foliora-guide-subtitle {
-	margin: 0;
-	color: #64748b;
-	font-size: 13px;
-	line-height: 1.4;
-}
 
 /* 1. Quick Start Cards */
-.foliora-guide-cards-3 {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 16px;
-}
-
-@media (max-width: 900px) {
-	.foliora-guide-cards-3 {
-		grid-template-columns: 1fr;
-	}
-}
-
-.foliora-guide-step-card {
-	background: #f8fafc;
-	border: 1px solid #e2e8f0;
-	border-radius: 10px;
-	padding: 18px;
-	display: flex;
-	gap: 14px;
-	transition: all 0.2s ease;
-}
-
-.foliora-guide-step-card:hover {
-	background: #ffffff;
-	border-color: #cbd5e1;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-	transform: translateY(-2px);
-}
-
-.foliora-step-badge {
-	width: 30px;
-	height: 30px;
-	border-radius: 8px;
-	background: #2563eb;
-	color: #ffffff;
-	font-weight: 700;
-	font-size: 13px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-shrink: 0;
-}
-
-.foliora-step-body {
-	flex: 1 1 auto;
-	display: flex;
-	flex-direction: column;
-	gap: 6px;
-}
-
-.foliora-step-body h4 {
-	margin: 0;
-	font-size: 14px;
-	font-weight: 700;
-	color: #0f172a;
-}
-
-.foliora-step-body p {
-	margin: 0;
-	font-size: 12.5px;
-	line-height: 1.45;
-	color: #64748b;
-}
-
-.foliora-mini-code-box {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 8px;
-	background: #0f172a;
-	border-radius: 6px;
-	padding: 6px 10px;
-	margin-top: 6px;
-}
-
-.foliora-mini-code-box code {
-	background: transparent;
-	color: #38bdf8;
-	font-size: 11px;
-	padding: 0;
-	border: none;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
-.foliora-copy-snippet-btn {
-	background: rgba(255, 255, 255, 0.1);
-	border: 1px solid rgba(255, 255, 255, 0.2);
-	border-radius: 4px;
-	color: #e2e8f0;
-	padding: 3px 6px;
-	cursor: pointer;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	transition: all 0.15s ease;
-}
-
-.foliora-copy-snippet-btn:hover {
-	background: #2563eb;
-	color: #fff;
-	border-color: #2563eb;
-}
-
-.foliora-copy-snippet-btn .dashicons {
-	font-size: 14px;
-	width: 14px;
-	height: 14px;
-}
-
-.foliora-step-chip {
-	display: inline-flex;
-	align-items: center;
-	gap: 6px;
-	padding: 5px 10px;
-	border-radius: 6px;
-	font-size: 11.5px;
-	font-weight: 600;
-	margin-top: 6px;
-	width: fit-content;
-}
-
-.foliora-step-chip.is-blue {
-	background: #eff6ff;
-	color: #2563eb;
-	border: 1px solid #bfdbfe;
-}
-
-.foliora-step-chip.is-green {
-	background: #ecfdf5;
-	color: #059669;
-	border: 1px solid #a7f3d0;
-}
-
-.foliora-step-chip .dashicons {
-	font-size: 14px;
-	width: 14px;
-	height: 14px;
-}
 
 /* 2 & 3. Modern API Reference Table */
-.foliora-api-table-card {
-	border: 1px solid #e2e8f0;
-	border-radius: 10px;
-	overflow: hidden;
-	background: #ffffff;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-	margin-bottom: 20px;
-}
-
-.foliora-api-table {
-	width: 100%;
-	border-collapse: collapse;
-	font-size: 13px;
-	text-align: left;
-}
-
-.foliora-api-table thead th {
-	background: #f8fafc;
-	color: #475569;
-	font-size: 11.5px;
-	text-transform: uppercase;
-	font-weight: 700;
-	letter-spacing: 0.05em;
-	padding: 12px 16px;
-	border-bottom: 1px solid #e2e8f0;
-}
-
-.foliora-api-table tbody tr {
-	border-bottom: 1px solid #f1f5f9;
-	transition: background 0.12s ease;
-}
-
-.foliora-api-table tbody tr:last-child {
-	border-bottom: none;
-}
-
-.foliora-api-table tbody tr:hover {
-	background: #f8fafc;
-}
-
-.foliora-api-table tbody td {
-	padding: 14px 16px;
-	vertical-align: top;
-	color: #334155;
-	line-height: 1.5;
-}
-
-.foliora-attr-cell {
-	display: flex;
-	flex-direction: column;
-	gap: 4px;
-	align-items: flex-start;
-}
-
-.foliora-param-code {
-	font-family: Consolas, Monaco, "Courier New", monospace;
-	font-size: 13px;
-	font-weight: 700;
-	color: #0f172a;
-	background: #f1f5f9;
-	border: 1px solid #cbd5e1;
-	border-radius: 5px;
-	padding: 3px 7px;
-}
-
-.foliora-pill-req {
-	display: inline-block;
-	font-size: 10px;
-	font-weight: 700;
-	text-transform: uppercase;
-	color: #dc2626;
-	background: #fef2f2;
-	border: 1px solid #fecaca;
-	border-radius: 4px;
-	padding: 1px 5px;
-	letter-spacing: 0.03em;
-}
-
-.foliora-pill-opt {
-	display: inline-block;
-	font-size: 10px;
-	font-weight: 600;
-	text-transform: uppercase;
-	color: #64748b;
-	background: #f8fafc;
-	border: 1px solid #e2e8f0;
-	border-radius: 4px;
-	padding: 1px 5px;
-	letter-spacing: 0.03em;
-}
-
-.foliora-type-pill {
-	display: inline-block;
-	font-size: 11.5px;
-	font-family: Consolas, Monaco, monospace;
-	color: #0369a1;
-	background: #f0f9ff;
-	border: 1px solid #bae6fd;
-	border-radius: 4px;
-	padding: 2px 7px;
-	margin-bottom: 4px;
-}
-
-.foliora-default-pill {
-	display: block;
-	font-size: 11px;
-	color: #64748b;
-	font-style: italic;
-}
-
-.foliora-tbl-desc {
-	margin: 0;
-	font-size: 13px;
-	color: #334155;
-	line-height: 1.5;
-}
-
-.foliora-option-list {
-	margin: 6px 0 0 0;
-	padding: 0;
-	list-style: none;
-	display: flex;
-	flex-direction: column;
-	gap: 4px;
-}
-
-.foliora-option-list li {
-	margin: 0;
-	font-size: 12.5px;
-	color: #475569;
-}
-
-.foliora-val-code {
-	font-family: Consolas, Monaco, monospace;
-	font-weight: 700;
-	font-size: 12px;
-	color: #2563eb;
-	background: #eff6ff;
-	border: 1px solid #dbeafe;
-	border-radius: 4px;
-	padding: 1px 5px;
-}
-
-.foliora-csv-pills {
-	margin: 6px 0 0;
-	display: flex;
-	flex-wrap: wrap;
-	gap: 4px;
-}
-
-.foliora-csv-pills span {
-	font-family: Consolas, Monaco, monospace;
-	font-size: 11px;
-	color: #475569;
-	background: #f1f5f9;
-	border: 1px solid #e2e8f0;
-	border-radius: 4px;
-	padding: 1px 5px;
-}
-
-.foliora-code-chip-copy {
-	display: inline-flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 8px;
-	background: #f8fafc;
-	border: 1px solid #cbd5e1;
-	border-radius: 6px;
-	padding: 5px 10px;
-	cursor: pointer;
-	transition: all 0.15s ease;
-	max-width: 100%;
-}
-
-.foliora-code-chip-copy:hover {
-	background: #ffffff;
-	border-color: #2563eb;
-	box-shadow: 0 2px 6px rgba(37, 99, 235, 0.12);
-}
-
-.foliora-code-chip-copy code {
-	background: transparent;
-	border: none;
-	padding: 0;
-	font-size: 11.5px;
-	color: #0f172a;
-	font-family: Consolas, Monaco, monospace;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
-.foliora-code-chip-copy .dashicons {
-	font-size: 14px;
-	width: 14px;
-	height: 14px;
-	color: #64748b;
-	transition: color 0.15s ease;
-}
-
-.foliora-code-chip-copy:hover .dashicons {
-	color: #2563eb;
-}
 
 /* Ready to Use Copy Presets Shelf */
-.foliora-presets-shelf {
-	background: #0f172a;
-	border-radius: 10px;
-	padding: 20px 22px;
-	color: #fff;
-	margin-top: 18px;
-}
-
-.foliora-presets-head {
-	display: flex;
-	align-items: center;
-	gap: 12px;
-	margin-bottom: 16px;
-	padding-bottom: 12px;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.foliora-presets-icon {
-	color: #fbbf24;
-	font-size: 24px;
-	width: 24px;
-	height: 24px;
-}
-
-.foliora-presets-head h4 {
-	margin: 0 0 2px;
-	font-size: 15px;
-	font-weight: 700;
-	color: #ffffff;
-}
-
-.foliora-presets-head p {
-	margin: 0;
-	font-size: 12.5px;
-	color: #94a3b8;
-}
-
-.foliora-presets-grid {
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
-}
-
-.foliora-preset-card {
-	background: #1e293b;
-	border: 1px solid rgba(255, 255, 255, 0.1);
-	border-radius: 8px;
-	padding: 12px 14px;
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
-	transition: border-color 0.15s ease;
-}
-
-.foliora-preset-card:hover {
-	border-color: rgba(255, 255, 255, 0.25);
-}
-
-.foliora-preset-card-top {
-	display: flex;
-	align-items: center;
-	gap: 8px;
-}
-
-.foliora-preset-tag {
-	font-size: 11px;
-	font-weight: 700;
-	padding: 2px 7px;
-	border-radius: 4px;
-	text-transform: uppercase;
-	letter-spacing: 0.03em;
-}
-
-.foliora-preset-tag.is-purple {
-	background: rgba(168, 85, 247, 0.2);
-	color: #c084fc;
-	border: 1px solid rgba(168, 85, 247, 0.4);
-}
-
-.foliora-preset-tag.is-blue {
-	background: rgba(56, 189, 248, 0.2);
-	color: #38bdf8;
-	border: 1px solid rgba(56, 189, 248, 0.4);
-}
-
-.foliora-preset-tag.is-slate {
-	background: rgba(148, 163, 184, 0.2);
-	color: #cbd5e1;
-	border: 1px solid rgba(148, 163, 184, 0.4);
-}
-
-.foliora-preset-tag.is-teal {
-	background: rgba(45, 212, 191, 0.2);
-	color: #2dd4bf;
-	border: 1px solid rgba(45, 212, 191, 0.4);
-}
-
-.foliora-preset-hint {
-	font-size: 12px;
-	color: #94a3b8;
-}
-
-.foliora-preset-code-row {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 12px;
-	background: #0b0f19;
-	border-radius: 6px;
-	padding: 8px 12px;
-}
-
-.foliora-preset-code-row code {
-	background: transparent;
-	border: none;
-	padding: 0;
-	font-family: Consolas, Monaco, monospace;
-	font-size: 12px;
-	color: #7dd3fc;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
-.foliora-copy-preset-btn {
-	display: inline-flex;
-	align-items: center;
-	gap: 4px;
-	background: #2563eb;
-	color: #ffffff;
-	border: none;
-	border-radius: 5px;
-	padding: 5px 10px;
-	font-size: 12px;
-	font-weight: 600;
-	cursor: pointer;
-	flex-shrink: 0;
-	transition: background 0.15s ease;
-}
-
-.foliora-copy-preset-btn:hover {
-	background: #1d4ed8;
-}
-
-.foliora-copy-preset-btn .dashicons {
-	font-size: 14px;
-	width: 14px;
-	height: 14px;
-}
-
-.foliora-preset-single {
-	background: #0f172a;
-	margin-top: 14px;
-	color: #fff;
-}
 
 /* 4. Deep Linking */
-.foliora-deeplink-grid {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 16px;
-}
-
-@media (max-width: 782px) {
-	.foliora-deeplink-grid {
-		grid-template-columns: 1fr;
-	}
-}
-
-.foliora-deeplink-box {
-	background: #f8fafc;
-	border: 1px solid #e2e8f0;
-	border-radius: 8px;
-	padding: 16px 18px;
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
-}
-
-.foliora-deeplink-code code {
-	background: #0f172a;
-	color: #e2e8f0;
-	padding: 6px 10px;
-	border-radius: 6px;
-	display: block;
-	font-size: 12px;
-	font-family: Consolas, Monaco, monospace;
-}
-
-.foliora-deeplink-code code strong {
-	color: #38bdf8;
-}
-
-.foliora-deeplink-box p {
-	margin: 0;
-	font-size: 12.5px;
-	line-height: 1.5;
-	color: #475569;
-}
 
 /* 5. Builder Cards Grid */
-.foliora-builder-cards-grid {
+.foliora-builder-cards-grid{
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	gap: 16px;
 }
 
 @media (max-width: 782px) {
-	.foliora-builder-cards-grid {
+	.foliora-builder-cards-grid{
 		grid-template-columns: 1fr;
 	}
 }
 
-.foliora-builder-card {
+.foliora-builder-card{
 	background: #f8fafc;
 	border: 1px solid #e2e8f0;
 	border-radius: 10px;
@@ -2031,21 +149,21 @@ a.foliora-metric:focus {
 	transition: all 0.2s ease;
 }
 
-.foliora-builder-card:hover {
+.foliora-builder-card:hover{
 	background: #ffffff;
 	border-color: #cbd5e1;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 	transform: translateY(-2px);
 }
 
-.foliora-builder-card-head {
+.foliora-builder-card-head{
 	display: flex;
 	align-items: center;
 	gap: 10px;
 	margin-bottom: 8px;
 }
 
-.foliora-builder-icon {
+.foliora-builder-icon{
 	width: 32px;
 	height: 32px;
 	border-radius: 8px;
@@ -2056,36 +174,36 @@ a.foliora-metric:focus {
 	flex-shrink: 0;
 }
 
-.foliora-builder-icon .dashicons {
+.foliora-builder-icon .dashicons{
 	font-size: 18px;
 	width: 18px;
 	height: 18px;
 }
 
-.foliora-builder-icon.is-wp {
+.foliora-builder-icon.is-wp{
 	background: #2271b1;
 }
 
-.foliora-builder-icon.is-elementor {
+.foliora-builder-icon.is-elementor{
 	background: #e60067;
 }
 
-.foliora-builder-icon.is-divi {
+.foliora-builder-icon.is-divi{
 	background: #7c3aed;
 }
 
-.foliora-builder-icon.is-i18n {
+.foliora-builder-icon.is-i18n{
 	background: #0d9488;
 }
 
-.foliora-builder-card-head h4 {
+.foliora-builder-card-head h4{
 	margin: 0;
 	font-size: 14.5px;
 	font-weight: 700;
 	color: #0f172a;
 }
 
-.foliora-builder-card p {
+.foliora-builder-card p{
 	margin: 0;
 	font-size: 12.5px;
 	line-height: 1.5;
@@ -2093,82 +211,16 @@ a.foliora-metric:focus {
 }
 
 /* 6. FAQs Accordion */
-.foliora-faq-list {
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
-}
-
-.foliora-faq-item {
-	background: #f8fafc;
-	border: 1px solid #e2e8f0;
-	border-radius: 8px;
-	overflow: hidden;
-	transition: all 0.15s ease;
-}
-
-.foliora-faq-item[open] {
-	background: #ffffff;
-	border-color: #cbd5e1;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-}
-
-.foliora-faq-item summary {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 12px;
-	padding: 14px 18px;
-	cursor: pointer;
-	list-style: none;
-	user-select: none;
-}
-
-.foliora-faq-item summary::-webkit-details-marker {
-	display: none;
-}
-
-.foliora-faq-q {
-	font-size: 13.5px;
-	font-weight: 700;
-	color: #0f172a;
-}
-
-.foliora-faq-arrow {
-	color: #64748b;
-	font-size: 16px;
-	width: 16px;
-	height: 16px;
-	transition: transform 0.2s ease;
-}
-
-.foliora-faq-item[open] .foliora-faq-arrow {
-	transform: rotate(180deg);
-	color: #2563eb;
-}
-
-.foliora-faq-answer {
-	padding: 0 18px 16px;
-	border-top: 1px solid #f1f5f9;
-	padding-top: 12px;
-}
-
-.foliora-faq-answer p {
-	margin: 0;
-	font-size: 13px;
-	line-height: 1.6;
-	color: #475569;
-}
 
 /* ==========================================================================
    Shortcode Builder & Live Preview Styles
    ========================================================================== */
-.foliora-builder-wrap {
+.foliora-builder-wrap{
 	max-width: 1400px;
 	margin: 20px 20px 40px 0;
 }
 
-.foliora-builder-header {
+.foliora-builder-header{
 	background: #1e2327;
 	color: #fff;
 	border-radius: 10px;
@@ -2180,28 +232,28 @@ a.foliora-metric:focus {
 	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 
-.foliora-builder-kicker {
+.foliora-builder-kicker{
 	display: flex;
 	align-items: center;
 	gap: 10px;
 	margin-bottom: 6px;
 }
 
-.foliora-builder-kicker .dashicons {
+.foliora-builder-kicker .dashicons{
 	font-size: 26px;
 	width: 26px;
 	height: 26px;
 	color: #72aee6;
 }
 
-.foliora-builder-kicker h1 {
+.foliora-builder-kicker h1{
 	margin: 0;
 	font-size: 22px;
 	color: #fff;
 	line-height: 1.2;
 }
 
-.foliora-builder-lede {
+.foliora-builder-lede{
 	margin: 0;
 	font-size: 14px;
 	color: #c3c4c7;
@@ -2209,7 +261,7 @@ a.foliora-metric:focus {
 	line-height: 1.5;
 }
 
-.foliora-builder-presets {
+.foliora-builder-presets{
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
@@ -2218,7 +270,7 @@ a.foliora-metric:focus {
 	border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.foliora-presets-label {
+.foliora-presets-label{
 	font-size: 12px;
 	font-weight: 600;
 	text-transform: uppercase;
@@ -2226,13 +278,13 @@ a.foliora-metric:focus {
 	color: #9da3a8;
 }
 
-.foliora-presets-chips {
+.foliora-presets-chips{
 	display: flex;
 	flex-wrap: wrap;
 	gap: 8px;
 }
 
-.foliora-preset-chip {
+.foliora-preset-chip{
 	appearance: none;
 	background: rgba(255, 255, 255, 0.08);
 	border: 1px solid rgba(255, 255, 255, 0.16);
@@ -2249,14 +301,14 @@ a.foliora-metric:focus {
 }
 
 .foliora-preset-chip:hover,
-.foliora-preset-chip:focus {
+.foliora-preset-chip:focus{
 	background: rgba(255, 255, 255, 0.18);
 	border-color: #72aee6;
 	color: #fff;
 	transform: translateY(-1px);
 }
 
-.foliora-preset-chip.is-active {
+.foliora-preset-chip.is-active{
 	background: #2271b1;
 	border-color: #72aee6;
 	color: #fff;
@@ -2264,7 +316,7 @@ a.foliora-metric:focus {
 }
 
 /* 2-Column Builder Layout */
-.foliora-builder-layout {
+.foliora-builder-layout{
 	display: grid;
 	grid-template-columns: minmax(380px, 1fr) minmax(480px, 1.25fr);
 	gap: 24px;
@@ -2272,18 +324,18 @@ a.foliora-metric:focus {
 }
 
 @media (max-width: 1080px) {
-	.foliora-builder-layout {
+	.foliora-builder-layout{
 		grid-template-columns: 1fr;
 	}
 }
 
-.foliora-builder-controls {
+.foliora-builder-controls{
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
 }
 
-.foliora-builder-card {
+.foliora-builder-card{
 	background: #fff;
 	border: 1px solid #ccd0d4;
 	border-radius: 8px;
@@ -2291,7 +343,7 @@ a.foliora-metric:focus {
 	overflow: hidden;
 }
 
-.foliora-builder-card .foliora-card-head {
+.foliora-builder-card .foliora-card-head{
 	display: flex;
 	align-items: center;
 	gap: 10px;
@@ -2300,35 +352,35 @@ a.foliora-metric:focus {
 	border-bottom: 1px solid #e2e8f0;
 }
 
-.foliora-builder-card .foliora-card-head .dashicons {
+.foliora-builder-card .foliora-card-head .dashicons{
 	color: #2271b1;
 	font-size: 20px;
 	width: 20px;
 	height: 20px;
 }
 
-.foliora-builder-card .foliora-card-head h2 {
+.foliora-builder-card .foliora-card-head h2{
 	margin: 0;
 	font-size: 15px;
 	font-weight: 700;
 	color: #1e293b;
 }
 
-.foliora-builder-card .foliora-card-body {
+.foliora-builder-card .foliora-card-body{
 	padding: 18px;
 	display: flex;
 	flex-direction: column;
 	gap: 16px;
 }
 
-.foliora-file-actions {
+.foliora-file-actions{
 	display: flex;
 	flex-wrap: wrap;
 	gap: 10px;
 	margin-bottom: 6px;
 }
 
-.foliora-file-actions .button {
+.foliora-file-actions .button{
 	display: inline-flex;
 	align-items: center;
 	gap: 6px;
@@ -2338,19 +390,19 @@ a.foliora-metric:focus {
 	font-weight: 600;
 }
 
-.foliora-form-row {
+.foliora-form-row{
 	display: flex;
 	flex-direction: column;
 	gap: 6px;
 }
 
-.foliora-label {
+.foliora-label{
 	font-size: 13px;
 	font-weight: 600;
 	color: #1e293b;
 }
 
-.foliora-sublabel {
+.foliora-sublabel{
 	font-size: 12px;
 	font-weight: 600;
 	color: #64748b;
@@ -2360,7 +412,7 @@ a.foliora-metric:focus {
 
 .foliora-form-row input[type="text"],
 .foliora-form-row input[type="url"],
-.foliora-form-row input[type="number"] {
+.foliora-form-row input[type="number"]{
 	width: 100%;
 	padding: 8px 12px;
 	border-radius: 6px;
@@ -2370,26 +422,26 @@ a.foliora-metric:focus {
 	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
-.foliora-form-row input:focus {
+.foliora-form-row input:focus{
 	border-color: #2271b1;
 	box-shadow: 0 0 0 1px #2271b1;
 	outline: none;
 }
 
-.foliora-grid-2 {
+.foliora-grid-2{
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 16px;
 }
 
 @media (max-width: 600px) {
-	.foliora-grid-2 {
+	.foliora-grid-2{
 		grid-template-columns: 1fr;
 	}
 }
 
 /* Recent PDFs List */
-.foliora-recent-list {
+.foliora-recent-list{
 	display: flex;
 	flex-wrap: wrap;
 	gap: 6px;
@@ -2400,7 +452,7 @@ a.foliora-metric:focus {
 	border-radius: 6px;
 }
 
-.foliora-recent-btn {
+.foliora-recent-btn{
 	appearance: none;
 	background: #fff;
 	border: 1px solid #cbd5e1;
@@ -2416,43 +468,43 @@ a.foliora-metric:focus {
 	transition: all 0.12s ease;
 }
 
-.foliora-recent-btn:hover {
+.foliora-recent-btn:hover{
 	border-color: #2271b1;
 	color: #0f172a;
 	background: #f8fafc;
 }
 
-.foliora-recent-btn.is-active {
+.foliora-recent-btn.is-active{
 	background: #eff6ff;
 	border-color: #2271b1;
 	color: #1d4ed8;
 	font-weight: 600;
 }
 
-.foliora-recent-title {
+.foliora-recent-title{
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
 
 /* Theme Pills */
-.foliora-theme-pills {
+.foliora-theme-pills{
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 10px;
 }
 
-.foliora-theme-pill {
+.foliora-theme-pill{
 	cursor: pointer;
 }
 
-.foliora-theme-pill input {
+.foliora-theme-pill input{
 	position: absolute;
 	opacity: 0;
 	pointer-events: none;
 }
 
-.foliora-pill-box {
+.foliora-pill-box{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -2466,34 +518,34 @@ a.foliora-metric:focus {
 	transition: all 0.15s ease;
 }
 
-.foliora-pill-icon {
+.foliora-pill-icon{
 	font-size: 18px;
 }
 
-.foliora-pill-label {
+.foliora-pill-label{
 	font-size: 12px;
 	font-weight: 600;
 	color: #334155;
 }
 
-.foliora-theme-pill input:checked + .foliora-pill-box {
+.foliora-theme-pill input:checked + .foliora-pill-box{
 	border-color: #2271b1;
 	background: #eff6ff;
 	box-shadow: 0 2px 8px rgba(37, 99, 235, 0.12);
 }
 
-.foliora-theme-pill input:checked + .foliora-pill-box .foliora-pill-label {
+.foliora-theme-pill input:checked + .foliora-pill-box .foliora-pill-label{
 	color: #1d4ed8;
 }
 
 /* View Pills */
-.foliora-view-pills {
+.foliora-view-pills{
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	gap: 8px;
 }
 
-.foliora-view-pill {
+.foliora-view-pill{
 	display: flex;
 	align-items: center;
 	gap: 6px;
@@ -2508,33 +560,33 @@ a.foliora-metric:focus {
 	transition: all 0.12s ease;
 }
 
-.foliora-view-pill:hover {
+.foliora-view-pill:hover{
 	background: #f1f5f9;
 	border-color: #cbd5e1;
 }
 
-.foliora-view-pill input:checked + span {
+.foliora-view-pill input:checked + span{
 	font-weight: 700;
 	color: #2271b1;
 }
 
-.foliora-view-pill-flip {
+.foliora-view-pill-flip{
 	border-color: #c7d2fe;
 	background: #f5f3ff;
 }
 
-.foliora-view-pill-flip:hover {
+.foliora-view-pill-flip:hover{
 	background: #ede9fe;
 }
 
 /* Quick Chips */
-.foliora-quick-chips {
+.foliora-quick-chips{
 	display: flex;
 	gap: 6px;
 	margin-top: 4px;
 }
 
-.foliora-quick-chip {
+.foliora-quick-chip{
 	appearance: none;
 	background: #f1f5f9;
 	border: 1px solid #e2e8f0;
@@ -2545,19 +597,19 @@ a.foliora-metric:focus {
 	cursor: pointer;
 }
 
-.foliora-quick-chip:hover {
+.foliora-quick-chip:hover{
 	background: #e2e8f0;
 	color: #0f172a;
 }
 
 /* Tool Switches Grid */
-.foliora-tool-switches-grid {
+.foliora-tool-switches-grid{
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
 	gap: 8px 12px;
 }
 
-.foliora-tool-switch {
+.foliora-tool-switch{
 	display: flex;
 	align-items: center;
 	gap: 8px;
@@ -2572,23 +624,23 @@ a.foliora-metric:focus {
 	transition: background 0.12s ease;
 }
 
-.foliora-tool-switch:hover {
+.foliora-tool-switch:hover{
 	background: #f1f5f9;
 }
 
-.foliora-tool-switch input:checked + .foliora-switch-label {
+.foliora-tool-switch input:checked + .foliora-switch-label{
 	color: #0f172a;
 	font-weight: 600;
 }
 
 /* Checkbox group */
-.foliora-checkbox-group {
+.foliora-checkbox-group{
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
 }
 
-.foliora-check-label {
+.foliora-check-label{
 	display: flex;
 	align-items: flex-start;
 	gap: 10px;
@@ -2597,12 +649,12 @@ a.foliora-metric:focus {
 	cursor: pointer;
 }
 
-.foliora-check-label input {
+.foliora-check-label input{
 	margin-top: 2px;
 }
 
 /* Left Controls Tabbed Navigation (3 Balanced Tabs - No Scrollbar) */
-.foliora-ctrl-tabs-nav {
+.foliora-ctrl-tabs-nav{
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 6px;
@@ -2612,7 +664,7 @@ a.foliora-metric:focus {
 	overflow: hidden;
 }
 
-.foliora-ctrl-tab {
+.foliora-ctrl-tab{
 	appearance: none;
 	background: transparent;
 	border: 1px solid transparent;
@@ -2631,7 +683,7 @@ a.foliora-metric:focus {
 	text-align: center;
 }
 
-.foliora-ctrl-tab .dashicons {
+.foliora-ctrl-tab .dashicons{
 	font-size: 17px;
 	width: 17px;
 	height: 17px;
@@ -2640,53 +692,53 @@ a.foliora-metric:focus {
 	flex-shrink: 0;
 }
 
-.foliora-ctrl-tab:hover {
+.foliora-ctrl-tab:hover{
 	color: #0f172a;
 	background: #f1f5f9;
 }
 
-.foliora-ctrl-tab.is-active {
+.foliora-ctrl-tab.is-active{
 	background: #fff;
 	color: #2271b1;
 	border-color: #cbd5e1;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
-.foliora-ctrl-tab.is-active .dashicons {
+.foliora-ctrl-tab.is-active .dashicons{
 	color: #2271b1;
 }
 
-.foliora-ctrl-pane {
+.foliora-ctrl-pane{
 	background: #fff;
 }
 
-.foliora-pane-body {
+.foliora-pane-body{
 	padding: 20px;
 	display: flex;
 	flex-direction: column;
 	gap: 16px;
 }
 
-.foliora-section-subhead h3 {
+.foliora-section-subhead h3{
 	margin: 0 0 2px;
 	font-size: 13.5px;
 	font-weight: 700;
 	color: #1e293b;
 }
 
-.foliora-section-subhead .description {
+.foliora-section-subhead .description{
 	margin: 2px 0 0;
 	font-size: 12px;
 	color: #64748b;
 }
 
-.foliora-pane-divider {
+.foliora-pane-divider{
 	border: 0;
 	border-top: 1px solid #e2e8f0;
 	margin: 4px 0;
 }
 
-.foliora-pane-footer {
+.foliora-pane-footer{
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -2695,27 +747,27 @@ a.foliora-metric:focus {
 	border-top: 1px solid #e2e8f0;
 }
 
-.foliora-tab-step {
+.foliora-tab-step{
 	font-size: 12px;
 	font-weight: 600;
 	cursor: pointer;
 }
 
 /* Sticky Right Column (Live Preview & Code Output) */
-.foliora-builder-sidebar {
+.foliora-builder-sidebar{
 	position: sticky;
 	top: 40px;
 	z-index: 10;
 }
 
-.foliora-builder-sticky {
+.foliora-builder-sticky{
 	display: flex;
 	flex-direction: column;
 	gap: 16px;
 }
 
 /* Preview Card */
-.foliora-builder-preview-card {
+.foliora-builder-preview-card{
 	background: #fff;
 	border: 1px solid #ccd0d4;
 	border-radius: 8px;
@@ -2723,7 +775,7 @@ a.foliora-metric:focus {
 	overflow: hidden;
 }
 
-.foliora-preview-header {
+.foliora-preview-header{
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -2732,27 +784,27 @@ a.foliora-metric:focus {
 	border-bottom: 1px solid #e2e8f0;
 }
 
-.foliora-preview-title {
+.foliora-preview-title{
 	display: flex;
 	align-items: center;
 	gap: 8px;
 }
 
-.foliora-preview-title .dashicons {
+.foliora-preview-title .dashicons{
 	color: #2271b1;
 	font-size: 18px;
 	width: 18px;
 	height: 18px;
 }
 
-.foliora-preview-title h3 {
+.foliora-preview-title h3{
 	margin: 0;
 	font-size: 13.5px;
 	font-weight: 700;
 	color: #1e293b;
 }
 
-.foliora-device-switcher {
+.foliora-device-switcher{
 	display: flex;
 	gap: 4px;
 	background: #e2e8f0;
@@ -2760,7 +812,7 @@ a.foliora-metric:focus {
 	border-radius: 6px;
 }
 
-.foliora-device-btn {
+.foliora-device-btn{
 	appearance: none;
 	background: transparent;
 	border: 0;
@@ -2774,24 +826,24 @@ a.foliora-metric:focus {
 	transition: all 0.12s ease;
 }
 
-.foliora-device-btn .dashicons {
+.foliora-device-btn .dashicons{
 	font-size: 16px;
 	width: 16px;
 	height: 16px;
 }
 
-.foliora-device-btn:hover {
+.foliora-device-btn:hover{
 	color: #0f172a;
 }
 
-.foliora-device-btn.is-active {
+.foliora-device-btn.is-active{
 	background: #fff;
 	color: #2271b1;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 /* Preview Frame */
-.foliora-builder-frame-wrap {
+.foliora-builder-frame-wrap{
 	background: #e2e8f0;
 	padding: 14px;
 	display: flex;
@@ -2800,39 +852,39 @@ a.foliora-metric:focus {
 	min-height: 380px;
 }
 
-.foliora-builder-frame {
+.foliora-builder-frame{
 	width: 100%;
 	transition: max-width 0.25s ease;
 }
 
-.foliora-builder-frame.is-desktop {
+.foliora-builder-frame.is-desktop{
 	max-width: 100%;
 }
 
-.foliora-builder-frame.is-tablet {
+.foliora-builder-frame.is-tablet{
 	max-width: 768px;
 	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 	border-radius: 8px;
 	overflow: hidden;
 }
 
-.foliora-builder-frame.is-mobile {
+.foliora-builder-frame.is-mobile{
 	max-width: 375px;
 	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 	border-radius: 12px;
 	overflow: hidden;
 }
 
-.foliora-builder-preview-stage {
+.foliora-builder-preview-stage{
 	width: 100%;
 	min-height: 340px;
 }
 
-.foliora-builder-preview-stage .foliora-wrap {
+.foliora-builder-preview-stage .foliora-wrap{
 	margin: 0 !important;
 }
 
-.foliora-builder-empty-state {
+.foliora-builder-empty-state{
 	min-height: 300px;
 	display: flex;
 	flex-direction: column;
@@ -2846,7 +898,7 @@ a.foliora-metric:focus {
 	text-align: center;
 }
 
-.foliora-builder-empty-state .dashicons {
+.foliora-builder-empty-state .dashicons{
 	font-size: 40px;
 	width: 40px;
 	height: 40px;
@@ -2854,7 +906,7 @@ a.foliora-metric:focus {
 }
 
 /* Output Card */
-.foliora-builder-output-card {
+.foliora-builder-output-card{
 	background: #fff;
 	border: 1px solid #ccd0d4;
 	border-radius: 8px;
@@ -2865,14 +917,14 @@ a.foliora-metric:focus {
 	gap: 12px;
 }
 
-.foliora-output-tabs {
+.foliora-output-tabs{
 	display: flex;
 	gap: 6px;
 	border-bottom: 1px solid #e2e8f0;
 	padding-bottom: 6px;
 }
 
-.foliora-tab-btn {
+.foliora-tab-btn{
 	appearance: none;
 	background: transparent;
 	border: 0;
@@ -2885,17 +937,17 @@ a.foliora-metric:focus {
 	transition: all 0.12s ease;
 }
 
-.foliora-tab-btn:hover {
+.foliora-tab-btn:hover{
 	color: #0f172a;
 	background: #f1f5f9;
 }
 
-.foliora-tab-btn.is-active {
+.foliora-tab-btn.is-active{
 	color: #2271b1;
 	background: #eff6ff;
 }
 
-.foliora-builder-textarea {
+.foliora-builder-textarea{
 	width: 100%;
 	font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 	font-size: 12px;
@@ -2909,12 +961,12 @@ a.foliora-metric:focus {
 	outline: none;
 }
 
-.foliora-output-actions {
+.foliora-output-actions{
 	display: flex;
 	gap: 8px;
 }
 
-.foliora-output-actions .button {
+.foliora-output-actions .button{
 	flex: 1;
 	display: inline-flex;
 	align-items: center;
@@ -2926,33 +978,25 @@ a.foliora-metric:focus {
 	font-weight: 600;
 }
 
-.foliora-output-actions #foliora-builder-copy {
+.foliora-output-actions #foliora-builder-copy{
 	background: #2271b1;
 	border-color: #2271b1;
 }
 
-.foliora-output-actions #foliora-builder-copy:hover {
+.foliora-output-actions #foliora-builder-copy:hover{
 	background: #135e96;
 }
-
 
 /* ==========================================================================
    Shortcode Builder — Premium Polish (overrides)
    ========================================================================== */
-.foliora-builder-wrap {
-	--fb-accent: #4f46e5;
-	--fb-accent-2: #7c3aed;
-	--fb-accent-soft: #eef2ff;
-	--fb-ink: #0f172a;
-	--fb-muted: #64748b;
-	--fb-line: #e5e7f0;
-	--fb-radius: 14px;
-	--fb-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px -8px rgba(15, 23, 42, 0.1);
+/* Design tokens (--fb-*) now live on .foliora-admin in foliora-admin-ui.css. */
+.foliora-builder-wrap{
 	font-feature-settings: "cv02", "cv03", "cv04";
 }
 
 /* Hero header */
-.foliora-builder-wrap .foliora-builder-header {
+.foliora-builder-wrap .foliora-builder-header{
 	position: relative;
 	overflow: hidden;
 	background: radial-gradient(1200px 300px at 0% 0%, rgba(124, 58, 237, 0.35), transparent 60%), radial-gradient(900px 300px at 100% 100%, rgba(79, 70, 229, 0.4), transparent 60%), linear-gradient(135deg, #0b1020 0%, #151a33 100%);
@@ -2961,19 +1005,19 @@ a.foliora-metric:focus {
 	box-shadow: 0 20px 40px -20px rgba(15, 23, 42, 0.6);
 }
 
-.foliora-builder-wrap .foliora-builder-kicker .dashicons {
+.foliora-builder-wrap .foliora-builder-kicker .dashicons{
 	background: linear-gradient(135deg, var(--fb-accent), var(--fb-accent-2));
 	color: #fff;
 	border-radius: 10px;
 	box-shadow: 0 6px 16px -4px rgba(124, 58, 237, 0.7);
 }
 
-.foliora-builder-wrap .foliora-builder-lede {
+.foliora-builder-wrap .foliora-builder-lede{
 	color: #a5b0c8;
 }
 
 /* Preset chips */
-.foliora-builder-wrap .foliora-preset-chip {
+.foliora-builder-wrap .foliora-preset-chip{
 	background: rgba(255, 255, 255, 0.06);
 	border: 1px solid rgba(255, 255, 255, 0.12);
 	color: #e2e8f0;
@@ -2985,7 +1029,7 @@ a.foliora-metric:focus {
 }
 
 .foliora-builder-wrap .foliora-preset-chip:hover,
-.foliora-builder-wrap .foliora-preset-chip:focus {
+.foliora-builder-wrap .foliora-preset-chip:focus{
 	background: rgba(255, 255, 255, 0.14);
 	border-color: rgba(255, 255, 255, 0.3);
 	color: #fff;
@@ -2993,7 +1037,7 @@ a.foliora-metric:focus {
 	outline: none;
 }
 
-.foliora-builder-wrap .foliora-preset-chip.is-active {
+.foliora-builder-wrap .foliora-preset-chip.is-active{
 	background: linear-gradient(135deg, var(--fb-accent), var(--fb-accent-2));
 	border-color: transparent;
 	color: #fff;
@@ -3003,7 +1047,7 @@ a.foliora-metric:focus {
 /* Cards */
 .foliora-builder-wrap .foliora-builder-card,
 .foliora-builder-wrap .foliora-builder-preview-card,
-.foliora-builder-wrap .foliora-builder-output-card {
+.foliora-builder-wrap .foliora-builder-output-card{
 	border: 1px solid var(--fb-line);
 	border-radius: var(--fb-radius);
 	box-shadow: var(--fb-shadow);
@@ -3011,33 +1055,33 @@ a.foliora-metric:focus {
 }
 
 /* Tabs */
-.foliora-builder-wrap .foliora-ctrl-tabs-nav {
+.foliora-builder-wrap .foliora-ctrl-tabs-nav{
 	background: linear-gradient(180deg, #f8f9ff, #f3f4fb);
 	border-bottom: 1px solid var(--fb-line);
 	padding: 10px;
 	gap: 8px;
 }
 
-.foliora-builder-wrap .foliora-ctrl-tab {
+.foliora-builder-wrap .foliora-ctrl-tab{
 	position: relative;
 	border-radius: 10px;
 	padding: 11px 8px;
 	color: var(--fb-muted);
 }
 
-.foliora-builder-wrap .foliora-ctrl-tab:hover {
+.foliora-builder-wrap .foliora-ctrl-tab:hover{
 	background: rgba(79, 70, 229, 0.06);
 	color: var(--fb-ink);
 }
 
-.foliora-builder-wrap .foliora-ctrl-tab.is-active {
+.foliora-builder-wrap .foliora-ctrl-tab.is-active{
 	background: #fff;
 	color: var(--fb-accent);
 	border-color: transparent;
 	box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 6px 14px -6px rgba(79, 70, 229, 0.35);
 }
 
-.foliora-builder-wrap .foliora-ctrl-tab.is-active::after {
+.foliora-builder-wrap .foliora-ctrl-tab.is-active::after{
 	content: "";
 	position: absolute;
 	left: 18%;
@@ -3048,11 +1092,11 @@ a.foliora-metric:focus {
 	background: linear-gradient(90deg, var(--fb-accent), var(--fb-accent-2));
 }
 
-.foliora-builder-wrap .foliora-ctrl-tab.is-active .dashicons {
+.foliora-builder-wrap .foliora-ctrl-tab.is-active .dashicons{
 	color: var(--fb-accent);
 }
 
-.foliora-builder-wrap .foliora-ctrl-pane:not([hidden]) .foliora-pane-body {
+.foliora-builder-wrap .foliora-ctrl-pane:not([hidden]) .foliora-pane-body{
 	animation: foliora-pane-in 0.28s ease both;
 }
 
@@ -3067,12 +1111,12 @@ a.foliora-metric:focus {
 	}
 }
 
-.foliora-builder-wrap .foliora-pane-body {
+.foliora-builder-wrap .foliora-pane-body{
 	padding: 22px;
 	gap: 18px;
 }
 
-.foliora-builder-wrap .foliora-section-subhead h3 {
+.foliora-builder-wrap .foliora-section-subhead h3{
 	display: flex;
 	align-items: center;
 	gap: 8px;
@@ -3082,21 +1126,21 @@ a.foliora-metric:focus {
 	color: var(--fb-muted);
 }
 
-.foliora-builder-wrap .foliora-section-subhead h3::after {
+.foliora-builder-wrap .foliora-section-subhead h3::after{
 	content: "";
 	flex: 1;
 	height: 1px;
 	background: var(--fb-line);
 }
 
-.foliora-builder-wrap .foliora-pane-footer {
+.foliora-builder-wrap .foliora-pane-footer{
 	background: #fafbff;
 	border-top: 1px solid var(--fb-line);
 	padding: 14px 22px;
 }
 
 /* Form fields */
-.foliora-builder-wrap .foliora-label {
+.foliora-builder-wrap .foliora-label{
 	font-size: 12px;
 	font-weight: 600;
 	color: #334155;
@@ -3106,7 +1150,7 @@ a.foliora-metric:focus {
 .foliora-builder-wrap .foliora-form-row input[type="text"],
 .foliora-builder-wrap .foliora-form-row input[type="url"],
 .foliora-builder-wrap .foliora-form-row input[type="number"],
-.foliora-builder-wrap .foliora-form-row select {
+.foliora-builder-wrap .foliora-form-row select{
 	border: 1px solid #dbe0ee;
 	border-radius: 10px;
 	padding: 9px 12px;
@@ -3117,7 +1161,7 @@ a.foliora-metric:focus {
 }
 
 .foliora-builder-wrap .foliora-form-row input:focus,
-.foliora-builder-wrap .foliora-form-row select:focus {
+.foliora-builder-wrap .foliora-form-row select:focus{
 	border-color: var(--fb-accent);
 	box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.14);
 	outline: none;
@@ -3125,7 +1169,7 @@ a.foliora-metric:focus {
 
 /* Buttons */
 .foliora-builder-wrap .button,
-.foliora-builder-wrap .button-primary {
+.foliora-builder-wrap .button-primary{
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -3139,7 +1183,7 @@ a.foliora-metric:focus {
 }
 
 .foliora-builder-wrap .button .dashicons,
-.foliora-builder-wrap .button-primary .dashicons {
+.foliora-builder-wrap .button-primary .dashicons{
 	width: 16px;
 	height: 16px;
 	font-size: 16px;
@@ -3148,7 +1192,7 @@ a.foliora-metric:focus {
 	vertical-align: baseline;
 }
 
-.foliora-builder-wrap .button-primary {
+.foliora-builder-wrap .button-primary{
 	background: linear-gradient(135deg, var(--fb-accent), var(--fb-accent-2));
 	border: 0;
 	color: #fff;
@@ -3156,39 +1200,39 @@ a.foliora-metric:focus {
 }
 
 .foliora-builder-wrap .button-primary:hover,
-.foliora-builder-wrap .button-primary:focus {
+.foliora-builder-wrap .button-primary:focus{
 	background: linear-gradient(135deg, #4338ca, #6d28d9);
 	color: #fff;
 	transform: translateY(-1px);
 	box-shadow: 0 12px 22px -8px rgba(79, 70, 229, 0.9);
 }
 
-.foliora-builder-wrap .button:not(.button-primary) {
+.foliora-builder-wrap .button:not(.button-primary){
 	background: #fff;
 	border: 1px solid #d5daea;
 	color: var(--fb-accent);
 }
 
-.foliora-builder-wrap .button:not(.button-primary):hover {
+.foliora-builder-wrap .button:not(.button-primary):hover{
 	background: var(--fb-accent-soft);
 	border-color: #c7d2fe;
 	color: #4338ca;
 }
 
-.foliora-builder-wrap .foliora-tab-step {
+.foliora-builder-wrap .foliora-tab-step{
 	border-radius: 999px;
 	padding: 0 16px;
 }
 
 /* Theme + view pills */
-.foliora-builder-wrap .foliora-pill-box {
+.foliora-builder-wrap .foliora-pill-box{
 	border: 1.5px solid #e1e5f0;
 	border-radius: 12px;
 	background: #fff;
 	transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease, transform 0.12s ease;
 }
 
-.foliora-builder-wrap .foliora-theme-pill:hover .foliora-pill-box {
+.foliora-builder-wrap .foliora-theme-pill:hover .foliora-pill-box{
 	border-color: #c7d2fe;
 	transform: translateY(-1px);
 }
@@ -3200,7 +1244,7 @@ a.foliora-metric:focus {
 }
 
 /* Toggles / quick switches */
-.foliora-builder-wrap .foliora-tool-switch {
+.foliora-builder-wrap .foliora-tool-switch{
 	border-radius: 10px;
 	background: #fafbff;
 	border-color: var(--fb-line);
@@ -3208,46 +1252,46 @@ a.foliora-metric:focus {
 	transition: border-color 0.15s ease, background 0.15s ease;
 }
 
-.foliora-builder-wrap .foliora-tool-switch:hover {
+.foliora-builder-wrap .foliora-tool-switch:hover{
 	background: var(--fb-accent-soft);
 	border-color: #c7d2fe;
 }
 
 .foliora-builder-wrap input[type="checkbox"],
-.foliora-builder-wrap input[type="radio"] {
+.foliora-builder-wrap input[type="radio"]{
 	accent-color: var(--fb-accent);
 }
 
 /* Preview card */
-.foliora-builder-wrap .foliora-builder-preview-card {
+.foliora-builder-wrap .foliora-builder-preview-card{
 	background: #fff;
 }
 
-.foliora-builder-wrap .foliora-builder-frame-wrap {
+.foliora-builder-wrap .foliora-builder-frame-wrap{
 	background: radial-gradient(circle at 1px 1px, #d9deee 1px, transparent 0) 0 0 / 18px 18px, #f4f6fc;
 	border-radius: 12px;
 }
 
 .foliora-builder-wrap .foliora-builder-frame.is-desktop,
 .foliora-builder-wrap .foliora-builder-frame.is-tablet,
-.foliora-builder-wrap .foliora-builder-frame.is-mobile {
+.foliora-builder-wrap .foliora-builder-frame.is-mobile{
 	border-radius: 12px;
 	box-shadow: 0 18px 40px -18px rgba(15, 23, 42, 0.45);
 	transition: max-width 0.3s ease;
 }
 
 /* Output / code */
-.foliora-builder-wrap .foliora-tab-btn {
+.foliora-builder-wrap .foliora-tab-btn{
 	border-radius: 8px;
 	font-weight: 600;
 }
 
-.foliora-builder-wrap .foliora-tab-btn.is-active {
+.foliora-builder-wrap .foliora-tab-btn.is-active{
 	background: var(--fb-accent-soft);
 	color: var(--fb-accent);
 }
 
-.foliora-builder-wrap .foliora-builder-textarea {
+.foliora-builder-wrap .foliora-builder-textarea{
 	background: #0b1020;
 	color: #a5f3fc;
 	border: 1px solid #1e2547;
@@ -3259,7 +1303,7 @@ a.foliora-metric:focus {
 	box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.35);
 }
 
-.foliora-builder-wrap .foliora-output-actions #foliora-builder-copy {
+.foliora-builder-wrap .foliora-output-actions #foliora-builder-copy{
 	background: linear-gradient(135deg, var(--fb-accent), var(--fb-accent-2));
 	border: 0;
 	color: #fff;
@@ -3267,24 +1311,24 @@ a.foliora-metric:focus {
 	box-shadow: 0 10px 22px -10px rgba(79, 70, 229, 0.9);
 }
 
-.foliora-builder-wrap .foliora-output-actions #foliora-builder-copy:hover {
+.foliora-builder-wrap .foliora-output-actions #foliora-builder-copy:hover{
 	background: linear-gradient(135deg, #4338ca, #6d28d9);
 	transform: translateY(-1px);
 }
 
 @media (prefers-reduced-motion: reduce) {
-	.foliora-builder-wrap * {
+	.foliora-builder-wrap *{
 		animation: none !important;
 		transition: none !important;
 	}
 }
 
 /* View layout pills — border lives on the label, inner span stays plain */
-.foliora-builder-wrap .foliora-view-pills {
+.foliora-builder-wrap .foliora-view-pills{
 	gap: 10px;
 }
 
-.foliora-builder-wrap .foliora-view-pill {
+.foliora-builder-wrap .foliora-view-pill{
 	position: relative;
 	display: flex;
 	align-items: center;
@@ -3301,18 +1345,18 @@ a.foliora-metric:focus {
 	transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease, transform 0.12s ease;
 }
 
-.foliora-builder-wrap .foliora-view-pill:hover {
+.foliora-builder-wrap .foliora-view-pill:hover{
 	background: #fff;
 	border-color: #c7d2fe;
 	transform: translateY(-1px);
 }
 
-.foliora-builder-wrap .foliora-view-pill input[type="radio"] {
+.foliora-builder-wrap .foliora-view-pill input[type="radio"]{
 	flex: 0 0 auto;
 	margin: 0;
 }
 
-.foliora-builder-wrap .foliora-view-pill span {
+.foliora-builder-wrap .foliora-view-pill span{
 	flex: 1;
 	min-width: 0;
 	padding: 0;
@@ -3322,28 +1366,28 @@ a.foliora-metric:focus {
 	box-shadow: none;
 }
 
-.foliora-builder-wrap .foliora-view-pill:has(input:checked) {
+.foliora-builder-wrap .foliora-view-pill:has(input:checked){
 	border-color: var(--fb-accent);
 	background: var(--fb-accent-soft);
 	color: var(--fb-accent);
 	box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
 }
 
-.foliora-builder-wrap .foliora-view-pill input:checked + span {
+.foliora-builder-wrap .foliora-view-pill input:checked + span{
 	color: var(--fb-accent);
 	font-weight: 700;
 }
 
-.foliora-builder-wrap .foliora-view-pill-flip {
+.foliora-builder-wrap .foliora-view-pill-flip{
 	background: #faf8ff;
 	border-color: #ddd6fe;
 }
 /* Compact sizing + start page width */
-.foliora-builder-wrap .foliora-view-pills {
+.foliora-builder-wrap .foliora-view-pills{
 	gap: 6px;
 }
 
-.foliora-builder-wrap .foliora-view-pill {
+.foliora-builder-wrap .foliora-view-pill{
 	min-height: 34px;
 	padding: 6px 10px;
 	gap: 8px;
@@ -3351,20 +1395,20 @@ a.foliora-metric:focus {
 	font-size: 12px;
 }
 
-.foliora-builder-wrap .foliora-view-pill input[type="radio"] {
+.foliora-builder-wrap .foliora-view-pill input[type="radio"]{
 	width: 15px;
 	height: 15px;
 	min-width: 15px;
 }
 
-.foliora-builder-wrap .foliora-view-pill input[type="radio"]:checked::before {
+.foliora-builder-wrap .foliora-view-pill input[type="radio"]:checked::before{
 	width: 7px;
 	height: 7px;
 	margin: 3px;
 }
 
 .foliora-builder-wrap .foliora-view-pill span,
-.foliora-builder-wrap .foliora-view-pill input:checked + span {
+.foliora-builder-wrap .foliora-view-pill input:checked + span{
 	border: 0 !important;
 	outline: 0 !important;
 	background: transparent !important;
@@ -3373,7 +1417,7 @@ a.foliora-metric:focus {
 	border-radius: 0 !important;
 }
 
-.foliora-builder-wrap #foliora-builder-page {
+.foliora-builder-wrap #foliora-builder-page{
 	width: 72px;
 	max-width: 72px;
 	min-height: 34px;
@@ -3382,32 +1426,32 @@ a.foliora-metric:focus {
 }
 
 .foliora-builder-wrap .button,
-.foliora-builder-wrap .button-primary {
+.foliora-builder-wrap .button-primary{
 	min-height: 32px;
 	padding: 0 14px;
 	font-size: 12.5px;
 }
 
-.foliora-builder-wrap .foliora-pane-footer {
+.foliora-builder-wrap .foliora-pane-footer{
 	padding: 10px 20px;
 }
 
-.foliora-builder-wrap .foliora-output-actions #foliora-builder-copy {
+.foliora-builder-wrap .foliora-output-actions #foliora-builder-copy{
 	min-height: 38px;
 }
 
 .foliora-builder-wrap .foliora-form-row input[type="text"],
-.foliora-builder-wrap .foliora-form-row input[type="url"] {
+.foliora-builder-wrap .foliora-form-row input[type="url"]{
 	min-height: 36px;
 	padding: 6px 12px;
 }
 /* Toolbar location badges */
-.foliora-builder-wrap .foliora-tool-switch .foliora-switch-label {
+.foliora-builder-wrap .foliora-tool-switch .foliora-switch-label{
 	flex: 1;
 	min-width: 0;
 }
 
-.foliora-builder-wrap .foliora-loc-badge {
+.foliora-builder-wrap .foliora-loc-badge{
 	flex: 0 0 auto;
 	margin-left: auto;
 	padding: 2px 7px;
@@ -3419,23 +1463,22 @@ a.foliora-metric:focus {
 	white-space: nowrap;
 }
 
-.foliora-builder-wrap .foliora-loc-badge.is-bar {
+.foliora-builder-wrap .foliora-loc-badge.is-bar{
 	background: #dcfce7;
 	color: #166534;
 }
 
-.foliora-builder-wrap .foliora-loc-badge.is-menu {
+.foliora-builder-wrap .foliora-loc-badge.is-menu{
 	background: #e0e7ff;
 	color: #3730a3;
 }
-
 
 /* ==========================================================================
    Saved Embeds Manager & View Tabs Styles (Pro Grade)
    ========================================================================== */
 
 /* Top View Switcher Navigation */
-.foliora-builder-view-nav {
+.foliora-builder-view-nav{
 	display: inline-flex;
 	align-items: center;
 	gap: 6px;
@@ -3447,7 +1490,7 @@ a.foliora-metric:focus {
 	margin-bottom: 20px;
 }
 
-.foliora-view-tab-btn {
+.foliora-view-tab-btn{
 	display: inline-flex;
 	align-items: center;
 	gap: 8px;
@@ -3462,24 +1505,24 @@ a.foliora-metric:focus {
 	transition: all 0.15s ease;
 }
 
-.foliora-view-tab-btn:hover {
+.foliora-view-tab-btn:hover{
 	color: #0f172a;
 	background: #f8fafc;
 }
 
-.foliora-view-tab-btn.is-active {
+.foliora-view-tab-btn.is-active{
 	background: var(--fb-accent, #4f46e5);
 	color: #ffffff;
 	box-shadow: 0 2px 8px rgba(79, 70, 229, 0.25);
 }
 
-.foliora-view-tab-btn .dashicons {
+.foliora-view-tab-btn .dashicons{
 	font-size: 17px;
 	width: 17px;
 	height: 17px;
 }
 
-.foliora-count-pill {
+.foliora-count-pill{
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -3491,13 +1534,13 @@ a.foliora-metric:focus {
 	color: inherit;
 }
 
-.foliora-view-tab-btn.is-active .foliora-count-pill {
+.foliora-view-tab-btn.is-active .foliora-count-pill{
 	background: rgba(255, 255, 255, 0.25);
 	color: #ffffff;
 }
 
 /* Edit Banner */
-.foliora-builder-edit-banner {
+.foliora-builder-edit-banner{
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -3509,7 +1552,7 @@ a.foliora-metric:focus {
 	box-shadow: 0 1px 3px rgba(37, 99, 235, 0.06);
 }
 
-.foliora-edit-banner-left {
+.foliora-edit-banner-left{
 	display: flex;
 	align-items: center;
 	gap: 10px;
@@ -3517,32 +1560,32 @@ a.foliora-metric:focus {
 	font-size: 13.5px;
 }
 
-.foliora-edit-banner-left .dashicons {
+.foliora-edit-banner-left .dashicons{
 	color: #2563eb;
 	font-size: 20px;
 	width: 20px;
 	height: 20px;
 }
 
-.foliora-btn-new-embed {
+.foliora-btn-new-embed{
 	background: #ffffff !important;
 	border-color: #93c5fd !important;
 	color: #1d4ed8 !important;
 	font-weight: 600 !important;
 }
 
-.foliora-btn-new-embed:hover {
+.foliora-btn-new-embed:hover{
 	background: #dbeafe !important;
 }
 
 /* Code Mode Checkbox Row */
-.foliora-code-mode-row {
+.foliora-code-mode-row{
 	margin-top: 12px;
 	padding-top: 10px;
 	border-top: 1px dashed #e2e8f0;
 }
 
-.foliora-code-mode-toggle {
+.foliora-code-mode-toggle{
 	display: inline-flex;
 	align-items: center;
 	gap: 8px;
@@ -3551,12 +1594,12 @@ a.foliora-metric:focus {
 	cursor: pointer;
 }
 
-.foliora-code-mode-toggle input[type="checkbox"] {
+.foliora-code-mode-toggle input[type="checkbox"]{
 	margin: 0;
 }
 
 /* Saved Embeds Manager View */
-.foliora-embeds-manager-card {
+.foliora-embeds-manager-card{
 	background: #ffffff;
 	border-radius: 14px;
 	border: 1px solid #e2e8f0;
@@ -3564,7 +1607,7 @@ a.foliora-metric:focus {
 	box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
 }
 
-.foliora-manager-header {
+.foliora-manager-header{
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -3575,33 +1618,33 @@ a.foliora-metric:focus {
 	border-bottom: 1px solid #f1f5f9;
 }
 
-.foliora-manager-title {
+.foliora-manager-title{
 	display: flex;
 	align-items: center;
 	gap: 10px;
 }
 
-.foliora-manager-title .dashicons {
+.foliora-manager-title .dashicons{
 	color: var(--fb-accent, #4f46e5);
 	font-size: 24px;
 	width: 24px;
 	height: 24px;
 }
 
-.foliora-manager-title h2 {
+.foliora-manager-title h2{
 	margin: 0;
 	font-size: 18px;
 	font-weight: 700;
 	color: #0f172a;
 }
 
-.foliora-manager-actions {
+.foliora-manager-actions{
 	display: flex;
 	align-items: center;
 	gap: 10px;
 }
 
-#foliora-embeds-search {
+#foliora-embeds-search{
 	min-width: 240px;
 	border-radius: 8px;
 	border: 1px solid #cbd5e1;
@@ -3610,13 +1653,13 @@ a.foliora-metric:focus {
 }
 
 /* Embeds Table */
-.foliora-embeds-table {
+.foliora-embeds-table{
 	border-radius: 8px;
 	border: 1px solid #e2e8f0 !important;
 	overflow: hidden;
 }
 
-.foliora-embeds-table thead th {
+.foliora-embeds-table thead th{
 	background: #f8fafc;
 	font-size: 12px;
 	font-weight: 700;
@@ -3626,31 +1669,31 @@ a.foliora-metric:focus {
 	padding: 12px 14px;
 }
 
-.foliora-embeds-table tbody td {
+.foliora-embeds-table tbody td{
 	padding: 12px 14px;
 	vertical-align: middle;
 	font-size: 13px;
 }
 
-.foliora-embeds-table .row-title {
+.foliora-embeds-table .row-title{
 	font-weight: 700;
 	color: #1e293b;
 	font-size: 13.5px;
 	text-decoration: none;
 }
 
-.foliora-embeds-table .row-title:hover {
+.foliora-embeds-table .row-title:hover{
 	color: var(--fb-accent, #4f46e5);
 }
 
-.foliora-sub-title {
+.foliora-sub-title{
 	display: block;
 	font-size: 11.5px;
 	color: #64748b;
 	margin-top: 2px;
 }
 
-.foliora-file-name {
+.foliora-file-name{
 	font-family: Consolas, Monaco, monospace;
 	font-size: 11.5px;
 	color: #475569;
@@ -3665,7 +1708,7 @@ a.foliora-metric:focus {
 	white-space: nowrap;
 }
 
-.foliora-tag-pill {
+.foliora-tag-pill{
 	display: inline-block;
 	font-size: 10.5px;
 	font-weight: 700;
@@ -3676,17 +1719,17 @@ a.foliora-metric:focus {
 	margin-right: 4px;
 }
 
-.foliora-tag-pill.is-view {
+.foliora-tag-pill.is-view{
 	background: #e0e7ff;
 	color: #3730a3;
 }
 
-.foliora-tag-pill.is-theme {
+.foliora-tag-pill.is-theme{
 	background: #fef3c7;
 	color: #92400e;
 }
 
-.foliora-shortcode-chip {
+.foliora-shortcode-chip{
 	display: inline-flex;
 	align-items: center;
 	gap: 6px;
@@ -3702,26 +1745,26 @@ a.foliora-metric:focus {
 	transition: all 0.15s ease;
 }
 
-.foliora-shortcode-chip:hover {
+.foliora-shortcode-chip:hover{
 	background: #eff6ff;
 	border-color: #3b82f6;
 	color: #1d4ed8;
 	box-shadow: 0 2px 6px rgba(59, 130, 246, 0.15);
 }
 
-.foliora-shortcode-chip .dashicons {
+.foliora-shortcode-chip .dashicons{
 	font-size: 14px;
 	width: 14px;
 	height: 14px;
 	color: #64748b;
 }
 
-.foliora-shortcode-chip:hover .dashicons {
+.foliora-shortcode-chip:hover .dashicons{
 	color: #1d4ed8;
 }
 
 /* Empty State */
-.foliora-embeds-empty-state {
+.foliora-embeds-empty-state{
 	text-align: center;
 	padding: 48px 24px;
 	background: #f8fafc;
@@ -3729,7 +1772,7 @@ a.foliora-metric:focus {
 	border: 2px dashed #e2e8f0;
 }
 
-.foliora-embeds-empty-state .dashicons {
+.foliora-embeds-empty-state .dashicons{
 	font-size: 48px;
 	width: 48px;
 	height: 48px;
@@ -3737,14 +1780,14 @@ a.foliora-metric:focus {
 	margin-bottom: 12px;
 }
 
-.foliora-embeds-empty-state h3 {
+.foliora-embeds-empty-state h3{
 	margin: 0 0 8px;
 	font-size: 17px;
 	font-weight: 700;
 	color: #0f172a;
 }
 
-.foliora-embeds-empty-state p {
+.foliora-embeds-empty-state p{
 	margin: 0 0 20px;
 	color: #64748b;
 	font-size: 13.5px;

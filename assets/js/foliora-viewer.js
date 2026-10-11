@@ -8,12 +8,17 @@
 ( function () {
 	'use strict';
 
-	if ( typeof window.pdfjsLib === 'undefined' ) {
+	// Foliora's own PDF.js, captured right after its bundle ran (see
+	// Foliora_Viewer::PDFJS_CAPTURE). Falls back to the global only when the
+	// capture snippet did not run, e.g. a theme that dequeues inline scripts.
+	var pdfjs = ( window.Foliora && window.Foliora.pdfjsLib ) || window.pdfjsLib;
+
+	if ( ! pdfjs ) {
 		return;
 	}
 
 	var config = window.FolioraConfig || {};
-	window.pdfjsLib.GlobalWorkerOptions.workerSrc = config.workerSrc;
+	pdfjs.GlobalWorkerOptions.workerSrc = config.workerSrc;
 	var VIEW_MODES = [ 'page', 'scroll', 'spread', 'flip' ];
 
 	function $( sel, root ) {
@@ -29,7 +34,7 @@
 	}
 
 	function passwordReasonIncorrect() {
-		var responses = window.pdfjsLib.PasswordResponses;
+		var responses = pdfjs.PasswordResponses;
 		return ( responses && responses.INCORRECT_PASSWORD ) || 2;
 	}
 
@@ -84,8 +89,8 @@
 		layerEl.style.width = viewport.width + 'px';
 		layerEl.style.height = viewport.height + 'px';
 
-		if ( typeof window.pdfjsLib.TextLayer === 'function' && page.streamTextContent ) {
-			var layer = new window.pdfjsLib.TextLayer( {
+		if ( typeof pdfjs.TextLayer === 'function' && page.streamTextContent ) {
+			var layer = new pdfjs.TextLayer( {
 				textContentSource: page.streamTextContent(),
 				container: layerEl,
 				viewport: viewport,
@@ -95,12 +100,12 @@
 			} );
 		}
 
-		if ( typeof window.pdfjsLib.renderTextLayer !== 'function' ) {
+		if ( typeof pdfjs.renderTextLayer !== 'function' ) {
 			return Promise.resolve();
 		}
 
 		return page.getTextContent().then( function ( textContent ) {
-			var task = window.pdfjsLib.renderTextLayer( {
+			var task = pdfjs.renderTextLayer( {
 				textContent: textContent,
 				textContentSource: textContent,
 				container: layerEl,
@@ -781,7 +786,7 @@
 			layerEl.style.setProperty( '--scale-factor', String( viewport.scale ) );
 			layerEl.style.width = viewport.width + 'px';
 			layerEl.style.height = viewport.height + 'px';
-			var AL = window.pdfjsLib.AnnotationLayer;
+			var AL = pdfjs.AnnotationLayer;
 			if ( typeof AL !== 'function' ) {
 				return Promise.resolve();
 			}
@@ -1600,11 +1605,14 @@
 			}
 		}
 
+		var MAX_PRINT_PAGES = 24;
+		var PRINT_TARGET_WIDTH = 1654; // ~A4 at 200 dpi.
+		var PRINT_MAX_PIXELS = 16000000;
+
 		/**
-		 * Pages to print for the current view mode: both sides of a spread,
-		 * every rendered page near the viewport in scroll mode, or just the
-		 * current page otherwise. Falls back to whatever slot is actually
-		 * rendered so a virtualized (released) canvas is never printed blank.
+		 * Page numbers to print for the current view mode: both sides of a
+		 * spread or flip view, the pages visible on screen in scroll view
+		 * (capped), or just the current page.
 		 */
 		function printPageNums() {
 			var mode = viewMode();
@@ -1612,64 +1620,130 @@
 				return spreadPages( state.page );
 			}
 			if ( mode === 'scroll' ) {
-				var rendered = slots
+				// The pages the reader can actually see, not the ones merely kept loaded.
+				var box = pagesEl.getBoundingClientRect();
+				var visible = slots
 					.filter( function ( s ) {
-						return s.rendered;
+						var r = s.wrap.getBoundingClientRect();
+						return r.bottom > box.top + 1 && r.top < box.bottom - 1;
 					} )
 					.map( function ( s ) {
 						return s.pageNum;
-					} );
-				return rendered.length ? rendered : [ state.page ];
+					} )
+					.slice( 0, MAX_PRINT_PAGES );
+				return visible.length ? visible : [ state.page ];
 			}
 			return [ state.page ];
 		}
 
-		function printCurrent() {
-			var printSlots = printPageNums()
-				.map( function ( n ) {
-					return slots.filter( function ( s ) {
-						return s.pageNum === n;
-					} )[ 0 ];
-				} )
-				.filter( function ( s ) {
-					return s && s.rendered;
-				} );
+		/**
+		 * Render one page off-screen at a fixed print resolution, independent of
+		 * the on-screen zoom and of canvas virtualization, and resolve a PNG Blob.
+		 */
+		function renderPageForPrint( pageNum ) {
+			return state.pdf.getPage( pageNum ).then( function ( page ) {
+				var base = page.getViewport( { scale: 1, rotation: state.rotation } );
+				var scale = clamp( PRINT_TARGET_WIDTH / base.width, 0.5, 4 );
+				var vp = page.getViewport( { scale: scale, rotation: state.rotation } );
+				if ( vp.width * vp.height > PRINT_MAX_PIXELS ) {
+					scale *= Math.sqrt( PRINT_MAX_PIXELS / ( vp.width * vp.height ) );
+					vp = page.getViewport( { scale: scale, rotation: state.rotation } );
+				}
+				var canvas = document.createElement( 'canvas' );
+				canvas.width = Math.max( 1, Math.floor( vp.width ) );
+				canvas.height = Math.max( 1, Math.floor( vp.height ) );
+				return page
+					.render( { canvasContext: canvas.getContext( '2d' ), viewport: vp } )
+					.promise.then( function () {
+						return new Promise( function ( resolve, reject ) {
+							canvas.toBlob( function ( blob ) {
+								canvas.width = 1;
+								canvas.height = 1;
+								if ( blob ) {
+									resolve( blob );
+								} else {
+									reject( new Error( 'toBlob failed' ) );
+								}
+							}, 'image/png' );
+						} );
+					} );
+			} );
+		}
 
-			if ( ! printSlots.length ) {
-				printSlots = slots.filter( function ( s ) {
-					return s.rendered;
-				} );
+		function printCurrent() {
+			if ( ! state.pdf ) {
+				return;
 			}
-			if ( ! printSlots.length ) {
+			var nums = printPageNums();
+			if ( ! nums.length ) {
 				return;
 			}
 
-			dispatchEvent( 'foliora:print', {
-				page: state.page,
-				pages: printSlots.map( function ( s ) {
-					return s.pageNum;
-				} ),
+			// Open synchronously so popup blockers allow it; fill it once pages are ready.
+			var frame = window.open( '', '_blank' );
+			if ( ! frame ) {
+				return;
+			}
+			var urls = [];
+			var revoke = function () {
+				urls.forEach( function ( u ) {
+					window.URL.revokeObjectURL( u );
+				} );
+				urls = [];
+			};
+			try {
+				frame.document.title = 'Print';
+				frame.document.body.textContent = i18n.loading || 'Loading…';
+			} catch ( err ) {
+				// The new window is not scriptable; the file fallback below handles it.
+			}
+
+			dispatchEvent( 'foliora:print', { page: state.page, pages: nums } );
+
+			var chain = Promise.resolve();
+			nums.forEach( function ( n ) {
+				chain = chain.then( function () {
+					if ( frame.closed ) {
+						throw new Error( 'print window closed' );
+					}
+					return renderPageForPrint( n ).then( function ( blob ) {
+						urls.push( window.URL.createObjectURL( blob ) );
+					} );
+				} );
 			} );
 
-			try {
-				var images = printSlots
-					.map( function ( s ) {
-						return '<img src="' + s.canvas.toDataURL( 'image/png' ) + '" style="max-width:100%;display:block;page-break-after:always;" />';
-					} )
-					.join( '' );
-				var frame = window.open( '', '_blank' );
-				if ( ! frame ) {
-					return;
-				}
-				frame.document.write(
-					'<!DOCTYPE html><title>Print</title>' +
-						images +
-						'<script>window.onload=function(){window.focus();window.print();};</script>'
-				);
-				frame.document.close();
-			} catch ( err ) {
-				window.open( fileUrl, '_blank', 'noopener,noreferrer' );
-			}
+			chain
+				.then( function () {
+					var doc = frame.document;
+					doc.body.textContent = '';
+					var style = doc.createElement( 'style' );
+					// break-before on every image except the first avoids a trailing blank sheet.
+					style.textContent = 'html,body{margin:0;padding:0}img{display:block;max-width:100%;max-height:98vh;margin:0 auto}img+img{break-before:page;page-break-before:always}';
+					doc.head.appendChild( style );
+					var pending = urls.length;
+					var done = function () {
+						pending -= 1;
+						if ( pending <= 0 && ! frame.closed ) {
+							frame.focus();
+							frame.print();
+						}
+					};
+					frame.addEventListener( 'afterprint', revoke );
+					urls.forEach( function ( u ) {
+						var img = doc.createElement( 'img' );
+						img.onload = done;
+						img.onerror = done;
+						img.src = u;
+						doc.body.appendChild( img );
+					} );
+				} )
+				.catch( function () {
+					revoke();
+					if ( ! frame.closed ) {
+						// Let the browser's own PDF viewer print the file.
+						frame.location.href = fileUrl;
+					}
+				} );
 		}
 
 		function collectHits( query ) {
@@ -2535,7 +2609,9 @@
 		document.addEventListener( 'webkitfullscreenchange', onFsChange );
 
 		function startLoadingDocument() {
-			var loadingTask = window.pdfjsLib.getDocument( { url: fileUrl } );
+			// Re-assert our worker: a plugin sharing this PDF.js object could have changed it.
+			pdfjs.GlobalWorkerOptions.workerSrc = config.workerSrc;
+			var loadingTask = pdfjs.getDocument( { url: fileUrl } );
 			// pdf.js only calls onPassword when it is set on the task; passing it in the
 			// getDocument() params is ignored and password PDFs just fail to load.
 			loadingTask.onPassword = function ( updatePassword, reason ) {

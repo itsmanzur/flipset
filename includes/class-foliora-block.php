@@ -27,13 +27,7 @@ class Foliora_Block {
 			return;
 		}
 
-		wp_register_script(
-			'foliora-pdfjs',
-			FOLIORA_URL . 'assets/vendor/pdfjs/pdf.min.js',
-			array(),
-			FOLIORA_VERSION,
-			true
-		);
+		Foliora_Viewer::register_pdfjs();
 
 		wp_register_script(
 			'foliora-block-editor',

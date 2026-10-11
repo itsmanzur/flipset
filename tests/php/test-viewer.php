@@ -44,6 +44,24 @@ class Test_Foliora_Viewer extends Foliora_TestCase {
 		$this->assertStringContainsString( 'foliora-present', $html );
 	}
 
+	public function test_branding_credit_is_off_by_default() {
+		delete_option( 'foliora_settings' );
+		$html = Foliora::instance()->viewer->render_shortcode( array( 'file' => 'https://example.com/a.pdf' ) );
+		$this->assertStringNotContainsString( 'foliora-branding', $html );
+		$this->assertStringNotContainsString( 'Powered by Foliora', $html );
+	}
+
+	public function test_branding_credit_shows_only_when_enabled_in_settings() {
+		update_option( 'foliora_settings', array( 'show_branding' => true ) );
+		$html = Foliora::instance()->viewer->render_shortcode( array( 'file' => 'https://example.com/a.pdf' ) );
+		$this->assertStringContainsString( 'foliora-branding', $html );
+
+		update_option( 'foliora_settings', array( 'show_branding' => false ) );
+		$html = Foliora::instance()->viewer->render_shortcode( array( 'file' => 'https://example.com/a.pdf' ) );
+		$this->assertStringNotContainsString( 'foliora-branding', $html );
+		delete_option( 'foliora_settings' );
+	}
+
 	public function test_download_and_print_can_be_hidden() {
 		$html = Foliora::instance()->viewer->render_shortcode(
 			array(
@@ -76,15 +94,26 @@ class Test_Foliora_Viewer extends Foliora_TestCase {
 		$this->assertStringContainsString( 'data-view="page"', $invalid );
 	}
 
-	public function test_epub_mode_is_locked_without_pro() {
-		$html = Foliora::instance()->viewer->render_shortcode(
-			array(
-				'file' => 'https://example.com/book.epub',
-				'mode' => 'epub',
-			)
+	public function test_mode_attribute_shows_no_upsell_and_add_ons_can_take_over() {
+		$atts = array(
+			'file' => 'https://example.com/book.epub',
+			'mode' => 'epub',
 		);
-		$this->assertStringContainsString( 'foliora-locked', $html );
-		$this->assertStringContainsString( 'Foliora Pro', $html );
+		$html = Foliora::instance()->viewer->render_shortcode( $atts );
+		$this->assertStringNotContainsString( 'foliora-locked', $html );
+		$this->assertStringNotContainsString( 'Upgrade', $html );
+
+		add_filter(
+			'foliora/pre_render_viewer',
+			function ( $output, $filter_atts ) {
+				return 'epub' === $filter_atts['mode'] ? '<div class="my-epub"></div>' : $output;
+			},
+			10,
+			2
+		);
+		$html = Foliora::instance()->viewer->render_shortcode( $atts );
+		remove_all_filters( 'foliora/pre_render_viewer' );
+		$this->assertStringContainsString( 'my-epub', $html );
 	}
 
 	public function test_shortcode_is_registered() {

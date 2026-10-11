@@ -161,7 +161,7 @@
 	}
 
 	function refreshSetupUi() {
-		var items = $$( '.foliora-setup li' );
+		var items = $$( '.fa-steps li' );
 		if ( ! items.length ) {
 			return;
 		}
@@ -170,13 +170,21 @@
 		} ).length;
 		var total = items.length;
 		var complete = done === total;
-		var bar = $( '.foliora-progress span' );
+		var bar = $( '.fa-progress span' );
+		var barWrap = $( '.fa-progress' );
 		if ( bar ) {
 			bar.style.width = Math.round( ( done / total ) * 100 ) + '%';
 		}
-		var metric = $( '#foliora-metric-setup .foliora-metric-value' );
+		if ( barWrap ) {
+			barWrap.setAttribute( 'aria-valuenow', String( Math.round( ( done / total ) * 100 ) ) );
+		}
+		var metric = $( '#foliora-metric-setup .fa-metric__value' );
 		if ( metric ) {
 			metric.textContent = done + '/' + total;
+		}
+		var metricCard = $( '#foliora-metric-setup' );
+		if ( metricCard ) {
+			metricCard.classList.toggle( 'is-complete', complete );
 		}
 		var ringFg = $( '#foliora-ring-fg' );
 		var ringLabel = $( '#foliora-ring-label' );
@@ -220,7 +228,7 @@
 		}, 900 );
 	}
 
-	function setShortcode( url, title, thumbUrl ) {
+	function setShortcode( url, title, thumbUrl, attachmentId ) {
 		var input = $( '#foliora-shortcode-output' );
 		var fileLabel = $( '#foliora-selected-file' );
 		var createBtn = $( '#foliora-create-test-page' );
@@ -231,6 +239,13 @@
 		input.value = url ? '[foliora file="' + url + '"]' : '';
 		if ( fileLabel ) {
 			fileLabel.textContent = title || url || t( 'selectPdf', 'Select PDF' );
+			fileLabel.setAttribute( 'title', title || url || '' );
+		}
+		var openBuilder = $( '#fa-open-builder' );
+		if ( openBuilder ) {
+			var base = openBuilder.getAttribute( 'data-base' ) || openBuilder.getAttribute( 'href' ) || '';
+			var idNum = parseInt( attachmentId, 10 ) || 0;
+			openBuilder.setAttribute( 'href', idNum && base ? base + ( base.indexOf( '?' ) === -1 ? '?' : '&' ) + 'pdf_id=' + idNum : base );
 		}
 		if ( createBtn ) {
 			createBtn.disabled = ! url;
@@ -279,7 +294,7 @@
 		frame.on( 'select', function () {
 			var file = frame.state().get( 'selection' ).first().toJSON();
 			if ( file && file.url ) {
-				setShortcode( file.url, file.filename || file.title || '', ( file.image && file.image.src ) || '' );
+				setShortcode( file.url, file.filename || file.title || '', ( file.image && file.image.src ) || '', file.id );
 				pulsePanel( '#foliora-embed-panel' );
 			}
 		} );
@@ -306,7 +321,7 @@
 				if ( step ) {
 					step.classList.add( 'is-done' );
 				}
-				var embeds = $( '#foliora-metric-embeds .foliora-metric-value' );
+				var embeds = $( '#foliora-metric-pages .fa-metric__value' );
 				if ( embeds ) {
 					embeds.textContent = String( ( parseInt( embeds.textContent, 10 ) || 0 ) + 1 );
 				}
@@ -320,6 +335,79 @@
 				button.textContent = original;
 			}
 		);
+	}
+
+	/** "Upload PDF" quick action: same upload flow as dropping a file on the stage. */
+	function bindUploadTrigger() {
+		var trigger = $( '#fa-upload-trigger' );
+		var input = $( '#fa-upload-input' );
+		if ( ! trigger || ! input ) {
+			return;
+		}
+		trigger.addEventListener( 'click', function () {
+			if ( ! config.canUpload ) {
+				openMedia();
+				return;
+			}
+			input.click();
+		} );
+		input.addEventListener( 'change', function () {
+			var file = input.files && input.files[ 0 ];
+			input.value = '';
+			if ( ! file ) {
+				return;
+			}
+			if ( ! isPdfFile( file ) ) {
+				toast( t( 'notPdf', 'Please drop a PDF file.' ) );
+				return;
+			}
+			uploadPdf( file );
+		} );
+	}
+
+	/** Complete setup collapses to one line; the toggle remembers its state on this device. */
+	function bindSetupToggle() {
+		var panel = $( '#foliora-setup-panel' );
+		var toggle = $( '#foliora-setup-toggle' );
+		if ( ! panel || ! toggle ) {
+			return;
+		}
+		var KEY = 'foliora_setup_open';
+		var apply = function ( open ) {
+			panel.classList.toggle( 'is-open', open );
+			toggle.setAttribute( 'aria-expanded', open ? 'true' : 'false' );
+			toggle.textContent = open ? ( toggle.getAttribute( 'data-hide' ) || 'Hide steps' ) : ( toggle.getAttribute( 'data-show' ) || 'Show steps' );
+		};
+		var saved = false;
+		try {
+			saved = '1' === window.localStorage.getItem( KEY );
+		} catch ( err ) {
+			saved = false;
+		}
+		apply( saved );
+		toggle.addEventListener( 'click', function () {
+			var open = ! panel.classList.contains( 'is-open' );
+			apply( open );
+			try {
+				window.localStorage.setItem( KEY, open ? '1' : '0' );
+			} catch ( err ) {
+				// Storage blocked; the state just won't persist.
+			}
+		} );
+	}
+
+	/** Copy icon buttons in the Recent saved embeds list. */
+	function bindCopyButtons() {
+		$$( '[data-fa-copy]' ).forEach( function ( btn ) {
+			btn.addEventListener( 'click', function () {
+				copyText( btn.getAttribute( 'data-fa-copy' ) || '', null, function () {
+					btn.classList.add( 'is-copied' );
+					window.setTimeout( function () {
+						btn.classList.remove( 'is-copied' );
+					}, 1200 );
+				} );
+			} );
+		} );
 	}
 
 	function bindDashboard() {
@@ -350,7 +438,8 @@
 				setShortcode(
 					item.getAttribute( 'data-url' ) || '',
 					item.getAttribute( 'data-title' ) || '',
-					item.getAttribute( 'data-thumb' ) || ''
+					item.getAttribute( 'data-thumb' ) || '',
+					item.getAttribute( 'data-id' ) || ''
 				);
 			} );
 		} );
@@ -376,8 +465,10 @@
 				}
 			} );
 		} );
+		bindUploadTrigger();
+		bindSetupToggle();
+		bindCopyButtons();
 		bindDrop();
-		bindProTiles();
 		bindCountUp();
 	}
 
@@ -420,12 +511,12 @@
 			.then( parseAjax )
 			.then( function ( json ) {
 				if ( json && json.success && json.data && json.data.url ) {
-					setShortcode( json.data.url, json.data.filename || json.data.title || file.name, '' );
+					setShortcode( json.data.url, json.data.filename || json.data.title || file.name, '', json.data.id );
 					var uploaded = $( '[data-setup-step="uploaded"]' );
 					if ( uploaded ) {
 						uploaded.classList.add( 'is-done' );
 					}
-					var pdfs = $( 'a.foliora-metric .foliora-metric-value[data-count]' );
+					var pdfs = $( '#foliora-metric-pdfs .fa-metric__value' );
 					if ( pdfs ) {
 						pdfs.textContent = String( ( parseInt( pdfs.textContent, 10 ) || 0 ) + 1 );
 					}
@@ -486,26 +577,11 @@
 		} );
 	}
 
-	function bindProTiles() {
-		$$( '.foliora-pro-tile' ).forEach( function ( tile ) {
-			tile.addEventListener( 'toggle', function () {
-				if ( ! tile.open ) {
-					return;
-				}
-				$$( '.foliora-pro-tile' ).forEach( function ( other ) {
-					if ( other !== tile ) {
-						other.open = false;
-					}
-				} );
-			} );
-		} );
-	}
-
 	function bindCountUp() {
 		if ( window.matchMedia && window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches ) {
 			return;
 		}
-		$$( '.foliora-metric-value[data-count]' ).forEach( function ( el ) {
+		$$( '.fa-metric__value[data-count]' ).forEach( function ( el ) {
 			var to = parseInt( el.getAttribute( 'data-count' ), 10 );
 			if ( ! to ) {
 				return;
@@ -524,28 +600,157 @@
 		} );
 	}
 
+	function flashButton( el ) {
+		el.classList.add( 'is-copied' );
+		window.setTimeout( function () {
+			el.classList.remove( 'is-copied' );
+		}, 1500 );
+	}
+
+	/** Create (or update) the shared test page for one PDF row. */
+	function bindDocCreateTestPage() {
+		$$( '.foliora-doc-create-test-btn' ).forEach( function ( button ) {
+			button.addEventListener( 'click', function ( e ) {
+				e.preventDefault();
+				var file = button.getAttribute( 'data-pdf-url' ) || '';
+				if ( ! file || button.disabled ) {
+					return;
+				}
+				var original = button.textContent;
+				button.disabled = true;
+				button.textContent = t( 'creating', 'Creating page…' );
+				post(
+					'foliora_create_test_page',
+					{ file: file },
+					function ( data ) {
+						button.disabled = false;
+						button.textContent = original;
+						toast( t( 'testPageReady', 'Test page ready' ) );
+						if ( data.url ) {
+							window.open( data.url, '_blank', 'noopener,noreferrer' );
+						}
+					},
+					function () {
+						button.disabled = false;
+						button.textContent = original;
+						toast( t( 'createFail', 'Could not create the test page.' ) );
+					}
+				);
+			} );
+		} );
+	}
+
+	/** Collapsible "4 ways to embed" card; the state is a per-browser convenience. */
+	function bindHowto() {
+		var card = $( '#fa-howto' );
+		var toggle = $( '#fa-howto-toggle' );
+		var body = $( '#fa-howto-body' );
+		if ( ! card || ! toggle || ! body ) {
+			return;
+		}
+		var KEY = 'foliora_howto_collapsed';
+		var apply = function ( collapsed ) {
+			body.hidden = collapsed;
+			card.classList.toggle( 'is-collapsed', collapsed );
+			toggle.setAttribute( 'aria-expanded', collapsed ? 'false' : 'true' );
+			toggle.textContent = collapsed ? toggle.getAttribute( 'data-show' ) : toggle.getAttribute( 'data-hide' );
+		};
+		var stored = false;
+		try {
+			stored = '1' === window.localStorage.getItem( KEY );
+		} catch ( err ) {
+			stored = false;
+		}
+		apply( stored );
+		toggle.addEventListener( 'click', function () {
+			var next = ! body.hidden;
+			apply( next );
+			try {
+				window.localStorage.setItem( KEY, next ? '1' : '0' );
+			} catch ( err ) {
+				// Storage unavailable; the state stays for this view only.
+			}
+		} );
+	}
+
+	/** Highlight the guide sub-nav chip of the section being read. */
+	function bindGuideSpy() {
+		var links = $$( '#fa-guide-nav a[href^="#guide-"]' );
+		if ( ! links.length || ! ( 'IntersectionObserver' in window ) ) {
+			return;
+		}
+		var byId = {};
+		links.forEach( function ( link ) {
+			byId[ link.getAttribute( 'href' ).slice( 1 ) ] = link;
+		} );
+		var setActive = function ( id ) {
+			links.forEach( function ( link ) {
+				var on = byId[ id ] === link;
+				link.classList.toggle( 'is-active', on );
+				if ( on ) {
+					link.setAttribute( 'aria-current', 'true' );
+				} else {
+					link.removeAttribute( 'aria-current' );
+				}
+			} );
+		};
+		var ids = Object.keys( byId );
+		// The active chip is the last section whose top has passed the sticky bar.
+		var update = function () {
+			var current = ids[ 0 ];
+			ids.forEach( function ( id ) {
+				var section = document.getElementById( id );
+				if ( section && section.getBoundingClientRect().top <= 140 ) {
+					current = id;
+				}
+			} );
+			setActive( current );
+		};
+		var observer = new window.IntersectionObserver( update, { rootMargin: '-120px 0px -65% 0px', threshold: [ 0, 1 ] } );
+		ids.forEach( function ( id ) {
+			var section = document.getElementById( id );
+			if ( section ) {
+				observer.observe( section );
+			}
+		} );
+		update();
+	}
+
 	function bindDocuments() {
 		$$( '.foliora-copy-btn, .foliora-copy-preset-btn, .foliora-copy-snippet-btn' ).forEach( function ( button ) {
 			button.addEventListener( 'click', function ( e ) {
 				e.preventDefault();
 				var text = button.getAttribute( 'data-foliora-copy' ) || '';
-				copyText( text, button, markCopiedStep );
-			} );
-		} );
-		$$( '.foliora-code-chip-copy' ).forEach( function ( chip ) {
-			chip.addEventListener( 'click', function ( e ) {
-				e.preventDefault();
-				var text = chip.getAttribute( 'data-foliora-copy' ) || '';
-				copyText( text, chip, function () {
-					toast( copiedLabel() );
+				// Icon buttons keep their markup; the check state is a CSS class.
+				copyText( text, null, function () {
+					flashButton( button );
+					markCopiedStep();
 				} );
 			} );
 		} );
-		$$( '.foliora-docs-shortcode' ).forEach( function ( input ) {
-			input.addEventListener( 'click', function () {
-				input.select();
+		$$( '.foliora-code-chip-copy' ).forEach( function ( chip ) {
+			var run = function () {
+				copyText( chip.getAttribute( 'data-foliora-copy' ) || '', null, function () {
+					flashButton( chip );
+				} );
+			};
+			chip.setAttribute( 'role', 'button' );
+			chip.setAttribute( 'tabindex', '0' );
+			chip.setAttribute( 'aria-label', t( 'copyShortcode', 'Copy' ) + ': ' + ( chip.textContent || '' ).trim() );
+			chip.addEventListener( 'click', function ( e ) {
+				e.preventDefault();
+				run();
+			} );
+			chip.addEventListener( 'keydown', function ( e ) {
+				if ( 'Enter' === e.key || ' ' === e.key ) {
+					e.preventDefault();
+					run();
+				}
 			} );
 		} );
+		bindDocCreateTestPage();
+		bindHowto();
+		bindGuideSpy();
 	}
 
 	function bindShortcodeBuilder() {
@@ -1001,6 +1206,14 @@
 				}
 			} );
 		} );
+
+		try {
+			if ( 'embeds' === new window.URLSearchParams( window.location.search ).get( 'view' ) ) {
+				switchMainView( 'embeds' );
+			}
+		} catch ( err ) {
+			// URLSearchParams unavailable; stay on the builder view.
+		}
 
 		$$( '.foliora-switch-to-builder' ).forEach( function ( btn ) {
 			btn.addEventListener( 'click', function ( e ) {

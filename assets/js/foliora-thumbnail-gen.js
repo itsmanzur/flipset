@@ -14,12 +14,14 @@
 	var rows = document.querySelectorAll( '.foliora-docs-table tbody tr[data-pdf-id]' );
 	var i;
 
-	if ( typeof window.pdfjsLib === 'undefined' ) {
+	var pdfjs = ( window.Foliora && window.Foliora.pdfjsLib ) || window.pdfjsLib;
+
+	if ( ! pdfjs ) {
 		return;
 	}
 
 	if ( config.workerSrc ) {
-		window.pdfjsLib.GlobalWorkerOptions.workerSrc = config.workerSrc;
+		pdfjs.GlobalWorkerOptions.workerSrc = config.workerSrc;
 	}
 
 	for ( i = 0; i < rows.length; i++ ) {
@@ -67,7 +69,7 @@
 	}
 
 	function loadPdf( url ) {
-		var task = window.pdfjsLib.getDocument( {
+		var task = pdfjs.getDocument( {
 			url: url,
 			onPassword: function () {
 				if ( task && task.destroy ) {
@@ -199,7 +201,12 @@
 			job.a11yEl.textContent = config.i18n && config.i18n.tagged
 				? config.i18n.tagged
 				: 'Tagged';
-			job.a11yEl.removeAttribute( 'title' );
+			job.a11yEl.setAttribute(
+				'title',
+				config.i18n && config.i18n.taggedHint
+					? config.i18n.taggedHint
+					: 'Tagged PDF. Screen readers can follow its structure.'
+			);
 			return;
 		}
 		job.a11yEl.classList.add( 'is-warn' );
@@ -237,12 +244,24 @@
 		job.statusEl.classList.remove( 'is-pending' );
 		if ( empty ) {
 			job.statusEl.classList.add( 'is-empty' );
+			job.statusEl.setAttribute(
+				'title',
+				config.i18n && config.i18n.noTextHint
+					? config.i18n.noTextHint
+					: 'No selectable text was found (a scanned image PDF), so it cannot be searched.'
+			);
 			job.statusEl.textContent = config.i18n && config.i18n.noText
 				? config.i18n.noText
 				: 'No text';
 			return;
 		}
 		job.statusEl.classList.add( 'is-ready' );
+		job.statusEl.setAttribute(
+			'title',
+			config.i18n && config.i18n.indexedHint
+				? config.i18n.indexedHint
+				: 'Text extracted. WordPress search can find words in this PDF.'
+		);
 		job.statusEl.textContent = config.i18n && config.i18n.indexed
 			? config.i18n.indexed
 			: 'Indexed';

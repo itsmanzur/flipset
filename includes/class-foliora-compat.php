@@ -19,6 +19,7 @@ class Foliora_Compat {
 	public function init() {
 		add_filter( 'foliora/viewer_atts', array( $this, 'localize_viewer_atts' ), 5 );
 		add_filter( 'script_loader_tag', array( $this, 'script_loader_tag' ), 10, 2 );
+		add_filter( 'wp_inline_script_attributes', array( $this, 'inline_script_attributes' ) );
 
 		add_filter( 'rocket_exclude_js', array( $this, 'exclude_js_paths' ) );
 		add_filter( 'rocket_exclude_defer_js', array( $this, 'exclude_js_paths' ) );
@@ -160,15 +161,37 @@ class Foliora_Compat {
 		if ( ! in_array( $handle, $this->js_handles(), true ) ) {
 			return $tag;
 		}
-		if ( false !== strpos( $tag, 'data-no-optimize' ) ) {
-			return $tag;
-		}
-		return preg_replace(
-			'/<script\s/i',
+		// The tag string can start with an inline "before" script (the PDF.js
+		// capture snippet), so target the <script> element that carries the src.
+		$count = 0;
+		$out   = preg_replace(
+			'/<script\s+(?![^>]*data-no-optimize)(?=[^>]*\bsrc=)/i',
 			'<script data-no-optimize="1" data-no-minify="1" data-no-defer="1" data-no-delay="1" data-cfasync="false" nowprocket ',
 			$tag,
-			1
+			1,
+			$count
 		);
+		return ( $count && is_string( $out ) ) ? $out : $tag;
+	}
+
+	/**
+	 * Keep optimizers from delaying or moving the inline PDF.js capture
+	 * snippets: they must run immediately before and after the bundle.
+	 *
+	 * @param array $attributes Inline script tag attributes.
+	 * @return array
+	 */
+	public function inline_script_attributes( $attributes ) {
+		$id = isset( $attributes['id'] ) ? (string) $attributes['id'] : '';
+		if ( 'foliora-pdfjs-js-before' === $id || 'foliora-pdfjs-js-after' === $id ) {
+			$attributes['data-no-optimize'] = '1';
+			$attributes['data-no-minify']   = '1';
+			$attributes['data-no-defer']    = '1';
+			$attributes['data-no-delay']    = '1';
+			$attributes['data-cfasync']     = 'false';
+			$attributes['nowprocket']       = true;
+		}
+		return $attributes;
 	}
 
 	/**

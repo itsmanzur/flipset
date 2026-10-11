@@ -1,12 +1,12 @@
 # Foliora developer hooks
 
-Foliora (free) is a complete PDF viewer. Foliora Pro is a **separate** plugin. The free plugin never ships Pro code; it only exposes WordPress filters and actions. Pro — or any third-party add-on — hooks those same points to replace rendering, inject a toolbar, hide branding, or gate licensed features.
+Foliora (free) is a complete PDF viewer with no locked features and no upsell UI. It exposes WordPress filters and actions so a separate add-on (a future Foliora Pro, or any third party) can replace rendering, inject a toolbar, change the credit link, or gate licensed features without modifying this plugin.
 
 You can build your own “Foliora Pro”-style extension with this public contract. You do not need undocumented internals.
 
 Hook names use a slash namespace (`foliora/did_thing`) by design. All live PHP hooks follow that style.
 
-**Viewer pipeline (in order):** `foliora/viewer_atts` → empty-file / EPUB-lock checks → `foliora/pre_render_viewer` → `foliora/before_viewer` → `foliora/show_branding` → `foliora/viewer_html`.
+**Viewer pipeline (in order):** saved-embed merge (`id`) → `shortcode_atts()` → `foliora/viewer_atts` → empty-file check → `foliora/pre_render_viewer` → `foliora/before_viewer` → toolbar (`foliora/download_url`) → `foliora/show_branding` → `foliora/viewer_file_url` → `foliora/viewer_html`.
 
 ---
 
@@ -15,7 +15,7 @@ Hook names use a slash namespace (`foliora/did_thing`) by design. All live PHP h
 **Type:** action
 **Fired from:** `Foliora::run()` in `includes/class-foliora.php`
 
-Runs once after the free plugin has constructed its viewer, thumbnails, library, block, and (on admin screens) admin classes, and after each of those has `init()`’d.
+Runs once after every free-plugin component (saved embeds, viewer, thumbnails, SEO, accessibility, compat, builders, library, block, auto-embed and, on admin screens, the admin classes) has run its `init()`.
 
 **Parameters**
 
@@ -83,41 +83,20 @@ add_filter( 'foliora/is_pro_active', function ( $pro_confirmed ) {
 **Type:** filter
 **Fired from:** `Foliora_Loader::is_feature_enabled()` in `includes/class-foliora-loader.php`
 
-Per-feature license gate. If Pro is not active, this filter never runs — the method returns `false`. If Pro **is** active, the default passed in is `true`; your add-on should return `false` for features the current license does not include.
+Per-feature license gate. If Pro is not active, this filter never runs — the method returns `false`. If Pro **is** active, the default passed in is `true` for **every** key, including ones your add-on has not built yet; return `false` for any feature the current license does not include or that is not implemented.
 
 **Parameters**
 
 | Name | Type | Meaning |
 |------|------|---------|
 | `$enabled` | `bool` | Default `true` when Pro is active |
-| `$feature_key` | `string` | One of: `epub_reader`, `bookmarks`, `reader_themes`, `protected_links`, `woocommerce_gate`, `analytics`, `remove_branding` |
+| `$feature_key` | `string` | The feature key your add-on asks about. Free defines none and shows no locked or upsell UI |
 
 ```php
 add_filter( 'foliora/feature_enabled', function ( $enabled, $feature_key ) {
-	$licensed = array( 'bookmarks', 'reader_themes', 'remove_branding' );
+	$licensed = array( 'bookmarks' );
 	return in_array( $feature_key, $licensed, true );
 }, 10, 2 );
-```
-
----
-
-## `foliora/upgrade_url`
-
-**Type:** filter
-**Fired from:** `Foliora_Loader::upgrade_url()` in `includes/class-foliora-loader.php`
-
-URL used by locked-feature UI (“Upgrade to Pro”).
-
-**Parameters**
-
-| Name | Type | Meaning |
-|------|------|---------|
-| `$url` | `string` | Default `https://thereadscope.com/foliora/pricing` |
-
-```php
-add_filter( 'foliora/upgrade_url', function ( $url ) {
-	return 'https://example.com/your-addon/pricing';
-} );
 ```
 
 ---
@@ -127,7 +106,7 @@ add_filter( 'foliora/upgrade_url', function ( $url ) {
 **Type:** filter
 **Fired from:** `Foliora_Viewer::render_shortcode()` in `includes/class-foliora-viewer.php`
 
-Runs immediately after `shortcode_atts()` (defaults from Foliora → Settings for width/height). Swap `file`, `width`, `height`, or `mode` without replacing the whole viewer. Empty-file and EPUB-lock checks run **after** this filter, so you can inject a missing file URL or change `mode`.
+Runs immediately after `shortcode_atts()`, which fills defaults from Foliora → Settings (width, height, theme, lazy loading) and, when `id` is set, after the saved embed's configuration has been merged (explicit attributes win). Swap `file`, `width`, `height`, `mode`, `view` and so on without replacing the whole viewer. The empty-file check runs **after** this filter, so you can inject a missing file URL.
 
 Used by `[foliora]` and by anything that calls `render_shortcode()` (the viewer block, the library’s in-place embeds).
 
@@ -135,7 +114,26 @@ Used by `[foliora]` and by anything that calls `render_shortcode()` (the viewer 
 
 | Name | Type | Meaning |
 |------|------|---------|
-| `$atts` | `array` | Keys: `file` (URL), `width`, `height`, `mode` (`pdf` or `epub`), `page`, `title`, `download`, `print`, `hash`, `view` (`page`, `scroll`, or `spread`), `resume` |
+| `$atts` | `array` | See the attribute table below |
+
+**Attributes** (every key is always present; booleans arrive as strings such as `'true'` / `'false'`, or `''` for "use the Settings default"):
+
+| Key | Values / default |
+|-----|------------------|
+| `id` | Saved embed ID (`foliora_embed` post) or `''` |
+| `file` | PDF URL (required) |
+| `width`, `height` | CSS size; defaults from Settings (`100%` / `600px`) |
+| `mode` | `pdf` (default). Reserved for add-ons: read it in `foliora/pre_render_viewer` to render something other than a PDF |
+| `page` | Start page, default `1` |
+| `title` | Optional caption |
+| `theme` | `light` (default from Settings), `dark`, `sepia` |
+| `view` | `page` (default), `scroll`, `spread`, `flip` (3D flipbook). Anything else falls back to `page`; `spread` and `flip` fall back to `page` in containers narrower than 640px |
+| `download`, `print`, `search`, `share`, `shortcuts`, `presentation`, `fullscreen` | `true` / `false` / `''` (Settings default) |
+| `theme_btn` | `true` / `false` / `''` — the light/dark/sepia toggle button |
+| `hide` | Comma list of controls to hide: `nav`, `zoom`, `fit`, `rotate`, `view`, `pan`, `download`, `print`, `search`, `theme`, `share`, `shortcuts`, `presentation`, `fullscreen` |
+| `loading` | `eager` (default) or `lazy` |
+| `hash` | `true` (default) — sync `#page=N` in the URL |
+| `resume` | `true` (default) — remember the last page in `localStorage` |
 
 Return an array. Non-array values are discarded and treated as empty attributes.
 
@@ -202,7 +200,7 @@ add_filter( 'foliora/pre_render_viewer', function ( $output, $atts ) {
 **Type:** action
 **Fired from:** `Foliora_Viewer::render_shortcode()` in `includes/class-foliora-viewer.php`
 
-Fires only on the free PDF path (skipped when `pre_render_viewer` short-circuits). Echo markup; it is captured and inserted into `.foliora-chrome` **before** the free toolbar.
+Fires only on the free PDF path (skipped when `pre_render_viewer` short-circuits). Echo markup; it is captured and inserted into `.foliora-chrome` **before** the free toolbar. Free already ships its own light / dark / sepia theme button (`theme_btn`); do not add a second one.
 
 **Parameters**
 
@@ -226,17 +224,18 @@ add_action( 'foliora/before_viewer', function ( $instance_id, $atts ) {
 **Type:** filter
 **Fired from:** `Foliora_Viewer::render_shortcode()` in `includes/class-foliora-viewer.php`
 
-Whether to print the “Powered by Foliora” credit under the viewer. Default `true`. Foliora Pro typically returns `false` when the site has the `remove_branding` feature and the matching setting enabled.
+Whether to print the “Powered by Foliora” credit under the viewer. The default is the **Credit link** checkbox under Foliora → Settings, which is **off** until an administrator turns it on. Return `true` or `false` to override the setting for a site, a page or a single viewer.
 
 **Parameters**
 
 | Name | Type | Meaning |
 |------|------|---------|
-| `$show` | `bool` | Default `true` |
+| `$show` | `bool` | Default: the saved `show_branding` setting (`false` unless enabled) |
 
 ```php
 add_filter( 'foliora/show_branding', function ( $show ) {
-	return false;
+	// Always show the credit on the marketing site.
+	return is_page( 'about' ) ? true : $show;
 } );
 ```
 
@@ -247,7 +246,7 @@ add_filter( 'foliora/show_branding', function ( $show ) {
 **Type:** filter
 **Fired from:** `Foliora_Viewer::render_shortcode()` in `includes/class-foliora-viewer.php`
 
-Last chance to wrap or post-process the finished viewer HTML. Applied to the free plugin’s container **and** to any non-`null` `foliora/pre_render_viewer` return. Not applied to the empty-file admin notice or the locked-EPUB notice.
+Last chance to wrap or post-process the finished viewer HTML. Applied to the free plugin’s container **and** to any non-`null` `foliora/pre_render_viewer` return. Not applied to the editor-only notices (no file URL, unknown saved-embed ID).
 
 **Parameters**
 
@@ -267,17 +266,79 @@ add_filter( 'foliora/viewer_html', function ( $html, $atts ) {
 
 ---
 
-## Related: DOM event `foliora:pagechange`
+## `foliora/viewer_file_url`
 
-This is **not** a WordPress hook. The front-end viewer dispatches a bubbling `CustomEvent` on the `.foliora-viewer` element whenever the current page changes (`assets/js/foliora-viewer.js`).
+**Type:** filter
+**Fired from:** `Foliora_Viewer::render_shortcode()` in `includes/class-foliora-viewer.php`
 
-`event.detail` is `{ page: number, numPages: number }`. Useful for reading-progress UIs without replacing the renderer.
+The URL the front-end viewer loads (`data-file`) and the no-JavaScript fallback link uses. Use it for signed or proxied URLs. It runs only on the free PDF path.
+
+**Parameters**
+
+| Name | Type | Meaning |
+|------|------|---------|
+| `$file_url` | `string` | `$atts['file']` |
+| `$atts` | `array` | Resolved attributes |
+
+---
+
+## `foliora/download_url`
+
+**Type:** filter
+**Fired from:** `Foliora_Viewer::render_toolbar()` in `includes/class-foliora-viewer.php`
+
+The `href` of the toolbar Download button. Defaults to the file URL; change it to send downloads through a tracked or protected endpoint without changing what the viewer renders.
+
+**Parameters**
+
+| Name | Type | Meaning |
+|------|------|---------|
+| `$download_url` | `string` | The PDF URL |
+| `$atts` | `array` | Resolved attributes |
+
+---
+
+## `foliora/schema_digital_document`
+
+**Type:** filter
+**Fired from:** `Foliora_SEO::output_schema_jsonld()` in `includes/class-foliora-seo.php`
+
+The Schema.org `DigitalDocument` array printed as JSON-LD for each PDF embedded on a singular post or shown on a PDF attachment page. Return an array to print it; any other value drops that document.
+
+**Parameters**
+
+| Name | Type | Meaning |
+|------|------|---------|
+| `$doc` | `array` | `@context`, `@type`, `name`, `url`, `encodingFormat`, and when known `numberOfPages`, `thumbnailUrl`, `description` |
+| `$pdf_id` | `int` | PDF attachment ID |
+| `$post_id` | `int` | Singular post ID that embeds the PDF |
+
+---
+
+## Related: DOM events
+
+These are **not** WordPress hooks. The front-end viewer dispatches bubbling `CustomEvent`s on the `.foliora-viewer` element (`assets/js/foliora-viewer.js`). `event.detail` always includes `fileUrl` plus the fields below.
+
+| Event | Extra `detail` fields |
+|-------|----------------------|
+| `foliora:ready` | `numPages`, `viewMode` |
+| `foliora:pagechange` | `page`, `numPages` |
+| `foliora:zoom` | `zoom`, `fitMode` (`page`, `width` or `none`) |
+| `foliora:search` | `query`, `hitsCount`, `currentHit` (absent when there are no hits) |
+| `foliora:print` | `page`, `pages` (the page numbers actually sent to the print window) |
+| `foliora:download` | — |
+| `foliora:error` | `stage` (`render`) |
 
 ```js
 document.addEventListener( 'foliora:pagechange', function ( event ) {
 	console.log( event.detail.page, 'of', event.detail.numPages );
 } );
 ```
+
+### JavaScript globals
+
+- `window.FolioraViewer.bind( element )` binds a `.foliora-viewer` that was added to the page after load.
+- `window.Foliora.pdfjsLib` is Foliora's own bundled PDF.js (3.11.174), captured right after its script runs. Use it instead of `window.pdfjsLib`: Foliora puts `window.pdfjsLib` back exactly as it found it (another plugin's copy, or unset) so it never collides with other PDF plugins, and you should not depend on the global either. Set `workerSrc` on this object to Foliora's worker (`FolioraConfig.workerSrc`).
 
 ---
 
@@ -350,7 +411,7 @@ Every **live** `apply_filters()` / `do_action()` in this plugin uses slash-style
 
 A commented-out Freemius stub in `foliora.php` contains `do_action( 'foliora_fs_loaded' )`. That line is not executed.
 
-The library shortcode (`[foliora_library]`) still goes through the viewer hooks above when it renders an embed. Thumbnail and text-index AJAX have no additional PHP filters beyond `foliora/extracted_text`. Tagged-PDF detection is stored via `foliora_save_a11y` and can be overridden with `foliora/pdf_tagged`.
+The library shortcode (`[foliora_library]`) still goes through the viewer hooks above when it renders an embed. Thumbnail and text-index AJAX have no additional PHP filters beyond `foliora/extracted_text` and `foliora/extracted_text_max_chars`. Tagged-PDF detection is stored via `foliora_save_a11y` and can be overridden with `foliora/pdf_tagged`.
 
 ---
 
@@ -359,7 +420,7 @@ The library shortcode (`[foliora_library]`) still goes through the viewer hooks 
 **Type:** filter
 **Fired from:** `Foliora_A11y::is_tagged()` in `includes/class-foliora-a11y.php`
 
-Overrides whether an attachment is treated as a tagged (accessible) PDF. The default is the MarkInfo `/Marked` flag stored from Foliora → Documents.
+Overrides whether an attachment is treated as a tagged (accessible) PDF. The default is the MarkInfo `/Marked` flag stored when the Foliora → Docs & Features → Documents tab is opened.
 
 **Parameters**
 

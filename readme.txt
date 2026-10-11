@@ -1,4 +1,4 @@
-=== Foliora – PDF Viewer, 3D Flipbook & Document Library ===
+=== Foliora – PDF Viewer, PDF Embed, 3D Flipbook & Document Library ===
 Contributors: itsmanzur
 Tags: pdf, pdf viewer, pdf embed, flipbook, document library
 Requires at least: 6.0
@@ -8,81 +8,123 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Fast, accessible PDF viewer with 3D flipbook, document library and PDF text search. Gutenberg, Elementor, Divi & Beaver Builder ready.
+Embed PDFs with a fast PDF viewer, 3D flipbook and document library. Searchable PDF text, accessible, no CDN. Gutenberg, Elementor, Divi ready.
 
 == Description ==
 
-Foliora embeds PDF documents in posts and pages using a bundled, locally hosted PDF.js build. There is no external rendering service, no CDN, and no API key.
+Foliora embeds PDF documents in posts, pages and widgets with a PDF.js build that ships inside the plugin. Use a shortcode, a Gutenberg block, a page-builder widget, or paste a PDF link on its own line. There is no CDN, no external service and no API key: rendering happens in the visitor's browser, from files on your own site.
 
-**Free features**
+**Why Foliora?**
 
-* Shortcode: `[foliora file="https://example.com/document.pdf"]`
-* Gutenberg “Foliora Viewer” block with a Media Library picker and first-page preview
-* Page-by-page, continuous scroll, two-page spread, or realistic 3D FlipBook mode (with zero-asset Web Audio paper turn sound); zoom, fit page / fit width, rotate, find (N of M), print, download, fullscreen, and presentation mode
-* Light, sepia, and dark reader theme modes for comfortable reading
-* Automatic oEmbed / direct PDF URL auto-embed: paste any .pdf URL to embed instantly
-* WordPress standard attachment page auto-embed (configurable under Settings)
-* Smart CORS error diagnostics and user-friendly fallback card with direct download link for cross-origin PDFs
-* Optional title caption, start page, guest last-page resume, and `#page=4` deep links
-* Hide download or print per embed, or site-wide under Foliora → Settings
-* Text layer and annotation links so visitors can select text and follow PDF links
-* Keyboard shortcuts (arrows, Page Up/Down, plus/minus, R to rotate, Home/End, Ctrl/Cmd+F, Escape)
-* Password-protected PDFs, document outline, page thumbnails, pinch/swipe, and a hand/pan tool
-* Streamlined, edge-to-edge responsive toolbar with a sleek More Tools (⋮) popup menu
-* Dashboard with setup checklist and shortcode builder
-* Documents library of PDFs already in the Media Library
-* `[foliora_library]` shortcode and “Foliora Library” block: a grid of site PDFs with first-page thumbnails and search
-* PDF text indexing so WordPress site search (and the library search) can find phrases inside embedded documents
-* Open Graph / Twitter preview using the PDF’s first-page thumbnail when a page is shared
-* Native Elementor, Divi, and Beaver Builder widgets for the viewer and the document library
-* WPML / Polylang: translated Media Library PDFs swap automatically for the current language
-* Caching-plugin exclusions so PDF.js is not minified, combined, or delayed
-* Warns on Foliora → Documents when a PDF is not tagged for accessibility
-* Bengali (bn_BD) translation bundled
-* Live preview of default width and height on the settings screen
+* **Fast and local** – bundled PDF.js, nothing loaded from a CDN, optional lazy loading.
+* **Accessible** – keyboard controls, screen reader page announcements, and a check that flags PDFs without accessibility tags.
+* **3D flipbook** – page, scroll, spread and flipbook views, all in the free plugin.
+* **Searchable PDF text** – WordPress site search can find words inside your embedded PDFs.
+* **Works where you build** – Gutenberg, Elementor, Divi and Beaver Builder.
+* **Translation-ready** – WPML and Polylang support, Bengali (bn_BD) bundled.
 
-**Foliora Pro** (separate add-on) unlocks:
+= Features =
 
-* EPUB reader mode
-* Bookmarks and reading-progress sync for logged-in users
-* Reader font, typography & custom color themes
-* Password-protected and expiring share links
-* WooCommerce paid-content gating
-* Reading analytics
-* Removal of the “Powered by Foliora” credit
+**Viewer**
+
+* Shortcode `[foliora file="https://example.com/document.pdf"]` and a "Foliora Viewer" Gutenberg block with a Media Library picker and first-page preview.
+* Paste a direct `.pdf` link on its own line to embed it. PDF attachment pages can show the viewer too (a setting).
+* Zoom, fit page or width, rotate, find with match count, page thumbnails, document outline, hand tool, fullscreen, presentation mode, print and download.
+* Selectable text and working links inside the PDF; password-protected PDFs ask for the password.
+* Light, dark and sepia reading themes.
+* Start page, `#page=4` deep links and last-page resume on the visitor's device.
+* Show or hide download, print, search, share and other controls per embed or site-wide.
+* Share dialog with X, Facebook, LinkedIn, WhatsApp, email and copy link.
+* Clear message with a direct link when a PDF on another domain blocks cross-origin access (CORS).
+
+**Flipbook and view modes**
+
+* Single page, continuous scroll, two-page spread and 3D flipbook (`view="flip"`).
+* Realistic page curl with a short page-turn sound generated in the browser, no audio files.
+* Spread and flipbook fall back to a single page on narrow screens.
+* Touch support: pinch to zoom and swipe to turn pages.
+
+**Document library**
+
+* `[foliora_library]` shortcode and "Foliora Library" block: a grid of your Media Library PDFs with first-page thumbnails, search and pagination; a document opens in place.
+* Foliora → Docs & Features lists your PDFs with preview, search-index status and accessibility status, and copies shortcodes.
+* Shortcode Builder with live preview and one-click presets; save an embed once and reuse it as `[foliora id="1"]` or with the block.
+
+**SEO and search**
+
+* PDF text is extracted in your browser from Foliora → Docs & Features and stored on your site, so posts and pages that embed a PDF match in WordPress search.
+* Open Graph and Twitter image from the PDF's first page, unless an SEO plugin already provides one.
+* Schema.org DigitalDocument structured data.
+* A plain link to the PDF is shown when JavaScript is off.
+
+**Accessibility**
+
+* Labelled toolbar buttons, visible keyboard focus and full keyboard control.
+* Page changes are announced to screen readers; reduced-motion preference is respected.
+* Foliora → Docs & Features marks PDFs that are not tagged for accessibility.
+
+**Builders and integrations**
+
+* Native Elementor, Divi and Beaver Builder widgets for the viewer and the library.
+* WPML and Polylang: a translated Media Library PDF is swapped in for the current language.
+* Script exclusions for WP Rocket, W3 Total Cache, Autoptimize, LiteSpeed Cache and SiteGround Optimizer, so PDF.js is not minified, combined or delayed.
+
+**Developer friendly**
+
+* Public filters and actions, and DOM events such as `foliora:ready` and `foliora:pagechange`, documented in `docs/HOOKS.md`.
+* WP-CLI: `wp foliora status`, `wp foliora reindex`, `wp foliora clear_cache`.
+* Clean uninstall: settings and Foliora data are removed, your media is kept.
+
+= External services =
+
+Foliora does not contact any server on its own. It has no analytics, no licence check, no update ping and no remote scripts, fonts or images. The visitor's browser opens an outside address only when the visitor clicks one of these links:
+
+* **Share dialog (X, Facebook, LinkedIn, WhatsApp)** – the "Share" button in the viewer builds share links. Nothing is sent until the visitor clicks one; then the address of the current page (optionally with the page number) and, for X and WhatsApp, the document title are passed to that network in the link:
+  * X (Twitter), `twitter.com/intent/tweet` – [Terms](https://twitter.com/en/tos), [Privacy](https://twitter.com/en/privacy)
+  * Facebook, `facebook.com/sharer/sharer.php` – [Terms](https://www.facebook.com/terms.php), [Privacy](https://www.facebook.com/privacy/policy/)
+  * LinkedIn, `linkedin.com/sharing/share-offsite` – [Terms](https://www.linkedin.com/legal/user-agreement), [Privacy](https://www.linkedin.com/legal/privacy-policy)
+  * WhatsApp, `api.whatsapp.com/send` – [Terms](https://www.whatsapp.com/legal/terms-of-service), [Privacy](https://www.whatsapp.com/legal/privacy-policy)
+* **Email share** uses a `mailto:` link and opens the visitor's own email program; no server is involved.
+* **"Powered by Foliora" credit** – off by default. If an administrator turns it on under Foliora → Settings → Credit link, a normal link to https://thereadscope.com/foliora is shown under each viewer. The plugin sends nothing there; the visitor's browser makes an ordinary page request only if the link is clicked.
+* **PDFs hosted on another domain** – if you embed a PDF from another website, the visitor's browser downloads it directly from that host, which receives the visitor's IP address. PDFs in your own Media Library are served by your own site.
+
+= Third-party libraries =
+
+* **PDF.js 3.11.174** by Mozilla – Apache License 2.0. Bundled in `assets/vendor/pdfjs/` as `pdf.min.js` and `pdf.worker.min.js`, the official minified build from the `pdfjs-dist` 3.11.174 release. Upstream project: https://github.com/mozilla/pdf.js – the human-readable source for this version is at https://github.com/mozilla/pdf.js/tree/v3.11.174. Licence text: https://www.apache.org/licenses/LICENSE-2.0
+* No other third-party library is bundled. The plugin's own JavaScript and CSS are shipped unminified.
 
 == Installation ==
 
-1. Upload the `foliora` folder to `/wp-content/plugins/`.
-2. Activate the plugin through the Plugins screen. You will land on the Foliora dashboard.
-3. Upload a PDF in Media, or open Foliora → Documents.
-4. Copy a shortcode, create a test page, or insert the Foliora Viewer block.
+1. Upload the `foliora` folder to `/wp-content/plugins/`, or install the plugin from the Plugins screen.
+2. Activate the plugin. You will land on the Foliora dashboard.
+3. Upload a PDF in Media, or open Foliora → Docs & Features.
+4. Copy a shortcode, create a test page, or insert the "Foliora Viewer" block in the editor.
 
 == Frequently Asked Questions ==
 
 = Does this send my documents to a third-party server? =
 
-No. Rendering happens in the visitor’s browser with the PDF.js library bundled in this plugin.
+No. Rendering happens in the visitor's browser with the PDF.js library bundled in this plugin. See "External services" above for the few links that open outside sites only when clicked.
 
-= How do I enable 3D FlipBook mode? =
+= How do I use the 3D flipbook? =
 
-Use `[foliora file="https://example.com/document.pdf" view="flip"]` in shortcodes, choose "3D FlipBook" from the View dropdown in the Gutenberg block settings, or click "View Mode" inside the toolbar More Tools (⋮) menu.
+Use `[foliora file="https://example.com/document.pdf" view="flip"]`, choose "3D FlipBook" in the View setting of the Foliora Viewer block, or switch the view from the More tools menu in the toolbar. On narrow screens (under 640 px) it shows a single page.
 
-= Does it support EPUB? =
+= Shortcode or block - which should I use? =
 
-EPUB rendering is a Foliora Pro feature. The free plugin handles PDF only.
+They render the same viewer. Use the block in the editor if you want a file picker and first-page preview. Use `[foliora file="..."]` in the classic editor, widgets or PHP templates. Elementor, Divi and Beaver Builder have Foliora Viewer and Foliora Library widgets that use the same renderer.
 
-= Shortcode or block — which should I use? =
+= Can I save an embed and reuse it? =
 
-They render the same viewer. Use the block in the editor if you want a file picker and first-page preview. Use `[foliora file="…"]` in classic editor, widgets, or PHP templates. Elementor, Divi, and Beaver Builder each have Foliora Viewer and Foliora Library widgets that use the same renderer.
+Yes. Build it in Foliora → Shortcode Builder, save it, and use `[foliora id="1"]` or the block's saved-embed ID. Edit the saved embed later and every page that uses it updates.
 
 = Does it work with WPML or Polylang? =
 
-Yes. Translate the PDF in the Media Library (WPML Media Translation or Polylang’s media option). Foliora swaps the file URL to the current language’s attachment. You can also put a different PDF on each language’s page. `wpml-config.xml` ships with the plugin so the viewer block `file` and `title` attributes are translatable.
+Yes. Translate the PDF in the Media Library (WPML Media Translation or Polylang's media option). Foliora swaps the file URL to the current language's attachment. You can also put a different PDF on each language's page. `wpml-config.xml` ships with the plugin so the block's `file` and `title` attributes are translatable.
 
 = The viewer is blank after enabling a cache plugin =
 
-Foliora excludes its PDF.js scripts from minify/combine/delay in WP Rocket, W3 Total Cache, Autoptimize, LiteSpeed Cache, and SiteGround Optimizer, and marks those tags `data-no-optimize`. If another optimizer still concatenates them, add `foliora-viewer.js`, `pdf.min.js`, and `pdf.worker.min.js` to that plugin’s exclude list.
+Foliora excludes its PDF.js scripts from minify, combine and delay in WP Rocket, W3 Total Cache, Autoptimize, LiteSpeed Cache and SiteGround Optimizer, and marks those tags `data-no-optimize`. If another optimizer still concatenates them, add `foliora-viewer.js`, `pdf.min.js` and `pdf.worker.min.js` to that plugin's exclude list.
 
 = A PDF loads on my own site but fails from another domain =
 
@@ -90,19 +132,19 @@ The file URL must allow the page origin to fetch it. Cross-origin PDFs need CORS
 
 = Large PDFs feel slow =
 
-Foliora draws the visible page (or a two-page spread). Continuous scroll lazy-renders nearby pages. Very large files still need to be downloaded once. Keep uploads reasonably sized when you can.
+Foliora draws the visible page (or a two-page spread). Continuous scroll renders nearby pages only. Very large files still need to be downloaded once, so keep uploads reasonably sized when you can.
 
 = How do I show a gallery of all my PDFs? =
 
-Add `[foliora_library]` to a page, or insert the Foliora Library block. Visitors see a grid of Media Library PDFs and can open any document in the Foliora viewer without leaving the page. Optional attributes: `columns`, `per_page`, `orderby` (`date`, `title`, or `modified`), `order` (`ASC` or `DESC`), and `search` (`true` or `false`).
+Add `[foliora_library]` to a page, or insert the Foliora Library block. Visitors see a grid of Media Library PDFs and can open any document in the Foliora viewer without leaving the page. Optional attributes: `columns`, `per_page`, `orderby` (`date`, `title` or `modified`), `order` (`ASC` or `DESC`) and `search` (`true` or `false`).
 
 = How do library thumbnails get generated? =
 
-The first time you open Foliora → Documents, the plugin draws each PDF’s first page in the browser (bundled PDF.js) and saves a PNG in the Media Library, parented to that PDF. After that, the gallery reuses the stored image. Visit Documents at least once per new PDF so its thumbnail can be created. Thumbnails are not regenerated on every page load.
+The first time you open Foliora → Docs & Features, the plugin draws each PDF's first page in your browser (bundled PDF.js) and saves a PNG in the Media Library, parented to that PDF. After that the library reuses the stored image. Thumbnails are not regenerated on every page load.
 
-= What does “Untagged” mean on Documents? =
+= What does "Untagged" mean on the Documents list? =
 
-The PDF has no accessibility tags (its MarkInfo dictionary is not marked). Screen readers may miss headings and reading order. Export a tagged PDF from Word, InDesign, or Acrobat. Foliora does not rewrite the file. You can turn the check off under Foliora → Settings → Search and sharing.
+The PDF has no accessibility tags (its MarkInfo dictionary is not marked). Screen readers may miss headings and reading order. Export a tagged PDF from Word, InDesign or Acrobat. Foliora does not rewrite the file. You can turn the check off under Foliora → Settings → Search and sharing.
 
 = Does Foliora include translations? =
 
@@ -110,53 +152,86 @@ Yes. A Bengali (`bn_BD`) translation ships in the plugin. If a language pack fro
 
 = Does WordPress search find text inside PDFs? =
 
-Yes. Opening Foliora → Documents extracts text from each PDF (same visit that generates thumbnails) and stores it so posts and pages that embed those files match in the site search. The document library search uses that text too. Password-protected or scanned image-only PDFs are skipped. Turn it off under Foliora → Settings → Search and sharing.
+Yes. Opening Foliora → Docs & Features extracts text from each PDF (the same visit that generates thumbnails) and stores it so posts and pages that embed those files match in the site search. The library search uses that text too. Password-protected PDFs are skipped, and scanned image-only PDFs have no text to find. Turn it off under Foliora → Settings → Search and sharing.
 
 = Why does a shared page show a PDF cover image? =
 
-If the page embeds a Foliora PDF and a first-page thumbnail exists, Foliora adds Open Graph and Twitter image tags using that cover. If Yoast, Rank Math, or a similar SEO plugin already set an image, Foliora does not override it. You can disable this under Settings.
+If the page embeds a Foliora PDF and a first-page thumbnail exists, Foliora adds Open Graph and Twitter image tags using that cover. If Yoast SEO, Rank Math or a similar SEO plugin already sets an image, Foliora does not override it. You can disable this under Foliora → Settings.
 
 = How do I hide download or print? =
 
-Foliora → Settings has checkboxes for the site default. A single embed can override with `[foliora file="…" download="false" print="false"]`, or the matching toggles on the Foliora Viewer block.
+Foliora → Settings has checkboxes for the site default. A single embed can override with `[foliora file="..." download="false" print="false"]`, or use the matching toggles on the block. The `hide` attribute hides other controls, for example `hide="share,fullscreen"`.
 
 = Can I open the viewer on a specific page? =
 
-Yes. Use `[foliora file="…" page="4"]`, set Start page on the block, or link to the page with `#page=4`.
+Yes. Use `[foliora file="..." page="4"]`, set Start page on the block, or link to the page with `#page=4`.
 
-= How do I hide “Powered by Foliora”? =
+= Does Foliora show a "Powered by" link? =
 
-That credit is part of the free plugin. Foliora Pro can turn it off under Foliora → Settings.
+No, not unless you ask for it. The credit link is off by default. If you would like to support the plugin, tick Foliora → Settings → Credit link and a small "Powered by Foliora" link appears under each viewer.
 
 = Does the free plugin collect analytics? =
 
-No. There is no tracking pixel, no remote API, and no phone-home. Foliora Pro has an optional reading-analytics feature; the free plugin does not.
+No. There is no tracking pixel, no remote API and no phone-home. See the Privacy section for what is stored.
+
+= Where do I get support or report a bug? =
+
+Use the support forum at https://wordpress.org/support/plugin/foliora/ or open an issue on GitHub: https://github.com/itsmanzur/foliora/issues
 
 == Developer Hooks ==
 
-Foliora Pro (and any third-party add-on) extends the viewer through public WordPress filters and actions — no Pro code lives in this plugin. The full list, parameters, and copy-paste examples are in `docs/HOOKS.md` inside the plugin folder.
+Add-ons can extend the viewer through public WordPress filters and actions. The full list, parameters and copy-paste examples are in `docs/HOOKS.md` in the GitHub repository: https://github.com/itsmanzur/foliora/blob/main/docs/HOOKS.md
 
 == Screenshots ==
 
-1. Front-end viewer with a compact toolbar (page, zoom, find, download, print, fullscreen).
-2. Foliora dashboard: setup checklist and shortcode builder.
-3. Documents screen listing Media Library PDFs, with first-page preview thumbnails.
-4. Settings with a live width/height preview of the viewer.
-5. Gutenberg “Foliora Viewer” block with a Media Library picker and first-page canvas preview.
-6. Front-end document library grid (`[foliora_library]`) expanding a PDF in place.
+1. Front-end viewer with the compact toolbar (page, zoom, find, theme, share, fullscreen).
+2. The 3D flipbook view.
+3. Foliora dashboard with the setup checklist.
+4. Shortcode Builder with live preview and saved embeds.
+5. Docs & Features screen listing Media Library PDFs with previews and search/accessibility status.
+6. Settings with a live width and height preview.
+7. Gutenberg "Foliora Viewer" block with a Media Library picker and first-page preview.
+8. Front-end document library grid (`[foliora_library]`).
+
+== Privacy ==
+
+Foliora does not collect any visitor data, sets no cookies, and has no analytics or tracking. The plugin has no remote requests of its own (see "External services").
+
+What the plugin stores on your site:
+
+* **Settings** – one option, `foliora_settings`.
+* **Saved embeds** – a private custom post type, `foliora_embed`, with the embed's configuration in post meta.
+* **PDF data** – post meta on your PDF attachments (extracted text, page count, indexed flag, accessibility flag, thumbnail ID) and a combined search index on posts and pages that embed a PDF.
+* **Thumbnails** – first-page PNG images generated in your browser and saved in the Media Library.
+* **Admin notice state** – one user meta value per administrator who dismisses the welcome notice, and a short-lived transient used for the redirect after activation.
+
+In the visitor's own browser, Foliora uses `localStorage` (not cookies) to remember the last page read (`foliora:page:<file URL>`) and the chosen reading theme (`foliora_theme`). These values never leave the browser, and the visitor can clear them at any time.
+
+The share feature only builds links; it contacts no one until the visitor clicks a link.
+
+Deleting the plugin from the Plugins screen removes the settings, saved embeds, Foliora post and user meta, the transient and the thumbnails it generated. Your uploaded PDFs and other media are kept.
+
+== Credits ==
+
+Foliora is developed and maintained by itsmanzur.
+
+Source code: https://github.com/itsmanzur/foliora
+Website: https://thereadscope.com/foliora
+PDF.js by Mozilla (Apache-2.0).
+
+Support / Bug reports: https://wordpress.org/support/plugin/foliora/ and https://github.com/itsmanzur/foliora/issues
 
 == Changelog ==
 
 = 1.0.0 =
-* Initial release: PDF viewer with bundled PDF.js, shortcode, and Gutenberg block.
-* Page, continuous scroll, two-page spread, and 3D FlipBook mode with realistic paper turn sound effect.
-* Direct PDF URL oEmbed auto-embed handler and attachment page auto-embed.
-* Smart CORS error diagnostics and fallback card.
-* Streamlined toolbar with More Tools (⋮) popup menu.
-* Compact mobile toolbar, guest last-page resume, `#page=` deep links, and password-protected PDFs.
-* Documents library, `[foliora_library]` grid, first-page thumbnails, and site search inside PDFs.
-* Elementor, Divi, and Beaver Builder widgets; WPML / Polylang PDF swapping; Bengali (bn_BD) translation.
-* Public hooks so Foliora Pro (and other add-ons) can extend the viewer without modifying this plugin.
+* Initial release.
+* PDF viewer with a bundled PDF.js build, shortcode, Gutenberg block and direct PDF URL embed.
+* Page, continuous scroll, two-page spread and 3D flipbook views; light, dark and sepia themes.
+* Document library shortcode and block, Shortcode Builder with saved embeds, and a Docs & Features screen.
+* PDF text search in WordPress search, Open Graph image and structured data.
+* Accessibility: keyboard control, screen reader announcements and tagged-PDF check.
+* Elementor, Divi and Beaver Builder widgets; WPML and Polylang support; Bengali translation.
+* Public hooks and WP-CLI commands for developers.
 
 == Upgrade Notice ==
 

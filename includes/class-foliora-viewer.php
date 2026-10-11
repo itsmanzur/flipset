@@ -58,7 +58,7 @@ class Foliora_Viewer {
 				'file'         => '',
 				'width'        => $settings['default_width'] ?? '100%',
 				'height'       => $settings['default_height'] ?? '600px',
-				'mode'         => 'pdf', // 'pdf' (free) or 'epub' (Pro-only).
+				'mode'         => 'pdf', // Reserved for add-ons: read it in foliora/pre_render_viewer.
 				'page'         => '1',
 				'title'        => '',
 				'theme'        => $settings['default_theme'] ?? 'light',
@@ -83,10 +83,12 @@ class Foliora_Viewer {
 		/**
 		 * Filter: foliora/viewer_atts
 		 *
-		 * Override resolved shortcode/block attributes (file, width, height,
-		 * mode, page, title, download, print, hash, view, resume) without replacing the
+		 * Override resolved shortcode/block attributes (every key of the
+		 * shortcode_atts() list: id, file, width, height, mode, page, title, theme,
+		 * download, print, search, theme_btn, share, shortcuts, presentation,
+		 * fullscreen, loading, hide, hash, view, resume) without replacing the
 		 * entire viewer. Runs after defaults are applied and before the
-		 * empty-file / EPUB-lock checks.
+		 * empty-file check. See docs/HOOKS.md for the value lists.
 		 *
 		 * @param array $atts Resolved attributes.
 		 */
@@ -99,17 +101,11 @@ class Foliora_Viewer {
 			return $this->admin_notice( __( 'Foliora: no file URL was provided. Use [foliora file="https://example.com/document.pdf"].', 'foliora' ) );
 		}
 
-		// EPUB is a Pro-only rendering mode — free plugin ships zero EPUB
-		// parsing code, just this lock screen.
-		if ( 'epub' === $atts['mode'] && ! Foliora_Loader::is_feature_enabled( 'epub_reader' ) ) {
-			return $this->locked_feature_notice( 'epub_reader' );
-		}
-
 		/**
 		 * Filter: foliora/pre_render_viewer
 		 *
-		 * Lets Foliora Pro take over rendering completely — e.g. an EPUB
-		 * viewer, or the same PDF viewer wrapped in its bookmark/theme
+		 * Lets an add-on take over rendering completely — e.g. an EPUB
+		 * viewer, or the same PDF viewer wrapped in its bookmark / reader
 		 * toolbar — without this free class needing to know Pro's
 		 * internals. Return any non-null value to short-circuit the
 		 * default PDF.js output below.
@@ -129,8 +125,8 @@ class Foliora_Viewer {
 		/**
 		 * Action: foliora/before_viewer
 		 *
-		 * Foliora Pro can hook here to inject a toolbar (bookmarks, theme
-		 * switcher, etc.) above the base viewer without free plugin code
+		 * Foliora Pro can hook here to inject a toolbar (bookmarks, reader
+		 * fonts, etc.) above the base viewer without free plugin code
 		 * needing to know Pro exists beyond this hook.
 		 */
 		ob_start();
@@ -161,7 +157,8 @@ class Foliora_Viewer {
 		$is_lazy = 'lazy' === strtolower( (string) ( $atts['loading'] ?? 'eager' ) );
 
 		$branding = '';
-		if ( apply_filters( 'foliora/show_branding', true ) ) {
+		// Off by default (WordPress.org guideline 10); an administrator opts in under Foliora → Settings.
+		if ( apply_filters( 'foliora/show_branding', ! empty( $settings['show_branding'] ) ) ) {
 			$branding = sprintf(
 				'<p class="foliora-branding"><a href="%1$s" target="_blank" rel="noopener noreferrer">%2$s</a></p>',
 				esc_url( 'https://thereadscope.com/foliora' ),
@@ -217,7 +214,7 @@ class Foliora_Viewer {
 	}
 
 	/**
-	 * Chrome for the free PDF viewer. Pro's bookmark/theme bar is
+	 * Chrome for the free PDF viewer. Pro's bookmark / reader bar is
 	 * printed into the same .foliora-chrome row via foliora/before_viewer.
 	 *
 	 * @param string $instance_id Viewer element id.
@@ -586,6 +583,49 @@ class Foliora_Viewer {
 	}
 
 	/**
+	 * Version of the bundled assets/vendor/pdfjs build. The capture snippet only
+	 * accepts a global with this exact version as "ours", so a different
+	 * plugin's PDF.js is never mistaken for Foliora's. Update it together with
+	 * the vendor files.
+	 */
+	const PDFJS_VERSION = '3.11.174';
+
+	/**
+	 * Run just BEFORE the bundle: remember whatever PDF.js another plugin
+	 * already put on the page, because the bundle assigns window.pdfjsLib
+	 * unconditionally.
+	 */
+	const PDFJS_BEFORE = '(function(w){var f=w.Foliora=w.Foliora||{};f._prevPdfjs={g:w.pdfjsLib,u:w["pdfjs-dist/build/pdf"]};})(window);';
+
+	/**
+	 * Run just AFTER the bundle: keep a private reference to our own PDF.js
+	 * (window.Foliora.pdfjsLib) and put window.pdfjsLib back exactly as it was
+	 * before our bundle ran (another plugin's PDF.js, or unset). Foliora then
+	 * leaves no global footprint and other plugins that look for a global
+	 * PDF.js load their own. Each bundle is self-contained, so nothing is shared.
+	 */
+	const PDFJS_AFTER = '(function(w){var f=w.Foliora=w.Foliora||{},p=f._prevPdfjs||{},c=w.pdfjsLib,k="pdfjs-dist/build/pdf";delete f._prevPdfjs;if(!f.pdfjsLib&&c&&c!==p.g&&c.version==="' . self::PDFJS_VERSION . '"){f.pdfjsLib=c;if(p.g){w.pdfjsLib=p.g;}else{try{delete w.pdfjsLib;}catch(e){w.pdfjsLib=undefined;}}if(p.u){w[k]=p.u;}else{try{delete w[k];}catch(e){w[k]=undefined;}}}})(window);';
+
+	/**
+	 * Register the bundled PDF.js once, with the capture snippets attached.
+	 * Safe to call from any enqueue path; later calls are no-ops.
+	 */
+	public static function register_pdfjs() {
+		if ( wp_script_is( 'foliora-pdfjs', 'registered' ) ) {
+			return;
+		}
+		wp_register_script(
+			'foliora-pdfjs',
+			FOLIORA_URL . 'assets/vendor/pdfjs/pdf.min.js',
+			array(),
+			FOLIORA_VERSION,
+			true
+		);
+		wp_add_inline_script( 'foliora-pdfjs', self::PDFJS_BEFORE, 'before' );
+		wp_add_inline_script( 'foliora-pdfjs', self::PDFJS_AFTER, 'after' );
+	}
+
+	/**
 	 * Enqueue the bundled PDF.js build + our thin wrapper script once per
 	 * request.
 	 */
@@ -602,13 +642,8 @@ class Foliora_Viewer {
 			FOLIORA_VERSION
 		);
 
-		wp_enqueue_script(
-			'foliora-pdfjs',
-			FOLIORA_URL . 'assets/vendor/pdfjs/pdf.min.js',
-			array(),
-			FOLIORA_VERSION,
-			true
-		);
+		self::register_pdfjs();
+		wp_enqueue_script( 'foliora-pdfjs' );
 
 		wp_enqueue_script(
 			'foliora-viewer',
@@ -629,27 +664,6 @@ class Foliora_Viewer {
 		);
 	}
 
-
-	/**
-	 * Small inline "upgrade to unlock" block, shown in place of a locked
-	 * feature. Deliberately plain-styled so it never looks broken even
-	 * if foliora-viewer.css fails to load.
-	 *
-	 * @param string $feature_key
-	 * @return string
-	 */
-	private function locked_feature_notice( $feature_key ) {
-		$features = Foliora_Loader::pro_features();
-		$label    = $features[ $feature_key ] ?? $feature_key;
-
-		return sprintf(
-			'<div class="foliora-locked"><p><strong>%1$s</strong> %2$s <a href="%3$s" target="_blank" rel="noopener noreferrer">%4$s</a></p></div>',
-			esc_html( $label ),
-			esc_html__( 'is a Foliora Pro feature.', 'foliora' ),
-			esc_url( Foliora_Loader::upgrade_url() ),
-			esc_html__( 'Upgrade to unlock', 'foliora' )
-		);
-	}
 
 	private function admin_notice( $message ) {
 		if ( ! current_user_can( 'edit_posts' ) ) {

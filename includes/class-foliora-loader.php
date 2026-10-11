@@ -11,10 +11,10 @@
  *   1. Foliora Pro fires `do_action( 'foliora/pro_loaded' )` on its own
  *      `plugins_loaded` (priority 5, i.e. before Foliora free boots at 20).
  *   2. Foliora Pro also defines the constant FOLIORA_PRO_VERSION.
- *   3. Foliora free never ships any Pro *code* — only locked UI. Actual
- *      EPUB rendering, bookmarks, reading-progress, gating, etc. live
- *      entirely inside the Pro plugin and hook into filters/actions that
- *      Foliora free exposes (see class-foliora-viewer.php).
+ *   3. Foliora free never ships any Pro code and shows no locked or
+ *      upsell UI. Anything an add-on adds lives entirely inside that
+ *      plugin and hooks into the filters/actions Foliora free exposes
+ *      (see class-foliora-viewer.php and docs/HOOKS.md).
  *
  * @package Foliora
  */
@@ -75,41 +75,12 @@ class Foliora_Loader {
 	}
 
 	/**
-	 * Convenience helper for admin/UI code: returns the URL to send
-	 * people to when they click an "Upgrade to Pro" lock.
+	 * Whether a single named add-on feature is enabled on this site.
+	 * An add-on hooks `foliora/feature_enabled` and returns true for the
+	 * features the site's license includes. Always false while no add-on is
+	 * active.
 	 *
-	 * @return string
-	 */
-	public static function upgrade_url() {
-		return apply_filters( 'foliora/upgrade_url', 'https://thereadscope.com/foliora/pricing' );
-	}
-
-	/**
-	 * Central list of Pro-only feature flags. Keeping this in one array
-	 * means the admin locked-feature UI and the viewer's capability
-	 * checks never drift out of sync with each other.
-	 *
-	 * @return array<string,string> feature_key => human label
-	 */
-	public static function pro_features() {
-		return array(
-			'epub_reader'      => __( 'EPUB reader mode', 'foliora' ),
-			'bookmarks'        => __( 'Bookmarks & reading progress', 'foliora' ),
-			'reader_themes'    => __( 'Reader font & custom color themes', 'foliora' ),
-			'protected_links'  => __( 'Password-protected / expiring links', 'foliora' ),
-			'woocommerce_gate' => __( 'WooCommerce paid-content gating', 'foliora' ),
-			'analytics'        => __( 'Reading analytics', 'foliora' ),
-			'remove_branding'  => __( 'Remove Foliora branding', 'foliora' ),
-		);
-	}
-
-	/**
-	 * Whether a single named Pro feature is unlocked on this site.
-	 * Foliora Pro should hook `foliora/feature_enabled` and return true
-	 * for whichever features the user's license tier includes; until
-	 * then, every feature is locked once Pro is merely installed.
-	 *
-	 * @param string $feature_key One of the keys from pro_features().
+	 * @param string $feature_key Feature key chosen by the add-on.
 	 * @return bool
 	 */
 	public static function is_feature_enabled( $feature_key ) {

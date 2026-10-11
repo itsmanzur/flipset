@@ -35,14 +35,15 @@
 		useEffect(
 			function () {
 				var canvas = canvasRef.current;
-				if ( ! props.file || ! canvas || typeof window.pdfjsLib === 'undefined' ) {
+				var pdfjs = ( window.Foliora && window.Foliora.pdfjsLib ) || window.pdfjsLib;
+				if ( ! props.file || ! canvas || ! pdfjs ) {
 					return undefined;
 				}
 
 				var cancelled = false;
-				window.pdfjsLib.GlobalWorkerOptions.workerSrc = config.workerSrc;
+				pdfjs.GlobalWorkerOptions.workerSrc = config.workerSrc;
 
-				window.pdfjsLib
+				pdfjs
 					.getDocument( props.file )
 					.promise.then( function ( pdf ) {
 						return pdf.getPage( 1 );

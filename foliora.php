@@ -1,17 +1,17 @@
 <?php
 /**
- * Plugin Name:       Foliora – PDF Viewer, 3D Flipbook & Document Library
- * Plugin URI:         https://thereadscope.com/foliora
- * Description:        Fast, accessible PDF viewer with 3D flipbook, document library and PDF text search. Gutenberg, Elementor, Divi & Beaver Builder ready. Clean upgrade path to Foliora Pro for EPUB, bookmarks, reading progress, and protected links.
- * Version:            1.0.0
- * Requires at least:  6.0
- * Requires PHP:       7.4
- * Author:             The Read Scope
- * Author URI:         https://thereadscope.com
- * License:             GPL v2 or later
- * License URI:        https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:        foliora
- * Domain Path:        /languages
+ * Plugin Name:       Foliora – PDF Viewer, PDF Embed, 3D Flipbook & Document Library
+ * Plugin URI:        https://thereadscope.com/foliora
+ * Description:       Embed PDFs with a fast PDF viewer, 3D flipbook and document library. Searchable PDF text, accessible, no CDN. Gutenberg, Elementor, Divi ready.
+ * Version:           1.0.0
+ * Requires at least: 6.0
+ * Requires PHP:      7.4
+ * Author:            The Read Scope
+ * Author URI:        https://thereadscope.com
+ * License:           GPLv2 or later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:       foliora
+ * Domain Path:       /languages
  *
  * @package Foliora
  */
