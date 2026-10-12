@@ -53,9 +53,10 @@ msgstr "মিডিয়া লাইব্রেরির PDF-এর এক�
 
 #: includes/builders/class-foliora-beaver-library.php:19
 #: includes/builders/class-foliora-beaver-viewer.php:19
-#: includes/class-foliora-admin.php:71
 #: includes/class-foliora-admin.php:72
-#: includes/class-foliora-admin.php:791
+#: includes/class-foliora-admin.php:73
+#: includes/class-foliora-admin.php:683
+#: includes/class-foliora-admin.php:1503
 #: includes/class-foliora-builders.php:36
 msgid "Foliora"
 msgstr "Foliora"
@@ -103,7 +104,7 @@ msgstr "সাজানো"
 
 #: includes/builders/class-foliora-divi-library.php:77
 #: includes/builders/class-foliora-elementor-library.php:77
-#: includes/class-foliora-admin.php:1675
+#: includes/class-foliora-admin.php:2208
 #: includes/class-foliora-builders.php:198
 #: assets/js/foliora-library-block.js:55
 msgid "Date"
@@ -156,7 +157,7 @@ msgstr "সার্চ বক্স"
 #: includes/builders/class-foliora-elementor-library.php:102
 #: includes/builders/class-foliora-elementor-viewer.php:103
 #: includes/builders/class-foliora-elementor-viewer.php:115
-#: includes/class-foliora-admin.php:1924
+#: includes/class-foliora-admin.php:2485
 #: includes/class-foliora-builders.php:146
 #: includes/class-foliora-builders.php:155
 #: includes/class-foliora-builders.php:217
@@ -169,8 +170,8 @@ msgstr "দেখান"
 #: includes/builders/class-foliora-elementor-library.php:103
 #: includes/builders/class-foliora-elementor-viewer.php:104
 #: includes/builders/class-foliora-elementor-viewer.php:116
-#: includes/class-foliora-admin.php:1924
-#: includes/class-foliora-admin.php:1925
+#: includes/class-foliora-admin.php:2485
+#: includes/class-foliora-admin.php:2486
 #: includes/class-foliora-builders.php:147
 #: includes/class-foliora-builders.php:156
 #: includes/class-foliora-builders.php:218
@@ -179,7 +180,7 @@ msgstr "লুকান"
 
 #: includes/builders/class-foliora-divi-viewer.php:45
 #: includes/builders/class-foliora-elementor-viewer.php:38
-#: includes/class-foliora-admin.php:2065
+#: includes/class-foliora-admin.php:2616
 #: includes/class-foliora-builders.php:103
 msgid "Document"
 msgstr "ডকুমেন্ট"
@@ -239,14 +240,16 @@ msgstr "উচ্চতা"
 
 #: includes/builders/class-foliora-divi-viewer.php:92
 #: includes/builders/class-foliora-elementor-viewer.php:101
-#: includes/class-foliora-admin.php:310
+#: includes/class-foliora-admin.php:346
+#: includes/class-foliora-admin.php:1053
 #: includes/class-foliora-builders.php:143
 msgid "Download button"
 msgstr "ডাউনলোড বাটন"
 
 #: includes/builders/class-foliora-divi-viewer.php:103
 #: includes/builders/class-foliora-elementor-viewer.php:113
-#: includes/class-foliora-admin.php:318
+#: includes/class-foliora-admin.php:354
+#: includes/class-foliora-admin.php:1059
 #: includes/class-foliora-builders.php:152
 msgid "Print button"
 msgstr "প্রিন্ট বাটন"
@@ -257,9 +260,9 @@ msgstr "মিডিয়া লাইব্রেরি থেকে একট
 
 #: includes/class-foliora-a11y.php:72
 #: includes/class-foliora-a11y.php:87
-#: includes/class-foliora-admin.php:2901
-#: includes/class-foliora-admin.php:2917
-#: includes/class-foliora-admin.php:2980
+#: includes/class-foliora-admin.php:3452
+#: includes/class-foliora-admin.php:3468
+#: includes/class-foliora-admin.php:3531
 #: includes/class-foliora-seo.php:69
 #: includes/class-foliora-seo.php:84
 #: includes/class-foliora-thumbnails.php:59
@@ -277,1763 +280,1922 @@ msgstr "PDF অ্যাকসেসিবিলিটি চেক বন্ধ
 msgid "That file is not a PDF attachment."
 msgstr "ওই ফাইলটি একটি PDF অ্যাটাচমেন্ট নয়।"
 
-#: includes/class-foliora-admin.php:82
+#: includes/class-foliora-admin.php:83
 msgid "Foliora Dashboard"
 msgstr "Foliora ড্যাশবোর্ড"
 
-#: includes/class-foliora-admin.php:83
+#: includes/class-foliora-admin.php:84
 msgid "Dashboard"
 msgstr "ড্যাশবোর্ড"
 
-#: includes/class-foliora-admin.php:91
+#: includes/class-foliora-admin.php:92
 msgid "Foliora Shortcode Builder"
 msgstr "Foliora শর্টকোড বিল্ডার"
 
-#: includes/class-foliora-admin.php:92
-#: includes/class-foliora-admin.php:834
-#: includes/class-foliora-admin.php:1260
-#: includes/class-foliora-admin.php:1934
+#: includes/class-foliora-admin.php:93
+#: includes/class-foliora-admin.php:726
+#: includes/class-foliora-admin.php:1793
+#: includes/class-foliora-admin.php:2495
 msgid "Shortcode Builder"
 msgstr "শর্টকোড বিল্ডার"
 
-#: includes/class-foliora-admin.php:100
+#: includes/class-foliora-admin.php:101
 msgid "Foliora Docs & Features"
 msgstr "Foliora ডক্স ও ফিচার"
 
-#: includes/class-foliora-admin.php:101
-#: includes/class-foliora-admin.php:837
-#: includes/class-foliora-admin.php:1877
+#: includes/class-foliora-admin.php:102
+#: includes/class-foliora-admin.php:729
+#: includes/class-foliora-admin.php:2438
 msgid "Docs & Features"
 msgstr "ডক্স ও ফিচার"
 
-#: includes/class-foliora-admin.php:109
-#: includes/class-foliora-admin.php:1103
+#: includes/class-foliora-admin.php:110
 msgid "Foliora Settings"
 msgstr "Foliora সেটিংস"
 
-#: includes/class-foliora-admin.php:110
+#: includes/class-foliora-admin.php:111
+#: includes/class-foliora-admin.php:1505
+#: includes/class-foliora-admin.php:1508
 msgid "Settings"
 msgstr "সেটিংস"
 
-#: includes/class-foliora-admin.php:208
-#: includes/class-foliora-admin.php:2133
+#: includes/class-foliora-admin.php:218
+#: includes/class-foliora-admin.php:2684
 msgid "Indexed"
 msgstr "ইনডেক্সড"
 
-#: includes/class-foliora-admin.php:209
-#: includes/class-foliora-admin.php:2135
+#: includes/class-foliora-admin.php:219
+#: includes/class-foliora-admin.php:2686
 msgid "No text"
 msgstr "টেক্সট নেই"
 
-#: includes/class-foliora-admin.php:210
-#: includes/class-foliora-admin.php:2144
+#: includes/class-foliora-admin.php:220
+#: includes/class-foliora-admin.php:2695
 msgid "Tagged"
 msgstr "ট্যাগড"
 
-#: includes/class-foliora-admin.php:211
-#: includes/class-foliora-admin.php:2149
+#: includes/class-foliora-admin.php:221
+#: includes/class-foliora-admin.php:2700
 msgid "Untagged"
 msgstr "আনট্যাগড"
 
-#: includes/class-foliora-admin.php:212
-#: includes/class-foliora-admin.php:2148
+#: includes/class-foliora-admin.php:222
+#: includes/class-foliora-admin.php:2699
 msgid "This PDF has no accessibility tags. Export it from Word, InDesign, or Acrobat as a tagged PDF so screen readers can follow headings and reading order."
 msgstr "এই PDF-এ অ্যাকসেসিবিলিটি ট্যাগ নেই। স্ক্রিন রিডার যেন শিরোনাম ও পড়ার ক্রম অনুসরণ করতে পারে, Word, InDesign বা Acrobat থেকে ট্যাগড PDF হিসেবে এক্সপোর্ট করুন।"
 
-#: includes/class-foliora-admin.php:213
-#: includes/class-foliora-admin.php:2144
+#: includes/class-foliora-admin.php:223
+#: includes/class-foliora-admin.php:2695
 msgid "Tagged PDF. Screen readers can follow its structure."
 msgstr "ট্যাগড পিডিএফ। স্ক্রিন রিডার এর কাঠামো অনুসরণ করতে পারে।"
 
-#: includes/class-foliora-admin.php:214
-#: includes/class-foliora-admin.php:2133
+#: includes/class-foliora-admin.php:224
+#: includes/class-foliora-admin.php:2684
 msgid "Text extracted. WordPress search can find words in this PDF."
 msgstr "টেক্সট বের করা হয়েছে। ওয়ার্ডপ্রেস সার্চ এই পিডিএফের শব্দ খুঁজে পাবে।"
 
-#: includes/class-foliora-admin.php:215
-#: includes/class-foliora-admin.php:2135
+#: includes/class-foliora-admin.php:225
+#: includes/class-foliora-admin.php:2686
 msgid "No selectable text was found (a scanned image PDF), so it cannot be searched."
 msgstr "কোনো সিলেক্টযোগ্য টেক্সট পাওয়া যায়নি (স্ক্যান করা ইমেজ পিডিএফ), তাই সার্চ করা যাবে না।"
 
-#: includes/class-foliora-admin.php:240
+#: includes/class-foliora-admin.php:250
 #: assets/js/foliora-block.js:248
 msgid "Select PDF"
 msgstr "PDF বেছে নিন"
 
-#: includes/class-foliora-admin.php:241
+#: includes/class-foliora-admin.php:251
 msgid "Use this PDF"
 msgstr "এই PDF ব্যবহার করুন"
 
-#: includes/class-foliora-admin.php:242
+#: includes/class-foliora-admin.php:252
 msgid "Copied!"
 msgstr "কপি হয়েছে!"
 
-#: includes/class-foliora-admin.php:243
+#: includes/class-foliora-admin.php:253
 msgid "Shortcode copied"
 msgstr "শর্টকোড কপি হয়েছে"
 
-#: includes/class-foliora-admin.php:244
+#: includes/class-foliora-admin.php:254
 msgid "Code snippet copied to clipboard"
 msgstr "কোড স্নিপেট ক্লিপবোর্ডে কপি হয়েছে"
 
-#: includes/class-foliora-admin.php:245
+#: includes/class-foliora-admin.php:255
 msgid "Dismissed"
 msgstr "বাতিল"
 
 #. translators: 1: completed steps, 2: total steps.
-#: includes/class-foliora-admin.php:247
-#: includes/class-foliora-admin.php:899
+#: includes/class-foliora-admin.php:257
+#: includes/class-foliora-admin.php:791
 #, php-format
 msgid "%1$s of %2$s steps complete"
 msgstr "%2$s-এর মধ্যে %1$s ধাপ সম্পন্ন"
 
-#: includes/class-foliora-admin.php:248
-#: includes/class-foliora-admin.php:896
+#: includes/class-foliora-admin.php:258
+#: includes/class-foliora-admin.php:788
 msgid "You are set. New documents go in Documents or the Media Library."
 msgstr "প্রস্তুত। নতুন ডকুমেন্ট ডকুমেন্টস বা মিডিয়া লাইব্রেরিতে যোগ করুন।"
 
-#: includes/class-foliora-admin.php:249
-#: includes/class-foliora-admin.php:1002
+#: includes/class-foliora-admin.php:259
+#: includes/class-foliora-admin.php:894
 msgid "Drop a PDF to embed it"
 msgstr "এমবেড করতে একটি PDF ফেলুন"
 
-#: includes/class-foliora-admin.php:250
+#: includes/class-foliora-admin.php:260
 msgid "Uploading…"
 msgstr "আপলোড হচ্ছে…"
 
-#: includes/class-foliora-admin.php:251
+#: includes/class-foliora-admin.php:261
 msgid "Creating page…"
 msgstr "পাতা তৈরি হচ্ছে…"
 
-#: includes/class-foliora-admin.php:252
+#: includes/class-foliora-admin.php:262
 msgid "Test page ready"
 msgstr "টেস্ট পেজ প্রস্তুত"
 
-#: includes/class-foliora-admin.php:253
+#: includes/class-foliora-admin.php:263
 msgid "Could not create the test page."
 msgstr "টেস্ট পেজ তৈরি করা যায়নি।"
 
-#: includes/class-foliora-admin.php:254
-#: includes/class-foliora-admin.php:1058
-#: includes/class-foliora-admin.php:2159
-#: includes/class-foliora-admin.php:2263
+#: includes/class-foliora-admin.php:264
+#: includes/class-foliora-admin.php:950
+#: includes/class-foliora-admin.php:2710
+#: includes/class-foliora-admin.php:2814
 msgid "Copy shortcode"
 msgstr "শর্টকোড কপি করুন"
 
-#: includes/class-foliora-admin.php:255
+#: includes/class-foliora-admin.php:265
 msgid "Please drop a PDF file."
 msgstr "অনুগ্রহ করে একটি PDF ফাইল ফেলুন।"
 
-#: includes/class-foliora-admin.php:256
+#: includes/class-foliora-admin.php:266
 msgid "Upload failed. Try the Media Library."
 msgstr "আপলোড ব্যর্থ। মিডিয়া লাইব্রেরি ব্যবহার করে দেখুন।"
 
-#: includes/class-foliora-admin.php:257
+#: includes/class-foliora-admin.php:267
 msgid "Preset applied"
 msgstr "প্রিসেট প্রয়োগ হয়েছে"
 
-#: includes/class-foliora-admin.php:258
+#: includes/class-foliora-admin.php:268
+#: includes/class-foliora-admin.php:1400
+#: includes/class-foliora-admin.php:1405
 #: includes/class-foliora-embeds.php:251
 msgid "Please select a PDF file."
 msgstr "অনুগ্রহ করে একটি PDF ফাইল বেছে নিন।"
 
-#: includes/class-foliora-admin.php:259
-#: includes/class-foliora-admin.php:1604
+#: includes/class-foliora-admin.php:269
+#: includes/class-foliora-admin.php:2137
 msgid "Select or upload a PDF above to see live interactive preview."
 msgstr "লাইভ ইন্টারেক্টিভ প্রিভিউ দেখতে উপরে একটি PDF বেছে নিন বা আপলোড করুন।"
 
-#: includes/class-foliora-admin.php:260
+#: includes/class-foliora-admin.php:270
 msgid "Saving…"
 msgstr "সংরক্ষণ হচ্ছে…"
 
-#: includes/class-foliora-admin.php:261
-#: includes/class-foliora-admin.php:1627
+#: includes/class-foliora-admin.php:271
+#: includes/class-foliora-admin.php:2160
 msgid "Update Embed & Copy"
 msgstr "এমবেড আপডেট ও কপি"
 
-#: includes/class-foliora-admin.php:262
+#: includes/class-foliora-admin.php:272
 msgid "✓ Saved! Copied"
 msgstr "✓ সংরক্ষিত! কপি হয়েছে"
 
 #. translators: %s: shortcode that was copied.
-#: includes/class-foliora-admin.php:264
+#: includes/class-foliora-admin.php:274
 #, php-format
 msgid "Saved! %s copied to clipboard."
 msgstr "সংরক্ষিত! %s ক্লিপবোর্ডে কপি হয়েছে।"
 
-#: includes/class-foliora-admin.php:265
+#: includes/class-foliora-admin.php:275
 #: includes/class-foliora-embeds.php:167
 msgid "Could not save embed."
 msgstr "এমবেড সংরক্ষণ করা যায়নি।"
 
-#: includes/class-foliora-admin.php:266
+#: includes/class-foliora-admin.php:276
 msgid "Could not create test page."
 msgstr "টেস্ট পেজ তৈরি করা যায়নি।"
 
 #. translators: %s: text that was copied.
-#: includes/class-foliora-admin.php:268
+#: includes/class-foliora-admin.php:278
 #, php-format
 msgid "Copied: %s"
 msgstr "কপি হয়েছে: %s"
 
-#: includes/class-foliora-admin.php:269
+#: includes/class-foliora-admin.php:279
 #: includes/class-foliora-embeds.php:335
 msgid "Embed duplicated successfully."
 msgstr "এমবেড সফলভাবে ডুপ্লিকেট হয়েছে।"
 
-#: includes/class-foliora-admin.php:270
+#: includes/class-foliora-admin.php:280
 msgid "Could not duplicate embed."
 msgstr "এমবেড ডুপ্লিকেট করা যায়নি।"
 
 #. translators: %s: embed ID.
-#: includes/class-foliora-admin.php:272
+#: includes/class-foliora-admin.php:282
 #, php-format
 msgid "Are you sure you want to delete this embed? Any shortcode using id=\"%s\" will no longer work."
 msgstr "আপনি কি নিশ্চিত যে এই এমবেড মুছতে চান? id=\"%s\" ব্যবহারকারী যেকোনো শর্টকোড আর কাজ করবে না।"
 
-#: includes/class-foliora-admin.php:273
+#: includes/class-foliora-admin.php:283
 #: includes/class-foliora-embeds.php:313
 msgid "Embed deleted."
 msgstr "এমবেড মোছা হয়েছে।"
 
-#: includes/class-foliora-admin.php:274
+#: includes/class-foliora-admin.php:284
 #: includes/class-foliora-embeds.php:310
 msgid "Could not delete embed."
 msgstr "এমবেড মোছা যায়নি।"
 
-#: includes/class-foliora-admin.php:287
+#. translators: 1: number of switches turned on, 2: number of switches in the section.
+#: includes/class-foliora-admin.php:307
+#, php-format
+msgid "%1$s/%2$s on"
+msgstr "%1$s/%2$s চালু"
+
+#: includes/class-foliora-admin.php:308
+msgid "Settings saved"
+msgstr "সেটিংস সংরক্ষিত হয়েছে"
+
+#: includes/class-foliora-admin.php:309
+msgid "Reset this section to the default values? Nothing is saved until you click Save changes."
+msgstr "এই সেকশন ডিফল্ট মানে ফিরিয়ে নেবেন? \"পরিবর্তন সংরক্ষণ করুন\" চাপার আগে কিছুই সংরক্ষিত হবে না।"
+
+#: includes/class-foliora-admin.php:310
+msgid "Could not load the preview."
+msgstr "প্রিভিউ লোড করা যায়নি।"
+
+#: includes/class-foliora-admin.php:311
+msgid "Loading preview…"
+msgstr "প্রিভিউ লোড হচ্ছে…"
+
+#: includes/class-foliora-admin.php:323
 msgid "Viewer Defaults"
 msgstr "ভিউয়ার ডিফল্ট"
 
-#: includes/class-foliora-admin.php:294
+#: includes/class-foliora-admin.php:330
+#: includes/class-foliora-admin.php:1031
 msgid "Default width"
 msgstr "ডিফল্ট প্রস্থ"
 
-#: includes/class-foliora-admin.php:302
+#: includes/class-foliora-admin.php:338
+#: includes/class-foliora-admin.php:1037
 msgid "Default height"
 msgstr "ডিফল্ট উচ্চতা"
 
-#: includes/class-foliora-admin.php:326
+#: includes/class-foliora-admin.php:362
+#: includes/class-foliora-admin.php:1043
 msgid "Default theme"
 msgstr "ডিফল্ট থিম"
 
-#: includes/class-foliora-admin.php:334
+#: includes/class-foliora-admin.php:370
+#: includes/class-foliora-admin.php:1048
 msgid "Lazy loading"
 msgstr "লেজি লোডিং"
 
-#: includes/class-foliora-admin.php:342
+#: includes/class-foliora-admin.php:378
+#: includes/class-foliora-admin.php:1065
+#: includes/class-foliora-admin.php:1560
 msgid "Credit link"
 msgstr "ক্রেডিট লিংক"
 
-#: includes/class-foliora-admin.php:350
+#: includes/class-foliora-admin.php:386
 msgid "Toolbar Controls"
 msgstr "টুলবার কন্ট্রোল"
 
-#: includes/class-foliora-admin.php:357
+#: includes/class-foliora-admin.php:393
+#: includes/class-foliora-admin.php:1070
 msgid "Search in document"
 msgstr "ডকুমেন্টে সার্চ"
 
-#: includes/class-foliora-admin.php:365
+#: includes/class-foliora-admin.php:401
+#: includes/class-foliora-admin.php:1077
 msgid "Theme switcher"
 msgstr "থিম সুইচার"
 
-#: includes/class-foliora-admin.php:373
+#: includes/class-foliora-admin.php:409
+#: includes/class-foliora-admin.php:1084
 msgid "Share button"
 msgstr "শেয়ার বাটন"
 
-#: includes/class-foliora-admin.php:381
+#: includes/class-foliora-admin.php:417
+#: includes/class-foliora-admin.php:1091
 msgid "Keyboard shortcuts guide"
 msgstr "কীবোর্ড শর্টকাট গাইড"
 
-#: includes/class-foliora-admin.php:389
+#: includes/class-foliora-admin.php:425
+#: includes/class-foliora-admin.php:1098
 msgid "Full screen button"
 msgstr "ফুল স্ক্রিন বাটন"
 
-#: includes/class-foliora-admin.php:397
+#: includes/class-foliora-admin.php:433
+#: includes/class-foliora-admin.php:1105
 msgid "Presentation button"
 msgstr "প্রেজেন্টেশন বাটন"
 
-#: includes/class-foliora-admin.php:405
+#: includes/class-foliora-admin.php:441
 msgid "Search and sharing"
 msgstr "সার্চ ও শেয়ারিং"
 
-#: includes/class-foliora-admin.php:412
+#: includes/class-foliora-admin.php:448
+#: includes/class-foliora-admin.php:1112
 msgid "Site search"
 msgstr "সাইট সার্চ"
 
-#: includes/class-foliora-admin.php:420
+#: includes/class-foliora-admin.php:456
+#: includes/class-foliora-admin.php:1122
 msgid "Social preview"
 msgstr "সোশ্যাল প্রিভিউ"
 
-#: includes/class-foliora-admin.php:428
+#: includes/class-foliora-admin.php:464
+#: includes/class-foliora-admin.php:1117
 msgid "Accessibility tags"
 msgstr "অ্যাকসেসিবিলিটি ট্যাগ"
 
-#: includes/class-foliora-admin.php:436
+#: includes/class-foliora-admin.php:472
+#: includes/class-foliora-admin.php:1127
 msgid "Direct PDF auto-embed"
 msgstr "সরাসরি PDF অটো-এমবেড"
 
-#: includes/class-foliora-admin.php:444
+#: includes/class-foliora-admin.php:480
+#: includes/class-foliora-admin.php:1132
 msgid "Attachment pages"
 msgstr "অ্যাটাচমেন্ট পেজ"
 
-#: includes/class-foliora-admin.php:543
+#: includes/class-foliora-admin.php:562
+#: includes/class-foliora-admin.php:1574
 msgid "Enable or disable specific buttons across all embedded PDF viewers. Individual embeds can also customize controls via the \"hide\" attribute."
 msgstr "সব এমবেড করা PDF ভিউয়ারে নির্দিষ্ট বাটন চালু বা বন্ধ করুন। আলাদা এমবেডে \"hide\" অ্যাট্রিবিউট দিয়েও কন্ট্রোল কাস্টমাইজ করা যায়।"
 
-#: includes/class-foliora-admin.php:551
-msgid "Light (Default)"
-msgstr "লাইট (ডিফল্ট)"
-
-#: includes/class-foliora-admin.php:552
-msgid "Dark"
-msgstr "ডার্ক"
-
-#: includes/class-foliora-admin.php:553
-#: includes/class-foliora-admin.php:1384
-msgid "Sepia (Warm)"
-msgstr "সেপিয়া (উষ্ণ)"
-
-#: includes/class-foliora-admin.php:555
-msgid "Default reader color scheme for visitors."
-msgstr "দর্শকদের জন্য ডিফল্ট রিডার কালার স্কিম।"
-
-#: includes/class-foliora-admin.php:569
-msgid "Show a small “Powered by Foliora” link under each viewer. Off by default; turn it on if you would like to support the plugin."
-msgstr "প্রতিটি ভিউয়ারের নিচে ছোট একটি “Powered by Foliora” লিংক দেখান। ডিফল্টে বন্ধ; প্লাগিনকে সমর্থন করতে চাইলে চালু করুন।"
-
-#: includes/class-foliora-admin.php:580
-msgid "Only load PDF documents when they scroll into the visitor viewport (faster initial page load)."
-msgstr "PDF ডকুমেন্ট শুধু দর্শকের স্ক্রিনে স্ক্রল করে এলে লোড করুন (প্রথম পেজ লোড দ্রুত হয়)।"
-
-#: includes/class-foliora-admin.php:591
-msgid "Show the search/find input on the toolbar (or hide via hide=\"search\")."
-msgstr "টুলবারে সার্চ/ফাইন্ড ইনপুট দেখান (অথবা hide=\"search\" দিয়ে লুকান)।"
-
-#: includes/class-foliora-admin.php:602
-msgid "Show the Dark / Light / Sepia theme toggle button."
-msgstr "ডার্ক / লাইট / সেপিয়া থিম টগল বাটন দেখান।"
-
-#: includes/class-foliora-admin.php:613
-msgid "Show the share and copy page link button."
-msgstr "শেয়ার ও পেজ লিংক কপির বাটন দেখান।"
-
-#: includes/class-foliora-admin.php:624
-msgid "Show the keyboard shortcuts guide button (?) and enable keyboard navigation."
-msgstr "কীবোর্ড শর্টকাট গাইড বাটন (?) দেখান এবং কীবোর্ড নেভিগেশন চালু করুন।"
-
-#: includes/class-foliora-admin.php:635
-msgid "Show the full screen toggle button."
-msgstr "ফুল স্ক্রিন টগল বাটন দেখান।"
-
-#: includes/class-foliora-admin.php:646
-msgid "Show the distraction-free presentation mode button."
-msgstr "বিক্ষেপমুক্ত প্রেজেন্টেশন মোড বাটন দেখান।"
-
-#: includes/class-foliora-admin.php:675
-msgid "Show the download button on the viewer toolbar. Individual embeds can override this with download=\"false\"."
-msgstr "ভিউয়ার টুলবারে ডাউনলোড বাটন দেখান। আলাদা এমবেড download=\"false\" দিয়ে এটি ওভাররাইড করতে পারে।"
-
-#: includes/class-foliora-admin.php:686
-msgid "Show the print button on the viewer toolbar. Individual embeds can override this with print=\"false\"."
-msgstr "ভিউয়ার টুলবারে প্রিন্ট বাটন দেখান। আলাদা এমবেড print=\"false\" দিয়ে এটি ওভাররাইড করতে পারে।"
-
-#: includes/class-foliora-admin.php:691
+#: includes/class-foliora-admin.php:638
+#: includes/class-foliora-admin.php:1596
 msgid "Make embedded PDFs findable in WordPress search and nicer when a page is shared."
 msgstr "এমবেড করা PDF ওয়ার্ডপ্রেস সার্চে খুঁজে পাওয়া যাক, আর পেজ শেয়ার করলে প্রিভিউ ভালো দেখাক।"
 
-#: includes/class-foliora-admin.php:701
-msgid "Include text from embedded PDFs in WordPress site search (and in the document library search). Visit Foliora → Documents to extract text."
-msgstr "এমবেড করা PDF-এর টেক্সট ওয়ার্ডপ্রেস সাইট সার্চে (এবং ডকুমেন্ট লাইব্রেরি সার্চে) রাখুন। টেক্সট এক্সট্র্যাক্ট করতে Foliora → ডকুমেন্টস খুলুন।"
-
-#: includes/class-foliora-admin.php:712
-msgid "Use the PDF first-page thumbnail as the Open Graph / Twitter image when a post or page embeds Foliora and no SEO plugin already set an image."
-msgstr "কোনো পোস্ট বা পেজে Foliora এমবেড থাকলে এবং SEO প্লাগিন ইতিমধ্যে ছবি সেট না করলে PDF-এর প্রথম পাতার থাম্বনেইল Open Graph / Twitter ছবি হিসেবে ব্যবহার করুন।"
-
-#: includes/class-foliora-admin.php:723
-msgid "Warn on Foliora → Documents when a PDF is not tagged. Tagged PDFs include structure (headings, reading order) that screen readers can follow."
-msgstr "PDF ট্যাগড না হলে Foliora → ডকুমেন্টসে সতর্ক করুন। ট্যাগড PDF-এ স্ক্রিন রিডার অনুসরণ করতে পারে এমন গঠন (শিরোনাম, পড়ার ক্রম) থাকে।"
-
-#: includes/class-foliora-admin.php:734
-msgid "Automatically convert standalone .pdf URLs pasted on their own line into an interactive Foliora viewer."
-msgstr "নিজস্ব লাইনে পেস্ট করা এককভাবে .pdf URL স্বয়ংক্রিয়ভাবে ইন্টারেক্টিভ Foliora ভিউয়ারে রূপান্তর করুন।"
-
-#: includes/class-foliora-admin.php:745
-msgid "Automatically display the interactive Foliora PDF viewer on standard WordPress PDF attachment pages."
-msgstr "স্ট্যান্ডার্ড ওয়ার্ডপ্রেস PDF অ্যাটাচমেন্ট পেজে স্বয়ংক্রিয়ভাবে ইন্টারেক্টিভ Foliora PDF ভিউয়ার দেখান।"
-
-#: includes/class-foliora-admin.php:794
+#: includes/class-foliora-admin.php:686
 msgid "Embed PDFs with a bundled viewer. No CDN, no account, no API keys."
 msgstr "বান্ডেল করা ভিউয়ার দিয়ে PDF এমবেড করুন। কোনো CDN, অ্যাকাউন্ট বা API কী লাগে না।"
 
-#: includes/class-foliora-admin.php:797
+#: includes/class-foliora-admin.php:689
 msgid "Plain permalinks — share links need Post name"
 msgstr "সাধারণ পারমালিংক — শেয়ার লিংকের জন্য Post name লাগে"
 
-#: includes/class-foliora-admin.php:817
+#: includes/class-foliora-admin.php:709
 msgid "New Embed"
 msgstr "নতুন এমবেড"
 
-#: includes/class-foliora-admin.php:821
-#: includes/class-foliora-admin.php:2004
+#: includes/class-foliora-admin.php:713
+#: includes/class-foliora-admin.php:2555
 msgid "Documents"
 msgstr "ডকুমেন্টস"
 
-#: includes/class-foliora-admin.php:828
+#: includes/class-foliora-admin.php:720
 msgid "Quick actions:"
 msgstr "দ্রুত কাজ:"
 
-#: includes/class-foliora-admin.php:831
-#: includes/class-foliora-admin.php:1138
-#: includes/class-foliora-admin.php:1885
-#: includes/class-foliora-admin.php:2205
+#: includes/class-foliora-admin.php:723
+#: includes/class-foliora-admin.php:1658
+#: includes/class-foliora-admin.php:2446
+#: includes/class-foliora-admin.php:2756
 msgid "Upload PDF"
 msgstr "PDF আপলোড"
 
-#: includes/class-foliora-admin.php:835
-#: includes/class-foliora-admin.php:867
+#: includes/class-foliora-admin.php:727
+#: includes/class-foliora-admin.php:759
 msgid "Saved Embeds"
 msgstr "সংরক্ষিত এমবেড"
 
-#: includes/class-foliora-admin.php:836
+#: includes/class-foliora-admin.php:728
 #: assets/js/foliora-block.js:100
 msgid "Viewer Settings"
 msgstr "ভিউয়ার সেটিংস"
 
-#: includes/class-foliora-admin.php:845
+#: includes/class-foliora-admin.php:737
 msgid "Pick a cover on the right — or drop a PDF — then copy the shortcode."
 msgstr "ডানদিকে একটি কভার বেছে নিন — অথবা একটি PDF ফেলুন — তারপর শর্টকোড কপি করুন।"
 
-#: includes/class-foliora-admin.php:848
+#: includes/class-foliora-admin.php:740
 msgid "Dismiss this notice."
 msgstr "এই নোটিশ বন্ধ করুন।"
 
-#: includes/class-foliora-admin.php:859
+#: includes/class-foliora-admin.php:751
 msgid "PDFs"
 msgstr "PDF"
 
-#: includes/class-foliora-admin.php:861
-#: includes/class-foliora-admin.php:869
+#: includes/class-foliora-admin.php:753
+#: includes/class-foliora-admin.php:761
 #: assets/js/foliora-block.js:140
 msgid "View"
 msgstr "ভিউ"
 
-#: includes/class-foliora-admin.php:875
+#: includes/class-foliora-admin.php:767
 msgid "Pages using Foliora"
 msgstr "Foliora ব্যবহারকারী পেজ"
 
-#: includes/class-foliora-admin.php:882
+#: includes/class-foliora-admin.php:774
 msgid "Setup"
 msgstr "সেটআপ"
 
-#: includes/class-foliora-admin.php:892
+#: includes/class-foliora-admin.php:784
 msgid "Get started"
 msgstr "শুরু করুন"
 
-#: includes/class-foliora-admin.php:906
+#: includes/class-foliora-admin.php:798
 msgid "Setup progress"
 msgstr "সেটআপের অগ্রগতি"
 
-#: includes/class-foliora-admin.php:911
+#: includes/class-foliora-admin.php:803
 msgid "You're all set"
 msgstr "সব প্রস্তুত"
 
-#: includes/class-foliora-admin.php:912
-#: includes/class-foliora-admin.php:913
+#: includes/class-foliora-admin.php:804
+#: includes/class-foliora-admin.php:805
 msgid "Show steps"
 msgstr "ধাপগুলো দেখান"
 
-#: includes/class-foliora-admin.php:912
+#: includes/class-foliora-admin.php:804
 msgid "Hide steps"
 msgstr "ধাপগুলো লুকান"
 
-#: includes/class-foliora-admin.php:921
+#: includes/class-foliora-admin.php:813
 #: includes/class-foliora-library.php:251
 msgid "Upload a PDF"
 msgstr "একটি PDF আপলোড করুন"
 
-#: includes/class-foliora-admin.php:922
+#: includes/class-foliora-admin.php:814
 msgid "Add a file, or drop one on the stage."
 msgstr "একটি ফাইল যোগ করুন, অথবা স্টেজে ফেলুন।"
 
-#: includes/class-foliora-admin.php:925
+#: includes/class-foliora-admin.php:817
 msgid "Upload"
 msgstr "আপলোড"
 
-#: includes/class-foliora-admin.php:931
+#: includes/class-foliora-admin.php:823
 msgid "Copy a shortcode"
 msgstr "একটি শর্টকোড কপি করুন"
 
-#: includes/class-foliora-admin.php:932
+#: includes/class-foliora-admin.php:824
 msgid "Click the code on the stage to copy."
 msgstr "কপি করতে স্টেজের কোডে ক্লিক করুন।"
 
-#: includes/class-foliora-admin.php:935
+#: includes/class-foliora-admin.php:827
 msgid "Show stage"
 msgstr "স্টেজ দেখান"
 
-#: includes/class-foliora-admin.php:941
+#: includes/class-foliora-admin.php:833
 msgid "Put it on a page"
 msgstr "একটি পেজে রাখুন"
 
-#: includes/class-foliora-admin.php:942
+#: includes/class-foliora-admin.php:834
 msgid "Publish a test page, or use the viewer block."
 msgstr "একটি টেস্ট পেজ প্রকাশ করুন, অথবা ভিউয়ার ব্লক ব্যবহার করুন।"
 
-#: includes/class-foliora-admin.php:945
+#: includes/class-foliora-admin.php:837
 msgid "Create page"
 msgstr "পেজ তৈরি করুন"
 
-#: includes/class-foliora-admin.php:956
+#: includes/class-foliora-admin.php:848
 msgid "Embed a document"
 msgstr "একটি ডকুমেন্ট এমবেড করুন"
 
-#: includes/class-foliora-admin.php:957
+#: includes/class-foliora-admin.php:849
 msgid "Drop a PDF, pick a cover, or browse the library."
 msgstr "একটি PDF ফেলুন, কভার বেছে নিন, অথবা লাইব্রেরি দেখুন।"
 
-#: includes/class-foliora-admin.php:960
-#: includes/class-foliora-admin.php:2126
+#: includes/class-foliora-admin.php:852
+#: includes/class-foliora-admin.php:2677
 msgid "Open in Builder"
 msgstr "বিল্ডারে খুলুন"
 
-#: includes/class-foliora-admin.php:979
+#: includes/class-foliora-admin.php:871
 msgid "No document selected"
 msgstr "কোনো ডকুমেন্ট বেছে নেওয়া হয়নি"
 
-#: includes/class-foliora-admin.php:980
-#: includes/class-foliora-admin.php:1615
-#: includes/class-foliora-admin.php:1674
-#: includes/class-foliora-admin.php:2068
+#: includes/class-foliora-admin.php:872
+#: includes/class-foliora-admin.php:2148
+#: includes/class-foliora-admin.php:2207
+#: includes/class-foliora-admin.php:2619
 msgid "Shortcode"
 msgstr "শর্টকোড"
 
-#: includes/class-foliora-admin.php:981
+#: includes/class-foliora-admin.php:873
 msgid "Click to copy"
 msgstr "কপি করতে ক্লিক করুন"
 
-#: includes/class-foliora-admin.php:990
-#: includes/class-foliora-admin.php:1630
-#: includes/class-foliora-admin.php:2577
-#: includes/class-foliora-admin.php:2591
-#: includes/class-foliora-admin.php:2605
-#: includes/class-foliora-admin.php:2680
+#: includes/class-foliora-admin.php:882
+#: includes/class-foliora-admin.php:2163
+#: includes/class-foliora-admin.php:3128
+#: includes/class-foliora-admin.php:3142
+#: includes/class-foliora-admin.php:3156
+#: includes/class-foliora-admin.php:3231
 #: includes/class-foliora-viewer.php:483
 msgid "Copy"
 msgstr "কপি"
 
-#: includes/class-foliora-admin.php:995
-#: includes/class-foliora-admin.php:2125
+#: includes/class-foliora-admin.php:887
+#: includes/class-foliora-admin.php:2676
 msgid "Create test page"
 msgstr "টেস্ট পেজ তৈরি করুন"
 
-#: includes/class-foliora-admin.php:997
+#: includes/class-foliora-admin.php:889
 msgid "Browse Media Library"
 msgstr "মিডিয়া লাইব্রেরি খুলুন"
 
-#: includes/class-foliora-admin.php:1007
+#: includes/class-foliora-admin.php:899
 msgid "Recent"
 msgstr "সাম্প্রতিক"
 
-#: includes/class-foliora-admin.php:1035
+#: includes/class-foliora-admin.php:927
+#: includes/class-foliora-admin.php:1446
 msgid "Viewer defaults"
 msgstr "ভিউয়ার ডিফল্ট"
 
-#: includes/class-foliora-admin.php:1045
+#: includes/class-foliora-admin.php:937
 msgid "Recent saved embeds"
 msgstr "সাম্প্রতিক সংরক্ষিত এমবেড"
 
-#: includes/class-foliora-admin.php:1048
+#: includes/class-foliora-admin.php:940
 msgid "View all"
 msgstr "সব দেখুন"
 
-#: includes/class-foliora-admin.php:1055
+#: includes/class-foliora-admin.php:947
 msgid "Untitled embed"
 msgstr "নামহীন এমবেড"
 
-#: includes/class-foliora-admin.php:1064
-#: includes/class-foliora-admin.php:1709
+#: includes/class-foliora-admin.php:956
+#: includes/class-foliora-admin.php:2242
 msgid "Edit"
 msgstr "সম্পাদনা"
 
-#: includes/class-foliora-admin.php:1072
-#: includes/class-foliora-admin.php:1725
+#: includes/class-foliora-admin.php:964
+#: includes/class-foliora-admin.php:2258
 msgid "No saved embeds yet"
 msgstr "এখনও কোনো সংরক্ষিত এমবেড নেই"
 
-#: includes/class-foliora-admin.php:1073
+#: includes/class-foliora-admin.php:965
 msgid "Create your first embed"
 msgstr "আপনার প্রথম এমবেড তৈরি করুন"
 
-#: includes/class-foliora-admin.php:1105
-msgid "Back to Dashboard"
-msgstr "ড্যাশবোর্ডে ফিরুন"
+#: includes/class-foliora-admin.php:1032
+msgid "Width of every viewer. Use a number with a unit, for example 100% or 800px."
+msgstr "প্রতিটি ভিউয়ারের প্রস্থ। ইউনিটসহ সংখ্যা দিন, যেমন 100% বা 800px।"
+
+#: includes/class-foliora-admin.php:1038
+msgid "Height of the reading area, for example 600px or 80vh."
+msgstr "পড়ার এলাকার উচ্চতা, যেমন 600px বা 80vh।"
+
+#: includes/class-foliora-admin.php:1044
+msgid "Default reader color scheme for visitors."
+msgstr "দর্শকদের জন্য ডিফল্ট রিডার কালার স্কিম।"
+
+#: includes/class-foliora-admin.php:1049
+msgid "Only load PDF documents when they scroll into the visitor viewport (faster initial page load)."
+msgstr "PDF ডকুমেন্ট শুধু দর্শকের স্ক্রিনে স্ক্রল করে এলে লোড করুন (প্রথম পেজ লোড দ্রুত হয়)।"
+
+#: includes/class-foliora-admin.php:1054
+msgid "Show the download button on the viewer toolbar."
+msgstr "ভিউয়ার টুলবারে ডাউনলোড বাটন দেখান।"
+
+#: includes/class-foliora-admin.php:1060
+msgid "Show the print button on the viewer toolbar."
+msgstr "ভিউয়ার টুলবারে প্রিন্ট বাটন দেখান।"
+
+#: includes/class-foliora-admin.php:1066
+msgid "Show a small “Powered by Foliora” link under each viewer. Off by default. Turn it on to support the plugin."
+msgstr "প্রতিটি ভিউয়ারের নিচে ছোট “Powered by Foliora” লিংক দেখান। ডিফল্টে বন্ধ। প্লাগিনকে সমর্থন করতে চালু করতে পারেন।"
+
+#: includes/class-foliora-admin.php:1071
+msgid "Show the search/find input on the toolbar."
+msgstr "টুলবারে সার্চ/ফাইন্ড ইনপুট দেখান।"
+
+#: includes/class-foliora-admin.php:1078
+msgid "Show the Dark / Light / Sepia theme toggle button."
+msgstr "ডার্ক / লাইট / সেপিয়া থিম টগল বাটন দেখান।"
+
+#: includes/class-foliora-admin.php:1085
+msgid "Show the share and copy page link button."
+msgstr "শেয়ার ও পেজ লিংক কপির বাটন দেখান।"
+
+#: includes/class-foliora-admin.php:1092
+msgid "Show the keyboard shortcuts guide button (?) and enable keyboard navigation."
+msgstr "কীবোর্ড শর্টকাট গাইড বাটন (?) দেখান এবং কীবোর্ড নেভিগেশন চালু করুন।"
+
+#: includes/class-foliora-admin.php:1099
+msgid "Show the full screen toggle button."
+msgstr "ফুল স্ক্রিন টগল বাটন দেখান।"
+
+#: includes/class-foliora-admin.php:1106
+msgid "Show the distraction-free presentation mode button."
+msgstr "বিক্ষেপমুক্ত প্রেজেন্টেশন মোড বাটন দেখান।"
+
+#: includes/class-foliora-admin.php:1113
+msgid "Include text from embedded PDFs in WordPress site search (and in the document library search). Visit Foliora → Documents to extract text."
+msgstr "এমবেড করা PDF-এর টেক্সট ওয়ার্ডপ্রেস সাইট সার্চে (এবং ডকুমেন্ট লাইব্রেরি সার্চে) রাখুন। টেক্সট এক্সট্র্যাক্ট করতে Foliora → ডকুমেন্টস খুলুন।"
+
+#: includes/class-foliora-admin.php:1118
+msgid "Warn on Foliora → Documents when a PDF is not tagged. Tagged PDFs include structure (headings, reading order) that screen readers can follow."
+msgstr "PDF ট্যাগড না হলে Foliora → ডকুমেন্টসে সতর্ক করুন। ট্যাগড PDF-এ স্ক্রিন রিডার অনুসরণ করতে পারে এমন গঠন (শিরোনাম, পড়ার ক্রম) থাকে।"
 
 #: includes/class-foliora-admin.php:1123
+msgid "Use the PDF first-page thumbnail as the Open Graph / Twitter image when a post or page embeds Foliora and no SEO plugin already set an image."
+msgstr "কোনো পোস্ট বা পেজে Foliora এমবেড থাকলে এবং SEO প্লাগিন ইতিমধ্যে ছবি সেট না করলে PDF-এর প্রথম পাতার থাম্বনেইল Open Graph / Twitter ছবি হিসেবে ব্যবহার করুন।"
+
+#: includes/class-foliora-admin.php:1128
+msgid "Automatically convert standalone .pdf URLs pasted on their own line into an interactive Foliora viewer."
+msgstr "নিজস্ব লাইনে পেস্ট করা এককভাবে .pdf URL স্বয়ংক্রিয়ভাবে ইন্টারেক্টিভ Foliora ভিউয়ারে রূপান্তর করুন।"
+
+#: includes/class-foliora-admin.php:1133
+msgid "Automatically display the interactive Foliora PDF viewer on standard WordPress PDF attachment pages."
+msgstr "স্ট্যান্ডার্ড ওয়ার্ডপ্রেস PDF অ্যাটাচমেন্ট পেজে স্বয়ংক্রিয়ভাবে ইন্টারেক্টিভ Foliora PDF ভিউয়ার দেখান।"
+
+#: includes/class-foliora-admin.php:1193
+msgid "Quick values"
+msgstr "দ্রুত মান"
+
+#: includes/class-foliora-admin.php:1198
+msgid "Use a number with a unit, e.g. 600px"
+msgstr "ইউনিটসহ সংখ্যা দিন, যেমন 600px"
+
+#: includes/class-foliora-admin.php:1206
+#: includes/class-foliora-admin.php:1903
+msgid "Light"
+msgstr "লাইট"
+
+#: includes/class-foliora-admin.php:1207
+#: includes/class-foliora-admin.php:1910
+msgid "Dark Mode"
+msgstr "ডার্ক মোড"
+
+#: includes/class-foliora-admin.php:1208
+#: includes/class-foliora-admin.php:1917
+msgid "Sepia (Warm)"
+msgstr "সেপিয়া (উষ্ণ)"
+
+#: includes/class-foliora-admin.php:1264
+msgid "Override per embed with"
+msgstr "প্রতিটি এমবেডে বদলাতে ব্যবহার করুন"
+
+#: includes/class-foliora-admin.php:1395
+msgid "You are not allowed to do this."
+msgstr "এটি করার অনুমতি আপনার নেই।"
+
+#: includes/class-foliora-admin.php:1451
+#: includes/class-foliora-admin.php:2020
+#: includes/class-foliora-admin.php:2030
+#: includes/class-foliora-admin.php:2050
+#: includes/class-foliora-admin.php:2060
+msgid "Toolbar"
+msgstr "টুলবার"
+
+#: includes/class-foliora-admin.php:1456
+msgid "Search & sharing"
+msgstr "সার্চ ও শেয়ারিং"
+
+#. translators: 1: number of indexed PDFs, 2: total PDFs.
+#: includes/class-foliora-admin.php:1468
+#, php-format
+msgid "%1$s of %2$s PDFs indexed"
+msgstr "%2$s টির মধ্যে %1$s টি পিডিএফ ইনডেক্স হয়েছে"
+
+#: includes/class-foliora-admin.php:1474
+#: includes/class-foliora-admin.php:1487
+msgid "Manage in Documents →"
+msgstr "ডকুমেন্টসে ম্যানেজ করুন →"
+
+#. translators: 1: number of tagged PDFs, 2: number of checked PDFs.
+#: includes/class-foliora-admin.php:1481
+#, php-format
+msgid "%1$s of %2$s checked PDFs are tagged"
+msgstr "চেক করা %2$s টির মধ্যে %1$s টি পিডিএফ ট্যাগড"
+
+#: includes/class-foliora-admin.php:1502
+msgid "Breadcrumb"
+msgstr "ব্রেডক্রাম্ব"
+
+#: includes/class-foliora-admin.php:1509
+msgid "Site-wide defaults for every Foliora viewer. Individual embeds and saved shortcodes can still override them."
+msgstr "প্রতিটি Foliora ভিউয়ারের সাইট-ওয়াইড ডিফল্ট। আলাদা এমবেড ও সংরক্ষিত শর্টকোড এগুলো বদলাতে পারে।"
+
+#: includes/class-foliora-admin.php:1512
+msgid "Unsaved changes"
+msgstr "অসংরক্ষিত পরিবর্তন"
+
+#: includes/class-foliora-admin.php:1515
+#: includes/class-foliora-admin.php:1670
+msgid "Save changes"
+msgstr "পরিবর্তন সংরক্ষণ করুন"
+
+#: includes/class-foliora-admin.php:1521
+msgid "Settings sections"
+msgstr "সেটিংস সেকশন"
+
+#: includes/class-foliora-admin.php:1545
+msgid "Size"
+msgstr "আকার"
+
+#: includes/class-foliora-admin.php:1549
+msgid "Reader"
+msgstr "রিডার"
+
+#: includes/class-foliora-admin.php:1553
+msgid "Toolbar actions"
+msgstr "টুলবার অ্যাকশন"
+
+#: includes/class-foliora-admin.php:1567
+#: includes/class-foliora-admin.php:1589
+#: includes/class-foliora-admin.php:1610
+msgid "Reset to defaults"
+msgstr "ডিফল্টে ফিরুন"
+
+#: includes/class-foliora-admin.php:1576
+msgid "Enable all"
+msgstr "সব চালু করুন"
+
+#: includes/class-foliora-admin.php:1577
+msgid "Disable all"
+msgstr "সব বন্ধ করুন"
+
+#: includes/class-foliora-admin.php:1598
+#: includes/class-foliora-admin.php:2565
+#: includes/class-foliora-admin.php:2617
+#: includes/class-foliora-library.php:209
+msgid "Search"
+msgstr "সার্চ"
+
+#: includes/class-foliora-admin.php:1602
+msgid "Sharing"
+msgstr "শেয়ারিং"
+
+#: includes/class-foliora-admin.php:1605
+msgid "Auto-embed"
+msgstr "অটো-এমবেড"
+
+#: includes/class-foliora-admin.php:1621
 msgid "Live preview"
 msgstr "লাইভ প্রিভিউ"
 
-#: includes/class-foliora-admin.php:1125
-msgid "Width and height update this viewer immediately. Save to store them as site defaults."
-msgstr "প্রস্থ ও উচ্চতা এই ভিউয়ার তাৎক্ষণিক আপডেট করে। সাইট ডিফল্ট হিসেবে রাখতে সেভ করুন।"
+#: includes/class-foliora-admin.php:1624
+msgid "Preview size"
+msgstr "প্রিভিউ সাইজ"
 
-#: includes/class-foliora-admin.php:1132
-msgid "Preview uses the most recently uploaded PDF in the Media Library."
-msgstr "প্রিভিউতে মিডিয়া লাইব্রেরির সবচেয়ে সম্প্রতি আপলোড করা PDF ব্যবহার হয়।"
+#: includes/class-foliora-admin.php:1625
+#: includes/class-foliora-admin.php:1626
+#: includes/class-foliora-admin.php:2116
+msgid "Desktop View (100%)"
+msgstr "ডেস্কটপ ভিউ (100%)"
 
-#: includes/class-foliora-admin.php:1133
-msgid "Open Documents"
-msgstr "ডকুমেন্টস খুলুন"
+#: includes/class-foliora-admin.php:1628
+#: includes/class-foliora-admin.php:1629
+#: includes/class-foliora-admin.php:2119
+msgid "Tablet View (768px)"
+msgstr "ট্যাবলেট ভিউ (768px)"
 
-#: includes/class-foliora-admin.php:1137
-msgid "Upload a PDF to see a live preview of these defaults."
-msgstr "এই ডিফল্টগুলোর লাইভ প্রিভিউ দেখতে একটি PDF আপলোড করুন।"
+#: includes/class-foliora-admin.php:1631
+#: includes/class-foliora-admin.php:1632
+#: includes/class-foliora-admin.php:2122
+msgid "Mobile View (375px)"
+msgstr "মোবাইল ভিউ (375px)"
 
-#: includes/class-foliora-admin.php:1225
+#: includes/class-foliora-admin.php:1636
+msgid "Show preview"
+msgstr "প্রিভিউ দেখান"
+
+#: includes/class-foliora-admin.php:1636
+msgid "Hide preview"
+msgstr "প্রিভিউ লুকান"
+
+#: includes/class-foliora-admin.php:1641
+msgid "Preview PDF"
+msgstr "প্রিভিউ পিডিএফ"
+
+#: includes/class-foliora-admin.php:1653
+msgid "Unsaved changes are previewed here only."
+msgstr "অসংরক্ষিত পরিবর্তন শুধু এখানে প্রিভিউ হয়।"
+
+#: includes/class-foliora-admin.php:1657
+msgid "Upload a PDF to preview"
+msgstr "প্রিভিউ দেখতে একটি পিডিএফ আপলোড করুন"
+
+#: includes/class-foliora-admin.php:1666
+msgid "You have unsaved changes"
+msgstr "আপনার অসংরক্ষিত পরিবর্তন আছে"
+
+#: includes/class-foliora-admin.php:1668
+msgid "Discard"
+msgstr "বাতিল করুন"
+
+#: includes/class-foliora-admin.php:1758
 msgid "Shortcode Builder & Live Preview"
 msgstr "শর্টকোড বিল্ডার ও লাইভ প্রিভিউ"
 
-#: includes/class-foliora-admin.php:1228
+#: includes/class-foliora-admin.php:1761
 msgid "Visually configure your PDF embed with real-time preview, then save to generate a clean shortcode like [foliora id=\"1\"]."
 msgstr "রিয়েল-টাইম প্রিভিউসহ আপনার PDF এমবেড ভিজ্যুয়ালি কনফিগার করুন, তারপর সেভ করে [foliora id=\"1\"]-এর মতো পরিষ্কার শর্টকোড তৈরি করুন।"
 
-#: includes/class-foliora-admin.php:1232
-#: includes/class-foliora-admin.php:2827
+#: includes/class-foliora-admin.php:1765
+#: includes/class-foliora-admin.php:3378
 msgid "1-Click Presets:"
 msgstr "১-ক্লিক প্রিসেট:"
 
-#: includes/class-foliora-admin.php:1234
+#: includes/class-foliora-admin.php:1767
 msgid "3D realistic FlipBook with Web Audio page turn sound"
 msgstr "Web Audio পেজ-টার্ন সাউন্ডসহ বাস্তবসম্মত 3D ফ্লিপবুক"
 
-#: includes/class-foliora-admin.php:1235
-#: includes/class-foliora-admin.php:1459
-#: includes/class-foliora-viewer.php:570
+#: includes/class-foliora-admin.php:1768
+#: includes/class-foliora-admin.php:1992
+#: includes/class-foliora-viewer.php:580
 #: assets/js/foliora-block.js:146
 msgid "3D FlipBook"
 msgstr "3D ফ্লিপবুক"
 
-#: includes/class-foliora-admin.php:1237
+#: includes/class-foliora-admin.php:1770
 msgid "Sepia theme, continuous scroll, search enabled"
 msgstr "সেপিয়া থিম, কন্টিনিউয়াস স্ক্রল, সার্চ চালু"
 
-#: includes/class-foliora-admin.php:1238
+#: includes/class-foliora-admin.php:1771
 msgid "E-Book Reader"
 msgstr "ই-বুক রিডার"
 
-#: includes/class-foliora-admin.php:1240
+#: includes/class-foliora-admin.php:1773
 msgid "Clean white theme, presentation and download enabled"
 msgstr "পরিষ্কার সাদা থিম, প্রেজেন্টেশন ও ডাউনলোড চালু"
 
-#: includes/class-foliora-admin.php:1241
+#: includes/class-foliora-admin.php:1774
 msgid "Corporate Report"
 msgstr "কর্পোরেট রিপোর্ট"
 
-#: includes/class-foliora-admin.php:1243
+#: includes/class-foliora-admin.php:1776
 msgid "Dark theme, fullscreen and zoom enabled"
 msgstr "ডার্ক থিম, ফুল স্ক্রিন ও জুম চালু"
 
-#: includes/class-foliora-admin.php:1244
+#: includes/class-foliora-admin.php:1777
 msgid "Night Reader"
 msgstr "নাইট রিডার"
 
-#: includes/class-foliora-admin.php:1246
+#: includes/class-foliora-admin.php:1779
 msgid "Download and print hidden, pan and zoom allowed"
 msgstr "ডাউনলোড ও প্রিন্ট লুকানো, প্যান ও জুম অনুমোদিত"
 
-#: includes/class-foliora-admin.php:1247
+#: includes/class-foliora-admin.php:1780
 msgid "View Only (Protected)"
 msgstr "শুধু দেখা (সুরক্ষিত)"
 
-#: includes/class-foliora-admin.php:1249
+#: includes/class-foliora-admin.php:1782
 msgid "Lazy loaded, compact toolbar, faster initial load"
 msgstr "লেজি লোড, কমপ্যাক্ট টুলবার, দ্রুত প্রাথমিক লোড"
 
-#: includes/class-foliora-admin.php:1250
+#: includes/class-foliora-admin.php:1783
 msgid "Speed Optimized"
 msgstr "স্পিড অপ্টিমাইজড"
 
-#: includes/class-foliora-admin.php:1264
-#: includes/class-foliora-admin.php:1655
+#: includes/class-foliora-admin.php:1797
+#: includes/class-foliora-admin.php:2188
 msgid "My Saved Embeds"
 msgstr "আমার সংরক্ষিত এমবেড"
 
 #. translators: 1: Embed name, 2: Embed ID
-#: includes/class-foliora-admin.php:1277
+#: includes/class-foliora-admin.php:1810
 #, php-format
 msgid "Editing Saved Embed: %1$s (ID: #%2$d)"
 msgstr "সংরক্ষিত এমবেড সম্পাদনা: %1$s (ID: #%2$d)"
 
-#: includes/class-foliora-admin.php:1285
+#: includes/class-foliora-admin.php:1818
 msgid "+ Create New Embed"
 msgstr "+ নতুন এমবেড তৈরি করুন"
 
-#: includes/class-foliora-admin.php:1301
+#: includes/class-foliora-admin.php:1834
 msgid "1. Document & Style"
 msgstr "১. ডকুমেন্ট ও স্টাইল"
 
-#: includes/class-foliora-admin.php:1305
+#: includes/class-foliora-admin.php:1838
 msgid "2. Size & Layout"
 msgstr "২. সাইজ ও লেআউট"
 
-#: includes/class-foliora-admin.php:1309
+#: includes/class-foliora-admin.php:1842
 msgid "3. Toolbar & Advanced"
 msgstr "৩. টুলবার ও অ্যাডভান্সড"
 
-#: includes/class-foliora-admin.php:1318
+#: includes/class-foliora-admin.php:1851
 msgid "Embed Name / Title:"
 msgstr "এমবেডের নাম / শিরোনাম:"
 
-#: includes/class-foliora-admin.php:1319
+#: includes/class-foliora-admin.php:1852
 msgid "e.g. Annual Company Report 2026"
 msgstr "যেমন: বার্ষিক কোম্পানি রিপোর্ট ২০২৬"
 
-#: includes/class-foliora-admin.php:1321
+#: includes/class-foliora-admin.php:1854
 msgid "Name for your internal reference in the Saved Embeds manager."
 msgstr "সংরক্ষিত এমবেড ম্যানেজারে আপনার নিজের রেফারেন্সের জন্য নাম।"
 
-#: includes/class-foliora-admin.php:1327
-#: includes/class-foliora-admin.php:1672
+#: includes/class-foliora-admin.php:1860
+#: includes/class-foliora-admin.php:2205
 msgid "PDF Document Source"
 msgstr "PDF ডকুমেন্টের উৎস"
 
-#: includes/class-foliora-admin.php:1331
+#: includes/class-foliora-admin.php:1864
 msgid "Choose from Media Library"
 msgstr "মিডিয়া লাইব্রেরি থেকে বেছে নিন"
 
-#: includes/class-foliora-admin.php:1334
+#: includes/class-foliora-admin.php:1867
 msgid "Upload New PDF"
 msgstr "নতুন PDF আপলোড করুন"
 
-#: includes/class-foliora-admin.php:1339
+#: includes/class-foliora-admin.php:1872
 msgid "PDF File URL:"
 msgstr "PDF ফাইলের URL:"
 
-#: includes/class-foliora-admin.php:1345
+#: includes/class-foliora-admin.php:1878
 msgid "Or select a recent PDF:"
 msgstr "অথবা সাম্প্রতিক একটি PDF বেছে নিন:"
 
-#: includes/class-foliora-admin.php:1360
+#: includes/class-foliora-admin.php:1893
 msgid "Appearance & Theme"
 msgstr "চেহারা ও থিম"
 
-#: includes/class-foliora-admin.php:1364
+#: includes/class-foliora-admin.php:1897
 msgid "Reading Theme:"
 msgstr "রিডিং থিম:"
 
-#: includes/class-foliora-admin.php:1370
-msgid "Light"
-msgstr "লাইট"
-
-#: includes/class-foliora-admin.php:1377
-msgid "Dark Mode"
-msgstr "ডার্ক মোড"
-
-#: includes/class-foliora-admin.php:1391
+#: includes/class-foliora-admin.php:1924
 msgid "Viewer Caption / Subtitle (Optional):"
 msgstr "ভিউয়ার ক্যাপশন / সাবটাইটেল (ঐচ্ছিক):"
 
-#: includes/class-foliora-admin.php:1392
+#: includes/class-foliora-admin.php:1925
 msgid "e.g. Official Edition"
 msgstr "যেমন: অফিসিয়াল সংস্করণ"
 
-#: includes/class-foliora-admin.php:1398
+#: includes/class-foliora-admin.php:1931
 msgid "Next: Size & Layout →"
 msgstr "পরবর্তী: সাইজ ও লেআউট →"
 
-#: includes/class-foliora-admin.php:1407
+#: includes/class-foliora-admin.php:1940
 msgid "Viewer Dimensions"
 msgstr "ভিউয়ারের মাপ"
 
-#: includes/class-foliora-admin.php:1412
+#: includes/class-foliora-admin.php:1945
 msgid "Width:"
 msgstr "প্রস্থ:"
 
-#: includes/class-foliora-admin.php:1421
+#: includes/class-foliora-admin.php:1954
 msgid "Height:"
 msgstr "উচ্চতা:"
 
-#: includes/class-foliora-admin.php:1434
+#: includes/class-foliora-admin.php:1967
 msgid "Initial Page & Display Mode"
 msgstr "শুরুর পাতা ও প্রদর্শন মোড"
 
-#: includes/class-foliora-admin.php:1439
+#: includes/class-foliora-admin.php:1972
 msgid "Start Page:"
 msgstr "শুরুর পাতা:"
 
-#: includes/class-foliora-admin.php:1443
+#: includes/class-foliora-admin.php:1976
 msgid "Initial View Layout:"
 msgstr "শুরুর ভিউ লেআউট:"
 
-#: includes/class-foliora-admin.php:1447
+#: includes/class-foliora-admin.php:1980
 msgid "Single Page"
 msgstr "একক পাতা"
 
-#: includes/class-foliora-admin.php:1451
+#: includes/class-foliora-admin.php:1984
 msgid "Continuous Scroll"
 msgstr "কন্টিনিউয়াস স্ক্রল"
 
-#: includes/class-foliora-admin.php:1455
+#: includes/class-foliora-admin.php:1988
 msgid "Two-Page Spread"
 msgstr "দুই পাতার স্প্রেড"
 
-#: includes/class-foliora-admin.php:1467
-#: includes/class-foliora-admin.php:1564
+#: includes/class-foliora-admin.php:2000
+#: includes/class-foliora-admin.php:2097
 msgid "← Back"
 msgstr "← পেছনে"
 
-#: includes/class-foliora-admin.php:1470
+#: includes/class-foliora-admin.php:2003
 msgid "Next: Toolbar & Advanced →"
 msgstr "পরবর্তী: টুলবার ও অ্যাডভান্সড →"
 
-#: includes/class-foliora-admin.php:1479
+#: includes/class-foliora-admin.php:2012
 msgid "Toolbar Buttons & Controls"
 msgstr "টুলবার বাটন ও কন্ট্রোল"
 
-#: includes/class-foliora-admin.php:1480
+#: includes/class-foliora-admin.php:2013
 msgid "Uncheck any button you want to hide from the viewer toolbar:"
 msgstr "ভিউয়ার টুলবার থেকে যে বাটন লুকাতে চান তার টিক তুলে দিন:"
 
-#: includes/class-foliora-admin.php:1486
+#: includes/class-foliora-admin.php:2019
 #: includes/class-foliora-viewer.php:330
 msgid "Download"
 msgstr "ডাউনলোড"
 
-#: includes/class-foliora-admin.php:1487
-#: includes/class-foliora-admin.php:1497
-#: includes/class-foliora-admin.php:1517
-#: includes/class-foliora-admin.php:1527
-msgid "Toolbar"
-msgstr "টুলবার"
-
-#: includes/class-foliora-admin.php:1491
+#: includes/class-foliora-admin.php:2024
 msgid "Print"
 msgstr "প্রিন্ট"
 
-#: includes/class-foliora-admin.php:1492
-#: includes/class-foliora-admin.php:1502
-#: includes/class-foliora-admin.php:1507
-#: includes/class-foliora-admin.php:1512
-#: includes/class-foliora-admin.php:1522
-#: includes/class-foliora-admin.php:1532
-#: includes/class-foliora-admin.php:1537
+#: includes/class-foliora-admin.php:2025
+#: includes/class-foliora-admin.php:2035
+#: includes/class-foliora-admin.php:2040
+#: includes/class-foliora-admin.php:2045
+#: includes/class-foliora-admin.php:2055
+#: includes/class-foliora-admin.php:2065
+#: includes/class-foliora-admin.php:2070
 msgid "⋮ Menu"
 msgstr "⋮ মেনু"
 
-#: includes/class-foliora-admin.php:1496
+#: includes/class-foliora-admin.php:2029
 msgid "Text Search (Ctrl+F)"
 msgstr "টেক্সট সার্চ (Ctrl+F)"
 
-#: includes/class-foliora-admin.php:1501
+#: includes/class-foliora-admin.php:2034
 msgid "Theme Switcher"
 msgstr "থিম সুইচার"
 
-#: includes/class-foliora-admin.php:1506
+#: includes/class-foliora-admin.php:2039
 msgid "Share & Page Link"
 msgstr "শেয়ার ও পেজ লিংক"
 
-#: includes/class-foliora-admin.php:1511
+#: includes/class-foliora-admin.php:2044
 msgid "Shortcuts Guide (?)"
 msgstr "শর্টকাট গাইড (?)"
 
-#: includes/class-foliora-admin.php:1516
+#: includes/class-foliora-admin.php:2049
 #: includes/class-foliora-viewer.php:450
 msgid "Full Screen"
 msgstr "ফুল স্ক্রিন"
 
-#: includes/class-foliora-admin.php:1521
+#: includes/class-foliora-admin.php:2054
 #: includes/class-foliora-viewer.php:389
 #: includes/class-foliora-viewer.php:454
 msgid "Presentation Mode"
 msgstr "প্রেজেন্টেশন মোড"
 
-#: includes/class-foliora-admin.php:1526
+#: includes/class-foliora-admin.php:2059
 #: includes/class-foliora-viewer.php:426
 msgid "Zoom In / Out"
 msgstr "জুম ইন / আউট"
 
-#: includes/class-foliora-admin.php:1531
+#: includes/class-foliora-admin.php:2064
 #: includes/class-foliora-viewer.php:434
 msgid "Rotate Document"
 msgstr "ডকুমেন্ট ঘোরান"
 
-#: includes/class-foliora-admin.php:1536
+#: includes/class-foliora-admin.php:2069
 #: includes/class-foliora-viewer.php:446
 msgid "Hand / Pan Tool"
 msgstr "হ্যান্ড / প্যান টুল"
 
-#: includes/class-foliora-admin.php:1544
+#: includes/class-foliora-admin.php:2077
 msgid "Performance & Advanced"
 msgstr "পারফরম্যান্স ও অ্যাডভান্সড"
 
-#: includes/class-foliora-admin.php:1550
+#: includes/class-foliora-admin.php:2083
 msgid "Lazy Loading (loading=\"lazy\")"
 msgstr "লেজি লোডিং (loading=\"lazy\")"
 
-#: includes/class-foliora-admin.php:1550
+#: includes/class-foliora-admin.php:2083
 msgid "Only load PDF when scrolled into viewport."
 msgstr "ভিউপোর্টে স্ক্রল করে এলে তবেই PDF লোড করুন।"
 
-#: includes/class-foliora-admin.php:1554
+#: includes/class-foliora-admin.php:2087
 msgid "Sync Browser URL Hash (hash=\"true\")"
 msgstr "ব্রাউজার URL হ্যাশ সিঙ্ক (hash=\"true\")"
 
-#: includes/class-foliora-admin.php:1554
+#: includes/class-foliora-admin.php:2087
 msgid "Update #page=N in address bar for easy bookmarking."
 msgstr "সহজে বুকমার্ক করতে অ্যাড্রেস বারে #page=N আপডেট করুন।"
 
-#: includes/class-foliora-admin.php:1558
+#: includes/class-foliora-admin.php:2091
 msgid "Remember Last Read Page (resume=\"true\")"
 msgstr "শেষ পড়া পাতা মনে রাখুন (resume=\"true\")"
 
-#: includes/class-foliora-admin.php:1558
+#: includes/class-foliora-admin.php:2091
 msgid "Auto-resume where visitor left off."
 msgstr "দর্শক যেখানে ছেড়েছিলেন সেখান থেকে স্বয়ংক্রিয়ভাবে শুরু করুন।"
 
-#: includes/class-foliora-admin.php:1580
+#: includes/class-foliora-admin.php:2113
 msgid "Real-Time Live Preview"
 msgstr "রিয়েল-টাইম লাইভ প্রিভিউ"
 
-#: includes/class-foliora-admin.php:1583
-msgid "Desktop View (100%)"
-msgstr "ডেস্কটপ ভিউ (100%)"
-
-#: includes/class-foliora-admin.php:1586
-msgid "Tablet View (768px)"
-msgstr "ট্যাবলেট ভিউ (768px)"
-
-#: includes/class-foliora-admin.php:1589
-msgid "Mobile View (375px)"
-msgstr "মোবাইল ভিউ (375px)"
-
-#: includes/class-foliora-admin.php:1616
+#: includes/class-foliora-admin.php:2149
 msgid "PHP Snippet"
 msgstr "PHP স্নিপেট"
 
-#: includes/class-foliora-admin.php:1617
+#: includes/class-foliora-admin.php:2150
 msgid "Block Code"
 msgstr "ব্লক কোড"
 
-#: includes/class-foliora-admin.php:1627
+#: includes/class-foliora-admin.php:2160
 msgid "Save Embed & Get Shortcode"
 msgstr "এমবেড সংরক্ষণ ও শর্টকোড নিন"
 
-#: includes/class-foliora-admin.php:1629
+#: includes/class-foliora-admin.php:2162
 msgid "Copy code to clipboard"
 msgstr "কোড ক্লিপবোর্ডে কপি করুন"
 
-#: includes/class-foliora-admin.php:1633
+#: includes/class-foliora-admin.php:2166
 msgid "Create Test Page"
 msgstr "টেস্ট পেজ তৈরি করুন"
 
-#: includes/class-foliora-admin.php:1640
+#: includes/class-foliora-admin.php:2173
 msgid "Developer: Show full inline shortcode"
 msgstr "ডেভেলপার: সম্পূর্ণ ইনলাইন শর্টকোড দেখান"
 
-#: includes/class-foliora-admin.php:1658
+#: includes/class-foliora-admin.php:2191
 msgid "Search embeds…"
 msgstr "এমবেড খুঁজুন…"
 
-#: includes/class-foliora-admin.php:1660
+#: includes/class-foliora-admin.php:2193
 msgid "Create New Embed"
 msgstr "নতুন এমবেড তৈরি করুন"
 
-#: includes/class-foliora-admin.php:1670
+#: includes/class-foliora-admin.php:2203
 msgid "ID"
 msgstr "ID"
 
-#: includes/class-foliora-admin.php:1671
+#: includes/class-foliora-admin.php:2204
 msgid "Embed Name / Title"
 msgstr "এমবেডের নাম / শিরোনাম"
 
-#: includes/class-foliora-admin.php:1673
+#: includes/class-foliora-admin.php:2206
 msgid "Layout & Theme"
 msgstr "লেআউট ও থিম"
 
-#: includes/class-foliora-admin.php:1676
+#: includes/class-foliora-admin.php:2209
 msgid "Actions"
 msgstr "অ্যাকশন"
 
-#: includes/class-foliora-admin.php:1701
+#: includes/class-foliora-admin.php:2234
 msgid "Click to copy shortcode"
 msgstr "শর্টকোড কপি করতে ক্লিক করুন"
 
-#: includes/class-foliora-admin.php:1711
+#: includes/class-foliora-admin.php:2244
 msgid "Duplicate this embed"
 msgstr "এই এমবেডের কপি করুন"
 
-#: includes/class-foliora-admin.php:1712
+#: includes/class-foliora-admin.php:2245
 msgid "Duplicate"
 msgstr "ডুপ্লিকেট"
 
-#: includes/class-foliora-admin.php:1714
+#: includes/class-foliora-admin.php:2247
 msgid "Delete this embed"
 msgstr "এই এমবেড মুছুন"
 
-#: includes/class-foliora-admin.php:1715
+#: includes/class-foliora-admin.php:2248
 msgid "Delete"
 msgstr "মুছুন"
 
-#: includes/class-foliora-admin.php:1726
+#: includes/class-foliora-admin.php:2259
 msgid "Create your first PDF embed in the Shortcode Builder and click \"Save Embed & Get Shortcode\" to generate a shortcode like [foliora id=\"1\"]."
 msgstr "শর্টকোড বিল্ডারে আপনার প্রথম PDF এমবেড তৈরি করুন এবং \"এমবেড সংরক্ষণ ও শর্টকোড নিন\" ক্লিক করে [foliora id=\"1\"]-এর মতো শর্টকোড পান।"
 
-#: includes/class-foliora-admin.php:1728
-#: includes/class-foliora-admin.php:1889
+#: includes/class-foliora-admin.php:2261
+#: includes/class-foliora-admin.php:2450
 msgid "Open Shortcode Builder"
 msgstr "শর্টকোড বিল্ডার খুলুন"
 
-#: includes/class-foliora-admin.php:1864
+#: includes/class-foliora-admin.php:2425
 msgid "Every PDF in your Media Library, ready to embed. No duplicate storage."
 msgstr "মিডিয়া লাইব্রেরির প্রতিটি পিডিএফ এমবেডের জন্য প্রস্তুত। অতিরিক্ত স্টোরেজ লাগে না।"
 
-#: includes/class-foliora-admin.php:1865
+#: includes/class-foliora-admin.php:2426
 msgid "Shortcodes, blocks, deep links and page builders, all in one reference."
 msgstr "শর্টকোড, ব্লক, ডিপ লিংক ও পেজ বিল্ডার, সব এক রেফারেন্সে।"
 
-#: includes/class-foliora-admin.php:1866
+#: includes/class-foliora-admin.php:2427
 msgid "Everything Foliora can do. Fast, local and accessible."
 msgstr "Foliora যা যা করতে পারে। দ্রুত, লোকাল ও অ্যাক্সেসিবল।"
 
-#: includes/class-foliora-admin.php:1896
+#: includes/class-foliora-admin.php:2457
 msgid "Docs & Features sections"
 msgstr "ডক্স ও ফিচার সেকশন"
 
-#: includes/class-foliora-admin.php:1899
+#: includes/class-foliora-admin.php:2460
 msgid "Documents Library"
 msgstr "ডকুমেন্ট লাইব্রেরি"
 
-#: includes/class-foliora-admin.php:1904
+#: includes/class-foliora-admin.php:2465
 msgid "User Guide"
 msgstr "ইউজার গাইড"
 
-#: includes/class-foliora-admin.php:1908
+#: includes/class-foliora-admin.php:2469
 msgid "All Features"
 msgstr "সব ফিচার"
 
-#: includes/class-foliora-admin.php:1922
+#: includes/class-foliora-admin.php:2483
 msgid "4 ways to embed your documents"
 msgstr "ডকুমেন্ট এমবেড করার ৪টি উপায়"
 
-#: includes/class-foliora-admin.php:1935
+#: includes/class-foliora-admin.php:2496
 msgid "Use the visual Shortcode Builder to configure 3D FlipBook, theme, and toolbar to generate clean [foliora id=\"1\"] shortcodes."
 msgstr "3D ফ্লিপবুক, থিম ও টুলবার কনফিগার করে পরিষ্কার [foliora id=\"1\"] শর্টকোড তৈরি করতে ভিজ্যুয়াল শর্টকোড বিল্ডার ব্যবহার করুন।"
 
-#: includes/class-foliora-admin.php:1941
+#: includes/class-foliora-admin.php:2502
 msgid "Direct Shortcode Copy"
 msgstr "সরাসরি শর্টকোড কপি"
 
-#: includes/class-foliora-admin.php:1942
+#: includes/class-foliora-admin.php:2503
 msgid "Click \"Copy\" on any row below to quickly copy [foliora file=\"...\"] and paste it into classic editor, pages, or widgets."
 msgstr "নিচের যেকোনো সারিতে \"কপি\" ক্লিক করে [foliora file=\"...\"] কপি করুন এবং ক্লাসিক এডিটর, পেজ বা উইজেটে পেস্ট করুন।"
 
-#: includes/class-foliora-admin.php:1948
+#: includes/class-foliora-admin.php:2509
 msgid "1-Click Test Page"
 msgstr "১-ক্লিক টেস্ট পেজ"
 
-#: includes/class-foliora-admin.php:1949
+#: includes/class-foliora-admin.php:2510
 msgid "Hover over any document title below and click \"Create test page\" to publish and preview instantly in a new tab."
 msgstr "নিচের যেকোনো ডকুমেন্টের শিরোনামের ওপর হোভার করে \"টেস্ট পেজ তৈরি করুন\" ক্লিক করলে নতুন ট্যাবে সঙ্গে সঙ্গে প্রকাশিত হয়ে প্রিভিউ দেখা যাবে।"
 
-#: includes/class-foliora-admin.php:1955
+#: includes/class-foliora-admin.php:2516
 msgid "Gutenberg & oEmbed"
 msgstr "Gutenberg ও oEmbed"
 
-#: includes/class-foliora-admin.php:1956
+#: includes/class-foliora-admin.php:2517
 msgid "Insert the \"Foliora Viewer\" block, or simply paste any direct .pdf link on a new line to auto-embed."
 msgstr "\"Foliora Viewer\" ব্লক যোগ করুন, অথবা নতুন লাইনে যেকোনো সরাসরি .pdf লিংক পেস্ট করলেই অটো-এমবেড হবে।"
 
-#: includes/class-foliora-admin.php:1964
+#: includes/class-foliora-admin.php:2525
 msgid "Opening this screen automatically generates first-page preview thumbnails, indexes PDF text for site search, and checks accessibility tags."
 msgstr "এই স্ক্রিন খুললে স্বয়ংক্রিয়ভাবে প্রথম পাতার প্রিভিউ থাম্বনেইল তৈরি হয়, সাইট সার্চের জন্য PDF টেক্সট ইনডেক্স হয় এবং অ্যাকসেসিবিলিটি ট্যাগ যাচাই হয়।"
 
-#: includes/class-foliora-admin.php:1966
+#: includes/class-foliora-admin.php:2527
 msgid "Full Documentation & Cheatsheet"
 msgstr "সম্পূর্ণ ডকুমেন্টেশন ও চিটশিট"
 
-#: includes/class-foliora-admin.php:1971
+#: includes/class-foliora-admin.php:2532
 msgid "Generating thumbnails, indexing PDF text, and checking accessibility tags…"
 msgstr "থাম্বনেইল তৈরি, PDF টেক্সট ইনডেক্স, এবং অ্যাকসেসিবিলিটি ট্যাগ যাচাই চলছে…"
 
 #. translators: %s: number of untagged PDFs on this page.
-#: includes/class-foliora-admin.php:1990
+#: includes/class-foliora-admin.php:2541
 #, php-format
 msgid "%s PDF on this page is not tagged. Screen readers may not follow the intended reading order. Export tagged PDFs from Word, InDesign, or Acrobat."
 msgid_plural "%s PDFs on this page are not tagged. Screen readers may not follow the intended reading order. Export tagged PDFs from Word, InDesign, or Acrobat."
 msgstr[0] "এই পাতার %sটি PDF ট্যাগড নয়। স্ক্রিন রিডার কাঙ্ক্ষিত পড়ার ক্রম অনুসরণ নাও করতে পারে। Word, InDesign বা Acrobat থেকে ট্যাগড PDF এক্সপোর্ট করুন।"
 msgstr[1] "এই পাতার %sটি PDF ট্যাগড নয়। স্ক্রিন রিডার কাঙ্ক্ষিত পড়ার ক্রম অনুসরণ নাও করতে পারে। Word, InDesign বা Acrobat থেকে ট্যাগড PDF এক্সপোর্ট করুন।"
 
-#: includes/class-foliora-admin.php:2011
+#: includes/class-foliora-admin.php:2562
 #: includes/class-foliora-library.php:201
 msgid "Search documents"
 msgstr "ডকুমেন্ট খুঁজুন"
 
-#: includes/class-foliora-admin.php:2013
+#: includes/class-foliora-admin.php:2564
 #: includes/class-foliora-library.php:207
 msgid "Search documents…"
 msgstr "ডকুমেন্ট খুঁজুন…"
 
-#: includes/class-foliora-admin.php:2014
-#: includes/class-foliora-admin.php:2066
-#: includes/class-foliora-library.php:209
-msgid "Search"
-msgstr "সার্চ"
-
-#: includes/class-foliora-admin.php:2017
+#: includes/class-foliora-admin.php:2568
 msgid "Filter by status"
 msgstr "স্ট্যাটাস অনুযায়ী ফিল্টার"
 
-#: includes/class-foliora-admin.php:2020
+#: includes/class-foliora-admin.php:2571
 msgid "All"
 msgstr "সব"
 
-#: includes/class-foliora-admin.php:2021
+#: includes/class-foliora-admin.php:2572
 msgid "Ready"
 msgstr "প্রস্তুত"
 
-#: includes/class-foliora-admin.php:2022
-#: includes/class-foliora-admin.php:2139
-#: includes/class-foliora-admin.php:2153
+#: includes/class-foliora-admin.php:2573
+#: includes/class-foliora-admin.php:2690
+#: includes/class-foliora-admin.php:2704
 msgid "Pending"
 msgstr "অপেক্ষমাণ"
 
-#: includes/class-foliora-admin.php:2023
+#: includes/class-foliora-admin.php:2574
 msgid "Needs attention"
 msgstr "মনোযোগ দরকার"
 
 #. translators: %s: number of PDFs
-#: includes/class-foliora-admin.php:2051
+#: includes/class-foliora-admin.php:2602
 #, php-format
 msgid "%s document"
 msgid_plural "%s documents"
 msgstr[0] "%sটি ডকুমেন্ট"
 msgstr[1] "%sটি ডকুমেন্ট"
 
-#: includes/class-foliora-admin.php:2064
+#: includes/class-foliora-admin.php:2615
 msgid "Preview"
 msgstr "প্রিভিউ"
 
-#: includes/class-foliora-admin.php:2067
+#: includes/class-foliora-admin.php:2618
 msgid "Accessibility"
 msgstr "অ্যাকসেসিবিলিটি"
 
-#: includes/class-foliora-admin.php:2127
+#: includes/class-foliora-admin.php:2678
 msgid "View in Media"
 msgstr "মিডিয়াতে দেখুন"
 
-#: includes/class-foliora-admin.php:2128
+#: includes/class-foliora-admin.php:2679
 msgid "Open file"
 msgstr "ফাইল খুলুন"
 
-#: includes/class-foliora-admin.php:2137
+#: includes/class-foliora-admin.php:2688
 msgid "PDF text indexing is turned off in Settings."
 msgstr "সেটিংসে পিডিএফ টেক্সট ইনডেক্সিং বন্ধ আছে।"
 
-#: includes/class-foliora-admin.php:2137
-#: includes/class-foliora-admin.php:2151
+#: includes/class-foliora-admin.php:2688
+#: includes/class-foliora-admin.php:2702
 msgid "Off"
 msgstr "বন্ধ"
 
-#: includes/class-foliora-admin.php:2139
+#: includes/class-foliora-admin.php:2690
 msgid "Waiting for text extraction. Keep this screen open."
 msgstr "টেক্সট এক্সট্র্যাকশনের অপেক্ষায়। এই স্ক্রিন খোলা রাখুন।"
 
-#: includes/class-foliora-admin.php:2151
+#: includes/class-foliora-admin.php:2702
 msgid "Accessibility checks are turned off in Settings."
 msgstr "সেটিংসে অ্যাক্সেসিবিলিটি চেক বন্ধ আছে।"
 
-#: includes/class-foliora-admin.php:2153
+#: includes/class-foliora-admin.php:2704
 msgid "Waiting for the accessibility check. Keep this screen open."
 msgstr "অ্যাক্সেসিবিলিটি চেকের অপেক্ষায়। এই স্ক্রিন খোলা রাখুন।"
 
 #. translators: %s: the search term.
-#: includes/class-foliora-admin.php:2196
+#: includes/class-foliora-admin.php:2747
 #, php-format
 msgid "No documents match \"%s\""
 msgstr "\"%s\" এর সাথে মিলে এমন কোনো ডকুমেন্ট নেই"
 
-#: includes/class-foliora-admin.php:2199
+#: includes/class-foliora-admin.php:2750
 msgid "Clear search"
 msgstr "সার্চ মুছুন"
 
-#: includes/class-foliora-admin.php:2201
+#: includes/class-foliora-admin.php:2752
 msgid "No documents in this status."
 msgstr "এই স্ট্যাটাসে কোনো ডকুমেন্ট নেই।"
 
-#: includes/class-foliora-admin.php:2202
+#: includes/class-foliora-admin.php:2753
 msgid "Show all documents"
 msgstr "সব ডকুমেন্ট দেখান"
 
-#: includes/class-foliora-admin.php:2204
+#: includes/class-foliora-admin.php:2755
 msgid "No PDFs yet"
 msgstr "এখনও কোনো পিডিএফ নেই"
 
-#: includes/class-foliora-admin.php:2229
+#: includes/class-foliora-admin.php:2780
 msgid "Foliora User Guide & Complete Reference"
 msgstr "Foliora ইউজার গাইড ও সম্পূর্ণ রেফারেন্স"
 
-#: includes/class-foliora-admin.php:2230
+#: includes/class-foliora-admin.php:2781
 msgid "Learn how to easily embed PDFs, customize 3D FlipBook view modes, use shortcodes, integrate with page builders, and optimize for SEO and speed."
 msgstr "সহজে PDF এমবেড করা, 3D ফ্লিপবুক ভিউ মোড কাস্টমাইজ করা, শর্টকোড ব্যবহার, পেজ বিল্ডার ইন্টিগ্রেশন এবং SEO ও স্পিড অপ্টিমাইজেশন সম্পর্কে জানুন।"
 
-#: includes/class-foliora-admin.php:2235
+#: includes/class-foliora-admin.php:2786
 msgid "Guide sections"
 msgstr "গাইডের সেকশন"
 
-#: includes/class-foliora-admin.php:2236
+#: includes/class-foliora-admin.php:2787
 msgid "Quick Start"
 msgstr "দ্রুত শুরু"
 
-#: includes/class-foliora-admin.php:2237
+#: includes/class-foliora-admin.php:2788
 msgid "[foliora] API"
 msgstr "[foliora] API"
 
-#: includes/class-foliora-admin.php:2238
+#: includes/class-foliora-admin.php:2789
 msgid "[foliora_library]"
 msgstr "[foliora_library]"
 
-#: includes/class-foliora-admin.php:2239
+#: includes/class-foliora-admin.php:2790
 msgid "Deep Linking"
 msgstr "ডিপ লিংকিং"
 
-#: includes/class-foliora-admin.php:2240
+#: includes/class-foliora-admin.php:2791
 msgid "Page Builders"
 msgstr "পেজ বিল্ডার"
 
-#: includes/class-foliora-admin.php:2241
+#: includes/class-foliora-admin.php:2792
 msgid "FAQs & Tips"
 msgstr "FAQ ও টিপস"
 
-#: includes/class-foliora-admin.php:2251
+#: includes/class-foliora-admin.php:2802
 msgid "1. Quick Start: 3 Easy Ways to Embed"
 msgstr "১. দ্রুত শুরু: এমবেড করার ৩টি সহজ উপায়"
 
-#: includes/class-foliora-admin.php:2252
+#: includes/class-foliora-admin.php:2803
 msgid "Choose whichever workflow fits your editing style."
 msgstr "আপনার এডিটিং স্টাইলের সাথে যে ওয়ার্কফ্লো মানায় সেটি বেছে নিন।"
 
-#: includes/class-foliora-admin.php:2259
+#: includes/class-foliora-admin.php:2810
 msgid "Shortcode (Anywhere)"
 msgstr "শর্টকোড (যেকোনো জায়গায়)"
 
-#: includes/class-foliora-admin.php:2260
+#: includes/class-foliora-admin.php:2811
 msgid "Copy [foliora file=\"...\"] from the Documents Library tab and paste it into any post, page, widget, or template."
 msgstr "ডকুমেন্ট লাইব্রেরি ট্যাব থেকে [foliora file=\"...\"] কপি করে যেকোনো পোস্ট, পেজ, উইজেট বা টেমপ্লেটে পেস্ট করুন।"
 
-#: includes/class-foliora-admin.php:2272
+#: includes/class-foliora-admin.php:2823
 msgid "Gutenberg Native Block"
 msgstr "Gutenberg নেটিভ ব্লক"
 
-#: includes/class-foliora-admin.php:2273
+#: includes/class-foliora-admin.php:2824
 msgid "In the Block Editor, insert the \"Foliora Viewer\" block. Pick any PDF from your Media Library with instant live rendering."
 msgstr "ব্লক এডিটরে \"Foliora Viewer\" ব্লক যোগ করুন। মিডিয়া লাইব্রেরি থেকে যেকোনো PDF বেছে নিন এবং সঙ্গে সঙ্গে লাইভ রেন্ডারিং দেখুন।"
 
-#: includes/class-foliora-admin.php:2276
+#: includes/class-foliora-admin.php:2827
 msgid "Visual Editor Block"
 msgstr "ভিজ্যুয়াল এডিটর ব্লক"
 
-#: includes/class-foliora-admin.php:2283
+#: includes/class-foliora-admin.php:2834
 msgid "Auto oEmbed (Paste URL)"
 msgstr "অটো oEmbed (URL পেস্ট)"
 
-#: includes/class-foliora-admin.php:2284
+#: includes/class-foliora-admin.php:2835
 msgid "Simply paste a direct .pdf link on a new line in your editor. WordPress automatically transforms it into an interactive reader."
 msgstr "এডিটরে নতুন লাইনে সরাসরি একটি .pdf লিংক পেস্ট করুন। ওয়ার্ডপ্রেস স্বয়ংক্রিয়ভাবে এটিকে ইন্টারেক্টিভ রিডারে রূপান্তর করবে।"
 
-#: includes/class-foliora-admin.php:2287
+#: includes/class-foliora-admin.php:2838
 msgid "Zero Shortcode Required"
 msgstr "কোনো শর্টকোড লাগে না"
 
-#: includes/class-foliora-admin.php:2301
+#: includes/class-foliora-admin.php:2852
 msgid "2. [foliora] Shortcode Parameters & Attributes"
 msgstr "২. [foliora] শর্টকোডের প্যারামিটার ও অ্যাট্রিবিউট"
 
-#: includes/class-foliora-admin.php:2302
+#: includes/class-foliora-admin.php:2853
 msgid "Customize every aspect of your PDF viewer with these parameters:"
 msgstr "এই প্যারামিটারগুলো দিয়ে আপনার PDF ভিউয়ারের প্রতিটি দিক কাস্টমাইজ করুন:"
 
-#: includes/class-foliora-admin.php:2310
-#: includes/class-foliora-admin.php:2629
+#: includes/class-foliora-admin.php:2861
+#: includes/class-foliora-admin.php:3180
 msgid "Attribute"
 msgstr "অ্যাট্রিবিউট"
 
-#: includes/class-foliora-admin.php:2311
+#: includes/class-foliora-admin.php:2862
 msgid "Type & Default"
 msgstr "ধরন ও ডিফল্ট"
 
-#: includes/class-foliora-admin.php:2312
+#: includes/class-foliora-admin.php:2863
 msgid "Description & Options"
 msgstr "বিবরণ ও অপশন"
 
-#: includes/class-foliora-admin.php:2313
+#: includes/class-foliora-admin.php:2864
 msgid "Example"
 msgstr "উদাহরণ"
 
-#: includes/class-foliora-admin.php:2321
+#: includes/class-foliora-admin.php:2872
 msgid "Recommended"
 msgstr "প্রস্তাবিত"
 
-#: includes/class-foliora-admin.php:2326
+#: includes/class-foliora-admin.php:2877
 msgid "Saved Embed ID"
 msgstr "সংরক্ষিত এমবেড ID"
 
-#: includes/class-foliora-admin.php:2329
+#: includes/class-foliora-admin.php:2880
 msgid "Clean Saved Embed Shortcode:"
 msgstr "পরিষ্কার সংরক্ষিত এমবেড শর্টকোড:"
 
-#: includes/class-foliora-admin.php:2329
+#: includes/class-foliora-admin.php:2880
 msgid "Encapsulates all PDF settings, dimensions, themes, 3D flipbook mode, and toolbar options generated from the Shortcode Builder into a clean, short code."
 msgstr "শর্টকোড বিল্ডার থেকে তৈরি সব PDF সেটিংস, মাপ, থিম, 3D ফ্লিপবুক মোড ও টুলবার অপশন একটি ছোট, পরিষ্কার কোডে সংরক্ষিত থাকে।"
 
-#: includes/class-foliora-admin.php:2342
+#: includes/class-foliora-admin.php:2893
 msgid "Required unless id is set"
 msgstr "id দেওয়া না থাকলে আবশ্যক"
 
-#: includes/class-foliora-admin.php:2349
+#: includes/class-foliora-admin.php:2900
 msgid "Direct URL to your PDF document (local Media Library or CORS-enabled remote host)."
 msgstr "আপনার PDF ডকুমেন্টের সরাসরি URL (লোকাল মিডিয়া লাইব্রেরি অথবা CORS-সক্ষম রিমোট হোস্ট)।"
 
-#: includes/class-foliora-admin.php:2362
-#: includes/class-foliora-admin.php:2389
-#: includes/class-foliora-admin.php:2410
-#: includes/class-foliora-admin.php:2431
-#: includes/class-foliora-admin.php:2452
-#: includes/class-foliora-admin.php:2473
-#: includes/class-foliora-admin.php:2494
-#: includes/class-foliora-admin.php:2515
-#: includes/class-foliora-admin.php:2535
+#: includes/class-foliora-admin.php:2913
+#: includes/class-foliora-admin.php:2940
+#: includes/class-foliora-admin.php:2961
+#: includes/class-foliora-admin.php:2982
+#: includes/class-foliora-admin.php:3003
+#: includes/class-foliora-admin.php:3024
+#: includes/class-foliora-admin.php:3045
+#: includes/class-foliora-admin.php:3066
+#: includes/class-foliora-admin.php:3086
 msgid "Optional"
 msgstr "ঐচ্ছিক"
 
-#: includes/class-foliora-admin.php:2370
+#: includes/class-foliora-admin.php:2921
 msgid "Reading Layout Mode:"
 msgstr "রিডিং লেআউট মোড:"
 
-#: includes/class-foliora-admin.php:2372
+#: includes/class-foliora-admin.php:2923
 msgid "3D realistic FlipBook with Web Audio page turn sound."
 msgstr "Web Audio পেজ-টার্ন সাউন্ডসহ বাস্তবসম্মত 3D ফ্লিপবুক।"
 
-#: includes/class-foliora-admin.php:2373
+#: includes/class-foliora-admin.php:2924
 msgid "Continuous vertical scrolling feed."
 msgstr "নিরবচ্ছিন্ন উল্লম্ব স্ক্রলিং ফিড।"
 
-#: includes/class-foliora-admin.php:2374
+#: includes/class-foliora-admin.php:2925
 msgid "Two-page magazine book spread."
 msgstr "দুই পাতার ম্যাগাজিন-স্টাইল বুক স্প্রেড।"
 
-#: includes/class-foliora-admin.php:2375
+#: includes/class-foliora-admin.php:2926
 msgid "Standard single page reader."
 msgstr "স্ট্যান্ডার্ড একক পাতার রিডার।"
 
-#: includes/class-foliora-admin.php:2397
+#: includes/class-foliora-admin.php:2948
 msgid "Viewer container width. Supports percentage (%), pixels (px), or viewport width (vw)."
 msgstr "ভিউয়ার কন্টেইনারের প্রস্থ। শতাংশ (%), পিক্সেল (px) বা ভিউপোর্ট প্রস্থ (vw) সমর্থিত।"
 
-#: includes/class-foliora-admin.php:2418
+#: includes/class-foliora-admin.php:2969
 msgid "Viewer container height. Supports pixels (px), viewport height (vh), or em/rem."
 msgstr "ভিউয়ার কন্টেইনারের উচ্চতা। পিক্সেল (px), ভিউপোর্ট উচ্চতা (vh) বা em/rem সমর্থিত।"
 
-#: includes/class-foliora-admin.php:2439
+#: includes/class-foliora-admin.php:2990
 msgid "Initial starting page number when the document opens."
 msgstr "ডকুমেন্ট খোলার সময় শুরুর পাতা নম্বর।"
 
-#: includes/class-foliora-admin.php:2460
+#: includes/class-foliora-admin.php:3011
 msgid "Show or hide the direct PDF download button in the toolbar."
 msgstr "টুলবারে সরাসরি PDF ডাউনলোড বাটন দেখান বা লুকান।"
 
-#: includes/class-foliora-admin.php:2481
+#: includes/class-foliora-admin.php:3032
 msgid "Show or hide the print button in the toolbar."
 msgstr "টুলবারে প্রিন্ট বাটন দেখান বা লুকান।"
 
-#: includes/class-foliora-admin.php:2502
+#: includes/class-foliora-admin.php:3053
 msgid "Enable or disable the in-document text search (Find) toolbar tool."
 msgstr "ডকুমেন্টের ভেতরের টেক্সট সার্চ (ফাইন্ড) টুলবার টুল চালু বা বন্ধ করুন।"
 
-#: includes/class-foliora-admin.php:2522
+#: includes/class-foliora-admin.php:3073
 msgid "Optional caption heading displayed directly above the viewer frame."
 msgstr "ভিউয়ার ফ্রেমের ঠিক ওপরে দেখানো ঐচ্ছিক ক্যাপশন শিরোনাম।"
 
-#: includes/class-foliora-admin.php:2542
+#: includes/class-foliora-admin.php:3093
 msgid "Hide specific toolbar buttons (comma-separated):"
 msgstr "নির্দিষ্ট টুলবার বাটন লুকান (কমা দিয়ে আলাদা করে):"
 
-#: includes/class-foliora-admin.php:2563
+#: includes/class-foliora-admin.php:3114
 msgid "Ready-to-Use Copy Presets"
 msgstr "ব্যবহারের জন্য প্রস্তুত কপি প্রিসেট"
 
-#: includes/class-foliora-admin.php:2564
+#: includes/class-foliora-admin.php:3115
 msgid "Click the copy button on any preset to copy the full shortcode:"
 msgstr "সম্পূর্ণ শর্টকোড কপি করতে যেকোনো প্রিসেটের কপি বাটনে ক্লিক করুন:"
 
-#: includes/class-foliora-admin.php:2570
+#: includes/class-foliora-admin.php:3121
 msgid "3D FlipBook Mode"
 msgstr "3D ফ্লিপবুক মোড"
 
-#: includes/class-foliora-admin.php:2571
+#: includes/class-foliora-admin.php:3122
 msgid "Realistic Sound & Perspective"
 msgstr "বাস্তবসম্মত সাউন্ড ও পার্সপেক্টিভ"
 
-#: includes/class-foliora-admin.php:2584
+#: includes/class-foliora-admin.php:3135
 msgid "Vertical Continuous Scroll"
 msgstr "উল্লম্ব কন্টিনিউয়াস স্ক্রল"
 
-#: includes/class-foliora-admin.php:2585
+#: includes/class-foliora-admin.php:3136
 msgid "Ideal for Long Reports & Ebooks"
 msgstr "দীর্ঘ রিপোর্ট ও ই-বুকের জন্য আদর্শ"
 
-#: includes/class-foliora-admin.php:2598
+#: includes/class-foliora-admin.php:3149
 msgid "Locked Down Presentation"
 msgstr "লকডাউন প্রেজেন্টেশন"
 
-#: includes/class-foliora-admin.php:2599
+#: includes/class-foliora-admin.php:3150
 msgid "No Direct Download or Printing"
 msgstr "সরাসরি ডাউনলোড বা প্রিন্ট নেই"
 
-#: includes/class-foliora-admin.php:2620
+#: includes/class-foliora-admin.php:3171
 msgid "3. [foliora_library] Document Gallery Shortcode"
 msgstr "৩. [foliora_library] ডকুমেন্ট গ্যালারি শর্টকোড"
 
-#: includes/class-foliora-admin.php:2621
+#: includes/class-foliora-admin.php:3172
 msgid "Display all your Media Library PDFs in a responsive, searchable grid gallery with lightbox reading modal:"
 msgstr "আপনার মিডিয়া লাইব্রেরির সব PDF রেসপন্সিভ, সার্চযোগ্য গ্রিড গ্যালারিতে লাইটবক্স রিডিং মোডালসহ দেখান:"
 
-#: includes/class-foliora-admin.php:2630
+#: includes/class-foliora-admin.php:3181
 msgid "Values / Default"
 msgstr "মান / ডিফল্ট"
 
-#: includes/class-foliora-admin.php:2631
+#: includes/class-foliora-admin.php:3182
 msgid "Description & Behavior"
 msgstr "বিবরণ ও আচরণ"
 
-#: includes/class-foliora-admin.php:2641
+#: includes/class-foliora-admin.php:3192
 msgid "Number of document grid columns on desktop viewports (automatically reflows on mobile)."
 msgstr "ডেস্কটপ ভিউপোর্টে ডকুমেন্ট গ্রিডের কলাম সংখ্যা (মোবাইলে স্বয়ংক্রিয়ভাবে সাজে)।"
 
-#: includes/class-foliora-admin.php:2649
+#: includes/class-foliora-admin.php:3200
 msgid "How many PDF cards to display per page before showing pagination controls."
 msgstr "পেজিনেশন কন্ট্রোল দেখানোর আগে প্রতি পাতায় কতটি PDF কার্ড দেখানো হবে।"
 
-#: includes/class-foliora-admin.php:2657
+#: includes/class-foliora-admin.php:3208
 msgid "Sorting order for the gallery catalog items."
 msgstr "গ্যালারির আইটেমগুলোর সাজানোর ক্রম।"
 
-#: includes/class-foliora-admin.php:2665
+#: includes/class-foliora-admin.php:3216
 msgid "Show real-time instant search input box above the document gallery."
 msgstr "ডকুমেন্ট গ্যালারির ওপরে রিয়েল-টাইম ইনস্ট্যান্ট সার্চ বক্স দেখান।"
 
-#: includes/class-foliora-admin.php:2673
+#: includes/class-foliora-admin.php:3224
 msgid "Interactive Gallery Preset"
 msgstr "ইন্টারেক্টিভ গ্যালারি প্রিসেট"
 
-#: includes/class-foliora-admin.php:2674
+#: includes/class-foliora-admin.php:3225
 msgid "Searchable 4-column document directory"
 msgstr "সার্চযোগ্য ৪-কলামের ডকুমেন্ট ডিরেক্টরি"
 
-#: includes/class-foliora-admin.php:2693
+#: includes/class-foliora-admin.php:3244
 msgid "4. Deep Linking & URL Hashes (#page=X)"
 msgstr "৪. ডিপ লিংকিং ও URL হ্যাশ (#page=X)"
 
-#: includes/class-foliora-admin.php:2694
+#: includes/class-foliora-admin.php:3245
 msgid "Send visitors directly to any specific page inside an embedded document by appending hash anchors:"
 msgstr "হ্যাশ অ্যাংকর যোগ করে দর্শকদের এমবেড করা ডকুমেন্টের নির্দিষ্ট পাতায় সরাসরি পাঠান:"
 
-#: includes/class-foliora-admin.php:2702
+#: includes/class-foliora-admin.php:3253
 msgid "Loads the handbook page and automatically jumps directly to page 14 with smooth animation."
 msgstr "হ্যান্ডবুকের পাতা লোড করে মসৃণ অ্যানিমেশনসহ স্বয়ংক্রিয়ভাবে সরাসরি ১৪ নম্বর পাতায় যায়।"
 
-#: includes/class-foliora-admin.php:2708
+#: includes/class-foliora-admin.php:3259
 msgid "Alternative namespaced syntax to avoid conflicting with other on-page anchors or sliders."
 msgstr "পেজের অন্য অ্যাংকর বা স্লাইডারের সাথে সংঘাত এড়াতে বিকল্প নেমস্পেসড সিনট্যাক্স।"
 
-#: includes/class-foliora-admin.php:2720
+#: includes/class-foliora-admin.php:3271
 msgid "5. Page Builders & Compatibility"
 msgstr "৫. পেজ বিল্ডার ও সামঞ্জস্য"
 
-#: includes/class-foliora-admin.php:2721
+#: includes/class-foliora-admin.php:3272
 msgid "Native visual blocks and widgets bundled for your favorite WordPress builders:"
 msgstr "আপনার প্রিয় ওয়ার্ডপ্রেস বিল্ডারের জন্য বান্ডেল করা নেটিভ ভিজ্যুয়াল ব্লক ও উইজেট:"
 
-#: includes/class-foliora-admin.php:2728
+#: includes/class-foliora-admin.php:3279
 msgid "Gutenberg Block Editor"
 msgstr "Gutenberg ব্লক এডিটর"
 
-#: includes/class-foliora-admin.php:2730
+#: includes/class-foliora-admin.php:3281
 msgid "Search for \"Foliora Viewer\" or \"Foliora Library\" in the block inserter. Customize dimensions, starting page, view mode (including 3D FlipBook), and download toggles directly in the block sidebar."
 msgstr "ব্লক ইনসার্টারে \"Foliora Viewer\" বা \"Foliora Library\" খুঁজুন। ব্লক সাইডবারেই মাপ, শুরুর পাতা, ভিউ মোড (3D ফ্লিপবুকসহ) ও ডাউনলোড টগল কাস্টমাইজ করুন।"
 
-#: includes/class-foliora-admin.php:2735
+#: includes/class-foliora-admin.php:3286
 msgid "Elementor Page Builder"
 msgstr "Elementor পেজ বিল্ডার"
 
-#: includes/class-foliora-admin.php:2737
+#: includes/class-foliora-admin.php:3288
 msgid "Find \"Foliora PDF Viewer\" and \"Foliora PDF Library\" widgets in the Elementor panel. Full visual styling controls with zero extra setup."
 msgstr "Elementor প্যানেলে \"Foliora PDF Viewer\" ও \"Foliora PDF Library\" উইজেট খুঁজুন। অতিরিক্ত সেটআপ ছাড়াই পূর্ণ ভিজ্যুয়াল স্টাইলিং কন্ট্রোল।"
 
-#: includes/class-foliora-admin.php:2742
+#: includes/class-foliora-admin.php:3293
 msgid "Divi & Beaver Builder"
 msgstr "Divi ও Beaver Builder"
 
-#: includes/class-foliora-admin.php:2744
+#: includes/class-foliora-admin.php:3295
 msgid "Native Divi modules and Beaver Builder modules are bundled right in Foliora. Select your PDF directly inside their builder interfaces."
 msgstr "নেটিভ Divi মডিউল ও Beaver Builder মডিউল Foliora-তেই বান্ডেল করা আছে। তাদের বিল্ডার ইন্টারফেসের ভেতরেই সরাসরি আপনার PDF বেছে নিন।"
 
-#: includes/class-foliora-admin.php:2749
+#: includes/class-foliora-admin.php:3300
 msgid "WPML & Polylang Multi-Language"
 msgstr "WPML ও Polylang বহুভাষা"
 
-#: includes/class-foliora-admin.php:2751
+#: includes/class-foliora-admin.php:3302
 msgid "When you translate Media Library PDFs, Foliora automatically swaps the document URL for the active visitor language on that page."
 msgstr "মিডিয়া লাইব্রেরির PDF অনুবাদ করলে Foliora ওই পেজে সক্রিয় দর্শকের ভাষা অনুযায়ী স্বয়ংক্রিয়ভাবে ডকুমেন্ট URL বদলে দেয়।"
 
-#: includes/class-foliora-admin.php:2763
+#: includes/class-foliora-admin.php:3314
 msgid "6. Troubleshooting & Best Practices"
 msgstr "৬. সমস্যা সমাধান ও সেরা চর্চা"
 
-#: includes/class-foliora-admin.php:2764
+#: includes/class-foliora-admin.php:3315
 msgid "Answers to frequent configuration questions and hosting best practices:"
 msgstr "কনফিগারেশন নিয়ে সাধারণ প্রশ্নের উত্তর ও হোস্টিংয়ের সেরা চর্চা:"
 
-#: includes/class-foliora-admin.php:2770
+#: includes/class-foliora-admin.php:3321
 msgid "How do I resolve CORS (Cross-Origin) errors when loading remote PDFs?"
 msgstr "রিমোট PDF লোড করার সময় CORS (ক্রস-অরিজিন) ত্রুটি কীভাবে সমাধান করবো?"
 
-#: includes/class-foliora-admin.php:2774
+#: includes/class-foliora-admin.php:3325
 msgid "Browsers block scripts from reading PDFs hosted on other domains unless that remote server allows CORS. The easiest fix is uploading the PDF directly to your WordPress Media Library. If you must use a remote host, configure the header Access-Control-Allow-Origin: * on that remote server."
 msgstr "অন্য ডোমেনে হোস্ট করা PDF রিমোট সার্ভার CORS অনুমোদন না করলে ব্রাউজার স্ক্রিপ্টকে তা পড়তে দেয় না। সবচেয়ে সহজ সমাধান হলো PDF সরাসরি আপনার ওয়ার্ডপ্রেস মিডিয়া লাইব্রেরিতে আপলোড করা। রিমোট হোস্ট ব্যবহার করতেই হলে ওই সার্ভারে Access-Control-Allow-Origin: * হেডার কনফিগার করুন।"
 
-#: includes/class-foliora-admin.php:2779
+#: includes/class-foliora-admin.php:3330
 msgid "Why are PDF.js scripts excluded from cache plugins?"
 msgstr "ক্যাশ প্লাগিন থেকে PDF.js স্ক্রিপ্ট কেন বাদ দেওয়া হয়?"
 
-#: includes/class-foliora-admin.php:2783
+#: includes/class-foliora-admin.php:3334
 msgid "PDF.js requires its worker script (pdf.worker.min.js) to load in an isolated worker thread. Combining, deferring, or minifying it with other theme JS breaks web worker loading. Foliora automatically sets data-no-optimize rules for WP Rocket, LiteSpeed Cache, Autoptimize, and W3 Total Cache."
 msgstr "PDF.js-এর ওয়ার্কার স্ক্রিপ্ট (pdf.worker.min.js) আলাদা ওয়ার্কার থ্রেডে লোড হওয়া দরকার। থিমের অন্য JS-এর সাথে এটি একত্র, ডিফার বা মিনিফাই করলে ওয়েব ওয়ার্কার লোডিং ভেঙে যায়। Foliora স্বয়ংক্রিয়ভাবে WP Rocket, LiteSpeed Cache, Autoptimize ও W3 Total Cache-এর জন্য data-no-optimize নিয়ম সেট করে।"
 
-#: includes/class-foliora-admin.php:2788
+#: includes/class-foliora-admin.php:3339
 msgid "How do thumbnail generation and search indexing work?"
 msgstr "থাম্বনেইল তৈরি ও সার্চ ইনডেক্সিং কীভাবে কাজ করে?"
 
-#: includes/class-foliora-admin.php:2792
+#: includes/class-foliora-admin.php:3343
 msgid "The first time an admin visits the Documents Library tab, the browser renders page 1 of each PDF and saves a high-quality cover thumbnail in your Media Library, while simultaneously extracting text so visitors can search for PDF contents using WordPress site search."
 msgstr "অ্যাডমিন প্রথমবার ডকুমেন্ট লাইব্রেরি ট্যাব খুললে ব্রাউজার প্রতিটি PDF-এর ১ নম্বর পাতা রেন্ডার করে মিডিয়া লাইব্রেরিতে উচ্চমানের কভার থাম্বনেইল সংরক্ষণ করে, আর একই সাথে টেক্সট এক্সট্র্যাক্ট করে যাতে দর্শকরা ওয়ার্ডপ্রেস সাইট সার্চে PDF-এর ভেতরের লেখা খুঁজতে পারেন।"
 
-#: includes/class-foliora-admin.php:2809
+#: includes/class-foliora-admin.php:3360
 msgid "Reading Modes & 3D FlipBook Engine"
 msgstr "রিডিং মোড ও 3D ফ্লিপবুক ইঞ্জিন"
 
-#: includes/class-foliora-admin.php:2811
+#: includes/class-foliora-admin.php:3362
 msgid "16-Bone 3D FlipBook:"
 msgstr "১৬-বোন 3D ফ্লিপবুক:"
 
-#: includes/class-foliora-admin.php:2811
+#: includes/class-foliora-admin.php:3362
 msgid "Ultra-realistic 3D curved page turning with natural paper inertia, dynamic specular lighting, center spine depth shadow, and stacked paper thickness."
 msgstr "প্রাকৃতিক কাগজের জড়তা, ডায়নামিক স্পেকুলার আলো, মাঝের স্পাইন ডেপথ শ্যাডো ও স্তূপ করা কাগজের পুরুত্বসহ অতি-বাস্তবসম্মত 3D বাঁকানো পেজ টার্ন।"
 
-#: includes/class-foliora-admin.php:2812
+#: includes/class-foliora-admin.php:3363
 msgid "Web Audio Paper Sound:"
 msgstr "Web Audio কাগজের শব্দ:"
 
-#: includes/class-foliora-admin.php:2812
+#: includes/class-foliora-admin.php:3363
 msgid "Synthesized real-time page-turn audio feedback (no heavy external mp3 files required)."
 msgstr "রিয়েল-টাইমে সিন্থেসাইজ করা পেজ-টার্ন অডিও ফিডব্যাক (ভারী বাহ্যিক mp3 ফাইল লাগে না)।"
 
-#: includes/class-foliora-admin.php:2813
+#: includes/class-foliora-admin.php:3364
 msgid "Multiple Layout Modes:"
 msgstr "একাধিক লেআউট মোড:"
 
-#: includes/class-foliora-admin.php:2813
+#: includes/class-foliora-admin.php:3364
 msgid "Single Page, Two-Page Magazine Spread, Continuous Vertical Scroll, and 3D FlipBook."
 msgstr "একক পাতা, দুই পাতার ম্যাগাজিন স্প্রেড, কন্টিনিউয়াস উল্লম্ব স্ক্রল ও 3D ফ্লিপবুক।"
 
-#: includes/class-foliora-admin.php:2814
+#: includes/class-foliora-admin.php:3365
 msgid "Glassmorphism Thumbnails Panel:"
 msgstr "গ্লাসমরফিজম থাম্বনেইল প্যানেল:"
 
-#: includes/class-foliora-admin.php:2814
+#: includes/class-foliora-admin.php:3365
 msgid "Slide-out thumbnail card preview strip with instant jump-to-page navigation."
 msgstr "তাৎক্ষণিক পাতায় যাওয়ার নেভিগেশনসহ স্লাইড-আউট থাম্বনেইল কার্ড প্রিভিউ স্ট্রিপ।"
 
-#: includes/class-foliora-admin.php:2815
+#: includes/class-foliora-admin.php:3366
 msgid "Touch & Mobile Gesture Engine:"
 msgstr "টাচ ও মোবাইল জেসচার ইঞ্জিন:"
 
-#: includes/class-foliora-admin.php:2815
+#: includes/class-foliora-admin.php:3366
 msgid "Natural swipe-to-flip gestures and hardware-accelerated pinch-to-zoom."
 msgstr "প্রাকৃতিক সোয়াইপ-টু-ফ্লিপ জেসচার ও হার্ডওয়্যার-অ্যাক্সিলারেটেড পিঞ্চ-টু-জুম।"
 
-#: includes/class-foliora-admin.php:2816
+#: includes/class-foliora-admin.php:3367
 msgid "Reading Themes:"
 msgstr "রিডিং থিম:"
 
-#: includes/class-foliora-admin.php:2816
+#: includes/class-foliora-admin.php:3367
 msgid "Instant Dark, Light, and Sepia eye-care reading themes."
 msgstr "তাৎক্ষণিক ডার্ক, লাইট ও সেপিয়া চোখ-বান্ধব রিডিং থিম।"
 
-#: includes/class-foliora-admin.php:2822
+#: includes/class-foliora-admin.php:3373
 msgid "Shortcode Builder & Saved Embeds"
 msgstr "শর্টকোড বিল্ডার ও সংরক্ষিত এমবেড"
 
-#: includes/class-foliora-admin.php:2824
+#: includes/class-foliora-admin.php:3375
 msgid "Clean ID Shortcodes [foliora id=\"1\"]:"
 msgstr "পরিষ্কার ID শর্টকোড [foliora id=\"1\"]:"
 
-#: includes/class-foliora-admin.php:2824
+#: includes/class-foliora-admin.php:3375
 msgid "Encapsulates long attributes into a clean, easy-to-manage ID-based shortcode."
 msgstr "লম্বা অ্যাট্রিবিউটগুলোকে সহজে পরিচালনাযোগ্য পরিষ্কার ID-ভিত্তিক শর্টকোডে সংকুচিত করে।"
 
-#: includes/class-foliora-admin.php:2825
+#: includes/class-foliora-admin.php:3376
 msgid "Saved Embeds Manager:"
 msgstr "সংরক্ষিত এমবেড ম্যানেজার:"
 
-#: includes/class-foliora-admin.php:2825
+#: includes/class-foliora-admin.php:3376
 msgid "Dedicated manager with instant search, 1-click copy, duplicate, and live editing."
 msgstr "ইনস্ট্যান্ট সার্চ, ১-ক্লিক কপি, ডুপ্লিকেট ও লাইভ এডিটিংসহ ডেডিকেটেড ম্যানেজার।"
 
-#: includes/class-foliora-admin.php:2826
+#: includes/class-foliora-admin.php:3377
 msgid "Live Interactive Preview:"
 msgstr "লাইভ ইন্টারেক্টিভ প্রিভিউ:"
 
-#: includes/class-foliora-admin.php:2826
+#: includes/class-foliora-admin.php:3377
 msgid "Real-time responsive preview (Desktop, Tablet, Mobile) that updates instantly as you tweak settings."
 msgstr "সেটিংস বদলানোর সাথে সাথে আপডেট হওয়া রিয়েল-টাইম রেসপন্সিভ প্রিভিউ (ডেস্কটপ, ট্যাবলেট, মোবাইল)।"
 
-#: includes/class-foliora-admin.php:2827
+#: includes/class-foliora-admin.php:3378
 msgid "One-click configurations for 3D FlipBook, E-Book Reader, Corporate Report, Night Reader, and Speed Optimized."
 msgstr "3D ফ্লিপবুক, ই-বুক রিডার, কর্পোরেট রিপোর্ট, নাইট রিডার ও স্পিড অপ্টিমাইজডের জন্য ওয়ান-ক্লিক কনফিগারেশন।"
 
-#: includes/class-foliora-admin.php:2828
+#: includes/class-foliora-admin.php:3379
 msgid "Developer Raw Code Toggle:"
 msgstr "ডেভেলপার র কোড টগল:"
 
-#: includes/class-foliora-admin.php:2828
+#: includes/class-foliora-admin.php:3379
 msgid "Switch between clean ID shortcodes, raw inline shortcodes, PHP snippets, and Gutenberg block code."
 msgstr "পরিষ্কার ID শর্টকোড, র ইনলাইন শর্টকোড, PHP স্নিপেট ও Gutenberg ব্লক কোডের মধ্যে বদল করুন।"
 
-#: includes/class-foliora-admin.php:2834
+#: includes/class-foliora-admin.php:3385
 msgid "Page Builders & Documents Library"
 msgstr "পেজ বিল্ডার ও ডকুমেন্ট লাইব্রেরি"
 
-#: includes/class-foliora-admin.php:2836
+#: includes/class-foliora-admin.php:3387
 msgid "Gutenberg Native Block:"
 msgstr "Gutenberg নেটিভ ব্লক:"
 
-#: includes/class-foliora-admin.php:2836
+#: includes/class-foliora-admin.php:3387
 msgid "Foliora Viewer block with Media picker & live first-page preview."
 msgstr "মিডিয়া পিকার ও লাইভ প্রথম-পাতা প্রিভিউসহ Foliora Viewer ব্লক।"
 
-#: includes/class-foliora-admin.php:2837
+#: includes/class-foliora-admin.php:3388
 msgid "Auto oEmbed:"
 msgstr "অটো oEmbed:"
 
-#: includes/class-foliora-admin.php:2837
+#: includes/class-foliora-admin.php:3388
 msgid "Simply paste any direct .pdf link on a new line to embed instantly."
 msgstr "নতুন লাইনে যেকোনো সরাসরি .pdf লিংক পেস্ট করলেই সঙ্গে সঙ্গে এমবেড হয়।"
 
-#: includes/class-foliora-admin.php:2838
+#: includes/class-foliora-admin.php:3389
 msgid "Page Builders Compatibility:"
 msgstr "পেজ বিল্ডার সামঞ্জস্য:"
 
-#: includes/class-foliora-admin.php:2838
+#: includes/class-foliora-admin.php:3389
 msgid "Native widgets for Elementor, Divi and Beaver Builder; the shortcode works everywhere else."
 msgstr "Elementor, Divi ও Beaver Builder এর নেটিভ উইজেট; শর্টকোড বাকি সবখানে কাজ করে।"
 
-#: includes/class-foliora-admin.php:2839
+#: includes/class-foliora-admin.php:3390
 msgid "Documents Library Grid:"
 msgstr "ডকুমেন্ট লাইব্রেরি গ্রিড:"
 
-#: includes/class-foliora-admin.php:2839
+#: includes/class-foliora-admin.php:3390
 msgid "[foliora_library] shortcode for searchable PDF galleries."
 msgstr "সার্চযোগ্য PDF গ্যালারির জন্য [foliora_library] শর্টকোড।"
 
-#: includes/class-foliora-admin.php:2840
+#: includes/class-foliora-admin.php:3391
 msgid "Attachment Pages:"
 msgstr "অ্যাটাচমেন্ট পেজ:"
 
-#: includes/class-foliora-admin.php:2840
+#: includes/class-foliora-admin.php:3391
 msgid "Automatic interactive reader on standard WordPress attachment pages."
 msgstr "স্ট্যান্ডার্ড ওয়ার্ডপ্রেস অ্যাটাচমেন্ট পেজে স্বয়ংক্রিয় ইন্টারেক্টিভ রিডার।"
 
-#: includes/class-foliora-admin.php:2846
+#: includes/class-foliora-admin.php:3397
 msgid "SEO, Search & Accessibility"
 msgstr "SEO, সার্চ ও অ্যাকসেসিবিলিটি"
 
-#: includes/class-foliora-admin.php:2848
+#: includes/class-foliora-admin.php:3399
 msgid "Site Search Indexing:"
 msgstr "সাইট সার্চ ইনডেক্সিং:"
 
-#: includes/class-foliora-admin.php:2848
+#: includes/class-foliora-admin.php:3399
 msgid "Extracts PDF text so WordPress search finds content inside documents."
 msgstr "PDF টেক্সট এক্সট্র্যাক্ট করে যাতে ওয়ার্ডপ্রেস সার্চ ডকুমেন্টের ভেতরের কন্টেন্ট খুঁজে পায়।"
 
-#: includes/class-foliora-admin.php:2849
+#: includes/class-foliora-admin.php:3400
 msgid "Schema.org JSON-LD:"
 msgstr "Schema.org JSON-LD:"
 
-#: includes/class-foliora-admin.php:2849
+#: includes/class-foliora-admin.php:3400
 msgid "Automatic DigitalDocument rich snippets for Google search results."
 msgstr "Google সার্চ ফলাফলের জন্য স্বয়ংক্রিয় DigitalDocument রিচ স্নিপেট।"
 
-#: includes/class-foliora-admin.php:2850
+#: includes/class-foliora-admin.php:3401
 msgid "Social Card Previews:"
 msgstr "সোশ্যাল কার্ড প্রিভিউ:"
 
-#: includes/class-foliora-admin.php:2850
+#: includes/class-foliora-admin.php:3401
 msgid "Open Graph & Twitter Cards cover preview generated from the PDF."
 msgstr "PDF থেকে তৈরি Open Graph ও Twitter Card কভার প্রিভিউ।"
 
-#: includes/class-foliora-admin.php:2851
+#: includes/class-foliora-admin.php:3402
 msgid "Accessibility Diagnostics:"
 msgstr "অ্যাকসেসিবিলিটি ডায়াগনস্টিক্স:"
 
-#: includes/class-foliora-admin.php:2851
+#: includes/class-foliora-admin.php:3402
 msgid "Detects untagged PDFs and tells you how to export an accessible one."
 msgstr "ট্যাগবিহীন পিডিএফ শনাক্ত করে এবং অ্যাক্সেসিবল পিডিএফ কীভাবে এক্সপোর্ট করবেন তা জানায়।"
 
-#: includes/class-foliora-admin.php:2852
+#: includes/class-foliora-admin.php:3403
 msgid "Zero CDN Dependency:"
 msgstr "শূন্য CDN নির্ভরতা:"
 
-#: includes/class-foliora-admin.php:2852
+#: includes/class-foliora-admin.php:3403
 msgid "Bundled locally hosted PDF.js, no third-party tracking or remote downtime."
 msgstr "বান্ডেল করা লোকাল PDF.js, কোনো থার্ড-পার্টি ট্র্যাকিং বা রিমোট ডাউনটাইম নেই।"
 
-#: includes/class-foliora-admin.php:2862
+#: includes/class-foliora-admin.php:3413
 msgid "Everything Foliora Can Do"
 msgstr "Foliora যা যা করতে পারে"
 
-#: includes/class-foliora-admin.php:2863
+#: includes/class-foliora-admin.php:3414
 msgid "A fast, accessible and locally rendered PDF reading experience with no external dependencies, plus builder widgets and SEO integration."
 msgstr "বাইরের কোনো নির্ভরতা ছাড়া দ্রুত, অ্যাক্সেসিবল ও লোকালি রেন্ডার করা পিডিএফ পড়ার অভিজ্ঞতা, সাথে বিল্ডার উইজেট ও SEO ইন্টিগ্রেশন।"
 
-#: includes/class-foliora-admin.php:2867
+#: includes/class-foliora-admin.php:3418
 msgid "reading modes"
 msgstr "রিডিং মোড"
 
-#: includes/class-foliora-admin.php:2869
+#: includes/class-foliora-admin.php:3420
 msgid "external requests"
 msgstr "বাইরের রিকোয়েস্ট"
 
-#: includes/class-foliora-admin.php:2881
+#: includes/class-foliora-admin.php:3432
 msgid "Free"
 msgstr "ফ্রি"
 
-#: includes/class-foliora-admin.php:2922
+#: includes/class-foliora-admin.php:3473
 msgid "Select a PDF first."
 msgstr "আগে একটি PDF বেছে নিন।"
 
-#: includes/class-foliora-admin.php:2929
+#: includes/class-foliora-admin.php:3480
 msgid "Only PDFs from the Media Library can be used here."
 msgstr "এখানে শুধু মিডিয়া লাইব্রেরির PDF ব্যবহার করা যায়।"
 
-#: includes/class-foliora-admin.php:2933
+#: includes/class-foliora-admin.php:3484
 msgid "That file is not a PDF."
 msgstr "ওই ফাইলটি PDF নয়।"
 
-#: includes/class-foliora-admin.php:2950
+#: includes/class-foliora-admin.php:3501
 msgid "Could not update the test page."
 msgstr "টেস্ট পেজ আপডেট করা যায়নি।"
 
-#: includes/class-foliora-admin.php:2958
+#: includes/class-foliora-admin.php:3509
 msgid "Foliora Test"
 msgstr "Foliora টেস্ট"
 
@@ -2227,13 +2389,13 @@ msgid "PDF viewer"
 msgstr "PDF ভিউয়ার"
 
 #: includes/class-foliora-viewer.php:275
-#: includes/class-foliora-viewer.php:557
+#: includes/class-foliora-viewer.php:567
 msgid "Table of contents"
 msgstr "সূচিপত্র"
 
 #: includes/class-foliora-viewer.php:278
-#: includes/class-foliora-viewer.php:558
-#: includes/class-foliora-viewer.php:560
+#: includes/class-foliora-viewer.php:568
+#: includes/class-foliora-viewer.php:570
 msgid "Page thumbnails"
 msgstr "পাতার থাম্বনেইল"
 
@@ -2278,7 +2440,7 @@ msgid "Fit page (0)"
 msgstr "পাতা ফিট (0)"
 
 #: includes/class-foliora-viewer.php:308
-#: includes/class-foliora-viewer.php:562
+#: includes/class-foliora-viewer.php:572
 msgid "Fit page"
 msgstr "পাতায় ফিট"
 
@@ -2307,7 +2469,7 @@ msgid "Full screen"
 msgstr "ফুল স্ক্রিন"
 
 #: includes/class-foliora-viewer.php:340
-#: includes/class-foliora-viewer.php:573
+#: includes/class-foliora-viewer.php:583
 msgid "More tools"
 msgstr "আরও টুল"
 
@@ -2389,114 +2551,114 @@ msgstr "ডকুমেন্ট শেয়ার করুন"
 msgid "Link to current page (page "
 msgstr "বর্তমান পাতার লিংক (পাতা "
 
-#: includes/class-foliora-viewer.php:547
+#: includes/class-foliora-viewer.php:557
 msgid "Loading document…"
 msgstr "ডকুমেন্ট লোড হচ্ছে…"
 
 #. translators: %s: percent loaded.
-#: includes/class-foliora-viewer.php:549
+#: includes/class-foliora-viewer.php:559
 #, php-format
 msgid "Loading %s…"
 msgstr "%s লোড হচ্ছে…"
 
-#: includes/class-foliora-viewer.php:550
+#: includes/class-foliora-viewer.php:560
 msgid "This document could not be loaded."
 msgstr "এই ডকুমেন্ট লোড করা যায়নি।"
 
 #. translators: 1: current page number, 2: total pages.
-#: includes/class-foliora-viewer.php:552
+#: includes/class-foliora-viewer.php:562
 #, php-format
 msgid "Page %1$s of %2$s"
 msgstr "পাতা %1$s / %2$s"
 
-#: includes/class-foliora-viewer.php:553
+#: includes/class-foliora-viewer.php:563
 msgid "This document is password-protected."
 msgstr "এই ডকুমেন্ট পাসওয়ার্ড-সুরক্ষিত।"
 
-#: includes/class-foliora-viewer.php:554
+#: includes/class-foliora-viewer.php:564
 msgid "Incorrect password."
 msgstr "পাসওয়ার্ড ভুল।"
 
-#: includes/class-foliora-viewer.php:555
+#: includes/class-foliora-viewer.php:565
 msgid "Unlock"
 msgstr "আনলক"
 
-#: includes/class-foliora-viewer.php:556
+#: includes/class-foliora-viewer.php:566
 msgid "Password"
 msgstr "পাসওয়ার্ড"
 
-#: includes/class-foliora-viewer.php:559
+#: includes/class-foliora-viewer.php:569
 msgid "Document outline"
 msgstr "ডকুমেন্ট আউটলাইন"
 
-#: includes/class-foliora-viewer.php:561
+#: includes/class-foliora-viewer.php:571
 msgid "Close panel"
 msgstr "প্যানেল বন্ধ করুন"
 
-#: includes/class-foliora-viewer.php:563
+#: includes/class-foliora-viewer.php:573
 msgid "Fit width"
 msgstr "প্রস্থে ফিট"
 
 #. translators: 1: current match, 2: total matches.
-#: includes/class-foliora-viewer.php:565
+#: includes/class-foliora-viewer.php:575
 #, php-format
 msgid "%1$s of %2$s"
 msgstr "%1$s / %2$s"
 
-#: includes/class-foliora-viewer.php:566
+#: includes/class-foliora-viewer.php:576
 msgid "No matches"
 msgstr "কোনো মিল পাওয়া যায়নি"
 
-#: includes/class-foliora-viewer.php:567
+#: includes/class-foliora-viewer.php:577
 #: assets/js/foliora-block.js:143
 msgid "Single page"
 msgstr "একক পাতা"
 
-#: includes/class-foliora-viewer.php:568
+#: includes/class-foliora-viewer.php:578
 #: assets/js/foliora-block.js:144
 msgid "Continuous scroll"
 msgstr "কন্টিনিউয়াস স্ক্রল"
 
-#: includes/class-foliora-viewer.php:569
+#: includes/class-foliora-viewer.php:579
 #: assets/js/foliora-block.js:145
 msgid "Two-page spread"
 msgstr "দুই পাতার স্প্রেড"
 
-#: includes/class-foliora-viewer.php:571
+#: includes/class-foliora-viewer.php:581
 msgid "Hand tool"
 msgstr "হ্যান্ড টুল"
 
-#: includes/class-foliora-viewer.php:572
+#: includes/class-foliora-viewer.php:582
 msgid "Text select"
 msgstr "টেক্সট সিলেক্ট"
 
-#: includes/class-foliora-viewer.php:574
+#: includes/class-foliora-viewer.php:584
 msgid "Presentation"
 msgstr "প্রেজেন্টেশন"
 
-#: includes/class-foliora-viewer.php:575
+#: includes/class-foliora-viewer.php:585
 msgid "Link copied!"
 msgstr "লিংক কপি হয়েছে!"
 
-#: includes/class-foliora-viewer.php:576
+#: includes/class-foliora-viewer.php:586
 msgid "Click to load document"
 msgstr "ডকুমেন্ট লোড করতে ক্লিক করুন"
 
-#: includes/class-foliora-viewer.php:577
+#: includes/class-foliora-viewer.php:587
 msgid "Unable to load document (Cross-Origin Restriction)"
 msgstr "ডকুমেন্ট লোড করা যায়নি (ক্রস-অরিজিন নিষেধাজ্ঞা)"
 
 #. translators: %s: remote host name
-#: includes/class-foliora-viewer.php:579
+#: includes/class-foliora-viewer.php:589
 #, php-format
 msgid "This PDF is hosted on an external domain (%s) which restricts cross-origin access (CORS)."
 msgstr "এই PDF-টি একটি বাহ্যিক ডোমেনে (%s) হোস্ট করা, যা ক্রস-অরিজিন অ্যাক্সেস (CORS) সীমাবদ্ধ করে।"
 
-#: includes/class-foliora-viewer.php:580
+#: includes/class-foliora-viewer.php:590
 msgid "Open / Download PDF directly"
 msgstr "সরাসরি PDF খুলুন / ডাউনলোড করুন"
 
-#: includes/class-foliora-viewer.php:581
+#: includes/class-foliora-viewer.php:591
 msgid "Site Admin: To enable direct embedding, configure Access-Control-Allow-Origin headers on the host server or upload the PDF to your WordPress Media Library."
 msgstr "সাইট অ্যাডমিন: সরাসরি এমবেডিং চালু করতে হোস্ট সার্ভারে Access-Control-Allow-Origin হেডার কনফিগার করুন অথবা PDF আপনার ওয়ার্ডপ্রেস মিডিয়া লাইব্রেরিতে আপলোড করুন।"
 

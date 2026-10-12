@@ -1,6 +1,5 @@
 /**
- * Foliora admin: dashboard shortcode builder, documents copy,
- * and settings live preview.
+ * Foliora admin: dashboard, shortcode builder and documents copy.
  */
 ( function () {
 	'use strict';
@@ -1438,87 +1437,6 @@
 		updateOutput();
 	}
 
-	function bindLivePreview() {
-		var widthInput = $( '#foliora-default-width' );
-		var heightInput = $( '#foliora-default-height' );
-		var themeSelect = $( '#foliora-default-theme' );
-		var wrap = $( '.foliora-live-preview-stage .foliora-wrap' );
-		var shell = $( '.foliora-live-preview-stage .foliora-shell' );
-		if ( ! wrap || ! shell ) {
-			return;
-		}
-
-		function apply() {
-			if ( widthInput && widthInput.value ) {
-				wrap.style.width = widthInput.value;
-			}
-			if ( heightInput && heightInput.value ) {
-				shell.style.height = heightInput.value;
-			}
-			if ( themeSelect ) {
-				var currentTheme = themeSelect.value || 'light';
-				[ 'light', 'dark', 'sepia' ].forEach( function ( name ) {
-					shell.classList.remove( 'foliora-theme-' + name );
-				} );
-				shell.classList.add( 'foliora-theme-' + currentTheme );
-			}
-
-			// Synchronize toolbar toggles in settings live preview
-			var toolbar = $( '.foliora-toolbar', shell );
-			if ( toolbar ) {
-				var dlCb = $( 'input[name="foliora_settings[allow_download]"]' );
-				var dlBtn = $( '.foliora-download', toolbar );
-				if ( dlCb && dlBtn ) { dlBtn.style.display = dlCb.checked ? '' : 'none'; }
-
-				var prCb = $( 'input[name="foliora_settings[allow_print]"]' );
-				var prBtn = $( '.foliora-print', toolbar );
-				if ( prCb && prBtn ) { prBtn.style.display = prCb.checked ? '' : 'none'; }
-
-				var seCb = $( 'input[name="foliora_settings[allow_search]"]' );
-				var seBtn = $( '.foliora-find-group', toolbar );
-				if ( seCb && seBtn ) { seBtn.style.display = seCb.checked ? '' : 'none'; }
-
-				var thCb = $( 'input[name="foliora_settings[allow_theme]"]' );
-				var thBtn = $( '.foliora-theme-toggle', toolbar );
-				if ( thCb && thBtn ) { thBtn.style.display = thCb.checked ? '' : 'none'; }
-
-				var shCb = $( 'input[name="foliora_settings[allow_share]"]' );
-				var shBtn = $( '.foliora-share-btn', toolbar );
-				if ( shCb && shBtn ) { shBtn.style.display = shCb.checked ? '' : 'none'; }
-
-				var scCb = $( 'input[name="foliora_settings[allow_shortcuts]"]' );
-				var scBtn = $( '.foliora-shortcuts-btn', toolbar );
-				if ( scCb && scBtn ) { scBtn.style.display = scCb.checked ? '' : 'none'; }
-
-				var fsCb = $( 'input[name="foliora_settings[allow_fullscreen]"]' );
-				var fsBtn = $( '.foliora-fs', toolbar );
-				if ( fsCb && fsBtn ) { fsBtn.style.display = fsCb.checked ? '' : 'none'; }
-
-				var psCb = $( 'input[name="foliora_settings[allow_presentation]"]' );
-				var psBtn = $( '.foliora-present', toolbar );
-				if ( psCb && psBtn ) { psBtn.style.display = psCb.checked ? '' : 'none'; }
-			}
-		}
-
-		if ( widthInput ) {
-			widthInput.addEventListener( 'input', apply );
-			widthInput.addEventListener( 'change', apply );
-		}
-		if ( heightInput ) {
-			heightInput.addEventListener( 'input', apply );
-			heightInput.addEventListener( 'change', apply );
-		}
-		if ( themeSelect ) {
-			themeSelect.addEventListener( 'change', apply );
-		}
-		$$( '.foliora-settings-layout input[type="checkbox"]' ).forEach( function ( cb ) {
-			cb.addEventListener( 'change', apply );
-		} );
-
-		// Initial sync
-		apply();
-	}
-
 	function bindWelcome() {
 		var wrap = $( '#foliora-welcome' );
 		var btn = $( '#foliora-welcome-dismiss' );
@@ -1536,7 +1454,6 @@
 		bindDashboard();
 		bindDocuments();
 		bindShortcodeBuilder();
-		bindLivePreview();
 		bindWelcome();
 	} );
 } )();

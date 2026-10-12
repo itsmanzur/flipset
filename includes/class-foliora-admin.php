@@ -46,6 +46,7 @@ class Foliora_Admin {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
 		add_action( 'wp_ajax_foliora_mark_setup_copied', array( $this, 'ajax_mark_setup_copied' ) );
 		add_action( 'wp_ajax_foliora_create_test_page', array( $this, 'ajax_create_test_page' ) );
+		add_action( 'wp_ajax_foliora_settings_preview', array( $this, 'ajax_settings_preview' ) );
 		add_action( 'wp_ajax_foliora_dismiss_welcome', array( $this, 'ajax_dismiss_welcome' ) );
 		// Invalidate the embed-count cache whenever a post is saved, trashed,
 		// restored, or deleted so the Dashboard metric stays accurate without
@@ -144,6 +145,15 @@ class Foliora_Admin {
 			wp_enqueue_style(
 				'foliora-dashboard',
 				FOLIORA_URL . 'assets/css/foliora-dashboard.css',
+				array( 'foliora-admin-ui' ),
+				FOLIORA_VERSION
+			);
+		}
+
+		if ( $is_settings ) {
+			wp_enqueue_style(
+				'foliora-settings',
+				FOLIORA_URL . 'assets/css/foliora-settings.css',
 				array( 'foliora-admin-ui' ),
 				FOLIORA_VERSION
 			);
@@ -277,6 +287,32 @@ class Foliora_Admin {
 				'canUpload'   => current_user_can( 'upload_files' ),
 			)
 		);
+
+		if ( $is_settings ) {
+			wp_enqueue_script(
+				'foliora-settings',
+				FOLIORA_URL . 'assets/js/foliora-settings.js',
+				array( 'foliora-viewer' ),
+				FOLIORA_VERSION,
+				true
+			);
+			wp_localize_script(
+				'foliora-settings',
+				'FolioraSettings',
+				array(
+					'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+					'nonce'   => wp_create_nonce( 'foliora_admin' ),
+					'i18n'    => array(
+						/* translators: 1: number of switches turned on, 2: number of switches in the section. */
+						'countOn'      => __( '%1$s/%2$s on', 'foliora' ),
+						'saved'        => __( 'Settings saved', 'foliora' ),
+						'confirmReset' => __( 'Reset this section to the default values? Nothing is saved until you click Save changes.', 'foliora' ),
+						'previewFail'  => __( 'Could not load the preview.', 'foliora' ),
+						'loading'      => __( 'Loading preview…', 'foliora' ),
+					),
+				)
+			);
+		}
 	}
 
 	public function register_settings() {
@@ -472,24 +508,7 @@ class Foliora_Admin {
 		// or their default when never stored, instead of turning off.
 		$is_form = ! empty( $input[ self::FORM_MARKER ] );
 
-		$flag_defaults = array(
-			'lazy_loading'           => false,
-			'show_branding'          => false,
-			'allow_download'         => true,
-			'allow_print'            => true,
-			'allow_search'           => true,
-			'allow_theme'            => true,
-			'allow_share'            => true,
-			'allow_shortcuts'        => true,
-			'allow_fullscreen'       => true,
-			'allow_presentation'     => true,
-			'index_pdf_text'         => true,
-			'social_preview'         => true,
-			'check_pdf_a11y'         => true,
-			'autoembed_url'          => true,
-			'embed_attachment_pages' => true,
-			'setup_copied_shortcode' => false,
-		);
+		$flag_defaults = $this->flag_defaults();
 
 		$valid_themes = array( 'light', 'dark', 'sepia' );
 		$theme        = isset( $input['default_theme'] ) && in_array( $input['default_theme'], $valid_themes, true )
@@ -544,206 +563,79 @@ class Foliora_Admin {
 	}
 
 	public function field_default_theme() {
-		$settings = get_option( self::OPTION_NAME, array() );
-		$current  = $settings['default_theme'] ?? 'light';
-		?>
-		<select name="<?php echo esc_attr( self::OPTION_NAME ); ?>[default_theme]" id="foliora-default-theme">
-			<option value="light" <?php selected( $current, 'light' ); ?>><?php esc_html_e( 'Light (Default)', 'foliora' ); ?></option>
-			<option value="dark" <?php selected( $current, 'dark' ); ?>><?php esc_html_e( 'Dark', 'foliora' ); ?></option>
-			<option value="sepia" <?php selected( $current, 'sepia' ); ?>><?php esc_html_e( 'Sepia (Warm)', 'foliora' ); ?></option>
-		</select>
-		<p class="description"><?php esc_html_e( 'Default reader color scheme for visitors.', 'foliora' ); ?></p>
-		<?php
+		$this->render_control( 'default_theme' );
 	}
 
-	/**
-	 * Opt-in checkbox for the "Powered by Foliora" credit link (off by default).
-	 */
 	public function field_show_branding() {
-		$settings = get_option( self::OPTION_NAME, array() );
-		$checked  = ! empty( $settings['show_branding'] );
-		printf(
-			'<label><input type="checkbox" name="%1$s[show_branding]" value="1" %2$s /> %3$s</label>',
-			esc_attr( self::OPTION_NAME ),
-			checked( $checked, true, false ),
-			esc_html__( 'Show a small “Powered by Foliora” link under each viewer. Off by default; turn it on if you would like to support the plugin.', 'foliora' )
-		);
+		$this->render_control( 'show_branding' );
 	}
 
 	public function field_lazy_loading() {
-		$settings = get_option( self::OPTION_NAME, array() );
-		$checked  = ! empty( $settings['lazy_loading'] );
-		printf(
-			'<label><input type="checkbox" name="%1$s[lazy_loading]" value="1" %2$s /> %3$s</label>',
-			esc_attr( self::OPTION_NAME ),
-			checked( $checked, true, false ),
-			esc_html__( 'Only load PDF documents when they scroll into the visitor viewport (faster initial page load).', 'foliora' )
-		);
+		$this->render_control( 'lazy_loading' );
 	}
 
 	public function field_allow_search() {
-		$settings = get_option( self::OPTION_NAME, array() );
-		$checked  = ! isset( $settings['allow_search'] ) || ! empty( $settings['allow_search'] );
-		printf(
-			'<label><input type="checkbox" name="%1$s[allow_search]" value="1" %2$s /> %3$s</label>',
-			esc_attr( self::OPTION_NAME ),
-			checked( $checked, true, false ),
-			esc_html__( 'Show the search/find input on the toolbar (or hide via hide="search").', 'foliora' )
-		);
+		$this->render_control( 'allow_search' );
 	}
 
 	public function field_allow_theme() {
-		$settings = get_option( self::OPTION_NAME, array() );
-		$checked  = ! isset( $settings['allow_theme'] ) || ! empty( $settings['allow_theme'] );
-		printf(
-			'<label><input type="checkbox" name="%1$s[allow_theme]" value="1" %2$s /> %3$s</label>',
-			esc_attr( self::OPTION_NAME ),
-			checked( $checked, true, false ),
-			esc_html__( 'Show the Dark / Light / Sepia theme toggle button.', 'foliora' )
-		);
+		$this->render_control( 'allow_theme' );
 	}
 
 	public function field_allow_share() {
-		$settings = get_option( self::OPTION_NAME, array() );
-		$checked  = ! isset( $settings['allow_share'] ) || ! empty( $settings['allow_share'] );
-		printf(
-			'<label><input type="checkbox" name="%1$s[allow_share]" value="1" %2$s /> %3$s</label>',
-			esc_attr( self::OPTION_NAME ),
-			checked( $checked, true, false ),
-			esc_html__( 'Show the share and copy page link button.', 'foliora' )
-		);
+		$this->render_control( 'allow_share' );
 	}
 
 	public function field_allow_shortcuts() {
-		$settings = get_option( self::OPTION_NAME, array() );
-		$checked  = ! isset( $settings['allow_shortcuts'] ) || ! empty( $settings['allow_shortcuts'] );
-		printf(
-			'<label><input type="checkbox" name="%1$s[allow_shortcuts]" value="1" %2$s /> %3$s</label>',
-			esc_attr( self::OPTION_NAME ),
-			checked( $checked, true, false ),
-			esc_html__( 'Show the keyboard shortcuts guide button (?) and enable keyboard navigation.', 'foliora' )
-		);
+		$this->render_control( 'allow_shortcuts' );
 	}
 
 	public function field_allow_fullscreen() {
-		$settings = get_option( self::OPTION_NAME, array() );
-		$checked  = ! isset( $settings['allow_fullscreen'] ) || ! empty( $settings['allow_fullscreen'] );
-		printf(
-			'<label><input type="checkbox" name="%1$s[allow_fullscreen]" value="1" %2$s /> %3$s</label>',
-			esc_attr( self::OPTION_NAME ),
-			checked( $checked, true, false ),
-			esc_html__( 'Show the full screen toggle button.', 'foliora' )
-		);
+		$this->render_control( 'allow_fullscreen' );
 	}
 
 	public function field_allow_presentation() {
-		$settings = get_option( self::OPTION_NAME, array() );
-		$checked  = ! isset( $settings['allow_presentation'] ) || ! empty( $settings['allow_presentation'] );
-		printf(
-			'<label><input type="checkbox" name="%1$s[allow_presentation]" value="1" %2$s /> %3$s</label>',
-			esc_attr( self::OPTION_NAME ),
-			checked( $checked, true, false ),
-			esc_html__( 'Show the distraction-free presentation mode button.', 'foliora' )
-		);
+		$this->render_control( 'allow_presentation' );
 	}
 
 	public function field_default_width() {
-		$settings = get_option( self::OPTION_NAME, array() );
-		printf(
-			'<input type="text" id="foliora-default-width" name="%1$s[default_width]" value="%2$s" class="regular-text" placeholder="100%%" />',
-			esc_attr( self::OPTION_NAME ),
-			esc_attr( $settings['default_width'] ?? '100%' )
-		);
+		$this->render_control( 'default_width' );
 	}
 
 	public function field_default_height() {
-		$settings = get_option( self::OPTION_NAME, array() );
-		printf(
-			'<input type="text" id="foliora-default-height" name="%1$s[default_height]" value="%2$s" class="regular-text" placeholder="600px" />',
-			esc_attr( self::OPTION_NAME ),
-			esc_attr( $settings['default_height'] ?? '600px' )
-		);
+		$this->render_control( 'default_height' );
 	}
 
 	public function field_allow_download() {
-		$settings = get_option( self::OPTION_NAME, array() );
-		$checked  = ! isset( $settings['allow_download'] ) || ! empty( $settings['allow_download'] );
-		printf(
-			'<label><input type="checkbox" name="%1$s[allow_download]" value="1" %2$s /> %3$s</label>',
-			esc_attr( self::OPTION_NAME ),
-			checked( $checked, true, false ),
-			esc_html__( 'Show the download button on the viewer toolbar. Individual embeds can override this with download="false".', 'foliora' )
-		);
+		$this->render_control( 'allow_download' );
 	}
 
 	public function field_allow_print() {
-		$settings = get_option( self::OPTION_NAME, array() );
-		$checked  = ! isset( $settings['allow_print'] ) || ! empty( $settings['allow_print'] );
-		printf(
-			'<label><input type="checkbox" name="%1$s[allow_print]" value="1" %2$s /> %3$s</label>',
-			esc_attr( self::OPTION_NAME ),
-			checked( $checked, true, false ),
-			esc_html__( 'Show the print button on the viewer toolbar. Individual embeds can override this with print="false".', 'foliora' )
-		);
+		$this->render_control( 'allow_print' );
+	}
+
+	public function field_index_pdf_text() {
+		$this->render_control( 'index_pdf_text' );
+	}
+
+	public function field_social_preview() {
+		$this->render_control( 'social_preview' );
+	}
+
+	public function field_check_pdf_a11y() {
+		$this->render_control( 'check_pdf_a11y' );
+	}
+
+	public function field_autoembed_url() {
+		$this->render_control( 'autoembed_url' );
+	}
+
+	public function field_embed_attachment_pages() {
+		$this->render_control( 'embed_attachment_pages' );
 	}
 
 	public function section_discover() {
 		echo '<p class="description">' . esc_html__( 'Make embedded PDFs findable in WordPress search and nicer when a page is shared.', 'foliora' ) . '</p>';
-	}
-
-	public function field_index_pdf_text() {
-		$settings = get_option( self::OPTION_NAME, array() );
-		$checked  = ! isset( $settings['index_pdf_text'] ) || ! empty( $settings['index_pdf_text'] );
-		printf(
-			'<label><input type="checkbox" name="%1$s[index_pdf_text]" value="1" %2$s /> %3$s</label>',
-			esc_attr( self::OPTION_NAME ),
-			checked( $checked, true, false ),
-			esc_html__( 'Include text from embedded PDFs in WordPress site search (and in the document library search). Visit Foliora → Documents to extract text.', 'foliora' )
-		);
-	}
-
-	public function field_social_preview() {
-		$settings = get_option( self::OPTION_NAME, array() );
-		$checked  = ! isset( $settings['social_preview'] ) || ! empty( $settings['social_preview'] );
-		printf(
-			'<label><input type="checkbox" name="%1$s[social_preview]" value="1" %2$s /> %3$s</label>',
-			esc_attr( self::OPTION_NAME ),
-			checked( $checked, true, false ),
-			esc_html__( 'Use the PDF first-page thumbnail as the Open Graph / Twitter image when a post or page embeds Foliora and no SEO plugin already set an image.', 'foliora' )
-		);
-	}
-
-	public function field_check_pdf_a11y() {
-		$settings = get_option( self::OPTION_NAME, array() );
-		$checked  = ! isset( $settings['check_pdf_a11y'] ) || ! empty( $settings['check_pdf_a11y'] );
-		printf(
-			'<label><input type="checkbox" name="%1$s[check_pdf_a11y]" value="1" %2$s /> %3$s</label>',
-			esc_attr( self::OPTION_NAME ),
-			checked( $checked, true, false ),
-			esc_html__( 'Warn on Foliora → Documents when a PDF is not tagged. Tagged PDFs include structure (headings, reading order) that screen readers can follow.', 'foliora' )
-		);
-	}
-
-	public function field_autoembed_url() {
-		$settings = get_option( self::OPTION_NAME, array() );
-		$checked  = ! isset( $settings['autoembed_url'] ) || ! empty( $settings['autoembed_url'] );
-		printf(
-			'<label><input type="checkbox" name="%1$s[autoembed_url]" value="1" %2$s /> %3$s</label>',
-			esc_attr( self::OPTION_NAME ),
-			checked( $checked, true, false ),
-			esc_html__( 'Automatically convert standalone .pdf URLs pasted on their own line into an interactive Foliora viewer.', 'foliora' )
-		);
-	}
-
-	public function field_embed_attachment_pages() {
-		$settings = get_option( self::OPTION_NAME, array() );
-		$checked  = ! isset( $settings['embed_attachment_pages'] ) || ! empty( $settings['embed_attachment_pages'] );
-		printf(
-			'<label><input type="checkbox" name="%1$s[embed_attachment_pages]" value="1" %2$s /> %3$s</label>',
-			esc_attr( self::OPTION_NAME ),
-			checked( $checked, true, false ),
-			esc_html__( 'Automatically display the interactive Foliora PDF viewer on standard WordPress PDF attachment pages.', 'foliora' )
-		);
 	}
 
 	public function render_dashboard() {
@@ -1080,33 +972,564 @@ class Foliora_Admin {
 		<?php
 	}
 
+	/**
+	 * Default values of every on/off setting. Shared by the sanitize
+	 * callback and the Settings screen's "Reset to defaults".
+	 *
+	 * @return array<string,bool>
+	 */
+	private function flag_defaults() {
+		return array(
+			'lazy_loading'           => false,
+			'show_branding'          => false,
+			'allow_download'         => true,
+			'allow_print'            => true,
+			'allow_search'           => true,
+			'allow_theme'            => true,
+			'allow_share'            => true,
+			'allow_shortcuts'        => true,
+			'allow_fullscreen'       => true,
+			'allow_presentation'     => true,
+			'index_pdf_text'         => true,
+			'social_preview'         => true,
+			'check_pdf_a11y'         => true,
+			'autoembed_url'          => true,
+			'embed_attachment_pages' => true,
+			'setup_copied_shortcode' => false,
+		);
+	}
+
+	/**
+	 * Every field the Settings form posts, with its default value.
+	 *
+	 * @return array<string,mixed>
+	 */
+	private function settings_defaults() {
+		$flags = $this->flag_defaults();
+		unset( $flags['setup_copied_shortcode'] );
+		return array_merge(
+			array(
+				'default_width'  => '100%',
+				'default_height' => '600px',
+				'default_theme'  => 'light',
+			),
+			$flags
+		);
+	}
+
+	/**
+	 * Presentation data for the Settings screen: control type, label, help
+	 * text, per-embed override hint and toolbar icon for each field. Labels
+	 * match the add_settings_field() titles.
+	 *
+	 * @return array<string,array<string,mixed>>
+	 */
+	private function settings_schema() {
+		return array(
+			'default_width'          => array(
+				'type'    => 'dimension',
+				'label'   => __( 'Default width', 'foliora' ),
+				'help'    => __( 'Width of every viewer. Use a number with a unit, for example 100% or 800px.', 'foliora' ),
+				'presets' => array( '100%', '800px', '960px' ),
+			),
+			'default_height'         => array(
+				'type'    => 'dimension',
+				'label'   => __( 'Default height', 'foliora' ),
+				'help'    => __( 'Height of the reading area, for example 600px or 80vh.', 'foliora' ),
+				'presets' => array( '420px', '600px', '80vh' ),
+			),
+			'default_theme'          => array(
+				'type'  => 'theme',
+				'label' => __( 'Default theme', 'foliora' ),
+				'help'  => __( 'Default reader color scheme for visitors.', 'foliora' ),
+			),
+			'lazy_loading'           => array(
+				'type'  => 'switch',
+				'label' => __( 'Lazy loading', 'foliora' ),
+				'help'  => __( 'Only load PDF documents when they scroll into the visitor viewport (faster initial page load).', 'foliora' ),
+			),
+			'allow_download'         => array(
+				'type'  => 'switch',
+				'label' => __( 'Download button', 'foliora' ),
+				'help'  => __( 'Show the download button on the viewer toolbar.', 'foliora' ),
+				'hint'  => 'download="false"',
+			),
+			'allow_print'            => array(
+				'type'  => 'switch',
+				'label' => __( 'Print button', 'foliora' ),
+				'help'  => __( 'Show the print button on the viewer toolbar.', 'foliora' ),
+				'hint'  => 'print="false"',
+			),
+			'show_branding'          => array(
+				'type'  => 'switch',
+				'label' => __( 'Credit link', 'foliora' ),
+				'help'  => __( 'Show a small “Powered by Foliora” link under each viewer. Off by default. Turn it on to support the plugin.', 'foliora' ),
+			),
+			'allow_search'           => array(
+				'type'  => 'switch',
+				'label' => __( 'Search in document', 'foliora' ),
+				'help'  => __( 'Show the search/find input on the toolbar.', 'foliora' ),
+				'hint'  => 'hide="search"',
+				'icon'  => 'search',
+			),
+			'allow_theme'            => array(
+				'type'  => 'switch',
+				'label' => __( 'Theme switcher', 'foliora' ),
+				'help'  => __( 'Show the Dark / Light / Sepia theme toggle button.', 'foliora' ),
+				'hint'  => 'hide="theme"',
+				'icon'  => 'theme',
+			),
+			'allow_share'            => array(
+				'type'  => 'switch',
+				'label' => __( 'Share button', 'foliora' ),
+				'help'  => __( 'Show the share and copy page link button.', 'foliora' ),
+				'hint'  => 'hide="share"',
+				'icon'  => 'share',
+			),
+			'allow_shortcuts'        => array(
+				'type'  => 'switch',
+				'label' => __( 'Keyboard shortcuts guide', 'foliora' ),
+				'help'  => __( 'Show the keyboard shortcuts guide button (?) and enable keyboard navigation.', 'foliora' ),
+				'hint'  => 'hide="shortcuts"',
+				'icon'  => 'shortcuts',
+			),
+			'allow_fullscreen'       => array(
+				'type'  => 'switch',
+				'label' => __( 'Full screen button', 'foliora' ),
+				'help'  => __( 'Show the full screen toggle button.', 'foliora' ),
+				'hint'  => 'hide="fullscreen"',
+				'icon'  => 'fs',
+			),
+			'allow_presentation'     => array(
+				'type'  => 'switch',
+				'label' => __( 'Presentation button', 'foliora' ),
+				'help'  => __( 'Show the distraction-free presentation mode button.', 'foliora' ),
+				'hint'  => 'hide="presentation"',
+				'icon'  => 'present',
+			),
+			'index_pdf_text'         => array(
+				'type'  => 'switch',
+				'label' => __( 'Site search', 'foliora' ),
+				'help'  => __( 'Include text from embedded PDFs in WordPress site search (and in the document library search). Visit Foliora → Documents to extract text.', 'foliora' ),
+			),
+			'check_pdf_a11y'         => array(
+				'type'  => 'switch',
+				'label' => __( 'Accessibility tags', 'foliora' ),
+				'help'  => __( 'Warn on Foliora → Documents when a PDF is not tagged. Tagged PDFs include structure (headings, reading order) that screen readers can follow.', 'foliora' ),
+			),
+			'social_preview'         => array(
+				'type'  => 'switch',
+				'label' => __( 'Social preview', 'foliora' ),
+				'help'  => __( 'Use the PDF first-page thumbnail as the Open Graph / Twitter image when a post or page embeds Foliora and no SEO plugin already set an image.', 'foliora' ),
+			),
+			'autoembed_url'          => array(
+				'type'  => 'switch',
+				'label' => __( 'Direct PDF auto-embed', 'foliora' ),
+				'help'  => __( 'Automatically convert standalone .pdf URLs pasted on their own line into an interactive Foliora viewer.', 'foliora' ),
+			),
+			'embed_attachment_pages' => array(
+				'type'  => 'switch',
+				'label' => __( 'Attachment pages', 'foliora' ),
+				'help'  => __( 'Automatically display the interactive Foliora PDF viewer on standard WordPress PDF attachment pages.', 'foliora' ),
+			),
+		);
+	}
+
+	/**
+	 * Current value of a setting (stored value, or its default).
+	 *
+	 * @param string $key Setting key.
+	 * @return mixed
+	 */
+	private function setting_value( $key ) {
+		$settings = get_option( self::OPTION_NAME, array() );
+		$defaults = $this->settings_defaults();
+		if ( is_array( $settings ) && array_key_exists( $key, $settings ) ) {
+			return $settings[ $key ];
+		}
+		return $defaults[ $key ] ?? '';
+	}
+
+	/**
+	 * One on/off switch. The real checkbox stays in the accessibility tree
+	 * (role="switch"); only its look is replaced.
+	 *
+	 * @param string $key         Setting key.
+	 * @param string $labelled_by Element id that names the switch.
+	 * @param string $described   Element id of the help text.
+	 */
+	private function render_switch( $key, $labelled_by = '', $described = '' ) {
+		printf(
+			'<span class="fa-switch"><input type="checkbox" role="switch" id="foliora-%1$s" name="%2$s[%3$s]" value="1"%4$s%5$s%6$s /><span class="fa-switch__track" aria-hidden="true"><span class="fa-switch__knob"></span></span></span>',
+			esc_attr( str_replace( '_', '-', $key ) ),
+			esc_attr( self::OPTION_NAME ),
+			esc_attr( $key ),
+			checked( ! empty( $this->setting_value( $key ) ), true, false ),
+			'' !== $labelled_by ? ' aria-labelledby="' . esc_attr( $labelled_by ) . '"' : '',
+			'' !== $described ? ' aria-describedby="' . esc_attr( $described ) . '"' : ''
+		);
+	}
+
+	/**
+	 * Control markup for one field, shared by the registered field callbacks
+	 * and the Settings screen renderer.
+	 *
+	 * @param string $key       Setting key.
+	 * @param string $described Element id of the help text.
+	 */
+	private function render_control( $key, $described = '' ) {
+		$schema = $this->settings_schema();
+		if ( ! isset( $schema[ $key ] ) ) {
+			return;
+		}
+		$field = $schema[ $key ];
+		$value = $this->setting_value( $key );
+		$id    = 'foliora-' . str_replace( '_', '-', $key );
+
+		if ( 'dimension' === $field['type'] ) {
+			?>
+			<div class="fa-dimension">
+				<input type="text" class="fa-input" id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( self::OPTION_NAME . '[' . $key . ']' ); ?>" value="<?php echo esc_attr( (string) $value ); ?>" inputmode="decimal" autocomplete="off" spellcheck="false" data-fa-dimension aria-describedby="<?php echo esc_attr( trim( $described . ' ' . $id . '-error' ) ); ?>" />
+				<div class="fa-presets" role="group" aria-label="<?php esc_attr_e( 'Quick values', 'foliora' ); ?>">
+					<?php foreach ( $field['presets'] as $preset ) : ?>
+						<button type="button" class="fa-chip fa-chip--light" data-fa-preset="<?php echo esc_attr( $preset ); ?>" data-target="<?php echo esc_attr( $id ); ?>"><?php echo esc_html( $preset ); ?></button>
+					<?php endforeach; ?>
+				</div>
+				<p class="fa-field__error" id="<?php echo esc_attr( $id . '-error' ); ?>" role="alert" hidden><?php esc_html_e( 'Use a number with a unit, e.g. 600px', 'foliora' ); ?></p>
+			</div>
+			<?php
+			return;
+		}
+
+		if ( 'theme' === $field['type'] ) {
+			$themes = array(
+				'light' => array( __( 'Light', 'foliora' ), '☀️' ),
+				'dark'  => array( __( 'Dark Mode', 'foliora' ), '🌙' ),
+				'sepia' => array( __( 'Sepia (Warm)', 'foliora' ), '☕' ),
+			);
+			?>
+			<div class="foliora-theme-pills fa-theme-pills" role="radiogroup" aria-labelledby="<?php echo esc_attr( $id . '-label' ); ?>"<?php echo '' !== $described ? ' aria-describedby="' . esc_attr( $described ) . '"' : ''; ?>>
+				<?php foreach ( $themes as $slug => $theme ) : ?>
+					<label class="foliora-theme-pill foliora-theme-pill-<?php echo esc_attr( $slug ); ?>">
+						<input type="radio" name="<?php echo esc_attr( self::OPTION_NAME . '[' . $key . ']' ); ?>" value="<?php echo esc_attr( $slug ); ?>" <?php checked( $value, $slug ); ?> />
+						<span class="foliora-pill-box">
+							<span class="fa-swatch fa-swatch--<?php echo esc_attr( $slug ); ?>" aria-hidden="true"><i></i><i></i><i></i></span>
+							<span class="foliora-pill-icon" aria-hidden="true"><?php echo esc_html( $theme[1] ); ?></span>
+							<span class="foliora-pill-label"><?php echo esc_html( $theme[0] ); ?></span>
+						</span>
+					</label>
+				<?php endforeach; ?>
+			</div>
+			<?php
+			return;
+		}
+
+		$this->render_switch( $key, $id . '-label', $described );
+	}
+
+	/**
+	 * Inline code chip for an attribute override.
+	 *
+	 * @param string $code Attribute text such as hide="search".
+	 */
+	private function render_hint( $code ) {
+		printf(
+			'<code class="fa-code">%s</code>',
+			esc_html( $code )
+		);
+	}
+
+	/**
+	 * A standard label + help + control row.
+	 *
+	 * @param string $key    Setting key.
+	 * @param string $status Optional HTML for a status line (already escaped).
+	 */
+	private function render_field_row( $key, $status = '' ) {
+		$schema = $this->settings_schema();
+		if ( ! isset( $schema[ $key ] ) ) {
+			return;
+		}
+		$field   = $schema[ $key ];
+		$id      = 'foliora-' . str_replace( '_', '-', $key );
+		$is_flag = 'switch' === $field['type'];
+		$tag     = $is_flag ? 'label' : 'div';
+		?>
+		<div class="fa-field fa-field--<?php echo esc_attr( $field['type'] ); ?>">
+			<<?php echo esc_html( $tag ); ?> class="fa-field__text"<?php echo $is_flag ? ' for="' . esc_attr( $id ) . '"' : ''; ?>>
+				<<?php echo $is_flag ? 'span' : 'label'; ?> class="fa-field__label" id="<?php echo esc_attr( $id . '-label' ); ?>"<?php echo $is_flag ? '' : ' for="' . esc_attr( $id ) . '"'; ?>><?php echo esc_html( $field['label'] ); ?></<?php echo $is_flag ? 'span' : 'label'; ?>>
+				<span class="fa-field__help" id="<?php echo esc_attr( $id . '-help' ); ?>">
+					<?php echo esc_html( $field['help'] ); ?>
+					<?php if ( ! empty( $field['hint'] ) ) : ?>
+						<span class="fa-field__hint"><?php esc_html_e( 'Override per embed with', 'foliora' ); ?> <?php $this->render_hint( $field['hint'] ); ?></span>
+					<?php endif; ?>
+				</span>
+				<?php
+				if ( '' !== $status ) {
+					echo $status; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built from escaped parts in render_settings_page().
+				}
+				?>
+			</<?php echo esc_html( $tag ); ?>>
+			<div class="fa-field__control">
+				<?php $this->render_control( $key, $id . '-help' ); ?>
+			</div>
+		</div>
+		<?php
+	}
+
+	/**
+	 * A toolbar toggle tile: icon, label, help, override hint and switch.
+	 *
+	 * @param string $key Setting key.
+	 */
+	private function render_toolbar_tile( $key ) {
+		$schema = $this->settings_schema();
+		if ( ! isset( $schema[ $key ] ) ) {
+			return;
+		}
+		$field = $schema[ $key ];
+		$id    = 'foliora-' . str_replace( '_', '-', $key );
+		$on    = ! empty( $this->setting_value( $key ) );
+		?>
+		<label class="fa-toggle-tile<?php echo $on ? ' is-on' : ''; ?>" for="<?php echo esc_attr( $id ); ?>">
+			<span class="fa-toggle-tile__icon" aria-hidden="true">
+				<?php echo Foliora::instance()->viewer->get_toolbar_icon( $field['icon'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static SVG from the viewer. ?>
+			</span>
+			<span class="fa-toggle-tile__text">
+				<span class="fa-field__label" id="<?php echo esc_attr( $id . '-label' ); ?>"><?php echo esc_html( $field['label'] ); ?></span>
+				<span class="fa-field__help" id="<?php echo esc_attr( $id . '-help' ); ?>"><?php echo esc_html( $field['help'] ); ?></span>
+				<span class="fa-field__hint"><?php $this->render_hint( $field['hint'] ); ?></span>
+			</span>
+			<?php $this->render_switch( $key, $id . '-label', $id . '-help' ); ?>
+		</label>
+		<?php
+	}
+
+	/**
+	 * Cheap PDF counts for the status lines under the search settings.
+	 *
+	 * @return array{total:int,indexed:int,checked:int,tagged:int}
+	 */
+	private function settings_pdf_stats() {
+		$count = static function ( $meta_query = array() ) {
+			$args = array(
+				'post_type'      => 'attachment',
+				'post_status'    => 'inherit',
+				'post_mime_type' => 'application/pdf',
+				'posts_per_page' => 1,
+				'fields'         => 'ids',
+			);
+			if ( $meta_query ) {
+				$args['meta_query'] = $meta_query; // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- one bounded count on an admin screen.
+			}
+			$query = new WP_Query( $args );
+			return (int) $query->found_posts;
+		};
+
+		return array(
+			'total'   => $count(),
+			'indexed' => $count(
+				array(
+					array(
+						'key'   => Foliora_SEO::META_INDEXED,
+						'value' => '1',
+					),
+				)
+			),
+			'checked' => $count(
+				array(
+					array(
+						'key'     => Foliora_A11y::META_CHECKED,
+						'compare' => 'EXISTS',
+					),
+				)
+			),
+			'tagged'  => $count(
+				array(
+					array(
+						'key'   => Foliora_A11y::META_TAGGED,
+						'value' => '1',
+					),
+				)
+			),
+		);
+	}
+
+	/**
+	 * Preview viewer markup. Every toolbar button is rendered so the screen
+	 * can show or hide it live; the saved settings decide the initial state.
+	 *
+	 * @param string $file   PDF URL.
+	 * @param string $width  CSS width.
+	 * @param string $height CSS height.
+	 * @param string $theme  light|dark|sepia.
+	 * @return string
+	 */
+	private function render_settings_preview_viewer( $file, $width, $height, $theme ) {
+		return Foliora::instance()->viewer->render_shortcode(
+			array(
+				'file'         => $file,
+				'width'        => $width,
+				'height'       => $height,
+				'theme'        => $theme,
+				'loading'      => 'eager',
+				'download'     => 'true',
+				'print'        => 'true',
+				'search'       => 'true',
+				'theme_btn'    => 'true',
+				'share'        => 'true',
+				'shortcuts'    => 'true',
+				'presentation' => 'true',
+				'fullscreen'   => 'true',
+			)
+		);
+	}
+
+	/**
+	 * AJAX: viewer markup for another preview PDF (Settings live preview).
+	 */
+	public function ajax_settings_preview() {
+		check_ajax_referer( 'foliora_admin', 'nonce' );
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => __( 'You are not allowed to do this.', 'foliora' ) ), 403 );
+		}
+
+		$pdf_id = isset( $_POST['pdf_id'] ) ? absint( wp_unslash( $_POST['pdf_id'] ) ) : 0;
+		if ( ! $pdf_id || 'application/pdf' !== get_post_mime_type( $pdf_id ) ) {
+			wp_send_json_error( array( 'message' => __( 'Please select a PDF file.', 'foliora' ) ), 400 );
+		}
+
+		$url = wp_get_attachment_url( $pdf_id );
+		if ( ! $url ) {
+			wp_send_json_error( array( 'message' => __( 'Please select a PDF file.', 'foliora' ) ), 400 );
+		}
+
+		$raw_width  = isset( $_POST['width'] ) ? sanitize_text_field( wp_unslash( $_POST['width'] ) ) : '';
+		$raw_height = isset( $_POST['height'] ) ? sanitize_text_field( wp_unslash( $_POST['height'] ) ) : '';
+		$raw_theme  = isset( $_POST['theme'] ) ? sanitize_key( wp_unslash( $_POST['theme'] ) ) : 'light';
+		$theme      = in_array( $raw_theme, array( 'light', 'dark', 'sepia' ), true ) ? $raw_theme : 'light';
+
+		wp_send_json_success(
+			array(
+				'html' => $this->render_settings_preview_viewer(
+					$url,
+					$this->sanitize_css_dimension( $raw_width, '100%' ),
+					$this->sanitize_css_dimension( $raw_height, '600px' ),
+					$theme
+				),
+			)
+		);
+	}
+
 	public function render_settings_page() {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
 
-		$settings    = get_option( self::OPTION_NAME, array() );
-		$preview_url = $this->get_latest_pdf_url();
+		$width       = (string) $this->setting_value( 'default_width' );
+		$height      = (string) $this->setting_value( 'default_height' );
+		$theme       = (string) $this->setting_value( 'default_theme' );
+		$recent_pdfs = $this->get_recent_pdfs( 12 );
 		$preview     = '';
+		$dash_url    = admin_url( 'admin.php?page=' . self::PAGE_SLUG );
+		$docs_url    = admin_url( 'admin.php?page=' . self::DOCS_SLUG );
+		$stats       = $this->settings_pdf_stats();
 
-		if ( $preview_url ) {
-			$preview = Foliora::instance()->viewer->render_shortcode(
-				array(
-					'file'   => $preview_url,
-					'width'  => $settings['default_width'] ?? '100%',
-					'height' => $settings['default_height'] ?? '420px',
-				)
-			);
+		if ( $recent_pdfs ) {
+			$preview = $this->render_settings_preview_viewer( $recent_pdfs[0]['url'], $width, $height, $theme );
 		}
+
+		$toolbar_keys = array( 'allow_search', 'allow_theme', 'allow_share', 'allow_shortcuts', 'allow_fullscreen', 'allow_presentation' );
+		$tabs         = array(
+			'viewer'  => array(
+				'label' => __( 'Viewer defaults', 'foliora' ),
+				'emoji' => '🖥',
+				'keys'  => array( 'allow_download', 'allow_print', 'lazy_loading', 'show_branding' ),
+			),
+			'toolbar' => array(
+				'label' => __( 'Toolbar', 'foliora' ),
+				'emoji' => '🧰',
+				'keys'  => $toolbar_keys,
+			),
+			'sharing' => array(
+				'label' => __( 'Search & sharing', 'foliora' ),
+				'emoji' => '🔎',
+				'keys'  => array( 'index_pdf_text', 'check_pdf_a11y', 'social_preview', 'autoembed_url', 'embed_attachment_pages' ),
+			),
+		);
+
+		// Status lines under the search settings, built from escaped parts.
+		$index_status = sprintf(
+			'<span class="fa-field__status">%1$s <a class="fa-link" href="%2$s">%3$s</a></span>',
+			esc_html(
+				sprintf(
+					/* translators: 1: number of indexed PDFs, 2: total PDFs. */
+					__( '%1$s of %2$s PDFs indexed', 'foliora' ),
+					number_format_i18n( $stats['indexed'] ),
+					number_format_i18n( $stats['total'] )
+				)
+			),
+			esc_url( $docs_url ),
+			esc_html__( 'Manage in Documents →', 'foliora' )
+		);
+		$a11y_status = sprintf(
+			'<span class="fa-field__status">%1$s <a class="fa-link" href="%2$s">%3$s</a></span>',
+			esc_html(
+				sprintf(
+					/* translators: 1: number of tagged PDFs, 2: number of checked PDFs. */
+					__( '%1$s of %2$s checked PDFs are tagged', 'foliora' ),
+					number_format_i18n( $stats['tagged'] ),
+					number_format_i18n( $stats['checked'] )
+				)
+			),
+			esc_url( add_query_arg( 'status', 'attention', $docs_url ) ),
+			esc_html__( 'Manage in Documents →', 'foliora' )
+		);
+
+		$form_id  = 'foliora-settings-form';
+		$defaults = $this->settings_defaults();
 		?>
 		<div class="wrap foliora-admin foliora-settings-wrap">
-			<h1><?php esc_html_e( 'Foliora Settings', 'foliora' ); ?></h1>
-			<p>
-				<a href="<?php echo esc_url( admin_url( 'admin.php?page=' . self::PAGE_SLUG ) ); ?>">&larr; <?php esc_html_e( 'Back to Dashboard', 'foliora' ); ?></a>
-			</p>
+			<hr class="wp-header-end" />
+			<?php settings_errors(); ?>
 
-			<div class="foliora-settings-layout">
-				<form method="post" action="options.php">
+			<div class="fa-hero">
+				<div class="fa-hero__top">
+					<div class="fa-hero__copy">
+						<div class="fa-hero__kicker">
+							<span class="fa-mark dashicons dashicons-admin-generic" aria-hidden="true"></span>
+							<nav class="fa-chip fa-crumbs" aria-label="<?php esc_attr_e( 'Breadcrumb', 'foliora' ); ?>">
+								<a href="<?php echo esc_url( $dash_url ); ?>"><?php esc_html_e( 'Foliora', 'foliora' ); ?></a>
+								<span aria-hidden="true">/</span>
+								<span aria-current="page"><?php esc_html_e( 'Settings', 'foliora' ); ?></span>
+							</nav>
+						</div>
+						<h1 class="fa-hero__title"><?php esc_html_e( 'Settings', 'foliora' ); ?></h1>
+						<p class="fa-hero__lede"><?php esc_html_e( 'Site-wide defaults for every Foliora viewer. Individual embeds and saved shortcodes can still override them.', 'foliora' ); ?></p>
+					</div>
+					<div class="fa-hero__side">
+						<span class="fa-chip fa-chip--warn" id="fa-dirty-pill" hidden><?php esc_html_e( 'Unsaved changes', 'foliora' ); ?></span>
+						<button type="submit" form="<?php echo esc_attr( $form_id ); ?>" class="fa-btn fa-btn--primary" data-fa-save>
+							<span class="dashicons dashicons-saved" aria-hidden="true"></span>
+							<span><?php esc_html_e( 'Save changes', 'foliora' ); ?></span>
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="fa-segmented fa-settings-tabs" role="tablist" aria-label="<?php esc_attr_e( 'Settings sections', 'foliora' ); ?>" hidden>
+				<?php foreach ( $tabs as $slug => $tab ) : ?>
+					<button type="button" class="fa-segmented__btn<?php echo 'viewer' === $slug ? ' is-active' : ''; ?>" role="tab" id="fa-tab-<?php echo esc_attr( $slug ); ?>" aria-controls="fa-panel-<?php echo esc_attr( $slug ); ?>" aria-selected="<?php echo 'viewer' === $slug ? 'true' : 'false'; ?>" tabindex="<?php echo 'viewer' === $slug ? '0' : '-1'; ?>" data-fa-tab="<?php echo esc_attr( $slug ); ?>">
+						<span aria-hidden="true"><?php echo esc_html( $tab['emoji'] ); ?></span>
+						<span><?php echo esc_html( $tab['label'] ); ?></span>
+						<span class="fa-pill" data-fa-count="<?php echo esc_attr( $slug ); ?>"></span>
+					</button>
+				<?php endforeach; ?>
+			</div>
+
+			<div class="fa-settings">
+				<form method="post" action="options.php" id="<?php echo esc_attr( $form_id ); ?>" class="fa-settings__form" data-defaults="<?php echo esc_attr( wp_json_encode( $defaults ) ); ?>" novalidate>
 					<?php
 					settings_fields( self::OPTION_GROUP );
 					printf(
@@ -1114,32 +1537,142 @@ class Foliora_Admin {
 						esc_attr( self::OPTION_NAME ),
 						esc_attr( self::FORM_MARKER )
 					);
-					do_settings_sections( self::PAGE_SLUG );
-					submit_button();
 					?>
+					<div class="fa-card fa-settings__card">
+
+						<section class="fa-panel" id="fa-panel-viewer" role="tabpanel" aria-labelledby="fa-tab-viewer" data-fa-panel="viewer">
+							<div class="fa-panel__body">
+								<div class="fa-subhead"><h3><?php esc_html_e( 'Size', 'foliora' ); ?></h3></div>
+								<?php $this->render_field_row( 'default_width' ); ?>
+								<?php $this->render_field_row( 'default_height' ); ?>
+
+								<div class="fa-subhead"><h3><?php esc_html_e( 'Reader', 'foliora' ); ?></h3></div>
+								<?php $this->render_field_row( 'default_theme' ); ?>
+								<?php $this->render_field_row( 'lazy_loading' ); ?>
+
+								<div class="fa-subhead"><h3><?php esc_html_e( 'Toolbar actions', 'foliora' ); ?></h3></div>
+								<?php $this->render_field_row( 'allow_download' ); ?>
+								<?php $this->render_field_row( 'allow_print' ); ?>
+
+								<div class="fa-credit">
+									<span class="fa-credit__icon dashicons dashicons-heart" aria-hidden="true"></span>
+									<div class="fa-credit__text">
+										<label class="fa-field__label" for="foliora-show-branding" id="foliora-show-branding-label"><?php esc_html_e( 'Credit link', 'foliora' ); ?></label>
+										<span class="fa-field__help" id="foliora-show-branding-help"><?php echo esc_html( $this->settings_schema()['show_branding']['help'] ); ?></span>
+									</div>
+									<?php $this->render_switch( 'show_branding', 'foliora-show-branding-label', 'foliora-show-branding-help' ); ?>
+								</div>
+							</div>
+							<div class="fa-panel__foot">
+								<button type="button" class="fa-link" data-fa-reset="viewer"><?php esc_html_e( 'Reset to defaults', 'foliora' ); ?></button>
+							</div>
+						</section>
+
+						<section class="fa-panel" id="fa-panel-toolbar" role="tabpanel" aria-labelledby="fa-tab-toolbar" data-fa-panel="toolbar">
+							<div class="fa-panel__body">
+								<div class="fa-panel__intro">
+									<p><?php esc_html_e( 'Enable or disable specific buttons across all embedded PDF viewers. Individual embeds can also customize controls via the "hide" attribute.', 'foliora' ); ?></p>
+									<div class="fa-panel__bulk">
+										<button type="button" class="fa-link" data-fa-bulk="on"><?php esc_html_e( 'Enable all', 'foliora' ); ?></button>
+										<button type="button" class="fa-link" data-fa-bulk="off"><?php esc_html_e( 'Disable all', 'foliora' ); ?></button>
+									</div>
+								</div>
+								<div class="fa-toggle-grid">
+									<?php
+									foreach ( $toolbar_keys as $key ) {
+										$this->render_toolbar_tile( $key );
+									}
+									?>
+								</div>
+							</div>
+							<div class="fa-panel__foot">
+								<button type="button" class="fa-link" data-fa-reset="toolbar"><?php esc_html_e( 'Reset to defaults', 'foliora' ); ?></button>
+							</div>
+						</section>
+
+						<section class="fa-panel" id="fa-panel-sharing" role="tabpanel" aria-labelledby="fa-tab-sharing" data-fa-panel="sharing">
+							<div class="fa-panel__body">
+								<div class="fa-panel__intro">
+									<p><?php esc_html_e( 'Make embedded PDFs findable in WordPress search and nicer when a page is shared.', 'foliora' ); ?></p>
+								</div>
+								<div class="fa-subhead"><h3><?php esc_html_e( 'Search', 'foliora' ); ?></h3></div>
+								<?php $this->render_field_row( 'index_pdf_text', $index_status ); ?>
+								<?php $this->render_field_row( 'check_pdf_a11y', $a11y_status ); ?>
+
+								<div class="fa-subhead"><h3><?php esc_html_e( 'Sharing', 'foliora' ); ?></h3></div>
+								<?php $this->render_field_row( 'social_preview' ); ?>
+
+								<div class="fa-subhead"><h3><?php esc_html_e( 'Auto-embed', 'foliora' ); ?></h3></div>
+								<?php $this->render_field_row( 'autoembed_url' ); ?>
+								<?php $this->render_field_row( 'embed_attachment_pages' ); ?>
+							</div>
+							<div class="fa-panel__foot">
+								<button type="button" class="fa-link" data-fa-reset="sharing"><?php esc_html_e( 'Reset to defaults', 'foliora' ); ?></button>
+							</div>
+						</section>
+
+					</div>
 				</form>
 
-				<div class="foliora-live-preview">
-					<h2><?php esc_html_e( 'Live preview', 'foliora' ); ?></h2>
-					<p class="foliora-card-help">
-						<?php esc_html_e( 'Width and height update this viewer immediately. Save to store them as site defaults.', 'foliora' ); ?>
-					</p>
-					<?php if ( $preview ) : ?>
-						<div class="foliora-live-preview-stage">
-							<?php echo $preview; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- viewer HTML is built with escaped atts. ?>
+				<aside class="fa-card fa-preview" id="fa-preview" aria-labelledby="fa-preview-title">
+					<div class="fa-card__head">
+						<span class="fa-card__icon dashicons dashicons-visibility" aria-hidden="true"></span>
+						<div class="fa-card__titles">
+							<h2 class="fa-card__title" id="fa-preview-title"><?php esc_html_e( 'Live preview', 'foliora' ); ?></h2>
 						</div>
-						<p class="description">
-							<?php esc_html_e( 'Preview uses the most recently uploaded PDF in the Media Library.', 'foliora' ); ?>
-							<a href="<?php echo esc_url( admin_url( 'admin.php?page=' . self::DOCS_SLUG ) ); ?>"><?php esc_html_e( 'Open Documents', 'foliora' ); ?></a>
-						</p>
-					<?php else : ?>
-						<div class="foliora-live-preview-empty">
-							<p><?php esc_html_e( 'Upload a PDF to see a live preview of these defaults.', 'foliora' ); ?></p>
-							<a class="button" href="<?php echo esc_url( admin_url( 'media-new.php' ) ); ?>"><?php esc_html_e( 'Upload PDF', 'foliora' ); ?></a>
-						</div>
-					<?php endif; ?>
-				</div>
+						<?php if ( $preview ) : ?>
+							<div class="foliora-device-switcher" id="fa-device-switcher" role="group" aria-label="<?php esc_attr_e( 'Preview size', 'foliora' ); ?>">
+								<button type="button" class="foliora-device-btn is-active" data-device="desktop" aria-pressed="true" title="<?php esc_attr_e( 'Desktop View (100%)', 'foliora' ); ?>">
+									<span class="dashicons dashicons-desktop" aria-hidden="true"></span><span class="screen-reader-text"><?php esc_html_e( 'Desktop View (100%)', 'foliora' ); ?></span>
+								</button>
+								<button type="button" class="foliora-device-btn" data-device="tablet" aria-pressed="false" title="<?php esc_attr_e( 'Tablet View (768px)', 'foliora' ); ?>">
+									<span class="dashicons dashicons-tablet" aria-hidden="true"></span><span class="screen-reader-text"><?php esc_html_e( 'Tablet View (768px)', 'foliora' ); ?></span>
+								</button>
+								<button type="button" class="foliora-device-btn" data-device="mobile" aria-pressed="false" title="<?php esc_attr_e( 'Mobile View (375px)', 'foliora' ); ?>">
+									<span class="dashicons dashicons-smartphone" aria-hidden="true"></span><span class="screen-reader-text"><?php esc_html_e( 'Mobile View (375px)', 'foliora' ); ?></span>
+								</button>
+							</div>
+						<?php endif; ?>
+						<button type="button" class="fa-btn fa-btn--secondary fa-btn--sm fa-preview__toggle" id="fa-preview-toggle" aria-expanded="true" aria-controls="fa-preview-body" data-show="<?php esc_attr_e( 'Show preview', 'foliora' ); ?>" data-hide="<?php esc_attr_e( 'Hide preview', 'foliora' ); ?>" hidden><?php esc_html_e( 'Hide preview', 'foliora' ); ?></button>
+					</div>
+					<div class="fa-preview__body" id="fa-preview-body">
+						<?php if ( $preview ) : ?>
+							<div class="fa-preview__bar">
+								<label for="fa-preview-pdf"><?php esc_html_e( 'Preview PDF', 'foliora' ); ?></label>
+								<select id="fa-preview-pdf" class="fa-select">
+									<?php foreach ( $recent_pdfs as $pdf ) : ?>
+										<option value="<?php echo esc_attr( (string) $pdf['id'] ); ?>"><?php echo esc_html( $pdf['title'] ); ?></option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+							<div class="fa-preview__stage" id="fa-preview-stage" aria-live="polite">
+								<div class="fa-preview__device" id="fa-preview-device">
+									<?php echo $preview; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- viewer HTML is built with escaped atts. ?>
+								</div>
+							</div>
+							<p class="fa-preview__foot"><?php esc_html_e( 'Unsaved changes are previewed here only.', 'foliora' ); ?></p>
+						<?php else : ?>
+							<div class="fa-empty">
+								<span class="fa-empty__tile dashicons dashicons-media-document" aria-hidden="true"></span>
+								<p class="fa-empty__title"><?php esc_html_e( 'Upload a PDF to preview', 'foliora' ); ?></p>
+								<a class="fa-btn fa-btn--primary" href="<?php echo esc_url( admin_url( 'media-new.php' ) ); ?>"><?php esc_html_e( 'Upload PDF', 'foliora' ); ?></a>
+							</div>
+						<?php endif; ?>
+					</div>
+				</aside>
 			</div>
+
+			<div class="fa-savebar" id="fa-savebar" hidden>
+				<span class="fa-savebar__text"><span class="dashicons dashicons-warning" aria-hidden="true"></span><?php esc_html_e( 'You have unsaved changes', 'foliora' ); ?></span>
+				<span class="fa-savebar__actions">
+					<button type="button" class="fa-link" id="fa-discard"><?php esc_html_e( 'Discard', 'foliora' ); ?></button>
+					<button type="submit" form="<?php echo esc_attr( $form_id ); ?>" class="fa-btn fa-btn--primary fa-btn--sm" data-fa-save>
+						<span><?php esc_html_e( 'Save changes', 'foliora' ); ?></span>
+					</button>
+				</span>
+			</div>
+
+			<div class="foliora-toast" id="foliora-toast" hidden role="status"></div>
 		</div>
 		<?php
 	}

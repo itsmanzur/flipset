@@ -2736,6 +2736,16 @@
 		}
 
 		container._folioraInstance = {
+			// Re-skin without remembering the choice (used by the Settings preview).
+			setTheme: function ( nextTheme ) {
+				if ( shell && THEMES.indexOf( nextTheme ) !== -1 ) {
+					THEMES.forEach( function ( name ) {
+						shell.classList.remove( 'foliora-theme-' + name );
+					} );
+					shell.classList.add( 'foliora-theme-' + nextTheme );
+					currentTheme = nextTheme;
+				}
+			},
 			setViewMode: function ( nextMode ) {
 				if ( VIEW_MODES.indexOf( nextMode ) !== -1 ) {
 					state.viewMode = nextMode;

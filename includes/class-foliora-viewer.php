@@ -501,6 +501,16 @@ class Foliora_Viewer {
 	}
 
 	/**
+	 * Toolbar glyph markup for admin screens that show the same icons.
+	 *
+	 * @param string $name Icon key.
+	 * @return string SVG markup.
+	 */
+	public function get_toolbar_icon( $name ) {
+		return $this->toolbar_icon( $name );
+	}
+
+	/**
 	 * Inline 16px stroke icons for the viewer chrome.
 	 *
 	 * @param string $name Icon key.
