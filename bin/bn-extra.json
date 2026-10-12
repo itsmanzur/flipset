@@ -480,5 +480,6 @@
 	"Unsaved changes are previewed here only.": "অসংরক্ষিত পরিবর্তন শুধু এখানে প্রিভিউ হয়।",
 	"Upload a PDF to preview": "প্রিভিউ দেখতে একটি পিডিএফ আপলোড করুন",
 	"You have unsaved changes": "আপনার অসংরক্ষিত পরিবর্তন আছে",
-	"Discard": "বাতিল করুন"
+	"Discard": "বাতিল করুন",
+	"Height %s · scaled to fit": "উচ্চতা %s · জায়গা অনুযায়ী ছোট করা"
 }

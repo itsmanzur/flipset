@@ -270,12 +270,24 @@
 				shell.classList.toggle( 'foliora-theme-' + name, name === theme );
 			} );
 
+			// The viewer's own CSS uses display: ... !important, so only an
+			// inline !important declaration can hide a button reliably.
 			Object.keys( TOOLBAR_FLAGS ).forEach( function ( key ) {
 				var on = checked( key );
 				$$( TOOLBAR_FLAGS[ key ], shell ).forEach( function ( el ) {
 					el.classList.toggle( 'fa-is-off', ! on );
+					if ( on ) {
+						el.style.removeProperty( 'display' );
+					} else {
+						el.style.setProperty( 'display', 'none', 'important' );
+					}
 				} );
 			} );
+
+			var sizeChip = $( '#fa-preview-size' );
+			if ( sizeChip ) {
+				sizeChip.textContent = String( i18n.heightChip || 'Height %s · scaled to fit' ).replace( '%s', height || '—' );
+			}
 		}
 
 		function refreshAll() {

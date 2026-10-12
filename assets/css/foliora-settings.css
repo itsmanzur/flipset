@@ -43,7 +43,7 @@
 /* ---- Two-column layout -------------------------------------------------- */
 .fa-settings {
 	display: grid;
-	grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+	grid-template-columns: minmax(420px, 5fr) minmax(0, 6fr);
 	gap: 24px;
 	align-items: start;
 }
@@ -58,6 +58,29 @@
 
 .fa-panel__body {
 	padding: 4px 22px 8px;
+	container-type: inline-size;
+	container-name: fa-panel;
+}
+
+/* Tight panel: label + help sit above a full-width control. Switch rows stay a row. */
+@container fa-panel (max-width: 520px) {
+	.fa-field:not(.fa-field--switch) {
+		flex-direction: column;
+		align-items: stretch;
+		gap: 10px;
+	}
+
+	.fa-field:not(.fa-field--switch) .fa-field__text {
+		flex: 0 0 auto;
+	}
+
+	.fa-field:not(.fa-field--switch) .fa-field__control {
+		width: 100%;
+	}
+
+	.fa-field .fa-dimension {
+		width: 100%;
+	}
 }
 
 .fa-panel__foot {
@@ -145,6 +168,11 @@
 .fa-field--theme {
 	flex-direction: column;
 	align-items: stretch;
+	gap: 12px;
+}
+
+.fa-field--theme .fa-field__text {
+	flex: 0 0 auto;
 }
 
 .fa-field--theme .fa-field__control {
@@ -334,7 +362,18 @@
 	top: 48px;
 	display: flex;
 	flex-direction: column;
-	max-height: calc(100vh - 80px);
+	height: calc(100vh - 48px - 24px);
+	min-height: 440px;
+	max-height: calc(100vh - 48px - 24px);
+}
+
+.fa-preview .fa-card__head {
+	flex: 0 0 auto;
+}
+
+.fa-preview__size {
+	cursor: default;
+	font-weight: 600;
 }
 
 .fa-preview__body {
@@ -368,9 +407,9 @@
 
 .fa-preview__stage {
 	flex: 1 1 auto;
-	min-height: 240px;
+	min-height: 0;
 	padding: 14px;
-	overflow: auto;
+	overflow: hidden;
 	background: #e2e8f0;
 }
 
@@ -380,17 +419,29 @@
 }
 
 .fa-preview__device {
+	height: 100%;
 	margin-inline: auto;
 	max-width: 100%;
 	transition: max-width 0.2s ease;
 }
 
+/* The preview viewer always fills the stage; the saved height is shown as a chip. */
 .fa-preview__device .foliora-wrap {
+	height: 100%;
 	margin: 0 auto;
 	max-width: 100%;
 }
 
+.fa-preview__device .foliora-shell {
+	height: 100% !important;
+}
+
+.fa-field__status .fa-link {
+	white-space: nowrap;
+}
+
 .fa-preview__foot {
+	flex: 0 0 auto;
 	margin: 0;
 	padding: 10px 18px;
 	border-block-start: 1px solid var(--fb-line);
@@ -453,11 +504,14 @@
 	.fa-preview {
 		position: static;
 		order: -1;
+		height: auto;
+		min-height: 0;
 		max-height: none;
 	}
 
 	.fa-preview__stage {
-		max-height: 70vh;
+		flex: 0 0 auto;
+		height: 70vh;
 	}
 }
 

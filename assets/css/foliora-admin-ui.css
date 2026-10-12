@@ -1173,7 +1173,7 @@
 }
 
 .fa-field__text {
-	flex: 1 1 220px;
+	flex: 1 1 auto;
 	min-width: 0;
 	display: block;
 	cursor: default;
@@ -1296,6 +1296,15 @@ label.fa-field__text {
 }
 
 .fa-is-off {
+	display: none !important;
+}
+
+/*
+ * A [hidden] attribute must always win over component display rules
+ * (.fa-chip { display: flex } and friends). The viewer preview manages its
+ * own hidden parts, and the Builder keeps its own rules, so both are left out.
+ */
+.foliora-admin:not(.foliora-builder-wrap) [hidden]:not(.foliora-shell *) {
 	display: none !important;
 }
 

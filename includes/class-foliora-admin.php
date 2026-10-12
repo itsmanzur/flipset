@@ -131,14 +131,14 @@ class Foliora_Admin {
 			'foliora-admin-ui',
 			FOLIORA_URL . 'assets/css/foliora-admin-ui.css',
 			array(),
-			FOLIORA_VERSION
+			$this->asset_ver( 'assets/css/foliora-admin-ui.css' )
 		);
 
 		wp_enqueue_style(
 			'foliora-admin',
 			FOLIORA_URL . 'assets/css/foliora-admin.css',
 			array( 'foliora-admin-ui' ),
-			FOLIORA_VERSION
+			$this->asset_ver( 'assets/css/foliora-admin.css' )
 		);
 
 		if ( $is_dashboard ) {
@@ -146,7 +146,7 @@ class Foliora_Admin {
 				'foliora-dashboard',
 				FOLIORA_URL . 'assets/css/foliora-dashboard.css',
 				array( 'foliora-admin-ui' ),
-				FOLIORA_VERSION
+				$this->asset_ver( 'assets/css/foliora-dashboard.css' )
 			);
 		}
 
@@ -155,7 +155,7 @@ class Foliora_Admin {
 				'foliora-settings',
 				FOLIORA_URL . 'assets/css/foliora-settings.css',
 				array( 'foliora-admin-ui' ),
-				FOLIORA_VERSION
+				$this->asset_ver( 'assets/css/foliora-settings.css' )
 			);
 		}
 
@@ -164,7 +164,7 @@ class Foliora_Admin {
 				'foliora-docs',
 				FOLIORA_URL . 'assets/css/foliora-docs.css',
 				array( 'foliora-admin-ui' ),
-				FOLIORA_VERSION
+				$this->asset_ver( 'assets/css/foliora-docs.css' )
 			);
 		}
 
@@ -173,7 +173,7 @@ class Foliora_Admin {
 				'foliora-viewer',
 				FOLIORA_URL . 'assets/css/foliora-viewer.css',
 				array(),
-				FOLIORA_VERSION
+				$this->asset_ver( 'assets/css/foliora-viewer.css' )
 			);
 			Foliora_Viewer::register_pdfjs();
 			wp_enqueue_script( 'foliora-pdfjs' );
@@ -181,7 +181,7 @@ class Foliora_Admin {
 				'foliora-viewer',
 				FOLIORA_URL . 'assets/js/foliora-viewer.js',
 				array( 'foliora-pdfjs' ),
-				FOLIORA_VERSION,
+				$this->asset_ver( 'assets/js/foliora-viewer.js' ),
 				true
 			);
 			wp_localize_script(
@@ -202,7 +202,7 @@ class Foliora_Admin {
 				'foliora-thumbnail-gen',
 				FOLIORA_URL . 'assets/js/foliora-thumbnail-gen.js',
 				array( 'foliora-pdfjs' ),
-				FOLIORA_VERSION,
+				$this->asset_ver( 'assets/js/foliora-thumbnail-gen.js' ),
 				true
 			);
 			wp_localize_script(
@@ -236,7 +236,7 @@ class Foliora_Admin {
 			'foliora-admin',
 			FOLIORA_URL . 'assets/js/foliora-admin.js',
 			array(),
-			FOLIORA_VERSION,
+			$this->asset_ver( 'assets/js/foliora-admin.js' ),
 			true
 		);
 
@@ -293,7 +293,7 @@ class Foliora_Admin {
 				'foliora-settings',
 				FOLIORA_URL . 'assets/js/foliora-settings.js',
 				array( 'foliora-viewer' ),
-				FOLIORA_VERSION,
+				$this->asset_ver( 'assets/js/foliora-settings.js' ),
 				true
 			);
 			wp_localize_script(
@@ -308,11 +308,28 @@ class Foliora_Admin {
 						'saved'        => __( 'Settings saved', 'foliora' ),
 						'confirmReset' => __( 'Reset this section to the default values? Nothing is saved until you click Save changes.', 'foliora' ),
 						'previewFail'  => __( 'Could not load the preview.', 'foliora' ),
+						/* translators: %s: configured viewer height, for example 600px. */
+						'heightChip'   => __( 'Height %s · scaled to fit', 'foliora' ),
 						'loading'      => __( 'Loading preview…', 'foliora' ),
 					),
 				)
 			);
 		}
+	}
+
+	/**
+	 * Asset version query. With WP_DEBUG on, the file's modification time is
+	 * added so edited admin assets are never served from the browser cache.
+	 *
+	 * @param string $relative Path inside the plugin, e.g. assets/css/foliora-docs.css.
+	 * @return string
+	 */
+	private function asset_ver( $relative ) {
+		$file = FOLIORA_DIR . ltrim( $relative, '/' );
+		if ( defined( 'WP_DEBUG' ) && WP_DEBUG && file_exists( $file ) ) {
+			return FOLIORA_VERSION . '.' . filemtime( $file );
+		}
+		return FOLIORA_VERSION;
 	}
 
 	public function register_settings() {
@@ -1529,7 +1546,7 @@ class Foliora_Admin {
 			</div>
 
 			<div class="fa-settings">
-				<form method="post" action="options.php" id="<?php echo esc_attr( $form_id ); ?>" class="fa-settings__form" data-defaults="<?php echo esc_attr( wp_json_encode( $defaults ) ); ?>" novalidate>
+				<form method="post" action="options.php" id="<?php echo esc_attr( $form_id ); ?>" class="fa-settings__form" data-defaults="<?php echo esc_attr( wp_json_encode( $defaults ) ); ?>" autocomplete="off" novalidate>
 					<?php
 					settings_fields( self::OPTION_GROUP );
 					printf(
@@ -1621,6 +1638,17 @@ class Foliora_Admin {
 							<h2 class="fa-card__title" id="fa-preview-title"><?php esc_html_e( 'Live preview', 'foliora' ); ?></h2>
 						</div>
 						<?php if ( $preview ) : ?>
+							<span class="fa-chip fa-chip--light fa-preview__size" id="fa-preview-size">
+								<?php
+								echo esc_html(
+									sprintf(
+										/* translators: %s: configured viewer height, for example 600px. */
+										__( 'Height %s · scaled to fit', 'foliora' ),
+										$height
+									)
+								);
+								?>
+							</span>
 							<div class="foliora-device-switcher" id="fa-device-switcher" role="group" aria-label="<?php esc_attr_e( 'Preview size', 'foliora' ); ?>">
 								<button type="button" class="foliora-device-btn is-active" data-device="desktop" aria-pressed="true" title="<?php esc_attr_e( 'Desktop View (100%)', 'foliora' ); ?>">
 									<span class="dashicons dashicons-desktop" aria-hidden="true"></span><span class="screen-reader-text"><?php esc_html_e( 'Desktop View (100%)', 'foliora' ); ?></span>
