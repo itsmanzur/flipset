@@ -31,7 +31,7 @@ class Foliora_Divi_Viewer extends ET_Builder_Module {
 	 */
 	protected $module_credits = array(
 		'module_uri' => 'https://thereadscope.com/foliora',
-		'author'     => 'The Read Scope',
+		'author'     => 'itsmanzur',
 		'author_uri' => 'https://thereadscope.com',
 	);
 
