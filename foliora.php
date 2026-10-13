@@ -37,47 +37,6 @@ define( 'FOLIORA_BASENAME', plugin_basename( __FILE__ ) );
 
 /*
  * ---------------------------------------------------------------------
- * Freemius SDK
- * ---------------------------------------------------------------------
- * Swap in your real Freemius plugin ID + public key once the product is
- * created in the Freemius dashboard. Left commented so the plugin still
- * runs standalone during development; uncomment before shipping.
- */
-// phpcs:disable Squiz.Commenting.InlineComment, Squiz.PHP.CommentedOutCode, Universal.WhiteSpace.DisallowInlineTabs
-// if ( ! function_exists( 'foliora_fs' ) ) {
-// function foliora_fs() {
-// global $foliora_fs;
-//
-// if ( ! isset( $foliora_fs ) ) {
-// require_once FOLIORA_DIR . 'freemius/start.php';
-//
-// $foliora_fs = fs_dynamic_init(
-// array(
-// 'id'                  => 'XXXXX',
-// 'slug'                => 'foliora',
-// 'type'                => 'plugin',
-// 'public_key'          => 'pk_XXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
-// 'is_premium'          => false,
-// 'has_addons'          => true,
-// 'has_paid_plans'      => true,
-// 'menu'                => array(
-// 'slug'    => 'foliora-settings',
-// 'support' => false,
-// ),
-// )
-// );
-// }
-//
-// return $foliora_fs;
-// }
-//
-// foliora_fs();
-// do_action( 'foliora_fs_loaded' );
-// }
-// phpcs:enable Squiz.Commenting.InlineComment, Squiz.PHP.CommentedOutCode, Universal.WhiteSpace.DisallowInlineTabs
-
-/*
- * ---------------------------------------------------------------------
  * Dependencies
  * ---------------------------------------------------------------------
  */
