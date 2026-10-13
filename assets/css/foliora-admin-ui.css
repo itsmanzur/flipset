@@ -118,6 +118,70 @@
 	}
 }
 
+/* ---- Setup ring (shared component) ------------------------------------- */
+.fa-ring {
+	position: relative;
+	width: 56px;
+	height: 56px;
+	min-width: 56px;
+	min-height: 56px;
+	max-width: 56px;
+	max-height: 56px;
+	flex: 0 0 56px;
+	box-sizing: border-box;
+	display: block;
+	line-height: 1;
+}
+
+.fa-ring__svg {
+	display: block;
+	width: 56px;
+	height: 56px;
+	min-width: 56px;
+	min-height: 56px;
+	max-width: 56px;
+	max-height: 56px;
+	overflow: visible;
+	transform: rotate(-90deg);
+	box-sizing: border-box;
+}
+
+.fa-ring__track,
+.fa-ring__fill {
+	fill: none;
+	stroke-width: 3;
+	box-sizing: border-box;
+}
+
+.fa-ring__track {
+	stroke: rgba(255, 255, 255, 0.12);
+}
+
+.fa-ring__fill {
+	stroke: url(#fa-ring-grad);
+	stroke-linecap: round;
+	transition: stroke-dasharray 0.4s ease;
+}
+
+.fa-ring.is-complete .fa-ring__fill {
+	stroke: var(--fb-success);
+}
+
+.fa-ring__label {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 13px;
+	font-weight: 700;
+	line-height: 1;
+	color: #fff;
+	text-align: center;
+	box-sizing: border-box;
+	user-select: none;
+}
+
 /* ---- Mark (gradient icon square) --------------------------------------- */
 .fa-mark {
 	display: inline-flex;

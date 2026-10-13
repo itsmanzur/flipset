@@ -23,51 +23,6 @@
 	min-width: 0;
 }
 
-/* ---- Setup ring (dark background) -------------------------------------- */
-.fa-ring {
-	position: relative;
-	width: 56px;
-	height: 56px;
-	flex: 0 0 auto;
-}
-
-.fa-ring__svg {
-	width: 100%;
-	height: 100%;
-	transform: rotate(-90deg);
-}
-
-.fa-ring__track,
-.fa-ring__fill {
-	fill: none;
-	stroke-width: 3;
-}
-
-.fa-ring__track {
-	stroke: rgba(255, 255, 255, 0.12);
-}
-
-.fa-ring__fill {
-	stroke: url(#fa-ring-grad);
-	stroke-linecap: round;
-	transition: stroke-dasharray 0.4s ease;
-}
-
-.fa-ring.is-complete .fa-ring__fill {
-	stroke: var(--fb-success);
-}
-
-.fa-ring__label {
-	position: absolute;
-	inset: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 13px;
-	font-weight: 700;
-	color: #fff;
-}
-
 /* ---- Metrics ------------------------------------------------------------ */
 .fa-metrics {
 	display: grid;
