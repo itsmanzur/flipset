@@ -75,9 +75,9 @@ Foliora embeds PDF documents in posts, pages and widgets with a PDF.js build tha
 * WP-CLI: `wp foliora status`, `wp foliora reindex`, `wp foliora clear_cache`.
 * Clean uninstall: settings and Foliora data are removed, your media is kept.
 
-= Foliora Pro =
+= Extending Foliora =
 
-Foliora Pro is an optional, separate add-on plugin for advanced publishing and business workflows. The free plugin is 100% complete and fully functional on its own — it does not lock any basic PDF viewing or embedding features. Features planned or available in the Pro add-on include EPUB ebook reading, lead generation (email gating), download protection, watermarking, and reading analytics.
+Foliora exposes public WordPress filters and actions (see Developer Hooks below) so add-ons and themes can extend the viewer without modifying core code. No paid features are sold or locked in this plugin.
 
 = External services =
 
@@ -172,7 +172,7 @@ Yes. Use `[foliora file="..." page="4"]`, set Start page on the block, or link t
 
 = Can I read EPUB ebooks? =
 
-Not in the free version. EPUB reading is a feature of the separate Foliora Pro add-on. The free plugin focuses exclusively on fast, local PDF rendering and 3D flipbooks.
+EPUB files are not supported in this version. Foliora focuses on fast, accessible PDF rendering, 3D flipbooks and document libraries.
 
 = Does Foliora show a "Powered by" link? =
 

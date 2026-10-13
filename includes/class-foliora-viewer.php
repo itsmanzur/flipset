@@ -106,7 +106,7 @@ class Foliora_Viewer {
 		 *
 		 * Lets an add-on take over rendering completely — e.g. an EPUB
 		 * viewer, or the same PDF viewer wrapped in its bookmark / reader
-		 * toolbar — without this free class needing to know Pro's
+		 * toolbar — without this free class needing to know add-on
 		 * internals. Return any non-null value to short-circuit the
 		 * default PDF.js output below.
 		 *
@@ -125,9 +125,9 @@ class Foliora_Viewer {
 		/**
 		 * Action: foliora/before_viewer
 		 *
-		 * Foliora Pro can hook here to inject a toolbar (bookmarks, reader
+		 * An add-on can hook here to inject a toolbar (bookmarks, reader
 		 * fonts, etc.) above the base viewer without free plugin code
-		 * needing to know Pro exists beyond this hook.
+		 * needing to know the add-on exists beyond this hook.
 		 */
 		ob_start();
 		do_action( 'foliora/before_viewer', $instance_id, $atts );
@@ -214,7 +214,7 @@ class Foliora_Viewer {
 	}
 
 	/**
-	 * Chrome for the free PDF viewer. Pro's bookmark / reader bar is
+	 * Chrome for the free PDF viewer. An add-on's toolbar is
 	 * printed into the same .foliora-chrome row via foliora/before_viewer.
 	 *
 	 * @param string $instance_id Viewer element id.

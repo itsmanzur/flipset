@@ -2,16 +2,16 @@
 /**
  * Foliora_Loader
  *
- * This is the single source of truth for "is Pro active?" anywhere in the
- * free plugin. Nothing else should check for the Pro plugin directly —
+ * This is the single source of truth for "is an add-on active?" anywhere in the
+ * free plugin. Nothing else should check for an add-on plugin directly —
  * always go through Foliora_Loader::is_pro_active() so the detection
  * logic only lives in one place.
  *
- * Contract with Foliora Pro (separate plugin/addon):
- *   1. Foliora Pro fires `do_action( 'foliora/pro_loaded' )` on its own
+ * Contract with add-on extensions (e.g. separate add-on plugin):
+ *   1. An add-on fires `do_action( 'foliora/pro_loaded' )` on its own
  *      `plugins_loaded` (priority 5, i.e. before Foliora free boots at 20).
- *   2. Foliora Pro also defines the constant FOLIORA_PRO_VERSION.
- *   3. Foliora free never ships any Pro code and shows no locked or
+ *   2. An add-on also defines the constant FOLIORA_PRO_VERSION.
+ *   3. Foliora free never ships any add-on code and shows no locked or
  *      upsell UI. Anything an add-on adds lives entirely inside that
  *      plugin and hooks into the filters/actions Foliora free exposes
  *      (see class-foliora-viewer.php and docs/HOOKS.md).
@@ -33,7 +33,7 @@ class Foliora_Loader {
 	private static $is_pro_active = null;
 
 	/**
-	 * Whether Foliora Pro is installed, active, and has confirmed itself
+	 * Whether an add-on is installed, active, and has confirmed itself
 	 * loaded via the `foliora/pro_loaded` action.
 	 *
 	 * @return bool
@@ -48,7 +48,7 @@ class Foliora_Loader {
 		/**
 		 * Filter: foliora/is_pro_active
 		 *
-		 * Lets Foliora Pro (or a site owner, for testing) override the
+		 * Lets an add-on (or a site owner, for testing) override the
 		 * detection result explicitly.
 		 *
 		 * @param bool $pro_confirmed
@@ -59,9 +59,9 @@ class Foliora_Loader {
 	}
 
 	/**
-	 * Reset the cached Pro-active result.
+	 * Reset the cached add-on detection result.
 	 *
-	 * Intended for unit-test isolation and for any scenario where Pro is
+	 * Intended for unit-test isolation and for any scenario where an add-on is
 	 * activated or deactivated at run-time after the initial detection has
 	 * already been cached (e.g. plugin-in-plugin activation tests).
 	 *

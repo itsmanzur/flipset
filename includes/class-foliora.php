@@ -4,8 +4,8 @@
  *
  * Thin singleton that boots the free plugin's pieces. Deliberately does
  * almost nothing itself — it exists so `foliora_run()` has one obvious
- * place to call, and so Foliora Pro (or a future admin dashboard widget,
- * WP-CLI command, etc.) has a stable `Foliora::instance()` to hook into.
+ * place to call, and so add-ons (or a future admin dashboard widget,
+ * WP-CLI command, etc.) have a stable `Foliora::instance()` to hook into.
  *
  * @package Foliora
  */
@@ -99,7 +99,7 @@ class Foliora {
 
 	/**
 	 * Wire everything up. Runs on `plugins_loaded` (see foliora.php) so
-	 * that by this point Foliora Pro — if installed — has already fired
+	 * that by this point any add-on — if installed — has already fired
 	 * `foliora/pro_loaded` and Foliora_Loader::is_pro_active() is
 	 * reliable everywhere below.
 	 */
@@ -122,8 +122,8 @@ class Foliora {
 		/**
 		 * Action: foliora/loaded
 		 *
-		 * Fires once the free plugin has fully booted. Foliora Pro can
-		 * use this instead of its own plugins_loaded if it needs
+		 * Fires once the free plugin has fully booted. Add-ons can
+		 * use this instead of their own plugins_loaded if they need
 		 * Foliora's classes to already exist.
 		 */
 		do_action( 'foliora/loaded' );

@@ -1849,7 +1849,7 @@ msgid "Ideal for Long Reports & Ebooks"
 msgstr ""
 
 #: includes/class-foliora-admin.php:3177
-msgid "Locked Down Presentation"
+msgid "Read-Only Presentation"
 msgstr ""
 
 #: includes/class-foliora-admin.php:3178

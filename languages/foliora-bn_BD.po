@@ -1851,8 +1851,8 @@ msgid "Ideal for Long Reports & Ebooks"
 msgstr "দীর্ঘ রিপোর্ট ও ই-বুকের জন্য আদর্শ"
 
 #: includes/class-foliora-admin.php:3177
-msgid "Locked Down Presentation"
-msgstr "লকডাউন প্রেজেন্টেশন"
+msgid "Read-Only Presentation"
+msgstr "রিড-অনলি প্রেজেন্টেশন"
 
 #: includes/class-foliora-admin.php:3178
 msgid "No Direct Download or Printing"

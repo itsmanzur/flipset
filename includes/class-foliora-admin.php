@@ -4,10 +4,10 @@
  *
  * Top-level Foliora menu: Dashboard (home) + Settings. Dashboard is
  * the interactive shell — setup checklist and embed builder. Settings still owns Viewer Defaults via the Settings
- * API (PAGE_SLUG), so Foliora Pro can keep adding fields there.
+ * API (PAGE_SLUG), so add-ons can keep adding fields there.
  *
- * PAGE_SLUG stays `foliora-settings` because Pro's Protected Links
- * submenu and settings sections parent off it.
+ * PAGE_SLUG stays `foliora-settings` because add-on settings
+ * sections parent off it.
  *
  * @package Foliora
  */
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Foliora_Admin {
 
 	/**
-	 * Settings API option group for this screen. Add-ons (Foliora Pro)
+	 * Settings API option group for this screen. Add-ons
 	 * must register_setting() against this same group so the single
 	 * settings_fields() call in render_settings_page() covers every
 	 * option on the page. Store add-on data under a *different* option
@@ -3174,7 +3174,7 @@ class Foliora_Admin {
 
 						<div class="foliora-preset-card">
 							<div class="foliora-preset-card-top">
-								<span class="foliora-preset-tag is-slate"><?php esc_html_e( 'Locked Down Presentation', 'foliora' ); ?></span>
+								<span class="foliora-preset-tag is-slate"><?php esc_html_e( 'Read-Only Presentation', 'foliora' ); ?></span>
 								<span class="foliora-preset-hint"><?php esc_html_e( 'No Direct Download or Printing', 'foliora' ); ?></span>
 							</div>
 							<div class="foliora-preset-code-row">

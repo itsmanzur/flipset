@@ -1,8 +1,8 @@
 # Foliora developer hooks
 
-Foliora (free) is a complete PDF viewer with no locked features and no upsell UI. It exposes WordPress filters and actions so a separate add-on (a future Foliora Pro, or any third party) can replace rendering, inject a toolbar, change the credit link, or gate licensed features without modifying this plugin.
+Foliora (free) is a complete PDF viewer with no locked features, no upsell UI, and no bundled paid features. It exposes WordPress filters and actions so a separate add-on or theme can replace rendering, inject a toolbar, change the credit link, or extend functionality without modifying this plugin.
 
-You can build your own “Foliora Pro”-style extension with this public contract. You do not need undocumented internals.
+You can build your own companion extension with this public contract. You do not need undocumented internals.
 
 Hook names use a slash namespace (`foliora/did_thing`) by design. All live PHP hooks follow that style.
 
@@ -38,7 +38,7 @@ add_action( 'foliora/loaded', function () {
 **Type:** action (fired by the add-on, **consumed** by free)
 **Consumed in:** `Foliora_Loader::is_pro_active()` via `did_action( 'foliora/pro_loaded' )`
 
-The free plugin does **not** fire this. A Pro-style add-on must fire it on `plugins_loaded` **before** Foliora boots (Foliora free runs at priority `20`). Also define `FOLIORA_PRO_VERSION`. Both are required for `Foliora_Loader::is_pro_active()` to return true (unless overridden by `foliora/is_pro_active`).
+The free plugin does **not** fire this. An add-on must fire it on `plugins_loaded` **before** Foliora boots (Foliora free runs at priority `20`). Also define `FOLIORA_PRO_VERSION`. Both are required for `Foliora_Loader::is_pro_active()` to return true (unless overridden by `foliora/is_pro_active`).
 
 ```php
 add_action( 'plugins_loaded', function () {
@@ -56,7 +56,7 @@ add_action( 'plugins_loaded', function () {
 **Type:** filter
 **Fired from:** `Foliora_Loader::is_pro_active()` in `includes/class-foliora-loader.php`
 
-Overrides Pro detection. The default is `defined( 'FOLIORA_PRO_VERSION' ) && did_action( 'foliora/pro_loaded' )`.
+Overrides add-on active detection. The default is `defined( 'FOLIORA_PRO_VERSION' ) && did_action( 'foliora/pro_loaded' )`.
 
 **Parameters**
 
@@ -68,7 +68,7 @@ The result is **cached** on the first call for the rest of the request. Hook thi
 
 ```php
 add_filter( 'foliora/is_pro_active', function ( $pro_confirmed ) {
-	// Force “Pro UI” on a staging site without the add-on installed.
+	// Force add-on detection on a staging site without the companion add-on installed.
 	if ( defined( 'WP_ENVIRONMENT_TYPE' ) && 'local' === WP_ENVIRONMENT_TYPE ) {
 		return true;
 	}
@@ -83,14 +83,14 @@ add_filter( 'foliora/is_pro_active', function ( $pro_confirmed ) {
 **Type:** filter
 **Fired from:** `Foliora_Loader::is_feature_enabled()` in `includes/class-foliora-loader.php`
 
-Per-feature license gate. If Pro is not active, this filter never runs — the method returns `false`. If Pro **is** active, the default passed in is `true` for **every** key, including ones your add-on has not built yet; return `false` for any feature the current license does not include or that is not implemented.
+Per-feature extension gate. Foliora free has no bundled paid features. If an add-on is not active, this filter never runs — the method returns `false`. If an add-on **is** active, the default passed in is `true` for **every** key; return `false` for any feature the add-on does not enable.
 
 **Parameters**
 
 | Name | Type | Meaning |
 |------|------|---------|
-| `$enabled` | `bool` | Default `true` when Pro is active |
-| `$feature_key` | `string` | The feature key your add-on asks about. Free defines none and shows no locked or upsell UI |
+| `$enabled` | `bool` | Default `true` when an add-on is active |
+| `$feature_key` | `string` | The feature key your add-on asks about. Free defines none, sells no paid features, and shows no locked or upsell UI |
 
 ```php
 add_filter( 'foliora/feature_enabled', function ( $enabled, $feature_key ) {

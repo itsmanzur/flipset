@@ -26,8 +26,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Core constants
  * ---------------------------------------------------------------------
  * Every other file in the plugin should reference these rather than
- * hard-coding paths/URLs, so the free/pro split and any future folder
- * reshuffle stay painless.
+ * hard-coding paths/URLs, so any future folder
+ * reshuffle stays painless.
  */
 define( 'FOLIORA_VERSION', '1.0.0' );
 define( 'FOLIORA_FILE', __FILE__ );
@@ -170,7 +170,7 @@ function foliora_register_textdomain_path() {
 add_action( 'plugins_loaded', 'foliora_register_textdomain_path', 1 );
 
 /**
- * Boot the plugin once all plugins are loaded, so Foliora Pro (if active)
+ * Boot the plugin once all plugins are loaded, so any add-on extension (if active)
  * has had a chance to register itself before we check for it.
  */
 function foliora_run() {
