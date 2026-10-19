@@ -1517,7 +1517,9 @@
 
 		function rotatePage() {
 			state.rotation = ( state.rotation + 90 ) % 360;
+			container.setAttribute( 'data-rotation', String( state.rotation ) );
 			renderCurrent();
+			dispatchEvent( 'foliora:rotate', { rotation: state.rotation } );
 		}
 
 		function cycleView() {
@@ -2155,6 +2157,10 @@
 		container.__folioraGetPage = function () {
 			return state.page;
 		};
+		container.__folioraGetRotation = function () {
+			return state.rotation;
+		};
+		container.setAttribute( 'data-rotation', String( state.rotation ) );
 
 		if ( downloadBtn ) {
 			downloadBtn.addEventListener( 'click', function () {
@@ -2272,25 +2278,35 @@
 		}
 		var moreMenu = toolbar ? $( '.foliora-more-menu', toolbar ) : null;
 		if ( moreBtn && moreMenu ) {
+			// On narrow screens the stylesheet hides most tools (and the menu's
+			// own items) until the toolbar has .is-more-open, so More expands
+			// the whole toolbar there instead of only opening the menu.
+			var isNarrow = function () {
+				return !! ( window.matchMedia && window.matchMedia( '(max-width: 720px)' ).matches );
+			};
+			var setMore = function ( open ) {
+				moreMenu.hidden = ! open;
+				moreBtn.setAttribute( 'aria-expanded', open ? 'true' : 'false' );
+				moreBtn.classList.toggle( 'is-active', open );
+				toolbar.classList.toggle( 'is-more-open', open && isNarrow() );
+			};
 			moreBtn.addEventListener( 'click', function ( e ) {
 				e.stopPropagation();
-				var isOpen = ! moreMenu.hidden;
-				moreMenu.hidden = isOpen;
-				moreBtn.setAttribute( 'aria-expanded', isOpen ? 'false' : 'true' );
-				moreBtn.classList.toggle( 'is-active', ! isOpen );
+				setMore( moreMenu.hidden );
 			} );
 			document.addEventListener( 'click', function ( e ) {
-				if ( ! moreMenu.hidden && ! e.target.closest( '.foliora-more-wrap' ) ) {
-					moreMenu.hidden = true;
-					moreBtn.setAttribute( 'aria-expanded', 'false' );
-					moreBtn.classList.remove( 'is-active' );
+				if ( moreMenu.hidden && ! toolbar.classList.contains( 'is-more-open' ) ) {
+					return;
+				}
+				// Expanded toolbar (narrow): tools inside it stay usable.
+				var area = toolbar.classList.contains( 'is-more-open' ) ? toolbar : moreBtn.parentNode;
+				if ( ! area.contains( e.target ) ) {
+					setMore( false );
 				}
 			} );
 			$$( '.foliora-more-item', moreMenu ).forEach( function ( item ) {
 				item.addEventListener( 'click', function () {
-					moreMenu.hidden = true;
-					moreBtn.setAttribute( 'aria-expanded', 'false' );
-					moreBtn.classList.remove( 'is-active' );
+					setMore( false );
 				} );
 			} );
 		}

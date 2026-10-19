@@ -324,6 +324,7 @@ These are **not** WordPress hooks. The front-end viewer dispatches bubbling `Cus
 | `foliora:ready` | `numPages`, `viewMode` |
 | `foliora:pagechange` | `page`, `numPages` |
 | `foliora:zoom` | `zoom`, `fitMode` (`page`, `width` or `none`) |
+| `foliora:rotate` | `rotation` (`0`, `90`, `180` or `270`, degrees clockwise; the viewer only ever turns 90° at a time) |
 | `foliora:search` | `query`, `hitsCount`, `currentHit` (absent when there are no hits) |
 | `foliora:print` | `page`, `pages` (the page numbers actually sent to the print window) |
 | `foliora:download` | — |
@@ -338,6 +339,7 @@ document.addEventListener( 'foliora:pagechange', function ( event ) {
 ### JavaScript globals
 
 - `window.FolioraViewer.bind( element )` binds a `.foliora-viewer` that was added to the page after load.
+- On a bound `.foliora-viewer` element: `element.__folioraGoToPage( n )`, `element.__folioraGetPage()` and `element.__folioraGetRotation()` (degrees clockwise). The element also carries `data-rotation`, kept in sync with `foliora:rotate`, so overlays can follow a rotated page with CSS or script.
 - `window.Foliora.pdfjsLib` is Foliora's own bundled PDF.js (3.11.174), captured right after its script runs. Use it instead of `window.pdfjsLib`: Foliora puts `window.pdfjsLib` back exactly as it found it (another plugin's copy, or unset) so it never collides with other PDF plugins, and you should not depend on the global either. Set `workerSrc` on this object to Foliora's worker (`FolioraConfig.workerSrc`).
 
 ---
