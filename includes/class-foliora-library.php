@@ -107,13 +107,13 @@ class Foliora_Library {
 		ob_start();
 		?>
 		<div id="<?php echo esc_attr( $instance_id ); ?>" class="foliora-library" data-columns="<?php echo esc_attr( (string) $columns ); ?>">
-			<?php echo $this->render_search_form( $search_on, $search, $search_var, $query_var ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in helper. ?>
+			<?php echo wp_kses( $this->render_search_form( $search_on, $search, $search_var, $query_var ), Foliora_Viewer::allowed_html() ); ?>
 			<ul class="foliora-library-grid" style="--foliora-cols: <?php echo esc_attr( (string) $columns ); ?>;">
 				<?php foreach ( $query->posts as $attachment ) : ?>
-					<?php echo $this->render_item( $attachment ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built with escaped helpers. ?>
+					<?php echo wp_kses( $this->render_item( $attachment ), Foliora_Viewer::allowed_html() ); ?>
 				<?php endforeach; ?>
 			</ul>
-			<?php echo $this->render_pagination( $query, $paged, $query_var, $search_var, $search ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- paginate_links + kses. ?>
+			<?php echo wp_kses( $this->render_pagination( $query, $paged, $query_var, $search_var, $search ), Foliora_Viewer::allowed_html() ); ?>
 		</div>
 		<?php
 		wp_reset_postdata();
@@ -164,11 +164,11 @@ class Foliora_Library {
 		?>
 		<li class="foliora-library-item">
 			<button type="button" class="foliora-library-card" aria-expanded="false" aria-controls="<?php echo esc_attr( $embed_id ); ?>">
-				<span class="foliora-library-thumb"><?php echo $image; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_get_attachment_image or static SVG. ?></span>
+				<span class="foliora-library-thumb"><?php echo wp_kses( $image, Foliora_Viewer::allowed_html() ); ?></span>
 				<span class="foliora-library-title"><?php echo esc_html( $title ); ?></span>
 			</button>
 			<div id="<?php echo esc_attr( $embed_id ); ?>" class="foliora-library-embed" hidden>
-				<?php echo $viewer; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Foliora_Viewer output. ?>
+				<?php echo wp_kses( $viewer, Foliora_Viewer::allowed_html() ); ?>
 			</div>
 		</li>
 		<?php

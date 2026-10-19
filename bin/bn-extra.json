@@ -481,5 +481,7 @@
 	"Upload a PDF to preview": "প্রিভিউ দেখতে একটি পিডিএফ আপলোড করুন",
 	"You have unsaved changes": "আপনার অসংরক্ষিত পরিবর্তন আছে",
 	"Discard": "বাতিল করুন",
-	"Height %s · scaled to fit": "উচ্চতা %s · জায়গা অনুযায়ী ছোট করা"
+	"Height %s · scaled to fit": "উচ্চতা %s · জায়গা অনুযায়ী ছোট করা",
+	"itsmanzur": "itsmanzur",
+	"Embed PDFs with a fast PDF viewer, 3D flipbook and document library. Searchable PDF text, accessible, no CDN. Works with Gutenberg, Elementor, Divi.": "দ্রুত পিডিএফ ভিউয়ার, ৩ডি ফ্লিপবুক ও ডকুমেন্ট লাইব্রেরি দিয়ে পিডিএফ এমবেড করুন। সার্চযোগ্য পিডিএফ টেক্সট, অ্যাক্সেসিবল, কোনো CDN নেই। Gutenberg, Elementor, Divi-র সাথে কাজ করে।"
 }

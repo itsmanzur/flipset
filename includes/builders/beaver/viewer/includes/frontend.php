@@ -19,4 +19,4 @@ $foliora_atts = array(
 	'print'    => isset( $settings->print ) ? sanitize_text_field( (string) $settings->print ) : 'true',
 );
 
-echo Foliora::instance()->viewer->render_shortcode( $foliora_atts ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- viewer HTML is escaped internally.
+echo wp_kses( Foliora::instance()->viewer->render_shortcode( $foliora_atts ), Foliora_Viewer::allowed_html() );

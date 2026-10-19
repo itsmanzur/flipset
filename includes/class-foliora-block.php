@@ -44,6 +44,9 @@ class Foliora_Block {
 			FOLIORA_VERSION
 		);
 
+		// Editor strings come from WordPress.org language packs (no bundled JSON).
+		wp_set_script_translations( 'foliora-block-editor', 'foliora' );
+
 		wp_localize_script(
 			'foliora-block-editor',
 			'FolioraBlock',
@@ -66,6 +69,8 @@ class Foliora_Block {
 			FOLIORA_VERSION,
 			true
 		);
+
+		wp_set_script_translations( 'foliora-library-block-editor', 'foliora' );
 
 		register_block_type(
 			FOLIORA_DIR . 'blocks/viewer',

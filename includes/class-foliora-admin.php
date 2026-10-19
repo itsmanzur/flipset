@@ -1283,7 +1283,16 @@ class Foliora_Admin {
 				</span>
 				<?php
 				if ( '' !== $status ) {
-					echo $status; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built from escaped parts in render_settings_page().
+					echo wp_kses(
+						$status,
+						array(
+							'span' => array( 'class' => true ),
+							'a'    => array(
+								'class' => true,
+								'href'  => true,
+							),
+						)
+					);
 				}
 				?>
 			</<?php echo esc_html( $tag ); ?>>
@@ -1310,7 +1319,7 @@ class Foliora_Admin {
 		?>
 		<label class="fa-toggle-tile<?php echo $on ? ' is-on' : ''; ?>" for="<?php echo esc_attr( $id ); ?>">
 			<span class="fa-toggle-tile__icon" aria-hidden="true">
-				<?php echo Foliora::instance()->viewer->get_toolbar_icon( $field['icon'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static SVG from the viewer. ?>
+				<?php echo wp_kses( Foliora::instance()->viewer->get_toolbar_icon( $field['icon'] ), Foliora_Viewer::svg_allowed_html() ); ?>
 			</span>
 			<span class="fa-toggle-tile__text">
 				<span class="fa-field__label" id="<?php echo esc_attr( $id . '-label' ); ?>"><?php echo esc_html( $field['label'] ); ?></span>
@@ -1675,7 +1684,7 @@ class Foliora_Admin {
 							</div>
 							<div class="fa-preview__stage" id="fa-preview-stage" aria-live="polite">
 								<div class="fa-preview__device" id="fa-preview-device">
-									<?php echo $preview; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- viewer HTML is built with escaped atts. ?>
+									<?php echo wp_kses( $preview, Foliora_Viewer::allowed_html() ); ?>
 								</div>
 							</div>
 							<p class="fa-preview__foot"><?php esc_html_e( 'Unsaved changes are previewed here only.', 'foliora' ); ?></p>
@@ -2158,7 +2167,7 @@ class Foliora_Admin {
 									<div class="foliora-builder-frame" id="foliora-builder-frame">
 										<div class="foliora-builder-preview-stage" id="foliora-builder-stage">
 											<?php if ( $initial_preview ) : ?>
-												<?php echo $initial_preview; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+												<?php echo wp_kses( $initial_preview, Foliora_Viewer::allowed_html() ); ?>
 											<?php else : ?>
 												<div class="foliora-builder-empty-state">
 													<span class="dashicons dashicons-pdf" aria-hidden="true"></span>

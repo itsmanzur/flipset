@@ -8,7 +8,7 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Embed PDFs with a fast PDF viewer, 3D flipbook and document library. Searchable PDF text, accessible, no CDN. Gutenberg, Elementor, Divi ready.
+Embed PDFs with a fast PDF viewer, 3D flipbook and document library. Searchable PDF text, accessible, no CDN. Works with Gutenberg, Elementor, Divi.
 
 == Description ==
 
@@ -21,7 +21,7 @@ Foliora embeds PDF documents in posts, pages and widgets with a PDF.js build tha
 * **3D flipbook** – page, scroll, spread and flipbook views, all in the free plugin.
 * **Searchable PDF text** – WordPress site search can find words inside your embedded PDFs.
 * **Works where you build** – Gutenberg, Elementor, Divi and Beaver Builder.
-* **Translation-ready** – WPML and Polylang support, Bengali (bn_BD) bundled.
+* **Translation-ready** – WPML and Polylang support; translations come from translate.wordpress.org.
 
 = Features =
 
@@ -152,7 +152,7 @@ The PDF has no accessibility tags (its MarkInfo dictionary is not marked). Scree
 
 = Does Foliora include translations? =
 
-Yes. A Bengali (`bn_BD`) translation ships in the plugin. If a language pack from WordPress.org is installed, that pack takes precedence.
+Foliora is translation-ready (text domain `foliora`). Translations are delivered through translate.wordpress.org and installed automatically by WordPress for your site language. Contributions are welcome at https://translate.wordpress.org/projects/wp-plugins/foliora/ .
 
 = Does WordPress search find text inside PDFs? =
 
@@ -238,7 +238,7 @@ Support / Bug reports: https://wordpress.org/support/plugin/foliora/ and https:/
 * Document library shortcode and block, Shortcode Builder with saved embeds, and a Docs & Features screen.
 * PDF text search in WordPress search, Open Graph image and structured data.
 * Accessibility: keyboard control, screen reader announcements and tagged-PDF check.
-* Elementor, Divi and Beaver Builder widgets; WPML and Polylang support; Bengali translation.
+* Elementor, Divi and Beaver Builder widgets; WPML and Polylang support; translation-ready.
 * Public hooks and WP-CLI commands for developers.
 
 == Upgrade Notice ==

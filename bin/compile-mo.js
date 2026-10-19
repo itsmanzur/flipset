@@ -1,9 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const pluginRoot = 'c:/Users/Manzur/Local Sites/powerup/app/public/wp-content/plugins/foliora';
-const poFile = path.join(pluginRoot, 'languages/foliora-bn_BD.po');
-const moFile = path.join(pluginRoot, 'languages/foliora-bn_BD.mo');
+const pluginRoot = path.resolve(__dirname, '..');
+const poFile = path.join(pluginRoot, 'translations-src/foliora-bn_BD.po');
+const moFile = path.join(pluginRoot, 'translations-src/foliora-bn_BD.mo');
 
 const content = fs.readFileSync(poFile, 'utf8');
 const lines = content.split(/\r?\n/);

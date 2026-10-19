@@ -37,3 +37,5 @@ test-results
 .editorconfig
 .gitattributes
 PRODUCT_ROADMAP.md
+# Translation sources are uploaded to translate.wordpress.org, never shipped.
+translations-src

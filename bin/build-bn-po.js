@@ -357,5 +357,5 @@ if ( missing.length ) {
 	process.exit( 1 );
 }
 
-fs.writeFileSync( path.join( root, 'languages', 'foliora-bn_BD.po' ), out.join( '\n' ) + '\n', 'utf8' );
+fs.writeFileSync( path.join( root, 'translations-src', 'foliora-bn_BD.po' ), out.join( '\n' ) + '\n', 'utf8' );
 console.log( 'Wrote foliora-bn_BD.po', blocks.length, 'entries' );

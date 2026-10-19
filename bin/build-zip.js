@@ -52,7 +52,8 @@ const rootIgnores = new Set([
 	'playwright.config.js',
 	'playwright-report',
 	'test-results',
-	'PRODUCT_ROADMAP.md'
+	'PRODUCT_ROADMAP.md',
+	'translations-src'
 ]);
 
 function shouldIgnore(relativePath) {

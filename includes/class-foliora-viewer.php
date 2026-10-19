@@ -97,6 +97,11 @@ class Foliora_Viewer {
 			$atts = array();
 		}
 
+		// width and height end up in an inline style attribute: allow only a
+		// number with a CSS length unit, never free text.
+		$atts['width']  = self::sanitize_dimension( $atts['width'] ?? '', self::sanitize_dimension( $settings['default_width'] ?? '', '100%' ) );
+		$atts['height'] = self::sanitize_dimension( $atts['height'] ?? '', self::sanitize_dimension( $settings['default_height'] ?? '', '600px' ) );
+
 		if ( empty( $atts['file'] ) ) {
 			return $this->admin_notice( __( 'Foliora: no file URL was provided. Use [foliora file="https://example.com/document.pdf"].', 'foliora' ) );
 		}
@@ -273,16 +278,16 @@ class Foliora_Viewer {
 		<div class="foliora-toolbar" role="toolbar" data-target="<?php echo esc_attr( $instance_id ); ?>" aria-controls="<?php echo esc_attr( $instance_id ); ?>" aria-label="<?php esc_attr_e( 'PDF viewer', 'foliora' ); ?>">
 			<div class="foliora-tool-group foliora-panel-group" hidden>
 				<button type="button" class="foliora-btn foliora-toc" hidden aria-expanded="false" title="<?php esc_attr_e( 'Table of contents', 'foliora' ); ?>" aria-label="<?php esc_attr_e( 'Table of contents', 'foliora' ); ?>">
-					<?php echo $this->toolbar_icon( 'toc' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php $this->the_icon( 'toc' ); ?>
 				</button>
 				<button type="button" class="foliora-btn foliora-thumbs" hidden aria-expanded="false" title="<?php esc_attr_e( 'Page thumbnails', 'foliora' ); ?>" aria-label="<?php esc_attr_e( 'Page thumbnails', 'foliora' ); ?>">
-					<?php echo $this->toolbar_icon( 'thumbs' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php $this->the_icon( 'thumbs' ); ?>
 				</button>
 			</div>
 			<?php if ( $show_nav ) : ?>
 			<div class="foliora-tool-group foliora-nav-group">
 				<button type="button" class="foliora-btn foliora-prev" title="<?php esc_attr_e( 'Previous page (←)', 'foliora' ); ?>" aria-label="<?php esc_attr_e( 'Previous page', 'foliora' ); ?>">
-					<?php echo $this->toolbar_icon( 'prev' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php $this->the_icon( 'prev' ); ?>
 				</button>
 				<span class="foliora-page-indicator">
 					<input type="number" class="foliora-page-input" min="1" value="1" aria-label="<?php esc_attr_e( 'Page', 'foliora' ); ?>" />
@@ -290,102 +295,102 @@ class Foliora_Viewer {
 					<span class="foliora-page-count">1</span>
 				</span>
 				<button type="button" class="foliora-btn foliora-next" title="<?php esc_attr_e( 'Next page (→)', 'foliora' ); ?>" aria-label="<?php esc_attr_e( 'Next page', 'foliora' ); ?>">
-					<?php echo $this->toolbar_icon( 'next' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php $this->the_icon( 'next' ); ?>
 				</button>
 			</div>
 			<?php endif; ?>
 			<div class="foliora-tool-group foliora-zoom-group">
 				<?php if ( $show_zoom ) : ?>
 				<button type="button" class="foliora-btn foliora-zoom-out" title="<?php esc_attr_e( 'Zoom out (-)', 'foliora' ); ?>" aria-label="<?php esc_attr_e( 'Zoom out', 'foliora' ); ?>">
-					<?php echo $this->toolbar_icon( 'minus' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php $this->the_icon( 'minus' ); ?>
 				</button>
 				<span class="foliora-zoom-label" aria-live="polite">100%</span>
 				<button type="button" class="foliora-btn foliora-zoom-in" title="<?php esc_attr_e( 'Zoom in (+)', 'foliora' ); ?>" aria-label="<?php esc_attr_e( 'Zoom in', 'foliora' ); ?>">
-					<?php echo $this->toolbar_icon( 'plus' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php $this->the_icon( 'plus' ); ?>
 				</button>
 				<?php endif; ?>
 				<?php if ( $show_fit ) : ?>
 				<button type="button" class="foliora-btn foliora-fit" title="<?php esc_attr_e( 'Fit page (0)', 'foliora' ); ?>" aria-label="<?php esc_attr_e( 'Fit page', 'foliora' ); ?>">
-					<?php echo $this->toolbar_icon( 'fit' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php $this->the_icon( 'fit' ); ?>
 				</button>
 				<?php endif; ?>
 			</div>
 			<?php if ( $search ) : ?>
 			<div class="foliora-tool-group foliora-find-group">
 				<span class="foliora-find">
-					<?php echo $this->toolbar_icon( 'search' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php $this->the_icon( 'search' ); ?>
 					<input type="search" class="foliora-find-input" placeholder="<?php esc_attr_e( 'Find', 'foliora' ); ?>" aria-label="<?php esc_attr_e( 'Find in document', 'foliora' ); ?>" />
 				</span>
 				<span class="foliora-find-status" hidden aria-live="polite"></span>
 				<button type="button" class="foliora-btn foliora-find-prev" title="<?php esc_attr_e( 'Previous match', 'foliora' ); ?>" aria-label="<?php esc_attr_e( 'Previous match', 'foliora' ); ?>">
-					<?php echo $this->toolbar_icon( 'up' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php $this->the_icon( 'up' ); ?>
 				</button>
 				<button type="button" class="foliora-btn foliora-find-next" title="<?php esc_attr_e( 'Next match', 'foliora' ); ?>" aria-label="<?php esc_attr_e( 'Next match', 'foliora' ); ?>">
-					<?php echo $this->toolbar_icon( 'down' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php $this->the_icon( 'down' ); ?>
 				</button>
 			</div>
 			<?php endif; ?>
 			<div class="foliora-tool-group foliora-tool-group-end">
 				<?php if ( $download ) : ?>
 				<a class="foliora-btn foliora-download" href="<?php echo esc_url( $download_url ); ?>" download title="<?php esc_attr_e( 'Download', 'foliora' ); ?>" aria-label="<?php esc_attr_e( 'Download', 'foliora' ); ?>">
-					<?php echo $this->toolbar_icon( 'download' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php $this->the_icon( 'download' ); ?>
 				</a>
 				<?php endif; ?>
 				<?php if ( $fullscreen ) : ?>
 				<button type="button" class="foliora-btn foliora-fs" title="<?php esc_attr_e( 'Full screen (F)', 'foliora' ); ?>" aria-label="<?php esc_attr_e( 'Full screen', 'foliora' ); ?>">
-					<?php echo $this->toolbar_icon( 'fs' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php $this->the_icon( 'fs' ); ?>
 				</button>
 				<?php endif; ?>
 				<div class="foliora-more-wrap">
 					<button type="button" class="foliora-btn foliora-more" aria-expanded="false" aria-haspopup="true" title="<?php esc_attr_e( 'More tools', 'foliora' ); ?>" aria-label="<?php esc_attr_e( 'More tools', 'foliora' ); ?>">
-						<?php echo $this->toolbar_icon( 'more' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+						<?php $this->the_icon( 'more' ); ?>
 					</button>
 					<div class="foliora-more-menu" hidden role="menu">
 						<?php if ( $show_rotate ) : ?>
 						<button type="button" class="foliora-more-item foliora-rotate" role="menuitem">
-							<?php echo $this->toolbar_icon( 'rotate' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							<?php $this->the_icon( 'rotate' ); ?>
 							<span><?php esc_html_e( 'Rotate', 'foliora' ); ?></span>
 						</button>
 						<?php endif; ?>
 						<?php if ( $show_view ) : ?>
 						<button type="button" class="foliora-more-item foliora-view" role="menuitem">
-							<?php echo $this->toolbar_icon( 'view' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							<?php $this->the_icon( 'view' ); ?>
 							<span><?php esc_html_e( 'View Mode', 'foliora' ); ?></span>
 						</button>
 						<?php endif; ?>
 						<?php if ( $show_pan ) : ?>
 						<button type="button" class="foliora-more-item foliora-pan" role="menuitem" aria-pressed="false">
-							<?php echo $this->toolbar_icon( 'pan' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							<?php $this->the_icon( 'pan' ); ?>
 							<span><?php esc_html_e( 'Hand Tool', 'foliora' ); ?></span>
 						</button>
 						<?php endif; ?>
 						<?php if ( $theme_btn ) : ?>
 						<button type="button" class="foliora-more-item foliora-theme-toggle" role="menuitem">
-							<?php echo $this->toolbar_icon( 'theme' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							<?php $this->the_icon( 'theme' ); ?>
 							<span><?php esc_html_e( 'Switch Theme', 'foliora' ); ?></span>
 						</button>
 						<?php endif; ?>
 						<?php if ( $share ) : ?>
 						<button type="button" class="foliora-more-item foliora-share-btn" role="menuitem" aria-expanded="false">
-							<?php echo $this->toolbar_icon( 'share' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							<?php $this->the_icon( 'share' ); ?>
 							<span><?php esc_html_e( 'Share Document', 'foliora' ); ?></span>
 						</button>
 						<?php endif; ?>
 						<?php if ( $shortcuts ) : ?>
 						<button type="button" class="foliora-more-item foliora-shortcuts-btn" role="menuitem" aria-expanded="false">
-							<?php echo $this->toolbar_icon( 'shortcuts' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							<?php $this->the_icon( 'shortcuts' ); ?>
 							<span><?php esc_html_e( 'Shortcuts Guide', 'foliora' ); ?></span>
 						</button>
 						<?php endif; ?>
 						<?php if ( $print ) : ?>
 						<button type="button" class="foliora-more-item foliora-print" role="menuitem">
-							<?php echo $this->toolbar_icon( 'print' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							<?php $this->the_icon( 'print' ); ?>
 							<span><?php esc_html_e( 'Print Document', 'foliora' ); ?></span>
 						</button>
 						<?php endif; ?>
 						<?php if ( $present ) : ?>
 						<button type="button" class="foliora-more-item foliora-present" role="menuitem" aria-pressed="false">
-							<?php echo $this->toolbar_icon( 'present' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							<?php $this->the_icon( 'present' ); ?>
 							<span><?php esc_html_e( 'Presentation Mode', 'foliora' ); ?></span>
 						</button>
 						<?php endif; ?>
@@ -413,7 +418,7 @@ class Foliora_Viewer {
 				<div class="foliora-modal-header">
 					<h3 class="foliora-modal-title"><?php esc_html_e( 'Keyboard Shortcuts', 'foliora' ); ?></h3>
 					<button type="button" class="foliora-modal-close" aria-label="<?php esc_attr_e( 'Close', 'foliora' ); ?>">
-						<?php echo $this->toolbar_icon( 'close' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+						<?php $this->the_icon( 'close' ); ?>
 					</button>
 				</div>
 				<div class="foliora-modal-body">
@@ -473,7 +478,7 @@ class Foliora_Viewer {
 				<div class="foliora-modal-header">
 					<h3 class="foliora-modal-title"><?php esc_html_e( 'Share Document', 'foliora' ); ?></h3>
 					<button type="button" class="foliora-modal-close" aria-label="<?php esc_attr_e( 'Close', 'foliora' ); ?>">
-						<?php echo $this->toolbar_icon( 'close' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+						<?php $this->the_icon( 'close' ); ?>
 					</button>
 				</div>
 				<div class="foliora-modal-body">
@@ -498,6 +503,243 @@ class Foliora_Viewer {
 		</div>
 		<?php
 		return ob_get_clean();
+	}
+
+	/**
+	 * Validate a CSS length used for the viewer width or height.
+	 *
+	 * @param mixed  $value   Raw value.
+	 * @param string $fallback Fallback.
+	 * @return string
+	 */
+	public static function sanitize_dimension( $value, $fallback ) {
+		$value = trim( sanitize_text_field( (string) $value ) );
+		if ( preg_match( '/^(0|\d+(\.\d+)?(px|%|em|rem|vh|vw|svh|dvh|lvh))$/', $value ) ) {
+			return $value;
+		}
+		return (string) $fallback;
+	}
+
+	/**
+	 * Keep only known control names in a comma separated "hide" list.
+	 *
+	 * @param mixed $value Raw list.
+	 * @return string
+	 */
+	public static function sanitize_hide_list( $value ) {
+		$known = array( 'nav', 'zoom', 'fit', 'rotate', 'view', 'pan', 'download', 'print', 'search', 'theme', 'share', 'shortcuts', 'presentation', 'fullscreen' );
+
+		/**
+		 * Filter: foliora/hide_tokens
+		 *
+		 * Control names accepted by the "hide" attribute. Add-ons that print
+		 * extra controls add their own names here.
+		 *
+		 * @param string[] $known Allowed names.
+		 */
+		$filtered = apply_filters( 'foliora/hide_tokens', $known );
+		$known    = is_array( $filtered ) ? array_map( 'strval', $filtered ) : $known;
+
+		$tokens = array_map( 'trim', explode( ',', strtolower( sanitize_text_field( (string) $value ) ) ) );
+		$tokens = array_values( array_unique( array_intersect( $tokens, $known ) ) );
+		return implode( ',', $tokens );
+	}
+
+	/**
+	 * Normalise a stored on/off shortcode attribute to true, false or empty (inherit).
+	 *
+	 * @param mixed $value Raw value.
+	 * @return string
+	 */
+	public static function sanitize_flag( $value ) {
+		$v = strtolower( trim( (string) $value ) );
+		if ( in_array( $v, array( '1', 'true', 'yes', 'on' ), true ) ) {
+			return 'true';
+		}
+		if ( in_array( $v, array( '0', 'false', 'no', 'off' ), true ) ) {
+			return 'false';
+		}
+		return '';
+	}
+
+	/**
+	 * Tags and attributes the viewer and library markup needs, for wp_kses().
+	 * Everything else is stripped, so output built from settings, post titles
+	 * or filters can never carry script, iframes or event handlers.
+	 *
+	 * @return array<string,array<string,bool>>
+	 */
+	public static function allowed_html() {
+		$g = array(
+			'class'            => true,
+			'id'               => true,
+			'hidden'           => true,
+			'role'             => true,
+			'tabindex'         => true,
+			'title'            => true,
+			'style'            => true,
+			'lang'             => true,
+			'dir'              => true,
+			'data-*'           => true,
+			'aria-label'       => true,
+			'aria-labelledby'  => true,
+			'aria-describedby' => true,
+			'aria-hidden'      => true,
+			'aria-live'        => true,
+			'aria-busy'        => true,
+			'aria-expanded'    => true,
+			'aria-pressed'     => true,
+			'aria-controls'    => true,
+			'aria-haspopup'    => true,
+			'aria-current'     => true,
+			'aria-modal'       => true,
+			'aria-valuemin'    => true,
+			'aria-valuemax'    => true,
+			'aria-valuenow'    => true,
+		);
+
+		$tags = array(
+			'div'      => array(),
+			'span'     => array(),
+			'p'        => array(),
+			'nav'      => array(),
+			'ul'       => array(),
+			'li'       => array(),
+			'h2'       => array(),
+			'h3'       => array(),
+			'strong'   => array(),
+			'kbd'      => array(),
+			'noscript' => array(),
+			'figure'   => array(),
+			'a'        => array(
+				'href'     => true,
+				'target'   => true,
+				'rel'      => true,
+				'download' => true,
+			),
+			'button'   => array(
+				'type'     => true,
+				'disabled' => true,
+				'name'     => true,
+				'value'    => true,
+			),
+			'form'     => array(
+				'method' => true,
+				'action' => true,
+			),
+			'label'    => array(
+				'for' => true,
+			),
+			'input'    => array(
+				'type'         => true,
+				'name'         => true,
+				'value'        => true,
+				'placeholder'  => true,
+				'min'          => true,
+				'max'          => true,
+				'checked'      => true,
+				'readonly'     => true,
+				'disabled'     => true,
+				'autocomplete' => true,
+			),
+			'img'      => array(
+				'src'      => true,
+				'srcset'   => true,
+				'sizes'    => true,
+				'alt'      => true,
+				'width'    => true,
+				'height'   => true,
+				'loading'  => true,
+				'decoding' => true,
+			),
+		);
+
+		$allowed = array();
+		foreach ( $tags as $tag => $attrs ) {
+			$allowed[ $tag ] = array_merge( $g, $attrs );
+		}
+
+		$allowed = array_merge( $allowed, self::svg_allowed_html() );
+
+		/**
+		 * Filter: foliora/allowed_html
+		 *
+		 * Add-ons that print extra markup inside the viewer or library output
+		 * (through foliora/before_viewer or foliora/viewer_html) extend this list.
+		 *
+		 * @param array $allowed Tag => attributes map used with wp_kses().
+		 */
+		$filtered = apply_filters( 'foliora/allowed_html', $allowed );
+		return is_array( $filtered ) ? $filtered : $allowed;
+	}
+
+	/**
+	 * Tags and attributes of the static line icons (inline SVG).
+	 *
+	 * @return array<string,array<string,bool>>
+	 */
+	public static function svg_allowed_html() {
+		$paint = array(
+			'class'           => true,
+			'fill'            => true,
+			'stroke'          => true,
+			'stroke-width'    => true,
+			'stroke-linecap'  => true,
+			'stroke-linejoin' => true,
+			'aria-hidden'     => true,
+		);
+
+		return array(
+			'svg'      => array_merge(
+				$paint,
+				array(
+					'xmlns'     => true,
+					'width'     => true,
+					'height'    => true,
+					'viewbox'   => true,
+					'focusable' => true,
+				)
+			),
+			'path'     => array_merge( $paint, array( 'd' => true ) ),
+			'polyline' => array_merge( $paint, array( 'points' => true ) ),
+			'line'     => array_merge(
+				$paint,
+				array(
+					'x1' => true,
+					'y1' => true,
+					'x2' => true,
+					'y2' => true,
+				)
+			),
+			'circle'   => array_merge(
+				$paint,
+				array(
+					'cx' => true,
+					'cy' => true,
+					'r'  => true,
+				)
+			),
+			'rect'     => array_merge(
+				$paint,
+				array(
+					'x'      => true,
+					'y'      => true,
+					'width'  => true,
+					'height' => true,
+					'rx'     => true,
+					'ry'     => true,
+				)
+			),
+		);
+	}
+
+	/**
+	 * Print one toolbar icon, escaped at output.
+	 *
+	 * @param string $name Icon key.
+	 */
+	private function the_icon( $name ) {
+		echo wp_kses( $this->toolbar_icon( $name ), self::svg_allowed_html() );
 	}
 
 	/**

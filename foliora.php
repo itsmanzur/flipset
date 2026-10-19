@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Foliora – PDF Viewer, PDF Embed, 3D Flipbook & Document Library
  * Plugin URI:        https://thereadscope.com/foliora
- * Description:       Embed PDFs with a fast PDF viewer, 3D flipbook and document library. Searchable PDF text, accessible, no CDN. Gutenberg, Elementor, Divi ready.
+ * Description:       Embed PDFs with a fast PDF viewer, 3D flipbook and document library. Searchable PDF text, accessible, no CDN. Works with Gutenberg, Elementor, Divi.
  * Version:           1.0.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
@@ -110,23 +110,6 @@ function foliora_deactivate() {
 	// Nothing to do yet.
 }
 register_deactivation_hook( FOLIORA_FILE, 'foliora_deactivate' );
-
-/**
- * Make the bundled /languages files load. Core does NOT read the
- * 'Domain Path' header on its own: on WP.org it only loads language packs
- * from WP_LANG_DIR. Newer cores expose a registry to add a custom path for
- * just-in-time loading; older ones need load_plugin_textdomain(). WP.org
- * language packs in WP_LANG_DIR still take precedence either way.
- */
-function foliora_register_textdomain_path() {
-	if ( isset( $GLOBALS['wp_textdomain_registry'] ) && is_object( $GLOBALS['wp_textdomain_registry'] )
-		&& method_exists( $GLOBALS['wp_textdomain_registry'], 'set_custom_path' ) ) {
-		$GLOBALS['wp_textdomain_registry']->set_custom_path( 'foliora', FOLIORA_DIR . 'languages' );
-		return;
-	}
-	load_plugin_textdomain( 'foliora', false, dirname( FOLIORA_BASENAME ) . '/languages' ); // phpcs:ignore PluginCheck.CodeAnalysis.DiscouragedFunctions.load_plugin_textdomainFound -- only reached on WP < 6.1 (no textdomain registry), where bundled /languages files are otherwise never read.
-}
-add_action( 'plugins_loaded', 'foliora_register_textdomain_path', 1 );
 
 /**
  * Boot the plugin once all plugins are loaded, so any add-on extension (if active)

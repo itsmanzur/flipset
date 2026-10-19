@@ -437,3 +437,40 @@ add_filter( 'foliora/pdf_tagged', function ( $tagged, $attachment_id ) {
 	return $tagged;
 }, 10, 2 );
 ```
+
+---
+
+## `foliora/allowed_html`
+
+**Type:** filter
+**Fired from:** `Foliora_Viewer::allowed_html()` in `includes/class-foliora-viewer.php`
+
+Viewer and library markup is passed through `wp_kses()` with this tag/attribute list whenever the plugin prints it itself (page-builder widgets, the library grid, the admin previews). If an add-on prints extra markup through `foliora/before_viewer` or `foliora/viewer_html`, extend the list so it is kept.
+
+**Parameters**
+
+| Name | Type | Meaning |
+|------|------|---------|
+| `$allowed` | `array` | `wp_kses()` allowed-HTML array |
+
+```php
+add_filter( 'foliora/allowed_html', function ( $allowed ) {
+	$allowed['section'] = array( 'class' => true, 'data-*' => true );
+	return $allowed;
+} );
+```
+
+---
+
+## `foliora/hide_tokens`
+
+**Type:** filter
+**Fired from:** `Foliora_Viewer::sanitize_hide_list()` in `includes/class-foliora-viewer.php`
+
+Control names accepted in the `hide="..."` list of a saved embed. Unknown names are dropped when an embed is saved. Add-ons that print their own controls add their names here.
+
+**Parameters**
+
+| Name | Type | Meaning |
+|------|------|---------|
+| `$known` | `string[]` | Allowed names (`nav`, `zoom`, `fit`, `rotate`, `view`, `pan`, `download`, `print`, `search`, `theme`, `share`, `shortcuts`, `presentation`, `fullscreen`) |

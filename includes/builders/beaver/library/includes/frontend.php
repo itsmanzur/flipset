@@ -17,4 +17,4 @@ $foliora_atts = array(
 	'search'   => isset( $settings->search ) ? sanitize_text_field( (string) $settings->search ) : 'true',
 );
 
-echo Foliora::instance()->library->render_shortcode( $foliora_atts ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- library HTML is escaped internally.
+echo wp_kses( Foliora::instance()->library->render_shortcode( $foliora_atts ), Foliora_Viewer::allowed_html() );

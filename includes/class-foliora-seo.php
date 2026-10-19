@@ -305,9 +305,20 @@ class Foliora_SEO {
 		}
 
 		$json = count( $schemas ) === 1 ? $schemas[0] : $schemas;
+
+		// The JSON sits inside a <script> element: JSON_HEX_* turns < > & ' "
+		// into \uXXXX escapes so a stored title can never close the element.
+		$encoded = wp_json_encode(
+			$json,
+			JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT
+		);
+		if ( ! is_string( $encoded ) || '' === $encoded ) {
+			return;
+		}
+
 		printf(
 			"<script type=\"application/ld+json\">\n%s\n</script>\n",
-			wp_json_encode( $json, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT )
+			$encoded // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON_HEX_* encoded for a script context.
 		);
 	}
 

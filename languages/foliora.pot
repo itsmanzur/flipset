@@ -1,4 +1,4 @@
-# Copyright (C) 2026 The Read Scope
+# Copyright (C) 2026 itsmanzur
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-12T01:18:29+00:00\n"
+"POT-Creation-Date: 2026-10-16T00:08:28+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: foliora\n"
@@ -26,12 +26,12 @@ msgstr ""
 
 #. Description of the plugin
 #: foliora.php
-msgid "Embed PDFs with a fast PDF viewer, 3D flipbook and document library. Searchable PDF text, accessible, no CDN. Gutenberg, Elementor, Divi ready."
+msgid "Embed PDFs with a fast PDF viewer, 3D flipbook and document library. Searchable PDF text, accessible, no CDN. Works with Gutenberg, Elementor, Divi."
 msgstr ""
 
 #. Author of the plugin
 #: foliora.php
-msgid "The Read Scope"
+msgid "itsmanzur"
 msgstr ""
 
 #. Author URI of the plugin
@@ -54,7 +54,7 @@ msgstr ""
 #: includes/class-foliora-admin.php:72
 #: includes/class-foliora-admin.php:73
 #: includes/class-foliora-admin.php:700
-#: includes/class-foliora-admin.php:1520
+#: includes/class-foliora-admin.php:1529
 #: includes/class-foliora-builders.php:36
 msgid "Foliora"
 msgstr ""
@@ -102,7 +102,7 @@ msgstr ""
 
 #: includes/builders/class-foliora-divi-library.php:77
 #: includes/builders/class-foliora-elementor-library.php:77
-#: includes/class-foliora-admin.php:2236
+#: includes/class-foliora-admin.php:2245
 #: includes/class-foliora-builders.php:198
 #: assets/js/foliora-library-block.js:55
 msgid "Date"
@@ -155,7 +155,7 @@ msgstr ""
 #: includes/builders/class-foliora-elementor-library.php:102
 #: includes/builders/class-foliora-elementor-viewer.php:103
 #: includes/builders/class-foliora-elementor-viewer.php:115
-#: includes/class-foliora-admin.php:2513
+#: includes/class-foliora-admin.php:2522
 #: includes/class-foliora-builders.php:146
 #: includes/class-foliora-builders.php:155
 #: includes/class-foliora-builders.php:217
@@ -168,8 +168,8 @@ msgstr ""
 #: includes/builders/class-foliora-elementor-library.php:103
 #: includes/builders/class-foliora-elementor-viewer.php:104
 #: includes/builders/class-foliora-elementor-viewer.php:116
-#: includes/class-foliora-admin.php:2513
-#: includes/class-foliora-admin.php:2514
+#: includes/class-foliora-admin.php:2522
+#: includes/class-foliora-admin.php:2523
 #: includes/class-foliora-builders.php:147
 #: includes/class-foliora-builders.php:156
 #: includes/class-foliora-builders.php:218
@@ -178,7 +178,7 @@ msgstr ""
 
 #: includes/builders/class-foliora-divi-viewer.php:45
 #: includes/builders/class-foliora-elementor-viewer.php:38
-#: includes/class-foliora-admin.php:2644
+#: includes/class-foliora-admin.php:2653
 #: includes/class-foliora-builders.php:103
 msgid "Document"
 msgstr ""
@@ -258,9 +258,9 @@ msgstr ""
 
 #: includes/class-foliora-a11y.php:72
 #: includes/class-foliora-a11y.php:87
-#: includes/class-foliora-admin.php:3480
-#: includes/class-foliora-admin.php:3496
-#: includes/class-foliora-admin.php:3559
+#: includes/class-foliora-admin.php:3489
+#: includes/class-foliora-admin.php:3505
+#: includes/class-foliora-admin.php:3568
 #: includes/class-foliora-seo.php:69
 #: includes/class-foliora-seo.php:84
 #: includes/class-foliora-thumbnails.php:59
@@ -292,8 +292,8 @@ msgstr ""
 
 #: includes/class-foliora-admin.php:93
 #: includes/class-foliora-admin.php:743
-#: includes/class-foliora-admin.php:1821
-#: includes/class-foliora-admin.php:2523
+#: includes/class-foliora-admin.php:1830
+#: includes/class-foliora-admin.php:2532
 msgid "Shortcode Builder"
 msgstr ""
 
@@ -303,7 +303,7 @@ msgstr ""
 
 #: includes/class-foliora-admin.php:102
 #: includes/class-foliora-admin.php:746
-#: includes/class-foliora-admin.php:2466
+#: includes/class-foliora-admin.php:2475
 msgid "Docs & Features"
 msgstr ""
 
@@ -312,48 +312,48 @@ msgid "Foliora Settings"
 msgstr ""
 
 #: includes/class-foliora-admin.php:111
-#: includes/class-foliora-admin.php:1522
-#: includes/class-foliora-admin.php:1525
+#: includes/class-foliora-admin.php:1531
+#: includes/class-foliora-admin.php:1534
 msgid "Settings"
 msgstr ""
 
 #: includes/class-foliora-admin.php:218
-#: includes/class-foliora-admin.php:2712
+#: includes/class-foliora-admin.php:2721
 msgid "Indexed"
 msgstr ""
 
 #: includes/class-foliora-admin.php:219
-#: includes/class-foliora-admin.php:2714
+#: includes/class-foliora-admin.php:2723
 msgid "No text"
 msgstr ""
 
 #: includes/class-foliora-admin.php:220
-#: includes/class-foliora-admin.php:2723
+#: includes/class-foliora-admin.php:2732
 msgid "Tagged"
 msgstr ""
 
 #: includes/class-foliora-admin.php:221
-#: includes/class-foliora-admin.php:2728
+#: includes/class-foliora-admin.php:2737
 msgid "Untagged"
 msgstr ""
 
 #: includes/class-foliora-admin.php:222
-#: includes/class-foliora-admin.php:2727
+#: includes/class-foliora-admin.php:2736
 msgid "This PDF has no accessibility tags. Export it from Word, InDesign, or Acrobat as a tagged PDF so screen readers can follow headings and reading order."
 msgstr ""
 
 #: includes/class-foliora-admin.php:223
-#: includes/class-foliora-admin.php:2723
+#: includes/class-foliora-admin.php:2732
 msgid "Tagged PDF. Screen readers can follow its structure."
 msgstr ""
 
 #: includes/class-foliora-admin.php:224
-#: includes/class-foliora-admin.php:2712
+#: includes/class-foliora-admin.php:2721
 msgid "Text extracted. WordPress search can find words in this PDF."
 msgstr ""
 
 #: includes/class-foliora-admin.php:225
-#: includes/class-foliora-admin.php:2714
+#: includes/class-foliora-admin.php:2723
 msgid "No selectable text was found (a scanned image PDF), so it cannot be searched."
 msgstr ""
 
@@ -417,8 +417,8 @@ msgstr ""
 
 #: includes/class-foliora-admin.php:264
 #: includes/class-foliora-admin.php:967
-#: includes/class-foliora-admin.php:2738
-#: includes/class-foliora-admin.php:2842
+#: includes/class-foliora-admin.php:2747
+#: includes/class-foliora-admin.php:2851
 msgid "Copy shortcode"
 msgstr ""
 
@@ -435,14 +435,14 @@ msgid "Preset applied"
 msgstr ""
 
 #: includes/class-foliora-admin.php:268
-#: includes/class-foliora-admin.php:1417
-#: includes/class-foliora-admin.php:1422
+#: includes/class-foliora-admin.php:1426
+#: includes/class-foliora-admin.php:1431
 #: includes/class-foliora-embeds.php:251
 msgid "Please select a PDF file."
 msgstr ""
 
 #: includes/class-foliora-admin.php:269
-#: includes/class-foliora-admin.php:2165
+#: includes/class-foliora-admin.php:2174
 msgid "Select or upload a PDF above to see live interactive preview."
 msgstr ""
 
@@ -451,7 +451,7 @@ msgid "Saving…"
 msgstr ""
 
 #: includes/class-foliora-admin.php:271
-#: includes/class-foliora-admin.php:2188
+#: includes/class-foliora-admin.php:2197
 msgid "Update Embed & Copy"
 msgstr ""
 
@@ -525,7 +525,7 @@ msgstr ""
 
 #. translators: %s: configured viewer height, for example 600px.
 #: includes/class-foliora-admin.php:312
-#: includes/class-foliora-admin.php:1646
+#: includes/class-foliora-admin.php:1655
 #, php-format
 msgid "Height %s · scaled to fit"
 msgstr ""
@@ -560,7 +560,7 @@ msgstr ""
 
 #: includes/class-foliora-admin.php:395
 #: includes/class-foliora-admin.php:1082
-#: includes/class-foliora-admin.php:1577
+#: includes/class-foliora-admin.php:1586
 msgid "Credit link"
 msgstr ""
 
@@ -628,12 +628,12 @@ msgid "Attachment pages"
 msgstr ""
 
 #: includes/class-foliora-admin.php:579
-#: includes/class-foliora-admin.php:1591
+#: includes/class-foliora-admin.php:1600
 msgid "Enable or disable specific buttons across all embedded PDF viewers. Individual embeds can also customize controls via the \"hide\" attribute."
 msgstr ""
 
 #: includes/class-foliora-admin.php:655
-#: includes/class-foliora-admin.php:1613
+#: includes/class-foliora-admin.php:1622
 msgid "Make embedded PDFs findable in WordPress search and nicer when a page is shared."
 msgstr ""
 
@@ -650,7 +650,7 @@ msgid "New Embed"
 msgstr ""
 
 #: includes/class-foliora-admin.php:730
-#: includes/class-foliora-admin.php:2583
+#: includes/class-foliora-admin.php:2592
 msgid "Documents"
 msgstr ""
 
@@ -659,9 +659,9 @@ msgid "Quick actions:"
 msgstr ""
 
 #: includes/class-foliora-admin.php:740
-#: includes/class-foliora-admin.php:1686
-#: includes/class-foliora-admin.php:2474
-#: includes/class-foliora-admin.php:2784
+#: includes/class-foliora-admin.php:1695
+#: includes/class-foliora-admin.php:2483
+#: includes/class-foliora-admin.php:2793
 msgid "Upload PDF"
 msgstr ""
 
@@ -768,7 +768,7 @@ msgid "Drop a PDF, pick a cover, or browse the library."
 msgstr ""
 
 #: includes/class-foliora-admin.php:869
-#: includes/class-foliora-admin.php:2705
+#: includes/class-foliora-admin.php:2714
 msgid "Open in Builder"
 msgstr ""
 
@@ -777,9 +777,9 @@ msgid "No document selected"
 msgstr ""
 
 #: includes/class-foliora-admin.php:889
-#: includes/class-foliora-admin.php:2176
-#: includes/class-foliora-admin.php:2235
-#: includes/class-foliora-admin.php:2647
+#: includes/class-foliora-admin.php:2185
+#: includes/class-foliora-admin.php:2244
+#: includes/class-foliora-admin.php:2656
 msgid "Shortcode"
 msgstr ""
 
@@ -788,17 +788,17 @@ msgid "Click to copy"
 msgstr ""
 
 #: includes/class-foliora-admin.php:899
-#: includes/class-foliora-admin.php:2191
-#: includes/class-foliora-admin.php:3156
-#: includes/class-foliora-admin.php:3170
-#: includes/class-foliora-admin.php:3184
-#: includes/class-foliora-admin.php:3259
-#: includes/class-foliora-viewer.php:483
+#: includes/class-foliora-admin.php:2200
+#: includes/class-foliora-admin.php:3165
+#: includes/class-foliora-admin.php:3179
+#: includes/class-foliora-admin.php:3193
+#: includes/class-foliora-admin.php:3268
+#: includes/class-foliora-viewer.php:488
 msgid "Copy"
 msgstr ""
 
 #: includes/class-foliora-admin.php:904
-#: includes/class-foliora-admin.php:2704
+#: includes/class-foliora-admin.php:2713
 msgid "Create test page"
 msgstr ""
 
@@ -811,7 +811,7 @@ msgid "Recent"
 msgstr ""
 
 #: includes/class-foliora-admin.php:944
-#: includes/class-foliora-admin.php:1463
+#: includes/class-foliora-admin.php:1472
 msgid "Viewer defaults"
 msgstr ""
 
@@ -828,12 +828,12 @@ msgid "Untitled embed"
 msgstr ""
 
 #: includes/class-foliora-admin.php:973
-#: includes/class-foliora-admin.php:2270
+#: includes/class-foliora-admin.php:2279
 msgid "Edit"
 msgstr ""
 
 #: includes/class-foliora-admin.php:981
-#: includes/class-foliora-admin.php:2286
+#: includes/class-foliora-admin.php:2295
 msgid "No saved embeds yet"
 msgstr ""
 
@@ -922,17 +922,17 @@ msgid "Use a number with a unit, e.g. 600px"
 msgstr ""
 
 #: includes/class-foliora-admin.php:1223
-#: includes/class-foliora-admin.php:1931
+#: includes/class-foliora-admin.php:1940
 msgid "Light"
 msgstr ""
 
 #: includes/class-foliora-admin.php:1224
-#: includes/class-foliora-admin.php:1938
+#: includes/class-foliora-admin.php:1947
 msgid "Dark Mode"
 msgstr ""
 
 #: includes/class-foliora-admin.php:1225
-#: includes/class-foliora-admin.php:1945
+#: includes/class-foliora-admin.php:1954
 msgid "Sepia (Warm)"
 msgstr ""
 
@@ -940,1331 +940,1331 @@ msgstr ""
 msgid "Override per embed with"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1412
+#: includes/class-foliora-admin.php:1421
 msgid "You are not allowed to do this."
 msgstr ""
 
-#: includes/class-foliora-admin.php:1468
-#: includes/class-foliora-admin.php:2048
-#: includes/class-foliora-admin.php:2058
-#: includes/class-foliora-admin.php:2078
-#: includes/class-foliora-admin.php:2088
+#: includes/class-foliora-admin.php:1477
+#: includes/class-foliora-admin.php:2057
+#: includes/class-foliora-admin.php:2067
+#: includes/class-foliora-admin.php:2087
+#: includes/class-foliora-admin.php:2097
 msgid "Toolbar"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1473
+#: includes/class-foliora-admin.php:1482
 msgid "Search & sharing"
 msgstr ""
 
 #. translators: 1: number of indexed PDFs, 2: total PDFs.
-#: includes/class-foliora-admin.php:1485
+#: includes/class-foliora-admin.php:1494
 #, php-format
 msgid "%1$s of %2$s PDFs indexed"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1491
-#: includes/class-foliora-admin.php:1504
+#: includes/class-foliora-admin.php:1500
+#: includes/class-foliora-admin.php:1513
 msgid "Manage in Documents →"
 msgstr ""
 
 #. translators: 1: number of tagged PDFs, 2: number of checked PDFs.
-#: includes/class-foliora-admin.php:1498
+#: includes/class-foliora-admin.php:1507
 #, php-format
 msgid "%1$s of %2$s checked PDFs are tagged"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1519
+#: includes/class-foliora-admin.php:1528
 msgid "Breadcrumb"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1526
+#: includes/class-foliora-admin.php:1535
 msgid "Site-wide defaults for every Foliora viewer. Individual embeds and saved shortcodes can still override them."
 msgstr ""
 
-#: includes/class-foliora-admin.php:1529
+#: includes/class-foliora-admin.php:1538
 msgid "Unsaved changes"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1532
-#: includes/class-foliora-admin.php:1698
+#: includes/class-foliora-admin.php:1541
+#: includes/class-foliora-admin.php:1707
 msgid "Save changes"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1538
+#: includes/class-foliora-admin.php:1547
 msgid "Settings sections"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1562
+#: includes/class-foliora-admin.php:1571
 msgid "Size"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1566
+#: includes/class-foliora-admin.php:1575
 msgid "Reader"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1570
+#: includes/class-foliora-admin.php:1579
 msgid "Toolbar actions"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1584
-#: includes/class-foliora-admin.php:1606
-#: includes/class-foliora-admin.php:1627
+#: includes/class-foliora-admin.php:1593
+#: includes/class-foliora-admin.php:1615
+#: includes/class-foliora-admin.php:1636
 msgid "Reset to defaults"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1593
+#: includes/class-foliora-admin.php:1602
 msgid "Enable all"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1594
+#: includes/class-foliora-admin.php:1603
 msgid "Disable all"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1615
-#: includes/class-foliora-admin.php:2593
-#: includes/class-foliora-admin.php:2645
+#: includes/class-foliora-admin.php:1624
+#: includes/class-foliora-admin.php:2602
+#: includes/class-foliora-admin.php:2654
 #: includes/class-foliora-library.php:209
 msgid "Search"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1619
+#: includes/class-foliora-admin.php:1628
 msgid "Sharing"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1622
+#: includes/class-foliora-admin.php:1631
 msgid "Auto-embed"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1638
+#: includes/class-foliora-admin.php:1647
 msgid "Live preview"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1652
+#: includes/class-foliora-admin.php:1661
 msgid "Preview size"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1653
-#: includes/class-foliora-admin.php:1654
-#: includes/class-foliora-admin.php:2144
+#: includes/class-foliora-admin.php:1662
+#: includes/class-foliora-admin.php:1663
+#: includes/class-foliora-admin.php:2153
 msgid "Desktop View (100%)"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1656
-#: includes/class-foliora-admin.php:1657
-#: includes/class-foliora-admin.php:2147
+#: includes/class-foliora-admin.php:1665
+#: includes/class-foliora-admin.php:1666
+#: includes/class-foliora-admin.php:2156
 msgid "Tablet View (768px)"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1659
-#: includes/class-foliora-admin.php:1660
-#: includes/class-foliora-admin.php:2150
+#: includes/class-foliora-admin.php:1668
+#: includes/class-foliora-admin.php:1669
+#: includes/class-foliora-admin.php:2159
 msgid "Mobile View (375px)"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1664
+#: includes/class-foliora-admin.php:1673
 msgid "Show preview"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1664
+#: includes/class-foliora-admin.php:1673
 msgid "Hide preview"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1669
+#: includes/class-foliora-admin.php:1678
 msgid "Preview PDF"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1681
+#: includes/class-foliora-admin.php:1690
 msgid "Unsaved changes are previewed here only."
 msgstr ""
 
-#: includes/class-foliora-admin.php:1685
+#: includes/class-foliora-admin.php:1694
 msgid "Upload a PDF to preview"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1694
+#: includes/class-foliora-admin.php:1703
 msgid "You have unsaved changes"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1696
+#: includes/class-foliora-admin.php:1705
 msgid "Discard"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1786
+#: includes/class-foliora-admin.php:1795
 msgid "Shortcode Builder & Live Preview"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1789
+#: includes/class-foliora-admin.php:1798
 msgid "Visually configure your PDF embed with real-time preview, then save to generate a clean shortcode like [foliora id=\"1\"]."
 msgstr ""
 
-#: includes/class-foliora-admin.php:1793
-#: includes/class-foliora-admin.php:3406
+#: includes/class-foliora-admin.php:1802
+#: includes/class-foliora-admin.php:3415
 msgid "1-Click Presets:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1795
+#: includes/class-foliora-admin.php:1804
 msgid "3D realistic FlipBook with Web Audio page turn sound"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1796
-#: includes/class-foliora-admin.php:2020
-#: includes/class-foliora-viewer.php:580
+#: includes/class-foliora-admin.php:1805
+#: includes/class-foliora-admin.php:2029
+#: includes/class-foliora-viewer.php:822
 #: assets/js/foliora-block.js:146
 msgid "3D FlipBook"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1798
+#: includes/class-foliora-admin.php:1807
 msgid "Sepia theme, continuous scroll, search enabled"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1799
+#: includes/class-foliora-admin.php:1808
 msgid "E-Book Reader"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1801
+#: includes/class-foliora-admin.php:1810
 msgid "Clean white theme, presentation and download enabled"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1802
+#: includes/class-foliora-admin.php:1811
 msgid "Corporate Report"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1804
+#: includes/class-foliora-admin.php:1813
 msgid "Dark theme, fullscreen and zoom enabled"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1805
+#: includes/class-foliora-admin.php:1814
 msgid "Night Reader"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1807
+#: includes/class-foliora-admin.php:1816
 msgid "Download and print hidden, pan and zoom allowed"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1808
+#: includes/class-foliora-admin.php:1817
 msgid "View Only (Protected)"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1810
+#: includes/class-foliora-admin.php:1819
 msgid "Lazy loaded, compact toolbar, faster initial load"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1811
+#: includes/class-foliora-admin.php:1820
 msgid "Speed Optimized"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1825
-#: includes/class-foliora-admin.php:2216
+#: includes/class-foliora-admin.php:1834
+#: includes/class-foliora-admin.php:2225
 msgid "My Saved Embeds"
 msgstr ""
 
 #. translators: 1: Embed name, 2: Embed ID
-#: includes/class-foliora-admin.php:1838
+#: includes/class-foliora-admin.php:1847
 #, php-format
 msgid "Editing Saved Embed: %1$s (ID: #%2$d)"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1846
+#: includes/class-foliora-admin.php:1855
 msgid "+ Create New Embed"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1862
+#: includes/class-foliora-admin.php:1871
 msgid "1. Document & Style"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1866
+#: includes/class-foliora-admin.php:1875
 msgid "2. Size & Layout"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1870
+#: includes/class-foliora-admin.php:1879
 msgid "3. Toolbar & Advanced"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1879
+#: includes/class-foliora-admin.php:1888
 msgid "Embed Name / Title:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1880
+#: includes/class-foliora-admin.php:1889
 msgid "e.g. Annual Company Report 2026"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1882
+#: includes/class-foliora-admin.php:1891
 msgid "Name for your internal reference in the Saved Embeds manager."
 msgstr ""
 
-#: includes/class-foliora-admin.php:1888
-#: includes/class-foliora-admin.php:2233
+#: includes/class-foliora-admin.php:1897
+#: includes/class-foliora-admin.php:2242
 msgid "PDF Document Source"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1892
+#: includes/class-foliora-admin.php:1901
 msgid "Choose from Media Library"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1895
+#: includes/class-foliora-admin.php:1904
 msgid "Upload New PDF"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1900
+#: includes/class-foliora-admin.php:1909
 msgid "PDF File URL:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1906
+#: includes/class-foliora-admin.php:1915
 msgid "Or select a recent PDF:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1921
+#: includes/class-foliora-admin.php:1930
 msgid "Appearance & Theme"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1925
+#: includes/class-foliora-admin.php:1934
 msgid "Reading Theme:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1952
+#: includes/class-foliora-admin.php:1961
 msgid "Viewer Caption / Subtitle (Optional):"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1953
+#: includes/class-foliora-admin.php:1962
 msgid "e.g. Official Edition"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1959
+#: includes/class-foliora-admin.php:1968
 msgid "Next: Size & Layout →"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1968
+#: includes/class-foliora-admin.php:1977
 msgid "Viewer Dimensions"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1973
+#: includes/class-foliora-admin.php:1982
 msgid "Width:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1982
+#: includes/class-foliora-admin.php:1991
 msgid "Height:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:1995
+#: includes/class-foliora-admin.php:2004
 msgid "Initial Page & Display Mode"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2000
+#: includes/class-foliora-admin.php:2009
 msgid "Start Page:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2004
+#: includes/class-foliora-admin.php:2013
 msgid "Initial View Layout:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2008
+#: includes/class-foliora-admin.php:2017
 msgid "Single Page"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2012
+#: includes/class-foliora-admin.php:2021
 msgid "Continuous Scroll"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2016
+#: includes/class-foliora-admin.php:2025
 msgid "Two-Page Spread"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2028
-#: includes/class-foliora-admin.php:2125
+#: includes/class-foliora-admin.php:2037
+#: includes/class-foliora-admin.php:2134
 msgid "← Back"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2031
+#: includes/class-foliora-admin.php:2040
 msgid "Next: Toolbar & Advanced →"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2040
+#: includes/class-foliora-admin.php:2049
 msgid "Toolbar Buttons & Controls"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2041
+#: includes/class-foliora-admin.php:2050
 msgid "Uncheck any button you want to hide from the viewer toolbar:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2047
-#: includes/class-foliora-viewer.php:330
+#: includes/class-foliora-admin.php:2056
+#: includes/class-foliora-viewer.php:335
 msgid "Download"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2052
+#: includes/class-foliora-admin.php:2061
 msgid "Print"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2053
-#: includes/class-foliora-admin.php:2063
-#: includes/class-foliora-admin.php:2068
-#: includes/class-foliora-admin.php:2073
-#: includes/class-foliora-admin.php:2083
-#: includes/class-foliora-admin.php:2093
-#: includes/class-foliora-admin.php:2098
+#: includes/class-foliora-admin.php:2062
+#: includes/class-foliora-admin.php:2072
+#: includes/class-foliora-admin.php:2077
+#: includes/class-foliora-admin.php:2082
+#: includes/class-foliora-admin.php:2092
+#: includes/class-foliora-admin.php:2102
+#: includes/class-foliora-admin.php:2107
 msgid "⋮ Menu"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2057
+#: includes/class-foliora-admin.php:2066
 msgid "Text Search (Ctrl+F)"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2062
+#: includes/class-foliora-admin.php:2071
 msgid "Theme Switcher"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2067
+#: includes/class-foliora-admin.php:2076
 msgid "Share & Page Link"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2072
+#: includes/class-foliora-admin.php:2081
 msgid "Shortcuts Guide (?)"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2077
-#: includes/class-foliora-viewer.php:450
+#: includes/class-foliora-admin.php:2086
+#: includes/class-foliora-viewer.php:455
 msgid "Full Screen"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2082
-#: includes/class-foliora-viewer.php:389
-#: includes/class-foliora-viewer.php:454
+#: includes/class-foliora-admin.php:2091
+#: includes/class-foliora-viewer.php:394
+#: includes/class-foliora-viewer.php:459
 msgid "Presentation Mode"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2087
-#: includes/class-foliora-viewer.php:426
+#: includes/class-foliora-admin.php:2096
+#: includes/class-foliora-viewer.php:431
 msgid "Zoom In / Out"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2092
-#: includes/class-foliora-viewer.php:434
+#: includes/class-foliora-admin.php:2101
+#: includes/class-foliora-viewer.php:439
 msgid "Rotate Document"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2097
-#: includes/class-foliora-viewer.php:446
+#: includes/class-foliora-admin.php:2106
+#: includes/class-foliora-viewer.php:451
 msgid "Hand / Pan Tool"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2105
+#: includes/class-foliora-admin.php:2114
 msgid "Performance & Advanced"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2111
+#: includes/class-foliora-admin.php:2120
 msgid "Lazy Loading (loading=\"lazy\")"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2111
+#: includes/class-foliora-admin.php:2120
 msgid "Only load PDF when scrolled into viewport."
 msgstr ""
 
-#: includes/class-foliora-admin.php:2115
+#: includes/class-foliora-admin.php:2124
 msgid "Sync Browser URL Hash (hash=\"true\")"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2115
+#: includes/class-foliora-admin.php:2124
 msgid "Update #page=N in address bar for easy bookmarking."
 msgstr ""
 
-#: includes/class-foliora-admin.php:2119
+#: includes/class-foliora-admin.php:2128
 msgid "Remember Last Read Page (resume=\"true\")"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2119
+#: includes/class-foliora-admin.php:2128
 msgid "Auto-resume where visitor left off."
 msgstr ""
 
-#: includes/class-foliora-admin.php:2141
+#: includes/class-foliora-admin.php:2150
 msgid "Real-Time Live Preview"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2177
+#: includes/class-foliora-admin.php:2186
 msgid "PHP Snippet"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2178
+#: includes/class-foliora-admin.php:2187
 msgid "Block Code"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2188
+#: includes/class-foliora-admin.php:2197
 msgid "Save Embed & Get Shortcode"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2190
+#: includes/class-foliora-admin.php:2199
 msgid "Copy code to clipboard"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2194
+#: includes/class-foliora-admin.php:2203
 msgid "Create Test Page"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2201
+#: includes/class-foliora-admin.php:2210
 msgid "Developer: Show full inline shortcode"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2219
+#: includes/class-foliora-admin.php:2228
 msgid "Search embeds…"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2221
+#: includes/class-foliora-admin.php:2230
 msgid "Create New Embed"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2231
+#: includes/class-foliora-admin.php:2240
 msgid "ID"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2232
+#: includes/class-foliora-admin.php:2241
 msgid "Embed Name / Title"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2234
+#: includes/class-foliora-admin.php:2243
 msgid "Layout & Theme"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2237
+#: includes/class-foliora-admin.php:2246
 msgid "Actions"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2262
+#: includes/class-foliora-admin.php:2271
 msgid "Click to copy shortcode"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2272
+#: includes/class-foliora-admin.php:2281
 msgid "Duplicate this embed"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2273
+#: includes/class-foliora-admin.php:2282
 msgid "Duplicate"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2275
+#: includes/class-foliora-admin.php:2284
 msgid "Delete this embed"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2276
+#: includes/class-foliora-admin.php:2285
 msgid "Delete"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2287
+#: includes/class-foliora-admin.php:2296
 msgid "Create your first PDF embed in the Shortcode Builder and click \"Save Embed & Get Shortcode\" to generate a shortcode like [foliora id=\"1\"]."
 msgstr ""
 
-#: includes/class-foliora-admin.php:2289
-#: includes/class-foliora-admin.php:2478
+#: includes/class-foliora-admin.php:2298
+#: includes/class-foliora-admin.php:2487
 msgid "Open Shortcode Builder"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2453
+#: includes/class-foliora-admin.php:2462
 msgid "Every PDF in your Media Library, ready to embed. No duplicate storage."
 msgstr ""
 
-#: includes/class-foliora-admin.php:2454
+#: includes/class-foliora-admin.php:2463
 msgid "Shortcodes, blocks, deep links and page builders, all in one reference."
 msgstr ""
 
-#: includes/class-foliora-admin.php:2455
+#: includes/class-foliora-admin.php:2464
 msgid "Everything Foliora can do. Fast, local and accessible."
 msgstr ""
 
-#: includes/class-foliora-admin.php:2485
+#: includes/class-foliora-admin.php:2494
 msgid "Docs & Features sections"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2488
+#: includes/class-foliora-admin.php:2497
 msgid "Documents Library"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2493
+#: includes/class-foliora-admin.php:2502
 msgid "User Guide"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2497
+#: includes/class-foliora-admin.php:2506
 msgid "All Features"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2511
+#: includes/class-foliora-admin.php:2520
 msgid "4 ways to embed your documents"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2524
+#: includes/class-foliora-admin.php:2533
 msgid "Use the visual Shortcode Builder to configure 3D FlipBook, theme, and toolbar to generate clean [foliora id=\"1\"] shortcodes."
 msgstr ""
 
-#: includes/class-foliora-admin.php:2530
+#: includes/class-foliora-admin.php:2539
 msgid "Direct Shortcode Copy"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2531
+#: includes/class-foliora-admin.php:2540
 msgid "Click \"Copy\" on any row below to quickly copy [foliora file=\"...\"] and paste it into classic editor, pages, or widgets."
 msgstr ""
 
-#: includes/class-foliora-admin.php:2537
+#: includes/class-foliora-admin.php:2546
 msgid "1-Click Test Page"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2538
+#: includes/class-foliora-admin.php:2547
 msgid "Hover over any document title below and click \"Create test page\" to publish and preview instantly in a new tab."
 msgstr ""
 
-#: includes/class-foliora-admin.php:2544
+#: includes/class-foliora-admin.php:2553
 msgid "Gutenberg & oEmbed"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2545
+#: includes/class-foliora-admin.php:2554
 msgid "Insert the \"Foliora Viewer\" block, or simply paste any direct .pdf link on a new line to auto-embed."
 msgstr ""
 
-#: includes/class-foliora-admin.php:2553
+#: includes/class-foliora-admin.php:2562
 msgid "Opening this screen automatically generates first-page preview thumbnails, indexes PDF text for site search, and checks accessibility tags."
 msgstr ""
 
-#: includes/class-foliora-admin.php:2555
+#: includes/class-foliora-admin.php:2564
 msgid "Full Documentation & Cheatsheet"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2560
+#: includes/class-foliora-admin.php:2569
 msgid "Generating thumbnails, indexing PDF text, and checking accessibility tags…"
 msgstr ""
 
 #. translators: %s: number of untagged PDFs on this page.
-#: includes/class-foliora-admin.php:2569
+#: includes/class-foliora-admin.php:2578
 #, php-format
 msgid "%s PDF on this page is not tagged. Screen readers may not follow the intended reading order. Export tagged PDFs from Word, InDesign, or Acrobat."
 msgid_plural "%s PDFs on this page are not tagged. Screen readers may not follow the intended reading order. Export tagged PDFs from Word, InDesign, or Acrobat."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/class-foliora-admin.php:2590
+#: includes/class-foliora-admin.php:2599
 #: includes/class-foliora-library.php:201
 msgid "Search documents"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2592
+#: includes/class-foliora-admin.php:2601
 #: includes/class-foliora-library.php:207
 msgid "Search documents…"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2596
+#: includes/class-foliora-admin.php:2605
 msgid "Filter by status"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2599
+#: includes/class-foliora-admin.php:2608
 msgid "All"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2600
+#: includes/class-foliora-admin.php:2609
 msgid "Ready"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2601
-#: includes/class-foliora-admin.php:2718
-#: includes/class-foliora-admin.php:2732
+#: includes/class-foliora-admin.php:2610
+#: includes/class-foliora-admin.php:2727
+#: includes/class-foliora-admin.php:2741
 msgid "Pending"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2602
+#: includes/class-foliora-admin.php:2611
 msgid "Needs attention"
 msgstr ""
 
 #. translators: %s: number of PDFs
-#: includes/class-foliora-admin.php:2630
+#: includes/class-foliora-admin.php:2639
 #, php-format
 msgid "%s document"
 msgid_plural "%s documents"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/class-foliora-admin.php:2643
+#: includes/class-foliora-admin.php:2652
 msgid "Preview"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2646
+#: includes/class-foliora-admin.php:2655
 msgid "Accessibility"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2706
+#: includes/class-foliora-admin.php:2715
 msgid "View in Media"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2707
+#: includes/class-foliora-admin.php:2716
 msgid "Open file"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2716
+#: includes/class-foliora-admin.php:2725
 msgid "PDF text indexing is turned off in Settings."
 msgstr ""
 
-#: includes/class-foliora-admin.php:2716
-#: includes/class-foliora-admin.php:2730
+#: includes/class-foliora-admin.php:2725
+#: includes/class-foliora-admin.php:2739
 msgid "Off"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2718
+#: includes/class-foliora-admin.php:2727
 msgid "Waiting for text extraction. Keep this screen open."
 msgstr ""
 
-#: includes/class-foliora-admin.php:2730
+#: includes/class-foliora-admin.php:2739
 msgid "Accessibility checks are turned off in Settings."
 msgstr ""
 
-#: includes/class-foliora-admin.php:2732
+#: includes/class-foliora-admin.php:2741
 msgid "Waiting for the accessibility check. Keep this screen open."
 msgstr ""
 
 #. translators: %s: the search term.
-#: includes/class-foliora-admin.php:2775
+#: includes/class-foliora-admin.php:2784
 #, php-format
 msgid "No documents match \"%s\""
 msgstr ""
 
-#: includes/class-foliora-admin.php:2778
+#: includes/class-foliora-admin.php:2787
 msgid "Clear search"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2780
+#: includes/class-foliora-admin.php:2789
 msgid "No documents in this status."
 msgstr ""
 
-#: includes/class-foliora-admin.php:2781
+#: includes/class-foliora-admin.php:2790
 msgid "Show all documents"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2783
+#: includes/class-foliora-admin.php:2792
 msgid "No PDFs yet"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2808
+#: includes/class-foliora-admin.php:2817
 msgid "Foliora User Guide & Complete Reference"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2809
+#: includes/class-foliora-admin.php:2818
 msgid "Learn how to easily embed PDFs, customize 3D FlipBook view modes, use shortcodes, integrate with page builders, and optimize for SEO and speed."
 msgstr ""
 
-#: includes/class-foliora-admin.php:2814
+#: includes/class-foliora-admin.php:2823
 msgid "Guide sections"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2815
+#: includes/class-foliora-admin.php:2824
 msgid "Quick Start"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2816
+#: includes/class-foliora-admin.php:2825
 msgid "[foliora] API"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2817
+#: includes/class-foliora-admin.php:2826
 msgid "[foliora_library]"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2818
+#: includes/class-foliora-admin.php:2827
 msgid "Deep Linking"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2819
+#: includes/class-foliora-admin.php:2828
 msgid "Page Builders"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2820
+#: includes/class-foliora-admin.php:2829
 msgid "FAQs & Tips"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2830
+#: includes/class-foliora-admin.php:2839
 msgid "1. Quick Start: 3 Easy Ways to Embed"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2831
+#: includes/class-foliora-admin.php:2840
 msgid "Choose whichever workflow fits your editing style."
 msgstr ""
 
-#: includes/class-foliora-admin.php:2838
+#: includes/class-foliora-admin.php:2847
 msgid "Shortcode (Anywhere)"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2839
+#: includes/class-foliora-admin.php:2848
 msgid "Copy [foliora file=\"...\"] from the Documents Library tab and paste it into any post, page, widget, or template."
 msgstr ""
 
-#: includes/class-foliora-admin.php:2851
+#: includes/class-foliora-admin.php:2860
 msgid "Gutenberg Native Block"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2852
+#: includes/class-foliora-admin.php:2861
 msgid "In the Block Editor, insert the \"Foliora Viewer\" block. Pick any PDF from your Media Library with instant live rendering."
 msgstr ""
 
-#: includes/class-foliora-admin.php:2855
+#: includes/class-foliora-admin.php:2864
 msgid "Visual Editor Block"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2862
+#: includes/class-foliora-admin.php:2871
 msgid "Auto oEmbed (Paste URL)"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2863
+#: includes/class-foliora-admin.php:2872
 msgid "Simply paste a direct .pdf link on a new line in your editor. WordPress automatically transforms it into an interactive reader."
 msgstr ""
 
-#: includes/class-foliora-admin.php:2866
+#: includes/class-foliora-admin.php:2875
 msgid "Zero Shortcode Required"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2880
+#: includes/class-foliora-admin.php:2889
 msgid "2. [foliora] Shortcode Parameters & Attributes"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2881
+#: includes/class-foliora-admin.php:2890
 msgid "Customize every aspect of your PDF viewer with these parameters:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2889
-#: includes/class-foliora-admin.php:3208
+#: includes/class-foliora-admin.php:2898
+#: includes/class-foliora-admin.php:3217
 msgid "Attribute"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2890
+#: includes/class-foliora-admin.php:2899
 msgid "Type & Default"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2891
+#: includes/class-foliora-admin.php:2900
 msgid "Description & Options"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2892
+#: includes/class-foliora-admin.php:2901
 msgid "Example"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2900
+#: includes/class-foliora-admin.php:2909
 msgid "Recommended"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2905
+#: includes/class-foliora-admin.php:2914
 msgid "Saved Embed ID"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2908
+#: includes/class-foliora-admin.php:2917
 msgid "Clean Saved Embed Shortcode:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2908
+#: includes/class-foliora-admin.php:2917
 msgid "Encapsulates all PDF settings, dimensions, themes, 3D flipbook mode, and toolbar options generated from the Shortcode Builder into a clean, short code."
 msgstr ""
 
-#: includes/class-foliora-admin.php:2921
+#: includes/class-foliora-admin.php:2930
 msgid "Required unless id is set"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2928
+#: includes/class-foliora-admin.php:2937
 msgid "Direct URL to your PDF document (local Media Library or CORS-enabled remote host)."
 msgstr ""
 
-#: includes/class-foliora-admin.php:2941
-#: includes/class-foliora-admin.php:2968
-#: includes/class-foliora-admin.php:2989
-#: includes/class-foliora-admin.php:3010
-#: includes/class-foliora-admin.php:3031
-#: includes/class-foliora-admin.php:3052
-#: includes/class-foliora-admin.php:3073
-#: includes/class-foliora-admin.php:3094
-#: includes/class-foliora-admin.php:3114
+#: includes/class-foliora-admin.php:2950
+#: includes/class-foliora-admin.php:2977
+#: includes/class-foliora-admin.php:2998
+#: includes/class-foliora-admin.php:3019
+#: includes/class-foliora-admin.php:3040
+#: includes/class-foliora-admin.php:3061
+#: includes/class-foliora-admin.php:3082
+#: includes/class-foliora-admin.php:3103
+#: includes/class-foliora-admin.php:3123
 msgid "Optional"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2949
+#: includes/class-foliora-admin.php:2958
 msgid "Reading Layout Mode:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:2951
+#: includes/class-foliora-admin.php:2960
 msgid "3D realistic FlipBook with Web Audio page turn sound."
 msgstr ""
 
-#: includes/class-foliora-admin.php:2952
+#: includes/class-foliora-admin.php:2961
 msgid "Continuous vertical scrolling feed."
 msgstr ""
 
-#: includes/class-foliora-admin.php:2953
+#: includes/class-foliora-admin.php:2962
 msgid "Two-page magazine book spread."
 msgstr ""
 
-#: includes/class-foliora-admin.php:2954
+#: includes/class-foliora-admin.php:2963
 msgid "Standard single page reader."
 msgstr ""
 
-#: includes/class-foliora-admin.php:2976
+#: includes/class-foliora-admin.php:2985
 msgid "Viewer container width. Supports percentage (%), pixels (px), or viewport width (vw)."
 msgstr ""
 
-#: includes/class-foliora-admin.php:2997
+#: includes/class-foliora-admin.php:3006
 msgid "Viewer container height. Supports pixels (px), viewport height (vh), or em/rem."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3018
+#: includes/class-foliora-admin.php:3027
 msgid "Initial starting page number when the document opens."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3039
+#: includes/class-foliora-admin.php:3048
 msgid "Show or hide the direct PDF download button in the toolbar."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3060
+#: includes/class-foliora-admin.php:3069
 msgid "Show or hide the print button in the toolbar."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3081
+#: includes/class-foliora-admin.php:3090
 msgid "Enable or disable the in-document text search (Find) toolbar tool."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3101
+#: includes/class-foliora-admin.php:3110
 msgid "Optional caption heading displayed directly above the viewer frame."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3121
+#: includes/class-foliora-admin.php:3130
 msgid "Hide specific toolbar buttons (comma-separated):"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3142
+#: includes/class-foliora-admin.php:3151
 msgid "Ready-to-Use Copy Presets"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3143
+#: includes/class-foliora-admin.php:3152
 msgid "Click the copy button on any preset to copy the full shortcode:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3149
+#: includes/class-foliora-admin.php:3158
 msgid "3D FlipBook Mode"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3150
+#: includes/class-foliora-admin.php:3159
 msgid "Realistic Sound & Perspective"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3163
+#: includes/class-foliora-admin.php:3172
 msgid "Vertical Continuous Scroll"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3164
+#: includes/class-foliora-admin.php:3173
 msgid "Ideal for Long Reports & Ebooks"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3177
+#: includes/class-foliora-admin.php:3186
 msgid "Read-Only Presentation"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3178
+#: includes/class-foliora-admin.php:3187
 msgid "No Direct Download or Printing"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3199
+#: includes/class-foliora-admin.php:3208
 msgid "3. [foliora_library] Document Gallery Shortcode"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3200
+#: includes/class-foliora-admin.php:3209
 msgid "Display all your Media Library PDFs in a responsive, searchable grid gallery with lightbox reading modal:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3209
+#: includes/class-foliora-admin.php:3218
 msgid "Values / Default"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3210
+#: includes/class-foliora-admin.php:3219
 msgid "Description & Behavior"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3220
+#: includes/class-foliora-admin.php:3229
 msgid "Number of document grid columns on desktop viewports (automatically reflows on mobile)."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3228
+#: includes/class-foliora-admin.php:3237
 msgid "How many PDF cards to display per page before showing pagination controls."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3236
+#: includes/class-foliora-admin.php:3245
 msgid "Sorting order for the gallery catalog items."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3244
+#: includes/class-foliora-admin.php:3253
 msgid "Show real-time instant search input box above the document gallery."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3252
+#: includes/class-foliora-admin.php:3261
 msgid "Interactive Gallery Preset"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3253
+#: includes/class-foliora-admin.php:3262
 msgid "Searchable 4-column document directory"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3272
+#: includes/class-foliora-admin.php:3281
 msgid "4. Deep Linking & URL Hashes (#page=X)"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3273
+#: includes/class-foliora-admin.php:3282
 msgid "Send visitors directly to any specific page inside an embedded document by appending hash anchors:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3281
+#: includes/class-foliora-admin.php:3290
 msgid "Loads the handbook page and automatically jumps directly to page 14 with smooth animation."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3287
+#: includes/class-foliora-admin.php:3296
 msgid "Alternative namespaced syntax to avoid conflicting with other on-page anchors or sliders."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3299
+#: includes/class-foliora-admin.php:3308
 msgid "5. Page Builders & Compatibility"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3300
+#: includes/class-foliora-admin.php:3309
 msgid "Native visual blocks and widgets bundled for your favorite WordPress builders:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3307
+#: includes/class-foliora-admin.php:3316
 msgid "Gutenberg Block Editor"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3309
+#: includes/class-foliora-admin.php:3318
 msgid "Search for \"Foliora Viewer\" or \"Foliora Library\" in the block inserter. Customize dimensions, starting page, view mode (including 3D FlipBook), and download toggles directly in the block sidebar."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3314
+#: includes/class-foliora-admin.php:3323
 msgid "Elementor Page Builder"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3316
+#: includes/class-foliora-admin.php:3325
 msgid "Find \"Foliora PDF Viewer\" and \"Foliora PDF Library\" widgets in the Elementor panel. Full visual styling controls with zero extra setup."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3321
+#: includes/class-foliora-admin.php:3330
 msgid "Divi & Beaver Builder"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3323
+#: includes/class-foliora-admin.php:3332
 msgid "Native Divi modules and Beaver Builder modules are bundled right in Foliora. Select your PDF directly inside their builder interfaces."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3328
+#: includes/class-foliora-admin.php:3337
 msgid "WPML & Polylang Multi-Language"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3330
+#: includes/class-foliora-admin.php:3339
 msgid "When you translate Media Library PDFs, Foliora automatically swaps the document URL for the active visitor language on that page."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3342
+#: includes/class-foliora-admin.php:3351
 msgid "6. Troubleshooting & Best Practices"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3343
+#: includes/class-foliora-admin.php:3352
 msgid "Answers to frequent configuration questions and hosting best practices:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3349
+#: includes/class-foliora-admin.php:3358
 msgid "How do I resolve CORS (Cross-Origin) errors when loading remote PDFs?"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3353
+#: includes/class-foliora-admin.php:3362
 msgid "Browsers block scripts from reading PDFs hosted on other domains unless that remote server allows CORS. The easiest fix is uploading the PDF directly to your WordPress Media Library. If you must use a remote host, configure the header Access-Control-Allow-Origin: * on that remote server."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3358
+#: includes/class-foliora-admin.php:3367
 msgid "Why are PDF.js scripts excluded from cache plugins?"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3362
+#: includes/class-foliora-admin.php:3371
 msgid "PDF.js requires its worker script (pdf.worker.min.js) to load in an isolated worker thread. Combining, deferring, or minifying it with other theme JS breaks web worker loading. Foliora automatically sets data-no-optimize rules for WP Rocket, LiteSpeed Cache, Autoptimize, and W3 Total Cache."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3367
+#: includes/class-foliora-admin.php:3376
 msgid "How do thumbnail generation and search indexing work?"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3371
+#: includes/class-foliora-admin.php:3380
 msgid "The first time an admin visits the Documents Library tab, the browser renders page 1 of each PDF and saves a high-quality cover thumbnail in your Media Library, while simultaneously extracting text so visitors can search for PDF contents using WordPress site search."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3388
+#: includes/class-foliora-admin.php:3397
 msgid "Reading Modes & 3D FlipBook Engine"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3390
+#: includes/class-foliora-admin.php:3399
 msgid "16-Bone 3D FlipBook:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3390
+#: includes/class-foliora-admin.php:3399
 msgid "Ultra-realistic 3D curved page turning with natural paper inertia, dynamic specular lighting, center spine depth shadow, and stacked paper thickness."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3391
+#: includes/class-foliora-admin.php:3400
 msgid "Web Audio Paper Sound:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3391
+#: includes/class-foliora-admin.php:3400
 msgid "Synthesized real-time page-turn audio feedback (no heavy external mp3 files required)."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3392
+#: includes/class-foliora-admin.php:3401
 msgid "Multiple Layout Modes:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3392
+#: includes/class-foliora-admin.php:3401
 msgid "Single Page, Two-Page Magazine Spread, Continuous Vertical Scroll, and 3D FlipBook."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3393
+#: includes/class-foliora-admin.php:3402
 msgid "Glassmorphism Thumbnails Panel:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3393
+#: includes/class-foliora-admin.php:3402
 msgid "Slide-out thumbnail card preview strip with instant jump-to-page navigation."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3394
+#: includes/class-foliora-admin.php:3403
 msgid "Touch & Mobile Gesture Engine:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3394
+#: includes/class-foliora-admin.php:3403
 msgid "Natural swipe-to-flip gestures and hardware-accelerated pinch-to-zoom."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3395
+#: includes/class-foliora-admin.php:3404
 msgid "Reading Themes:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3395
+#: includes/class-foliora-admin.php:3404
 msgid "Instant Dark, Light, and Sepia eye-care reading themes."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3401
+#: includes/class-foliora-admin.php:3410
 msgid "Shortcode Builder & Saved Embeds"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3403
+#: includes/class-foliora-admin.php:3412
 msgid "Clean ID Shortcodes [foliora id=\"1\"]:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3403
+#: includes/class-foliora-admin.php:3412
 msgid "Encapsulates long attributes into a clean, easy-to-manage ID-based shortcode."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3404
+#: includes/class-foliora-admin.php:3413
 msgid "Saved Embeds Manager:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3404
+#: includes/class-foliora-admin.php:3413
 msgid "Dedicated manager with instant search, 1-click copy, duplicate, and live editing."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3405
+#: includes/class-foliora-admin.php:3414
 msgid "Live Interactive Preview:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3405
+#: includes/class-foliora-admin.php:3414
 msgid "Real-time responsive preview (Desktop, Tablet, Mobile) that updates instantly as you tweak settings."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3406
+#: includes/class-foliora-admin.php:3415
 msgid "One-click configurations for 3D FlipBook, E-Book Reader, Corporate Report, Night Reader, and Speed Optimized."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3407
+#: includes/class-foliora-admin.php:3416
 msgid "Developer Raw Code Toggle:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3407
+#: includes/class-foliora-admin.php:3416
 msgid "Switch between clean ID shortcodes, raw inline shortcodes, PHP snippets, and Gutenberg block code."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3413
+#: includes/class-foliora-admin.php:3422
 msgid "Page Builders & Documents Library"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3415
+#: includes/class-foliora-admin.php:3424
 msgid "Gutenberg Native Block:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3415
+#: includes/class-foliora-admin.php:3424
 msgid "Foliora Viewer block with Media picker & live first-page preview."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3416
+#: includes/class-foliora-admin.php:3425
 msgid "Auto oEmbed:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3416
+#: includes/class-foliora-admin.php:3425
 msgid "Simply paste any direct .pdf link on a new line to embed instantly."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3417
+#: includes/class-foliora-admin.php:3426
 msgid "Page Builders Compatibility:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3417
+#: includes/class-foliora-admin.php:3426
 msgid "Native widgets for Elementor, Divi and Beaver Builder; the shortcode works everywhere else."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3418
+#: includes/class-foliora-admin.php:3427
 msgid "Documents Library Grid:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3418
+#: includes/class-foliora-admin.php:3427
 msgid "[foliora_library] shortcode for searchable PDF galleries."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3419
+#: includes/class-foliora-admin.php:3428
 msgid "Attachment Pages:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3419
+#: includes/class-foliora-admin.php:3428
 msgid "Automatic interactive reader on standard WordPress attachment pages."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3425
+#: includes/class-foliora-admin.php:3434
 msgid "SEO, Search & Accessibility"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3427
+#: includes/class-foliora-admin.php:3436
 msgid "Site Search Indexing:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3427
+#: includes/class-foliora-admin.php:3436
 msgid "Extracts PDF text so WordPress search finds content inside documents."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3428
+#: includes/class-foliora-admin.php:3437
 msgid "Schema.org JSON-LD:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3428
+#: includes/class-foliora-admin.php:3437
 msgid "Automatic DigitalDocument rich snippets for Google search results."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3429
+#: includes/class-foliora-admin.php:3438
 msgid "Social Card Previews:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3429
+#: includes/class-foliora-admin.php:3438
 msgid "Open Graph & Twitter Cards cover preview generated from the PDF."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3430
+#: includes/class-foliora-admin.php:3439
 msgid "Accessibility Diagnostics:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3430
+#: includes/class-foliora-admin.php:3439
 msgid "Detects untagged PDFs and tells you how to export an accessible one."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3431
+#: includes/class-foliora-admin.php:3440
 msgid "Zero CDN Dependency:"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3431
+#: includes/class-foliora-admin.php:3440
 msgid "Bundled locally hosted PDF.js, no third-party tracking or remote downtime."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3441
+#: includes/class-foliora-admin.php:3450
 msgid "Everything Foliora Can Do"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3442
+#: includes/class-foliora-admin.php:3451
 msgid "A fast, accessible and locally rendered PDF reading experience with no external dependencies, plus builder widgets and SEO integration."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3446
+#: includes/class-foliora-admin.php:3455
 msgid "reading modes"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3448
+#: includes/class-foliora-admin.php:3457
 msgid "external requests"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3460
+#: includes/class-foliora-admin.php:3469
 msgid "Free"
 msgstr ""
 
-#: includes/class-foliora-admin.php:3501
+#: includes/class-foliora-admin.php:3510
 msgid "Select a PDF first."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3508
+#: includes/class-foliora-admin.php:3517
 msgid "Only PDFs from the Media Library can be used here."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3512
+#: includes/class-foliora-admin.php:3521
 msgid "That file is not a PDF."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3529
+#: includes/class-foliora-admin.php:3538
 msgid "Could not update the test page."
 msgstr ""
 
-#: includes/class-foliora-admin.php:3537
+#: includes/class-foliora-admin.php:3546
 msgid "Foliora Test"
 msgstr ""
 
-#: includes/class-foliora-block.php:98
+#: includes/class-foliora-block.php:103
 msgid "Foliora Documents"
 msgstr ""
 
-#: includes/class-foliora-block.php:105
+#: includes/class-foliora-block.php:110
 msgid "Whitepaper / Lead Magnet"
 msgstr ""
 
-#: includes/class-foliora-block.php:106
+#: includes/class-foliora-block.php:111
 msgid "Two-column document showcase with title, summary, and PDF viewer."
 msgstr ""
 
-#: includes/class-foliora-block.php:111
+#: includes/class-foliora-block.php:116
 msgid "Free Research Report"
 msgstr ""
 
-#: includes/class-foliora-block.php:115
+#: includes/class-foliora-block.php:120
 msgid "Explore key insights, comprehensive findings, and actionable recommendations in our latest publication."
 msgstr ""
 
-#: includes/class-foliora-block.php:120
+#: includes/class-foliora-block.php:125
 msgid "Download PDF"
 msgstr ""
 
-#: includes/class-foliora-block.php:135
+#: includes/class-foliora-block.php:140
 msgid "Academic / Research Document"
 msgstr ""
 
-#: includes/class-foliora-block.php:136
+#: includes/class-foliora-block.php:141
 msgid "Formal document layout with metadata, abstract callout, and full-width PDF viewer."
 msgstr ""
 
-#: includes/class-foliora-block.php:140
+#: includes/class-foliora-block.php:145
 msgid "Document Title & Research Paper"
 msgstr ""
 
-#: includes/class-foliora-block.php:144
+#: includes/class-foliora-block.php:149
 msgid "Published by Author / Institution — Last Updated: 2026"
 msgstr ""
 
-#: includes/class-foliora-block.php:148
+#: includes/class-foliora-block.php:153
 msgid "Abstract:"
 msgstr ""
 
-#: includes/class-foliora-block.php:148
+#: includes/class-foliora-block.php:153
 msgid "This publication examines core methodologies, experimental data, and concluding outcomes."
 msgstr ""
 
-#: includes/class-foliora-block.php:159
+#: includes/class-foliora-block.php:164
 msgid "Annual Report / Catalog Hero"
 msgstr ""
 
-#: includes/class-foliora-block.php:160
+#: includes/class-foliora-block.php:165
 msgid "Wide annual report showcase with key metrics and wide-format PDF reader."
 msgstr ""
 
-#: includes/class-foliora-block.php:164
+#: includes/class-foliora-block.php:169
 msgid "Annual Report & Highlights"
 msgstr ""
 
-#: includes/class-foliora-block.php:168
+#: includes/class-foliora-block.php:173
 msgid "Browse through our full annual review, financial statistics, and milestones."
 msgstr ""
 
@@ -2374,299 +2374,300 @@ msgstr ""
 msgid "Foliora: Embed ID #%d not found."
 msgstr ""
 
-#: includes/class-foliora-viewer.php:101
+#: includes/class-foliora-viewer.php:106
 msgid "Foliora: no file URL was provided. Use [foliora file=\"https://example.com/document.pdf\"]."
 msgstr ""
 
-#: includes/class-foliora-viewer.php:165
+#: includes/class-foliora-viewer.php:170
 msgid "Powered by Foliora"
 msgstr ""
 
 #. translators: %s: document title or fallback
-#: includes/class-foliora-viewer.php:176
+#: includes/class-foliora-viewer.php:181
 #, php-format
 msgid "Open document: %s (PDF)"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:191
-#: includes/class-foliora-viewer.php:273
+#: includes/class-foliora-viewer.php:196
+#: includes/class-foliora-viewer.php:278
 msgid "PDF viewer"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:275
-#: includes/class-foliora-viewer.php:567
+#: includes/class-foliora-viewer.php:280
+#: includes/class-foliora-viewer.php:809
 msgid "Table of contents"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:278
-#: includes/class-foliora-viewer.php:568
-#: includes/class-foliora-viewer.php:570
+#: includes/class-foliora-viewer.php:283
+#: includes/class-foliora-viewer.php:810
+#: includes/class-foliora-viewer.php:812
 msgid "Page thumbnails"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:284
+#: includes/class-foliora-viewer.php:289
 msgid "Previous page (←)"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:284
+#: includes/class-foliora-viewer.php:289
 msgid "Previous page"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:288
+#: includes/class-foliora-viewer.php:293
 msgid "Page"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:292
+#: includes/class-foliora-viewer.php:297
 msgid "Next page (→)"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:292
+#: includes/class-foliora-viewer.php:297
 msgid "Next page"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:299
+#: includes/class-foliora-viewer.php:304
 msgid "Zoom out (-)"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:299
+#: includes/class-foliora-viewer.php:304
 msgid "Zoom out"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:303
+#: includes/class-foliora-viewer.php:308
 msgid "Zoom in (+)"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:303
+#: includes/class-foliora-viewer.php:308
 msgid "Zoom in"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:308
+#: includes/class-foliora-viewer.php:313
 msgid "Fit page (0)"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:308
-#: includes/class-foliora-viewer.php:572
+#: includes/class-foliora-viewer.php:313
+#: includes/class-foliora-viewer.php:814
 msgid "Fit page"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:317
+#: includes/class-foliora-viewer.php:322
 msgid "Find"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:317
+#: includes/class-foliora-viewer.php:322
 msgid "Find in document"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:320
+#: includes/class-foliora-viewer.php:325
 msgid "Previous match"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:323
+#: includes/class-foliora-viewer.php:328
 msgid "Next match"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:335
+#: includes/class-foliora-viewer.php:340
 msgid "Full screen (F)"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:335
+#: includes/class-foliora-viewer.php:340
 msgid "Full screen"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:340
-#: includes/class-foliora-viewer.php:583
+#: includes/class-foliora-viewer.php:345
+#: includes/class-foliora-viewer.php:825
 msgid "More tools"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:347
+#: includes/class-foliora-viewer.php:352
 msgid "Rotate"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:353
+#: includes/class-foliora-viewer.php:358
 msgid "View Mode"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:359
+#: includes/class-foliora-viewer.php:364
 msgid "Hand Tool"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:365
+#: includes/class-foliora-viewer.php:370
 msgid "Switch Theme"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:371
-#: includes/class-foliora-viewer.php:474
+#: includes/class-foliora-viewer.php:376
+#: includes/class-foliora-viewer.php:479
 msgid "Share Document"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:377
+#: includes/class-foliora-viewer.php:382
 msgid "Shortcuts Guide"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:383
+#: includes/class-foliora-viewer.php:388
 msgid "Print Document"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:396
+#: includes/class-foliora-viewer.php:401
 msgid "Keyboard: arrows or Page Up and Page Down change page, plus and minus zoom, R rotates, Home and End jump to first or last page, Ctrl or Command F finds text, D toggles reading theme, ? opens shortcuts guide."
 msgstr ""
 
-#: includes/class-foliora-viewer.php:410
+#: includes/class-foliora-viewer.php:415
 msgid "Keyboard shortcuts"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:414
+#: includes/class-foliora-viewer.php:419
 msgid "Keyboard Shortcuts"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:415
-#: includes/class-foliora-viewer.php:475
+#: includes/class-foliora-viewer.php:420
+#: includes/class-foliora-viewer.php:480
 msgid "Close"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:422
+#: includes/class-foliora-viewer.php:427
 msgid "Next / Previous Page"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:430
+#: includes/class-foliora-viewer.php:435
 msgid "Fit Page / Width"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:438
+#: includes/class-foliora-viewer.php:443
 msgid "Toggle Theme (Dark/Sepia/Light)"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:442
+#: includes/class-foliora-viewer.php:447
 msgid "Find in Document"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:458
+#: includes/class-foliora-viewer.php:463
 msgid "First / Last Page"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:462
+#: includes/class-foliora-viewer.php:467
 msgid "Close Overlay / Clear Search"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:470
+#: includes/class-foliora-viewer.php:475
 msgid "Share document"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:487
+#: includes/class-foliora-viewer.php:492
 msgid "Link to current page (page "
 msgstr ""
 
-#: includes/class-foliora-viewer.php:557
+#: includes/class-foliora-viewer.php:799
 msgid "Loading document…"
 msgstr ""
 
 #. translators: %s: percent loaded.
-#: includes/class-foliora-viewer.php:559
+#: includes/class-foliora-viewer.php:801
 #, php-format
 msgid "Loading %s…"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:560
+#: includes/class-foliora-viewer.php:802
 msgid "This document could not be loaded."
 msgstr ""
 
 #. translators: 1: current page number, 2: total pages.
-#: includes/class-foliora-viewer.php:562
+#: includes/class-foliora-viewer.php:804
 #, php-format
 msgid "Page %1$s of %2$s"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:563
+#: includes/class-foliora-viewer.php:805
 msgid "This document is password-protected."
 msgstr ""
 
-#: includes/class-foliora-viewer.php:564
+#: includes/class-foliora-viewer.php:806
 msgid "Incorrect password."
 msgstr ""
 
-#: includes/class-foliora-viewer.php:565
+#: includes/class-foliora-viewer.php:807
 msgid "Unlock"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:566
+#: includes/class-foliora-viewer.php:808
 msgid "Password"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:569
+#: includes/class-foliora-viewer.php:811
 msgid "Document outline"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:571
+#: includes/class-foliora-viewer.php:813
 msgid "Close panel"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:573
+#: includes/class-foliora-viewer.php:815
 msgid "Fit width"
 msgstr ""
 
 #. translators: 1: current match, 2: total matches.
-#: includes/class-foliora-viewer.php:575
+#: includes/class-foliora-viewer.php:817
 #, php-format
 msgid "%1$s of %2$s"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:576
+#: includes/class-foliora-viewer.php:818
 msgid "No matches"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:577
+#: includes/class-foliora-viewer.php:819
 #: assets/js/foliora-block.js:143
 msgid "Single page"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:578
+#: includes/class-foliora-viewer.php:820
 #: assets/js/foliora-block.js:144
 msgid "Continuous scroll"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:579
+#: includes/class-foliora-viewer.php:821
 #: assets/js/foliora-block.js:145
 msgid "Two-page spread"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:581
+#: includes/class-foliora-viewer.php:823
 msgid "Hand tool"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:582
+#: includes/class-foliora-viewer.php:824
 msgid "Text select"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:584
+#: includes/class-foliora-viewer.php:826
 msgid "Presentation"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:585
+#: includes/class-foliora-viewer.php:827
 msgid "Link copied!"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:586
+#: includes/class-foliora-viewer.php:828
 msgid "Click to load document"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:587
+#: includes/class-foliora-viewer.php:829
 msgid "Unable to load document (Cross-Origin Restriction)"
 msgstr ""
 
 #. translators: %s: remote host name
-#: includes/class-foliora-viewer.php:589
+#: includes/class-foliora-viewer.php:831
 #, php-format
 msgid "This PDF is hosted on an external domain (%s) which restricts cross-origin access (CORS)."
 msgstr ""
 
-#: includes/class-foliora-viewer.php:590
+#: includes/class-foliora-viewer.php:832
 msgid "Open / Download PDF directly"
 msgstr ""
 
-#: includes/class-foliora-viewer.php:591
+#: includes/class-foliora-viewer.php:833
 msgid "Site Admin: To enable direct embedding, configure Access-Control-Allow-Origin headers on the host server or upload the PDF to your WordPress Media Library."
 msgstr ""
 
+#. translators: %d: saved embed ID number.
 #: assets/js/foliora-block.js:102
 #, js-format
 msgid "Using saved embed #%d. Attributes below override saved defaults."
@@ -2696,6 +2697,7 @@ msgstr ""
 msgid "Show print"
 msgstr ""
 
+#. translators: %d: saved embed ID number.
 #: assets/js/foliora-block.js:209
 #, js-format
 msgid "Saved embed #%d"

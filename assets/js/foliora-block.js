@@ -99,7 +99,7 @@
 						PanelBody,
 						{ title: __( 'Viewer Settings', 'foliora' ), initialOpen: true },
 						embedId > 0
-							? el( 'p', { style: { fontStyle: 'italic', marginBottom: '12px' } }, sprintf( __( 'Using saved embed #%d. Attributes below override saved defaults.', 'foliora' ), embedId ) )
+							? el( 'p', { style: { fontStyle: 'italic', marginBottom: '12px' } }, sprintf( /* translators: %d: saved embed ID number. */ __( 'Using saved embed #%d. Attributes below override saved defaults.', 'foliora' ), embedId ) )
 							: null,
 						el( TextControl, {
 							label: __( 'Width', 'foliora' ),
@@ -206,7 +206,7 @@
 										color: '#1d2327',
 									},
 								},
-								sprintf( __( 'Saved embed #%d', 'foliora' ), embedId )
+								sprintf( /* translators: %d: saved embed ID number. */ __( 'Saved embed #%d', 'foliora' ), embedId )
 							),
 							el(
 								'p',

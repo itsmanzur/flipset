@@ -139,6 +139,6 @@ class Foliora_Elementor_Viewer extends \Elementor\Widget_Base {
 			'print'    => ( ! isset( $settings['print'] ) || 'yes' === $settings['print'] ) ? 'true' : 'false',
 		);
 
-		echo Foliora::instance()->viewer->render_shortcode( $atts ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- viewer HTML is escaped internally.
+		echo wp_kses( Foliora::instance()->viewer->render_shortcode( $atts ), Foliora_Viewer::allowed_html() );
 	}
 }
