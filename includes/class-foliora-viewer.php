@@ -120,7 +120,7 @@ class Foliora_Viewer {
 		 */
 		$pro_output = apply_filters( 'foliora/pre_render_viewer', null, $atts );
 		if ( null !== $pro_output ) {
-			return apply_filters( 'foliora/viewer_html', $pro_output, $atts );
+			return wp_kses( (string) apply_filters( 'foliora/viewer_html', $pro_output, $atts ), self::allowed_html() );
 		}
 
 		$this->enqueue_assets();
@@ -136,7 +136,7 @@ class Foliora_Viewer {
 		 */
 		ob_start();
 		do_action( 'foliora/before_viewer', $instance_id, $atts );
-		$before = ob_get_clean();
+		$before = wp_kses( (string) ob_get_clean(), self::allowed_html() );
 
 		$toolbar = $this->render_toolbar( $instance_id, $atts, $settings );
 
@@ -215,7 +215,9 @@ class Foliora_Viewer {
 		 * @param string $html Rendered viewer HTML.
 		 * @param array  $atts Resolved attributes.
 		 */
-		return apply_filters( 'foliora/viewer_html', $container, $atts );
+		// Escape at the single point where the markup leaves the renderer, after
+		// every filter has had its say.
+		return wp_kses( (string) apply_filters( 'foliora/viewer_html', $container, $atts ), self::allowed_html() );
 	}
 
 	/**

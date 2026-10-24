@@ -200,9 +200,9 @@ class Foliora_Block {
 
 		$html = Foliora::instance()->viewer->render_shortcode( $attributes );
 		if ( function_exists( 'get_block_wrapper_attributes' ) ) {
-			return '<div ' . get_block_wrapper_attributes( array( 'class' => 'foliora-block' ) ) . '>' . $html . '</div>';
+			$html = '<div ' . get_block_wrapper_attributes( array( 'class' => 'foliora-block' ) ) . '>' . $html . '</div>';
 		}
-		return $html;
+		return wp_kses( $html, Foliora_Viewer::allowed_html() );
 	}
 
 	/**
@@ -217,8 +217,8 @@ class Foliora_Block {
 		unset( $content, $block ); // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
 		$html = Foliora::instance()->library->render_shortcode( $attributes );
 		if ( function_exists( 'get_block_wrapper_attributes' ) ) {
-			return '<div ' . get_block_wrapper_attributes( array( 'class' => 'foliora-library-block' ) ) . '>' . $html . '</div>';
+			$html = '<div ' . get_block_wrapper_attributes( array( 'class' => 'foliora-library-block' ) ) . '>' . $html . '</div>';
 		}
-		return $html;
+		return wp_kses( $html, Foliora_Viewer::allowed_html() );
 	}
 }

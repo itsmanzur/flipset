@@ -99,7 +99,7 @@ class Foliora_Library {
 			$html .= $this->render_search_form( $search_on, $search, $search_var, $query_var );
 			$html .= $this->render_empty( $search );
 			$html .= '</div>';
-			return $html;
+			return wp_kses( $html, Foliora_Viewer::allowed_html() );
 		}
 
 		$this->enqueue_assets();
@@ -117,7 +117,7 @@ class Foliora_Library {
 		</div>
 		<?php
 		wp_reset_postdata();
-		return ob_get_clean();
+		return wp_kses( (string) ob_get_clean(), Foliora_Viewer::allowed_html() );
 	}
 
 	private function render_item( $attachment ) {
@@ -180,24 +180,29 @@ class Foliora_Library {
 			return '';
 		}
 
+		// Existing query args are carried over as hidden fields. Read each one
+		// through sanitize_key() / sanitize_text_field() into $args first and print
+		// only from that sanitised copy.
+		$args = array();
+		if ( isset( $_GET ) && is_array( $_GET ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- preserve public query args.
+			foreach ( array_keys( $_GET ) as $raw_key ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- preserve public query args.
+				$key = sanitize_key( (string) $raw_key );
+				if ( '' === $key || $key === $search_var || $key === $query_var ) {
+					continue;
+				}
+				if ( ! isset( $_GET[ $raw_key ] ) || ! is_scalar( $_GET[ $raw_key ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- preserve public query args.
+					continue;
+				}
+				$args[ $key ] = sanitize_text_field( wp_unslash( (string) $_GET[ $raw_key ] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- preserve public query args.
+			}
+		}
+
 		ob_start();
 		?>
 		<form class="foliora-library-search" method="get" role="search">
-			<?php
-			if ( isset( $_GET ) && is_array( $_GET ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- preserve public query args.
-				foreach ( wp_unslash( $_GET ) as $key => $value ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- preserve public query args.
-					$key = sanitize_key( $key );
-					if ( ! $key || $key === $search_var || $key === $query_var || ! is_scalar( $value ) ) {
-						continue;
-					}
-					printf(
-						'<input type="hidden" name="%1$s" value="%2$s" />',
-						esc_attr( $key ),
-						esc_attr( sanitize_text_field( (string) $value ) )
-					);
-				}
-			}
-			?>
+			<?php foreach ( $args as $arg_key => $arg_value ) : ?>
+				<input type="hidden" name="<?php echo esc_attr( $arg_key ); ?>" value="<?php echo esc_attr( $arg_value ); ?>" />
+			<?php endforeach; ?>
 			<label class="screen-reader-text" for="<?php echo esc_attr( $search_var ); ?>"><?php esc_html_e( 'Search documents', 'foliora' ); ?></label>
 			<input
 				type="search"

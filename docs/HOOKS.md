@@ -445,7 +445,7 @@ add_filter( 'foliora/pdf_tagged', function ( $tagged, $attachment_id ) {
 **Type:** filter
 **Fired from:** `Foliora_Viewer::allowed_html()` in `includes/class-foliora-viewer.php`
 
-Viewer and library markup is passed through `wp_kses()` with this tag/attribute list whenever the plugin prints it itself (page-builder widgets, the library grid, the admin previews). If an add-on prints extra markup through `foliora/before_viewer` or `foliora/viewer_html`, extend the list so it is kept.
+Viewer and library markup is passed through `wp_kses()` with this tag/attribute list: the output of `[foliora]`, `[foliora_library]` and both blocks is escaped at the point it is returned (after `foliora/viewer_html`), the output of `foliora/before_viewer` is escaped before it is added, and page-builder widgets, the library grid and the admin previews escape it again when they print it. If an add-on prints extra markup through `foliora/before_viewer` or `foliora/viewer_html`, extend the list so it is kept.
 
 **Parameters**
 
