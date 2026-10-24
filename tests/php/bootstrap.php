@@ -1,8 +1,8 @@
 <?php
 /**
- * WordPress PHPUnit bootstrap for Foliora.
+ * WordPress PHPUnit bootstrap for Flipset.
  *
- * @package Foliora
+ * @package Flipset
  */
 
 $plugin_dir = dirname( __DIR__, 2 );
@@ -31,12 +31,12 @@ if ( ! defined( 'WP_TESTS_PHPUNIT_POLYFILLS_PATH' ) ) {
 require_once $_tests_dir . '/includes/functions.php';
 
 /**
- * Load Foliora as a mu-plugin so shortcodes and hooks register.
+ * Load Flipset as a mu-plugin so shortcodes and hooks register.
  */
-function foliora_tests_load_plugin() {
-	require dirname( __DIR__, 2 ) . '/foliora.php';
+function flipset_tests_load_plugin() {
+	require dirname( __DIR__, 2 ) . '/flipset.php';
 }
-tests_add_filter( 'muplugins_loaded', 'foliora_tests_load_plugin' );
+tests_add_filter( 'muplugins_loaded', 'flipset_tests_load_plugin' );
 
 require $_tests_dir . '/includes/bootstrap.php';
-require_once $plugin_dir . '/tests/php/class-foliora-testcase.php';
+require_once $plugin_dir . '/tests/php/class-flipset-testcase.php';

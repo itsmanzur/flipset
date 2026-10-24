@@ -1,0 +1,131 @@
+<?php
+/**
+ * Divi module: Flipset Viewer.
+ *
+ * @package Flipset
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+class Flipset_Divi_Viewer extends ET_Builder_Module {
+
+	/**
+	 * Divi module slug.
+	 *
+	 * @var string
+	 */
+	public $slug = 'flipset_viewer';
+	/**
+	 * Visual Builder support level.
+	 *
+	 * @var string
+	 */
+	public $vb_support = 'partial';
+
+	/**
+	 * Module credits shown in the Divi builder.
+	 *
+	 * @var array
+	 */
+	protected $module_credits = array(
+		'module_uri' => 'https://flipset.thereadscope.com',
+		'author'     => 'itsmanzur',
+		'author_uri' => 'https://thereadscope.com',
+	);
+
+	public function init() {
+		$this->name                   = __( 'Flipset Viewer', 'flipset' );
+		$this->icon_path              = '';
+		$this->main_css_element       = '%%order_class%%';
+		$this->settings_modal_toggles = array(
+			'general' => array(
+				'toggles' => array(
+					'main_content' => __( 'Document', 'flipset' ),
+					'layout'       => __( 'Layout', 'flipset' ),
+				),
+			),
+		);
+	}
+
+	public function get_fields() {
+		return array(
+			'file'     => array(
+				'label'              => __( 'PDF file', 'flipset' ),
+				'type'               => 'upload',
+				'option_category'    => 'basic_option',
+				'upload_button_text' => esc_attr__( 'Select a PDF', 'flipset' ),
+				'choose_text'        => esc_attr__( 'Choose a PDF', 'flipset' ),
+				'update_text'        => esc_attr__( 'Set as PDF', 'flipset' ),
+				'description'        => __( 'Select a PDF from the Media Library. If the upload picker shows images only, paste the PDF URL instead.', 'flipset' ),
+				'toggle_slug'        => 'main_content',
+			),
+			'title'    => array(
+				'label'           => __( 'Title caption', 'flipset' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'toggle_slug'     => 'main_content',
+			),
+			'page'     => array(
+				'label'           => __( 'Start page', 'flipset' ),
+				'type'            => 'text',
+				'default'         => '1',
+				'option_category' => 'basic_option',
+				'toggle_slug'     => 'main_content',
+			),
+			'width'    => array(
+				'label'           => __( 'Width', 'flipset' ),
+				'type'            => 'text',
+				'default'         => '100%',
+				'option_category' => 'layout',
+				'toggle_slug'     => 'layout',
+			),
+			'height'   => array(
+				'label'           => __( 'Height', 'flipset' ),
+				'type'            => 'text',
+				'default'         => '600px',
+				'option_category' => 'layout',
+				'toggle_slug'     => 'layout',
+			),
+			'download' => array(
+				'label'           => __( 'Download button', 'flipset' ),
+				'type'            => 'yes_no_button',
+				'options'         => array(
+					'on'  => __( 'Show', 'flipset' ),
+					'off' => __( 'Hide', 'flipset' ),
+				),
+				'default'         => 'on',
+				'option_category' => 'layout',
+				'toggle_slug'     => 'layout',
+			),
+			'print'    => array(
+				'label'           => __( 'Print button', 'flipset' ),
+				'type'            => 'yes_no_button',
+				'options'         => array(
+					'on'  => __( 'Show', 'flipset' ),
+					'off' => __( 'Hide', 'flipset' ),
+				),
+				'default'         => 'on',
+				'option_category' => 'layout',
+				'toggle_slug'     => 'layout',
+			),
+		);
+	}
+
+	public function render( $attrs, $content, $render_slug ) {
+		unset( $attrs, $content, $render_slug );
+
+		return Flipset::instance()->viewer->render_shortcode(
+			array(
+				'file'     => isset( $this->props['file'] ) ? $this->props['file'] : '',
+				'width'    => isset( $this->props['width'] ) ? $this->props['width'] : '100%',
+				'height'   => isset( $this->props['height'] ) ? $this->props['height'] : '600px',
+				'page'     => isset( $this->props['page'] ) ? $this->props['page'] : '1',
+				'title'    => isset( $this->props['title'] ) ? $this->props['title'] : '',
+				'download' => ( isset( $this->props['download'] ) && 'off' === $this->props['download'] ) ? 'false' : 'true',
+				'print'    => ( isset( $this->props['print'] ) && 'off' === $this->props['print'] ) ? 'false' : 'true',
+			)
+		);
+	}
+}

@@ -9,7 +9,7 @@
 	convertDeprecatedToExceptions="false"
 	>
 	<testsuites>
-		<testsuite name="Foliora">
+		<testsuite name="Flipset">
 			<directory prefix="test-" suffix=".php">./tests/php</directory>
 		</testsuite>
 	</testsuites>

@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 
 const pluginRoot = path.resolve(__dirname, '..');
-const poFile = path.join(pluginRoot, 'translations-src/foliora-bn_BD.po');
-const moFile = path.join(pluginRoot, 'translations-src/foliora-bn_BD.mo');
+const poFile = path.join(pluginRoot, 'translations-src/flipset-bn_BD.po');
+const moFile = path.join(pluginRoot, 'translations-src/flipset-bn_BD.mo');
 
 const content = fs.readFileSync(poFile, 'utf8');
 const lines = content.split(/\r?\n/);

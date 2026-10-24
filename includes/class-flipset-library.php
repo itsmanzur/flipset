@@ -1,0 +1,304 @@
+<?php
+/**
+ * Flipset_Library
+ *
+ * Front-end PDF gallery: [flipset_library] shortcode. Grid of Media
+ * Library PDFs with stored thumbnails; clicking a card expands the
+ * existing Flipset viewer in place.
+ *
+ * @package Flipset
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+class Flipset_Library {
+
+	use Flipset_Att_Flag;
+
+	/**
+	 * @var bool
+	 */
+	private $assets_enqueued = false;
+
+	/**
+	 * Per-request counter so pagination query vars stay stable when
+	 * nested viewer unique IDs increment inside each grid item.
+	 *
+	 * @var int
+	 */
+	private static $instance_n = 0;
+
+	public function init() {
+		add_shortcode( 'flipset_library', array( $this, 'render_shortcode' ) );
+	}
+
+	/**
+	 * [flipset_library columns="3" per_page="12" orderby="date" order="DESC"]
+	 *
+	 * @param array $atts Shortcode attributes.
+	 * @return string
+	 */
+	public function render_shortcode( $atts ) {
+		$atts = shortcode_atts(
+			array(
+				'columns'  => '3',
+				'per_page' => '12',
+				'orderby'  => 'date',
+				'order'    => 'DESC',
+				'search'   => 'true',
+			),
+			$atts,
+			'flipset_library'
+		);
+
+		$columns   = $this->clamp_int( $atts['columns'], 1, 6, 3 );
+		$per_page  = $this->clamp_int( $atts['per_page'], 1, 48, 12 );
+		$orderby   = $this->sanitize_orderby( $atts['orderby'] );
+		$order     = ( 'ASC' === strtoupper( $atts['order'] ) ) ? 'ASC' : 'DESC';
+		$search_on = $this->att_flag( $atts['search'] ?? 'true', true );
+
+		$uid         = ++self::$instance_n;
+		$instance_id = 'flipset-library-' . $uid;
+		$query_var   = 'flipset_page_' . $uid;
+		$search_var  = 'flipset_q_' . $uid;
+		$paged       = 1;
+		if ( isset( $_GET[ $query_var ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- public pagination query var.
+			$paged = max( 1, absint( wp_unslash( $_GET[ $query_var ] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- public pagination query var.
+		}
+		$search = '';
+		if ( $search_on && isset( $_GET[ $search_var ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- public search query var.
+			$search = sanitize_text_field( wp_unslash( $_GET[ $search_var ] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- public search query var.
+		}
+
+		$query = new WP_Query(
+			array(
+				'post_type'              => 'attachment',
+				'post_status'            => 'inherit',
+				'post_mime_type'         => 'application/pdf',
+				'posts_per_page'         => $per_page,
+				'paged'                  => $paged,
+				'orderby'                => $orderby,
+				'order'                  => $order,
+				's'                      => $search,
+				'no_found_rows'          => false,
+				'flipset_content_search' => ( '' !== $search ),
+			)
+		);
+
+		if ( ! $query->have_posts() ) {
+			wp_enqueue_style(
+				'flipset-library',
+				FLIPSET_URL . 'assets/css/flipset-library.css',
+				array(),
+				FLIPSET_VERSION
+			);
+			wp_reset_postdata();
+			$html  = '<div class="flipset-library">';
+			$html .= $this->render_search_form( $search_on, $search, $search_var, $query_var );
+			$html .= $this->render_empty( $search );
+			$html .= '</div>';
+			return wp_kses( $html, Flipset_Viewer::allowed_html() );
+		}
+
+		$this->enqueue_assets();
+
+		ob_start();
+		?>
+		<div id="<?php echo esc_attr( $instance_id ); ?>" class="flipset-library" data-columns="<?php echo esc_attr( (string) $columns ); ?>">
+			<?php echo wp_kses( $this->render_search_form( $search_on, $search, $search_var, $query_var ), Flipset_Viewer::allowed_html() ); ?>
+			<ul class="flipset-library-grid" style="--flipset-cols: <?php echo esc_attr( (string) $columns ); ?>;">
+				<?php foreach ( $query->posts as $attachment ) : ?>
+					<?php echo wp_kses( $this->render_item( $attachment ), Flipset_Viewer::allowed_html() ); ?>
+				<?php endforeach; ?>
+			</ul>
+			<?php echo wp_kses( $this->render_pagination( $query, $paged, $query_var, $search_var, $search ), Flipset_Viewer::allowed_html() ); ?>
+		</div>
+		<?php
+		wp_reset_postdata();
+		return wp_kses( (string) ob_get_clean(), Flipset_Viewer::allowed_html() );
+	}
+
+	private function render_item( $attachment ) {
+		$id  = (int) $attachment->ID;
+		$url = wp_get_attachment_url( $id );
+		if ( ! $url ) {
+			return '';
+		}
+
+		$title = get_the_title( $attachment );
+		if ( '' === $title ) {
+			$title = wp_basename( $url );
+		}
+
+		$embed_id = 'flipset-library-embed-' . wp_unique_id();
+		$thumb_id = Flipset_Thumbnails::get_thumbnail_id( $id );
+		$image    = '';
+		if ( $thumb_id ) {
+			$image = wp_get_attachment_image(
+				$thumb_id,
+				'medium',
+				false,
+				array(
+					'class'   => 'flipset-library-image',
+					'loading' => 'lazy',
+					'alt'     => $title,
+				)
+			);
+		}
+		if ( ! $image ) {
+			$image = '<span class="flipset-library-placeholder" aria-hidden="true">' . $this->placeholder_icon() . '</span>';
+		}
+
+		$viewer = Flipset::instance()->viewer->render_shortcode(
+			array(
+				'file'  => $url,
+				'width' => '100%',
+				'hash'  => 'false',
+			)
+		);
+		$viewer = str_replace( ' class="flipset-viewer"', ' class="flipset-viewer" data-flipset-defer="1"', $viewer );
+
+		ob_start();
+		?>
+		<li class="flipset-library-item">
+			<button type="button" class="flipset-library-card" aria-expanded="false" aria-controls="<?php echo esc_attr( $embed_id ); ?>">
+				<span class="flipset-library-thumb"><?php echo wp_kses( $image, Flipset_Viewer::allowed_html() ); ?></span>
+				<span class="flipset-library-title"><?php echo esc_html( $title ); ?></span>
+			</button>
+			<div id="<?php echo esc_attr( $embed_id ); ?>" class="flipset-library-embed" hidden>
+				<?php echo wp_kses( $viewer, Flipset_Viewer::allowed_html() ); ?>
+			</div>
+		</li>
+		<?php
+		return ob_get_clean();
+	}
+
+	private function render_search_form( $enabled, $search, $search_var, $query_var ) {
+		if ( ! $enabled ) {
+			return '';
+		}
+
+		// Existing query args are carried over as hidden fields. Read each one
+		// through sanitize_key() / sanitize_text_field() into $args first and print
+		// only from that sanitised copy.
+		$args = array();
+		if ( isset( $_GET ) && is_array( $_GET ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- preserve public query args.
+			foreach ( array_keys( $_GET ) as $raw_key ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- preserve public query args.
+				$key = sanitize_key( (string) $raw_key );
+				if ( '' === $key || $key === $search_var || $key === $query_var ) {
+					continue;
+				}
+				if ( ! isset( $_GET[ $raw_key ] ) || ! is_scalar( $_GET[ $raw_key ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- preserve public query args.
+					continue;
+				}
+				$args[ $key ] = sanitize_text_field( wp_unslash( (string) $_GET[ $raw_key ] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- preserve public query args.
+			}
+		}
+
+		ob_start();
+		?>
+		<form class="flipset-library-search" method="get" role="search">
+			<?php foreach ( $args as $arg_key => $arg_value ) : ?>
+				<input type="hidden" name="<?php echo esc_attr( $arg_key ); ?>" value="<?php echo esc_attr( $arg_value ); ?>" />
+			<?php endforeach; ?>
+			<label class="screen-reader-text" for="<?php echo esc_attr( $search_var ); ?>"><?php esc_html_e( 'Search documents', 'flipset' ); ?></label>
+			<input
+				type="search"
+				id="<?php echo esc_attr( $search_var ); ?>"
+				name="<?php echo esc_attr( $search_var ); ?>"
+				value="<?php echo esc_attr( $search ); ?>"
+				placeholder="<?php esc_attr_e( 'Search documents…', 'flipset' ); ?>"
+			/>
+			<button type="submit" class="flipset-library-search-submit"><?php esc_html_e( 'Search', 'flipset' ); ?></button>
+		</form>
+		<?php
+		return ob_get_clean();
+	}
+
+	private function render_pagination( $query, $paged, $query_var, $search_var = '', $search = '' ) {
+		if ( (int) $query->max_num_pages < 2 ) {
+			return '';
+		}
+
+		$add_args = array();
+		if ( '' !== $search_var && '' !== $search ) {
+			$add_args[ $search_var ] = $search;
+		}
+
+		$links = paginate_links(
+			array(
+				'base'      => add_query_arg( $query_var, '%#%' ),
+				'format'    => '',
+				'total'     => (int) $query->max_num_pages,
+				'current'   => $paged,
+				'type'      => 'list',
+				'add_args'  => $add_args,
+				'prev_text' => __( 'Previous', 'flipset' ),
+				'next_text' => __( 'Next', 'flipset' ),
+			)
+		);
+
+		if ( ! $links ) {
+			return '';
+		}
+
+		return '<nav class="flipset-library-pager" aria-label="' . esc_attr__( 'Document library pages', 'flipset' ) . '">' . wp_kses_post( $links ) . '</nav>';
+	}
+
+	private function render_empty( $search = '' ) {
+		$message = '' !== $search
+			? __( 'No PDFs matched that search.', 'flipset' )
+			: __( 'No PDFs found.', 'flipset' );
+		$html    = '<div class="flipset-library-empty"><p>' . esc_html( $message ) . '</p>';
+		if ( current_user_can( 'upload_files' ) ) {
+			$html .= '<p><a href="' . esc_url( admin_url( 'media-new.php' ) ) . '">' . esc_html__( 'Upload a PDF', 'flipset' ) . '</a></p>';
+		}
+		$html .= '</div>';
+		return $html;
+	}
+
+	private function enqueue_assets() {
+		if ( $this->assets_enqueued ) {
+			return;
+		}
+		$this->assets_enqueued = true;
+
+		Flipset::instance()->viewer->enqueue_assets();
+
+		wp_enqueue_style(
+			'flipset-library',
+			FLIPSET_URL . 'assets/css/flipset-library.css',
+			array( 'flipset-viewer' ),
+			FLIPSET_VERSION
+		);
+
+		wp_enqueue_script(
+			'flipset-library',
+			FLIPSET_URL . 'assets/js/flipset-library.js',
+			array( 'flipset-viewer' ),
+			FLIPSET_VERSION,
+			true
+		);
+	}
+
+	private function placeholder_icon() {
+		return '<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="8" y1="13" x2="16" y2="13" /><line x1="8" y1="17" x2="12" y2="17" /></svg>';
+	}
+
+
+	private function clamp_int( $value, $min, $max, $default ) {
+		$n = absint( $value );
+		if ( $n < $min || $n > $max ) {
+			return $default;
+		}
+		return $n;
+	}
+
+	private function sanitize_orderby( $value ) {
+		$value   = sanitize_key( $value );
+		$allowed = array( 'date', 'title', 'modified' );
+		return in_array( $value, $allowed, true ) ? $value : 'date';
+	}
+}

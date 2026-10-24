@@ -8,12 +8,12 @@ test.describe( 'Documents thumbnail generation', () => {
 		await page.locator( '#wp-submit' ).click();
 		await page.waitForURL( /wp-admin/ );
 
-		await page.goto( '/wp-admin/admin.php?page=foliora-documents' );
-		await expect( page.locator( '.foliora-docs-table' ) ).toBeVisible();
+		await page.goto( '/wp-admin/admin.php?page=flipset-documents' );
+		await expect( page.locator( '.flipset-docs-table' ) ).toBeVisible();
 
-		const thumb = page.locator( '.foliora-docs-thumb-img' );
-		const indexed = page.locator( '.foliora-index-status.is-ready, .foliora-index-status.is-empty' );
-		const a11y = page.locator( '.foliora-a11y-status.is-ready, .foliora-a11y-status.is-warn' );
+		const thumb = page.locator( '.flipset-docs-thumb-img' );
+		const indexed = page.locator( '.flipset-index-status.is-ready, .flipset-index-status.is-empty' );
+		const a11y = page.locator( '.flipset-a11y-status.is-ready, .flipset-a11y-status.is-warn' );
 		await expect( thumb.or( indexed ).or( a11y ) ).toBeVisible( { timeout: 90_000 } );
 	} );
 } );

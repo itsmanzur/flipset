@@ -1,20 +1,20 @@
-# Foliora 1.0.0 — manual release checklist
+# Flipset 1.0.0 — manual release checklist
 
 Docker was unavailable, so these are the items that could not be verified automatically (see `RELEASE-REPORT.md`). Run them on a fresh site with `WP_DEBUG` and `WP_DEBUG_LOG` on, and read `wp-content/debug.log` after each step. Mark each PASS / FAIL.
 
 ## Fresh install
 
-- [ ] Upload `foliora.zip` via Plugins → Add New → Upload. Activate. It redirects to the Foliora dashboard.
+- [ ] Upload `flipset.zip` via Plugins → Add New → Upload. Activate. It redirects to the Flipset dashboard.
 - [ ] Dashboard shows the right PDF count after uploading a PDF; "Upload a PDF" step turns done.
-- [ ] No "Powered by Foliora" link under any viewer on a fresh install. Tick Foliora → Settings → Credit link, save: the link appears; untick: it disappears.
-- [ ] Only one top-level **Foliora** menu; submenu: Dashboard, Shortcode Builder, Docs & Features, Settings.
+- [ ] No "Powered by Flipset" link under any viewer on a fresh install. Tick Flipset → Settings → Credit link, save: the link appears; untick: it disappears.
+- [ ] Only one top-level **Flipset** menu; submenu: Dashboard, Shortcode Builder, Docs & Features, Settings.
 
 ## Embed flow (wp-admin)
 
 - [ ] Upload a PDF, click **Embed**, copy the shortcode, paste it into a page. The PDF renders on the front end.
-- [ ] Shortcode Builder: create, **Save Embed & Get Shortcode**, use `[foliora id="N"]`. Edit the embed; the front end updates.
+- [ ] Shortcode Builder: create, **Save Embed & Get Shortcode**, use `[flipset id="N"]`. Edit the embed; the front end updates.
 - [ ] Saved Embeds: **Duplicate** creates a copy; **Delete** removes it after confirmation.
-- [ ] Block editor: insert **Foliora Viewer**, pick a PDF, preview shows page 1. Insert the block with a saved embed `id`.
+- [ ] Block editor: insert **Flipset Viewer**, pick a PDF, preview shows page 1. Insert the block with a saved embed `id`.
 
 ## Viewer controls (front end)
 
@@ -25,18 +25,18 @@ Docker was unavailable, so these are the items that could not be verified automa
 
 ## Other plugins
 
-- [ ] **Yoast SEO** or **Rank Math** active: Foliora outputs no Open Graph tags (they supply their own).
-- [ ] **Elementor** active: the Foliora widgets appear and render. Repeat with **Divi** and **Beaver Builder**.
+- [ ] **Yoast SEO** or **Rank Math** active: Flipset outputs no Open Graph tags (they supply their own).
+- [ ] **Elementor** active: the Flipset widgets appear and render. Repeat with **Divi** and **Beaver Builder**.
 - [ ] Without Elementor/Divi/Beaver nothing fatals.
 - [ ] A page-cache plugin (WP Rocket, LiteSpeed Cache, W3TC): the viewer still works on a cached page; it still works after "minify/defer JS".
 
 ## Languages
 
-- [ ] Settings → General → Site Language = **বাংলা**. Foliora admin pages, the front-end toolbar and the block editor labels are Bengali. No English strings remain.
+- [ ] Settings → General → Site Language = **বাংলা**. Flipset admin pages, the front-end toolbar and the block editor labels are Bengali. No English strings remain.
 
 ## Uninstall (use a disposable site)
 
-- [ ] Delete the plugin. `foliora_settings`, saved embeds, Foliora post meta and thumbnails are gone; **your PDFs and other media stay**.
+- [ ] Delete the plugin. `flipset_settings`, saved embeds, Flipset post meta and thumbnails are gone; **your PDFs and other media stay**.
 
 ## WordPress.org submission
 
@@ -46,7 +46,7 @@ Docker was unavailable, so these are the items that could not be verified automa
 
 ## What Print should produce
 
-Print renders the PDF pages again off-screen at a fixed print size (about A4 at 200 dpi, rotation kept), so the output does not depend on the on-screen zoom. A new tab opens, shows the loading text, then the browser print dialog opens by itself. One PDF page is one sheet, with no blank sheet at the end. The page numbers are also sent in the `foliora:print` event (`detail.pages`).
+Print renders the PDF pages again off-screen at a fixed print size (about A4 at 200 dpi, rotation kept), so the output does not depend on the on-screen zoom. A new tab opens, shows the loading text, then the browser print dialog opens by itself. One PDF page is one sheet, with no blank sheet at the end. The page numbers are also sent in the `flipset:print` event (`detail.pages`).
 
 | View | Sheets in the print preview |
 |------|-----------------------------|

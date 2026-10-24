@@ -1,19 +1,19 @@
-# Foliora developer hooks
+# Flipset developer hooks
 
-Foliora (free) is a complete PDF viewer with no locked features, no upsell UI, and no bundled paid features. It exposes WordPress filters and actions so a separate add-on or theme can replace rendering, inject a toolbar, change the credit link, or extend functionality without modifying this plugin.
+Flipset (free) is a complete PDF viewer with no locked features, no upsell UI, and no bundled paid features. It exposes WordPress filters and actions so a separate add-on or theme can replace rendering, inject a toolbar, change the credit link, or extend functionality without modifying this plugin.
 
 You can build your own companion extension with this public contract. You do not need undocumented internals.
 
-Hook names use a slash namespace (`foliora/did_thing`) by design. All live PHP hooks follow that style.
+Hook names use a slash namespace (`flipset/did_thing`) by design. All live PHP hooks follow that style.
 
-**Viewer pipeline (in order):** saved-embed merge (`id`) → `shortcode_atts()` → `foliora/viewer_atts` → empty-file check → `foliora/pre_render_viewer` → `foliora/before_viewer` → toolbar (`foliora/download_url`) → `foliora/show_branding` → `foliora/viewer_file_url` → `foliora/viewer_html`.
+**Viewer pipeline (in order):** saved-embed merge (`id`) → `shortcode_atts()` → `flipset/viewer_atts` → empty-file check → `flipset/pre_render_viewer` → `flipset/before_viewer` → toolbar (`flipset/download_url`) → `flipset/show_branding` → `flipset/viewer_file_url` → `flipset/viewer_html`.
 
 ---
 
-## `foliora/loaded`
+## `flipset/loaded`
 
 **Type:** action
-**Fired from:** `Foliora::run()` in `includes/class-foliora.php`
+**Fired from:** `Flipset::run()` in `includes/class-flipset.php`
 
 Runs once after every free-plugin component (saved embeds, viewer, thumbnails, SEO, accessibility, compat, builders, library, block, auto-embed and, on admin screens, the admin classes) has run its `init()`.
 
@@ -21,42 +21,42 @@ Runs once after every free-plugin component (saved embeds, viewer, thumbnails, S
 
 None.
 
-Use this when your add-on needs Foliora’s classes to already exist, instead of racing `plugins_loaded`.
+Use this when your add-on needs Flipset’s classes to already exist, instead of racing `plugins_loaded`.
 
 ```php
-add_action( 'foliora/loaded', function () {
-	if ( class_exists( 'Foliora_Viewer' ) ) {
-		// Safe to call Foliora APIs or enqueue companion assets.
+add_action( 'flipset/loaded', function () {
+	if ( class_exists( 'Flipset_Viewer' ) ) {
+		// Safe to call Flipset APIs or enqueue companion assets.
 	}
 } );
 ```
 
 ---
 
-## `foliora/pro_loaded`
+## `flipset/pro_loaded`
 
 **Type:** action (fired by the add-on, **consumed** by free)
-**Consumed in:** `Foliora_Loader::is_pro_active()` via `did_action( 'foliora/pro_loaded' )`
+**Consumed in:** `Flipset_Loader::is_pro_active()` via `did_action( 'flipset/pro_loaded' )`
 
-The free plugin does **not** fire this. An add-on must fire it on `plugins_loaded` **before** Foliora boots (Foliora free runs at priority `20`). Also define `FOLIORA_PRO_VERSION`. Both are required for `Foliora_Loader::is_pro_active()` to return true (unless overridden by `foliora/is_pro_active`).
+The free plugin does **not** fire this. An add-on must fire it on `plugins_loaded` **before** Flipset boots (Flipset free runs at priority `20`). Also define `FLIPSET_PRO_VERSION`. Both are required for `Flipset_Loader::is_pro_active()` to return true (unless overridden by `flipset/is_pro_active`).
 
 ```php
 add_action( 'plugins_loaded', function () {
-	if ( ! defined( 'FOLIORA_PRO_VERSION' ) ) {
-		define( 'FOLIORA_PRO_VERSION', '1.0.0' );
+	if ( ! defined( 'FLIPSET_PRO_VERSION' ) ) {
+		define( 'FLIPSET_PRO_VERSION', '1.0.0' );
 	}
-	do_action( 'foliora/pro_loaded' );
+	do_action( 'flipset/pro_loaded' );
 }, 5 );
 ```
 
 ---
 
-## `foliora/is_pro_active`
+## `flipset/is_pro_active`
 
 **Type:** filter
-**Fired from:** `Foliora_Loader::is_pro_active()` in `includes/class-foliora-loader.php`
+**Fired from:** `Flipset_Loader::is_pro_active()` in `includes/class-flipset-loader.php`
 
-Overrides add-on active detection. The default is `defined( 'FOLIORA_PRO_VERSION' ) && did_action( 'foliora/pro_loaded' )`.
+Overrides add-on active detection. The default is `defined( 'FLIPSET_PRO_VERSION' ) && did_action( 'flipset/pro_loaded' )`.
 
 **Parameters**
 
@@ -64,10 +64,10 @@ Overrides add-on active detection. The default is `defined( 'FOLIORA_PRO_VERSION
 |------|------|---------|
 | `$pro_confirmed` | `bool` | Built-in detection result |
 
-The result is **cached** on the first call for the rest of the request. Hook this filter before anything that calls `Foliora_Loader::is_pro_active()` (for example on `plugins_loaded` priority `15`, before Foliora’s `20`).
+The result is **cached** on the first call for the rest of the request. Hook this filter before anything that calls `Flipset_Loader::is_pro_active()` (for example on `plugins_loaded` priority `15`, before Flipset’s `20`).
 
 ```php
-add_filter( 'foliora/is_pro_active', function ( $pro_confirmed ) {
+add_filter( 'flipset/is_pro_active', function ( $pro_confirmed ) {
 	// Force add-on detection on a staging site without the companion add-on installed.
 	if ( defined( 'WP_ENVIRONMENT_TYPE' ) && 'local' === WP_ENVIRONMENT_TYPE ) {
 		return true;
@@ -78,12 +78,12 @@ add_filter( 'foliora/is_pro_active', function ( $pro_confirmed ) {
 
 ---
 
-## `foliora/feature_enabled`
+## `flipset/feature_enabled`
 
 **Type:** filter
-**Fired from:** `Foliora_Loader::is_feature_enabled()` in `includes/class-foliora-loader.php`
+**Fired from:** `Flipset_Loader::is_feature_enabled()` in `includes/class-flipset-loader.php`
 
-Per-feature extension gate. Foliora free has no bundled paid features. If an add-on is not active, this filter never runs — the method returns `false`. If an add-on **is** active, the default passed in is `true` for **every** key; return `false` for any feature the add-on does not enable.
+Per-feature extension gate. Flipset free has no bundled paid features. If an add-on is not active, this filter never runs — the method returns `false`. If an add-on **is** active, the default passed in is `true` for **every** key; return `false` for any feature the add-on does not enable.
 
 **Parameters**
 
@@ -93,7 +93,7 @@ Per-feature extension gate. Foliora free has no bundled paid features. If an add
 | `$feature_key` | `string` | The feature key your add-on asks about. Free defines none, sells no paid features, and shows no locked or upsell UI |
 
 ```php
-add_filter( 'foliora/feature_enabled', function ( $enabled, $feature_key ) {
+add_filter( 'flipset/feature_enabled', function ( $enabled, $feature_key ) {
 	$licensed = array( 'bookmarks' );
 	return in_array( $feature_key, $licensed, true );
 }, 10, 2 );
@@ -101,14 +101,14 @@ add_filter( 'foliora/feature_enabled', function ( $enabled, $feature_key ) {
 
 ---
 
-## `foliora/viewer_atts`
+## `flipset/viewer_atts`
 
 **Type:** filter
-**Fired from:** `Foliora_Viewer::render_shortcode()` in `includes/class-foliora-viewer.php`
+**Fired from:** `Flipset_Viewer::render_shortcode()` in `includes/class-flipset-viewer.php`
 
-Runs immediately after `shortcode_atts()`, which fills defaults from Foliora → Settings (width, height, theme, lazy loading) and, when `id` is set, after the saved embed's configuration has been merged (explicit attributes win). Swap `file`, `width`, `height`, `mode`, `view` and so on without replacing the whole viewer. The empty-file check runs **after** this filter, so you can inject a missing file URL.
+Runs immediately after `shortcode_atts()`, which fills defaults from Flipset → Settings (width, height, theme, lazy loading) and, when `id` is set, after the saved embed's configuration has been merged (explicit attributes win). Swap `file`, `width`, `height`, `mode`, `view` and so on without replacing the whole viewer. The empty-file check runs **after** this filter, so you can inject a missing file URL.
 
-Used by `[foliora]` and by anything that calls `render_shortcode()` (the viewer block, the library’s in-place embeds).
+Used by `[flipset]` and by anything that calls `render_shortcode()` (the viewer block, the library’s in-place embeds).
 
 **Parameters**
 
@@ -120,10 +120,10 @@ Used by `[foliora]` and by anything that calls `render_shortcode()` (the viewer 
 
 | Key | Values / default |
 |-----|------------------|
-| `id` | Saved embed ID (`foliora_embed` post) or `''` |
+| `id` | Saved embed ID (`flipset_embed` post) or `''` |
 | `file` | PDF URL (required) |
 | `width`, `height` | CSS size; defaults from Settings (`100%` / `600px`) |
-| `mode` | `pdf` (default). Reserved for add-ons: read it in `foliora/pre_render_viewer` to render something other than a PDF |
+| `mode` | `pdf` (default). Reserved for add-ons: read it in `flipset/pre_render_viewer` to render something other than a PDF |
 | `page` | Start page, default `1` |
 | `title` | Optional caption |
 | `theme` | `light` (default from Settings), `dark`, `sepia` |
@@ -138,7 +138,7 @@ Used by `[foliora]` and by anything that calls `render_shortcode()` (the viewer 
 Return an array. Non-array values are discarded and treated as empty attributes.
 
 ```php
-add_filter( 'foliora/viewer_atts', function ( $atts ) {
+add_filter( 'flipset/viewer_atts', function ( $atts ) {
 	if ( function_exists( 'pll_current_language' ) && 'fr' === pll_current_language() ) {
 		$atts['file'] = 'https://example.com/docs/guide-fr.pdf';
 	}
@@ -150,10 +150,10 @@ The free plugin already swaps Media Library attachments to the current WPML / Po
 
 ---
 
-## `foliora/translate_attachment_id`
+## `flipset/translate_attachment_id`
 
 **Type:** filter
-**Fired from:** `Foliora_Compat::translate_attachment_id()` in `includes/class-foliora-compat.php`
+**Fired from:** `Flipset_Compat::translate_attachment_id()` in `includes/class-flipset-compat.php`
 
 Last chance to pick a different PDF attachment for the current language.
 
@@ -166,26 +166,26 @@ Last chance to pick a different PDF attachment for the current language.
 
 ---
 
-## `foliora/pre_render_viewer`
+## `flipset/pre_render_viewer`
 
 **Type:** filter
-**Fired from:** `Foliora_Viewer::render_shortcode()` in `includes/class-foliora-viewer.php`
+**Fired from:** `Flipset_Viewer::render_shortcode()` in `includes/class-flipset-viewer.php`
 
 Return any non-`null` value to **replace** the default PDF.js markup entirely (EPUB viewer, a custom canvas, etc.). Returning `null` (the default) lets the free plugin render.
 
-If you only need to change the file URL or wrap the HTML, use `foliora/viewer_atts` or `foliora/viewer_html` instead.
+If you only need to change the file URL or wrap the HTML, use `flipset/viewer_atts` or `flipset/viewer_html` instead.
 
 **Parameters**
 
 | Name | Type | Meaning |
 |------|------|---------|
 | `$output` | `string\|null` | Default `null` (free plugin renders) |
-| `$atts` | `array` | Attributes after `foliora/viewer_atts` |
+| `$atts` | `array` | Attributes after `flipset/viewer_atts` |
 
-Non-null output still passes through `foliora/viewer_html` before it is returned.
+Non-null output still passes through `flipset/viewer_html` before it is returned.
 
 ```php
-add_filter( 'foliora/pre_render_viewer', function ( $output, $atts ) {
+add_filter( 'flipset/pre_render_viewer', function ( $output, $atts ) {
 	if ( isset( $atts['mode'] ) && 'epub' === $atts['mode'] ) {
 		return '<div class="my-epub-viewer" data-file="' . esc_url( $atts['file'] ) . '"></div>';
 	}
@@ -195,36 +195,36 @@ add_filter( 'foliora/pre_render_viewer', function ( $output, $atts ) {
 
 ---
 
-## `foliora/before_viewer`
+## `flipset/before_viewer`
 
 **Type:** action
-**Fired from:** `Foliora_Viewer::render_shortcode()` in `includes/class-foliora-viewer.php`
+**Fired from:** `Flipset_Viewer::render_shortcode()` in `includes/class-flipset-viewer.php`
 
-Fires only on the free PDF path (skipped when `pre_render_viewer` short-circuits). Echo markup; it is captured and inserted into `.foliora-chrome` **before** the free toolbar. Free already ships its own light / dark / sepia theme button (`theme_btn`); do not add a second one.
+Fires only on the free PDF path (skipped when `pre_render_viewer` short-circuits). Echo markup; it is captured and inserted into `.flipset-chrome` **before** the free toolbar. Free already ships its own light / dark / sepia theme button (`theme_btn`); do not add a second one.
 
 **Parameters**
 
 | Name | Type | Meaning |
 |------|------|---------|
-| `$instance_id` | `string` | Unique viewer element id (`foliora-viewer-{n}`) |
+| `$instance_id` | `string` | Unique viewer element id (`flipset-viewer-{n}`) |
 | `$atts` | `array` | Resolved attributes |
 
 ```php
-add_action( 'foliora/before_viewer', function ( $instance_id, $atts ) {
+add_action( 'flipset/before_viewer', function ( $instance_id, $atts ) {
 	echo '<div class="my-reader-bar" data-for="' . esc_attr( $instance_id ) . '">';
-	echo '<button type="button">' . esc_html__( 'Bookmark', 'my-foliora-addon' ) . '</button>';
+	echo '<button type="button">' . esc_html__( 'Bookmark', 'my-flipset-addon' ) . '</button>';
 	echo '</div>';
 }, 10, 2 );
 ```
 
 ---
 
-## `foliora/show_branding`
+## `flipset/show_branding`
 
 **Type:** filter
-**Fired from:** `Foliora_Viewer::render_shortcode()` in `includes/class-foliora-viewer.php`
+**Fired from:** `Flipset_Viewer::render_shortcode()` in `includes/class-flipset-viewer.php`
 
-Whether to print the “Powered by Foliora” credit under the viewer. The default is the **Credit link** checkbox under Foliora → Settings, which is **off** until an administrator turns it on. Return `true` or `false` to override the setting for a site, a page or a single viewer.
+Whether to print the “Powered by Flipset” credit under the viewer. The default is the **Credit link** checkbox under Flipset → Settings, which is **off** until an administrator turns it on. Return `true` or `false` to override the setting for a site, a page or a single viewer.
 
 **Parameters**
 
@@ -233,7 +233,7 @@ Whether to print the “Powered by Foliora” credit under the viewer. The defau
 | `$show` | `bool` | Default: the saved `show_branding` setting (`false` unless enabled) |
 
 ```php
-add_filter( 'foliora/show_branding', function ( $show ) {
+add_filter( 'flipset/show_branding', function ( $show ) {
 	// Always show the credit on the marketing site.
 	return is_page( 'about' ) ? true : $show;
 } );
@@ -241,12 +241,12 @@ add_filter( 'foliora/show_branding', function ( $show ) {
 
 ---
 
-## `foliora/viewer_html`
+## `flipset/viewer_html`
 
 **Type:** filter
-**Fired from:** `Foliora_Viewer::render_shortcode()` in `includes/class-foliora-viewer.php`
+**Fired from:** `Flipset_Viewer::render_shortcode()` in `includes/class-flipset-viewer.php`
 
-Last chance to wrap or post-process the finished viewer HTML. Applied to the free plugin’s container **and** to any non-`null` `foliora/pre_render_viewer` return. Not applied to the editor-only notices (no file URL, unknown saved-embed ID).
+Last chance to wrap or post-process the finished viewer HTML. Applied to the free plugin’s container **and** to any non-`null` `flipset/pre_render_viewer` return. Not applied to the editor-only notices (no file URL, unknown saved-embed ID).
 
 **Parameters**
 
@@ -258,7 +258,7 @@ Last chance to wrap or post-process the finished viewer HTML. Applied to the fre
 Escape anything you concatenate. Return valid HTML.
 
 ```php
-add_filter( 'foliora/viewer_html', function ( $html, $atts ) {
+add_filter( 'flipset/viewer_html', function ( $html, $atts ) {
 	$label = isset( $atts['file'] ) ? basename( wp_parse_url( $atts['file'], PHP_URL_PATH ) ) : '';
 	return '<figure class="my-doc"><figcaption>' . esc_html( $label ) . '</figcaption>' . $html . '</figure>';
 }, 10, 2 );
@@ -266,10 +266,10 @@ add_filter( 'foliora/viewer_html', function ( $html, $atts ) {
 
 ---
 
-## `foliora/viewer_file_url`
+## `flipset/viewer_file_url`
 
 **Type:** filter
-**Fired from:** `Foliora_Viewer::render_shortcode()` in `includes/class-foliora-viewer.php`
+**Fired from:** `Flipset_Viewer::render_shortcode()` in `includes/class-flipset-viewer.php`
 
 The URL the front-end viewer loads (`data-file`) and the no-JavaScript fallback link uses. Use it for signed or proxied URLs. It runs only on the free PDF path.
 
@@ -282,10 +282,10 @@ The URL the front-end viewer loads (`data-file`) and the no-JavaScript fallback 
 
 ---
 
-## `foliora/download_url`
+## `flipset/download_url`
 
 **Type:** filter
-**Fired from:** `Foliora_Viewer::render_toolbar()` in `includes/class-foliora-viewer.php`
+**Fired from:** `Flipset_Viewer::render_toolbar()` in `includes/class-flipset-viewer.php`
 
 The `href` of the toolbar Download button. Defaults to the file URL; change it to send downloads through a tracked or protected endpoint without changing what the viewer renders.
 
@@ -298,10 +298,10 @@ The `href` of the toolbar Download button. Defaults to the file URL; change it t
 
 ---
 
-## `foliora/schema_digital_document`
+## `flipset/schema_digital_document`
 
 **Type:** filter
-**Fired from:** `Foliora_SEO::output_schema_jsonld()` in `includes/class-foliora-seo.php`
+**Fired from:** `Flipset_SEO::output_schema_jsonld()` in `includes/class-flipset-seo.php`
 
 The Schema.org `DigitalDocument` array printed as JSON-LD for each PDF embedded on a singular post or shown on a PDF attachment page. Return an array to print it; any other value drops that document.
 
@@ -317,37 +317,37 @@ The Schema.org `DigitalDocument` array printed as JSON-LD for each PDF embedded 
 
 ## Related: DOM events
 
-These are **not** WordPress hooks. The front-end viewer dispatches bubbling `CustomEvent`s on the `.foliora-viewer` element (`assets/js/foliora-viewer.js`). `event.detail` always includes `fileUrl` plus the fields below.
+These are **not** WordPress hooks. The front-end viewer dispatches bubbling `CustomEvent`s on the `.flipset-viewer` element (`assets/js/flipset-viewer.js`). `event.detail` always includes `fileUrl` plus the fields below.
 
 | Event | Extra `detail` fields |
 |-------|----------------------|
-| `foliora:ready` | `numPages`, `viewMode` |
-| `foliora:pagechange` | `page`, `numPages` |
-| `foliora:zoom` | `zoom`, `fitMode` (`page`, `width` or `none`) |
-| `foliora:search` | `query`, `hitsCount`, `currentHit` (absent when there are no hits) |
-| `foliora:print` | `page`, `pages` (the page numbers actually sent to the print window) |
-| `foliora:download` | — |
-| `foliora:error` | `stage` (`render`) |
+| `flipset:ready` | `numPages`, `viewMode` |
+| `flipset:pagechange` | `page`, `numPages` |
+| `flipset:zoom` | `zoom`, `fitMode` (`page`, `width` or `none`) |
+| `flipset:search` | `query`, `hitsCount`, `currentHit` (absent when there are no hits) |
+| `flipset:print` | `page`, `pages` (the page numbers actually sent to the print window) |
+| `flipset:download` | — |
+| `flipset:error` | `stage` (`render`) |
 
 ```js
-document.addEventListener( 'foliora:pagechange', function ( event ) {
+document.addEventListener( 'flipset:pagechange', function ( event ) {
 	console.log( event.detail.page, 'of', event.detail.numPages );
 } );
 ```
 
 ### JavaScript globals
 
-- `window.FolioraViewer.bind( element )` binds a `.foliora-viewer` that was added to the page after load.
-- `window.Foliora.pdfjsLib` is Foliora's own bundled PDF.js (3.11.174), captured right after its script runs. Use it instead of `window.pdfjsLib`: Foliora puts `window.pdfjsLib` back exactly as it found it (another plugin's copy, or unset) so it never collides with other PDF plugins, and you should not depend on the global either. Set `workerSrc` on this object to Foliora's worker (`FolioraConfig.workerSrc`).
+- `window.FlipsetViewer.bind( element )` binds a `.flipset-viewer` that was added to the page after load.
+- `window.Flipset.pdfjsLib` is Flipset's own bundled PDF.js (3.11.174), captured right after its script runs. Use it instead of `window.pdfjsLib`: Flipset puts `window.pdfjsLib` back exactly as it found it (another plugin's copy, or unset) so it never collides with other PDF plugins, and you should not depend on the global either. Set `workerSrc` on this object to Flipset's worker (`FlipsetConfig.workerSrc`).
 
 ---
 
-## `foliora/extracted_text`
+## `flipset/extracted_text`
 
 **Type:** filter
-**Fired from:** `Foliora_SEO::ajax_save_extracted_text()` in `includes/class-foliora-seo.php`
+**Fired from:** `Flipset_SEO::ajax_save_extracted_text()` in `includes/class-flipset-seo.php`
 
-Alters plain text extracted from a PDF before it is stored on the attachment. Runs after sanitizing and clipping to `foliora/extracted_text_max_chars` (default 80,000).
+Alters plain text extracted from a PDF before it is stored on the attachment. Runs after sanitizing and clipping to `flipset/extracted_text_max_chars` (default 80,000).
 
 **Parameters**
 
@@ -357,17 +357,17 @@ Alters plain text extracted from a PDF before it is stored on the attachment. Ru
 | `$pdf_id` | `int` | Attachment ID |
 
 ```php
-add_filter( 'foliora/extracted_text', function ( $text, $pdf_id ) {
+add_filter( 'flipset/extracted_text', function ( $text, $pdf_id ) {
 	return str_replace( 'CONFIDENTIAL', '', $text );
 }, 10, 2 );
 ```
 
 ---
 
-## `foliora/search_index`
+## `flipset/search_index`
 
 **Type:** filter
-**Fired from:** `Foliora_SEO` when rebuilding `_foliora_search_index` on a post/page
+**Fired from:** `Flipset_SEO` when rebuilding `_flipset_search_index` on a post/page
 
 Combined text copied onto a host post so core search can match PDF contents.
 
@@ -381,10 +381,10 @@ Combined text copied onto a host post so core search can match PDF contents.
 
 ---
 
-## `foliora/og_image`
+## `flipset/og_image`
 
 **Type:** filter
-**Fired from:** `Foliora_SEO` when resolving a social-card image
+**Fired from:** `Flipset_SEO` when resolving a social-card image
 
 **Parameters**
 
@@ -396,10 +396,10 @@ Combined text copied onto a host post so core search can match PDF contents.
 
 ---
 
-## `foliora/extracted_text_max_chars`
+## `flipset/extracted_text_max_chars`
 
 **Type:** filter
-**Fired from:** `Foliora_SEO` when clipping extracted text
+**Fired from:** `Flipset_SEO` when clipping extracted text
 
 Default `80000`. Return a positive integer.
 
@@ -407,20 +407,20 @@ Default `80000`. Return a positive integer.
 
 ## Naming
 
-Every **live** `apply_filters()` / `do_action()` in this plugin uses slash-style names (`foliora/…`). There is no live underscore-style `foliora_*` hook.
+Every **live** `apply_filters()` / `do_action()` in this plugin uses slash-style names (`flipset/…`). There is no live underscore-style `flipset_*` hook.
 
-A commented-out Freemius stub in `foliora.php` contains `do_action( 'foliora_fs_loaded' )`. That line is not executed.
+A commented-out Freemius stub in `flipset.php` contains `do_action( 'flipset_fs_loaded' )`. That line is not executed.
 
-The library shortcode (`[foliora_library]`) still goes through the viewer hooks above when it renders an embed. Thumbnail and text-index AJAX have no additional PHP filters beyond `foliora/extracted_text` and `foliora/extracted_text_max_chars`. Tagged-PDF detection is stored via `foliora_save_a11y` and can be overridden with `foliora/pdf_tagged`.
+The library shortcode (`[flipset_library]`) still goes through the viewer hooks above when it renders an embed. Thumbnail and text-index AJAX have no additional PHP filters beyond `flipset/extracted_text` and `flipset/extracted_text_max_chars`. Tagged-PDF detection is stored via `flipset_save_a11y` and can be overridden with `flipset/pdf_tagged`.
 
 ---
 
-## `foliora/pdf_tagged`
+## `flipset/pdf_tagged`
 
 **Type:** filter
-**Fired from:** `Foliora_A11y::is_tagged()` in `includes/class-foliora-a11y.php`
+**Fired from:** `Flipset_A11y::is_tagged()` in `includes/class-flipset-a11y.php`
 
-Overrides whether an attachment is treated as a tagged (accessible) PDF. The default is the MarkInfo `/Marked` flag stored when the Foliora → Docs & Features → Documents tab is opened.
+Overrides whether an attachment is treated as a tagged (accessible) PDF. The default is the MarkInfo `/Marked` flag stored when the Flipset → Docs & Features → Documents tab is opened.
 
 **Parameters**
 
@@ -430,7 +430,7 @@ Overrides whether an attachment is treated as a tagged (accessible) PDF. The def
 | `$attachment_id` | `int` | PDF attachment ID |
 
 ```php
-add_filter( 'foliora/pdf_tagged', function ( $tagged, $attachment_id ) {
+add_filter( 'flipset/pdf_tagged', function ( $tagged, $attachment_id ) {
 	if ( 123 === (int) $attachment_id ) {
 		return true;
 	}
@@ -440,12 +440,12 @@ add_filter( 'foliora/pdf_tagged', function ( $tagged, $attachment_id ) {
 
 ---
 
-## `foliora/allowed_html`
+## `flipset/allowed_html`
 
 **Type:** filter
-**Fired from:** `Foliora_Viewer::allowed_html()` in `includes/class-foliora-viewer.php`
+**Fired from:** `Flipset_Viewer::allowed_html()` in `includes/class-flipset-viewer.php`
 
-Viewer and library markup is passed through `wp_kses()` with this tag/attribute list: the output of `[foliora]`, `[foliora_library]` and both blocks is escaped at the point it is returned (after `foliora/viewer_html`), the output of `foliora/before_viewer` is escaped before it is added, and page-builder widgets, the library grid and the admin previews escape it again when they print it. If an add-on prints extra markup through `foliora/before_viewer` or `foliora/viewer_html`, extend the list so it is kept.
+Viewer and library markup is passed through `wp_kses()` with this tag/attribute list: the output of `[flipset]`, `[flipset_library]` and both blocks is escaped at the point it is returned (after `flipset/viewer_html`), the output of `flipset/before_viewer` is escaped before it is added, and page-builder widgets, the library grid and the admin previews escape it again when they print it. If an add-on prints extra markup through `flipset/before_viewer` or `flipset/viewer_html`, extend the list so it is kept.
 
 **Parameters**
 
@@ -454,7 +454,7 @@ Viewer and library markup is passed through `wp_kses()` with this tag/attribute 
 | `$allowed` | `array` | `wp_kses()` allowed-HTML array |
 
 ```php
-add_filter( 'foliora/allowed_html', function ( $allowed ) {
+add_filter( 'flipset/allowed_html', function ( $allowed ) {
 	$allowed['section'] = array( 'class' => true, 'data-*' => true );
 	return $allowed;
 } );
@@ -462,10 +462,10 @@ add_filter( 'foliora/allowed_html', function ( $allowed ) {
 
 ---
 
-## `foliora/hide_tokens`
+## `flipset/hide_tokens`
 
 **Type:** filter
-**Fired from:** `Foliora_Viewer::sanitize_hide_list()` in `includes/class-foliora-viewer.php`
+**Fired from:** `Flipset_Viewer::sanitize_hide_list()` in `includes/class-flipset-viewer.php`
 
 Control names accepted in the `hide="..."` list of a saved embed. Unknown names are dropped when an embed is saved. Add-ons that print their own controls add their names here.
 

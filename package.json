@@ -1,7 +1,7 @@
 {
-	"name": "foliora",
+	"name": "flipset",
 	"private": true,
-	"description": "Dev tooling for Foliora. Not shipped in the WP.org zip.",
+	"description": "Dev tooling for Flipset. Not shipped in the WP.org zip.",
 	"scripts": {
 		"wp-env": "wp-env",
 		"build:zip": "node bin/build-zip.js",

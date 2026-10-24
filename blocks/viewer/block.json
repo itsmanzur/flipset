@@ -1,13 +1,13 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "foliora/viewer",
-	"title": "Foliora Viewer",
+	"name": "flipset/viewer",
+	"title": "Flipset Viewer",
 	"category": "media",
 	"icon": "media-document",
-	"description": "Embed a PDF document with the Foliora viewer.",
+	"description": "Embed a PDF document with the Flipset viewer.",
 	"keywords": [ "pdf", "document", "viewer", "flipbook" ],
-	"textdomain": "foliora",
+	"textdomain": "flipset",
 	"attributes": {
 		"id": {
 			"type": "number",
@@ -54,6 +54,6 @@
 		"html": false,
 		"align": [ "wide", "full" ]
 	},
-	"editorScript": "foliora-block-editor",
-	"editorStyle": "foliora-block-editor"
+	"editorScript": "flipset-block-editor",
+	"editorStyle": "flipset-block-editor"
 }

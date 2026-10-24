@@ -4,11 +4,11 @@ const { execSync } = require('child_process');
 
 const rootDir = path.resolve(__dirname, '..');
 const distDir = path.join(rootDir, 'dist');
-const stageDir = path.join(distDir, 'foliora');
-const zipPathRoot = path.join(rootDir, 'foliora.zip');
-const zipPathDist = path.join(distDir, 'foliora.zip');
+const stageDir = path.join(distDir, 'flipset');
+const zipPathRoot = path.join(rootDir, 'flipset.zip');
+const zipPathDist = path.join(distDir, 'flipset.zip');
 
-console.log('🚀 Starting Foliora WordPress Plugin Build...');
+console.log('🚀 Starting Flipset WordPress Plugin Build...');
 
 // 1. Clean dist directory
 if (fs.existsSync(distDir)) {
@@ -110,9 +110,9 @@ try {
 	if (fs.existsSync(zipPathRoot)) {
 		fs.unlinkSync(zipPathRoot);
 	}
-	console.log('📦 Compressing into foliora.zip...');
+	console.log('📦 Compressing into flipset.zip...');
 	// Compress-Archive on Windows PowerShell 5.1 writes backslash entry names,
-	// which extract as literal "foliora\file.php" on Linux hosts. Build the
+	// which extract as literal "flipset\file.php" on Linux hosts. Build the
 	// archive with System.IO.Compression and force forward slashes instead.
 	const psScript = [
 		'Add-Type -AssemblyName System.IO.Compression',
@@ -133,7 +133,7 @@ try {
 	execSync(`powershell -NoProfile -ExecutionPolicy Bypass -File "${psFile}"`, { stdio: 'inherit' });
 	fs.unlinkSync(psFile);
 
-	// Copy to dist/foliora.zip as well
+	// Copy to dist/flipset.zip as well
 	fs.copyFileSync(zipPathRoot, zipPathDist);
 
 	const stats = fs.statSync(zipPathRoot);

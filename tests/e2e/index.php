@@ -2,7 +2,7 @@
 /**
  * Prevent directory listing.
  *
- * @package Foliora
+ * @package Flipset
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

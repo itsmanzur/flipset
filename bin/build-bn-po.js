@@ -1,23 +1,23 @@
 /**
- * Build languages/foliora-bn_BD.po from the POT + a msgid map.
+ * Build languages/flipset-bn_BD.po from the POT + a msgid map.
  */
 const fs = require( 'fs' );
 const path = require( 'path' );
 
 const root = path.resolve( __dirname, '..' );
-const pot = fs.readFileSync( path.join( root, 'languages', 'foliora.pot' ), 'utf8' );
+const pot = fs.readFileSync( path.join( root, 'languages', 'flipset.pot' ), 'utf8' );
 
 const t = {
-	'Foliora': 'Foliora',
-	'https://thereadscope.com/foliora': 'https://thereadscope.com/foliora',
-	'A fast, accessible PDF viewer for WordPress. Bundled PDF.js rendering, shortcode + block embed, and a clean upgrade path to Foliora Pro for EPUB, bookmarks, reading progress, and protected links.': 'ওয়ার্ডপ্রেসের জন্য একটি দ্রুত, অ্যাকসেসিবল PDF ভিউয়ার। বান্ডেল করা PDF.js রেন্ডারিং, শর্টকোড ও ব্লক এমবেড, আর EPUB, বুকমার্ক, রিডিং প্রগ্রেস ও প্রটেক্টেড লিংকের জন্য Foliora Pro-তে আপগ্রেডের সহজ পথ।',
+	'Flipset': 'Flipset',
+	'https://flipset.thereadscope.com': 'https://flipset.thereadscope.com',
+	'A fast, accessible PDF viewer for WordPress. Bundled PDF.js rendering, shortcode + block embed, and a clean upgrade path to Flipset Pro for EPUB, bookmarks, reading progress, and protected links.': 'ওয়ার্ডপ্রেসের জন্য একটি দ্রুত, অ্যাকসেসিবল PDF ভিউয়ার। বান্ডেল করা PDF.js রেন্ডারিং, শর্টকোড ও ব্লক এমবেড, আর EPUB, বুকমার্ক, রিডিং প্রগ্রেস ও প্রটেক্টেড লিংকের জন্য Flipset Pro-তে আপগ্রেডের সহজ পথ।',
 	'The Read Scope': 'The Read Scope',
 	'https://thereadscope.com': 'https://thereadscope.com',
-	'Foliora Library': 'Foliora লাইব্রেরি',
+	'Flipset Library': 'Flipset লাইব্রেরি',
 	'A grid of Media Library PDFs.': 'মিডিয়া লাইব্রেরির PDF-এর একটি গ্রিড।',
 	'Media': 'মিডিয়া',
-	'Foliora Viewer': 'Foliora ভিউয়ার',
-	'Embed a PDF with the Foliora viewer.': 'Foliora ভিউয়ার দিয়ে একটি PDF এমবেড করুন।',
+	'Flipset Viewer': 'Flipset ভিউয়ার',
+	'Embed a PDF with the Flipset viewer.': 'Flipset ভিউয়ার দিয়ে একটি PDF এমবেড করুন।',
 	'Grid': 'গ্রিড',
 	'Columns': 'কলাম',
 	'Per page': 'প্রতি পাতায়',
@@ -48,11 +48,11 @@ const t = {
 	'Forbidden.': 'অনুমতি নেই।',
 	'PDF accessibility checks are turned off.': 'PDF অ্যাকসেসিবিলিটি চেক বন্ধ আছে।',
 	'That file is not a PDF attachment.': 'ওই ফাইলটি একটি PDF অ্যাটাচমেন্ট নয়।',
-	'Foliora Dashboard': 'Foliora ড্যাশবোর্ড',
+	'Flipset Dashboard': 'Flipset ড্যাশবোর্ড',
 	'Dashboard': 'ড্যাশবোর্ড',
-	'Foliora Documents': 'Foliora ডকুমেন্টস',
+	'Flipset Documents': 'Flipset ডকুমেন্টস',
 	'Documents': 'ডকুমেন্টস',
-	'Foliora Settings': 'Foliora সেটিংস',
+	'Flipset Settings': 'Flipset সেটিংস',
 	'Settings': 'সেটিংস',
 	'Loading document…': 'ডকুমেন্ট লোড হচ্ছে…',
 	'This document could not be loaded.': 'এই ডকুমেন্ট লোড করা যায়নি।',
@@ -94,9 +94,9 @@ const t = {
 	'Show the download button on the viewer toolbar. Individual embeds can override this with download="false".': 'ভিউয়ার টুলবারে ডাউনলোড বাটন দেখান। আলাদা এমবেড download="false" দিয়ে এটি ওভাররাইড করতে পারে।',
 	'Show the print button on the viewer toolbar. Individual embeds can override this with print="false".': 'ভিউয়ার টুলবারে প্রিন্ট বাটন দেখান। আলাদা এমবেড print="false" দিয়ে এটি ওভাররাইড করতে পারে।',
 	'Make embedded PDFs findable in WordPress search and nicer when a page is shared.': 'এমবেড করা PDF ওয়ার্ডপ্রেস সার্চে খুঁজে পাওয়া যাক, আর পেজ শেয়ার করলে প্রিভিউ ভালো দেখাক।',
-	'Include text from embedded PDFs in WordPress site search (and in the document library search). Visit Foliora → Documents to extract text.': 'এমবেড করা PDF-এর টেক্সট ওয়ার্ডপ্রেস সাইট সার্চে (এবং ডকুমেন্ট লাইব্রেরি সার্চে) রাখুন। টেক্সট এক্সট্র্যাক্ট করতে Foliora → ডকুমেন্টস খুলুন।',
-	'Use the PDF first-page thumbnail as the Open Graph / Twitter image when a post or page embeds Foliora and no SEO plugin already set an image.': 'কোনো পোস্ট বা পেজে Foliora এমবেড থাকলে এবং SEO প্লাগিন ইতিমধ্যে ছবি সেট না করলে PDF-এর প্রথম পাতার থাম্বনেইল Open Graph / Twitter ছবি হিসেবে ব্যবহার করুন।',
-	'Warn on Foliora → Documents when a PDF is not tagged. Tagged PDFs include structure (headings, reading order) that screen readers can follow.': 'PDF ট্যাগড না হলে Foliora → ডকুমেন্টসে সতর্ক করুন। ট্যাগড PDF-এ স্ক্রিন রিডার অনুসরণ করতে পারে এমন গঠন (শিরোনাম, পড়ার ক্রম) থাকে।',
+	'Include text from embedded PDFs in WordPress site search (and in the document library search). Visit Flipset → Documents to extract text.': 'এমবেড করা PDF-এর টেক্সট ওয়ার্ডপ্রেস সাইট সার্চে (এবং ডকুমেন্ট লাইব্রেরি সার্চে) রাখুন। টেক্সট এক্সট্র্যাক্ট করতে Flipset → ডকুমেন্টস খুলুন।',
+	'Use the PDF first-page thumbnail as the Open Graph / Twitter image when a post or page embeds Flipset and no SEO plugin already set an image.': 'কোনো পোস্ট বা পেজে Flipset এমবেড থাকলে এবং SEO প্লাগিন ইতিমধ্যে ছবি সেট না করলে PDF-এর প্রথম পাতার থাম্বনেইল Open Graph / Twitter ছবি হিসেবে ব্যবহার করুন।',
+	'Warn on Flipset → Documents when a PDF is not tagged. Tagged PDFs include structure (headings, reading order) that screen readers can follow.': 'PDF ট্যাগড না হলে Flipset → ডকুমেন্টসে সতর্ক করুন। ট্যাগড PDF-এ স্ক্রিন রিডার অনুসরণ করতে পারে এমন গঠন (শিরোনাম, পড়ার ক্রম) থাকে।',
 	'Embed PDFs with a bundled viewer. No CDN, no account, no API keys.': 'বান্ডেল করা ভিউয়ার দিয়ে PDF এমবেড করুন। কোনো CDN, অ্যাকাউন্ট বা API কী লাগে না।',
 	'Pro active': 'Pro চালু',
 	'Plain permalinks — share links need Post name': 'সাধারণ পারমালিংক — শেয়ার লিংকের জন্য Post name লাগে',
@@ -126,7 +126,7 @@ const t = {
 	'Browse Media Library': 'মিডিয়া লাইব্রেরি খুলুন',
 	'Recent': 'সাম্প্রতিক',
 	'Viewer defaults': 'ভিউয়ার ডিফল্ট',
-	'Foliora Pro': 'Foliora Pro',
+	'Flipset Pro': 'Flipset Pro',
 	'Unlocked on this site. Open a tile for details.': 'এই সাইটে আনলক। বিস্তারিত জানতে একটি টালি খুলুন।',
 	'Optional add-on. Open a tile to see what it adds.': 'ঐচ্ছিক অ্যাড-অন। কী যোগ করে তা দেখতে একটি টালি খুলুন।',
 	'Active': 'সক্রিয়',
@@ -138,7 +138,7 @@ const t = {
 	'Open Documents': 'ডকুমেন্টস খুলুন',
 	'Upload a PDF to see a live preview of these defaults.': 'এই ডিফল্টগুলোর লাইভ প্রিভিউ দেখতে একটি PDF আপলোড করুন।',
 	'Upload PDF': 'PDF আপলোড',
-	'PDFs already in the Media Library. Copy a shortcode to embed one with Foliora — files stay in Media, not in a separate library. Opening this screen generates first-page thumbnails, extracts PDF text for WordPress search, and checks whether each file is a tagged (accessible) PDF.': 'মিডিয়া লাইব্রেরিতে যে PDF আছে। Foliora দিয়ে এমবেড করতে শর্টকোড কপি করুন — ফাইল মিডিয়াতেই থাকে, আলাদা লাইব্রেরিতে নয়। এই স্ক্রিন খুললে প্রথম পাতার থাম্বনেইল তৈরি হয়, ওয়ার্ডপ্রেস সার্চের জন্য PDF টেক্সট এক্সট্র্যাক্ট হয়, এবং প্রতিটি ফাইল ট্যাগড (অ্যাকসেসিবল) PDF কি না তা যাচাই হয়।',
+	'PDFs already in the Media Library. Copy a shortcode to embed one with Flipset — files stay in Media, not in a separate library. Opening this screen generates first-page thumbnails, extracts PDF text for WordPress search, and checks whether each file is a tagged (accessible) PDF.': 'মিডিয়া লাইব্রেরিতে যে PDF আছে। Flipset দিয়ে এমবেড করতে শর্টকোড কপি করুন — ফাইল মিডিয়াতেই থাকে, আলাদা লাইব্রেরিতে নয়। এই স্ক্রিন খুললে প্রথম পাতার থাম্বনেইল তৈরি হয়, ওয়ার্ডপ্রেস সার্চের জন্য PDF টেক্সট এক্সট্র্যাক্ট হয়, এবং প্রতিটি ফাইল ট্যাগড (অ্যাকসেসিবল) PDF কি না তা যাচাই হয়।',
 	'Generating thumbnails, indexing PDF text, and checking accessibility tags…': 'থাম্বনেইল তৈরি, PDF টেক্সট ইনডেক্স, এবং অ্যাকসেসিবিলিটি ট্যাগ যাচাই চলছে…',
 	'Search documents': 'ডকুমেন্ট খুঁজুন',
 	'Search': 'সার্চ',
@@ -155,7 +155,7 @@ const t = {
 	'No PDFs matched that search.': 'সেই সার্চে কোনো PDF মেলেনি।',
 	'No PDFs in the Media Library yet.': 'মিডিয়া লাইব্রেরিতে এখনো কোনো PDF নেই।',
 	'Select a PDF first.': 'আগে একটি PDF বেছে নিন।',
-	'Foliora Test': 'Foliora টেস্ট',
+	'Flipset Test': 'Flipset টেস্ট',
 	'Open EPUB files in the same embed, not just PDF.': 'শুধু PDF নয়, একই এমবেডে EPUB ফাইলও খুলুন।',
 	'Page-turn animation for a magazine-style read.': 'ম্যাগাজিন-স্টাইল পড়ার জন্য পাতা ওল্টানো অ্যানিমেশন।',
 	'Logged-in readers can resume where they left off.': 'লগইন করা পাঠক যেখানে থেমেছিলেন সেখান থেকে চালিয়ে যেতে পারেন।',
@@ -163,10 +163,10 @@ const t = {
 	'Password, expiry, and view-capped share URLs.': 'পাসওয়ার্ড, মেয়াদ ও ভিউ-সীমাযুক্ত শেয়ার URL।',
 	'Limit documents to paying WooCommerce customers.': 'পেইং WooCommerce কাস্টমারদের জন্য ডকুমেন্ট সীমিত করুন।',
 	'See which documents get opened and how far.': 'কোন ডকুমেন্ট খোলা হয় এবং কতদূর পড়া হয় তা দেখুন।',
-	'Hide “Powered by Foliora” on the public viewer.': 'পাবলিক ভিউয়ার থেকে “Powered by Foliora” লুকান।',
+	'Hide “Powered by Flipset” on the public viewer.': 'পাবলিক ভিউয়ার থেকে “Powered by Flipset” লুকান।',
 	'PDF': 'PDF',
 	'PDF URL': 'PDF URL',
-	'Paste a Media Library PDF URL, or copy one from Foliora → Documents.': 'মিডিয়া লাইব্রেরির PDF URL পেস্ট করুন, অথবা Foliora → ডকুমেন্টস থেকে কপি করুন।',
+	'Paste a Media Library PDF URL, or copy one from Flipset → Documents.': 'মিডিয়া লাইব্রেরির PDF URL পেস্ট করুন, অথবা Flipset → ডকুমেন্টস থেকে কপি করুন।',
 	'Library': 'লাইব্রেরি',
 	'Search documents…': 'ডকুমেন্ট খুঁজুন…',
 	'Previous': 'আগের',
@@ -178,21 +178,21 @@ const t = {
 	'Reader font & custom color themes': 'রিডার ফন্ট ও কাস্টম কালার থিম',
 	'Reader font family, size, line height controls, and custom color themes.': 'রিডার ফন্ট ফ্যামিলি, সাইজ, লাইন হাইট কন্ট্রোল এবং কাস্টম কালার থিম।',
 	'Direct PDF auto-embed': 'সরাসরি PDF অটো-এমবেড',
-	'Automatically convert standalone .pdf URLs pasted on their own line into an interactive Foliora viewer.': 'নতুন লাইনে পেস্ট করা যেকোনো সরাসরি .pdf URL স্বয়ংক্রিয়ভাবে ইন্টারেক্টিভ Foliora ভিউয়ারে রূপান্তর করুন।',
+	'Automatically convert standalone .pdf URLs pasted on their own line into an interactive Flipset viewer.': 'নতুন লাইনে পেস্ট করা যেকোনো সরাসরি .pdf URL স্বয়ংক্রিয়ভাবে ইন্টারেক্টিভ Flipset ভিউয়ারে রূপান্তর করুন।',
 	'Saved embed #%d': 'সংরক্ষিত এমবেড #%d',
 	'Using saved embed #%d. Attributes below override saved defaults.': 'সংরক্ষিত এমবেড #%d ব্যবহার করা হচ্ছে। নিচের অ্যাট্রিবিউটগুলো সংরক্ষিত মান ওভাররাইড করবে।',
-	'Configured in Foliora → Embed Builder. The front end will display the full interactive viewer.': 'Foliora → এমবেড বিল্ডারে কনফিগার করা হয়েছে। ফ্রন্টএন্ডে সম্পূর্ণ ইন্টারেক্টিভ ভিউয়ার প্রদর্শিত হবে।',
+	'Configured in Flipset → Embed Builder. The front end will display the full interactive viewer.': 'Flipset → এমবেড বিল্ডারে কনফিগার করা হয়েছে। ফ্রন্টএন্ডে সম্পূর্ণ ইন্টারেক্টিভ ভিউয়ার প্রদর্শিত হবে।',
 	'Password-protected / expiring links': 'পাসওয়ার্ড-সুরক্ষিত / মেয়াদোত্তীর্ণ লিংক',
 	'WooCommerce paid-content gating': 'WooCommerce পেইড-কন্টেন্ট গেটিং',
 	'Reading analytics': 'রিডিং অ্যানালিটিক্স',
-	'Remove Foliora branding': 'Foliora ব্র্যান্ডিং সরান',
+	'Remove Flipset branding': 'Flipset ব্র্যান্ডিং সরান',
 	'PDF text indexing is turned off.': 'PDF টেক্সট ইনডেক্সিং বন্ধ আছে।',
 	'Invalid thumbnail data.': 'থাম্বনেইল ডেটা অবৈধ।',
 	'Thumbnail is too large.': 'থাম্বনেইল খুব বড়।',
-	'Foliora thumbnail: %s': 'Foliora থাম্বনেইল: %s',
+	'Flipset thumbnail: %s': 'Flipset থাম্বনেইল: %s',
 	'Could not save the thumbnail.': 'থাম্বনেইল সেভ করা যায়নি।',
-	'Foliora: no file URL was provided. Use [foliora file="https://example.com/document.pdf"].': 'Foliora: কোনো ফাইল URL দেওয়া হয়নি। ব্যবহার করুন [foliora file="https://example.com/document.pdf"]।',
-	'Powered by Foliora': 'Powered by Foliora',
+	'Flipset: no file URL was provided. Use [flipset file="https://example.com/document.pdf"].': 'Flipset: কোনো ফাইল URL দেওয়া হয়নি। ব্যবহার করুন [flipset file="https://example.com/document.pdf"]।',
+	'Powered by Flipset': 'Powered by Flipset',
 	'PDF viewer': 'PDF ভিউয়ার',
 	'Previous page': 'আগের পাতা',
 	'Page': 'পাতা',
@@ -208,7 +208,7 @@ const t = {
 	'Print': 'প্রিন্ট',
 	'Full screen': 'ফুল স্ক্রিন',
 	'Keyboard: left and right arrows change page, plus and minus zoom, R rotates, Home and End jump to first or last page.': 'কীবোর্ড: বাম ও ডান অ্যারো পাতা বদলায়, প্লাস ও মাইনাস জুম করে, R ঘোরায়, Home ও End প্রথম বা শেষ পাতায় যায়।',
-	'is a Foliora Pro feature.': 'একটি Foliora Pro ফিচার।',
+	'is a Flipset Pro feature.': 'একটি Flipset Pro ফিচার।',
 	'Upgrade to unlock': 'আনলক করতে আপগ্রেড করুন',
 	'Viewer Settings': 'ভিউয়ার সেটিংস',
 	'CSS width, for example 100% or 720px.': 'CSS প্রস্থ, যেমন 100% বা 720px।',
@@ -217,7 +217,7 @@ const t = {
 	'Show download': 'ডাউনলোড দেখান',
 	'Show print': 'প্রিন্ট দেখান',
 	'Replace PDF': 'PDF বদলান',
-	'Select a PDF to preview the first page here. Visitors will see the full Foliora viewer.': 'এখানে প্রথম পাতার প্রিভিউ দেখতে একটি PDF বেছে নিন। ভিজিটররা পুরো Foliora ভিউয়ার দেখবে।',
+	'Select a PDF to preview the first page here. Visitors will see the full Flipset viewer.': 'এখানে প্রথম পাতার প্রিভিউ দেখতে একটি PDF বেছে নিন। ভিজিটররা পুরো Flipset ভিউয়ার দেখবে।',
 	'Library Settings': 'লাইব্রেরি সেটিংস',
 	'Documents per page': 'প্রতি পাতায় ডকুমেন্ট',
 	'Last modified': 'শেষ পরিবর্তন',
@@ -227,7 +227,7 @@ const t = {
 	'library': 'library',
 	'gallery': 'gallery',
 	'documents': 'documents',
-	'Embed a PDF document with the Foliora viewer.': 'Foliora ভিউয়ার দিয়ে একটি PDF ডকুমেন্ট এমবেড করুন।',
+	'Embed a PDF document with the Flipset viewer.': 'Flipset ভিউয়ার দিয়ে একটি PDF ডকুমেন্ট এমবেড করুন।',
 	'document': 'document',
 	'viewer': 'viewer',
 	'ebook': 'ebook',
@@ -281,8 +281,8 @@ const header = `# Copyright (C) 2026 The Read Scope
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Foliora 1.0.0\\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/foliora\\n"
+"Project-Id-Version: Flipset 1.0.0\\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/flipset\\n"
 "POT-Creation-Date: 2026-09-24T04:54:10+00:00\\n"
 "PO-Revision-Date: 2026-09-24 10:55+0600\\n"
 "Last-Translator: The Read Scope <hello@thereadscope.com>\\n"
@@ -292,14 +292,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\\n"
 "Content-Transfer-Encoding: 8bit\\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\\n"
-"X-Generator: Foliora\\n"
-"X-Domain: foliora\\n"
+"X-Generator: Flipset\\n"
+"X-Domain: flipset\\n"
 `;
 
 // Strings added after the first release live in bn-extra.json so this file stays small.
 Object.assign( t, JSON.parse( fs.readFileSync( path.join( root, 'bin', 'bn-extra.json' ), 'utf8' ) ) );
 
-const potBody = pot.replace( /^[\s\S]*?X-Domain: foliora\\n"\n/, '' );
+const potBody = pot.replace( /^[\s\S]*?X-Domain: flipset\\n"\n/, '' );
 const blocks = parseBlocks( potBody );
 const missing = [];
 const out = [ header.trim(), '' ];
@@ -357,5 +357,5 @@ if ( missing.length ) {
 	process.exit( 1 );
 }
 
-fs.writeFileSync( path.join( root, 'translations-src', 'foliora-bn_BD.po' ), out.join( '\n' ) + '\n', 'utf8' );
-console.log( 'Wrote foliora-bn_BD.po', blocks.length, 'entries' );
+fs.writeFileSync( path.join( root, 'translations-src', 'flipset-bn_BD.po' ), out.join( '\n' ) + '\n', 'utf8' );
+console.log( 'Wrote flipset-bn_BD.po', blocks.length, 'entries' );

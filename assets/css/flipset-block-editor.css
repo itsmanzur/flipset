@@ -1,0 +1,48 @@
+.flipset-block-editor-preview {
+	padding: 16px;
+	border: 1px dashed #c3c4c7;
+	border-radius: 8px;
+	background: #f6f7f7;
+}
+
+.flipset-block-editor-preview.is-selected-file {
+	border-style: solid;
+	background: #2c3338;
+	padding: 0;
+	overflow: hidden;
+}
+
+.flipset-block-preview-canvas {
+	display: block;
+	width: 100%;
+	height: auto;
+	max-height: 480px;
+	object-fit: contain;
+	background: #3c434a;
+}
+
+.flipset-block-editor-bar {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 12px;
+	background: #1d2327;
+}
+
+.flipset-block-editor-bar .components-button {
+	color: #f0f0f1;
+}
+
+.flipset-block-editor-filename {
+	margin: 0;
+	font-size: 12px;
+	color: #c3c4c7;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.flipset-block-editor-placeholder {
+	margin: 8px 0 0;
+	color: #646970;
+}

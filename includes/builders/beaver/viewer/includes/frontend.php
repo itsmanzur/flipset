@@ -1,15 +1,15 @@
 <?php
 /**
- * Beaver Builder frontend: Foliora Viewer.
+ * Beaver Builder frontend: Flipset Viewer.
  *
- * @package Foliora
+ * @package Flipset
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$foliora_atts = array(
+$flipset_atts = array(
 	'file'     => isset( $settings->file ) ? esc_url_raw( $settings->file ) : '',
 	'width'    => isset( $settings->width ) ? sanitize_text_field( (string) $settings->width ) : '100%',
 	'height'   => isset( $settings->height ) ? sanitize_text_field( (string) $settings->height ) : '600px',
@@ -19,4 +19,4 @@ $foliora_atts = array(
 	'print'    => isset( $settings->print ) ? sanitize_text_field( (string) $settings->print ) : 'true',
 );
 
-echo wp_kses( Foliora::instance()->viewer->render_shortcode( $foliora_atts ), Foliora_Viewer::allowed_html() );
+echo wp_kses( Flipset::instance()->viewer->render_shortcode( $flipset_atts ), Flipset_Viewer::allowed_html() );

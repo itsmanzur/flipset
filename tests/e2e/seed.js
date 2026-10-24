@@ -25,7 +25,7 @@ function wp( args ) {
 }
 
 function seed() {
-	const pdf = '/var/www/html/wp-content/plugins/foliora/tests/fixtures/sample.pdf';
+	const pdf = '/var/www/html/wp-content/plugins/flipset/tests/fixtures/sample.pdf';
 	const attachmentId = wp( `media import ${ pdf } --porcelain` );
 	if ( ! /^\d+$/.test( attachmentId ) ) {
 		throw new Error( `Could not import sample PDF (got: ${ attachmentId })` );
@@ -44,8 +44,8 @@ function seed() {
 		);
 	}
 
-	upsertPage( 'foliora-e2e-viewer', 'Foliora E2E Viewer', `[foliora file="${ url }"]` );
-	upsertPage( 'foliora-e2e-library', 'Foliora E2E Library', '[foliora_library]' );
+	upsertPage( 'flipset-e2e-viewer', 'Flipset E2E Viewer', `[flipset file="${ url }"]` );
+	upsertPage( 'flipset-e2e-library', 'Flipset E2E Library', '[flipset_library]' );
 	wp( 'rewrite structure "/%postname%/" --hard' );
 }
 

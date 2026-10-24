@@ -1,11 +1,11 @@
-# Foliora Product Roadmap: Masterpiece Edition
+# Flipset Product Roadmap: Masterpiece Edition
 **Next-Generation PDF Reader & 3D Interactive FlipBook for WordPress**
 
 ---
 
 ## 🎯 Product Vision
-Foliora-কে WordPress ইকোসিস্টেমের সবচেয়ে দ্রুতগতির, দৃষ্টিনন্দন এবং ইউজার-ফ্রেন্ডলি PDF ও 3D FlipBook প্লাগিন হিসেবে প্রতিষ্ঠিত করা। 
-- **Free Version Strategy:** ফ্রি ভার্সনটি এত কোয়ালিটি সম্পন্ন এবং স্মুথ হবে যেন ব্যবহারকারীরা অন্য পেইড প্লাগিন বাদ দিয়ে Foliora বেছে নেয় এবং দ্রুত ৫-স্টার রেটিং ও ইনস্টল বৃদ্ধি পায়।
+Flipset-কে WordPress ইকোসিস্টেমের সবচেয়ে দ্রুতগতির, দৃষ্টিনন্দন এবং ইউজার-ফ্রেন্ডলি PDF ও 3D FlipBook প্লাগিন হিসেবে প্রতিষ্ঠিত করা। 
+- **Free Version Strategy:** ফ্রি ভার্সনটি এত কোয়ালিটি সম্পন্ন এবং স্মুথ হবে যেন ব্যবহারকারীরা অন্য পেইড প্লাগিন বাদ দিয়ে Flipset বেছে নেয় এবং দ্রুত ৫-স্টার রেটিং ও ইনস্টল বৃদ্ধি পায়।
 - **Pro Version Strategy:** এজেন্সি, বিজনেস, পাবলিশার ও কোর্স ক্রিয়েটরদের জন্য হাই-ভ্যালু লিড ক্যাপচার, পাইরেসি প্রটেকশন, ভার্চুয়াল বুকশেলফ ও অ্যানালিটিক্স ফিচার প্রদান করে প্রিমিয়ামে রূপান্তর নিশ্চিত করা।
 
 ---
@@ -25,7 +25,7 @@ Foliora-কে WordPress ইকোসিস্টেমের সবচেয়
 | **Viewer** | **Toolbar Essentials** | Zoom In/Out, Search/Find Text, Rotate, Pan/Hand tool, Fullscreen, Present Mode, Download, Print, Share। | ✅ Done |
 | **Viewer** | **Bookmarks & Outline** | PDF-এর নিজস্ব সূচিপত্র (Table of Contents) প্যানেল। | 🔄 Enhancing |
 | **Viewer** | **Thumbnail Strip Drawer** | সব পাতার ভিজ্যুয়াল প্রিভিউ ড্রয়ার। | 🔄 Next Step |
-| **Builder** | **Clean Shortcode** | ডাটাবেস-ব্যাকড `[foliora id="1"]` শর্টকোড জেনারেশন। | ✅ Done |
+| **Builder** | **Clean Shortcode** | ডাটাবেস-ব্যাকড `[flipset id="1"]` শর্টকোড জেনারেশন। | ✅ Done |
 | **Builder** | **Saved Embeds Manager** | সব সংরক্ষিত এমবেডের তালিকা, সার্চ, ১-ক্লিক কপি, ডুপ্লিকেট ও এডিট সুবিধা। | ✅ Done |
 | **Builder** | **Live Real-Time Preview** | বিল্ডারে সেটিংস পরিবর্তনের সাথে সাথে ডানপাশে লাইভ প্রিভিউ আপডেট। | ✅ Done |
 | **Builder** | **1-Click Presets** | FlipBook, E-Book, Corporate Report, Night Reader, View Only, Speed Optimized প্রিসেট। | ✅ Done |
@@ -66,4 +66,4 @@ Foliora-কে WordPress ইকোসিস্টেমের সবচেয়
    - [ ] লোডিং অ্যানিমেশন আরও প্রিমিয়াম ও স্লিক করা।
 
 ---
-*Created on: 2026-10-03 | Foliora Core Engineering*
+*Created on: 2026-10-03 | Flipset Core Engineering*

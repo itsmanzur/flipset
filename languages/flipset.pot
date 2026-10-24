@@ -1,0 +1,2795 @@
+# Copyright (C) 2026 itsmanzur
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Flipset – PDF Viewer, PDF Embed, 3D Flipbook & Document Library 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/flipset\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-10-24T06:47:02+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: flipset\n"
+
+#. Plugin Name of the plugin
+#: flipset.php
+msgid "Flipset – PDF Viewer, PDF Embed, 3D Flipbook & Document Library"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: flipset.php
+msgid "https://flipset.thereadscope.com"
+msgstr ""
+
+#. Description of the plugin
+#: flipset.php
+msgid "Embed PDFs with a fast PDF viewer, 3D flipbook and document library. Searchable PDF text, accessible, no CDN. Works with Gutenberg, Elementor, Divi."
+msgstr ""
+
+#. Author of the plugin
+#: flipset.php
+msgid "itsmanzur"
+msgstr ""
+
+#. Author URI of the plugin
+#: flipset.php
+msgid "https://thereadscope.com"
+msgstr ""
+
+#: includes/builders/class-flipset-beaver-library.php:17
+#: includes/builders/class-flipset-divi-library.php:39
+#: includes/builders/class-flipset-elementor-library.php:19
+msgid "Flipset Library"
+msgstr ""
+
+#: includes/builders/class-flipset-beaver-library.php:18
+msgid "A grid of Media Library PDFs."
+msgstr ""
+
+#: includes/builders/class-flipset-beaver-library.php:19
+#: includes/builders/class-flipset-beaver-viewer.php:19
+#: includes/class-flipset-admin.php:72
+#: includes/class-flipset-admin.php:73
+#: includes/class-flipset-admin.php:700
+#: includes/class-flipset-admin.php:1529
+#: includes/class-flipset-builders.php:36
+msgid "Flipset"
+msgstr ""
+
+#: includes/builders/class-flipset-beaver-library.php:20
+#: includes/builders/class-flipset-beaver-viewer.php:20
+msgid "Media"
+msgstr ""
+
+#: includes/builders/class-flipset-beaver-viewer.php:17
+#: includes/builders/class-flipset-divi-viewer.php:39
+#: includes/builders/class-flipset-elementor-viewer.php:19
+msgid "Flipset Viewer"
+msgstr ""
+
+#: includes/builders/class-flipset-beaver-viewer.php:18
+msgid "Embed a PDF with the Flipset viewer."
+msgstr ""
+
+#: includes/builders/class-flipset-divi-library.php:43
+#: includes/builders/class-flipset-elementor-library.php:38
+#: includes/class-flipset-builders.php:173
+msgid "Grid"
+msgstr ""
+
+#: includes/builders/class-flipset-divi-library.php:52
+#: includes/builders/class-flipset-elementor-library.php:45
+#: includes/class-flipset-builders.php:177
+#: assets/js/flipset-library-block.js:34
+msgid "Columns"
+msgstr ""
+
+#: includes/builders/class-flipset-divi-library.php:67
+#: includes/builders/class-flipset-elementor-library.php:62
+#: includes/class-flipset-builders.php:190
+msgid "Per page"
+msgstr ""
+
+#: includes/builders/class-flipset-divi-library.php:74
+#: includes/builders/class-flipset-elementor-library.php:73
+#: includes/class-flipset-builders.php:195
+#: assets/js/flipset-library-block.js:52
+msgid "Order by"
+msgstr ""
+
+#: includes/builders/class-flipset-divi-library.php:77
+#: includes/builders/class-flipset-elementor-library.php:77
+#: includes/class-flipset-admin.php:2245
+#: includes/class-flipset-builders.php:198
+#: assets/js/flipset-library-block.js:55
+msgid "Date"
+msgstr ""
+
+#: includes/builders/class-flipset-divi-library.php:78
+#: includes/builders/class-flipset-elementor-library.php:78
+#: includes/class-flipset-builders.php:199
+#: assets/js/flipset-block.js:123
+#: assets/js/flipset-library-block.js:56
+msgid "Title"
+msgstr ""
+
+#: includes/builders/class-flipset-divi-library.php:79
+#: includes/builders/class-flipset-elementor-library.php:79
+#: includes/class-flipset-builders.php:200
+msgid "Modified"
+msgstr ""
+
+#: includes/builders/class-flipset-divi-library.php:86
+#: includes/builders/class-flipset-elementor-library.php:87
+#: includes/class-flipset-builders.php:205
+#: assets/js/flipset-library-block.js:64
+msgid "Order"
+msgstr ""
+
+#: includes/builders/class-flipset-divi-library.php:89
+#: includes/builders/class-flipset-elementor-library.php:91
+#: includes/class-flipset-builders.php:208
+#: assets/js/flipset-library-block.js:67
+msgid "Newest first"
+msgstr ""
+
+#: includes/builders/class-flipset-divi-library.php:90
+#: includes/builders/class-flipset-elementor-library.php:92
+#: includes/class-flipset-builders.php:209
+#: assets/js/flipset-library-block.js:68
+msgid "Oldest first"
+msgstr ""
+
+#: includes/builders/class-flipset-divi-library.php:97
+#: includes/builders/class-flipset-elementor-library.php:100
+#: includes/class-flipset-builders.php:214
+msgid "Search box"
+msgstr ""
+
+#: includes/builders/class-flipset-divi-library.php:100
+#: includes/builders/class-flipset-divi-viewer.php:95
+#: includes/builders/class-flipset-divi-viewer.php:106
+#: includes/builders/class-flipset-elementor-library.php:102
+#: includes/builders/class-flipset-elementor-viewer.php:103
+#: includes/builders/class-flipset-elementor-viewer.php:115
+#: includes/class-flipset-admin.php:2522
+#: includes/class-flipset-builders.php:146
+#: includes/class-flipset-builders.php:155
+#: includes/class-flipset-builders.php:217
+msgid "Show"
+msgstr ""
+
+#: includes/builders/class-flipset-divi-library.php:101
+#: includes/builders/class-flipset-divi-viewer.php:96
+#: includes/builders/class-flipset-divi-viewer.php:107
+#: includes/builders/class-flipset-elementor-library.php:103
+#: includes/builders/class-flipset-elementor-viewer.php:104
+#: includes/builders/class-flipset-elementor-viewer.php:116
+#: includes/class-flipset-admin.php:2522
+#: includes/class-flipset-admin.php:2523
+#: includes/class-flipset-builders.php:147
+#: includes/class-flipset-builders.php:156
+#: includes/class-flipset-builders.php:218
+msgid "Hide"
+msgstr ""
+
+#: includes/builders/class-flipset-divi-viewer.php:45
+#: includes/builders/class-flipset-elementor-viewer.php:38
+#: includes/class-flipset-admin.php:2653
+#: includes/class-flipset-builders.php:103
+msgid "Document"
+msgstr ""
+
+#: includes/builders/class-flipset-divi-viewer.php:46
+#: includes/builders/class-flipset-elementor-viewer.php:76
+#: includes/class-flipset-builders.php:129
+msgid "Layout"
+msgstr ""
+
+#: includes/builders/class-flipset-divi-viewer.php:55
+#: includes/builders/class-flipset-elementor-viewer.php:45
+msgid "PDF file"
+msgstr ""
+
+#: includes/builders/class-flipset-divi-viewer.php:58
+msgid "Select a PDF"
+msgstr ""
+
+#: includes/builders/class-flipset-divi-viewer.php:59
+msgid "Choose a PDF"
+msgstr ""
+
+#: includes/builders/class-flipset-divi-viewer.php:60
+msgid "Set as PDF"
+msgstr ""
+
+#: includes/builders/class-flipset-divi-viewer.php:61
+msgid "Select a PDF from the Media Library. If the upload picker shows images only, paste the PDF URL instead."
+msgstr ""
+
+#: includes/builders/class-flipset-divi-viewer.php:65
+#: includes/builders/class-flipset-elementor-viewer.php:55
+#: includes/class-flipset-builders.php:113
+msgid "Title caption"
+msgstr ""
+
+#: includes/builders/class-flipset-divi-viewer.php:71
+#: includes/builders/class-flipset-elementor-viewer.php:64
+#: includes/class-flipset-builders.php:118
+#: assets/js/flipset-block.js:131
+msgid "Start page"
+msgstr ""
+
+#: includes/builders/class-flipset-divi-viewer.php:78
+#: includes/builders/class-flipset-elementor-viewer.php:83
+#: includes/class-flipset-builders.php:133
+#: assets/js/flipset-block.js:105
+msgid "Width"
+msgstr ""
+
+#: includes/builders/class-flipset-divi-viewer.php:85
+#: includes/builders/class-flipset-elementor-viewer.php:92
+#: includes/class-flipset-builders.php:138
+msgid "Height"
+msgstr ""
+
+#: includes/builders/class-flipset-divi-viewer.php:92
+#: includes/builders/class-flipset-elementor-viewer.php:101
+#: includes/class-flipset-admin.php:363
+#: includes/class-flipset-admin.php:1070
+#: includes/class-flipset-builders.php:143
+msgid "Download button"
+msgstr ""
+
+#: includes/builders/class-flipset-divi-viewer.php:103
+#: includes/builders/class-flipset-elementor-viewer.php:113
+#: includes/class-flipset-admin.php:371
+#: includes/class-flipset-admin.php:1076
+#: includes/class-flipset-builders.php:152
+msgid "Print button"
+msgstr ""
+
+#: includes/builders/class-flipset-elementor-viewer.php:48
+msgid "Choose a PDF from the Media Library."
+msgstr ""
+
+#: includes/class-flipset-a11y.php:72
+#: includes/class-flipset-a11y.php:87
+#: includes/class-flipset-admin.php:3489
+#: includes/class-flipset-admin.php:3505
+#: includes/class-flipset-admin.php:3568
+#: includes/class-flipset-seo.php:69
+#: includes/class-flipset-seo.php:84
+#: includes/class-flipset-thumbnails.php:67
+#: includes/class-flipset-thumbnails.php:78
+msgid "Forbidden."
+msgstr ""
+
+#: includes/class-flipset-a11y.php:76
+msgid "PDF accessibility checks are turned off."
+msgstr ""
+
+#: includes/class-flipset-a11y.php:83
+#: includes/class-flipset-seo.php:80
+#: includes/class-flipset-thumbnails.php:74
+msgid "That file is not a PDF attachment."
+msgstr ""
+
+#: includes/class-flipset-admin.php:83
+msgid "Flipset Dashboard"
+msgstr ""
+
+#: includes/class-flipset-admin.php:84
+msgid "Dashboard"
+msgstr ""
+
+#: includes/class-flipset-admin.php:92
+msgid "Flipset Shortcode Builder"
+msgstr ""
+
+#: includes/class-flipset-admin.php:93
+#: includes/class-flipset-admin.php:743
+#: includes/class-flipset-admin.php:1830
+#: includes/class-flipset-admin.php:2532
+msgid "Shortcode Builder"
+msgstr ""
+
+#: includes/class-flipset-admin.php:101
+msgid "Flipset Docs & Features"
+msgstr ""
+
+#: includes/class-flipset-admin.php:102
+#: includes/class-flipset-admin.php:746
+#: includes/class-flipset-admin.php:2475
+msgid "Docs & Features"
+msgstr ""
+
+#: includes/class-flipset-admin.php:110
+msgid "Flipset Settings"
+msgstr ""
+
+#: includes/class-flipset-admin.php:111
+#: includes/class-flipset-admin.php:1531
+#: includes/class-flipset-admin.php:1534
+msgid "Settings"
+msgstr ""
+
+#: includes/class-flipset-admin.php:218
+#: includes/class-flipset-admin.php:2721
+msgid "Indexed"
+msgstr ""
+
+#: includes/class-flipset-admin.php:219
+#: includes/class-flipset-admin.php:2723
+msgid "No text"
+msgstr ""
+
+#: includes/class-flipset-admin.php:220
+#: includes/class-flipset-admin.php:2732
+msgid "Tagged"
+msgstr ""
+
+#: includes/class-flipset-admin.php:221
+#: includes/class-flipset-admin.php:2737
+msgid "Untagged"
+msgstr ""
+
+#: includes/class-flipset-admin.php:222
+#: includes/class-flipset-admin.php:2736
+msgid "This PDF has no accessibility tags. Export it from Word, InDesign, or Acrobat as a tagged PDF so screen readers can follow headings and reading order."
+msgstr ""
+
+#: includes/class-flipset-admin.php:223
+#: includes/class-flipset-admin.php:2732
+msgid "Tagged PDF. Screen readers can follow its structure."
+msgstr ""
+
+#: includes/class-flipset-admin.php:224
+#: includes/class-flipset-admin.php:2721
+msgid "Text extracted. WordPress search can find words in this PDF."
+msgstr ""
+
+#: includes/class-flipset-admin.php:225
+#: includes/class-flipset-admin.php:2723
+msgid "No selectable text was found (a scanned image PDF), so it cannot be searched."
+msgstr ""
+
+#: includes/class-flipset-admin.php:250
+#: assets/js/flipset-block.js:248
+msgid "Select PDF"
+msgstr ""
+
+#: includes/class-flipset-admin.php:251
+msgid "Use this PDF"
+msgstr ""
+
+#: includes/class-flipset-admin.php:252
+msgid "Copied!"
+msgstr ""
+
+#: includes/class-flipset-admin.php:253
+msgid "Shortcode copied"
+msgstr ""
+
+#: includes/class-flipset-admin.php:254
+msgid "Code snippet copied to clipboard"
+msgstr ""
+
+#: includes/class-flipset-admin.php:255
+msgid "Dismissed"
+msgstr ""
+
+#. translators: 1: completed steps, 2: total steps.
+#: includes/class-flipset-admin.php:257
+#: includes/class-flipset-admin.php:808
+#, php-format
+msgid "%1$s of %2$s steps complete"
+msgstr ""
+
+#: includes/class-flipset-admin.php:258
+#: includes/class-flipset-admin.php:805
+msgid "You are set. New documents go in Documents or the Media Library."
+msgstr ""
+
+#: includes/class-flipset-admin.php:259
+#: includes/class-flipset-admin.php:911
+msgid "Drop a PDF to embed it"
+msgstr ""
+
+#: includes/class-flipset-admin.php:260
+msgid "Uploading…"
+msgstr ""
+
+#: includes/class-flipset-admin.php:261
+msgid "Creating page…"
+msgstr ""
+
+#: includes/class-flipset-admin.php:262
+msgid "Test page ready"
+msgstr ""
+
+#: includes/class-flipset-admin.php:263
+msgid "Could not create the test page."
+msgstr ""
+
+#: includes/class-flipset-admin.php:264
+#: includes/class-flipset-admin.php:967
+#: includes/class-flipset-admin.php:2747
+#: includes/class-flipset-admin.php:2851
+msgid "Copy shortcode"
+msgstr ""
+
+#: includes/class-flipset-admin.php:265
+msgid "Please drop a PDF file."
+msgstr ""
+
+#: includes/class-flipset-admin.php:266
+msgid "Upload failed. Try the Media Library."
+msgstr ""
+
+#: includes/class-flipset-admin.php:267
+msgid "Preset applied"
+msgstr ""
+
+#: includes/class-flipset-admin.php:268
+#: includes/class-flipset-admin.php:1426
+#: includes/class-flipset-admin.php:1431
+#: includes/class-flipset-embeds.php:251
+msgid "Please select a PDF file."
+msgstr ""
+
+#: includes/class-flipset-admin.php:269
+#: includes/class-flipset-admin.php:2174
+msgid "Select or upload a PDF above to see live interactive preview."
+msgstr ""
+
+#: includes/class-flipset-admin.php:270
+msgid "Saving…"
+msgstr ""
+
+#: includes/class-flipset-admin.php:271
+#: includes/class-flipset-admin.php:2197
+msgid "Update Embed & Copy"
+msgstr ""
+
+#: includes/class-flipset-admin.php:272
+msgid "✓ Saved! Copied"
+msgstr ""
+
+#. translators: %s: shortcode that was copied.
+#: includes/class-flipset-admin.php:274
+#, php-format
+msgid "Saved! %s copied to clipboard."
+msgstr ""
+
+#: includes/class-flipset-admin.php:275
+#: includes/class-flipset-embeds.php:167
+msgid "Could not save embed."
+msgstr ""
+
+#: includes/class-flipset-admin.php:276
+msgid "Could not create test page."
+msgstr ""
+
+#. translators: %s: text that was copied.
+#: includes/class-flipset-admin.php:278
+#, php-format
+msgid "Copied: %s"
+msgstr ""
+
+#: includes/class-flipset-admin.php:279
+#: includes/class-flipset-embeds.php:335
+msgid "Embed duplicated successfully."
+msgstr ""
+
+#: includes/class-flipset-admin.php:280
+msgid "Could not duplicate embed."
+msgstr ""
+
+#. translators: %s: embed ID.
+#: includes/class-flipset-admin.php:282
+#, php-format
+msgid "Are you sure you want to delete this embed? Any shortcode using id=\"%s\" will no longer work."
+msgstr ""
+
+#: includes/class-flipset-admin.php:283
+#: includes/class-flipset-embeds.php:313
+msgid "Embed deleted."
+msgstr ""
+
+#: includes/class-flipset-admin.php:284
+#: includes/class-flipset-embeds.php:310
+msgid "Could not delete embed."
+msgstr ""
+
+#. translators: 1: number of switches turned on, 2: number of switches in the section.
+#: includes/class-flipset-admin.php:307
+#, php-format
+msgid "%1$s/%2$s on"
+msgstr ""
+
+#: includes/class-flipset-admin.php:308
+msgid "Settings saved"
+msgstr ""
+
+#: includes/class-flipset-admin.php:309
+msgid "Reset this section to the default values? Nothing is saved until you click Save changes."
+msgstr ""
+
+#: includes/class-flipset-admin.php:310
+msgid "Could not load the preview."
+msgstr ""
+
+#. translators: %s: configured viewer height, for example 600px.
+#: includes/class-flipset-admin.php:312
+#: includes/class-flipset-admin.php:1655
+#, php-format
+msgid "Height %s · scaled to fit"
+msgstr ""
+
+#: includes/class-flipset-admin.php:313
+msgid "Loading preview…"
+msgstr ""
+
+#: includes/class-flipset-admin.php:340
+msgid "Viewer Defaults"
+msgstr ""
+
+#: includes/class-flipset-admin.php:347
+#: includes/class-flipset-admin.php:1048
+msgid "Default width"
+msgstr ""
+
+#: includes/class-flipset-admin.php:355
+#: includes/class-flipset-admin.php:1054
+msgid "Default height"
+msgstr ""
+
+#: includes/class-flipset-admin.php:379
+#: includes/class-flipset-admin.php:1060
+msgid "Default theme"
+msgstr ""
+
+#: includes/class-flipset-admin.php:387
+#: includes/class-flipset-admin.php:1065
+msgid "Lazy loading"
+msgstr ""
+
+#: includes/class-flipset-admin.php:395
+#: includes/class-flipset-admin.php:1082
+#: includes/class-flipset-admin.php:1586
+msgid "Credit link"
+msgstr ""
+
+#: includes/class-flipset-admin.php:403
+msgid "Toolbar Controls"
+msgstr ""
+
+#: includes/class-flipset-admin.php:410
+#: includes/class-flipset-admin.php:1087
+msgid "Search in document"
+msgstr ""
+
+#: includes/class-flipset-admin.php:418
+#: includes/class-flipset-admin.php:1094
+msgid "Theme switcher"
+msgstr ""
+
+#: includes/class-flipset-admin.php:426
+#: includes/class-flipset-admin.php:1101
+msgid "Share button"
+msgstr ""
+
+#: includes/class-flipset-admin.php:434
+#: includes/class-flipset-admin.php:1108
+msgid "Keyboard shortcuts guide"
+msgstr ""
+
+#: includes/class-flipset-admin.php:442
+#: includes/class-flipset-admin.php:1115
+msgid "Full screen button"
+msgstr ""
+
+#: includes/class-flipset-admin.php:450
+#: includes/class-flipset-admin.php:1122
+msgid "Presentation button"
+msgstr ""
+
+#: includes/class-flipset-admin.php:458
+msgid "Search and sharing"
+msgstr ""
+
+#: includes/class-flipset-admin.php:465
+#: includes/class-flipset-admin.php:1129
+msgid "Site search"
+msgstr ""
+
+#: includes/class-flipset-admin.php:473
+#: includes/class-flipset-admin.php:1139
+msgid "Social preview"
+msgstr ""
+
+#: includes/class-flipset-admin.php:481
+#: includes/class-flipset-admin.php:1134
+msgid "Accessibility tags"
+msgstr ""
+
+#: includes/class-flipset-admin.php:489
+#: includes/class-flipset-admin.php:1144
+msgid "Direct PDF auto-embed"
+msgstr ""
+
+#: includes/class-flipset-admin.php:497
+#: includes/class-flipset-admin.php:1149
+msgid "Attachment pages"
+msgstr ""
+
+#: includes/class-flipset-admin.php:579
+#: includes/class-flipset-admin.php:1600
+msgid "Enable or disable specific buttons across all embedded PDF viewers. Individual embeds can also customize controls via the \"hide\" attribute."
+msgstr ""
+
+#: includes/class-flipset-admin.php:655
+#: includes/class-flipset-admin.php:1622
+msgid "Make embedded PDFs findable in WordPress search and nicer when a page is shared."
+msgstr ""
+
+#: includes/class-flipset-admin.php:703
+msgid "Embed PDFs with a bundled viewer. No CDN, no account, no API keys."
+msgstr ""
+
+#: includes/class-flipset-admin.php:706
+msgid "Plain permalinks — share links need Post name"
+msgstr ""
+
+#: includes/class-flipset-admin.php:726
+msgid "New Embed"
+msgstr ""
+
+#: includes/class-flipset-admin.php:730
+#: includes/class-flipset-admin.php:2592
+msgid "Documents"
+msgstr ""
+
+#: includes/class-flipset-admin.php:737
+msgid "Quick actions:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:740
+#: includes/class-flipset-admin.php:1695
+#: includes/class-flipset-admin.php:2483
+#: includes/class-flipset-admin.php:2793
+msgid "Upload PDF"
+msgstr ""
+
+#: includes/class-flipset-admin.php:744
+#: includes/class-flipset-admin.php:776
+msgid "Saved Embeds"
+msgstr ""
+
+#: includes/class-flipset-admin.php:745
+#: assets/js/flipset-block.js:100
+msgid "Viewer Settings"
+msgstr ""
+
+#: includes/class-flipset-admin.php:754
+msgid "Pick a cover on the right — or drop a PDF — then copy the shortcode."
+msgstr ""
+
+#: includes/class-flipset-admin.php:757
+msgid "Dismiss this notice."
+msgstr ""
+
+#: includes/class-flipset-admin.php:768
+msgid "PDFs"
+msgstr ""
+
+#: includes/class-flipset-admin.php:770
+#: includes/class-flipset-admin.php:778
+#: assets/js/flipset-block.js:140
+msgid "View"
+msgstr ""
+
+#: includes/class-flipset-admin.php:784
+msgid "Pages using Flipset"
+msgstr ""
+
+#: includes/class-flipset-admin.php:791
+msgid "Setup"
+msgstr ""
+
+#: includes/class-flipset-admin.php:801
+msgid "Get started"
+msgstr ""
+
+#: includes/class-flipset-admin.php:815
+msgid "Setup progress"
+msgstr ""
+
+#: includes/class-flipset-admin.php:820
+msgid "You're all set"
+msgstr ""
+
+#: includes/class-flipset-admin.php:821
+#: includes/class-flipset-admin.php:822
+msgid "Show steps"
+msgstr ""
+
+#: includes/class-flipset-admin.php:821
+msgid "Hide steps"
+msgstr ""
+
+#: includes/class-flipset-admin.php:830
+#: includes/class-flipset-library.php:256
+msgid "Upload a PDF"
+msgstr ""
+
+#: includes/class-flipset-admin.php:831
+msgid "Add a file, or drop one on the stage."
+msgstr ""
+
+#: includes/class-flipset-admin.php:834
+msgid "Upload"
+msgstr ""
+
+#: includes/class-flipset-admin.php:840
+msgid "Copy a shortcode"
+msgstr ""
+
+#: includes/class-flipset-admin.php:841
+msgid "Click the code on the stage to copy."
+msgstr ""
+
+#: includes/class-flipset-admin.php:844
+msgid "Show stage"
+msgstr ""
+
+#: includes/class-flipset-admin.php:850
+msgid "Put it on a page"
+msgstr ""
+
+#: includes/class-flipset-admin.php:851
+msgid "Publish a test page, or use the viewer block."
+msgstr ""
+
+#: includes/class-flipset-admin.php:854
+msgid "Create page"
+msgstr ""
+
+#: includes/class-flipset-admin.php:865
+msgid "Embed a document"
+msgstr ""
+
+#: includes/class-flipset-admin.php:866
+msgid "Drop a PDF, pick a cover, or browse the library."
+msgstr ""
+
+#: includes/class-flipset-admin.php:869
+#: includes/class-flipset-admin.php:2714
+msgid "Open in Builder"
+msgstr ""
+
+#: includes/class-flipset-admin.php:888
+msgid "No document selected"
+msgstr ""
+
+#: includes/class-flipset-admin.php:889
+#: includes/class-flipset-admin.php:2185
+#: includes/class-flipset-admin.php:2244
+#: includes/class-flipset-admin.php:2656
+msgid "Shortcode"
+msgstr ""
+
+#: includes/class-flipset-admin.php:890
+msgid "Click to copy"
+msgstr ""
+
+#: includes/class-flipset-admin.php:899
+#: includes/class-flipset-admin.php:2200
+#: includes/class-flipset-admin.php:3165
+#: includes/class-flipset-admin.php:3179
+#: includes/class-flipset-admin.php:3193
+#: includes/class-flipset-admin.php:3268
+#: includes/class-flipset-viewer.php:490
+msgid "Copy"
+msgstr ""
+
+#: includes/class-flipset-admin.php:904
+#: includes/class-flipset-admin.php:2713
+msgid "Create test page"
+msgstr ""
+
+#: includes/class-flipset-admin.php:906
+msgid "Browse Media Library"
+msgstr ""
+
+#: includes/class-flipset-admin.php:916
+msgid "Recent"
+msgstr ""
+
+#: includes/class-flipset-admin.php:944
+#: includes/class-flipset-admin.php:1472
+msgid "Viewer defaults"
+msgstr ""
+
+#: includes/class-flipset-admin.php:954
+msgid "Recent saved embeds"
+msgstr ""
+
+#: includes/class-flipset-admin.php:957
+msgid "View all"
+msgstr ""
+
+#: includes/class-flipset-admin.php:964
+msgid "Untitled embed"
+msgstr ""
+
+#: includes/class-flipset-admin.php:973
+#: includes/class-flipset-admin.php:2279
+msgid "Edit"
+msgstr ""
+
+#: includes/class-flipset-admin.php:981
+#: includes/class-flipset-admin.php:2295
+msgid "No saved embeds yet"
+msgstr ""
+
+#: includes/class-flipset-admin.php:982
+msgid "Create your first embed"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1049
+msgid "Width of every viewer. Use a number with a unit, for example 100% or 800px."
+msgstr ""
+
+#: includes/class-flipset-admin.php:1055
+msgid "Height of the reading area, for example 600px or 80vh."
+msgstr ""
+
+#: includes/class-flipset-admin.php:1061
+msgid "Default reader color scheme for visitors."
+msgstr ""
+
+#: includes/class-flipset-admin.php:1066
+msgid "Only load PDF documents when they scroll into the visitor viewport (faster initial page load)."
+msgstr ""
+
+#: includes/class-flipset-admin.php:1071
+msgid "Show the download button on the viewer toolbar."
+msgstr ""
+
+#: includes/class-flipset-admin.php:1077
+msgid "Show the print button on the viewer toolbar."
+msgstr ""
+
+#: includes/class-flipset-admin.php:1083
+msgid "Show a small “Powered by Flipset” link under each viewer. Off by default. Turn it on to support the plugin."
+msgstr ""
+
+#: includes/class-flipset-admin.php:1088
+msgid "Show the search/find input on the toolbar."
+msgstr ""
+
+#: includes/class-flipset-admin.php:1095
+msgid "Show the Dark / Light / Sepia theme toggle button."
+msgstr ""
+
+#: includes/class-flipset-admin.php:1102
+msgid "Show the share and copy page link button."
+msgstr ""
+
+#: includes/class-flipset-admin.php:1109
+msgid "Show the keyboard shortcuts guide button (?) and enable keyboard navigation."
+msgstr ""
+
+#: includes/class-flipset-admin.php:1116
+msgid "Show the full screen toggle button."
+msgstr ""
+
+#: includes/class-flipset-admin.php:1123
+msgid "Show the distraction-free presentation mode button."
+msgstr ""
+
+#: includes/class-flipset-admin.php:1130
+msgid "Include text from embedded PDFs in WordPress site search (and in the document library search). Visit Flipset → Documents to extract text."
+msgstr ""
+
+#: includes/class-flipset-admin.php:1135
+msgid "Warn on Flipset → Documents when a PDF is not tagged. Tagged PDFs include structure (headings, reading order) that screen readers can follow."
+msgstr ""
+
+#: includes/class-flipset-admin.php:1140
+msgid "Use the PDF first-page thumbnail as the Open Graph / Twitter image when a post or page embeds Flipset and no SEO plugin already set an image."
+msgstr ""
+
+#: includes/class-flipset-admin.php:1145
+msgid "Automatically convert standalone .pdf URLs pasted on their own line into an interactive Flipset viewer."
+msgstr ""
+
+#: includes/class-flipset-admin.php:1150
+msgid "Automatically display the interactive Flipset PDF viewer on standard WordPress PDF attachment pages."
+msgstr ""
+
+#: includes/class-flipset-admin.php:1210
+msgid "Quick values"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1215
+msgid "Use a number with a unit, e.g. 600px"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1223
+#: includes/class-flipset-admin.php:1940
+msgid "Light"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1224
+#: includes/class-flipset-admin.php:1947
+msgid "Dark Mode"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1225
+#: includes/class-flipset-admin.php:1954
+msgid "Sepia (Warm)"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1281
+msgid "Override per embed with"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1421
+msgid "You are not allowed to do this."
+msgstr ""
+
+#: includes/class-flipset-admin.php:1477
+#: includes/class-flipset-admin.php:2057
+#: includes/class-flipset-admin.php:2067
+#: includes/class-flipset-admin.php:2087
+#: includes/class-flipset-admin.php:2097
+msgid "Toolbar"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1482
+msgid "Search & sharing"
+msgstr ""
+
+#. translators: 1: number of indexed PDFs, 2: total PDFs.
+#: includes/class-flipset-admin.php:1494
+#, php-format
+msgid "%1$s of %2$s PDFs indexed"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1500
+#: includes/class-flipset-admin.php:1513
+msgid "Manage in Documents →"
+msgstr ""
+
+#. translators: 1: number of tagged PDFs, 2: number of checked PDFs.
+#: includes/class-flipset-admin.php:1507
+#, php-format
+msgid "%1$s of %2$s checked PDFs are tagged"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1528
+msgid "Breadcrumb"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1535
+msgid "Site-wide defaults for every Flipset viewer. Individual embeds and saved shortcodes can still override them."
+msgstr ""
+
+#: includes/class-flipset-admin.php:1538
+msgid "Unsaved changes"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1541
+#: includes/class-flipset-admin.php:1707
+msgid "Save changes"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1547
+msgid "Settings sections"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1571
+msgid "Size"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1575
+msgid "Reader"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1579
+msgid "Toolbar actions"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1593
+#: includes/class-flipset-admin.php:1615
+#: includes/class-flipset-admin.php:1636
+msgid "Reset to defaults"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1602
+msgid "Enable all"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1603
+msgid "Disable all"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1624
+#: includes/class-flipset-admin.php:2602
+#: includes/class-flipset-admin.php:2654
+#: includes/class-flipset-library.php:214
+msgid "Search"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1628
+msgid "Sharing"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1631
+msgid "Auto-embed"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1647
+msgid "Live preview"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1661
+msgid "Preview size"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1662
+#: includes/class-flipset-admin.php:1663
+#: includes/class-flipset-admin.php:2153
+msgid "Desktop View (100%)"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1665
+#: includes/class-flipset-admin.php:1666
+#: includes/class-flipset-admin.php:2156
+msgid "Tablet View (768px)"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1668
+#: includes/class-flipset-admin.php:1669
+#: includes/class-flipset-admin.php:2159
+msgid "Mobile View (375px)"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1673
+msgid "Show preview"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1673
+msgid "Hide preview"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1678
+msgid "Preview PDF"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1690
+msgid "Unsaved changes are previewed here only."
+msgstr ""
+
+#: includes/class-flipset-admin.php:1694
+msgid "Upload a PDF to preview"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1703
+msgid "You have unsaved changes"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1705
+msgid "Discard"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1795
+msgid "Shortcode Builder & Live Preview"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1798
+msgid "Visually configure your PDF embed with real-time preview, then save to generate a clean shortcode like [flipset id=\"1\"]."
+msgstr ""
+
+#: includes/class-flipset-admin.php:1802
+#: includes/class-flipset-admin.php:3415
+msgid "1-Click Presets:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1804
+msgid "3D realistic FlipBook with Web Audio page turn sound"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1805
+#: includes/class-flipset-admin.php:2029
+#: includes/class-flipset-viewer.php:824
+#: assets/js/flipset-block.js:146
+msgid "3D FlipBook"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1807
+msgid "Sepia theme, continuous scroll, search enabled"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1808
+msgid "E-Book Reader"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1810
+msgid "Clean white theme, presentation and download enabled"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1811
+msgid "Corporate Report"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1813
+msgid "Dark theme, fullscreen and zoom enabled"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1814
+msgid "Night Reader"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1816
+msgid "Download and print hidden, pan and zoom allowed"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1817
+msgid "View Only (Protected)"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1819
+msgid "Lazy loaded, compact toolbar, faster initial load"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1820
+msgid "Speed Optimized"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1834
+#: includes/class-flipset-admin.php:2225
+msgid "My Saved Embeds"
+msgstr ""
+
+#. translators: 1: Embed name, 2: Embed ID
+#: includes/class-flipset-admin.php:1847
+#, php-format
+msgid "Editing Saved Embed: %1$s (ID: #%2$d)"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1855
+msgid "+ Create New Embed"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1871
+msgid "1. Document & Style"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1875
+msgid "2. Size & Layout"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1879
+msgid "3. Toolbar & Advanced"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1888
+msgid "Embed Name / Title:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1889
+msgid "e.g. Annual Company Report 2026"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1891
+msgid "Name for your internal reference in the Saved Embeds manager."
+msgstr ""
+
+#: includes/class-flipset-admin.php:1897
+#: includes/class-flipset-admin.php:2242
+msgid "PDF Document Source"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1901
+msgid "Choose from Media Library"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1904
+msgid "Upload New PDF"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1909
+msgid "PDF File URL:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1915
+msgid "Or select a recent PDF:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1930
+msgid "Appearance & Theme"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1934
+msgid "Reading Theme:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1961
+msgid "Viewer Caption / Subtitle (Optional):"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1962
+msgid "e.g. Official Edition"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1968
+msgid "Next: Size & Layout →"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1977
+msgid "Viewer Dimensions"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1982
+msgid "Width:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:1991
+msgid "Height:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2004
+msgid "Initial Page & Display Mode"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2009
+msgid "Start Page:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2013
+msgid "Initial View Layout:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2017
+msgid "Single Page"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2021
+msgid "Continuous Scroll"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2025
+msgid "Two-Page Spread"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2037
+#: includes/class-flipset-admin.php:2134
+msgid "← Back"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2040
+msgid "Next: Toolbar & Advanced →"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2049
+msgid "Toolbar Buttons & Controls"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2050
+msgid "Uncheck any button you want to hide from the viewer toolbar:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2056
+#: includes/class-flipset-viewer.php:337
+msgid "Download"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2061
+msgid "Print"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2062
+#: includes/class-flipset-admin.php:2072
+#: includes/class-flipset-admin.php:2077
+#: includes/class-flipset-admin.php:2082
+#: includes/class-flipset-admin.php:2092
+#: includes/class-flipset-admin.php:2102
+#: includes/class-flipset-admin.php:2107
+msgid "⋮ Menu"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2066
+msgid "Text Search (Ctrl+F)"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2071
+msgid "Theme Switcher"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2076
+msgid "Share & Page Link"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2081
+msgid "Shortcuts Guide (?)"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2086
+#: includes/class-flipset-viewer.php:457
+msgid "Full Screen"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2091
+#: includes/class-flipset-viewer.php:396
+#: includes/class-flipset-viewer.php:461
+msgid "Presentation Mode"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2096
+#: includes/class-flipset-viewer.php:433
+msgid "Zoom In / Out"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2101
+#: includes/class-flipset-viewer.php:441
+msgid "Rotate Document"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2106
+#: includes/class-flipset-viewer.php:453
+msgid "Hand / Pan Tool"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2114
+msgid "Performance & Advanced"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2120
+msgid "Lazy Loading (loading=\"lazy\")"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2120
+msgid "Only load PDF when scrolled into viewport."
+msgstr ""
+
+#: includes/class-flipset-admin.php:2124
+msgid "Sync Browser URL Hash (hash=\"true\")"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2124
+msgid "Update #page=N in address bar for easy bookmarking."
+msgstr ""
+
+#: includes/class-flipset-admin.php:2128
+msgid "Remember Last Read Page (resume=\"true\")"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2128
+msgid "Auto-resume where visitor left off."
+msgstr ""
+
+#: includes/class-flipset-admin.php:2150
+msgid "Real-Time Live Preview"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2186
+msgid "PHP Snippet"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2187
+msgid "Block Code"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2197
+msgid "Save Embed & Get Shortcode"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2199
+msgid "Copy code to clipboard"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2203
+msgid "Create Test Page"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2210
+msgid "Developer: Show full inline shortcode"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2228
+msgid "Search embeds…"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2230
+msgid "Create New Embed"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2240
+msgid "ID"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2241
+msgid "Embed Name / Title"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2243
+msgid "Layout & Theme"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2246
+msgid "Actions"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2271
+msgid "Click to copy shortcode"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2281
+msgid "Duplicate this embed"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2282
+msgid "Duplicate"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2284
+msgid "Delete this embed"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2285
+msgid "Delete"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2296
+msgid "Create your first PDF embed in the Shortcode Builder and click \"Save Embed & Get Shortcode\" to generate a shortcode like [flipset id=\"1\"]."
+msgstr ""
+
+#: includes/class-flipset-admin.php:2298
+#: includes/class-flipset-admin.php:2487
+msgid "Open Shortcode Builder"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2462
+msgid "Every PDF in your Media Library, ready to embed. No duplicate storage."
+msgstr ""
+
+#: includes/class-flipset-admin.php:2463
+msgid "Shortcodes, blocks, deep links and page builders, all in one reference."
+msgstr ""
+
+#: includes/class-flipset-admin.php:2464
+msgid "Everything Flipset can do. Fast, local and accessible."
+msgstr ""
+
+#: includes/class-flipset-admin.php:2494
+msgid "Docs & Features sections"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2497
+msgid "Documents Library"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2502
+msgid "User Guide"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2506
+msgid "All Features"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2520
+msgid "4 ways to embed your documents"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2533
+msgid "Use the visual Shortcode Builder to configure 3D FlipBook, theme, and toolbar to generate clean [flipset id=\"1\"] shortcodes."
+msgstr ""
+
+#: includes/class-flipset-admin.php:2539
+msgid "Direct Shortcode Copy"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2540
+msgid "Click \"Copy\" on any row below to quickly copy [flipset file=\"...\"] and paste it into classic editor, pages, or widgets."
+msgstr ""
+
+#: includes/class-flipset-admin.php:2546
+msgid "1-Click Test Page"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2547
+msgid "Hover over any document title below and click \"Create test page\" to publish and preview instantly in a new tab."
+msgstr ""
+
+#: includes/class-flipset-admin.php:2553
+msgid "Gutenberg & oEmbed"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2554
+msgid "Insert the \"Flipset Viewer\" block, or simply paste any direct .pdf link on a new line to auto-embed."
+msgstr ""
+
+#: includes/class-flipset-admin.php:2562
+msgid "Opening this screen automatically generates first-page preview thumbnails, indexes PDF text for site search, and checks accessibility tags."
+msgstr ""
+
+#: includes/class-flipset-admin.php:2564
+msgid "Full Documentation & Cheatsheet"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2569
+msgid "Generating thumbnails, indexing PDF text, and checking accessibility tags…"
+msgstr ""
+
+#. translators: %s: number of untagged PDFs on this page.
+#: includes/class-flipset-admin.php:2578
+#, php-format
+msgid "%s PDF on this page is not tagged. Screen readers may not follow the intended reading order. Export tagged PDFs from Word, InDesign, or Acrobat."
+msgid_plural "%s PDFs on this page are not tagged. Screen readers may not follow the intended reading order. Export tagged PDFs from Word, InDesign, or Acrobat."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-flipset-admin.php:2599
+#: includes/class-flipset-library.php:206
+msgid "Search documents"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2601
+#: includes/class-flipset-library.php:212
+msgid "Search documents…"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2605
+msgid "Filter by status"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2608
+msgid "All"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2609
+msgid "Ready"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2610
+#: includes/class-flipset-admin.php:2727
+#: includes/class-flipset-admin.php:2741
+msgid "Pending"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2611
+msgid "Needs attention"
+msgstr ""
+
+#. translators: %s: number of PDFs
+#: includes/class-flipset-admin.php:2639
+#, php-format
+msgid "%s document"
+msgid_plural "%s documents"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-flipset-admin.php:2652
+msgid "Preview"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2655
+msgid "Accessibility"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2715
+msgid "View in Media"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2716
+msgid "Open file"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2725
+msgid "PDF text indexing is turned off in Settings."
+msgstr ""
+
+#: includes/class-flipset-admin.php:2725
+#: includes/class-flipset-admin.php:2739
+msgid "Off"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2727
+msgid "Waiting for text extraction. Keep this screen open."
+msgstr ""
+
+#: includes/class-flipset-admin.php:2739
+msgid "Accessibility checks are turned off in Settings."
+msgstr ""
+
+#: includes/class-flipset-admin.php:2741
+msgid "Waiting for the accessibility check. Keep this screen open."
+msgstr ""
+
+#. translators: %s: the search term.
+#: includes/class-flipset-admin.php:2784
+#, php-format
+msgid "No documents match \"%s\""
+msgstr ""
+
+#: includes/class-flipset-admin.php:2787
+msgid "Clear search"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2789
+msgid "No documents in this status."
+msgstr ""
+
+#: includes/class-flipset-admin.php:2790
+msgid "Show all documents"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2792
+msgid "No PDFs yet"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2817
+msgid "Flipset User Guide & Complete Reference"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2818
+msgid "Learn how to easily embed PDFs, customize 3D FlipBook view modes, use shortcodes, integrate with page builders, and optimize for SEO and speed."
+msgstr ""
+
+#: includes/class-flipset-admin.php:2823
+msgid "Guide sections"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2824
+msgid "Quick Start"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2825
+msgid "[flipset] API"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2826
+msgid "[flipset_library]"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2827
+msgid "Deep Linking"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2828
+msgid "Page Builders"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2829
+msgid "FAQs & Tips"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2839
+msgid "1. Quick Start: 3 Easy Ways to Embed"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2840
+msgid "Choose whichever workflow fits your editing style."
+msgstr ""
+
+#: includes/class-flipset-admin.php:2847
+msgid "Shortcode (Anywhere)"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2848
+msgid "Copy [flipset file=\"...\"] from the Documents Library tab and paste it into any post, page, widget, or template."
+msgstr ""
+
+#: includes/class-flipset-admin.php:2860
+msgid "Gutenberg Native Block"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2861
+msgid "In the Block Editor, insert the \"Flipset Viewer\" block. Pick any PDF from your Media Library with instant live rendering."
+msgstr ""
+
+#: includes/class-flipset-admin.php:2864
+msgid "Visual Editor Block"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2871
+msgid "Auto oEmbed (Paste URL)"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2872
+msgid "Simply paste a direct .pdf link on a new line in your editor. WordPress automatically transforms it into an interactive reader."
+msgstr ""
+
+#: includes/class-flipset-admin.php:2875
+msgid "Zero Shortcode Required"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2889
+msgid "2. [flipset] Shortcode Parameters & Attributes"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2890
+msgid "Customize every aspect of your PDF viewer with these parameters:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2898
+#: includes/class-flipset-admin.php:3217
+msgid "Attribute"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2899
+msgid "Type & Default"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2900
+msgid "Description & Options"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2901
+msgid "Example"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2909
+msgid "Recommended"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2914
+msgid "Saved Embed ID"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2917
+msgid "Clean Saved Embed Shortcode:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2917
+msgid "Encapsulates all PDF settings, dimensions, themes, 3D flipbook mode, and toolbar options generated from the Shortcode Builder into a clean, short code."
+msgstr ""
+
+#: includes/class-flipset-admin.php:2930
+msgid "Required unless id is set"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2937
+msgid "Direct URL to your PDF document (local Media Library or CORS-enabled remote host)."
+msgstr ""
+
+#: includes/class-flipset-admin.php:2950
+#: includes/class-flipset-admin.php:2977
+#: includes/class-flipset-admin.php:2998
+#: includes/class-flipset-admin.php:3019
+#: includes/class-flipset-admin.php:3040
+#: includes/class-flipset-admin.php:3061
+#: includes/class-flipset-admin.php:3082
+#: includes/class-flipset-admin.php:3103
+#: includes/class-flipset-admin.php:3123
+msgid "Optional"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2958
+msgid "Reading Layout Mode:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:2960
+msgid "3D realistic FlipBook with Web Audio page turn sound."
+msgstr ""
+
+#: includes/class-flipset-admin.php:2961
+msgid "Continuous vertical scrolling feed."
+msgstr ""
+
+#: includes/class-flipset-admin.php:2962
+msgid "Two-page magazine book spread."
+msgstr ""
+
+#: includes/class-flipset-admin.php:2963
+msgid "Standard single page reader."
+msgstr ""
+
+#: includes/class-flipset-admin.php:2985
+msgid "Viewer container width. Supports percentage (%), pixels (px), or viewport width (vw)."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3006
+msgid "Viewer container height. Supports pixels (px), viewport height (vh), or em/rem."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3027
+msgid "Initial starting page number when the document opens."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3048
+msgid "Show or hide the direct PDF download button in the toolbar."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3069
+msgid "Show or hide the print button in the toolbar."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3090
+msgid "Enable or disable the in-document text search (Find) toolbar tool."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3110
+msgid "Optional caption heading displayed directly above the viewer frame."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3130
+msgid "Hide specific toolbar buttons (comma-separated):"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3151
+msgid "Ready-to-Use Copy Presets"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3152
+msgid "Click the copy button on any preset to copy the full shortcode:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3158
+msgid "3D FlipBook Mode"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3159
+msgid "Realistic Sound & Perspective"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3172
+msgid "Vertical Continuous Scroll"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3173
+msgid "Ideal for Long Reports & Ebooks"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3186
+msgid "Read-Only Presentation"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3187
+msgid "No Direct Download or Printing"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3208
+msgid "3. [flipset_library] Document Gallery Shortcode"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3209
+msgid "Display all your Media Library PDFs in a responsive, searchable grid gallery with lightbox reading modal:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3218
+msgid "Values / Default"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3219
+msgid "Description & Behavior"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3229
+msgid "Number of document grid columns on desktop viewports (automatically reflows on mobile)."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3237
+msgid "How many PDF cards to display per page before showing pagination controls."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3245
+msgid "Sorting order for the gallery catalog items."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3253
+msgid "Show real-time instant search input box above the document gallery."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3261
+msgid "Interactive Gallery Preset"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3262
+msgid "Searchable 4-column document directory"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3281
+msgid "4. Deep Linking & URL Hashes (#page=X)"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3282
+msgid "Send visitors directly to any specific page inside an embedded document by appending hash anchors:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3290
+msgid "Loads the handbook page and automatically jumps directly to page 14 with smooth animation."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3296
+msgid "Alternative namespaced syntax to avoid conflicting with other on-page anchors or sliders."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3308
+msgid "5. Page Builders & Compatibility"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3309
+msgid "Native visual blocks and widgets bundled for your favorite WordPress builders:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3316
+msgid "Gutenberg Block Editor"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3318
+msgid "Search for \"Flipset Viewer\" or \"Flipset Library\" in the block inserter. Customize dimensions, starting page, view mode (including 3D FlipBook), and download toggles directly in the block sidebar."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3323
+msgid "Elementor Page Builder"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3325
+msgid "Find \"Flipset PDF Viewer\" and \"Flipset PDF Library\" widgets in the Elementor panel. Full visual styling controls with zero extra setup."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3330
+msgid "Divi & Beaver Builder"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3332
+msgid "Native Divi modules and Beaver Builder modules are bundled right in Flipset. Select your PDF directly inside their builder interfaces."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3337
+msgid "WPML & Polylang Multi-Language"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3339
+msgid "When you translate Media Library PDFs, Flipset automatically swaps the document URL for the active visitor language on that page."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3351
+msgid "6. Troubleshooting & Best Practices"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3352
+msgid "Answers to frequent configuration questions and hosting best practices:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3358
+msgid "How do I resolve CORS (Cross-Origin) errors when loading remote PDFs?"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3362
+msgid "Browsers block scripts from reading PDFs hosted on other domains unless that remote server allows CORS. The easiest fix is uploading the PDF directly to your WordPress Media Library. If you must use a remote host, configure the header Access-Control-Allow-Origin: * on that remote server."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3367
+msgid "Why are PDF.js scripts excluded from cache plugins?"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3371
+msgid "PDF.js requires its worker script (pdf.worker.min.js) to load in an isolated worker thread. Combining, deferring, or minifying it with other theme JS breaks web worker loading. Flipset automatically sets data-no-optimize rules for WP Rocket, LiteSpeed Cache, Autoptimize, and W3 Total Cache."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3376
+msgid "How do thumbnail generation and search indexing work?"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3380
+msgid "The first time an admin visits the Documents Library tab, the browser renders page 1 of each PDF and saves a high-quality cover thumbnail in your Media Library, while simultaneously extracting text so visitors can search for PDF contents using WordPress site search."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3397
+msgid "Reading Modes & 3D FlipBook Engine"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3399
+msgid "16-Bone 3D FlipBook:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3399
+msgid "Ultra-realistic 3D curved page turning with natural paper inertia, dynamic specular lighting, center spine depth shadow, and stacked paper thickness."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3400
+msgid "Web Audio Paper Sound:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3400
+msgid "Synthesized real-time page-turn audio feedback (no heavy external mp3 files required)."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3401
+msgid "Multiple Layout Modes:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3401
+msgid "Single Page, Two-Page Magazine Spread, Continuous Vertical Scroll, and 3D FlipBook."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3402
+msgid "Glassmorphism Thumbnails Panel:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3402
+msgid "Slide-out thumbnail card preview strip with instant jump-to-page navigation."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3403
+msgid "Touch & Mobile Gesture Engine:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3403
+msgid "Natural swipe-to-flip gestures and hardware-accelerated pinch-to-zoom."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3404
+msgid "Reading Themes:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3404
+msgid "Instant Dark, Light, and Sepia eye-care reading themes."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3410
+msgid "Shortcode Builder & Saved Embeds"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3412
+msgid "Clean ID Shortcodes [flipset id=\"1\"]:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3412
+msgid "Encapsulates long attributes into a clean, easy-to-manage ID-based shortcode."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3413
+msgid "Saved Embeds Manager:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3413
+msgid "Dedicated manager with instant search, 1-click copy, duplicate, and live editing."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3414
+msgid "Live Interactive Preview:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3414
+msgid "Real-time responsive preview (Desktop, Tablet, Mobile) that updates instantly as you tweak settings."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3415
+msgid "One-click configurations for 3D FlipBook, E-Book Reader, Corporate Report, Night Reader, and Speed Optimized."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3416
+msgid "Developer Raw Code Toggle:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3416
+msgid "Switch between clean ID shortcodes, raw inline shortcodes, PHP snippets, and Gutenberg block code."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3422
+msgid "Page Builders & Documents Library"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3424
+msgid "Gutenberg Native Block:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3424
+msgid "Flipset Viewer block with Media picker & live first-page preview."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3425
+msgid "Auto oEmbed:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3425
+msgid "Simply paste any direct .pdf link on a new line to embed instantly."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3426
+msgid "Page Builders Compatibility:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3426
+msgid "Native widgets for Elementor, Divi and Beaver Builder; the shortcode works everywhere else."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3427
+msgid "Documents Library Grid:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3427
+msgid "[flipset_library] shortcode for searchable PDF galleries."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3428
+msgid "Attachment Pages:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3428
+msgid "Automatic interactive reader on standard WordPress attachment pages."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3434
+msgid "SEO, Search & Accessibility"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3436
+msgid "Site Search Indexing:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3436
+msgid "Extracts PDF text so WordPress search finds content inside documents."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3437
+msgid "Schema.org JSON-LD:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3437
+msgid "Automatic DigitalDocument rich snippets for Google search results."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3438
+msgid "Social Card Previews:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3438
+msgid "Open Graph & Twitter Cards cover preview generated from the PDF."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3439
+msgid "Accessibility Diagnostics:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3439
+msgid "Detects untagged PDFs and tells you how to export an accessible one."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3440
+msgid "Zero CDN Dependency:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3440
+msgid "Bundled locally hosted PDF.js, no third-party tracking or remote downtime."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3450
+msgid "Everything Flipset Can Do"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3451
+msgid "A fast, accessible and locally rendered PDF reading experience with no external dependencies, plus builder widgets and SEO integration."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3455
+msgid "reading modes"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3457
+msgid "external requests"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3469
+msgid "Free"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3510
+msgid "Select a PDF first."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3517
+msgid "Only PDFs from the Media Library can be used here."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3521
+msgid "That file is not a PDF."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3538
+msgid "Could not update the test page."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3546
+msgid "Flipset Test"
+msgstr ""
+
+#: includes/class-flipset-block.php:103
+msgid "Flipset Documents"
+msgstr ""
+
+#: includes/class-flipset-block.php:110
+msgid "Whitepaper / Lead Magnet"
+msgstr ""
+
+#: includes/class-flipset-block.php:111
+msgid "Two-column document showcase with title, summary, and PDF viewer."
+msgstr ""
+
+#: includes/class-flipset-block.php:116
+msgid "Free Research Report"
+msgstr ""
+
+#: includes/class-flipset-block.php:120
+msgid "Explore key insights, comprehensive findings, and actionable recommendations in our latest publication."
+msgstr ""
+
+#: includes/class-flipset-block.php:125
+msgid "Download PDF"
+msgstr ""
+
+#: includes/class-flipset-block.php:140
+msgid "Academic / Research Document"
+msgstr ""
+
+#: includes/class-flipset-block.php:141
+msgid "Formal document layout with metadata, abstract callout, and full-width PDF viewer."
+msgstr ""
+
+#: includes/class-flipset-block.php:145
+msgid "Document Title & Research Paper"
+msgstr ""
+
+#: includes/class-flipset-block.php:149
+msgid "Published by Author / Institution — Last Updated: 2026"
+msgstr ""
+
+#: includes/class-flipset-block.php:153
+msgid "Abstract:"
+msgstr ""
+
+#: includes/class-flipset-block.php:153
+msgid "This publication examines core methodologies, experimental data, and concluding outcomes."
+msgstr ""
+
+#: includes/class-flipset-block.php:164
+msgid "Annual Report / Catalog Hero"
+msgstr ""
+
+#: includes/class-flipset-block.php:165
+msgid "Wide annual report showcase with key metrics and wide-format PDF reader."
+msgstr ""
+
+#: includes/class-flipset-block.php:169
+msgid "Annual Report & Highlights"
+msgstr ""
+
+#: includes/class-flipset-block.php:173
+msgid "Browse through our full annual review, financial statistics, and milestones."
+msgstr ""
+
+#: includes/class-flipset-builders.php:100
+msgid "PDF"
+msgstr ""
+
+#: includes/class-flipset-builders.php:107
+msgid "PDF URL"
+msgstr ""
+
+#: includes/class-flipset-builders.php:109
+msgid "Paste a Media Library PDF URL, or copy one from Flipset → Documents."
+msgstr ""
+
+#: includes/class-flipset-builders.php:170
+msgid "Library"
+msgstr ""
+
+#: includes/class-flipset-embeds.php:40
+msgid "Flipset Embeds"
+msgstr ""
+
+#: includes/class-flipset-embeds.php:41
+msgid "Flipset Embed"
+msgstr ""
+
+#: includes/class-flipset-embeds.php:145
+msgid "PDF Embed"
+msgstr ""
+
+#: includes/class-flipset-embeds.php:158
+msgid "Invalid embed ID."
+msgstr ""
+
+#: includes/class-flipset-embeds.php:227
+msgid "Embed not found."
+msgstr ""
+
+#. translators: %s: original embed title/name.
+#: includes/class-flipset-embeds.php:232
+#, php-format
+msgid "%s (Copy)"
+msgstr ""
+
+#: includes/class-flipset-embeds.php:244
+#: includes/class-flipset-embeds.php:305
+#: includes/class-flipset-embeds.php:323
+#: includes/class-flipset-embeds.php:347
+msgid "Permission denied."
+msgstr ""
+
+#: includes/class-flipset-embeds.php:293
+msgid "Embed updated successfully!"
+msgstr ""
+
+#: includes/class-flipset-embeds.php:293
+msgid "Embed saved successfully!"
+msgstr ""
+
+#: includes/class-flipset-library.php:238
+msgid "Previous"
+msgstr ""
+
+#: includes/class-flipset-library.php:239
+msgid "Next"
+msgstr ""
+
+#: includes/class-flipset-library.php:247
+msgid "Document library pages"
+msgstr ""
+
+#: includes/class-flipset-library.php:252
+msgid "No PDFs matched that search."
+msgstr ""
+
+#: includes/class-flipset-library.php:253
+msgid "No PDFs found."
+msgstr ""
+
+#: includes/class-flipset-seo.php:73
+msgid "PDF text indexing is turned off."
+msgstr ""
+
+#: includes/class-flipset-thumbnails.php:86
+#: includes/class-flipset-thumbnails.php:91
+#: includes/class-flipset-thumbnails.php:101
+#: includes/class-flipset-thumbnails.php:110
+#: includes/class-flipset-thumbnails.php:119
+#: includes/class-flipset-thumbnails.php:144
+msgid "Invalid thumbnail data."
+msgstr ""
+
+#: includes/class-flipset-thumbnails.php:96
+#: includes/class-flipset-thumbnails.php:105
+msgid "Thumbnail is too large."
+msgstr ""
+
+#: includes/class-flipset-thumbnails.php:133
+#: includes/class-flipset-thumbnails.php:138
+#: includes/class-flipset-thumbnails.php:172
+msgid "Could not save the thumbnail."
+msgstr ""
+
+#. translators: %s: PDF title.
+#: includes/class-flipset-thumbnails.php:160
+#, php-format
+msgid "Flipset thumbnail: %s"
+msgstr ""
+
+#. translators: %d: embed ID number.
+#: includes/class-flipset-viewer.php:51
+#, php-format
+msgid "Flipset: Embed ID #%d not found."
+msgstr ""
+
+#: includes/class-flipset-viewer.php:106
+msgid "Flipset: no file URL was provided. Use [flipset file=\"https://example.com/document.pdf\"]."
+msgstr ""
+
+#: includes/class-flipset-viewer.php:170
+msgid "Powered by Flipset"
+msgstr ""
+
+#. translators: %s: document title or fallback
+#: includes/class-flipset-viewer.php:181
+#, php-format
+msgid "Open document: %s (PDF)"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:196
+#: includes/class-flipset-viewer.php:280
+msgid "PDF viewer"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:282
+#: includes/class-flipset-viewer.php:811
+msgid "Table of contents"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:285
+#: includes/class-flipset-viewer.php:812
+#: includes/class-flipset-viewer.php:814
+msgid "Page thumbnails"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:291
+msgid "Previous page (←)"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:291
+msgid "Previous page"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:295
+msgid "Page"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:299
+msgid "Next page (→)"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:299
+msgid "Next page"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:306
+msgid "Zoom out (-)"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:306
+msgid "Zoom out"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:310
+msgid "Zoom in (+)"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:310
+msgid "Zoom in"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:315
+msgid "Fit page (0)"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:315
+#: includes/class-flipset-viewer.php:816
+msgid "Fit page"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:324
+msgid "Find"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:324
+msgid "Find in document"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:327
+msgid "Previous match"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:330
+msgid "Next match"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:342
+msgid "Full screen (F)"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:342
+msgid "Full screen"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:347
+#: includes/class-flipset-viewer.php:827
+msgid "More tools"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:354
+msgid "Rotate"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:360
+msgid "View Mode"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:366
+msgid "Hand Tool"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:372
+msgid "Switch Theme"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:378
+#: includes/class-flipset-viewer.php:481
+msgid "Share Document"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:384
+msgid "Shortcuts Guide"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:390
+msgid "Print Document"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:403
+msgid "Keyboard: arrows or Page Up and Page Down change page, plus and minus zoom, R rotates, Home and End jump to first or last page, Ctrl or Command F finds text, D toggles reading theme, ? opens shortcuts guide."
+msgstr ""
+
+#: includes/class-flipset-viewer.php:417
+msgid "Keyboard shortcuts"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:421
+msgid "Keyboard Shortcuts"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:422
+#: includes/class-flipset-viewer.php:482
+msgid "Close"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:429
+msgid "Next / Previous Page"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:437
+msgid "Fit Page / Width"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:445
+msgid "Toggle Theme (Dark/Sepia/Light)"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:449
+msgid "Find in Document"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:465
+msgid "First / Last Page"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:469
+msgid "Close Overlay / Clear Search"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:477
+msgid "Share document"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:494
+msgid "Link to current page (page "
+msgstr ""
+
+#: includes/class-flipset-viewer.php:801
+msgid "Loading document…"
+msgstr ""
+
+#. translators: %s: percent loaded.
+#: includes/class-flipset-viewer.php:803
+#, php-format
+msgid "Loading %s…"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:804
+msgid "This document could not be loaded."
+msgstr ""
+
+#. translators: 1: current page number, 2: total pages.
+#: includes/class-flipset-viewer.php:806
+#, php-format
+msgid "Page %1$s of %2$s"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:807
+msgid "This document is password-protected."
+msgstr ""
+
+#: includes/class-flipset-viewer.php:808
+msgid "Incorrect password."
+msgstr ""
+
+#: includes/class-flipset-viewer.php:809
+msgid "Unlock"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:810
+msgid "Password"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:813
+msgid "Document outline"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:815
+msgid "Close panel"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:817
+msgid "Fit width"
+msgstr ""
+
+#. translators: 1: current match, 2: total matches.
+#: includes/class-flipset-viewer.php:819
+#, php-format
+msgid "%1$s of %2$s"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:820
+msgid "No matches"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:821
+#: assets/js/flipset-block.js:143
+msgid "Single page"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:822
+#: assets/js/flipset-block.js:144
+msgid "Continuous scroll"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:823
+#: assets/js/flipset-block.js:145
+msgid "Two-page spread"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:825
+msgid "Hand tool"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:826
+msgid "Text select"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:828
+msgid "Presentation"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:829
+msgid "Link copied!"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:830
+msgid "Click to load document"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:831
+msgid "Unable to load document (Cross-Origin Restriction)"
+msgstr ""
+
+#. translators: %s: remote host name
+#: includes/class-flipset-viewer.php:833
+#, php-format
+msgid "This PDF is hosted on an external domain (%s) which restricts cross-origin access (CORS)."
+msgstr ""
+
+#: includes/class-flipset-viewer.php:834
+msgid "Open / Download PDF directly"
+msgstr ""
+
+#: includes/class-flipset-viewer.php:835
+msgid "Site Admin: To enable direct embedding, configure Access-Control-Allow-Origin headers on the host server or upload the PDF to your WordPress Media Library."
+msgstr ""
+
+#. translators: %d: saved embed ID number.
+#: assets/js/flipset-block.js:102
+#, js-format
+msgid "Using saved embed #%d. Attributes below override saved defaults."
+msgstr ""
+
+#: assets/js/flipset-block.js:106
+msgid "CSS width, for example 100% or 720px."
+msgstr ""
+
+#: assets/js/flipset-block.js:113
+msgid "Height (px)"
+msgstr ""
+
+#: assets/js/flipset-block.js:124
+msgid "Optional caption above the viewer."
+msgstr ""
+
+#: assets/js/flipset-block.js:153
+msgid "Remember last page on this device"
+msgstr ""
+
+#: assets/js/flipset-block.js:160
+msgid "Show download"
+msgstr ""
+
+#: assets/js/flipset-block.js:167
+msgid "Show print"
+msgstr ""
+
+#. translators: %d: saved embed ID number.
+#: assets/js/flipset-block.js:209
+#, js-format
+msgid "Saved embed #%d"
+msgstr ""
+
+#: assets/js/flipset-block.js:217
+msgid "Configured in Flipset → Embed Builder. The front end will display the full interactive viewer."
+msgstr ""
+
+#: assets/js/flipset-block.js:247
+msgid "Replace PDF"
+msgstr ""
+
+#: assets/js/flipset-block.js:266
+msgid "Select a PDF to preview the first page here. Visitors will see the full Flipset viewer."
+msgstr ""
+
+#: assets/js/flipset-library-block.js:32
+msgid "Library Settings"
+msgstr ""
+
+#: assets/js/flipset-library-block.js:43
+msgid "Documents per page"
+msgstr ""
+
+#: assets/js/flipset-library-block.js:57
+msgid "Last modified"
+msgstr ""
+
+#: assets/js/flipset-library-block.js:75
+msgid "Show search"
+msgstr ""
+
+#: blocks/library/block.json
+msgctxt "block title"
+msgid "Flipset Library"
+msgstr ""
+
+#: blocks/library/block.json
+msgctxt "block description"
+msgid "A browsable grid of PDFs from the Media Library."
+msgstr ""
+
+#: blocks/library/block.json
+#: blocks/viewer/block.json
+msgctxt "block keyword"
+msgid "pdf"
+msgstr ""
+
+#: blocks/library/block.json
+msgctxt "block keyword"
+msgid "library"
+msgstr ""
+
+#: blocks/library/block.json
+msgctxt "block keyword"
+msgid "gallery"
+msgstr ""
+
+#: blocks/library/block.json
+msgctxt "block keyword"
+msgid "documents"
+msgstr ""
+
+#: blocks/viewer/block.json
+msgctxt "block title"
+msgid "Flipset Viewer"
+msgstr ""
+
+#: blocks/viewer/block.json
+msgctxt "block description"
+msgid "Embed a PDF document with the Flipset viewer."
+msgstr ""
+
+#: blocks/viewer/block.json
+msgctxt "block keyword"
+msgid "document"
+msgstr ""
+
+#: blocks/viewer/block.json
+msgctxt "block keyword"
+msgid "viewer"
+msgstr ""
+
+#: blocks/viewer/block.json
+msgctxt "block keyword"
+msgid "flipbook"
+msgstr ""

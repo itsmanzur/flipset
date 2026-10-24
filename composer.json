@@ -1,6 +1,6 @@
 {
-	"name": "thereadscope/foliora",
-	"description": "Dev tooling for the Foliora WordPress plugin. Not shipped in the WP.org zip.",
+	"name": "thereadscope/flipset",
+	"description": "Dev tooling for the Flipset WordPress plugin. Not shipped in the WP.org zip.",
 	"type": "wordpress-plugin",
 	"license": "GPL-2.0-or-later",
 	"require": {

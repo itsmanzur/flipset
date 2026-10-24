@@ -1,0 +1,1400 @@
+.flipset-wrap {
+	margin: 1.5em 0;
+	max-width: 100%;
+}
+
+.flipset-wrap *,
+.flipset-wrap *::before,
+.flipset-wrap *::after {
+	box-sizing: border-box;
+}
+
+.flipset-shell {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid #1d2327;
+	border-radius: 8px;
+	background: #2c3338;
+	overflow: hidden;
+	min-height: 280px;
+}
+
+.flipset-shell:fullscreen,
+.flipset-shell:-webkit-full-screen {
+	width: 100% !important;
+	height: 100% !important;
+	border: 0;
+	border-radius: 0;
+}
+
+.flipset-wrap .flipset-chrome {
+	display: flex !important;
+	flex-direction: row !important;
+	flex-wrap: nowrap !important;
+	align-items: center !important;
+	gap: 0;
+	width: 100%;
+	background: #1d2327;
+	color: #dcdcde;
+	border: 0;
+	border-bottom: 1px solid #0a0a0a;
+	overflow: visible !important;
+	position: relative;
+	z-index: 5;
+}
+
+.flipset-wrap .flipset-toolbar {
+	display: flex !important;
+	flex-direction: row !important;
+	flex-wrap: nowrap !important;
+	align-items: center !important;
+	gap: 6px;
+	margin: 0 !important;
+	padding: 4px 8px;
+	background: transparent !important;
+	border: 0 !important;
+	font-size: 12px;
+	flex: 1 1 auto;
+	min-width: 0;
+	width: 100% !important;
+	max-width: none !important;
+	color: inherit;
+}
+
+.flipset-wrap .flipset-tool-group {
+	display: flex !important;
+	flex-wrap: nowrap !important;
+	align-items: center;
+	gap: 2px;
+	flex: 0 0 auto;
+	width: auto !important;
+}
+
+.flipset-wrap .flipset-tool-group[hidden],
+.flipset-wrap .flipset-toolbar button.flipset-btn[hidden] {
+	display: none !important;
+}
+
+.flipset-wrap .flipset-tool-group + .flipset-tool-group {
+	padding-left: 4px;
+	border-left: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.flipset-wrap .flipset-find-group {
+	flex: 1 1 7em;
+	min-width: 0;
+	max-width: 16em;
+}
+
+.flipset-wrap .flipset-tool-group-end {
+	margin-left: auto !important;
+	display: flex !important;
+	align-items: center;
+	gap: 4px;
+	flex: 0 0 auto;
+}
+
+.flipset-wrap .flipset-toolbar button.flipset-btn,
+.flipset-wrap .flipset-toolbar a.flipset-btn {
+	appearance: none;
+	display: inline-flex !important;
+	align-items: center;
+	justify-content: center;
+	width: 26px !important;
+	min-width: 26px !important;
+	max-width: 26px !important;
+	height: 26px !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	border: 0 !important;
+	background: transparent !important;
+	border-radius: 4px;
+	cursor: pointer;
+	color: #dcdcde !important;
+	text-decoration: none !important;
+	flex: 0 0 26px !important;
+	float: none !important;
+	box-shadow: none !important;
+}
+
+.flipset-wrap .flipset-btn svg {
+	display: block;
+	width: 16px;
+	height: 16px;
+}
+
+.flipset-wrap .flipset-toolbar button.flipset-btn:hover,
+.flipset-wrap .flipset-toolbar a.flipset-btn:hover,
+.flipset-wrap .flipset-toolbar button.flipset-btn:focus {
+	background: rgba(255, 255, 255, 0.1) !important;
+	color: #fff !important;
+}
+
+.flipset-wrap .flipset-btn:focus-visible {
+	outline: 2px solid #72aee6;
+	outline-offset: 1px;
+}
+
+.flipset-wrap .flipset-btn:disabled {
+	opacity: 0.35;
+	cursor: default;
+	background: transparent !important;
+}
+
+.flipset-wrap .flipset-toolbar button.flipset-btn[aria-expanded="true"] {
+	background: rgba(255, 255, 255, 0.12) !important;
+}
+
+.flipset-wrap .flipset-page-indicator {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	padding: 0 4px;
+	color: #c3c4c7;
+	flex: 0 0 auto;
+}
+
+.flipset-wrap input.flipset-page-input[type="number"] {
+	width: 2.6em !important;
+	min-width: 2.6em !important;
+	max-width: 2.6em !important;
+	height: 26px !important;
+	margin: 0 !important;
+	padding: 0 2px !important;
+	border: 1px solid rgba(255, 255, 255, 0.16) !important;
+	border-radius: 4px;
+	background: #0a0a0a !important;
+	color: #f0f0f1 !important;
+	text-align: center;
+	font-size: 12px !important;
+	float: none !important;
+}
+
+.flipset-wrap .flipset-page-slash {
+	opacity: 0.55;
+}
+
+.flipset-wrap .flipset-zoom-label {
+	min-width: 2.8em;
+	text-align: center;
+	font-variant-numeric: tabular-nums;
+	color: #c3c4c7;
+	font-size: 12px;
+	flex: 0 0 auto;
+}
+
+.flipset-wrap .flipset-find {
+	position: relative;
+	display: flex;
+	align-items: center;
+	flex: 1 1 auto;
+	min-width: 0;
+	width: auto !important;
+}
+
+.flipset-wrap .flipset-find svg {
+	position: absolute;
+	left: 7px;
+	width: 13px;
+	height: 13px;
+	opacity: 0.55;
+	pointer-events: none;
+}
+
+.flipset-wrap input.flipset-find-input,
+.flipset-wrap input.flipset-find-input[type="search"] {
+	width: 100% !important;
+	min-width: 0 !important;
+	max-width: none !important;
+	height: 26px !important;
+	margin: 0 !important;
+	padding: 0 6px 0 24px !important;
+	border: 1px solid rgba(255, 255, 255, 0.16) !important;
+	border-radius: 4px;
+	background: #0a0a0a !important;
+	color: #f0f0f1 !important;
+	font-size: 12px !important;
+	float: none !important;
+	flex: 1 1 auto !important;
+}
+
+.flipset-wrap .flipset-find-input::placeholder {
+	color: #8c8f94;
+}
+
+.flipset-viewer {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	flex: 1 1 auto;
+	min-height: 220px;
+	overflow: hidden;
+	background: #3c434a;
+}
+
+.flipset-viewer:focus {
+	outline: none;
+}
+
+.flipset-viewer:focus-visible {
+	outline: 2px solid #72aee6;
+	outline-offset: -2px;
+}
+
+.flipset-caption {
+	margin: 0 0 8px;
+	font-weight: 600;
+	color: #1d2327;
+}
+
+.flipset-viewer[aria-busy="true"] {
+	background: linear-gradient(90deg, #2c3338 0%, #3c434a 40%, #2c3338 80%);
+	background-size: 200% 100%;
+	animation: flipset-shimmer 1.2s ease infinite;
+}
+
+@keyframes flipset-shimmer {
+	from {
+		background-position: 100% 0;
+	}
+	to {
+		background-position: -100% 0;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.flipset-viewer[aria-busy="true"] {
+		animation: none;
+		background: #2c3338;
+	}
+}
+
+.flipset-status {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: #dcdcde;
+	font-size: 14px;
+}
+
+.flipset-status.flipset-error {
+	color: #f18383;
+}
+
+.flipset-pages {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 16px;
+	box-sizing: border-box;
+	min-height: 100%;
+	height: 100%;
+	flex: 1 1 auto;
+	min-width: 0;
+	overflow: auto;
+	touch-action: pan-x pan-y;
+}
+
+.flipset-page-wrap {
+	position: relative;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+	background: #fff;
+	touch-action: none;
+}
+
+.flipset-page {
+	display: block;
+	max-width: none;
+}
+
+.flipset-text-layer {
+	position: absolute;
+	inset: 0;
+	overflow: hidden;
+	line-height: 1;
+	opacity: 1;
+	pointer-events: auto;
+	user-select: text;
+	-webkit-user-select: text;
+	z-index: 1;
+}
+
+.flipset-text-layer span {
+	position: absolute;
+	white-space: pre;
+	color: transparent;
+	cursor: text;
+	transform-origin: 0% 0%;
+}
+
+.flipset-text-layer span::selection {
+	background: rgba(0, 102, 204, 0.35);
+	color: transparent;
+}
+
+.flipset-text-layer span.flipset-hl {
+	background: rgba(255, 213, 0, 0.45);
+	color: transparent;
+}
+
+.flipset-annotation-layer {
+	position: absolute;
+	inset: 0;
+	overflow: hidden;
+	pointer-events: none;
+	z-index: 2;
+	transform-origin: 0 0;
+}
+
+.flipset-annotation-layer section {
+	position: absolute;
+	text-align: initial;
+	pointer-events: auto;
+	box-sizing: border-box;
+	transform-origin: 0 0;
+}
+
+.flipset-annotation-layer a {
+	position: absolute;
+	inset: 0;
+	display: block;
+	font-size: 1em;
+}
+
+.flipset-annotation-layer .linkAnnotation > a:hover,
+.flipset-annotation-layer .buttonWidgetAnnotation.pushButton > a:hover {
+	background: rgba(255, 255, 0, 0.18);
+	box-shadow: 0 0 0 1px rgba(255, 255, 0, 0.45);
+}
+
+.flipset-admin-notice {
+	padding: 8px 12px;
+	background: #fcf0f1;
+	border-left: 4px solid #d63638;
+}
+
+.flipset-branding {
+	margin: 8px 0 0;
+	text-align: center;
+	font-size: 11px;
+	line-height: 1.4;
+}
+
+.flipset-branding a {
+	color: #646970;
+	text-decoration: none;
+}
+
+.flipset-branding a:hover,
+.flipset-branding a:focus {
+	color: #2271b1;
+	text-decoration: underline;
+}
+
+.flipset-sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+.flipset-password {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 3;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	gap: 8px;
+	width: min(22rem, calc(100% - 32px));
+	padding: 16px;
+	border-radius: 6px;
+	background: #1d2327;
+	color: #dcdcde;
+	box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+.flipset-password-prompt {
+	margin: 0;
+	font-size: 14px;
+	line-height: 1.4;
+	text-align: center;
+}
+
+.flipset-password-input {
+	height: 32px;
+	margin: 0;
+	padding: 0 8px;
+	border: 1px solid rgba(255, 255, 255, 0.16);
+	border-radius: 4px;
+	background: #0a0a0a;
+	color: #f0f0f1;
+	font-size: 14px;
+}
+
+.flipset-password-submit {
+	height: 32px;
+	border: 0;
+	border-radius: 4px;
+	background: #2271b1;
+	color: #fff;
+	font-size: 13px;
+	cursor: pointer;
+}
+
+.flipset-password-submit:hover,
+.flipset-password-submit:focus {
+	background: #135e96;
+}
+
+.flipset-password-error {
+	margin: 0;
+	color: #f18383;
+	font-size: 13px;
+	text-align: center;
+}
+
+.flipset-side {
+	position: relative;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	z-index: 3;
+	display: flex;
+	flex-direction: column;
+	flex: 0 0 220px;
+	width: 220px;
+	max-width: 80%;
+	height: 100%;
+	background: #1d2327;
+	color: #dcdcde;
+	border-right: 1px solid #0a0a0a;
+	box-shadow: 4px 0 16px rgba(0, 0, 0, 0.25);
+	order: -1;
+}
+
+@media (max-width: 580px) {
+	.flipset-side {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		z-index: 10;
+		width: 240px;
+		max-width: 85%;
+		box-shadow: 8px 0 24px rgba(0, 0, 0, 0.5);
+	}
+}
+
+.flipset-side[hidden] {
+	display: none;
+}
+
+.flipset-side-head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+	flex: 0 0 auto;
+	padding: 8px 8px 8px 12px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.flipset-side-title {
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 1.3;
+}
+
+.flipset-side-close {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 26px;
+	height: 26px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-radius: 4px;
+	background: transparent;
+	color: #dcdcde;
+	font-size: 18px;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.flipset-side-close:hover,
+.flipset-side-close:focus {
+	background: rgba(255, 255, 255, 0.1);
+	color: #fff;
+}
+
+.flipset-toc-panel,
+.flipset-thumbs-panel {
+	flex: 1 1 auto;
+	min-height: 0;
+	overflow: auto;
+	padding: 8px;
+}
+
+.flipset-toc-panel[hidden],
+.flipset-thumbs-panel[hidden] {
+	display: none;
+}
+
+.flipset-toc-item {
+	display: block;
+	width: 100%;
+	margin: 0 0 2px;
+	padding: 6px 8px;
+	border: 0;
+	border-radius: 4px;
+	background: transparent;
+	color: #dcdcde;
+	font-size: 12px;
+	line-height: 1.35;
+	text-align: left;
+	cursor: pointer;
+}
+
+.flipset-toc-item[data-depth="1"] {
+	padding-left: 20px;
+}
+
+.flipset-toc-item:hover,
+.flipset-toc-item:focus {
+	background: rgba(255, 255, 255, 0.08);
+	color: #fff;
+}
+
+.flipset-thumbs-panel {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.flipset-thumb {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 4px;
+	width: 100%;
+	margin: 0;
+	padding: 6px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	background: transparent;
+	color: #dcdcde;
+	cursor: pointer;
+}
+
+.flipset-thumb:hover,
+.flipset-thumb:focus {
+	background: rgba(255, 255, 255, 0.06);
+}
+
+.flipset-thumb.is-current {
+	border-color: #72aee6;
+	background: rgba(114, 174, 230, 0.12);
+}
+
+.flipset-thumb-slot {
+	width: 96px;
+	min-height: 72px;
+	background: #3c434a;
+	border-radius: 2px;
+	overflow: hidden;
+}
+
+.flipset-thumb-slot canvas {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.flipset-thumb-label {
+	font-size: 11px;
+	line-height: 1.2;
+}
+
+@media (max-width: 720px) {
+	.flipset-wrap {
+		margin: 1em 0;
+	}
+
+	.flipset-wrap .flipset-shell {
+		height: min(85dvh, 100svh - 4rem) !important;
+		max-height: 85dvh;
+	}
+
+	.flipset-wrap .flipset-chrome {
+		flex-wrap: wrap !important;
+		overflow: visible;
+		padding-left: env(safe-area-inset-left);
+		padding-right: env(safe-area-inset-right);
+	}
+
+	.flipset-wrap .flipset-toolbar {
+		order: 1;
+		flex: 1 1 100%;
+		padding: 4px 6px;
+	}
+
+	.flipset-wrap .flipset-toolbar button.flipset-btn,
+	.flipset-wrap .flipset-toolbar a.flipset-btn {
+		width: 40px !important;
+		min-width: 40px !important;
+		max-width: 40px !important;
+		height: 40px !important;
+		flex: 0 0 40px !important;
+		touch-action: manipulation;
+	}
+
+	.flipset-wrap .flipset-btn svg {
+		width: 18px;
+		height: 18px;
+	}
+
+	.flipset-wrap input.flipset-page-input[type="number"],
+	.flipset-wrap input.flipset-find-input,
+	.flipset-wrap input.flipset-find-input[type="search"] {
+		height: 40px !important;
+		font-size: 16px !important;
+	}
+
+	.flipset-wrap .flipset-more {
+		display: inline-flex !important;
+	}
+
+	.flipset-wrap .flipset-toolbar:not(.is-more-open) .flipset-panel-group,
+	.flipset-wrap .flipset-toolbar:not(.is-more-open) .flipset-zoom-out,
+	.flipset-wrap .flipset-toolbar:not(.is-more-open) .flipset-zoom-in,
+	.flipset-wrap .flipset-toolbar:not(.is-more-open) .flipset-zoom-label,
+	.flipset-wrap .flipset-toolbar:not(.is-more-open) .flipset-rotate,
+	.flipset-wrap .flipset-toolbar:not(.is-more-open) .flipset-find-group,
+	.flipset-wrap .flipset-toolbar:not(.is-more-open) .flipset-tool-group-end .flipset-download,
+	.flipset-wrap .flipset-toolbar:not(.is-more-open) .flipset-tool-group-end .flipset-print,
+	.flipset-wrap .flipset-toolbar:not(.is-more-open) .flipset-tool-group-end .flipset-present,
+	.flipset-wrap .flipset-toolbar:not(.is-more-open) .flipset-tool-group-end .flipset-fs,
+	.flipset-wrap .flipset-toolbar:not(.is-more-open) .flipset-pan,
+	.flipset-wrap .flipset-toolbar:not(.is-more-open) .flipset-view {
+		display: none !important;
+	}
+
+	.flipset-wrap .flipset-toolbar.is-more-open {
+		flex-wrap: wrap !important;
+	}
+
+	.flipset-password-input,
+	.flipset-password-submit {
+		height: 44px;
+		font-size: 16px;
+	}
+
+	.flipset-pages.is-scroll {
+		-webkit-overflow-scrolling: touch;
+		overscroll-behavior: contain;
+		touch-action: pan-y;
+	}
+
+	.flipset-pages.is-scroll .flipset-page-wrap {
+		touch-action: pan-y pinch-zoom;
+	}
+}
+
+.flipset-wrap .flipset-more { display: inline-flex !important; }
+
+.flipset-wrap .flipset-find-status {
+	min-width: 3.2em;
+	padding: 0 4px;
+	color: #c3c4c7;
+	font-size: 11px;
+	font-variant-numeric: tabular-nums;
+	white-space: nowrap;
+}
+
+.flipset-wrap .flipset-toolbar button.flipset-btn.is-active,
+.flipset-wrap .flipset-toolbar button.flipset-btn[aria-pressed="true"] {
+	background: rgba(114, 174, 230, 0.28) !important;
+	color: #fff !important;
+}
+
+.flipset-pages.is-scroll {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 16px;
+	height: 100%;
+	min-height: 0;
+	overflow: auto;
+}
+
+.flipset-pages.is-spread {
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: nowrap;
+}
+
+.flipset-viewer.is-pan,
+.flipset-viewer.is-pan .flipset-page-wrap {
+	cursor: grab;
+}
+
+.flipset-viewer.is-pan.is-panning,
+.flipset-viewer.is-pan.is-panning .flipset-page-wrap {
+	cursor: grabbing;
+}
+
+.flipset-viewer.is-pan .flipset-text-layer,
+.flipset-viewer.is-pan .flipset-annotation-layer {
+	pointer-events: none;
+}
+
+.flipset-shell.is-present {
+	position: relative;
+}
+
+.flipset-shell.is-present .flipset-chrome {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 8;
+	opacity: 0;
+	transform: translateY(-8px);
+	transition: opacity 0.18s ease, transform 0.18s ease;
+	pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.flipset-shell.is-present:hover .flipset-chrome,
+	.flipset-shell.is-present .flipset-chrome:focus-within {
+		opacity: 1;
+		transform: none;
+		pointer-events: auto;
+	}
+}
+
+.flipset-shell.is-present.is-present-show .flipset-chrome,
+.flipset-shell.is-present .flipset-chrome:focus-within {
+	opacity: 1;
+	transform: none;
+	pointer-events: auto;
+}
+
+.flipset-shell.is-present .flipset-viewer {
+	flex: 1 1 auto;
+	min-height: 0;
+}
+
+/* ===================================================================
+   Themes: Dark & Sepia
+   ========================================================================== */
+.flipset-shell.flipset-theme-dark {
+	background: #14171a;
+	border-color: #2c3136;
+}
+
+.flipset-shell.flipset-theme-dark .flipset-chrome {
+	background: #0d0f11;
+	border-bottom-color: #1e2226;
+	color: #e2e8f0;
+}
+
+.flipset-shell.flipset-theme-dark .flipset-page-wrap canvas {
+	filter: invert(0.92) hue-rotate(180deg) brightness(0.95);
+}
+
+.flipset-shell.flipset-theme-dark .flipset-text-layer {
+	mix-blend-mode: difference;
+}
+
+.flipset-shell.flipset-theme-dark .flipset-panel {
+	background: #181b1e;
+	border-right-color: #2c3136;
+}
+
+.flipset-shell.flipset-theme-sepia {
+	background: #f4ecd8;
+	border-color: #dfd5be;
+}
+
+.flipset-shell.flipset-theme-sepia .flipset-chrome {
+	background: #3c3124;
+	border-bottom-color: #2c2419;
+	color: #f7eed7;
+}
+
+.flipset-shell.flipset-theme-sepia .flipset-btn {
+	color: #f7eed7;
+}
+
+.flipset-shell.flipset-theme-sepia .flipset-btn:hover,
+.flipset-shell.flipset-theme-sepia .flipset-btn:focus {
+	background: rgba(255, 255, 255, 0.12);
+	color: #fff;
+}
+
+.flipset-shell.flipset-theme-sepia .flipset-page-wrap canvas {
+	filter: sepia(0.36) contrast(0.96) brightness(0.98);
+}
+
+.flipset-shell.flipset-theme-sepia .flipset-panel {
+	background: #eee3c8;
+	border-right-color: #dfd5be;
+	color: #4a3d2e;
+}
+
+.flipset-shell.flipset-theme-sepia .flipset-toc-item {
+	color: #4a3d2e;
+}
+
+.flipset-shell.flipset-theme-sepia .flipset-toc-item:hover,
+.flipset-shell.flipset-theme-sepia .flipset-toc-item:focus {
+	background: rgba(0, 0, 0, 0.08);
+	color: #2c2419;
+}
+
+/* ==========================================================================
+   Modals (Shortcuts & Share)
+   ========================================================================== */
+.flipset-shell {
+	position: relative;
+}
+
+.flipset-modal[hidden] {
+	display: none !important;
+}
+
+.flipset-modal {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 50;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 16px;
+}
+
+.flipset-modal-backdrop {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.65);
+	backdrop-filter: blur(3px);
+	-webkit-backdrop-filter: blur(3px);
+}
+
+.flipset-modal-card {
+	position: relative;
+	z-index: 2;
+	width: 100%;
+	max-width: 440px;
+	max-height: 90%;
+	background: #1e2327;
+	color: #f0f0f1;
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	border-radius: 8px;
+	box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	animation: flipsetModalFadeIn 0.15s ease-out;
+}
+
+@keyframes flipsetModalFadeIn {
+	from {
+		opacity: 0;
+		transform: scale(0.96);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+.flipset-modal-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 12px 16px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.flipset-modal-title {
+	margin: 0;
+	font-size: 15px;
+	font-weight: 600;
+	color: #fff;
+}
+
+.flipset-modal-close {
+	appearance: none;
+	background: transparent;
+	border: 0;
+	color: #a7aaad;
+	cursor: pointer;
+	padding: 4px;
+	border-radius: 4px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	transition: color 0.12s ease, background-color 0.12s ease;
+}
+
+.flipset-modal-close:hover,
+.flipset-modal-close:focus {
+	background: rgba(255, 255, 255, 0.1);
+	color: #fff;
+}
+
+.flipset-modal-body {
+	padding: 16px;
+	overflow-y: auto;
+}
+
+/* Shortcuts Grid */
+.flipset-shortcuts-grid {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.flipset-shortcut-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	font-size: 12.5px;
+	padding-bottom: 6px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.flipset-shortcut-row:last-child {
+	border-bottom: 0;
+	padding-bottom: 0;
+}
+
+.flipset-shortcut-desc {
+	color: #c3c4c7;
+}
+
+.flipset-shortcut-keys {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	flex-shrink: 0;
+}
+
+.flipset-shortcut-keys kbd {
+	display: inline-block;
+	padding: 2px 6px;
+	font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+	font-size: 11px;
+	line-height: 1.3;
+	color: #f0f0f1;
+	background: rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 4px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+/* Share Modal Elements */
+.flipset-share-link-group {
+	display: flex;
+	gap: 6px;
+	margin-bottom: 10px;
+}
+
+.flipset-share-input {
+	flex: 1 1 auto;
+	min-width: 0;
+	padding: 6px 10px;
+	font-size: 12px;
+	color: #f0f0f1;
+	background: rgba(0, 0, 0, 0.25);
+	border: 1px solid rgba(255, 255, 255, 0.16);
+	border-radius: 4px;
+	outline: none;
+}
+
+.flipset-share-input:focus {
+	border-color: #72aee6;
+}
+
+.flipset-share-copy {
+	flex: 0 0 auto;
+	padding: 0 14px;
+	font-size: 12px;
+	font-weight: 500;
+	background: #2271b1 !important;
+	color: #fff !important;
+	border-radius: 4px !important;
+	border: 0 !important;
+	cursor: pointer;
+	height: 32px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	transition: background-color 0.12s ease;
+}
+
+.flipset-share-copy:hover,
+.flipset-share-copy:focus {
+	background: #135e96 !important;
+}
+
+.flipset-share-page-option {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 12px;
+	color: #c3c4c7;
+	margin-bottom: 16px;
+	cursor: pointer;
+}
+
+.flipset-share-buttons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.flipset-share-item {
+	flex: 1 1 calc(50% - 4px);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 8px 12px;
+	border-radius: 6px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #f0f0f1 !important;
+	background: rgba(255, 255, 255, 0.08);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	text-decoration: none !important;
+	transition: background-color 0.12s ease, transform 0.1s ease;
+}
+
+.flipset-share-item:hover,
+.flipset-share-item:focus {
+	background: rgba(255, 255, 255, 0.16);
+	transform: translateY(-1px);
+}
+
+.flipset-share-item.flipset-share-x:hover {
+	background: #000;
+}
+
+.flipset-share-item.flipset-share-fb:hover {
+	background: #1877f2;
+}
+
+.flipset-share-item.flipset-share-linkedin:hover {
+	background: #0a66c2;
+}
+
+.flipset-share-item.flipset-share-wa:hover {
+	background: #25d366;
+	color: #fff !important;
+}
+
+.flipset-share-item.flipset-share-email:hover {
+	background: #ea4335;
+}
+
+/* ==========================================================================
+   Lazy Loading Placeholder
+   ========================================================================== */
+.flipset-lazy-placeholder {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+	width: 100%;
+	height: 100%;
+	color: #dcdcde;
+	cursor: pointer;
+	padding: 24px;
+	text-align: center;
+}
+
+.flipset-lazy-btn {
+	appearance: none;
+	background: #2271b1;
+	color: #fff;
+	border: 0;
+	border-radius: 6px;
+	padding: 10px 18px;
+	font-size: 13px;
+	font-weight: 500;
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+	transition: background-color 0.12s ease, transform 0.1s ease;
+}
+
+.flipset-lazy-btn:hover,
+.flipset-lazy-btn:focus {
+	background: #135e96;
+	transform: translateY(-1px);
+}
+
+.flipset-noscript {
+	padding: 24px;
+	text-align: center;
+	background: #2c3338;
+	color: #fff;
+	border-radius: 4px;
+}
+
+.flipset-noscript a {
+	color: #72aee6;
+	font-weight: 600;
+	text-decoration: underline;
+}
+
+/* ==========================================================================
+   CORS & Error Diagnostics
+   ========================================================================== */
+.flipset-cors-card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 32px 20px;
+	text-align: center;
+	max-width: 520px;
+	margin: 0 auto;
+	color: #f0f0f1;
+}
+
+.flipset-cors-icon {
+	color: #f0b849;
+	margin-bottom: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.flipset-cors-title {
+	margin: 0 0 8px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #fff;
+}
+
+.flipset-cors-desc {
+	margin: 0 0 16px;
+	font-size: 13px;
+	line-height: 1.5;
+	color: #c3c4c7;
+}
+
+.flipset-cors-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 9px 18px;
+	background: #2271b1;
+	color: #fff !important;
+	text-decoration: none !important;
+	font-weight: 500;
+	font-size: 13px;
+	border-radius: 6px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	transition: background-color 0.12s ease, transform 0.1s ease;
+}
+
+.flipset-cors-btn:hover,
+.flipset-cors-btn:focus {
+	background: #135e96;
+	color: #fff !important;
+	transform: translateY(-1px);
+}
+
+.flipset-cors-admin-hint {
+	margin-top: 18px;
+	padding: 10px 14px;
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	border-radius: 6px;
+	font-size: 11px;
+	line-height: 1.4;
+	color: #a7aaad;
+	text-align: left;
+}
+
+/* ==========================================================================
+   More Tools Dropdown Menu
+   ========================================================================== */
+.flipset-more-wrap {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+}
+
+.flipset-more-menu {
+	position: absolute;
+	top: calc(100% + 6px);
+	right: 0;
+	z-index: 1000;
+	min-width: 190px;
+	padding: 6px;
+	background: #1d2327;
+	border: 1px solid rgba(255, 255, 255, 0.16);
+	border-radius: 8px;
+	box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.flipset-more-menu[hidden] {
+	display: none !important;
+}
+
+.flipset-more-item {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	width: 100%;
+	padding: 7px 10px;
+	border: 0;
+	border-radius: 6px;
+	background: transparent;
+	color: #dcdcde;
+	font-size: 12px;
+	line-height: 1.4;
+	text-align: left;
+	cursor: pointer;
+	text-decoration: none;
+	transition: background-color 0.12s ease, color 0.12s ease;
+}
+
+.flipset-more-item:hover,
+.flipset-more-item:focus {
+	background: rgba(255, 255, 255, 0.1);
+	color: #fff;
+}
+
+.flipset-more-item svg {
+	width: 15px;
+	height: 15px;
+	flex-shrink: 0;
+}
+
+/* ==========================================================================
+   3D FlipBook Styles
+   ========================================================================== */
+.flipset-pages.is-flip {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 0;
+	cursor: pointer;
+	user-select: none;
+	-webkit-user-select: none;
+}
+
+.flipset-pages.is-flip .flipset-page-wrap {
+	position: relative;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+/* Left page in spread has right-edge spine gradient */
+.flipset-pages.is-flip .flipset-page-wrap:first-of-type:not(:only-of-type) {
+	border-radius: 4px 0 0 4px;
+}
+
+.flipset-pages.is-flip.is-flip-busy .flipset-page-wrap,
+.flipset-pages.is-flip .flipset-page-wrap.is-flip-hidden {
+	visibility: hidden;
+}
+
+/* Real 3D page-turn stage */
+.flipset-flip-stage {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 30;
+	pointer-events: none;
+}
+
+.flipset-flip-cover,
+.flipset-flip-cast {
+	position: absolute;
+	background: #fff;
+}
+
+.flipset-flip-cast {
+	background: transparent;
+	opacity: 0;
+}
+
+.flipset-flip-strip {
+	position: absolute;
+	transform-style: preserve-3d;
+	will-change: transform;
+}
+
+.flipset-flip-face {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: calc(100% + 1px);
+	height: 100%;
+	background-color: #fff;
+	background-repeat: no-repeat;
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+}
+
+.flipset-flip-face.is-back {
+	transform: rotateY(180deg);
+}
+
+.flipset-flip-shade {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background: #000;
+	opacity: 0;
+}
+/* Book spine dividing line */
+.flipset-pages.is-flip .flipset-page-wrap:first-child:not(:only-child)::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: 2px;
+	background: linear-gradient(to right, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.05));
+	pointer-events: none;
+	z-index: 5;
+}

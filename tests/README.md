@@ -1,4 +1,4 @@
-# Foliora tests
+# Flipset tests
 
 Dev-only. Excluded from the WordPress.org zip via `.distignore`.
 
@@ -10,7 +10,7 @@ bash bin/install-wp-tests.sh wordpress_test root root 127.0.0.1 latest
 composer phpunit
 ```
 
-Covers `Foliora_Loader`, `Foliora_Viewer`, `Foliora_Thumbnails`, and `Foliora_Library`. Needs bash, Subversion, and a MySQL client (GitHub Actions provides these; Local on Windows typically does not).
+Covers `Flipset_Loader`, `Flipset_Viewer`, `Flipset_Thumbnails`, and `Flipset_Library`. Needs bash, Subversion, and a MySQL client (GitHub Actions provides these; Local on Windows typically does not).
 
 ## Playwright
 

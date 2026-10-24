@@ -1,4 +1,4 @@
-=== Foliora – PDF Viewer, PDF Embed, 3D Flipbook & Document Library ===
+=== Flipset – PDF Viewer, PDF Embed, 3D Flipbook & Document Library ===
 Contributors: itsmanzur
 Tags: pdf, pdf viewer, pdf embed, flipbook, document library
 Requires at least: 6.0
@@ -12,9 +12,9 @@ Embed PDFs with a fast PDF viewer, 3D flipbook and document library. Searchable 
 
 == Description ==
 
-Foliora embeds PDF documents in posts, pages and widgets with a PDF.js build that ships inside the plugin. Use a shortcode, a Gutenberg block, a page-builder widget, or paste a PDF link on its own line. There is no CDN, no external service and no API key: rendering happens in the visitor's browser, from files on your own site.
+Flipset embeds PDF documents in posts, pages and widgets with a PDF.js build that ships inside the plugin. Use a shortcode, a Gutenberg block, a page-builder widget, or paste a PDF link on its own line. There is no CDN, no external service and no API key: rendering happens in the visitor's browser, from files on your own site.
 
-**Why Foliora?**
+**Why Flipset?**
 
 * **Fast and local** – bundled PDF.js, nothing loaded from a CDN, optional lazy loading.
 * **Accessible** – keyboard controls, screen reader page announcements, and a check that flags PDFs without accessibility tags.
@@ -27,7 +27,7 @@ Foliora embeds PDF documents in posts, pages and widgets with a PDF.js build tha
 
 **Viewer**
 
-* Shortcode `[foliora file="https://example.com/document.pdf"]` and a "Foliora Viewer" Gutenberg block with a Media Library picker and first-page preview.
+* Shortcode `[flipset file="https://example.com/document.pdf"]` and a "Flipset Viewer" Gutenberg block with a Media Library picker and first-page preview.
 * Paste a direct `.pdf` link on its own line to embed it. PDF attachment pages can show the viewer too (a setting).
 * Zoom, fit page or width, rotate, find with match count, page thumbnails, document outline, hand tool, fullscreen, presentation mode, print and download.
 * Selectable text and working links inside the PDF; password-protected PDFs ask for the password.
@@ -46,13 +46,13 @@ Foliora embeds PDF documents in posts, pages and widgets with a PDF.js build tha
 
 **Document library**
 
-* `[foliora_library]` shortcode and "Foliora Library" block: a grid of your Media Library PDFs with first-page thumbnails, search and pagination; a document opens in place.
-* Foliora → Docs & Features lists your PDFs with preview, search-index status and accessibility status, and copies shortcodes.
-* Shortcode Builder with live preview and one-click presets; save an embed once and reuse it as `[foliora id="1"]` or with the block.
+* `[flipset_library]` shortcode and "Flipset Library" block: a grid of your Media Library PDFs with first-page thumbnails, search and pagination; a document opens in place.
+* Flipset → Docs & Features lists your PDFs with preview, search-index status and accessibility status, and copies shortcodes.
+* Shortcode Builder with live preview and one-click presets; save an embed once and reuse it as `[flipset id="1"]` or with the block.
 
 **SEO and search**
 
-* PDF text is extracted in your browser from Foliora → Docs & Features and stored on your site, so posts and pages that embed a PDF match in WordPress search.
+* PDF text is extracted in your browser from Flipset → Docs & Features and stored on your site, so posts and pages that embed a PDF match in WordPress search.
 * Open Graph and Twitter image from the PDF's first page, unless an SEO plugin already provides one.
 * Schema.org DigitalDocument structured data.
 * A plain link to the PDF is shown when JavaScript is off.
@@ -61,7 +61,7 @@ Foliora embeds PDF documents in posts, pages and widgets with a PDF.js build tha
 
 * Labelled toolbar buttons, visible keyboard focus and full keyboard control.
 * Page changes are announced to screen readers; reduced-motion preference is respected.
-* Foliora → Docs & Features marks PDFs that are not tagged for accessibility.
+* Flipset → Docs & Features marks PDFs that are not tagged for accessibility.
 
 **Builders and integrations**
 
@@ -71,17 +71,17 @@ Foliora embeds PDF documents in posts, pages and widgets with a PDF.js build tha
 
 **Developer friendly**
 
-* Public filters and actions, and DOM events such as `foliora:ready` and `foliora:pagechange`, documented in `docs/HOOKS.md`.
-* WP-CLI: `wp foliora status`, `wp foliora reindex`, `wp foliora clear_cache`.
-* Clean uninstall: settings and Foliora data are removed, your media is kept.
+* Public filters and actions, and DOM events such as `flipset:ready` and `flipset:pagechange`, documented in `docs/HOOKS.md`.
+* WP-CLI: `wp flipset status`, `wp flipset reindex`, `wp flipset clear_cache`.
+* Clean uninstall: settings and Flipset data are removed, your media is kept.
 
-= Extending Foliora =
+= Extending Flipset =
 
-Foliora exposes public WordPress filters and actions (see Developer Hooks below) so add-ons and themes can extend the viewer without modifying core code. No paid features are sold or locked in this plugin.
+Flipset exposes public WordPress filters and actions (see Developer Hooks below) so add-ons and themes can extend the viewer without modifying core code. No paid features are sold or locked in this plugin.
 
 = External services =
 
-Foliora does not contact any server on its own. It has no analytics, no licence check, no update ping and no remote scripts, fonts or images. The visitor's browser opens an outside address only when the visitor clicks one of these links:
+Flipset does not contact any server on its own. It has no analytics, no licence check, no update ping and no remote scripts, fonts or images. The visitor's browser opens an outside address only when the visitor clicks one of these links:
 
 * **Share dialog (X, Facebook, LinkedIn, WhatsApp)** – the "Share" button in the viewer builds share links. Nothing is sent until the visitor clicks one; then the address of the current page (optionally with the page number) and, for X and WhatsApp, the document title are passed to that network in the link:
   * X (Twitter), `twitter.com/intent/tweet` – [Terms](https://twitter.com/en/tos), [Privacy](https://twitter.com/en/privacy)
@@ -89,7 +89,7 @@ Foliora does not contact any server on its own. It has no analytics, no licence 
   * LinkedIn, `linkedin.com/sharing/share-offsite` – [Terms](https://www.linkedin.com/legal/user-agreement), [Privacy](https://www.linkedin.com/legal/privacy-policy)
   * WhatsApp, `api.whatsapp.com/send` – [Terms](https://www.whatsapp.com/legal/terms-of-service), [Privacy](https://www.whatsapp.com/legal/privacy-policy)
 * **Email share** uses a `mailto:` link and opens the visitor's own email program; no server is involved.
-* **"Powered by Foliora" credit** – off by default. If an administrator turns it on under Foliora → Settings → Credit link, a normal link to https://thereadscope.com/foliora is shown under each viewer. The plugin sends nothing there; the visitor's browser makes an ordinary page request only if the link is clicked.
+* **"Powered by Flipset" credit** – off by default. If an administrator turns it on under Flipset → Settings → Credit link, a normal link to https://flipset.thereadscope.com is shown under each viewer. The plugin sends nothing there; the visitor's browser makes an ordinary page request only if the link is clicked.
 * **PDFs hosted on another domain** – if you embed a PDF from another website, the visitor's browser downloads it directly from that host, which receives the visitor's IP address. PDFs in your own Media Library are served by your own site.
 
 = Third-party libraries =
@@ -99,10 +99,10 @@ Foliora does not contact any server on its own. It has no analytics, no licence 
 
 == Installation ==
 
-1. Upload the `foliora` folder to `/wp-content/plugins/`, or install the plugin from the Plugins screen.
-2. Activate the plugin. You will land on the Foliora dashboard.
-3. Upload a PDF in Media, or open Foliora → Docs & Features.
-4. Copy a shortcode, create a test page, or insert the "Foliora Viewer" block in the editor.
+1. Upload the `flipset` folder to `/wp-content/plugins/`, or install the plugin from the Plugins screen.
+2. Activate the plugin. You will land on the Flipset dashboard.
+3. Upload a PDF in Media, or open Flipset → Docs & Features.
+4. Copy a shortcode, create a test page, or insert the "Flipset Viewer" block in the editor.
 
 == Frequently Asked Questions ==
 
@@ -112,23 +112,23 @@ No. Rendering happens in the visitor's browser with the PDF.js library bundled i
 
 = How do I use the 3D flipbook? =
 
-Use `[foliora file="https://example.com/document.pdf" view="flip"]`, choose "3D FlipBook" in the View setting of the Foliora Viewer block, or switch the view from the More tools menu in the toolbar. On narrow screens (under 640 px) it shows a single page.
+Use `[flipset file="https://example.com/document.pdf" view="flip"]`, choose "3D FlipBook" in the View setting of the Flipset Viewer block, or switch the view from the More tools menu in the toolbar. On narrow screens (under 640 px) it shows a single page.
 
 = Shortcode or block - which should I use? =
 
-They render the same viewer. Use the block in the editor if you want a file picker and first-page preview. Use `[foliora file="..."]` in the classic editor, widgets or PHP templates. Elementor, Divi and Beaver Builder have Foliora Viewer and Foliora Library widgets that use the same renderer.
+They render the same viewer. Use the block in the editor if you want a file picker and first-page preview. Use `[flipset file="..."]` in the classic editor, widgets or PHP templates. Elementor, Divi and Beaver Builder have Flipset Viewer and Flipset Library widgets that use the same renderer.
 
 = Can I save an embed and reuse it? =
 
-Yes. Build it in Foliora → Shortcode Builder, save it, and use `[foliora id="1"]` or the block's saved-embed ID. Edit the saved embed later and every page that uses it updates.
+Yes. Build it in Flipset → Shortcode Builder, save it, and use `[flipset id="1"]` or the block's saved-embed ID. Edit the saved embed later and every page that uses it updates.
 
 = Does it work with WPML or Polylang? =
 
-Yes. Translate the PDF in the Media Library (WPML Media Translation or Polylang's media option). Foliora swaps the file URL to the current language's attachment. You can also put a different PDF on each language's page. `wpml-config.xml` ships with the plugin so the block's `file` and `title` attributes are translatable.
+Yes. Translate the PDF in the Media Library (WPML Media Translation or Polylang's media option). Flipset swaps the file URL to the current language's attachment. You can also put a different PDF on each language's page. `wpml-config.xml` ships with the plugin so the block's `file` and `title` attributes are translatable.
 
 = The viewer is blank after enabling a cache plugin =
 
-Foliora excludes its PDF.js scripts from minify, combine and delay in WP Rocket, W3 Total Cache, Autoptimize, LiteSpeed Cache and SiteGround Optimizer, and marks those tags `data-no-optimize`. If another optimizer still concatenates them, add `foliora-viewer.js`, `pdf.min.js` and `pdf.worker.min.js` to that plugin's exclude list.
+Flipset excludes its PDF.js scripts from minify, combine and delay in WP Rocket, W3 Total Cache, Autoptimize, LiteSpeed Cache and SiteGround Optimizer, and marks those tags `data-no-optimize`. If another optimizer still concatenates them, add `flipset-viewer.js`, `pdf.min.js` and `pdf.worker.min.js` to that plugin's exclude list.
 
 = A PDF loads on my own site but fails from another domain =
 
@@ -136,47 +136,47 @@ The file URL must allow the page origin to fetch it. Cross-origin PDFs need CORS
 
 = Large PDFs feel slow =
 
-Foliora draws the visible page (or a two-page spread). Continuous scroll renders nearby pages only. Very large files still need to be downloaded once, so keep uploads reasonably sized when you can.
+Flipset draws the visible page (or a two-page spread). Continuous scroll renders nearby pages only. Very large files still need to be downloaded once, so keep uploads reasonably sized when you can.
 
 = How do I show a gallery of all my PDFs? =
 
-Add `[foliora_library]` to a page, or insert the Foliora Library block. Visitors see a grid of Media Library PDFs and can open any document in the Foliora viewer without leaving the page. Optional attributes: `columns`, `per_page`, `orderby` (`date`, `title` or `modified`), `order` (`ASC` or `DESC`) and `search` (`true` or `false`).
+Add `[flipset_library]` to a page, or insert the Flipset Library block. Visitors see a grid of Media Library PDFs and can open any document in the Flipset viewer without leaving the page. Optional attributes: `columns`, `per_page`, `orderby` (`date`, `title` or `modified`), `order` (`ASC` or `DESC`) and `search` (`true` or `false`).
 
 = How do library thumbnails get generated? =
 
-The first time you open Foliora → Docs & Features, the plugin draws each PDF's first page in your browser (bundled PDF.js) and saves a PNG in the Media Library, parented to that PDF. After that the library reuses the stored image. Thumbnails are not regenerated on every page load.
+The first time you open Flipset → Docs & Features, the plugin draws each PDF's first page in your browser (bundled PDF.js) and saves a PNG in the Media Library, parented to that PDF. After that the library reuses the stored image. Thumbnails are not regenerated on every page load.
 
 = What does "Untagged" mean on the Documents list? =
 
-The PDF has no accessibility tags (its MarkInfo dictionary is not marked). Screen readers may miss headings and reading order. Export a tagged PDF from Word, InDesign or Acrobat. Foliora does not rewrite the file. You can turn the check off under Foliora → Settings → Search and sharing.
+The PDF has no accessibility tags (its MarkInfo dictionary is not marked). Screen readers may miss headings and reading order. Export a tagged PDF from Word, InDesign or Acrobat. Flipset does not rewrite the file. You can turn the check off under Flipset → Settings → Search and sharing.
 
-= Does Foliora include translations? =
+= Does Flipset include translations? =
 
-Foliora is translation-ready (text domain `foliora`). Translations are delivered through translate.wordpress.org and installed automatically by WordPress for your site language. Contributions are welcome at https://translate.wordpress.org/projects/wp-plugins/foliora/ .
+Flipset is translation-ready (text domain `flipset`). Translations are delivered through translate.wordpress.org and installed automatically by WordPress for your site language. Contributions are welcome at https://translate.wordpress.org/projects/wp-plugins/flipset/ .
 
 = Does WordPress search find text inside PDFs? =
 
-Yes. Opening Foliora → Docs & Features extracts text from each PDF (the same visit that generates thumbnails) and stores it so posts and pages that embed those files match in the site search. The library search uses that text too. Password-protected PDFs are skipped, and scanned image-only PDFs have no text to find. Turn it off under Foliora → Settings → Search and sharing.
+Yes. Opening Flipset → Docs & Features extracts text from each PDF (the same visit that generates thumbnails) and stores it so posts and pages that embed those files match in the site search. The library search uses that text too. Password-protected PDFs are skipped, and scanned image-only PDFs have no text to find. Turn it off under Flipset → Settings → Search and sharing.
 
 = Why does a shared page show a PDF cover image? =
 
-If the page embeds a Foliora PDF and a first-page thumbnail exists, Foliora adds Open Graph and Twitter image tags using that cover. If Yoast SEO, Rank Math or a similar SEO plugin already sets an image, Foliora does not override it. You can disable this under Foliora → Settings.
+If the page embeds a Flipset PDF and a first-page thumbnail exists, Flipset adds Open Graph and Twitter image tags using that cover. If Yoast SEO, Rank Math or a similar SEO plugin already sets an image, Flipset does not override it. You can disable this under Flipset → Settings.
 
 = How do I hide download or print? =
 
-Foliora → Settings has checkboxes for the site default. A single embed can override with `[foliora file="..." download="false" print="false"]`, or use the matching toggles on the block. The `hide` attribute hides other controls, for example `hide="share,fullscreen"`.
+Flipset → Settings has checkboxes for the site default. A single embed can override with `[flipset file="..." download="false" print="false"]`, or use the matching toggles on the block. The `hide` attribute hides other controls, for example `hide="share,fullscreen"`.
 
 = Can I open the viewer on a specific page? =
 
-Yes. Use `[foliora file="..." page="4"]`, set Start page on the block, or link to the page with `#page=4`.
+Yes. Use `[flipset file="..." page="4"]`, set Start page on the block, or link to the page with `#page=4`.
 
 = Can I read EPUB ebooks? =
 
-EPUB files are not supported in this version. Foliora focuses on fast, accessible PDF rendering, 3D flipbooks and document libraries.
+EPUB files are not supported in this version. Flipset focuses on fast, accessible PDF rendering, 3D flipbooks and document libraries.
 
-= Does Foliora show a "Powered by" link? =
+= Does Flipset show a "Powered by" link? =
 
-No, not unless you ask for it. The credit link is off by default. If you would like to support the plugin, tick Foliora → Settings → Credit link and a small "Powered by Foliora" link appears under each viewer.
+No, not unless you ask for it. The credit link is off by default. If you would like to support the plugin, tick Flipset → Settings → Credit link and a small "Powered by Flipset" link appears under each viewer.
 
 = Does the free plugin collect analytics? =
 
@@ -184,50 +184,50 @@ No. There is no tracking pixel, no remote API and no phone-home. See the Privacy
 
 = Where do I get support or report a bug? =
 
-Use the support forum at https://wordpress.org/support/plugin/foliora/ or open an issue on GitHub: https://github.com/itsmanzur/foliora/issues
+Use the support forum at https://wordpress.org/support/plugin/flipset/ or open an issue on GitHub: https://github.com/itsmanzur/flipset/issues
 
 == Developer Hooks ==
 
-Add-ons can extend the viewer through public WordPress filters and actions. The full list, parameters and copy-paste examples are in `docs/HOOKS.md` in the GitHub repository: https://github.com/itsmanzur/foliora/blob/main/docs/HOOKS.md
+Add-ons can extend the viewer through public WordPress filters and actions. The full list, parameters and copy-paste examples are in `docs/HOOKS.md` in the GitHub repository: https://github.com/itsmanzur/flipset/blob/main/docs/HOOKS.md
 
 == Screenshots ==
 
 1. Front-end viewer with the compact toolbar (page, zoom, find, theme, share, fullscreen).
 2. The 3D flipbook view.
-3. Foliora dashboard with the setup checklist.
+3. Flipset dashboard with the setup checklist.
 4. Shortcode Builder with live preview and saved embeds.
 5. Docs & Features screen listing Media Library PDFs with previews and search/accessibility status.
 6. Settings with a live width and height preview.
-7. Gutenberg "Foliora Viewer" block with a Media Library picker and first-page preview.
-8. Front-end document library grid (`[foliora_library]`).
+7. Gutenberg "Flipset Viewer" block with a Media Library picker and first-page preview.
+8. Front-end document library grid (`[flipset_library]`).
 
 == Privacy ==
 
-Foliora does not collect any visitor data, sets no cookies, and has no analytics or tracking. The plugin has no remote requests of its own (see "External services").
+Flipset does not collect any visitor data, sets no cookies, and has no analytics or tracking. The plugin has no remote requests of its own (see "External services").
 
 What the plugin stores on your site:
 
-* **Settings** – one option, `foliora_settings`.
-* **Saved embeds** – a private custom post type, `foliora_embed`, with the embed's configuration in post meta.
+* **Settings** – one option, `flipset_settings`.
+* **Saved embeds** – a private custom post type, `flipset_embed`, with the embed's configuration in post meta.
 * **PDF data** – post meta on your PDF attachments (extracted text, page count, indexed flag, accessibility flag, thumbnail ID) and a combined search index on posts and pages that embed a PDF.
 * **Thumbnails** – first-page PNG images generated in your browser and saved in the Media Library.
 * **Admin notice state** – one user meta value per administrator who dismisses the welcome notice, and a short-lived transient used for the redirect after activation.
 
-In the visitor's own browser, Foliora uses `localStorage` (not cookies) to remember the last page read (`foliora:page:<file URL>`) and the chosen reading theme (`foliora_theme`). These values never leave the browser, and the visitor can clear them at any time.
+In the visitor's own browser, Flipset uses `localStorage` (not cookies) to remember the last page read (`flipset:page:<file URL>`) and the chosen reading theme (`flipset_theme`). These values never leave the browser, and the visitor can clear them at any time.
 
 The share feature only builds links; it contacts no one until the visitor clicks a link.
 
-Deleting the plugin from the Plugins screen removes the settings, saved embeds, Foliora post and user meta, the transient and the thumbnails it generated. Your uploaded PDFs and other media are kept.
+Deleting the plugin from the Plugins screen removes the settings, saved embeds, Flipset post and user meta, the transient and the thumbnails it generated. Your uploaded PDFs and other media are kept.
 
 == Credits ==
 
-Foliora is developed and maintained by itsmanzur.
+Flipset is developed and maintained by itsmanzur.
 
-Source code: https://github.com/itsmanzur/foliora
-Website: https://thereadscope.com/foliora
+Source code: https://github.com/itsmanzur/flipset
+Website: https://flipset.thereadscope.com
 PDF.js by Mozilla (Apache-2.0).
 
-Support / Bug reports: https://wordpress.org/support/plugin/foliora/ and https://github.com/itsmanzur/foliora/issues
+Support / Bug reports: https://wordpress.org/support/plugin/flipset/ and https://github.com/itsmanzur/flipset/issues
 
 == Changelog ==
 
