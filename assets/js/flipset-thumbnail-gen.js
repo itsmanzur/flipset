@@ -185,7 +185,8 @@
 			return Promise.resolve( false );
 		}
 		return pdf.getMarkInfo().then( function ( info ) {
-			return !!( info && info.marked );
+			// pdf.js returns the PDF dictionary keys as written: /MarkInfo << /Marked true >>.
+			return !!( info && ( info.Marked || info.marked ) );
 		} ).catch( function () {
 			return false;
 		} );

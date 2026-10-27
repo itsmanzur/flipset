@@ -53,7 +53,8 @@ const rootIgnores = new Set([
 	'playwright-report',
 	'test-results',
 	'PRODUCT_ROADMAP.md',
-	'translations-src'
+	'translations-src',
+	'.wordpress-org'
 ]);
 
 function shouldIgnore(relativePath) {

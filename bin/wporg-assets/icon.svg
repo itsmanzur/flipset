@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+	<defs>
+		<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+			<stop offset="0" stop-color="#4f46e5"/>
+			<stop offset="1" stop-color="#7c3aed"/>
+		</linearGradient>
+		<linearGradient id="shine" x1="0" y1="0" x2="0" y2="1">
+			<stop offset="0" stop-color="#fff" stop-opacity=".2"/>
+			<stop offset="1" stop-color="#fff" stop-opacity="0"/>
+		</linearGradient>
+		<linearGradient id="flap" x1="0" y1="0" x2="1" y2="1">
+			<stop offset="0" stop-color="#ffffff"/>
+			<stop offset="1" stop-color="#c7d2fe"/>
+		</linearGradient>
+	</defs>
+	<rect width="256" height="256" rx="58" fill="url(#bg)"/>
+	<rect width="256" height="130" rx="58" fill="url(#shine)"/>
+	<!-- left page -->
+	<path d="M48 84Q90 66 128 92V196Q90 172 48 188Z" fill="#fff" opacity=".97"/>
+	<!-- right page, bottom corner turned up -->
+	<path d="M128 92Q166 66 208 84V150L178 182Q150 176 128 196Z" fill="#fff" opacity=".72"/>
+	<!-- the turned corner -->
+	<path d="M208 150L178 182L170 152.5Z" fill="url(#flap)"/>
+</svg>

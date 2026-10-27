@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Flipset banner</title>
+<style>
+	@font-face { font-family: Outfit; src: url("fonts/outfit-latin.woff2") format("woff2"); font-weight: 100 900; }
+	* { box-sizing: border-box; margin: 0; padding: 0; }
+	html, body { width: 1544px; height: 500px; overflow: hidden; background: #0b1020; }
+	body { font-family: Outfit, "Segoe UI", sans-serif; color: #fff; position: relative; }
+
+	.bg { position: absolute; inset: 0;
+		background:
+			radial-gradient(900px 520px at 0% 0%, rgba(124, 58, 237, .55), transparent 62%),
+			radial-gradient(900px 560px at 100% 100%, rgba(79, 70, 229, .60), transparent 60%),
+			linear-gradient(135deg, #0b1020 0%, #151a33 100%); }
+	.grid { position: absolute; inset: 0; opacity: .07;
+		background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px);
+		background-size: 44px 44px; mask-image: linear-gradient(90deg, transparent 5%, #000 60%, transparent 100%); }
+
+	.copy { position: absolute; left: 96px; top: 0; bottom: 0; width: 700px; display: flex; flex-direction: column; justify-content: center; gap: 26px; }
+	.brand { display: flex; align-items: center; gap: 22px; }
+	.brand img { width: 84px; height: 84px; border-radius: 22px; box-shadow: 0 18px 40px -12px rgba(124, 58, 237, .8); }
+	.brand b { font-size: 68px; font-weight: 700; letter-spacing: -1.5px; }
+	h1 { font-size: 54px; line-height: 1.08; font-weight: 600; letter-spacing: -1px; color: #e9ecff; }
+	h1 em { font-style: normal; background: linear-gradient(90deg, #a5b4fc, #c4b5fd); -webkit-background-clip: text; background-clip: text; color: transparent; }
+	.chips { display: flex; gap: 12px; flex-wrap: wrap; }
+	.chips span { padding: 9px 18px; border-radius: 999px; font-size: 22px; font-weight: 500; color: #dfe4ff; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .16); }
+
+	/* ---- book ---- */
+	.stage { position: absolute; right: 70px; top: 0; width: 700px; height: 500px; perspective: 2000px; }
+	.book { position: absolute; left: 40px; top: 84px; width: 620px; height: 400px; transform-style: preserve-3d; transform: scale(.88) rotateX(4deg) rotateY(-11deg); }
+	.shadow { position: absolute; left: 20px; right: 20px; bottom: -36px; height: 60px; background: radial-gradient(closest-side, rgba(0, 0, 0, .55), transparent); filter: blur(10px); }
+	.page { position: absolute; top: 0; width: 310px; height: 400px; background: linear-gradient(90deg, #f4f1ea, #fffdf8 30%, #fff); overflow: hidden; }
+	.page.l { left: 0; border-radius: 10px 0 0 10px; box-shadow: inset -26px 0 34px -18px rgba(60, 50, 120, .35); }
+	.page.r { left: 310px; border-radius: 0 10px 10px 0; background: linear-gradient(270deg, #f1efe8, #fffdf8 35%, #fff); box-shadow: inset 26px 0 34px -18px rgba(60, 50, 120, .35); }
+	.page .in { padding: 34px 34px; }
+	.hd { height: 16px; width: 62%; border-radius: 4px; background: #1f2347; margin-bottom: 14px; }
+	.hd.s { width: 36%; height: 10px; background: #6366f1; margin-bottom: 22px; }
+	.ln { height: 8px; border-radius: 4px; background: #d9dbe8; margin-bottom: 11px; }
+	.ln.w9 { width: 92%; } .ln.w8 { width: 80%; } .ln.w6 { width: 62%; }
+	.fig { height: 118px; border-radius: 10px; margin: 20px 0 20px; background: linear-gradient(135deg, #4f46e5, #7c3aed); position: relative; overflow: hidden; }
+	.fig i { position: absolute; bottom: 0; width: 26px; background: rgba(255, 255, 255, .85); border-radius: 5px 5px 0 0; }
+	.fig i:nth-child(1) { left: 22px; height: 42px; } .fig i:nth-child(2) { left: 64px; height: 70px; opacity: .8; }
+	.fig i:nth-child(3) { left: 106px; height: 54px; } .fig i:nth-child(4) { left: 148px; height: 92px; opacity: .85; }
+	.fig i:nth-child(5) { left: 190px; height: 66px; } .fig i:nth-child(6) { left: 232px; height: 100px; opacity: .9; }
+	.spine { position: absolute; left: 306px; top: -2px; width: 8px; height: 404px; background: linear-gradient(90deg, rgba(60, 50, 120, .5), rgba(255, 255, 255, .5), rgba(60, 50, 120, .5)); z-index: 3; }
+	.turn { position: absolute; left: 310px; top: 0; width: 310px; height: 400px; transform-origin: 0 50%; transform: rotateY(-36deg); z-index: 4;
+		background: linear-gradient(90deg, #d9d6f0 0%, #fffdf8 40%, #f3f1ff 100%); border-radius: 0 10px 10px 0;
+		box-shadow: 30px 20px 60px rgba(10, 8, 40, .55); }
+	.turn .in { padding: 34px; opacity: .9; }
+	.turn::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(90deg, rgba(79, 70, 229, .18), transparent 55%); }
+
+	/* floating toolbar */
+	.bar { position: absolute; left: 150px; top: 18px; z-index: 9; display: flex; align-items: center; gap: 4px; padding: 10px 14px; border-radius: 16px;
+		background: rgba(17, 20, 44, .82); border: 1px solid rgba(255, 255, 255, .16); backdrop-filter: blur(8px); box-shadow: 0 16px 40px -10px rgba(0, 0, 0, .6); }
+	.bar svg { width: 24px; height: 24px; stroke: #dfe4ff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; margin: 0 8px; }
+	.bar span { font-size: 19px; color: #c7ccf5; margin: 0 8px; font-weight: 500; }
+	.bar .sep { width: 1px; height: 22px; background: rgba(255, 255, 255, .2); margin: 0 4px; }
+
+	.badge { position: absolute; right: 24px; bottom: 28px; z-index: 9; padding: 10px 18px; border-radius: 14px; font-size: 22px; font-weight: 600; color: #0b1020;
+		background: linear-gradient(135deg, #c7d2fe, #ddd6fe); box-shadow: 0 14px 30px -10px rgba(0, 0, 0, .6); }
+
+	/* right-to-left variant: mirror the layout, keep the artwork readable */
+	body.rtl .copy { left: auto; right: 96px; text-align: right; align-items: flex-end; }
+		body.rtl .chips { justify-content: flex-end; }
+	body.rtl .stage { right: auto; left: 70px; }
+</style>
+</head>
+<body>
+<div class="bg"></div><div class="grid"></div>
+
+<div class="copy">
+	<div class="brand"><img src="icon.svg" alt=""><b>Flipset</b></div>
+	<h1>PDF viewer, <em>3D flipbook</em><br>&amp; document library</h1>
+	<div class="chips"><span>No CDN</span><span>Accessible</span><span>Searchable PDF text</span></div>
+</div>
+
+<div class="stage">
+	<div class="bar">
+		<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg><span>3 / 24</span><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+		<i class="sep"></i>
+		<svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg><span>100%</span><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+		<i class="sep"></i>
+		<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+		<svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+	</div>
+	<div class="book">
+		<div class="shadow"></div>
+		<div class="page l"><div class="in"><div class="hd s"></div><div class="hd"></div>
+			<div class="ln w9"></div><div class="ln"></div><div class="ln w8"></div><div class="ln w6"></div>
+			<div class="fig"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+			<div class="ln"></div><div class="ln w9"></div><div class="ln w8"></div></div></div>
+		<div class="page r"><div class="in"><div class="hd s"></div><div class="hd" style="width:48%"></div>
+			<div class="ln"></div><div class="ln w8"></div><div class="ln w9"></div><div class="ln w6"></div>
+			<div class="ln"></div><div class="ln w9"></div><div class="ln w8"></div><div class="ln"></div>
+			<div class="ln w6"></div><div class="ln w9"></div></div></div>
+		<div class="spine"></div>
+		<div class="turn"><div class="in"><div class="hd s"></div><div class="hd" style="width:70%"></div>
+			<div class="ln w9"></div><div class="ln"></div><div class="ln w8"></div><div class="ln w9"></div><div class="ln w6"></div><div class="ln"></div></div></div>
+	</div>
+	<div class="badge">Free &amp; open source</div>
+</div>
+<script>if (location.search.indexOf('rtl=1') > -1) { document.body.classList.add('rtl'); }</script>
+</body>
+</html>

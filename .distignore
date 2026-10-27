@@ -39,3 +39,5 @@ test-results
 PRODUCT_ROADMAP.md
 # Translation sources are uploaded to translate.wordpress.org, never shipped.
 translations-src
+# WordPress.org directory assets (icon, banners, screenshots) go to SVN /assets, not into the plugin.
+.wordpress-org
