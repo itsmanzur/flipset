@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Flipset intro video</title>
+<style>
+	@font-face { font-family: Outfit; src: url("../wporg-assets/fonts/outfit-latin.woff2") format("woff2"); font-weight: 100 900; }
+	@font-face { font-family: Inter; src: url("../../assets/fonts/inter/Inter-Variable.woff2") format("woff2"); font-weight: 400 700; }
+	* { box-sizing: border-box; margin: 0; padding: 0; }
+	html, body { width: 1920px; height: 1080px; overflow: hidden; background: #0b1020; }
+	body { position: relative; font-family: Outfit, "Segoe UI", sans-serif; color: #fff; }
+
+	.bg { position: absolute; inset: 0;
+		background:
+			radial-gradient(1200px 700px at 0% 0%, rgba(124, 58, 237, .5), transparent 62%),
+			radial-gradient(1200px 760px at 100% 100%, rgba(79, 70, 229, .55), transparent 60%),
+			linear-gradient(135deg, #0b1020 0%, #151a33 100%); }
+	.grid { position: absolute; inset: 0; opacity: .06;
+		background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px);
+		background-size: 60px 60px; }
+
+	.layer { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+
+	/* hook */
+	.hook { flex-direction: column; text-align: center; padding: 0 200px; }
+	.hook p { font-size: 112px; line-height: 1.12; font-weight: 600; letter-spacing: -2px; color: #eef0ff; }
+	.hook .w { display: inline-block; will-change: transform, opacity; }
+	.hook .dl { position: relative; color: #a5b4fc; }
+	.hook .dl::after { content: ""; position: absolute; left: -6px; right: -6px; top: 54%; height: 8px; border-radius: 4px; background: #fb7185; transform-origin: left; transform: scaleX(var(--strike, 0)); }
+
+	/* logo */
+	.logo { flex-direction: column; gap: 26px; }
+	.logo img { width: 220px; height: 220px; border-radius: 56px; box-shadow: 0 40px 90px -20px rgba(124, 58, 237, .8); }
+	.logo b { font-size: 168px; line-height: 1; font-weight: 700; letter-spacing: -4px; }
+	.logo span { font-size: 46px; font-weight: 500; color: #c7ccf5; letter-spacing: -.5px; }
+
+	/* demo */
+	.demo { align-items: flex-start; padding-top: 56px; }
+	.win { position: relative; width: 1360px; border-radius: 22px; overflow: hidden; background: #1a1d36; box-shadow: 0 70px 140px -40px rgba(0, 0, 0, .75), 0 0 0 1px rgba(255, 255, 255, .1); }
+	.win .bar { height: 56px; display: flex; align-items: center; gap: 10px; padding: 0 22px; background: #232748; }
+	.win .bar i { width: 15px; height: 15px; border-radius: 50%; background: #ff5f57; }
+	.win .bar i:nth-child(2) { background: #febc2e; } .win .bar i:nth-child(3) { background: #28c840; }
+	.win .url { margin-left: 22px; flex: 1; max-width: 640px; height: 32px; border-radius: 16px; background: rgba(255, 255, 255, .08); color: #aeb4dc; font: 500 17px/32px Inter, sans-serif; padding: 0 18px; }
+	.win .view { position: relative; width: 1360px; height: 770px; overflow: hidden; background: #fff; }
+	.win .view img { position: absolute; left: 0; top: -34px; width: 1360px; height: auto; transform-origin: 50% 40%; will-change: transform, opacity; }
+
+	.cap { position: absolute; left: 0; right: 0; bottom: 64px; display: flex; justify-content: center; }
+	.cap span { display: inline-block; padding: 18px 38px; border-radius: 18px; background: rgba(8, 10, 24, .78); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, .14);
+		font: 600 40px/1.2 Inter, sans-serif; color: #fff; letter-spacing: -.3px; }
+</style>
+</head>
+<body>
+<div class="bg"></div><div class="grid"></div>
+
+<div class="layer hook" id="hook">
+	<p><span class="w">Sharing</span> <span class="w">a</span> <span class="w">PDF</span> <span class="w">shouldn't</span> <span class="w">mean</span> <span class="w">sending</span> <span class="w">a</span> <span class="w dl">download.</span></p>
+</div>
+
+<div class="layer logo" id="logo">
+	<img src="../wporg-assets/icon.svg" alt="">
+	<b>Flipset</b>
+	<span>PDF viewer, 3D flipbook &amp; document library</span>
+</div>
+
+<div class="layer demo" id="demo">
+	<div class="win" id="win">
+		<div class="bar"><i></i><i></i><i></i><div class="url">yoursite.com/catalogue</div></div>
+		<div class="view">
+			<img id="shotA" style="top:-64px" src="../../.wordpress-org/screenshot-1.png" alt="">
+			<img id="shotB" src="../../.wordpress-org/screenshot-2.png" alt="">
+		</div>
+	</div>
+	<div class="cap"><span id="capText"></span></div>
+</div>
+
+<script>
+	var clamp = function (x) { return Math.max(0, Math.min(1, x)); };
+	var seg = function (t, a, b) { return clamp((t - a) / (b - a)); };
+	var easeOut = function (x) { return 1 - Math.pow(1 - x, 3); };
+	var easeInOut = function (x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+	var backOut = function (x) { var c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
+
+	var $ = function (id) { return document.getElementById(id); };
+	var words = [].slice.call(document.querySelectorAll('#hook .w'));
+
+	// Scene timings, in seconds. Voiceover clips are placed by build-draft.js to match.
+	var T = { hookIn: 0.35, hookOut: 3.15, logoIn: 3.2, logoOut: 4.95, demoIn: 5.0, switchAt: 7.3, end: 10 };
+
+	var CAPS = [
+		{ from: 5.5, to: 7.3, text: 'Embed any PDF with one shortcode' },
+		{ from: 7.5, to: 9.6, text: 'From a single page to a 3D flipbook' }
+	];
+
+	window.draw = function (t) {
+		// ---- hook ----
+		var hookOut = 1 - easeInOut(seg(t, T.hookOut, T.hookOut + .35));
+		$('hook').style.opacity = hookOut;
+		$('hook').style.display = t < T.hookOut + .4 ? 'flex' : 'none';
+		words.forEach(function (w, i) {
+			var p = easeOut(seg(t, T.hookIn + i * .13, T.hookIn + i * .13 + .45));
+			w.style.opacity = p;
+			w.style.transform = 'translateY(' + ((1 - p) * 38) + 'px)';
+		});
+		$('hook').querySelector('.dl').style.setProperty('--strike', easeInOut(seg(t, 1.95, 2.45)));
+
+		// ---- logo ----
+		var lin = seg(t, T.logoIn, T.logoIn + .55);
+		var lout = easeInOut(seg(t, T.logoOut - .25, T.logoOut));
+		var logo = $('logo');
+		logo.style.display = (t >= T.logoIn - .05 && t < T.logoOut + .05) ? 'flex' : 'none';
+		logo.style.opacity = easeOut(seg(t, T.logoIn, T.logoIn + .25)) * (1 - lout);
+		logo.querySelector('img').style.transform = 'scale(' + (.55 + .45 * backOut(lin)) + ')';
+		logo.querySelector('b').style.transform = 'translateY(' + ((1 - easeOut(seg(t, T.logoIn + .15, T.logoIn + .65))) * 30) + 'px)';
+		logo.querySelector('span').style.opacity = easeOut(seg(t, T.logoIn + .45, T.logoIn + .95));
+		logo.style.transform = 'scale(' + (1 + lout * .06) + ')';
+
+		// ---- demo ----
+		var demo = $('demo');
+		demo.style.display = t >= T.demoIn - .05 ? 'flex' : 'none';
+		var din = easeOut(seg(t, T.demoIn, T.demoIn + .7));
+		var fadeOut = 1 - easeInOut(seg(t, T.end - .35, T.end));
+		var win = $('win');
+		win.style.opacity = din * fadeOut;
+		var zoom = 1 + .06 * easeInOut(seg(t, T.demoIn + .3, T.end));
+		win.style.transform = 'translateY(' + ((1 - din) * 70) + 'px) scale(' + (.96 + .04 * din) * 1 + ')';
+		var sw = easeInOut(seg(t, T.switchAt, T.switchAt + .55));
+		var a = $('shotA'), b = $('shotB');
+		a.style.opacity = 1 - sw; b.style.opacity = sw;
+		a.style.transform = b.style.transform = 'scale(' + zoom + ')';
+
+		var cap = CAPS.filter(function (c) { return t >= c.from && t < c.to; })[0];
+		var ct = $('capText');
+		if (cap) {
+			var p = easeOut(seg(t, cap.from, cap.from + .3)) * (1 - easeInOut(seg(t, cap.to - .25, cap.to)));
+			ct.textContent = cap.text;
+			ct.parentNode.style.opacity = p * fadeOut;
+			ct.parentNode.style.transform = 'translateY(' + ((1 - p) * 24) + 'px)';
+		} else {
+			ct.parentNode.style.opacity = 0;
+		}
+	};
+	window.ready = document.fonts.ready.then(function () {
+		return Promise.all([].slice.call(document.images).map(function (i) { return i.decode().catch(function () {}); }));
+	}).then(function () { window.draw(0); return true; });
+</script>
+</body>
+</html>
