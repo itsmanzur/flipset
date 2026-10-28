@@ -282,6 +282,11 @@ class Flipset_Admin {
 					'confirmDelete'   => __( 'Are you sure you want to delete this embed? Any shortcode using id="%s" will no longer work.', 'flipset' ),
 					'embedDeleted'    => __( 'Embed deleted.', 'flipset' ),
 					'deleteFailed'    => __( 'Could not delete embed.', 'flipset' ),
+					'selectCover'     => __( 'Choose a cover image', 'flipset' ),
+					'useCover'        => __( 'Use as cover', 'flipset' ),
+					'coverSaved'      => __( 'Cover updated', 'flipset' ),
+					'coverReset'      => __( 'Cover reset to the first page', 'flipset' ),
+					'coverFailed'     => __( 'Could not change the cover.', 'flipset' ),
 				),
 				'uploadNonce' => wp_create_nonce( 'media-form' ),
 				'canUpload'   => current_user_can( 'upload_files' ),
@@ -2670,6 +2675,7 @@ class Flipset_Admin {
 								$title = wp_basename( $url );
 							}
 							$thumb_id    = Flipset_Thumbnails::get_thumbnail_id( $attachment->ID );
+							$has_cover   = (bool) Flipset_Thumbnails::get_cover_id( $attachment->ID );
 							$indexed     = Flipset_SEO::is_indexed( $attachment->ID );
 							$has_text    = $indexed && '' !== Flipset_SEO::get_extracted_text( $attachment->ID );
 							$a11y_done   = Flipset_A11y::is_checked( $attachment->ID );
@@ -2681,6 +2687,7 @@ class Flipset_Admin {
 								data-pdf-url="<?php echo esc_url( $url ); ?>"
 								data-pdf-title="<?php echo esc_attr( $title ); ?>"
 								data-needs-thumb="<?php echo $thumb_id ? '0' : '1'; ?>"
+								data-has-cover="<?php echo $has_cover ? '1' : '0'; ?>"
 								data-needs-index="<?php echo ( $index_on && ! $indexed ) ? '1' : '0'; ?>"
 								data-needs-a11y="<?php echo ( $a11y_on && ! $a11y_done ) ? '1' : '0'; ?>"
 							>
@@ -2712,6 +2719,10 @@ class Flipset_Admin {
 									<div class="fa-row-actions">
 										<button type="button" class="fa-link flipset-doc-create-test-btn" data-pdf-url="<?php echo esc_url( $url ); ?>"><?php esc_html_e( 'Create test page', 'flipset' ); ?></button>
 										<a class="fa-link" href="<?php echo esc_url( $open_url ); ?>"><?php esc_html_e( 'Open in Builder', 'flipset' ); ?></a>
+										<?php if ( current_user_can( 'upload_files' ) ) : ?>
+											<button type="button" class="fa-link flipset-doc-cover-btn"><?php esc_html_e( 'Change cover', 'flipset' ); ?></button>
+											<button type="button" class="fa-link flipset-doc-cover-reset"<?php echo $has_cover ? '' : ' hidden'; ?>><?php esc_html_e( 'Reset cover', 'flipset' ); ?></button>
+										<?php endif; ?>
 										<a class="fa-link" href="<?php echo esc_url( $edit ); ?>"><?php esc_html_e( 'View in Media', 'flipset' ); ?></a>
 										<a class="fa-link" href="<?php echo esc_url( $url ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Open file', 'flipset' ); ?></a>
 									</div>

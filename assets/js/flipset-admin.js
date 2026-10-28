@@ -639,6 +639,81 @@
 		} );
 	}
 
+	/** Pick a custom cover image for a PDF row, or reset it to the generated first page. */
+	function bindDocCover() {
+		var frame = null;
+
+		function apply( row, imageId ) {
+			var reset = row.querySelector( '.flipset-doc-cover-reset' );
+			post(
+				'flipset_set_cover',
+				{ attachment_id: row.getAttribute( 'data-pdf-id' ) || '0', image_id: imageId },
+				function ( data ) {
+					if ( data.needs ) {
+						// No generated image yet: reload so the first-page preview is generated again.
+						window.location.reload();
+						return;
+					}
+					var cell = row.querySelector( '.fa-col-thumb' );
+					if ( cell && data.url ) {
+						var img = cell.querySelector( 'img' );
+						if ( ! img ) {
+							img = document.createElement( 'img' );
+							img.className = 'flipset-docs-thumb-img';
+							img.alt = row.getAttribute( 'data-pdf-title' ) || '';
+							cell.textContent = '';
+							cell.appendChild( img );
+						}
+						img.removeAttribute( 'srcset' );
+						img.removeAttribute( 'sizes' );
+						img.src = data.url;
+					}
+					row.setAttribute( 'data-has-cover', data.custom ? '1' : '0' );
+					if ( reset ) {
+						reset.hidden = ! data.custom;
+					}
+					toast( data.custom ? t( 'coverSaved', 'Cover updated' ) : t( 'coverReset', 'Cover reset to the first page' ) );
+				},
+				function () {
+					toast( t( 'coverFailed', 'Could not change the cover.' ) );
+				}
+			);
+		}
+
+		$$( '.flipset-doc-cover-btn' ).forEach( function ( button ) {
+			button.addEventListener( 'click', function ( e ) {
+				e.preventDefault();
+				var row = button.closest( 'tr' );
+				if ( ! row || ! window.wp || ! window.wp.media ) {
+					return;
+				}
+				frame = window.wp.media( {
+					title: t( 'selectCover', 'Choose a cover image' ),
+					button: { text: t( 'useCover', 'Use as cover' ) },
+					library: { type: 'image' },
+					multiple: false,
+				} );
+				frame.on( 'select', function () {
+					var image = frame.state().get( 'selection' ).first().toJSON();
+					if ( image && image.id ) {
+						apply( row, String( image.id ) );
+					}
+				} );
+				frame.open();
+			} );
+		} );
+
+		$$( '.flipset-doc-cover-reset' ).forEach( function ( button ) {
+			button.addEventListener( 'click', function ( e ) {
+				e.preventDefault();
+				var row = button.closest( 'tr' );
+				if ( row ) {
+					apply( row, '0' );
+				}
+			} );
+		} );
+	}
+
 	/** Collapsible "4 ways to embed" card; the state is a per-browser convenience. */
 	function bindHowto() {
 		var card = $( '#fa-howto' );
@@ -748,6 +823,7 @@
 			} );
 		} );
 		bindDocCreateTestPage();
+		bindDocCover();
 		bindHowto();
 		bindGuideSpy();
 	}

@@ -10,12 +10,42 @@
  * fa-pill, fa-icon-btn, fa-link, fa-progress, fa-empty, fa-banner.
  */
 
+/* Inter (SIL OFL 1.1, see assets/fonts/inter/OFL.txt), bundled so no request leaves the site.
+   Latin subset, weight axis 400-700 only (the full variable font is 326 KB). */
+@font-face {
+	font-family: "Inter";
+	font-style: normal;
+	font-weight: 400 700;
+	font-display: swap;
+	src: url("../fonts/inter/Inter-Variable.woff2") format("woff2");
+}
+
+/* Type scale. Every admin font-size, line-height and tracking comes from here. */
+:root {
+	--fa-font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Bengali", "Hind Siliguri", sans-serif;
+	--fa-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	--fa-text-xs: 12px;
+	--fa-text-sm: 13px;
+	--fa-text-base: 14px;
+	--fa-text-md: 16px;
+	--fa-text-lg: 18px;
+	--fa-text-xl: 20px;
+	--fa-text-2xl: 24px;
+	--fa-text-3xl: 28px;
+	--fa-lh: 1.55;
+	--fa-tracking: 0.06em;
+}
+
 .flipset-admin {
+	font-family: var(--fa-font);
+	font-size: var(--fa-text-base);
+	line-height: var(--fa-lh);
+	-webkit-font-smoothing: antialiased;
 	--fb-accent: #4f46e5;
 	--fb-accent-2: #7c3aed;
 	--fb-accent-soft: #eef2ff;
 	--fb-ink: #0f172a;
-	--fb-muted: #64748b;
+	--fb-muted: #586274;
 	--fb-line: #e5e7f0;
 	--fb-radius: 14px;
 	--fb-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px -8px rgba(15, 23, 42, 0.1);
@@ -26,6 +56,14 @@
 	--fb-sky: #0ea5e9;
 	--fb-sky-soft: #f0f9ff;
 	--fb-violet-soft: #f5f3ff;
+}
+
+.flipset-admin :is(button, input, select, textarea) {
+	font-family: inherit;
+}
+
+.flipset-admin :is(code, pre, kbd) {
+	font-family: var(--fa-mono);
 }
 
 /* ---- Hero ---------------------------------------------------------------- */
@@ -47,7 +85,7 @@
 .fa-hero__title {
 	margin: 0;
 	padding: 0;
-	font-size: 22px;
+	font-size: var(--fa-text-2xl);
 	line-height: 1.2;
 	color: #fff;
 }
@@ -55,7 +93,7 @@
 .fa-hero__lede {
 	margin: 0;
 	max-width: 800px;
-	font-size: 14px;
+	font-size: var(--fa-text-base);
 	line-height: 1.5;
 	color: var(--fb-hero-muted);
 }
@@ -66,9 +104,9 @@
 }
 
 .fa-hero__label {
-	font-size: 11px;
+	font-size: var(--fa-text-xs);
 	font-weight: 600;
-	letter-spacing: 0.08em;
+	letter-spacing: var(--fa-tracking);
 	text-transform: uppercase;
 	color: var(--fb-hero-muted);
 }
@@ -173,8 +211,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-size: 13px;
-	font-weight: 700;
+	font-size: var(--fa-text-sm);
+	font-weight: 600;
 	line-height: 1;
 	color: #fff;
 	text-align: center;
@@ -190,7 +228,7 @@
 	flex: 0 0 auto;
 	width: 34px;
 	height: 34px;
-	font-size: 20px;
+	font-size: var(--fa-text-xl);
 	line-height: 1;
 	color: #fff;
 	border-radius: 10px;
@@ -201,7 +239,7 @@
 .fa-mark::before {
 	width: 20px;
 	height: 20px;
-	font-size: 20px;
+	font-size: var(--fa-text-xl);
 }
 
 /* ---- Chips (on dark) ---------------------------------------------------- */
@@ -214,7 +252,7 @@
 	border-radius: 999px;
 	background: rgba(255, 255, 255, 0.06);
 	color: #e2e8f0;
-	font-size: 12px;
+	font-size: var(--fa-text-xs);
 	font-weight: 600;
 	line-height: 1.5;
 	text-decoration: none;
@@ -269,7 +307,7 @@
 	flex: 0 0 auto;
 	width: 20px;
 	height: 20px;
-	font-size: 20px;
+	font-size: var(--fa-text-xl);
 	color: var(--fb-accent);
 }
 
@@ -281,15 +319,15 @@
 .fa-card__title {
 	margin: 0;
 	padding: 0;
-	font-size: 15px;
-	font-weight: 700;
+	font-size: var(--fa-text-base);
+	font-weight: 600;
 	line-height: 1.3;
 	color: var(--fb-ink);
 }
 
 .fa-card__sub {
 	margin: 2px 0 0;
-	font-size: 12.5px;
+	font-size: var(--fa-text-sm);
 	color: var(--fb-muted);
 }
 
@@ -316,9 +354,9 @@
 	align-items: center;
 	gap: 8px;
 	margin: 0;
-	font-size: 11.5px;
-	font-weight: 700;
-	letter-spacing: 0.08em;
+	font-size: var(--fa-text-xs);
+	font-weight: 600;
+	letter-spacing: var(--fa-tracking);
 	text-transform: uppercase;
 	color: var(--fb-muted);
 }
@@ -341,7 +379,7 @@
 	padding: 0 16px;
 	border: 1px solid transparent;
 	border-radius: 10px;
-	font-size: 13px;
+	font-size: var(--fa-text-sm);
 	font-weight: 600;
 	line-height: 1;
 	text-decoration: none;
@@ -354,14 +392,14 @@
 	width: 16px;
 	height: 16px;
 	margin: 0;
-	font-size: 16px;
-	line-height: 16px;
+	font-size: var(--fa-text-md);
+	line-height: 1.4;
 }
 
 .fa-btn--sm {
 	min-height: 32px;
 	padding: 0 14px;
-	font-size: 12.5px;
+	font-size: var(--fa-text-sm);
 }
 
 .fa-btn--primary {
@@ -445,7 +483,7 @@
 	border: 0;
 	background: none;
 	color: var(--fb-accent);
-	font-size: 13px;
+	font-size: var(--fa-text-sm);
 	font-weight: 600;
 	text-decoration: none;
 	cursor: pointer;
@@ -478,7 +516,7 @@
 	border-radius: 8px;
 	background: transparent;
 	color: var(--fb-muted);
-	font-size: 13.5px;
+	font-size: var(--fa-text-sm);
 	font-weight: 600;
 	cursor: pointer;
 	transition: all 0.15s ease;
@@ -516,8 +554,8 @@
 	border-radius: 999px;
 	background: rgba(0, 0, 0, 0.08);
 	color: inherit;
-	font-size: 11px;
-	font-weight: 700;
+	font-size: var(--fa-text-xs);
+	font-weight: 600;
 }
 
 /* ---- Progress bar ------------------------------------------------------- */
@@ -548,7 +586,7 @@
 	border-radius: 12px;
 	background: var(--fb-accent-soft);
 	color: #3730a3;
-	font-size: 13.5px;
+	font-size: var(--fa-text-sm);
 }
 
 .fa-banner p {
@@ -564,7 +602,7 @@
 	border-radius: 8px;
 	background: transparent;
 	color: #3730a3;
-	font-size: 20px;
+	font-size: var(--fa-text-xl);
 	line-height: 1;
 	cursor: pointer;
 }
@@ -592,7 +630,7 @@
 
 .fa-empty__title {
 	margin: 0;
-	font-size: 14px;
+	font-size: var(--fa-text-base);
 	font-weight: 600;
 	color: var(--fb-muted);
 }
@@ -659,9 +697,9 @@
 	padding: 0 7px;
 	border-radius: 999px;
 	background: rgba(15, 23, 42, 0.08);
-	font-size: 11px;
-	font-weight: 700;
-	line-height: 1.6;
+	font-size: var(--fa-text-xs);
+	font-weight: 600;
+	line-height: var(--fa-lh);
 }
 
 .fa-chip--light.is-active .fa-chip__count {
@@ -671,7 +709,7 @@
 .fa-chip .dashicons {
 	width: 16px;
 	height: 16px;
-	font-size: 16px;
+	font-size: var(--fa-text-md);
 }
 
 /* ---- Status badge (dot + label) ---------------------------------------- */
@@ -681,7 +719,7 @@
 	gap: 6px;
 	padding: 3px 10px;
 	border-radius: 999px;
-	font-size: 12px;
+	font-size: var(--fa-text-xs);
 	font-weight: 600;
 	line-height: 1.5;
 	white-space: nowrap;
@@ -737,7 +775,7 @@
 	padding: 0;
 	background: transparent;
 	color: #3730a3;
-	font-size: 12px;
+	font-size: var(--fa-text-xs);
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -750,7 +788,7 @@
 .fa-icon-btn .dashicons {
 	width: 16px;
 	height: 16px;
-	font-size: 16px;
+	font-size: var(--fa-text-md);
 }
 
 .fa-icon-btn .fa-icon-btn__done {
@@ -783,7 +821,7 @@
 	width: 16px;
 	height: 16px;
 	margin-block-start: -8px;
-	font-size: 16px;
+	font-size: var(--fa-text-md);
 	color: var(--fb-muted);
 	pointer-events: none;
 }
@@ -800,7 +838,7 @@
 	border-radius: 8px;
 	background: #fff;
 	color: var(--fb-ink);
-	font-size: 13px;
+	font-size: var(--fa-text-sm);
 }
 
 .fa-search .fa-search__input:focus {
@@ -824,9 +862,9 @@
 	border-block-end: 1px solid var(--fb-line);
 	background: #f8fafc;
 	color: var(--fb-muted);
-	font-size: 11.5px;
-	font-weight: 700;
-	letter-spacing: 0.06em;
+	font-size: var(--fa-text-xs);
+	font-weight: 600;
+	letter-spacing: var(--fa-tracking);
 	text-align: start;
 	text-transform: uppercase;
 	white-space: nowrap;
@@ -890,8 +928,8 @@
 .fa-tile__title,
 .fa-tile__copy h4 {
 	margin: 0;
-	font-size: 13.5px;
-	font-weight: 700;
+	font-size: var(--fa-text-sm);
+	font-weight: 600;
 	line-height: 1.35;
 	color: var(--fb-ink);
 }
@@ -908,8 +946,8 @@
 .fa-tile__copy p,
 .fa-tile--col > p {
 	margin: 4px 0 0;
-	font-size: 12.5px;
-	line-height: 1.55;
+	font-size: var(--fa-text-sm);
+	line-height: var(--fa-lh);
 	color: var(--fb-muted);
 }
 
@@ -928,7 +966,7 @@
 .fa-tile-icon .dashicons {
 	width: 20px;
 	height: 20px;
-	font-size: 20px;
+	font-size: var(--fa-text-xl);
 }
 
 .fa-tile-icon.is-violet {
@@ -957,8 +995,8 @@
 	border-radius: 50%;
 	background: linear-gradient(135deg, var(--fb-accent), var(--fb-accent-2));
 	color: #fff;
-	font-size: 12px;
-	font-weight: 700;
+	font-size: var(--fa-text-xs);
+	font-weight: 600;
 }
 
 /* ---- Sticky sub-navigation chips --------------------------------------- */
@@ -995,7 +1033,7 @@
 	padding: 12px 18px;
 	border-block-start: 1px solid var(--fb-line);
 	background: var(--fb-accent-soft);
-	font-size: 12.5px;
+	font-size: var(--fa-text-sm);
 	color: #3730a3;
 }
 
@@ -1008,7 +1046,7 @@
 .fa-infobar .dashicons {
 	width: 18px;
 	height: 18px;
-	font-size: 18px;
+	font-size: var(--fa-text-lg);
 }
 
 .fa-stats {
@@ -1025,7 +1063,7 @@
 	border: 1px solid var(--fb-line);
 	border-radius: 999px;
 	background: #f8fafc;
-	font-size: 12.5px;
+	font-size: var(--fa-text-sm);
 	color: var(--fb-muted);
 }
 
@@ -1038,8 +1076,8 @@
 	align-items: center;
 	padding: 2px 9px;
 	border-radius: 999px;
-	font-size: 11px;
-	font-weight: 700;
+	font-size: var(--fa-text-xs);
+	font-weight: 600;
 	letter-spacing: 0.04em;
 	text-transform: uppercase;
 }
@@ -1070,7 +1108,7 @@
 	border-radius: 8px;
 	background: #fff;
 	color: var(--fb-ink);
-	font-size: 13px;
+	font-size: var(--fa-text-sm);
 	font-weight: 600;
 	text-decoration: none;
 }
@@ -1101,7 +1139,7 @@
 .fa-empty__tile::before {
 	width: 28px;
 	height: 28px;
-	font-size: 28px;
+	font-size: var(--fa-text-3xl);
 }
 
 /* ---- Focus / responsive for the new components ------------------------- */
@@ -1249,7 +1287,7 @@ label.fa-field__text {
 
 .fa-field__label {
 	display: block;
-	font-size: 14px;
+	font-size: var(--fa-text-base);
 	font-weight: 600;
 	line-height: 1.4;
 	color: var(--fb-ink);
@@ -1258,7 +1296,7 @@ label.fa-field__text {
 .fa-field__help {
 	display: block;
 	margin-block-start: 2px;
-	font-size: 13px;
+	font-size: var(--fa-text-sm);
 	line-height: 1.5;
 	color: var(--fb-muted);
 }
@@ -1266,14 +1304,14 @@ label.fa-field__text {
 .fa-field__hint {
 	display: block;
 	margin-block-start: 6px;
-	font-size: 12px;
+	font-size: var(--fa-text-xs);
 	color: var(--fb-muted);
 }
 
 .fa-field__status {
 	display: block;
 	margin-block-start: 6px;
-	font-size: 12.5px;
+	font-size: var(--fa-text-sm);
 	font-weight: 600;
 	color: #334155;
 }
@@ -1287,7 +1325,7 @@ label.fa-field__text {
 
 .fa-field__error {
 	margin: 6px 0 0;
-	font-size: 12.5px;
+	font-size: var(--fa-text-sm);
 	font-weight: 600;
 	color: #b91c1c;
 }
@@ -1301,7 +1339,7 @@ label.fa-field__text {
 	border-radius: 6px;
 	background: var(--fb-accent-soft);
 	color: #3730a3;
-	font-size: 12px;
+	font-size: var(--fa-text-xs);
 	font-weight: 600;
 	line-height: 1.5;
 }
@@ -1316,7 +1354,7 @@ label.fa-field__text {
 	border-radius: 8px;
 	background: #fff;
 	color: var(--fb-ink);
-	font-size: 13.5px;
+	font-size: var(--fa-text-sm);
 	box-shadow: none;
 }
 

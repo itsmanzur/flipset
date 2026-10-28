@@ -1,5 +1,5 @@
 === Flipset – PDF Viewer, PDF Embed, 3D Flipbook & Document Library ===
-Contributors: itsmanzur
+Contributors: itsmanzur, readscope
 Tags: pdf, pdf viewer, pdf embed, flipbook, document library
 Requires at least: 6.0
 Tested up to: 7.1
@@ -95,7 +95,8 @@ Flipset does not contact any server on its own. It has no analytics, no licence 
 = Third-party libraries =
 
 * **PDF.js 3.11.174** by Mozilla – Apache License 2.0. Bundled in `assets/vendor/pdfjs/` as `pdf.min.js` and `pdf.worker.min.js`, the official minified build from the `pdfjs-dist` 3.11.174 release. Upstream project: https://github.com/mozilla/pdf.js – the human-readable source for this version is at https://github.com/mozilla/pdf.js/tree/v3.11.174. Licence text: https://www.apache.org/licenses/LICENSE-2.0
-* No other third-party library is bundled. The plugin's own JavaScript and CSS are shipped unminified.
+* **Inter** by The Inter Project Authors – SIL Open Font License 1.1. Bundled in `assets/fonts/inter/` (a Latin-subset, weight-axis-only variable `woff2` made from the official font with `subset-font`, plus `OFL.txt`) and used only on the Flipset screens in wp-admin. Upstream project: https://github.com/rsms/inter – licence text: https://openfontlicense.org
+* No other third-party library or font is bundled. The plugin's own JavaScript and CSS are shipped unminified.
 
 == Installation ==
 
@@ -161,6 +162,10 @@ Yes. Opening Flipset → Docs & Features extracts text from each PDF (the same v
 = Why does a shared page show a PDF cover image? =
 
 If the page embeds a Flipset PDF and a first-page thumbnail exists, Flipset adds Open Graph and Twitter image tags using that cover. If Yoast SEO, Rank Math or a similar SEO plugin already sets an image, Flipset does not override it. You can disable this under Flipset → Settings.
+
+= Can I use my own cover image for a PDF? =
+
+Yes. Open Flipset → Docs & Features, choose **Change cover** under a document and pick any image from the Media Library. That image is then used in the library grid, as the Open Graph and Twitter image, and in the structured data. **Reset cover** goes back to the generated first page. Your image is never deleted by Flipset.
 
 = How do I hide download or print? =
 

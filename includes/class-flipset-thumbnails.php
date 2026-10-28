@@ -23,10 +23,15 @@ class Flipset_Thumbnails {
 	/** Largest accepted width or height, in pixels. */
 	const MAX_DIMENSION = 4096;
 
+	/** Generated first-page image (attachment ID, owned by Flipset). */
 	const META_KEY = '_flipset_thumbnail_id';
+
+	/** Image picked by the site owner as the cover (attachment ID, never deleted by Flipset). */
+	const COVER_META_KEY = '_flipset_cover_id';
 
 	public function init() {
 		add_action( 'wp_ajax_flipset_save_thumbnail', array( $this, 'ajax_save_thumbnail' ) );
+		add_action( 'wp_ajax_flipset_set_cover', array( $this, 'ajax_set_cover' ) );
 		add_action( 'delete_attachment', array( $this, 'on_delete_attachment' ) );
 	}
 
@@ -48,10 +53,44 @@ class Flipset_Thumbnails {
 	}
 
 	/**
+	 * The image to show for a PDF: the custom cover when one is set and still
+	 * exists, otherwise the generated first-page image.
+	 *
 	 * @param int $pdf_attachment_id PDF attachment post ID.
 	 * @return int
 	 */
 	public static function get_thumbnail_id( $pdf_attachment_id ) {
+		$cover_id = self::get_cover_id( $pdf_attachment_id );
+		if ( $cover_id ) {
+			return $cover_id;
+		}
+
+		return self::get_generated_id( $pdf_attachment_id );
+	}
+
+	/**
+	 * Custom cover image ID, or 0 when none is set or the image is gone.
+	 *
+	 * @param int $pdf_attachment_id PDF attachment post ID.
+	 * @return int
+	 */
+	public static function get_cover_id( $pdf_attachment_id ) {
+		$pdf_attachment_id = absint( $pdf_attachment_id );
+		if ( ! $pdf_attachment_id ) {
+			return 0;
+		}
+
+		$cover_id = absint( get_post_meta( $pdf_attachment_id, self::COVER_META_KEY, true ) );
+		return ( $cover_id && wp_attachment_is_image( $cover_id ) ) ? $cover_id : 0;
+	}
+
+	/**
+	 * First-page image generated in the browser, ignoring any custom cover.
+	 *
+	 * @param int $pdf_attachment_id PDF attachment post ID.
+	 * @return int
+	 */
+	public static function get_generated_id( $pdf_attachment_id ) {
 		$pdf_attachment_id = absint( $pdf_attachment_id );
 		if ( ! $pdf_attachment_id ) {
 			return 0;
@@ -144,7 +183,7 @@ class Flipset_Thumbnails {
 			wp_send_json_error( array( 'message' => __( 'Invalid thumbnail data.', 'flipset' ) ) );
 		}
 
-		$old_id = self::get_thumbnail_id( $pdf_id );
+		$old_id = self::get_generated_id( $pdf_id );
 
 		$filetype = wp_check_filetype( $filename, null );
 		$title    = get_the_title( $pdf );
@@ -194,6 +233,50 @@ class Flipset_Thumbnails {
 	}
 
 	/**
+	 * Set or clear the custom cover of a PDF. An image ID of 0 clears it.
+	 */
+	public function ajax_set_cover() {
+		check_ajax_referer( 'flipset_admin', 'nonce' );
+
+		if ( ! current_user_can( 'upload_files' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Forbidden.', 'flipset' ) ), 403 );
+		}
+
+		$pdf_id = isset( $_POST['attachment_id'] ) ? absint( wp_unslash( $_POST['attachment_id'] ) ) : 0;
+		$pdf    = $pdf_id ? get_post( $pdf_id ) : null;
+
+		if ( ! $pdf || 'attachment' !== $pdf->post_type || 'application/pdf' !== $pdf->post_mime_type ) {
+			wp_send_json_error( array( 'message' => __( 'That file is not a PDF attachment.', 'flipset' ) ) );
+		}
+
+		if ( ! current_user_can( 'edit_post', $pdf_id ) ) {
+			wp_send_json_error( array( 'message' => __( 'Forbidden.', 'flipset' ) ), 403 );
+		}
+
+		$image_id = isset( $_POST['image_id'] ) ? absint( wp_unslash( $_POST['image_id'] ) ) : 0;
+
+		if ( $image_id ) {
+			if ( ! wp_attachment_is_image( $image_id ) || ! current_user_can( 'edit_post', $image_id ) ) {
+				wp_send_json_error( array( 'message' => __( 'Pick an image from the Media Library.', 'flipset' ) ) );
+			}
+			update_post_meta( $pdf_id, self::COVER_META_KEY, $image_id );
+		} else {
+			delete_post_meta( $pdf_id, self::COVER_META_KEY );
+		}
+
+		$thumb_id = self::get_thumbnail_id( $pdf_id );
+		$url      = $thumb_id ? wp_get_attachment_image_url( $thumb_id, 'thumbnail' ) : '';
+
+		wp_send_json_success(
+			array(
+				'custom' => (bool) self::get_cover_id( $pdf_id ),
+				'url'    => $url ? $url : '',
+				'needs'  => ! $thumb_id,
+			)
+		);
+	}
+
+	/**
 	 * When a PDF is deleted, also remove its generated thumbnail image.
 	 *
 	 * @param int $post_id Attachment ID being deleted.
@@ -206,8 +289,9 @@ class Flipset_Thumbnails {
 
 		$mime = get_post_mime_type( $post_id );
 		if ( 'application/pdf' === $mime ) {
-			$thumb_id = self::get_thumbnail_id( $post_id );
+			$thumb_id = self::get_generated_id( $post_id );
 			delete_post_meta( $post_id, self::META_KEY );
+			delete_post_meta( $post_id, self::COVER_META_KEY );
 
 			if ( $thumb_id && $thumb_id !== $post_id ) {
 				wp_delete_attachment( $thumb_id, true );
@@ -216,8 +300,25 @@ class Flipset_Thumbnails {
 		}
 
 		$parent = wp_get_post_parent_id( $post_id );
-		if ( $parent && self::get_thumbnail_id( $parent ) === $post_id ) {
+		if ( $parent && self::get_generated_id( $parent ) === $post_id ) {
 			delete_post_meta( $parent, self::META_KEY );
+		}
+
+		// An image used as a custom cover was deleted: forget it so the PDF falls back to its generated image.
+		if ( wp_attachment_is_image( $post_id ) ) {
+			$pdf_ids = get_posts(
+				array(
+					'post_type'      => 'attachment',
+					'post_status'    => 'any',
+					'fields'         => 'ids',
+					'posts_per_page' => -1,
+					'meta_key'       => self::COVER_META_KEY, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- rare: only when an image is deleted.
+					'meta_value'     => $post_id, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value -- rare: only when an image is deleted.
+				)
+			);
+			foreach ( $pdf_ids as $pdf_id ) {
+				delete_post_meta( $pdf_id, self::COVER_META_KEY );
+			}
 		}
 	}
 }

@@ -54,7 +54,7 @@
 .fa-metric__icon .dashicons {
 	width: 22px;
 	height: 22px;
-	font-size: 22px;
+	font-size: var(--fa-text-2xl);
 }
 
 .fa-metric__icon.is-indigo {
@@ -89,20 +89,20 @@
 }
 
 .fa-metric__value {
-	font-size: 24px;
-	font-weight: 700;
+	font-size: var(--fa-text-2xl);
+	font-weight: 600;
 	line-height: 1.15;
 	color: var(--fb-ink);
 }
 
 .fa-metric__label {
-	font-size: 12px;
+	font-size: var(--fa-text-xs);
 	color: var(--fb-muted);
 }
 
 .fa-metric__link {
 	margin-inline-start: auto;
-	font-size: 12px;
+	font-size: var(--fa-text-xs);
 	font-weight: 600;
 	color: var(--fb-accent);
 	opacity: 0;
@@ -165,16 +165,16 @@
 	border-radius: 50%;
 	background: #fff;
 	color: var(--fb-muted);
-	font-size: 12px;
-	font-weight: 700;
+	font-size: var(--fa-text-xs);
+	font-weight: 600;
 }
 
 .fa-steps__check {
 	display: none;
 	width: 18px;
 	height: 18px;
-	font-size: 18px;
-	line-height: 18px;
+	font-size: var(--fa-text-lg);
+	line-height: 1.5;
 }
 
 .fa-steps li.is-done .fa-steps__marker {
@@ -199,13 +199,13 @@
 }
 
 .fa-steps__title {
-	font-size: 14px;
+	font-size: var(--fa-text-base);
 	font-weight: 600;
 	color: var(--fb-ink);
 }
 
 .fa-steps__help {
-	font-size: 13px;
+	font-size: var(--fa-text-sm);
 	color: var(--fb-muted);
 }
 
@@ -223,7 +223,7 @@
 }
 
 .fa-setup__done-text {
-	font-size: 14px;
+	font-size: var(--fa-text-base);
 	font-weight: 600;
 	color: var(--fb-success);
 }
@@ -276,7 +276,7 @@
 .fa-stage__fallback {
 	width: 36px;
 	height: 36px;
-	font-size: 36px;
+	font-size: var(--fa-text-3xl);
 	color: var(--fb-hero-muted);
 }
 
@@ -290,7 +290,7 @@
 
 .fa-stage__title {
 	margin: 0;
-	font-size: 15px;
+	font-size: var(--fa-text-base);
 	font-weight: 600;
 	color: #fff;
 	white-space: nowrap;
@@ -317,8 +317,8 @@
 	background: transparent;
 	box-shadow: none;
 	color: #e2e8f0;
-	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-	font-size: 12.5px;
+	font-family: var(--fa-mono);
+	font-size: var(--fa-text-sm);
 	cursor: pointer;
 }
 
@@ -424,13 +424,13 @@
 .fa-cover__thumb .dashicons {
 	width: 28px;
 	height: 28px;
-	font-size: 28px;
+	font-size: var(--fa-text-3xl);
 	color: var(--fb-muted);
 }
 
 .fa-cover__name {
 	max-width: 100%;
-	font-size: 12px;
+	font-size: var(--fa-text-xs);
 	line-height: 1.3;
 	text-align: center;
 	white-space: nowrap;
@@ -469,7 +469,7 @@
 }
 
 .fa-saved__name {
-	font-size: 14px;
+	font-size: var(--fa-text-base);
 	font-weight: 600;
 	white-space: nowrap;
 	overflow: hidden;
@@ -488,11 +488,11 @@
 	border-radius: 6px;
 	background: #f1f5f9;
 	color: var(--fb-ink);
-	font-size: 12.5px;
+	font-size: var(--fa-text-sm);
 }
 
 .fa-saved__date {
-	font-size: 12.5px;
+	font-size: var(--fa-text-sm);
 	color: var(--fb-muted);
 	white-space: nowrap;
 }

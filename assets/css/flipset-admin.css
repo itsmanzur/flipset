@@ -4,9 +4,9 @@
 	width: 36px;
 	height: 36px;
 	border-radius: 10px;
-	background: #72aee6;
+	background: #818cf8;
 	color: #1d2327;
-	font-size: 20px;
+	font-size: var(--fa-text-xl);
 	line-height: 36px;
 	text-align: center;
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -26,7 +26,7 @@
 	border-radius: 999px;
 	background: #1d2327;
 	color: #fff;
-	font-size: 13px;
+	font-size: var(--fa-text-sm);
 	font-weight: 600;
 	z-index: 100000;
 	opacity: 0;
@@ -123,13 +123,13 @@
 }
 
 .flipset-builder-icon .dashicons{
-	font-size: 18px;
+	font-size: var(--fa-text-lg);
 	width: 18px;
 	height: 18px;
 }
 
 .flipset-builder-icon.is-wp{
-	background: #2271b1;
+	background: #4f46e5;
 }
 
 .flipset-builder-icon.is-elementor{
@@ -146,16 +146,16 @@
 
 .flipset-builder-card-head h4{
 	margin: 0;
-	font-size: 14.5px;
-	font-weight: 700;
+	font-size: var(--fa-text-base);
+	font-weight: 600;
 	color: #0f172a;
 }
 
 .flipset-builder-card p{
 	margin: 0;
-	font-size: 12.5px;
+	font-size: var(--fa-text-sm);
 	line-height: 1.5;
-	color: #64748b;
+	color: #586274;
 }
 
 /* 6. FAQs Accordion */
@@ -188,22 +188,22 @@
 }
 
 .flipset-builder-kicker .dashicons{
-	font-size: 26px;
+	font-size: var(--fa-text-3xl);
 	width: 26px;
 	height: 26px;
-	color: #72aee6;
+	color: #818cf8;
 }
 
 .flipset-builder-kicker h1{
 	margin: 0;
-	font-size: 22px;
+	font-size: var(--fa-text-2xl);
 	color: #fff;
 	line-height: 1.2;
 }
 
 .flipset-builder-lede{
 	margin: 0;
-	font-size: 14px;
+	font-size: var(--fa-text-base);
 	color: #c3c4c7;
 	max-width: 800px;
 	line-height: 1.5;
@@ -219,7 +219,7 @@
 }
 
 .flipset-presets-label{
-	font-size: 12px;
+	font-size: var(--fa-text-xs);
 	font-weight: 600;
 	text-transform: uppercase;
 	letter-spacing: 0.5px;
@@ -239,7 +239,7 @@
 	color: #e2e8f0;
 	padding: 6px 12px;
 	border-radius: 20px;
-	font-size: 12px;
+	font-size: var(--fa-text-xs);
 	font-weight: 500;
 	cursor: pointer;
 	display: inline-flex;
@@ -251,14 +251,14 @@
 .flipset-preset-chip:hover,
 .flipset-preset-chip:focus{
 	background: rgba(255, 255, 255, 0.18);
-	border-color: #72aee6;
+	border-color: #818cf8;
 	color: #fff;
 	transform: translateY(-1px);
 }
 
 .flipset-preset-chip.is-active{
-	background: #2271b1;
-	border-color: #72aee6;
+	background: #4f46e5;
+	border-color: #818cf8;
 	color: #fff;
 	box-shadow: 0 0 0 2px rgba(114, 174, 230, 0.4);
 }
@@ -301,16 +301,16 @@
 }
 
 .flipset-builder-card .flipset-card-head .dashicons{
-	color: #2271b1;
-	font-size: 20px;
+	color: #4f46e5;
+	font-size: var(--fa-text-xl);
 	width: 20px;
 	height: 20px;
 }
 
 .flipset-builder-card .flipset-card-head h2{
 	margin: 0;
-	font-size: 15px;
-	font-weight: 700;
+	font-size: var(--fa-text-base);
+	font-weight: 600;
 	color: #1e293b;
 }
 
@@ -334,7 +334,7 @@
 	gap: 6px;
 	padding: 6px 14px;
 	height: auto;
-	font-size: 13px;
+	font-size: var(--fa-text-sm);
 	font-weight: 600;
 }
 
@@ -345,15 +345,15 @@
 }
 
 .flipset-label{
-	font-size: 13px;
+	font-size: var(--fa-text-sm);
 	font-weight: 600;
 	color: #1e293b;
 }
 
 .flipset-sublabel{
-	font-size: 12px;
+	font-size: var(--fa-text-xs);
 	font-weight: 600;
-	color: #64748b;
+	color: #586274;
 	margin-bottom: 4px;
 	display: block;
 }
@@ -365,14 +365,14 @@
 	padding: 8px 12px;
 	border-radius: 6px;
 	border: 1px solid #cbd5e1;
-	font-size: 13px;
+	font-size: var(--fa-text-sm);
 	background: #fff;
 	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 .flipset-form-row input:focus{
-	border-color: #2271b1;
-	box-shadow: 0 0 0 1px #2271b1;
+	border-color: #4f46e5;
+	box-shadow: 0 0 0 1px #4f46e5;
 	outline: none;
 }
 
@@ -406,7 +406,7 @@
 	border: 1px solid #cbd5e1;
 	border-radius: 4px;
 	padding: 4px 8px;
-	font-size: 11.5px;
+	font-size: var(--fa-text-xs);
 	color: #334155;
 	cursor: pointer;
 	display: inline-flex;
@@ -417,14 +417,14 @@
 }
 
 .flipset-recent-btn:hover{
-	border-color: #2271b1;
+	border-color: #4f46e5;
 	color: #0f172a;
 	background: #f8fafc;
 }
 
 .flipset-recent-btn.is-active{
 	background: #eff6ff;
-	border-color: #2271b1;
+	border-color: #4f46e5;
 	color: #1d4ed8;
 	font-weight: 600;
 }
@@ -467,17 +467,17 @@
 }
 
 .flipset-pill-icon{
-	font-size: 18px;
+	font-size: var(--fa-text-lg);
 }
 
 .flipset-pill-label{
-	font-size: 12px;
+	font-size: var(--fa-text-xs);
 	font-weight: 600;
 	color: #334155;
 }
 
 .flipset-theme-pill input:checked + .flipset-pill-box{
-	border-color: #2271b1;
+	border-color: #4f46e5;
 	background: #eff6ff;
 	box-shadow: 0 2px 8px rgba(37, 99, 235, 0.12);
 }
@@ -501,7 +501,7 @@
 	background: #f8fafc;
 	border: 1px solid #e2e8f0;
 	border-radius: 6px;
-	font-size: 12px;
+	font-size: var(--fa-text-xs);
 	font-weight: 500;
 	color: #334155;
 	cursor: pointer;
@@ -514,8 +514,8 @@
 }
 
 .flipset-view-pill input:checked + span{
-	font-weight: 700;
-	color: #2271b1;
+	font-weight: 600;
+	color: #4f46e5;
 }
 
 .flipset-view-pill-flip{
@@ -539,7 +539,7 @@
 	background: #f1f5f9;
 	border: 1px solid #e2e8f0;
 	border-radius: 4px;
-	font-size: 11px;
+	font-size: var(--fa-text-xs);
 	padding: 2px 8px;
 	color: #475569;
 	cursor: pointer;
@@ -566,7 +566,7 @@
 	border: 1px solid #e2e8f0;
 	border-radius: 6px;
 	cursor: pointer;
-	font-size: 12px;
+	font-size: var(--fa-text-xs);
 	font-weight: 500;
 	color: #334155;
 	transition: background 0.12s ease;
@@ -592,7 +592,7 @@
 	display: flex;
 	align-items: flex-start;
 	gap: 10px;
-	font-size: 13px;
+	font-size: var(--fa-text-sm);
 	color: #475569;
 	cursor: pointer;
 }
@@ -618,21 +618,23 @@
 	border: 1px solid transparent;
 	padding: 10px 8px;
 	border-radius: 6px;
-	font-size: 12.5px;
+	font-size: var(--fa-text-sm);
 	font-weight: 600;
-	color: #64748b;
+	color: #586274;
 	cursor: pointer;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
 	gap: 6px;
-	white-space: nowrap;
+	white-space: normal;
+	line-height: 1.25;
+	min-width: 0;
 	transition: all 0.15s ease;
 	text-align: center;
 }
 
 .flipset-ctrl-tab .dashicons{
-	font-size: 17px;
+	font-size: var(--fa-text-md);
 	width: 17px;
 	height: 17px;
 	color: #94a3b8;
@@ -647,13 +649,13 @@
 
 .flipset-ctrl-tab.is-active{
 	background: #fff;
-	color: #2271b1;
+	color: #4f46e5;
 	border-color: #cbd5e1;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
 .flipset-ctrl-tab.is-active .dashicons{
-	color: #2271b1;
+	color: #4f46e5;
 }
 
 .flipset-ctrl-pane{
@@ -669,15 +671,15 @@
 
 .flipset-section-subhead h3{
 	margin: 0 0 2px;
-	font-size: 13.5px;
-	font-weight: 700;
+	font-size: var(--fa-text-sm);
+	font-weight: 600;
 	color: #1e293b;
 }
 
 .flipset-section-subhead .description{
 	margin: 2px 0 0;
-	font-size: 12px;
-	color: #64748b;
+	font-size: var(--fa-text-xs);
+	color: #586274;
 }
 
 .flipset-pane-divider{
@@ -696,7 +698,7 @@
 }
 
 .flipset-tab-step{
-	font-size: 12px;
+	font-size: var(--fa-text-xs);
 	font-weight: 600;
 	cursor: pointer;
 }
@@ -739,16 +741,16 @@
 }
 
 .flipset-preview-title .dashicons{
-	color: #2271b1;
-	font-size: 18px;
+	color: #4f46e5;
+	font-size: var(--fa-text-lg);
 	width: 18px;
 	height: 18px;
 }
 
 .flipset-preview-title h3{
 	margin: 0;
-	font-size: 13.5px;
-	font-weight: 700;
+	font-size: var(--fa-text-sm);
+	font-weight: 600;
 	color: #1e293b;
 }
 
@@ -766,7 +768,7 @@
 	border: 0;
 	padding: 4px 8px;
 	border-radius: 4px;
-	color: #64748b;
+	color: #586274;
 	cursor: pointer;
 	display: inline-flex;
 	align-items: center;
@@ -775,7 +777,7 @@
 }
 
 .flipset-device-btn .dashicons{
-	font-size: 16px;
+	font-size: var(--fa-text-md);
 	width: 16px;
 	height: 16px;
 }
@@ -786,7 +788,7 @@
 
 .flipset-device-btn.is-active{
 	background: #fff;
-	color: #2271b1;
+	color: #4f46e5;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -839,7 +841,7 @@
 	align-items: center;
 	justify-content: center;
 	gap: 12px;
-	color: #64748b;
+	color: #586274;
 	background: #fff;
 	border-radius: 8px;
 	padding: 24px;
@@ -877,9 +879,9 @@
 	background: transparent;
 	border: 0;
 	padding: 5px 10px;
-	font-size: 11.5px;
+	font-size: var(--fa-text-xs);
 	font-weight: 600;
-	color: #64748b;
+	color: #586274;
 	cursor: pointer;
 	border-radius: 4px;
 	transition: all 0.12s ease;
@@ -891,14 +893,14 @@
 }
 
 .flipset-tab-btn.is-active{
-	color: #2271b1;
+	color: #4f46e5;
 	background: #eff6ff;
 }
 
 .flipset-builder-textarea{
 	width: 100%;
-	font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
-	font-size: 12px;
+	font-family: var(--fa-mono);
+	font-size: var(--fa-text-xs);
 	line-height: 1.45;
 	padding: 10px 12px;
 	background: #0f172a;
@@ -922,17 +924,17 @@
 	gap: 6px;
 	padding: 6px 14px;
 	height: auto;
-	font-size: 12.5px;
+	font-size: var(--fa-text-sm);
 	font-weight: 600;
 }
 
 .flipset-output-actions #flipset-builder-copy{
-	background: #2271b1;
-	border-color: #2271b1;
+	background: #4f46e5;
+	border-color: #4f46e5;
 }
 
 .flipset-output-actions #flipset-builder-copy:hover{
-	background: #135e96;
+	background: #4338ca;
 }
 
 /* ==========================================================================
@@ -1068,8 +1070,8 @@
 	display: flex;
 	align-items: center;
 	gap: 8px;
-	font-size: 11.5px;
-	letter-spacing: 0.08em;
+	font-size: var(--fa-text-xs);
+	letter-spacing: var(--fa-tracking);
 	text-transform: uppercase;
 	color: var(--fb-muted);
 }
@@ -1089,7 +1091,7 @@
 
 /* Form fields */
 .flipset-builder-wrap .flipset-label{
-	font-size: 12px;
+	font-size: var(--fa-text-xs);
 	font-weight: 600;
 	color: #334155;
 	margin-bottom: 6px;
@@ -1134,8 +1136,8 @@
 .flipset-builder-wrap .button-primary .dashicons{
 	width: 16px;
 	height: 16px;
-	font-size: 16px;
-	line-height: 16px;
+	font-size: var(--fa-text-md);
+	line-height: 1.4;
 	margin: 0;
 	vertical-align: baseline;
 }
@@ -1244,9 +1246,9 @@
 	color: #a5f3fc;
 	border: 1px solid #1e2547;
 	border-radius: 12px;
-	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-	font-size: 12.5px;
-	line-height: 1.65;
+	font-family: var(--fa-mono);
+	font-size: var(--fa-text-sm);
+	line-height: var(--fa-lh);
 	padding: 14px 16px;
 	box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.35);
 }
@@ -1286,7 +1288,7 @@
 	background: #fff;
 	border: 1.5px solid #e1e5f0;
 	border-radius: 12px;
-	font-size: 12.5px;
+	font-size: var(--fa-text-sm);
 	font-weight: 600;
 	line-height: 1.3;
 	color: #334155;
@@ -1323,7 +1325,7 @@
 
 .flipset-builder-wrap .flipset-view-pill input:checked + span{
 	color: var(--fb-accent);
-	font-weight: 700;
+	font-weight: 600;
 }
 
 .flipset-builder-wrap .flipset-view-pill-flip{
@@ -1340,7 +1342,7 @@
 	padding: 6px 10px;
 	gap: 8px;
 	border-radius: 9px;
-	font-size: 12px;
+	font-size: var(--fa-text-xs);
 }
 
 .flipset-builder-wrap .flipset-view-pill input[type="radio"]{
@@ -1377,7 +1379,7 @@
 .flipset-builder-wrap .button-primary{
 	min-height: 32px;
 	padding: 0 14px;
-	font-size: 12.5px;
+	font-size: var(--fa-text-sm);
 }
 
 .flipset-builder-wrap .flipset-pane-footer{
@@ -1404,8 +1406,8 @@
 	margin-left: auto;
 	padding: 2px 7px;
 	border-radius: 999px;
-	font-size: 10px;
-	font-weight: 700;
+	font-size: var(--fa-text-xs);
+	font-weight: 600;
 	letter-spacing: 0.02em;
 	line-height: 1.5;
 	white-space: nowrap;
@@ -1446,8 +1448,8 @@
 	border-radius: 8px;
 	border: 1px solid transparent;
 	background: transparent;
-	color: #64748b;
-	font-size: 13.5px;
+	color: #586274;
+	font-size: var(--fa-text-sm);
 	font-weight: 600;
 	cursor: pointer;
 	transition: all 0.15s ease;
@@ -1465,7 +1467,7 @@
 }
 
 .flipset-view-tab-btn .dashicons{
-	font-size: 17px;
+	font-size: var(--fa-text-md);
 	width: 17px;
 	height: 17px;
 }
@@ -1476,8 +1478,8 @@
 	justify-content: center;
 	padding: 2px 8px;
 	border-radius: 999px;
-	font-size: 11px;
-	font-weight: 700;
+	font-size: var(--fa-text-xs);
+	font-weight: 600;
 	background: rgba(0, 0, 0, 0.08);
 	color: inherit;
 }
@@ -1505,12 +1507,12 @@
 	align-items: center;
 	gap: 10px;
 	color: #1e3a8a;
-	font-size: 13.5px;
+	font-size: var(--fa-text-sm);
 }
 
 .flipset-edit-banner-left .dashicons{
 	color: #2563eb;
-	font-size: 20px;
+	font-size: var(--fa-text-xl);
 	width: 20px;
 	height: 20px;
 }
@@ -1537,8 +1539,8 @@
 	display: inline-flex;
 	align-items: center;
 	gap: 8px;
-	font-size: 11.5px;
-	color: #64748b;
+	font-size: var(--fa-text-xs);
+	color: #586274;
 	cursor: pointer;
 }
 
@@ -1574,15 +1576,15 @@
 
 .flipset-manager-title .dashicons{
 	color: var(--fb-accent, #4f46e5);
-	font-size: 24px;
+	font-size: var(--fa-text-2xl);
 	width: 24px;
 	height: 24px;
 }
 
 .flipset-manager-title h2{
 	margin: 0;
-	font-size: 18px;
-	font-weight: 700;
+	font-size: var(--fa-text-lg);
+	font-weight: 600;
 	color: #0f172a;
 }
 
@@ -1597,7 +1599,7 @@
 	border-radius: 8px;
 	border: 1px solid #cbd5e1;
 	padding: 6px 12px;
-	font-size: 13px;
+	font-size: var(--fa-text-sm);
 }
 
 /* Embeds Table */
@@ -1609,8 +1611,8 @@
 
 .flipset-embeds-table thead th{
 	background: #f8fafc;
-	font-size: 12px;
-	font-weight: 700;
+	font-size: var(--fa-text-xs);
+	font-weight: 600;
 	color: #475569;
 	text-transform: uppercase;
 	letter-spacing: 0.03em;
@@ -1620,13 +1622,13 @@
 .flipset-embeds-table tbody td{
 	padding: 12px 14px;
 	vertical-align: middle;
-	font-size: 13px;
+	font-size: var(--fa-text-sm);
 }
 
 .flipset-embeds-table .row-title{
-	font-weight: 700;
+	font-weight: 600;
 	color: #1e293b;
-	font-size: 13.5px;
+	font-size: var(--fa-text-sm);
 	text-decoration: none;
 }
 
@@ -1636,14 +1638,14 @@
 
 .flipset-sub-title{
 	display: block;
-	font-size: 11.5px;
-	color: #64748b;
+	font-size: var(--fa-text-xs);
+	color: #586274;
 	margin-top: 2px;
 }
 
 .flipset-file-name{
-	font-family: Consolas, Monaco, monospace;
-	font-size: 11.5px;
+	font-family: var(--fa-mono);
+	font-size: var(--fa-text-xs);
 	color: #475569;
 	background: #f1f5f9;
 	padding: 3px 6px;
@@ -1658,8 +1660,8 @@
 
 .flipset-tag-pill{
 	display: inline-block;
-	font-size: 10.5px;
-	font-weight: 700;
+	font-size: var(--fa-text-xs);
+	font-weight: 600;
 	text-transform: uppercase;
 	letter-spacing: 0.03em;
 	padding: 2px 7px;
@@ -1685,9 +1687,9 @@
 	border: 1px solid #cbd5e1;
 	border-radius: 6px;
 	padding: 4px 8px;
-	font-family: Consolas, Monaco, monospace;
-	font-size: 12px;
-	font-weight: 700;
+	font-family: var(--fa-mono);
+	font-size: var(--fa-text-xs);
+	font-weight: 600;
 	color: #0f172a;
 	cursor: pointer;
 	transition: all 0.15s ease;
@@ -1701,10 +1703,10 @@
 }
 
 .flipset-shortcode-chip .dashicons{
-	font-size: 14px;
+	font-size: var(--fa-text-base);
 	width: 14px;
 	height: 14px;
-	color: #64748b;
+	color: #586274;
 }
 
 .flipset-shortcode-chip:hover .dashicons{
@@ -1730,15 +1732,15 @@
 
 .flipset-embeds-empty-state h3{
 	margin: 0 0 8px;
-	font-size: 17px;
-	font-weight: 700;
+	font-size: var(--fa-text-md);
+	font-weight: 600;
 	color: #0f172a;
 }
 
 .flipset-embeds-empty-state p{
 	margin: 0 0 20px;
-	color: #64748b;
-	font-size: 13.5px;
+	color: #586274;
+	font-size: var(--fa-text-sm);
 	max-width: 480px;
 	margin-left: auto;
 	margin-right: auto;
