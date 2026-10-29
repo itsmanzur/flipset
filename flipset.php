@@ -3,7 +3,7 @@
  * Plugin Name:       Flipset – PDF Viewer, PDF Embed, 3D Flipbook & Document Library
  * Plugin URI:        https://flipset.thereadscope.com
  * Description:       Embed PDFs with a fast PDF viewer, 3D flipbook and document library. Searchable PDF text, accessible, no CDN. Works with Gutenberg, Elementor, Divi.
- * Version:           1.0.0
+ * Version:           1.1.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            The Readscope
@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * hard-coding paths/URLs, so any future folder
  * reshuffle stays painless.
  */
-define( 'FLIPSET_VERSION', '1.0.0' );
+define( 'FLIPSET_VERSION', '1.1.0' );
 define( 'FLIPSET_FILE', __FILE__ );
 define( 'FLIPSET_DIR', plugin_dir_path( __FILE__ ) );
 define( 'FLIPSET_URL', plugin_dir_url( __FILE__ ) );

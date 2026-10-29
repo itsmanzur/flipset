@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Flipset intro video</title>
+<style>
+	@font-face { font-family: Outfit; src: url("../wporg-assets/fonts/outfit-latin.woff2") format("woff2"); font-weight: 100 900; }
+	@font-face { font-family: Inter; src: url("../../assets/fonts/inter/Inter-Variable.woff2") format("woff2"); font-weight: 400 700; }
+	* { box-sizing: border-box; margin: 0; padding: 0; }
+	html, body { width: 1920px; height: 1080px; overflow: hidden; background: #0b1020; }
+	body { position: relative; font-family: Outfit, "Segoe UI", sans-serif; color: #fff; }
+
+	.bg { position: absolute; inset: 0;
+		background:
+			radial-gradient(1200px 700px at 0% 0%, rgba(124, 58, 237, .5), transparent 62%),
+			radial-gradient(1200px 760px at 100% 100%, rgba(79, 70, 229, .55), transparent 60%),
+			linear-gradient(135deg, #0b1020 0%, #151a33 100%); }
+	.grid { position: absolute; inset: 0; opacity: .06;
+		background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px);
+		background-size: 60px 60px; }
+
+	.layer { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; }
+
+	/* hook */
+	.hook { flex-direction: column; text-align: center; padding: 0 200px; }
+	.hook p { font-size: 112px; line-height: 1.12; font-weight: 600; letter-spacing: -2px; color: #eef0ff; }
+	.hook .w { display: inline-block; }
+	.hook .dl { position: relative; color: #a5b4fc; }
+	.hook .dl::after { content: ""; position: absolute; left: -6px; right: -6px; top: 54%; height: 8px; border-radius: 4px; background: #fb7185; transform-origin: left; transform: scaleX(var(--strike, 0)); }
+
+	/* logo */
+	.logo { flex-direction: column; gap: 26px; }
+	.logo img { width: 220px; height: 220px; border-radius: 56px; box-shadow: 0 40px 90px -20px rgba(124, 58, 237, .8); }
+	.logo b { font-size: 168px; line-height: 1; font-weight: 700; letter-spacing: -4px; }
+	.logo span.tag { font-size: 46px; font-weight: 500; color: #c7ccf5; letter-spacing: -.5px; }
+	.logo .wp { margin-top: 6px; display: inline-block; padding: 12px 30px; border-radius: 999px; font: 600 30px/1 Inter, sans-serif; color: #dfe4ff; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .18); }
+
+	/* shot windows */
+	.seg { position: absolute; inset: 0; opacity: 0; }
+	.win { position: absolute; left: 180px; top: 62px; width: 1560px; height: 880px; border-radius: 22px; overflow: hidden; background: #fff; box-shadow: 0 70px 140px -40px rgba(0, 0, 0, .75), 0 0 0 1px rgba(255, 255, 255, .1); }
+	.win .bar { height: 52px; display: flex; align-items: center; gap: 10px; padding: 0 22px; background: #232748; }
+	.win .bar i { width: 14px; height: 14px; border-radius: 50%; background: #ff5f57; }
+	.win .bar i:nth-child(2) { background: #febc2e; } .win .bar i:nth-child(3) { background: #28c840; }
+	.win .url { margin-left: 22px; flex: 1; max-width: 640px; height: 30px; border-radius: 15px; background: rgba(255, 255, 255, .08); color: #aeb4dc; font: 500 16px/30px Inter, sans-serif; padding: 0 18px; }
+	.vp { position: absolute; left: 0; width: 1560px; overflow: hidden; background: #fff; }
+	.stage { position: absolute; left: 0; top: 0; width: 1440px; transform-origin: 0 0; }
+	.stage img { position: absolute; left: 0; top: 0; width: 1440px; height: auto; display: block; }
+	.ring { position: absolute; border-radius: 12px; border: 5px solid #fbbf24; box-shadow: 0 0 0 6px rgba(251, 191, 36, .25), 0 0 40px rgba(251, 191, 36, .55); opacity: 0; pointer-events: none; }
+
+	.cap { position: absolute; left: 0; right: 0; bottom: 56px; display: flex; justify-content: center; opacity: 0; }
+	.cap span { display: inline-block; padding: 16px 36px; border-radius: 18px; background: rgba(8, 10, 24, .82); border: 1px solid rgba(255, 255, 255, .14);
+		font: 600 38px/1.2 Inter, sans-serif; color: #fff; letter-spacing: -.3px; }
+
+	/* typed shortcode */
+	.code { flex-direction: column; gap: 34px; background: linear-gradient(135deg, #0b1020, #151a33); }
+	.code .label { font: 600 40px/1 Inter, sans-serif; color: #c7ccf5; letter-spacing: -.3px; }
+	.code pre { padding: 46px 62px; border-radius: 26px; background: #0a0e24; border: 1px solid rgba(165, 180, 252, .3); box-shadow: 0 50px 120px -30px rgba(0, 0, 0, .8);
+		font: 500 52px/1.35 ui-monospace, SFMono-Regular, Consolas, monospace; color: #e6e9ff; white-space: pre-wrap; max-width: 1500px; }
+	.code .tk-a { color: #a5b4fc; } .code .tk-s { color: #86efac; }
+	.code .caret { display: inline-block; width: 4px; height: 56px; background: #fbbf24; vertical-align: -10px; margin-left: 4px; }
+
+	/* closing */
+	.close { flex-direction: column; gap: 44px; }
+	.close h2 { font-size: 104px; font-weight: 700; letter-spacing: -2px; color: #eef0ff; }
+	.close .row { display: flex; gap: 26px; }
+	.close .chip { display: flex; align-items: center; gap: 14px; padding: 20px 36px; border-radius: 999px; font: 600 44px/1 Inter, sans-serif; color: #eaffe9; background: rgba(34, 197, 94, .16); border: 1px solid rgba(74, 222, 128, .45); }
+	.close .chip svg { width: 40px; height: 40px; stroke: #4ade80; fill: none; stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+	.close .free { font: 700 54px/1 Inter, sans-serif; padding: 24px 52px; border-radius: 20px; color: #0b1020; background: linear-gradient(135deg, #c7d2fe, #ddd6fe); }
+	.close .find { display: flex; align-items: center; gap: 22px; }
+	.close .field { width: 760px; height: 92px; border-radius: 46px; background: #fff; color: #1f2347; display: flex; align-items: center; padding: 0 40px; font: 500 44px/1 Inter, sans-serif; box-shadow: 0 30px 80px -20px rgba(0, 0, 0, .6); }
+	.close .field .caret { width: 3px; height: 50px; background: #4f46e5; margin-left: 3px; }
+	.close .go { height: 92px; padding: 0 44px; border-radius: 46px; background: #4f46e5; font: 700 40px/92px Inter, sans-serif; color: #fff; }
+	.close .url2 { font: 500 38px/1 Inter, sans-serif; color: #a5b4fc; letter-spacing: .3px; }
+</style>
+</head>
+<body>
+<div class="bg"></div><div class="grid"></div>
+<div id="root"></div>
+<div class="cap" id="cap"><span id="capText"></span></div>
+
+<div class="layer hook" id="hook">
+	<p><span class="w">Sharing</span> <span class="w">a</span> <span class="w">PDF</span> <span class="w">shouldn't</span> <span class="w">mean</span> <span class="w">sending</span> <span class="w">a</span> <span class="w dl">download.</span></p>
+</div>
+<div class="layer logo" id="logo">
+	<img src="../wporg-assets/icon.svg" alt="">
+	<b>Flipset</b>
+	<span class="tag">PDF viewer, 3D flipbook &amp; document library</span>
+	<span class="wp">for WordPress</span>
+</div>
+<div class="layer code" id="code">
+	<div class="label">Paste it on any page or post</div>
+	<pre id="codeText"></pre>
+</div>
+<div class="layer close" id="close">
+	<h2 id="clH">Everything is bundled</h2>
+	<div class="row" id="clChips">
+		<div class="chip"><svg viewBox="0 0 24 24"><polyline points="4 12.5 9.5 18 20 6.5"/></svg>No CDN</div>
+		<div class="chip"><svg viewBox="0 0 24 24"><polyline points="4 12.5 9.5 18 20 6.5"/></svg>No account</div>
+		<div class="chip"><svg viewBox="0 0 24 24"><polyline points="4 12.5 9.5 18 20 6.5"/></svg>No tracking</div>
+	</div>
+	<div class="free" id="clFree">Free on WordPress.org</div>
+	<div class="find" id="clFind"><div class="field"><span id="clTyped"></span><i class="caret"></i></div><div class="go">Search</div></div>
+	<div class="url2" id="clUrl">wordpress.org/plugins/flipset</div>
+</div>
+
+<script src="out/flip.js"></script>
+<script>
+	var clamp = function (x) { return Math.max(0, Math.min(1, x)); };
+	var seg01 = function (t, a, b) { return clamp((t - a) / (b - a)); };
+	var easeOut = function (x) { return 1 - Math.pow(1 - x, 3); };
+	var easeInOut = function (x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+	var backOut = function (x) { var c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
+	var $ = function (id) { return document.getElementById(id); };
+
+	// ---- timeline: one scene per voiceover clip, durations from the real clips -----------------
+	var CLIPS = [
+		['hook', 3.32, .35, .5], ['meet', 6.11, .2, .5], ['embed', 8.99, .2, .4], ['views', 11.47, .2, .4],
+		['builder', 8.28, .2, .4], ['library', 8.99, .2, .4], ['search', 8.28, .2, .4], ['close', 9.48, .2, 1.3]
+	];
+	var TL = [], acc = 0;
+	CLIPS.forEach(function (c) { var len = c[2] + c[1] + c[3]; TL.push({ id: c[0], s: acc, len: len, voice: acc + c[2], clipLen: c[1] }); acc += len; });
+	var TOTAL = acc;
+	var S = {}; TL.forEach(function (x) { S[x.id] = x; });
+	window.TL = TL; window.TOTAL = TOTAL;
+
+	// ---- image sizes (css px at 1x) and flip frames --------------------------------------------
+	var IMG = {
+		docs: ['out/shots/docs.png', 1250], docs_cover: ['out/shots/docs_cover.png', 1250],
+		builder_a: ['out/shots/builder_a.png', 1400], builder_b: ['out/shots/builder_b.png', 1400],
+		view: ['out/shots/view.png', 900], editor: ['out/shots/editor.png', 900], lib: ['out/shots/lib.png', 900],
+		lib_cover: ['out/shots/lib_cover.png', 900], lib_open: ['out/shots/lib_open.png', 900], search: ['out/shots/search.png', 900],
+		theme_light: ['out/shots/theme_light.png', 900], theme_dark: ['out/shots/theme_dark.png', 900], theme_sepia: ['out/shots/theme_sepia.png', 900]
+	};
+
+	// ---- shot segments ---------------------------------------------------------------------------
+	// sc: scene id, a/b: scene-local start/end (seconds). Each segment fades over FADE at both ends and
+	// overlaps its neighbour, so cuts are soft. cam: keyframes {u, cx, cy, z} in image px, u = segment-local.
+	var FADE = .35;
+	var SEGS = [
+		// --- embed
+		{ sc: 'embed', a: 0, b: 1.9, chrome: 'admin', img: 'docs', hv: 1250,
+			cam: [{ u: 0, cx: 720, cy: 420, z: 1.0 }, { u: 1.2, cx: 1090, cy: 150, z: 2.1 }, { u: 1.9, cx: 1090, cy: 150, z: 2.1 }],
+			rings: [{ rect: { x: 1042, y: 86, w: 140, h: 54 }, a: .7, b: 1.9 }], caps: [{ a: .3, b: 1.9, t: 'Upload a PDF' }] },
+		{ sc: 'embed', a: 3.2, b: 4.7, chrome: 'admin', img: 'editor', hv: 900,
+			cam: [{ u: 0, cx: 800, cy: 470, z: 1.0 }, { u: 1.5, cx: 700, cy: 500, z: 1.35 }],
+			caps: [{ a: .1, b: 1.5, t: 'Or drop in the block' }] },
+		{ sc: 'embed', a: 4.7, b: 9.8, chrome: 'browser', url: 'yoursite.com/catalogue', img: 'view', hv: 900,
+			cam: [{ u: 0, cx: 720, cy: 480, z: 1.35 }, { u: 5.1, cx: 720, cy: 480, z: 1.5 }],
+			caps: [{ a: .2, b: 2.6, t: 'Opens right on your page' }, { a: 2.7, b: 5.0, t: 'Fast viewer, on your own site' }] },
+
+		// --- views
+		{ sc: 'views', a: 0, b: 1.6, chrome: 'browser', url: 'yoursite.com/catalogue', img: 'view', hv: 900,
+			cam: [{ u: 0, cx: 720, cy: 480, z: 1.4 }, { u: 1.6, cx: 720, cy: 480, z: 1.5 }],
+			caps: [{ a: .1, b: 1.5, t: 'Page by page' }] },
+		{ sc: 'views', a: 1.6, b: 2.9, chrome: 'browser', url: 'yoursite.com/flipbook', flip: [[0, 0], [1.3, 0]], hv: 900,
+			cam: [{ u: 0, cx: 720, cy: 470, z: 1.5 }, { u: 1.3, cx: 720, cy: 470, z: 1.5 }],
+			caps: [{ a: .1, b: 1.2, t: 'As a spread' }] },
+		{ sc: 'views', a: 2.9, b: 4.7, chrome: 'browser', url: 'yoursite.com/flipbook', flip: [[0, .7], [1.5, 2.12], [1.8, 2.12]], hv: 900,
+			cam: [{ u: 0, cx: 720, cy: 470, z: 1.5 }, { u: 1.8, cx: 720, cy: 470, z: 1.5 }],
+			caps: [{ a: .1, b: 1.7, t: '3D flipbook' }] },
+		{ sc: 'views', a: 4.7, b: 7.4, chrome: 'browser', url: 'yoursite.com/catalogue', hv: 900,
+			layers: [{ img: 'theme_light', a: 0, b: .95 }, { img: 'theme_dark', a: .75, b: 1.85 }, { img: 'theme_sepia', a: 1.65, b: 2.75 }],
+			cam: [{ u: 0, cx: 720, cy: 470, z: 1.45 }, { u: 2.7, cx: 720, cy: 470, z: 1.45 }],
+			caps: [{ a: .1, b: .95, t: 'Light' }, { a: .95, b: 1.85, t: 'Dark' }, { a: 1.85, b: 2.7, t: 'Sepia' }] },
+		{ sc: 'views', a: 7.4, b: 12.1, chrome: 'browser', url: 'yoursite.com/catalogue', img: 'theme_light', hv: 900,
+			cam: [{ u: 0, cx: 720, cy: 300, z: 1.4 }, { u: .6, cx: 740, cy: 170, z: 2.0 }, { u: 2.1, cx: 760, cy: 170, z: 2.0 }, { u: 3.1, cx: 720, cy: 430, z: 1.45 }, { u: 4.7, cx: 720, cy: 430, z: 1.5 }],
+			rings: [{ rect: { x: 566, y: 148, w: 104, h: 40 }, a: .5, b: 1.15 }, { rect: { x: 700, y: 148, w: 142, h: 40 }, a: 1.15, b: 1.75 }, { rect: { x: 940, y: 148, w: 74, h: 40 }, a: 1.75, b: 2.2 }],
+			caps: [{ a: .3, b: .95, t: 'Zoom' }, { a: 1.0, b: 1.65, t: 'Search' }, { a: 1.7, b: 2.3, t: 'Download & print' }, { a: 2.5, b: 4.6, t: 'One clean toolbar' }] },
+
+		// --- builder
+		{ sc: 'builder', a: 0, b: 9.2, chrome: 'admin', hv: 1400,
+			layers: [{ img: 'builder_a', a: 0, b: 2.7 }, { img: 'builder_b', a: 2.3, b: 999 }],
+			cam: [{ u: 0, cx: 720, cy: 420, z: 1.0 }, { u: 2.0, cx: 720, cy: 480, z: 1.08 }, { u: 2.9, cx: 1050, cy: 650, z: 1.4 }, { u: 4.2, cx: 1050, cy: 660, z: 1.4 },
+				{ u: 5.1, cx: 640, cy: 190, z: 2.2 }, { u: 6.2, cx: 640, cy: 190, z: 2.2 }, { u: 7.2, cx: 1080, cy: 1130, z: 1.95 }, { u: 9.2, cx: 1080, cy: 1140, z: 2.05 }],
+			rings: [{ rect: { x: 749, y: 156, w: 143, h: 43 }, a: 5.0, b: 6.3 }, { rect: { x: 755, y: 1166, w: 652, h: 58 }, a: 7.7, b: 9.2 }],
+			caps: [{ a: .2, b: 1.9, t: 'The Shortcode Builder' }, { a: 2.3, b: 4.1, t: 'Live preview as you change settings' }, { a: 4.4, b: 6.1, t: 'Pick a preset' }, { a: 6.5, b: 9.0, t: 'Copy a short, clean shortcode' }] },
+
+		// --- library
+		{ sc: 'library', a: 0, b: 3.1, chrome: 'browser', url: 'yoursite.com/downloads', img: 'lib', hv: 900,
+			cam: [{ u: 0, cx: 720, cy: 500, z: 1.3 }, { u: 3.1, cx: 720, cy: 560, z: 1.4 }],
+			rings: [{ rect: { x: 392, y: 166, w: 658, h: 42 }, a: 1.0, b: 3.0 }], caps: [{ a: .2, b: 3.0, t: 'A searchable grid' }] },
+		{ sc: 'library', a: 3.1, b: 5.0, chrome: 'admin', hv: 1250,
+			layers: [{ img: 'docs', a: 0, b: 1.35 }, { img: 'docs_cover', a: 1.1, b: 2.0 }],
+			cam: [{ u: 0, cx: 720, cy: 700, z: 1.0 }, { u: .9, cx: 560, cy: 985, z: 1.9 }, { u: 2.0, cx: 560, cy: 985, z: 1.9 }],
+			rings: [{ rect: { x: 516, y: 978, w: 106, h: 34 }, a: .8, b: 1.3 }], caps: [{ a: .2, b: 1.9, t: 'Change cover' }] },
+		{ sc: 'library', a: 5.0, b: 6.4, chrome: 'browser', url: 'yoursite.com/downloads', img: 'lib_cover', hv: 900,
+			cam: [{ u: 0, cx: 720, cy: 600, z: 1.4 }, { u: 1.0, cx: 500, cy: 730, z: 2.3 }, { u: 1.4, cx: 500, cy: 730, z: 2.3 }],
+			rings: [{ rect: { x: 396, y: 563, w: 210, h: 338 }, a: .4, b: 1.4 }], caps: [{ a: .1, b: 1.4, t: 'Your own cover, or the first page' }] },
+		{ sc: 'library', a: 6.4, b: 9.8, chrome: 'browser', url: 'yoursite.com/downloads', img: 'lib_open', hv: 900,
+			cam: [{ u: 0, cx: 720, cy: 430, z: 1.45 }, { u: 3.4, cx: 720, cy: 420, z: 1.55 }],
+			caps: [{ a: .2, b: 3.2, t: 'Visitors read it right there' }] },
+
+		// --- search
+		{ sc: 'search', a: 0, b: 2.7, chrome: 'admin', img: 'docs', hv: 1250,
+			cam: [{ u: 0, cx: 720, cy: 650, z: 1.0 }, { u: .9, cx: 880, cy: 990, z: 1.75 }, { u: 2.7, cx: 880, cy: 1000, z: 1.8 }],
+			rings: [{ rect: { x: 822, y: 684, w: 112, h: 500 }, a: .8, b: 2.7 }], caps: [{ a: .2, b: 2.6, t: 'Text inside every PDF is indexed' }] },
+		{ sc: 'search', a: 2.7, b: 5.4, chrome: 'browser', url: 'yoursite.com/?s=Seating', img: 'search', hv: 900,
+			cam: [{ u: 0, cx: 720, cy: 330, z: 1.3 }, { u: .9, cx: 720, cy: 340, z: 1.5 }, { u: 2.7, cx: 720, cy: 440, z: 1.4 }],
+			caps: [{ a: .2, b: 2.6, t: 'Your site search can find it' }] },
+		{ sc: 'search', a: 5.4, b: 9.2, chrome: 'admin', img: 'docs', hv: 1250,
+			cam: [{ u: 0, cx: 880, cy: 1000, z: 1.8 }, { u: 1.0, cx: 960, cy: 1020, z: 1.85 }, { u: 3.8, cx: 960, cy: 1030, z: 1.9 }],
+			rings: [{ rect: { x: 912, y: 684, w: 140, h: 500 }, a: .8, b: 3.8 }], caps: [{ a: .3, b: 3.7, t: 'Accessibility checked on every file' }] }
+	];
+
+	// Build the DOM for each segment.
+	var root = $('root');
+	SEGS.forEach(function (g) {
+		var sc = S[g.sc];
+		g.A = sc.s + g.a; g.B = sc.s + g.b + FADE;
+		var bar = g.chrome === 'browser' ? 52 : 0;
+		g.w = g.chrome === 'browser' ? 1040 : 1560;
+		var seg = document.createElement('div'); seg.className = 'seg';
+		var win = document.createElement('div'); win.className = 'win'; win.style.width = g.w + 'px'; win.style.left = ((1920 - g.w) / 2) + 'px';
+		if (bar) { win.innerHTML = '<div class="bar"><i></i><i></i><i></i><div class="url">' + g.url + '</div></div>'; }
+		var vp = document.createElement('div'); vp.className = 'vp'; vp.style.width = g.w + 'px'; vp.style.top = bar + 'px'; vp.style.height = (880 - bar) + 'px';
+		var stage = document.createElement('div'); stage.className = 'stage'; stage.style.height = g.hv + 'px';
+		g.vpH = 880 - bar; g.stage = stage; g.layerEls = [];
+		var layers = g.layers || (g.flip ? [{ flip: true, a: 0, b: 999 }] : [{ img: g.img, a: 0, b: 999 }]);
+		layers.forEach(function (l) {
+			var im = document.createElement('img');
+			if (l.flip) { im.src = FLIP.frames[0].url; g.flipEl = im; } else { im.src = IMG[l.img][0]; }
+			stage.appendChild(im); g.layerEls.push({ el: im, a: l.a, b: l.b });
+		});
+		g.ringEls = (g.rings || []).map(function (r) {
+			var d = document.createElement('div'); d.className = 'ring';
+			var p = 8; d.style.left = (r.rect.x - p) + 'px'; d.style.top = (r.rect.y - p) + 'px'; d.style.width = (r.rect.w + p * 2) + 'px'; d.style.height = (r.rect.h + p * 2) + 'px';
+			stage.appendChild(d); return { el: d, a: r.a, b: r.b };
+		});
+		vp.appendChild(stage); win.appendChild(vp); seg.appendChild(win); root.appendChild(seg); g.el = seg;
+	});
+
+	// Flip frame lookup: last frame at or before tf.
+	function flipAt(tf) {
+		var f = FLIP.frames, lo = 0, hi = f.length - 1;
+		while (lo < hi) { var mid = (lo + hi + 1) >> 1; if (f[mid].t <= tf) { lo = mid; } else { hi = mid - 1; } }
+		return f[lo];
+	}
+	function lerpKeys(keys, u, k) {
+		if (u <= keys[0].u) { return keys[0][k]; }
+		for (var i = 1; i < keys.length; i++) {
+			if (u <= keys[i].u) { var p = easeInOut(seg01(u, keys[i - 1].u, keys[i].u)); return keys[i - 1][k] + (keys[i][k] - keys[i - 1][k]) * p; }
+		}
+		return keys[keys.length - 1][k];
+	}
+	function flipTime(map, u) {
+		if (u <= map[0][0]) { return map[0][1]; }
+		for (var i = 1; i < map.length; i++) {
+			if (u <= map[i][0]) { var p = seg01(u, map[i - 1][0], map[i][0]); return map[i - 1][1] + (map[i][1] - map[i - 1][1]) * p; }
+		}
+		return map[map.length - 1][1];
+	}
+
+	var words = [].slice.call(document.querySelectorAll('#hook .w'));
+	var SHORTCODE = '[flipset file="/uploads/catalogue.pdf"]';
+
+	window.draw = function (t) {
+		var decodes = [];
+
+		// ---- hook (scene 0)
+		var h = S.hook;
+		var hu = t - h.s;
+		$('hook').style.opacity = hu < 0 || t > h.s + h.len ? 0 : 1 - easeInOut(seg01(hu, h.len - .4, h.len));
+		words.forEach(function (w, i) {
+			var p = easeOut(seg01(hu, .35 + i * .13, .35 + i * .13 + .45));
+			w.style.opacity = p; w.style.transform = 'translateY(' + ((1 - p) * 38) + 'px)';
+		});
+		$('hook').querySelector('.dl').style.setProperty('--strike', easeInOut(seg01(hu, 2.0, 2.5)));
+
+		// ---- logo (meet)
+		var m = S.meet, mu = t - m.s, lg = $('logo');
+		var lout = 1 - easeInOut(seg01(mu, m.len - .4, m.len));
+		lg.style.opacity = (mu < 0 ? 0 : easeOut(seg01(mu, 0, .3))) * lout;
+		lg.querySelector('img').style.transform = 'scale(' + (.55 + .45 * backOut(seg01(mu, .1, .65))) + ')';
+		lg.querySelector('b').style.transform = 'translateY(' + ((1 - easeOut(seg01(mu, .3, .85))) * 30) + 'px)';
+		lg.querySelector('.tag').style.opacity = easeOut(seg01(mu, 1.5, 2.1));
+		lg.querySelector('.wp').style.opacity = easeOut(seg01(mu, 3.6, 4.2));
+
+		// ---- typed shortcode (embed, 1.8 - 3.3)
+		var e = S.embed, eu = t - e.s, cd = $('code');
+		var cin = easeOut(seg01(eu, 1.75, 2.1)) * (1 - easeInOut(seg01(eu, 3.0, 3.35)));
+		cd.style.opacity = cin;
+		var n = Math.round(clamp((eu - 1.95) / 1.0) * SHORTCODE.length);
+		var typed = SHORTCODE.slice(0, n);
+		$('codeText').innerHTML = typed.replace(/^\[flipset/, '[<span class="tk-a">flipset</span>').replace(/(file=)(".*)$/, '$1<span class="tk-s">$2</span>') + '<i class="caret"></i>';
+
+		// ---- shot segments
+		var caption = null, capP = 0;
+		SEGS.forEach(function (g) {
+			var u = t - g.A;
+			var vis = t >= g.A - .001 && t <= g.B + .001;
+			g.el.style.display = vis ? 'block' : 'none';
+			if (!vis) { return; }
+			var op = easeOut(seg01(u, 0, FADE)) * (1 - easeInOut(seg01(t, g.B - FADE, g.B)));
+			g.el.style.opacity = op;
+			var z = lerpKeys(g.cam, u, 'z'), cx = lerpKeys(g.cam, u, 'cx'), cy = lerpKeys(g.cam, u, 'cy');
+			var sc = (g.w / 1440) * z;
+			var tx = g.w / 2 - cx * sc, ty = g.vpH / 2 - cy * sc;
+			tx = Math.min(0, Math.max(g.w - 1440 * sc, tx)); ty = Math.min(0, Math.max(g.vpH - g.hv * sc, ty));
+			g.stage.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + sc + ')';
+			g.layerEls.forEach(function (l) {
+				var o = easeOut(seg01(u, l.a, l.a + .3)) * (1 - easeInOut(seg01(u, l.b - .3, l.b)));
+				l.el.style.opacity = l.a === 0 ? 1 - (l.b < 900 ? easeInOut(seg01(u, l.b - .3, l.b)) : 0) : o;
+			});
+			if (g.flipEl) {
+				var fr = flipAt(flipTime(g.flip, u));
+				if (g.flipEl.getAttribute('data-f') !== fr.url) { g.flipEl.setAttribute('data-f', fr.url); g.flipEl.src = fr.url; }
+				decodes.push(g.flipEl.decode().catch(function () {}));
+			}
+			g.ringEls.forEach(function (r) {
+				var o = easeOut(seg01(u, r.a, r.a + .25)) * (1 - easeInOut(seg01(u, r.b - .2, r.b)));
+				r.el.style.opacity = o * (.75 + .25 * Math.sin(u * 7));
+			});
+			(g.caps || []).forEach(function (c) {
+				if (u >= c.a && u < c.b) {
+					var p = easeOut(seg01(u, c.a, c.a + .25)) * (1 - easeInOut(seg01(u, c.b - .2, c.b))) * op;
+					if (p > capP) { capP = p; caption = c.t; }
+				}
+			});
+		});
+
+		// ---- caption
+		var cap = $('cap');
+		if (caption) { $('capText').textContent = caption; cap.style.opacity = capP; cap.style.transform = 'translateY(' + ((1 - capP) * 20) + 'px)'; } else { cap.style.opacity = 0; }
+
+		// ---- closing
+		var c = S.close, cu = t - c.s, cl = $('close');
+		cl.style.opacity = cu < 0 ? 0 : easeOut(seg01(cu, 0, .35)) * (1 - easeInOut(seg01(cu, c.len - .6, c.len)));
+		var chips = [].slice.call($('clChips').children);
+		var chipAt = [1.55, 2.4, 3.3];
+		chips.forEach(function (ch, i) { var p = easeOut(seg01(cu, chipAt[i], chipAt[i] + .35)); ch.style.opacity = p; ch.style.transform = 'translateY(' + ((1 - p) * 24) + 'px) scale(' + (.92 + .08 * p) + ')'; });
+		var fp = easeOut(seg01(cu, 4.6, 5.0)); $('clFree').style.opacity = fp; $('clFree').style.transform = 'scale(' + (.9 + .1 * backOut(seg01(cu, 4.6, 5.1))) + ')';
+		var fd = easeOut(seg01(cu, 7.2, 7.6)); $('clFind').style.opacity = fd; $('clUrl').style.opacity = easeOut(seg01(cu, 8.6, 9.1));
+		$('clTyped').textContent = 'Flipset'.slice(0, Math.round(clamp((cu - 7.7) / .8) * 7));
+		$('clH').style.opacity = 1; $('clFind').style.transform = 'translateY(' + ((1 - fd) * 24) + 'px)';
+		$('clChips').parentNode.style.display = 'flex';
+
+		return Promise.all(decodes);
+	};
+
+	window.ready = (function () {
+		var all = [].slice.call(document.images);
+		var pre = FLIP.frames.map(function (f) { var i = new Image(); i.src = f.url; return i.decode().catch(function () {}); });
+		return document.fonts.ready.then(function () {
+			return Promise.all(all.map(function (i) { return i.decode().catch(function () {}); }).concat(pre));
+		}).then(function () { return window.draw(0).then(function () { return true; }); });
+	})();
+</script>
+</body>
+</html>

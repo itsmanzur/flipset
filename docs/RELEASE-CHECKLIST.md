@@ -1,4 +1,4 @@
-# Flipset 1.0.0 — manual release checklist
+# Flipset 1.1.0 — manual release checklist
 
 Docker was unavailable, so these are the items that could not be verified automatically (see `RELEASE-REPORT.md`). Run them on a fresh site with `WP_DEBUG` and `WP_DEBUG_LOG` on, and read `wp-content/debug.log` after each step. Mark each PASS / FAIL.
 

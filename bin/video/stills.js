@@ -11,7 +11,7 @@ const [outDir, ...times] = process.argv.slice(2);
 	const b = await launch(9361);
 	try {
 		await b.viewport(1920, 1080, 1);
-		await b.goto('file:///' + path.join(__dirname, 'scene.html').replace(/\\/g, '/'), { wait: 300 });
+		await b.goto('file:///' + path.join(__dirname, process.env.PAGE || 'scene.html').replace(/\\/g, '/'), { wait: 300 });
 		await b.eval('window.ready');
 		for (const t of times) {
 			await b.eval('window.draw(' + parseFloat(t) + ')');

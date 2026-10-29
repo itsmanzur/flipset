@@ -1,15 +1,15 @@
-# Copyright (C) 2026 itsmanzur
+# Copyright (C) 2026 The Readscope
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Flipset – PDF Viewer, PDF Embed, 3D Flipbook & Document Library 1.0.0\n"
+"Project-Id-Version: Flipset – PDF Viewer, PDF Embed, 3D Flipbook & Document Library 1.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/flipset\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-28T17:13:21+00:00\n"
+"POT-Creation-Date: 2026-10-29T17:01:48+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: flipset\n"
@@ -31,7 +31,7 @@ msgstr ""
 
 #. Author of the plugin
 #: flipset.php
-msgid "itsmanzur"
+msgid "The Readscope"
 msgstr ""
 
 #. Author URI of the plugin

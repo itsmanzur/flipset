@@ -281,7 +281,7 @@ const header = `# Copyright (C) 2026 The Read Scope
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Flipset 1.0.0\\n"
+"Project-Id-Version: Flipset 1.1.0\\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/flipset\\n"
 "POT-Creation-Date: 2026-09-24T04:54:10+00:00\\n"
 "PO-Revision-Date: 2026-09-24 10:55+0600\\n"

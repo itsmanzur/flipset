@@ -1,10 +1,10 @@
 === Flipset – PDF Viewer, PDF Embed, 3D Flipbook & Document Library ===
-Contributors: itsmanzur, readscope
+Contributors: itsmanzur
 Tags: pdf, pdf viewer, pdf embed, flipbook, document library
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,6 +13,8 @@ Embed PDFs with a fast PDF viewer, 3D flipbook and document library. Searchable 
 == Description ==
 
 Flipset embeds PDF documents in posts, pages and widgets with a PDF.js build that ships inside the plugin. Use a shortcode, a Gutenberg block, a page-builder widget, or paste a PDF link on its own line. There is no CDN, no external service and no API key: rendering happens in the visitor's browser, from files on your own site.
+
+https://youtu.be/RGBoQxO4mUM
 
 **Why Flipset?**
 
@@ -236,6 +238,14 @@ Support / Bug reports: https://wordpress.org/support/plugin/flipset/ and https:/
 
 == Changelog ==
 
+= 1.1.0 =
+* New: choose your own cover image for any PDF. In Flipset → Docs & Features, use "Change cover" (and "Reset cover" to go back to the first page). The cover is used in the document library, the Open Graph and Twitter image, and the structured data.
+* Improved: cleaner admin screens. One type scale, the Inter font bundled with the plugin (no request leaves your site), consistent weights and spacing, and better text contrast.
+* Improved: Shortcode Builder tab labels no longer get cut off, and the cards on the Features screen line up.
+* Fixed: tagged PDFs were reported as "Untagged" in the accessibility check.
+* Added: an intro video on the plugin page.
+* Developer: new `Flipset_Thumbnails::get_cover_id()` and `get_generated_id()`; `get_thumbnail_id()` now returns the custom cover when one is set.
+
 = 1.0.0 =
 * Initial release.
 * PDF viewer with a bundled PDF.js build, shortcode, Gutenberg block and direct PDF URL embed.
@@ -247,6 +257,9 @@ Support / Bug reports: https://wordpress.org/support/plugin/flipset/ and https:/
 * Public hooks and WP-CLI commands for developers.
 
 == Upgrade Notice ==
+
+= 1.1.0 =
+Adds custom PDF cover images, cleaner admin typography and a fix for tagged PDFs being flagged as untagged. No settings change.
 
 = 1.0.0 =
 Initial release.

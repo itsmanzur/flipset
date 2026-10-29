@@ -64,6 +64,8 @@ async function launch(port = 9333) {
 
 	const api = {
 		send,
+		// Listen to raw protocol events, e.g. api.on((m) => m.method === 'Page.screencastFrame' && ...).
+		on(fn) { listeners.push(fn); },
 		async viewport(width, height, scale = 1) {
 			await send('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: scale, mobile: false });
 		},
