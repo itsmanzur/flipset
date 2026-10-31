@@ -203,7 +203,7 @@ Add-ons can extend the viewer through public WordPress filters and actions. The 
 2. The 3D flipbook view.
 3. Flipset dashboard with the setup checklist.
 4. Shortcode Builder with live preview and saved embeds.
-5. Docs & Features screen listing Media Library PDFs with previews and search/accessibility status.
+5. Docs & Features screen listing Media Library PDFs with previews, custom covers and search/accessibility status.
 6. Settings with a live width and height preview.
 7. Gutenberg "Flipset Viewer" block with a Media Library picker and first-page preview.
 8. Front-end document library grid (`[flipset_library]`).

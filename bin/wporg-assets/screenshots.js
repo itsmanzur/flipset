@@ -33,7 +33,7 @@ const steps = {
 	async 1(b) {
 		await b.viewport(W, H);
 		await b.goto(SITE + '/?page_id=' + pages.view, { until: `document.querySelectorAll('.flipset-viewer canvas').length>0`, wait: 2500 });
-		await b.eval(`window.scrollTo(0, document.querySelector('.flipset-wrap').getBoundingClientRect().top + scrollY - 140)`);
+		await b.eval(`window.scrollTo(0, document.querySelector('.flipset-wrap').getBoundingClientRect().top + scrollY - 120)`);
 		await sleep(600);
 		await b.shot(path.join(out, 'screenshot-1.png'));
 	},
@@ -70,13 +70,19 @@ const steps = {
 	async 5(b) {
 		await b.viewport(W, H + 160);
 		await b.goto(SITE + '/wp-admin/admin.php?page=flipset-documents', { wait: 2500 });
+		// Fold the "4 ways to embed" tips away so more rows (and the custom cover) fit in the shot.
+		await b.eval(`(function(){var h=[].slice.call(document.querySelectorAll('button')).filter(function(x){return x.textContent.trim()==='Hide';})[0];if(h){h.click();}})()`);
+		await sleep(600);
 		await b.shot(path.join(out, 'screenshot-5.png'));
 	},
 
 	// 6. Settings with live preview.
 	async 6(b) {
 		await b.viewport(W, H + 120);
-		await b.goto(SITE + '/wp-admin/admin.php?page=flipset-viewer-settings', { until: `document.querySelectorAll('#fa-preview-stage canvas').length>0`, wait: 2500 });
+		await b.goto(SITE + '/wp-admin/admin.php?page=flipset-viewer-settings', { until: `document.querySelectorAll('#fa-preview-stage canvas').length>0&&!/Loading document/.test(document.querySelector('#fa-preview-stage').textContent)`, wait: 2500 });
+		// The preview draws a moment after the canvas appears; wait for the placeholder to go.
+		for (let i = 0; i < 30 && (await b.eval(`/Loading document/.test(document.body.innerText)`)); i++) { await sleep(1000); }
+		await sleep(800);
 		await b.shot(path.join(out, 'screenshot-6.png'));
 	},
 

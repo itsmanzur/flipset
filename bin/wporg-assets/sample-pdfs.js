@@ -93,7 +93,7 @@ function html(d) {
 	.o1{width:150mm;height:150mm;right:-50mm;top:-40mm}.o2{width:110mm;height:110mm;left:-40mm;bottom:-30mm;background:rgba(0,0,0,.12)}
 	.cv-top{position:relative;font-size:16pt;letter-spacing:.18em;text-transform:uppercase;font-weight:600}
 	.cv-mid{position:relative}.cv-mid h1{font-size:50pt;line-height:1.02;font-weight:700;letter-spacing:-.02em;margin-bottom:8mm}
-	.cv-mid p{font-size:17pt;max-width:130mm;opacity:.92;line-height:1.35}
+	.cv-mid p{color:#fff;font-size:17pt;max-width:130mm;opacity:.92;line-height:1.35}
 	.cv-bot{position:relative;display:flex;justify-content:space-between;font-size:13pt;opacity:.85}
 	.inner{background:#fff;padding:16mm 20mm 14mm;display:flex;flex-direction:column}
 	header{display:flex;justify-content:space-between;font-size:10pt;color:#8a8fb0;border-bottom:1px solid #e6e8f2;padding-bottom:4mm;font-weight:500}
