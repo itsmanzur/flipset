@@ -27,15 +27,15 @@ trait Flipset_Att_Flag {
 	 * Resolve a shortcode/block attribute to a boolean.
 	 *
 	 * @param mixed $value   Attribute value from shortcode_atts() or block attrs.
-	 * @param bool  $default Fallback when $value is empty or unrecognised.
+	 * @param bool  $fallback Fallback when $value is empty or unrecognised.
 	 * @return bool
 	 */
-	private function att_flag( $value, $default ) {
+	private function att_flag( $value, $fallback ) {
 		if ( is_bool( $value ) ) {
 			return $value;
 		}
 		if ( null === $value || '' === $value ) {
-			return (bool) $default;
+			return (bool) $fallback;
 		}
 		$v = strtolower( (string) $value );
 		if ( in_array( $v, array( '0', 'false', 'no', 'off' ), true ) ) {

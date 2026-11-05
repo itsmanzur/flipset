@@ -217,12 +217,12 @@ class Flipset_Compat {
 	}
 
 	/**
-	 * @param bool   $do     Whether to minify.
+	 * @param bool   $skip   Whether to minify.
 	 * @param string $tag    Tag HTML.
 	 * @param string $file   File URL or path.
 	 * @return bool
 	 */
-	public function w3tc_skip_js( $do, $tag, $file ) {
+	public function w3tc_skip_js( $skip, $tag, $file ) {
 		unset( $tag );
 		// Use the plugin's own basename rather than a hard-coded folder name so
 		// this works regardless of where WordPress is installed or if the plugin
@@ -231,22 +231,22 @@ class Flipset_Compat {
 		if ( is_string( $file ) && false !== strpos( $file, $plugin_basename ) ) {
 			return false;
 		}
-		return $do;
+		return $skip;
 	}
 
 	/**
-	 * @param bool   $do   Whether to minify.
+	 * @param bool   $skip Whether to minify.
 	 * @param string $tag  Tag HTML.
 	 * @param string $file File URL or path.
 	 * @return bool
 	 */
-	public function w3tc_skip_css( $do, $tag, $file ) {
+	public function w3tc_skip_css( $skip, $tag, $file ) {
 		unset( $tag );
 		$plugin_basename = trailingslashit( wp_basename( FLIPSET_DIR ) );
 		if ( is_string( $file ) && false !== strpos( $file, $plugin_basename . 'assets/css/' ) ) {
 			return false;
 		}
-		return $do;
+		return $skip;
 	}
 
 	/**

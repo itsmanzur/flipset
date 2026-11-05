@@ -14,7 +14,7 @@ class Test_Flipset_Library extends Flipset_TestCase {
 	public function test_empty_library_shows_empty_state() {
 		$html = Flipset::instance()->library->render_shortcode( array() );
 		$this->assertStringContainsString( 'flipset-library', $html );
-		$this->assertStringContainsString( 'No PDFs found', $html );
+		$this->assertStringContainsString( 'No documents found', $html );
 		$this->assertStringContainsString( 'flipset-library-search', $html );
 	}
 
@@ -57,6 +57,6 @@ class Test_Flipset_Library extends Flipset_TestCase {
 		$_GET[ 'flipset_q_' . $next ] = 'zzzz-no-such-pdf';
 		$html = Flipset::instance()->library->render_shortcode( array( 'search' => 'true' ) );
 		unset( $_GET[ 'flipset_q_' . $next ] );
-		$this->assertStringContainsString( 'No PDFs matched that search', $html );
+		$this->assertStringContainsString( 'No documents matched that search', $html );
 	}
 }

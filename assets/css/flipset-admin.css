@@ -273,8 +273,15 @@
 
 @media (max-width: 1080px) {
 	.flipset-builder-layout{
-		grid-template-columns: 1fr;
+		/* minmax(0, …): a plain 1fr never shrinks below its content, which pushed the page
+		   to ~600px wide on phones (the builder tabs' min-content width). */
+		grid-template-columns: minmax(0, 1fr);
 	}
+}
+
+.flipset-builder-controls,
+.flipset-builder-sidebar{
+	min-width: 0;
 }
 
 .flipset-builder-controls{
@@ -913,11 +920,12 @@
 
 .flipset-output-actions{
 	display: flex;
+	flex-wrap: wrap;
 	gap: 8px;
 }
 
 .flipset-output-actions .button{
-	flex: 1;
+	flex: 1 1 auto;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;

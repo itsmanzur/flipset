@@ -27,6 +27,7 @@ const rootIgnores = new Set([
 	'.idea',
 	'.vscode',
 	'.cursor',
+	'.claude',
 	'.editorconfig',
 	'.gitattributes',
 	'.wp-env.json',

@@ -10,6 +10,7 @@ Thumbs.db
 .idea
 .vscode
 .cursor
+.claude
 .wp-env.json
 .wp-env.override.json
 node_modules

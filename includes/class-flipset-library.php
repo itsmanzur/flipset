@@ -95,7 +95,9 @@ class Flipset_Library {
 				FLIPSET_VERSION
 			);
 			wp_reset_postdata();
-			$html  = '<div class="flipset-library">';
+			// Same id/data attributes as the populated wrapper, so the in-place search and
+			// pagination (which look the container up by id) also work when the result is empty.
+			$html  = '<div id="' . esc_attr( $instance_id ) . '" class="flipset-library" data-columns="' . esc_attr( (string) $columns ) . '">';
 			$html .= $this->render_search_form( $search_on, $search, $search_var, $query_var );
 			$html .= $this->render_empty( $search );
 			$html .= '</div>';
@@ -108,7 +110,7 @@ class Flipset_Library {
 		?>
 		<div id="<?php echo esc_attr( $instance_id ); ?>" class="flipset-library" data-columns="<?php echo esc_attr( (string) $columns ); ?>">
 			<?php echo wp_kses( $this->render_search_form( $search_on, $search, $search_var, $query_var ), Flipset_Viewer::allowed_html() ); ?>
-			<ul class="flipset-library-grid" style="--flipset-cols: <?php echo esc_attr( (string) $columns ); ?>;">
+			<ul class="flipset-library-grid" role="list" style="--flipset-cols: <?php echo esc_attr( (string) $columns ); ?>;">
 				<?php foreach ( $query->posts as $attachment ) : ?>
 					<?php echo wp_kses( $this->render_item( $attachment ), Flipset_Viewer::allowed_html() ); ?>
 				<?php endforeach; ?>
@@ -141,15 +143,19 @@ class Flipset_Library {
 				'medium',
 				false,
 				array(
-					'class'   => 'flipset-library-image',
-					'loading' => 'lazy',
-					'alt'     => $title,
+					'class'    => 'flipset-library-image',
+					'loading'  => 'lazy',
+					'decoding' => 'async',
+					// Decorative: the title is printed right next to it inside the same button.
+					'alt'      => '',
 				)
 			);
 		}
 		if ( ! $image ) {
 			$image = '<span class="flipset-library-placeholder" aria-hidden="true">' . $this->placeholder_icon() . '</span>';
 		}
+
+		$meta = $this->item_meta( $id );
 
 		$viewer = Flipset::instance()->viewer->render_shortcode(
 			array(
@@ -165,7 +171,12 @@ class Flipset_Library {
 		<li class="flipset-library-item">
 			<button type="button" class="flipset-library-card" aria-expanded="false" aria-controls="<?php echo esc_attr( $embed_id ); ?>">
 				<span class="flipset-library-thumb"><?php echo wp_kses( $image, Flipset_Viewer::allowed_html() ); ?></span>
-				<span class="flipset-library-title"><?php echo esc_html( $title ); ?></span>
+				<span class="flipset-library-body">
+					<span class="flipset-library-title"><?php echo esc_html( $title ); ?></span>
+					<?php if ( '' !== $meta ) : ?>
+						<span class="flipset-library-meta"><?php echo esc_html( $meta ); ?></span>
+					<?php endif; ?>
+				</span>
 			</button>
 			<div id="<?php echo esc_attr( $embed_id ); ?>" class="flipset-library-embed" hidden>
 				<?php echo wp_kses( $viewer, Flipset_Viewer::allowed_html() ); ?>
@@ -173,6 +184,35 @@ class Flipset_Library {
 		</li>
 		<?php
 		return ob_get_clean();
+	}
+
+	/**
+	 * Muted one-line description under the title: "PDF · 1.2 MB". The size comes
+	 * from the attachment metadata WordPress already stores; the file is only
+	 * stat-ed when that is missing.
+	 *
+	 * @param int $id PDF attachment ID.
+	 * @return string
+	 */
+	private function item_meta( $id ) {
+		$parts = array( __( 'PDF', 'flipset' ) );
+
+		$bytes = 0;
+		$data  = wp_get_attachment_metadata( $id );
+		if ( is_array( $data ) && ! empty( $data['filesize'] ) ) {
+			$bytes = absint( $data['filesize'] );
+		}
+		if ( ! $bytes ) {
+			$path = get_attached_file( $id );
+			if ( $path && file_exists( $path ) ) {
+				$bytes = absint( filesize( $path ) );
+			}
+		}
+		if ( $bytes ) {
+			$parts[] = size_format( $bytes, 1 );
+		}
+
+		return implode( ' · ', $parts );
 	}
 
 	private function render_search_form( $enabled, $search, $search_var, $query_var ) {
@@ -249,9 +289,9 @@ class Flipset_Library {
 
 	private function render_empty( $search = '' ) {
 		$message = '' !== $search
-			? __( 'No PDFs matched that search.', 'flipset' )
-			: __( 'No PDFs found.', 'flipset' );
-		$html    = '<div class="flipset-library-empty"><p>' . esc_html( $message ) . '</p>';
+			? __( 'No documents matched that search.', 'flipset' )
+			: __( 'No documents found.', 'flipset' );
+		$html    = '<div class="flipset-library-empty" role="status"><p>' . esc_html( $message ) . '</p>';
 		if ( current_user_can( 'upload_files' ) ) {
 			$html .= '<p><a href="' . esc_url( admin_url( 'media-new.php' ) ) . '">' . esc_html__( 'Upload a PDF', 'flipset' ) . '</a></p>';
 		}
@@ -288,10 +328,10 @@ class Flipset_Library {
 	}
 
 
-	private function clamp_int( $value, $min, $max, $default ) {
+	private function clamp_int( $value, $min, $max, $fallback ) {
 		$n = absint( $value );
 		if ( $n < $min || $n > $max ) {
-			return $default;
+			return $fallback;
 		}
 		return $n;
 	}

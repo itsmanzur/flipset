@@ -710,6 +710,36 @@
 	}
 }
 
+/* Touch devices wider than the phone breakpoint (tablets, large foldables): same 40px targets,
+   and let the toolbar wrap instead of overflowing. */
+@media (pointer: coarse) and (min-width: 721px) {
+	.flipset-wrap .flipset-toolbar {
+		flex-wrap: wrap !important;
+	}
+
+	.flipset-wrap .flipset-toolbar button.flipset-btn,
+	.flipset-wrap .flipset-toolbar a.flipset-btn {
+		width: 40px !important;
+		min-width: 40px !important;
+		max-width: 40px !important;
+		height: 40px !important;
+		flex: 0 0 40px !important;
+		touch-action: manipulation;
+	}
+
+	.flipset-wrap input.flipset-page-input[type="number"],
+	.flipset-wrap input.flipset-find-input[type="search"] {
+		height: 40px !important;
+	}
+}
+
+@media (pointer: coarse) {
+	.flipset-side-close {
+		width: 40px;
+		height: 40px;
+	}
+}
+
 .flipset-wrap .flipset-more { display: inline-flex !important; }
 
 .flipset-wrap .flipset-find-status {

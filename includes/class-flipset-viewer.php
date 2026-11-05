@@ -801,6 +801,7 @@ class Flipset_Viewer {
 			'loading'        => __( 'Loading document…', 'flipset' ),
 			/* translators: %s: percent loaded. */
 			'loadingPct'     => __( 'Loading %s…', 'flipset' ),
+			'slow'           => __( 'Still loading… this file is large or the connection is slow.', 'flipset' ),
 			'error'          => __( 'This document could not be loaded.', 'flipset' ),
 			/* translators: 1: current page number, 2: total pages. */
 			'pageStatus'     => __( 'Page %1$s of %2$s', 'flipset' ),

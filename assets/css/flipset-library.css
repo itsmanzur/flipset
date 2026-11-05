@@ -1,211 +1,440 @@
+/*
+ * Flipset document library ([flipset_library], the Library block and the page-builder widgets).
+ *
+ * Everything is scoped under .flipset-library. Colours come from the custom properties declared
+ * once on the wrapper, so a theme can restyle the grid with a single rule, e.g.
+ *   .flipset-library { --flipset-accent: #b32d2e; }
+ * Surfaces, borders and muted text are derived from the surrounding text colour (currentColor), so
+ * the grid follows light and dark themes without a separate dark stylesheet.
+ */
+
 .flipset-library {
-	margin: 1.5em 0;
-	transition: opacity 0.15s ease;
+	/* Fallbacks for browsers without color-mix(); all pairs meet WCAG AA on a white page. */
+	--flipset-accent: #2271b1;
+	--flipset-text: currentColor;
+	--flipset-muted: #50575e;
+	--flipset-surface: #fff;
+	--flipset-surface-alt: #f6f7f7;
+	--flipset-border: #dcdcde;
+	--flipset-field-border: #8c8f94;
+
+	/* Spacing scale (8-pt): gaps between cards, between blocks, inside cards. */
+	--flipset-space-1: 8px;
+	--flipset-space-2: 16px;
+	--flipset-space-3: 24px;
+	--flipset-radius: 10px;
+	--flipset-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.05);
+	--flipset-shadow-lift: 0 4px 10px rgba(0, 0, 0, 0.1), 0 10px 24px rgba(0, 0, 0, 0.08);
+	--flipset-target: 40px;
+
+	position: relative;
+	margin-block: var(--flipset-space-3);
+	color: inherit;
+	line-height: 1.4;
 }
 
+@supports (color: color-mix(in srgb, red, blue)) {
+	.flipset-library {
+		--flipset-muted: color-mix(in srgb, currentColor 72%, transparent);
+		--flipset-surface: color-mix(in srgb, currentColor 4%, transparent);
+		--flipset-surface-alt: color-mix(in srgb, currentColor 7%, transparent);
+		--flipset-border: color-mix(in srgb, currentColor 18%, transparent);
+		--flipset-field-border: color-mix(in srgb, currentColor 55%, transparent);
+	}
+}
+
+.flipset-library *,
+.flipset-library *::before,
+.flipset-library *::after {
+	box-sizing: border-box;
+}
+
+/* Loading state: dimmed content, an indeterminate bar on top, no clicks. */
 .flipset-library.is-loading {
-	opacity: 0.55;
 	pointer-events: none;
 }
 
-.flipset-library-search {
+.flipset-library.is-loading > * {
+	opacity: 0.55;
+}
+
+.flipset-library.is-loading::before {
+	content: "";
+	position: absolute;
+	inset-block-start: 0;
+	inset-inline: 0;
+	z-index: 1;
+	height: 3px;
+	border-radius: 3px;
+	background: linear-gradient(90deg, transparent, var(--flipset-accent), transparent) 0 0 / 40% 100% no-repeat;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.flipset-library > * {
+		transition: opacity 0.15s ease;
+	}
+
+	.flipset-library.is-loading::before {
+		animation: flipset-library-bar 1s ease-in-out infinite;
+	}
+}
+
+@keyframes flipset-library-bar {
+	from {
+		background-position: -40% 0;
+	}
+
+	to {
+		background-position: 140% 0;
+	}
+}
+
+/* Search */
+.flipset-library .flipset-library-search {
 	display: flex;
-	gap: 8px;
-	align-items: center;
-	margin: 0 0 16px;
+	flex-wrap: nowrap;
+	gap: var(--flipset-space-1);
+	align-items: stretch;
+	margin: 0 0 var(--flipset-space-2);
 }
 
-.flipset-library-search input[type="search"] {
-	flex: 1 1 auto;
+.flipset-library .flipset-library-search input[type="search"] {
+	flex: 1 1 0;
 	min-width: 0;
-	padding: 8px 10px;
-	border: 1px solid #c3c4c7;
-	border-radius: 6px;
+	min-height: var(--flipset-target);
+	margin: 0;
+	padding-block: 0;
+	padding-inline: 12px;
+	border: 1px solid var(--flipset-field-border);
+	border-radius: 8px;
+	background: var(--flipset-surface);
+	color: inherit;
+	font: inherit;
 }
 
-.flipset-library-search-submit {
-	padding: 8px 14px;
-	border: 1px solid #1d2327;
-	border-radius: 6px;
-	background: #1d2327;
+.flipset-library .flipset-library-search-submit {
+	flex: 0 0 auto;
+	min-height: var(--flipset-target);
+	margin: 0;
+	padding-block: 0;
+	padding-inline: var(--flipset-space-2);
+	border: 1px solid var(--flipset-accent);
+	border-radius: 8px;
+	background: var(--flipset-accent);
 	color: #fff;
+	font: inherit;
+	font-weight: 600;
 	cursor: pointer;
 }
 
-.flipset-library-search-submit:hover,
-.flipset-library-search-submit:focus {
-	background: #2c3338;
+.flipset-library .flipset-library-search-submit:hover {
+	filter: brightness(0.92);
 }
 
-.flipset-library-grid {
+/* Grid: the "columns" attribute is the upper bound (--flipset-cols). Cards never get narrower than
+   140px, and the phone/tablet breakpoints below cap it at 1 / 2 columns. */
+.flipset-library .flipset-library-grid {
+	--flipset-grid-gap: var(--flipset-space-2);
+	--flipset-grid-cols: var(--flipset-cols, 3);
+
 	display: grid;
-	grid-template-columns: repeat(var(--flipset-cols, 3), minmax(0, 1fr));
-	gap: 16px;
+	grid-template-columns: repeat(auto-fill, minmax(max(140px, calc((100% - (var(--flipset-grid-cols) - 1) * var(--flipset-grid-gap)) / var(--flipset-grid-cols))), 1fr));
+	gap: var(--flipset-grid-gap);
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
 
-.flipset-library-item {
-	margin: 0;
-	padding: 0;
+@media (max-width: 768px) {
+	.flipset-library .flipset-library-grid {
+		--flipset-grid-cols: min(var(--flipset-cols, 3), 2);
+	}
 }
 
-.flipset-library-item.is-open {
+@media (max-width: 480px) {
+	.flipset-library .flipset-library-grid {
+		--flipset-grid-cols: 1;
+	}
+}
+
+.flipset-library .flipset-library-item {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.flipset-library .flipset-library-item.is-open {
 	grid-column: 1 / -1;
 }
 
-.flipset-library-card {
+/* Card */
+.flipset-library .flipset-library-card {
 	display: flex;
+	flex: 1 1 auto;
 	flex-direction: column;
 	align-items: stretch;
 	width: 100%;
+	min-height: var(--flipset-target);
 	margin: 0;
 	padding: 0;
-	border: 1px solid #c3c4c7;
-	border-radius: 8px;
-	background: #fff;
-	color: inherit;
-	text-align: left;
+	border: 1px solid var(--flipset-border);
+	border-radius: var(--flipset-radius);
+	background: var(--flipset-surface);
+	box-shadow: var(--flipset-shadow);
+	color: var(--flipset-text);
+	font: inherit;
+	text-align: start;
+	text-decoration: none;
 	cursor: pointer;
 	overflow: hidden;
 }
 
-.flipset-library-card:hover,
-.flipset-library-card:focus {
-	border-color: #2271b1;
+@media (prefers-reduced-motion: no-preference) {
+	.flipset-library .flipset-library-card {
+		transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+	}
 }
 
-.flipset-library-card:focus-visible {
-	outline: 2px solid #2271b1;
-	outline-offset: 2px;
+@media (hover: hover) {
+	.flipset-library .flipset-library-card:hover {
+		border-color: var(--flipset-accent);
+		box-shadow: var(--flipset-shadow-lift);
+	}
 }
 
-.flipset-library-card[aria-expanded="true"] {
-	border-color: #1d2327;
-	border-bottom-left-radius: 0;
-	border-bottom-right-radius: 0;
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+	.flipset-library .flipset-library-card:hover {
+		transform: translateY(-3px);
+	}
 }
 
-.flipset-library-thumb {
+.flipset-library .flipset-library-card:focus {
+	border-color: var(--flipset-accent);
+}
+
+.flipset-library .flipset-library-card:focus-visible {
+	outline: 3px solid var(--flipset-accent);
+	outline-offset: 3px;
+	box-shadow: var(--flipset-shadow-lift);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.flipset-library .flipset-library-card:focus-visible {
+		transform: translateY(-3px);
+	}
+}
+
+.flipset-library .flipset-library-card[aria-expanded="true"] {
+	border-color: var(--flipset-accent);
+}
+
+/* Cover: always 3:4, cropped to fill, neutral placeholder when there is no thumbnail. */
+.flipset-library .flipset-library-thumb {
 	display: block;
+	flex: 0 0 auto;
+	width: 100%;
 	aspect-ratio: 3 / 4;
-	background: #f6f7f7;
+	background: var(--flipset-surface-alt);
 	overflow: hidden;
 }
 
-.flipset-library-image {
+.flipset-library .flipset-library-image {
 	display: block;
 	width: 100%;
 	height: 100%;
+	max-width: none;
+	margin: 0;
 	object-fit: cover;
+	object-position: top center;
 }
 
-.flipset-library-placeholder {
+.flipset-library .flipset-library-placeholder {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	width: 100%;
 	height: 100%;
-	color: #646970;
+	color: var(--flipset-muted);
 }
 
-.flipset-library-title {
-	display: block;
-	padding: 10px 12px;
-	font-size: 14px;
-	line-height: 1.4;
+/* Text: title clamped to two lines, muted meta underneath. The body grows so cards in a row
+   keep the same height whatever the title length. */
+.flipset-library .flipset-library-body {
+	display: flex;
+	flex: 1 1 auto;
+	flex-direction: column;
+	gap: 4px;
+	min-width: 0;
+	padding: 12px var(--flipset-space-2) var(--flipset-space-2);
+}
+
+.flipset-library .flipset-library-title {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	line-clamp: 2;
+	overflow: hidden;
+	overflow-wrap: anywhere;
+	font-size: 15px;
 	font-weight: 600;
+	line-height: 1.35;
 }
 
-.flipset-library-embed {
+.flipset-library .flipset-library-meta {
+	display: block;
+	margin-block-start: auto;
+	color: var(--flipset-muted);
+	font-size: 13px;
+	line-height: 1.3;
+}
+
+/* Open card becomes a slim header row above the viewer instead of a full-width 3:4 cover. */
+.flipset-library .flipset-library-item.is-open .flipset-library-card {
+	flex: 0 0 auto;
+	flex-direction: row;
+	align-items: center;
+	border-end-start-radius: 0;
+	border-end-end-radius: 0;
+	box-shadow: none;
+	transform: none;
+}
+
+.flipset-library .flipset-library-item.is-open .flipset-library-thumb {
+	flex: 0 0 56px;
+	width: 56px;
+}
+
+.flipset-library .flipset-library-item.is-open .flipset-library-body {
+	flex: 1 1 auto;
+	padding-block: var(--flipset-space-1);
+}
+
+.flipset-library .flipset-library-item.is-open .flipset-library-meta {
+	margin-block-start: 0;
+}
+
+/* Viewer area */
+.flipset-library .flipset-library-embed {
 	margin: 0;
-	padding: 12px;
-	border: 1px solid #1d2327;
-	border-top: 0;
-	border-radius: 0 0 8px 8px;
-	background: #2c3338;
+	padding: var(--flipset-space-1);
+	border: 1px solid var(--flipset-accent);
+	border-block-start: 0;
+	border-end-start-radius: var(--flipset-radius);
+	border-end-end-radius: var(--flipset-radius);
+	background: var(--flipset-surface-alt);
 }
 
-.flipset-library-embed .flipset-wrap {
+.flipset-library .flipset-library-embed[hidden] {
+	display: none;
+}
+
+.flipset-library .flipset-library-embed .flipset-wrap {
 	margin: 0;
 }
 
-.flipset-library-pager {
-	margin-top: 20px;
+/* Pagination */
+.flipset-library .flipset-library-pager {
+	margin-block-start: var(--flipset-space-3);
 }
 
-.flipset-library-pager .page-numbers {
+.flipset-library .flipset-library-pager .page-numbers {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 6px;
+	gap: var(--flipset-space-1);
+	align-items: center;
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
 
-.flipset-library-pager .page-numbers li {
+.flipset-library .flipset-library-pager li {
 	margin: 0;
+	padding: 0;
+	list-style: none;
 }
 
-.flipset-library-pager a,
-.flipset-library-pager span {
-	display: inline-block;
-	min-width: 2em;
-	padding: 4px 8px;
-	border: 1px solid #c3c4c7;
-	border-radius: 4px;
-	text-align: center;
+.flipset-library .flipset-library-pager a.page-numbers,
+.flipset-library .flipset-library-pager span.page-numbers {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: var(--flipset-target);
+	min-height: var(--flipset-target);
+	padding-block: 0;
+	padding-inline: 12px;
+	border: 1px solid var(--flipset-border);
+	border-radius: 8px;
+	background: var(--flipset-surface);
+	color: inherit;
+	font-variant-numeric: tabular-nums;
 	text-decoration: none;
 }
 
-.flipset-library-pager a:hover,
-.flipset-library-pager a:focus {
-	border-color: #2271b1;
-	color: #2271b1;
+.flipset-library .flipset-library-pager a.page-numbers:hover {
+	border-color: var(--flipset-accent);
+	color: var(--flipset-accent);
 }
 
-.flipset-library-pager .current {
-	background: #1d2327;
-	border-color: #1d2327;
+.flipset-library .flipset-library-pager a.page-numbers:focus-visible {
+	outline: 3px solid var(--flipset-accent);
+	outline-offset: 2px;
+}
+
+.flipset-library .flipset-library-pager .page-numbers.current,
+.flipset-library .flipset-library-pager [aria-current="page"] {
+	border-color: var(--flipset-accent);
+	background: var(--flipset-accent);
 	color: #fff;
+	font-weight: 600;
 }
 
-.flipset-library-empty {
-	padding: 32px 16px;
+.flipset-library .flipset-library-pager .page-numbers.dots {
+	min-width: 0;
+	border-color: transparent;
+	background: transparent;
+}
+
+/* Keyboard focus for the search controls (the browser default ring is kept off-white themes). */
+.flipset-library .flipset-library-search input[type="search"]:focus-visible,
+.flipset-library .flipset-library-search-submit:focus-visible {
+	outline: 3px solid var(--flipset-accent);
+	outline-offset: 2px;
+}
+
+/* Empty state */
+.flipset-library .flipset-library-empty {
+	padding: var(--flipset-space-3) var(--flipset-space-2);
+	border: 1px dashed var(--flipset-field-border);
+	border-radius: var(--flipset-radius);
+	background: var(--flipset-surface-alt);
+	color: inherit;
 	text-align: center;
-	background: #f6f7f7;
-	border: 1px dashed #c3c4c7;
-	border-radius: 8px;
 }
 
-@media (max-width: 720px) {
-	.flipset-library-grid {
-		grid-template-columns: repeat(min(2, var(--flipset-cols, 3)), minmax(0, 1fr));
-	}
-
-	.flipset-library-search-submit {
-		min-height: 44px;
-		padding: 10px 16px;
-	}
-
-	.flipset-library-search input[type="search"] {
-		min-height: 44px;
-		font-size: 16px;
-	}
-
-	.flipset-library-card {
-		min-height: 44px;
-	}
+.flipset-library .flipset-library-empty p {
+	margin: 0;
 }
 
-@media (max-width: 480px) {
-	.flipset-library-grid {
-		grid-template-columns: 1fr;
+.flipset-library .flipset-library-empty p + p {
+	margin-block-start: var(--flipset-space-1);
+}
+
+.flipset-library .flipset-library-empty a {
+	color: var(--flipset-accent);
+}
+
+/* Windows high-contrast / forced colours: keep the card edges and the focus ring. */
+@media (forced-colors: active) {
+	.flipset-library .flipset-library-card,
+	.flipset-library .flipset-library-pager a.page-numbers,
+	.flipset-library .flipset-library-pager span.page-numbers {
+		border-color: CanvasText;
 	}
 
-	.flipset-library-search {
-		flex-direction: column;
-		align-items: stretch;
+	.flipset-library .flipset-library-card:focus-visible {
+		outline-color: Highlight;
 	}
 }

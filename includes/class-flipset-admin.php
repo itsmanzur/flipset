@@ -561,13 +561,13 @@ class Flipset_Admin {
 
 	/**
 	 * Validate a user-supplied CSS dimension value. Accepts common units:
-	 * px, %, em, rem, vh, vw, svh, dvh, lvh. Returns $default on failure.
+	 * px, %, em, rem, vh, vw, svh, dvh, lvh. Returns $fallback on failure.
 	 *
 	 * @param string $value   Raw value from the settings form.
-	 * @param string $default Fallback if the value is not a valid CSS dimension.
+	 * @param string $fallback Fallback if the value is not a valid CSS dimension.
 	 * @return string
 	 */
-	private function sanitize_css_dimension( $value, $default ) {
+	private function sanitize_css_dimension( $value, $fallback ) {
 		$value = trim( sanitize_text_field( (string) $value ) );
 		// Allow a positive number followed by a recognised CSS length unit.
 		if ( preg_match( '/^\d+(\.\d+)?(px|%|em|rem|vh|vw|svh|dvh|lvh)$/', $value ) ) {
@@ -577,7 +577,7 @@ class Flipset_Admin {
 		if ( '0' === $value ) {
 			return $value;
 		}
-		return $default;
+		return $fallback;
 	}
 
 	public function section_toolbar() {

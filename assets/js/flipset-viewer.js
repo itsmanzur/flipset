@@ -878,18 +878,34 @@
 			return [ state.page ];
 		}
 
+		function noop() {}
+
 		function renderSlot( slot ) {
 			if ( ! state.pdf || ! slot ) {
 				return Promise.resolve();
 			}
-			if ( slot.task && slot.task.cancel ) {
+			var previous = slot.task;
+			if ( previous && previous.cancel ) {
 				try {
-					slot.task.cancel();
+					previous.cancel();
 				} catch ( err ) {
 					// Stale task is replaced below.
 				}
 			}
-			return state.pdf.getPage( slot.pageNum ).then( function ( page ) {
+			// Serialise renders per canvas: PDF.js refuses a second render() on a canvas
+			// whose cancelled task has not finished cleaning up ("Cannot use the same
+			// canvas during multiple render() operations"), which a resize or zoom during
+			// loading used to trigger. Wait for the old task to settle, and let only the
+			// newest request through if several queue up while the page is being fetched.
+			slot.renderGen = ( slot.renderGen || 0 ) + 1;
+			var gen = slot.renderGen;
+			var settled = previous && previous.promise ? previous.promise.then( noop, noop ) : Promise.resolve();
+			return settled.then( function () {
+				return state.pdf.getPage( slot.pageNum );
+			} ).then( function ( page ) {
+				if ( gen !== slot.renderGen ) {
+					return undefined;
+				}
 				var scale = scaleForPage( page );
 				var viewport = page.getViewport( { scale: scale, rotation: state.rotation } );
 				var outputScale = window.devicePixelRatio || 1;
@@ -2612,13 +2628,39 @@
 			// Re-assert our worker: a plugin sharing this PDF.js object could have changed it.
 			pdfjs.GlobalWorkerOptions.workerSrc = config.workerSrc;
 			var loadingTask = pdfjs.getDocument( { url: fileUrl } );
+
+			// Stall watchdog: a huge file or a dead connection must never leave a
+			// silent viewer. After 20 s without progress, say so (the download keeps
+			// going and the message is replaced as soon as data arrives or it fails).
+			var stallTimer = null;
+			function armStallTimer() {
+				window.clearTimeout( stallTimer );
+				stallTimer = window.setTimeout( function () {
+					if ( status && ! state.pdf && ! passwordForm ) {
+						status.hidden = false;
+						status.textContent = i18n.slow || 'Still loading… this file is large or the connection is slow.';
+					}
+				}, 20000 );
+			}
+			armStallTimer();
+			loadingTask.promise.then(
+				function () {
+					window.clearTimeout( stallTimer );
+				},
+				function () {
+					window.clearTimeout( stallTimer );
+				}
+			);
+
 			// pdf.js only calls onPassword when it is set on the task; passing it in the
 			// getDocument() params is ignored and password PDFs just fail to load.
 			loadingTask.onPassword = function ( updatePassword, reason ) {
+				window.clearTimeout( stallTimer );
 				showPasswordForm( updatePassword, reason );
 			};
 			if ( loadingTask.onProgress !== undefined ) {
 				loadingTask.onProgress = function ( ev ) {
+					armStallTimer();
 					if ( ! status || ! ev || ! ev.total ) {
 						return;
 					}

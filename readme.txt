@@ -4,7 +4,7 @@ Tags: pdf, pdf viewer, pdf embed, flipbook, document library
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -238,6 +238,16 @@ Support / Bug reports: https://wordpress.org/support/plugin/flipset/ and https:/
 
 == Changelog ==
 
+= 1.1.1 =
+* Improved: PDF library design. Cards have a consistent 3:4 cover, a two-line title and a muted "PDF · size" line; the grid follows the `columns` setting and drops to 2 columns on tablets and 1 on phones; clearer keyboard focus, hover that respects "reduce motion", RTL support, theme-friendly colours with AA contrast, a loading bar and a "No documents found" state.
+* Improved: opening a document in the library moves focus into the viewer, and Esc closes it and returns focus to the card. After searching or changing page, focus stays on the library instead of jumping to the top of the page.
+* Improved: the viewer says "Still loading…" if a very large file or a slow connection stalls for 20 seconds, instead of staying blank.
+* Improved: toolbar buttons are 40px on touch tablets, not only on phones.
+* Fixed: resizing or zooming while a PDF was still loading could stop a page from rendering ("Cannot use the same canvas…").
+* Fixed: a library search with no results reloaded the whole page instead of updating in place, and a new search stayed on the old page number.
+* Fixed: the Shortcode Builder made the page scroll sideways on phones, and its Copy / Create test page buttons ran off the card.
+* Fixed: admin text in Bengali and other non-Latin languages now falls back to a system font that has those characters.
+
 = 1.1.0 =
 * New: choose your own cover image for any PDF. In Flipset → Docs & Features, use "Change cover" (and "Reset cover" to go back to the first page). The cover is used in the document library, the Open Graph and Twitter image, and the structured data.
 * Improved: cleaner admin screens. One type scale, the Inter font bundled with the plugin (no request leaves your site), consistent weights and spacing, and better text contrast.
@@ -257,6 +267,9 @@ Support / Bug reports: https://wordpress.org/support/plugin/flipset/ and https:/
 * Public hooks and WP-CLI commands for developers.
 
 == Upgrade Notice ==
+
+= 1.1.1 =
+Redesigned document library cards (same shortcode and block settings) plus accessibility and mobile fixes. If your theme styles the `.flipset-library-*` classes, check the library page after updating.
 
 = 1.1.0 =
 Adds custom PDF cover images, cleaner admin typography and a fix for tagged PDFs being flagged as untagged. No settings change.
