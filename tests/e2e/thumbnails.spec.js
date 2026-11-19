@@ -14,6 +14,8 @@ test.describe( 'Documents thumbnail generation', () => {
 		const thumb = page.locator( '.flipset-docs-thumb-img' );
 		const indexed = page.locator( '.flipset-index-status.is-ready, .flipset-index-status.is-empty' );
 		const a11y = page.locator( '.flipset-a11y-status.is-ready, .flipset-a11y-status.is-warn' );
-		await expect( thumb.or( indexed ).or( a11y ) ).toBeVisible( { timeout: 90_000 } );
+		// Any of these appearing means the browser-side job ran. Several can match
+		// at once (thumbnail, "Indexed", "Untagged"), so take the first.
+		await expect( thumb.or( indexed ).or( a11y ).first() ).toBeVisible( { timeout: 90_000 } );
 	} );
 } );

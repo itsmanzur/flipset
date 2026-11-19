@@ -60,6 +60,8 @@ jobs:
           exclude-files: |
             .gitignore
             .distignore
+            .gitattributes
+            .editorconfig
             .wp-env.json
             composer.json
             composer.lock
@@ -105,7 +107,13 @@ jobs:
           tools: composer
           extensions: mysqli, xml, mbstring
       - name: Install SVN and MySQL client
-        run: sudo apt-get update && sudo apt-get install -y subversion mysql-client
+        # Runner mirrors are occasionally flaky (exit 100); retry before failing.
+        run: |
+          for attempt in 1 2 3; do
+            sudo apt-get update && sudo apt-get install -y subversion mysql-client && break
+            echo "apt attempt $attempt failed"; sleep 15
+            [ "$attempt" = 3 ] && exit 1
+          done
       - run: composer install --no-interaction --prefer-dist
       - name: Install WordPress test suite
         env:

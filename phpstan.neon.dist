@@ -8,4 +8,9 @@ parameters:
 	excludePaths:
 		- vendor
 		- tests
+		# Page-builder modules extend classes from Elementor, Divi and Beaver Builder,
+		# which are not installed in CI. They are covered by the e2e and manual checks.
+		- includes/builders
+	bootstrapFiles:
+		- tests/phpstan-bootstrap.php
 	# The WordPress stubs come from szepeviktor/phpstan-wordpress, installed by CI.
