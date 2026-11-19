@@ -107,13 +107,25 @@ jobs:
           tools: composer
           extensions: mysqli, xml, mbstring
       - name: Install SVN and MySQL client
-        # Runner mirrors are occasionally flaky (exit 100); retry before failing.
+        # Install only what the runner image lacks. A broken third-party apt source
+        # can make "apt-get update" exit 100 even when the packages are available,
+        # so a failed update is not fatal; the install is retried and is.
         run: |
-          for attempt in 1 2 3; do
-            sudo apt-get update && sudo apt-get install -y subversion mysql-client && break
-            echo "apt attempt $attempt failed"; sleep 15
-            [ "$attempt" = 3 ] && exit 1
-          done
+          NEED=""
+          command -v svn >/dev/null 2>&1 || NEED="$NEED subversion"
+          command -v mysqladmin >/dev/null 2>&1 || NEED="$NEED mysql-client"
+          echo "Missing tools:${NEED:- none}"
+          if [ -n "$NEED" ]; then
+            for attempt in 1 2 3; do
+              sudo apt-get update -o Acquire::Retries=3 || echo "apt-get update failed, continuing"
+              if sudo apt-get install -y --no-install-recommends $NEED; then
+                break
+              fi
+              echo "apt install attempt $attempt failed"
+              if [ "$attempt" = 3 ]; then exit 1; fi
+              sleep 15
+            done
+          fi
       - run: composer install --no-interaction --prefer-dist
       - name: Install WordPress test suite
         env:
