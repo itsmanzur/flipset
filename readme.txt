@@ -14,9 +14,9 @@ Embed PDFs with a fast PDF viewer, 3D flipbook and document library. Searchable 
 
 Flipset embeds PDF documents in posts, pages and widgets with a PDF.js build that ships inside the plugin. Use a shortcode, a Gutenberg block, a page-builder widget, or paste a PDF link on its own line. There is no CDN, no external service and no API key: rendering happens in the visitor's browser, from files on your own site.
 
-👉 [Live demo](https://flipset.thereadscope.com) · [Documentation](https://flipset.thereadscope.com/flipset-docs/) · [Quick start](https://flipset.thereadscope.com/flipset-docs/quick-start/) · [Shortcodes](https://flipset.thereadscope.com/flipset-docs/shortcode/) · [Developer hooks](https://flipset.thereadscope.com/flipset-docs/hooks/) · [Support](https://wordpress.org/support/plugin/flipset/) · [GitHub](https://github.com/itsmanzur/flipset)
-
 https://youtu.be/RGBoQxO4mUM
+
+👉 [Live demo](https://flipset.thereadscope.com) · [Documentation](https://flipset.thereadscope.com/flipset-docs/) · [Playground](https://flipset.thereadscope.com/#playground) · [Support](https://wordpress.org/support/plugin/flipset/)
 
 **At a glance**
 
@@ -26,6 +26,7 @@ https://youtu.be/RGBoQxO4mUM
 * **Document library:** `[flipset_library]` – a grid or list of your Media Library PDFs with search, sort and pagination.
 * **Works with:** Gutenberg, Elementor, Divi, Beaver Builder, WPML, Polylang, WP Rocket, W3 Total Cache, Autoptimize, LiteSpeed Cache, SiteGround Optimizer.
 * **Privacy:** no CDN, no external requests, no cookies, no tracking. PDF.js is bundled.
+* **Security:** only `http` and `https` PDF addresses are accepted, PDF-embedded font code is not run, and there is a private way to report vulnerabilities.
 * **SEO:** PDF text is searchable in WordPress search; Open Graph / Twitter cover image; Schema.org `DigitalDocument`; plain PDF link when JavaScript is off.
 * **Accessibility:** full keyboard control, screen reader page announcements, reduced-motion support, untagged-PDF check.
 * **Requirements:** WordPress 6.0+, PHP 7.4+.
@@ -52,6 +53,7 @@ https://youtu.be/RGBoQxO4mUM
 * **Accessible** – keyboard controls, screen reader page announcements, and a check that flags PDFs without accessibility tags.
 * **3D flipbook** – page, scroll, spread and flipbook views, all in the free plugin.
 * **Searchable PDF text** – WordPress site search can find words inside your embedded PDFs.
+* **Safe by default** – only `http` and `https` PDF addresses are accepted, and PDFs cannot run code from their embedded fonts.
 * **Works where you build** – Gutenberg, Elementor, Divi and Beaver Builder.
 * **Translation-ready** – WPML and Polylang support; translations come from translate.wordpress.org.
 
@@ -94,6 +96,13 @@ https://youtu.be/RGBoQxO4mUM
 * Labelled toolbar buttons, visible keyboard focus and full keyboard control.
 * Page changes are announced to screen readers; reduced-motion preference is respected.
 * Flipset → Docs & Features marks PDFs that are not tagged for accessibility.
+
+**Security**
+
+* A PDF address must be `http`, `https` or a site-relative path; `javascript:`, `data:`, `file:` and other schemes are refused everywhere, including in filters and saved embeds.
+* The bundled PDF.js runs with `isEvalSupported: false`, so a PDF cannot run code generated from its fonts.
+* Admin actions check a nonce and the user's capability.
+* Vulnerabilities can be reported privately: https://github.com/itsmanzur/flipset/security/policy
 
 **Builders and integrations**
 
@@ -266,9 +275,17 @@ No, not unless you ask for it. The credit link is off by default. If you would l
 
 No. There is no tracking pixel, no remote API and no phone-home. See the Privacy section for what is stored.
 
+= Why is my PDF link refused? =
+
+Flipset accepts only `http` and `https` addresses and site-relative paths such as `/wp-content/uploads/file.pdf`. Addresses that start with `javascript:`, `data:`, `file:` or another scheme are ignored for safety. Use the full link to the PDF, or pick the file from the Media Library.
+
 = Where do I get support or report a bug? =
 
 Use the support forum at https://wordpress.org/support/plugin/flipset/ or open an issue on GitHub: https://github.com/itsmanzur/flipset/issues
+
+= How do I report a security problem? =
+
+Please do not post it in the public forum. Use GitHub's private reporting: https://github.com/itsmanzur/flipset/security/policy
 
 == Developer Hooks ==
 
@@ -323,6 +340,7 @@ Flipset is developed and maintained by itsmanzur.
 * Security: a PDF address must be `http`, `https` or a site-relative path. `javascript:`, `data:`, `file:` and other schemes are refused in shortcodes, blocks, saved embeds and filters.
 * Improved: PDF text sent from the browser for indexing is cut to the size limit before it is processed, and the stored page count is capped.
 * Improved: Flipset → Docs & Features now documents the library's `order`, `sort_control`, `layout` and `layout_toggle` settings, the custom cover and sort and list features, and which PDF addresses are accepted.
+* Improved: this readme has a Security section and answers for refused PDF links and for reporting a security problem.
 * Added: a security policy (`SECURITY.md` on GitHub) with a private way to report vulnerabilities.
 * Developer: new `Flipset_Viewer::sanitize_file_url()`; tests for the address rules and for `isEvalSupported`; a PHPStan job (report only) in CI; `docs/PDFJS.md` tracks the bundled PDF.js version and advisories.
 
