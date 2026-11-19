@@ -1,0 +1,11 @@
+parameters:
+	level: 5
+	paths:
+		- flipset.php
+		- uninstall.php
+		- includes
+		- blocks
+	excludePaths:
+		- vendor
+		- tests
+	# The WordPress stubs come from szepeviktor/phpstan-wordpress, installed by CI.

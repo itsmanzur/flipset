@@ -175,7 +175,7 @@ class Flipset_Embeds {
 
 		// Sanitize config fields.
 		$config = array(
-			'file'         => ! empty( $data['file'] ) ? esc_url_raw( $data['file'] ) : '',
+			'file'         => ! empty( $data['file'] ) ? Flipset_Viewer::sanitize_file_url( $data['file'] ) : '',
 			'title'        => isset( $data['title'] ) ? sanitize_text_field( $data['title'] ) : '',
 			'width'        => Flipset_Viewer::sanitize_dimension( $data['width'] ?? '', '100%' ),
 			'height'       => Flipset_Viewer::sanitize_dimension( $data['height'] ?? '', '520px' ),
@@ -251,7 +251,7 @@ class Flipset_Embeds {
 		}
 
 		$embed_id = isset( $_POST['embed_id'] ) ? absint( $_POST['embed_id'] ) : 0;
-		$file     = isset( $_POST['file'] ) ? esc_url_raw( wp_unslash( $_POST['file'] ) ) : '';
+		$file     = isset( $_POST['file'] ) ? Flipset_Viewer::sanitize_file_url( sanitize_text_field( wp_unslash( $_POST['file'] ) ) ) : '';
 
 		if ( empty( $file ) ) {
 			wp_send_json_error( array( 'message' => __( 'Please select a PDF file.', 'flipset' ) ) );

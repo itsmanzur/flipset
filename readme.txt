@@ -4,7 +4,7 @@ Tags: pdf, pdf viewer, pdf embed, flipbook, document library
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -312,10 +312,18 @@ Flipset is developed and maintained by itsmanzur.
 * Source code: https://github.com/itsmanzur/flipset
 * Support forum: https://wordpress.org/support/plugin/flipset/
 * Bug reports: https://github.com/itsmanzur/flipset/issues
+* Security issues (private): https://github.com/itsmanzur/flipset/security/policy
 * Help translate: https://translate.wordpress.org/projects/wp-plugins/flipset/
 * PDF.js by Mozilla (Apache-2.0).
 
 == Changelog ==
+
+= 1.1.3 =
+* Security: PDFs can no longer run generated code from their embedded fonts. Flipset now tells the bundled PDF.js not to use it (`isEvalSupported: false`) in the viewer, the thumbnail generator and the block editor preview.
+* Security: a PDF address must be `http`, `https` or a site-relative path. `javascript:`, `data:`, `file:` and other schemes are refused in shortcodes, blocks, saved embeds and filters.
+* Improved: PDF text sent from the browser for indexing is cut to the size limit before it is processed, and the stored page count is capped.
+* Added: a security policy (`SECURITY.md` on GitHub) with a private way to report vulnerabilities.
+* Developer: new `Flipset_Viewer::sanitize_file_url()`; tests for the address rules and for `isEvalSupported`; a PHPStan job (report only) in CI; `docs/PDFJS.md` tracks the bundled PDF.js version and advisories.
 
 = 1.1.2 =
 * New: sort menu for the document library (`sort_control="true"`): Newest, Oldest, Title A–Z and Title Z–A. It re-sorts in place, keeps your search, goes back to page 1 and tells screen readers what changed.
@@ -355,6 +363,9 @@ Flipset is developed and maintained by itsmanzur.
 * Public hooks and WP-CLI commands for developers.
 
 == Upgrade Notice ==
+
+= 1.1.3 =
+Security hardening for PDF display and PDF addresses. Recommended for every site; no settings change.
 
 = 1.1.2 =
 Adds an optional sort menu and a grid / list layout to the document library (both off unless you turn them on). Library cards now also show a page count for PDFs that have one stored.

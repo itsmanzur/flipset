@@ -71,6 +71,8 @@
 	function loadPdf( url ) {
 		var task = pdfjs.getDocument( {
 			url: url,
+			// Never let a PDF's own fonts run generated code (PDF.js CVE-2024-4367).
+			isEvalSupported: false,
 			onPassword: function () {
 				if ( task && task.destroy ) {
 					task.destroy();

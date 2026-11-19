@@ -104,8 +104,10 @@ class Flipset_SEO {
 			$raw = '';
 		}
 
+		// Cut oversized input before any parsing: UTF-8 uses at most 4 bytes a character.
+		$raw   = substr( $raw, 0, $this->max_chars() * 4 );
 		$text  = $this->sanitize_extracted_text( $raw );
-		$pages = isset( $_POST['pages'] ) ? absint( wp_unslash( $_POST['pages'] ) ) : 0;
+		$pages = isset( $_POST['pages'] ) ? min( 100000, absint( wp_unslash( $_POST['pages'] ) ) ) : 0;
 
 		/**
 		 * Filter: flipset/extracted_text

@@ -141,4 +141,83 @@ class Test_Flipset_Viewer extends Flipset_TestCase {
 		$this->assertStringContainsString( 'from-filter.pdf', $html );
 		remove_all_filters( 'flipset/viewer_atts' );
 	}
+
+	/**
+	 * @dataProvider allowed_file_urls
+	 *
+	 * @param string $input    Raw address.
+	 * @param string $expected Clean address.
+	 */
+	public function test_sanitize_file_url_keeps_http_https_and_relative( $input, $expected ) {
+		$this->assertSame( $expected, Flipset_Viewer::sanitize_file_url( $input ) );
+	}
+
+	/**
+	 * @return array
+	 */
+	public function allowed_file_urls() {
+		return array(
+			'https'    => array( 'https://example.com/a.pdf', 'https://example.com/a.pdf' ),
+			'http'     => array( 'http://example.com/a.pdf', 'http://example.com/a.pdf' ),
+			'relative' => array( '/wp-content/uploads/a.pdf', '/wp-content/uploads/a.pdf' ),
+			'trimmed'  => array( "  https://example.com/a.pdf\n", 'https://example.com/a.pdf' ),
+		);
+	}
+
+	/**
+	 * @dataProvider refused_file_urls
+	 *
+	 * @param mixed $input Raw address.
+	 */
+	public function test_sanitize_file_url_refuses_other_schemes( $input ) {
+		$this->assertSame( '', Flipset_Viewer::sanitize_file_url( $input ) );
+	}
+
+	/**
+	 * @return array
+	 */
+	public function refused_file_urls() {
+		return array(
+			'javascript' => array( 'javascript:alert(1)' ),
+			'mixed case' => array( 'JaVaScRiPt:alert(1)' ),
+			'data'       => array( 'data:application/pdf;base64,AAAA' ),
+			'file'       => array( 'file:///etc/passwd' ),
+			'ftp'        => array( 'ftp://example.com/a.pdf' ),
+			'blob'       => array( 'blob:https://example.com/1234' ),
+			'array'      => array( array( 'https://example.com/a.pdf' ) ),
+			'empty'      => array( '' ),
+		);
+	}
+
+	public function test_render_refuses_a_javascript_file_address() {
+		$html = Flipset::instance()->viewer->render_shortcode( array( 'file' => 'javascript:alert(1)' ) );
+		$this->assertStringNotContainsString( 'javascript:', $html );
+		$this->assertStringNotContainsString( 'data-file=', $html );
+	}
+
+	public function test_render_refuses_a_file_address_set_by_a_filter() {
+		add_filter(
+			'flipset/viewer_atts',
+			static function ( $atts ) {
+				$atts['file'] = 'data:text/html;base64,PHNjcmlwdD4=';
+				return $atts;
+			}
+		);
+		$html = Flipset::instance()->viewer->render_shortcode( array() );
+		$this->assertStringNotContainsString( 'data:text/html', $html );
+		remove_all_filters( 'flipset/viewer_atts' );
+	}
+
+	public function test_every_getdocument_call_turns_eval_off() {
+		$files = array( 'flipset-viewer.js', 'flipset-thumbnail-gen.js', 'flipset-block.js' );
+		foreach ( $files as $file ) {
+			$code = file_get_contents( FLIPSET_DIR . 'assets/js/' . $file ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- reading a bundled script in a test.
+			$this->assertNotFalse( $code, $file );
+			$this->assertSame(
+				preg_match_all( '/\.getDocument\(/', $code ),
+				substr_count( $code, 'isEvalSupported: false' ),
+				$file . ': every getDocument() call must set isEvalSupported: false (PDF.js CVE-2024-4367).'
+			);
+		}
+	}
 }

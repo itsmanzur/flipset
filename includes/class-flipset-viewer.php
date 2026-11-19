@@ -108,6 +108,10 @@ class Flipset_Viewer {
 		$atts['width']  = self::sanitize_dimension( $atts['width'] ?? '', self::sanitize_dimension( $settings['default_width'] ?? '', '100%' ) );
 		$atts['height'] = self::sanitize_dimension( $atts['height'] ?? '', self::sanitize_dimension( $settings['default_height'] ?? '', '600px' ) );
 
+		// Only http(s) and site-relative addresses may reach the page, whatever
+		// filter, builder or saved embed supplied them.
+		$atts['file'] = self::sanitize_file_url( $atts['file'] ?? '' );
+
 		if ( empty( $atts['file'] ) ) {
 			return $this->admin_notice( __( 'Flipset: no file URL was provided. Use [flipset file="https://example.com/document.pdf"].', 'flipset' ) );
 		}
@@ -511,6 +515,31 @@ class Flipset_Viewer {
 		</div>
 		<?php
 		return ob_get_clean();
+	}
+
+	/**
+	 * Clean a PDF address: http, https or site-relative only.
+	 *
+	 * Rejects every other scheme (javascript:, data:, file:, ftp: and so on), so
+	 * a crafted shortcode, block, saved embed or filter value cannot put one into
+	 * the page.
+	 *
+	 * @param mixed $url Raw address.
+	 * @return string Clean address, or an empty string when it is not allowed.
+	 */
+	public static function sanitize_file_url( $url ) {
+		if ( ! is_string( $url ) ) {
+			return '';
+		}
+		$url = trim( $url );
+		if ( '' === $url ) {
+			return '';
+		}
+		// A scheme is a leading "letters:" token. Anything but http(s) is refused.
+		if ( preg_match( '#^[a-z][a-z0-9+.\-]*:#i', $url ) && ! preg_match( '#^https?://#i', $url ) ) {
+			return '';
+		}
+		return esc_url_raw( $url, array( 'http', 'https' ) );
 	}
 
 	/**

@@ -21,6 +21,8 @@ composer.lock
 phpcs.xml
 phpcs.xml.dist
 .phpcs.xml.dist
+phpstan.neon.dist
+SECURITY.md
 phpunit.xml
 phpunit.xml.dist
 .phpunit.result.cache

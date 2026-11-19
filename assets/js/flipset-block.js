@@ -44,7 +44,7 @@
 				pdfjs.GlobalWorkerOptions.workerSrc = config.workerSrc;
 
 				pdfjs
-					.getDocument( props.file )
+					.getDocument( { url: props.file, isEvalSupported: false } )
 					.promise.then( function ( pdf ) {
 						return pdf.getPage( 1 );
 					} )

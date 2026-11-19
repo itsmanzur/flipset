@@ -2627,7 +2627,9 @@
 		function startLoadingDocument() {
 			// Re-assert our worker: a plugin sharing this PDF.js object could have changed it.
 			pdfjs.GlobalWorkerOptions.workerSrc = config.workerSrc;
-			var loadingTask = pdfjs.getDocument( { url: fileUrl } );
+			// isEvalSupported:false stops a PDF's fonts from running generated code
+			// (PDF.js CVE-2024-4367, fixed upstream in 4.2.67; we bundle 3.11.174).
+			var loadingTask = pdfjs.getDocument( { url: fileUrl, isEvalSupported: false } );
 
 			// Stall watchdog: a huge file or a dead connection must never leave a
 			// silent viewer. After 20 s without progress, say so (the download keeps

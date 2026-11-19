@@ -25,6 +25,24 @@ jobs:
       - run: composer install --no-interaction --prefer-dist
       - run: composer phpcs
 
+  phpstan:
+    name: PHPStan (level 5, report only)
+    runs-on: ubuntu-latest
+    # Report only for now: findings do not fail the build until the first
+    # baseline is clean. Raise the level in phpstan.neon.dist over time.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+          tools: composer
+      - run: composer install --no-interaction --prefer-dist
+      - run: composer config --no-plugins allow-plugins.phpstan/extension-installer true
+      - run: composer require --dev --no-interaction phpstan/phpstan szepeviktor/phpstan-wordpress phpstan/extension-installer
+      - run: vendor/bin/phpstan analyse --no-progress --memory-limit=1G
+
   plugin-check:
     name: Plugin Check
     runs-on: ubuntu-latest
@@ -48,6 +66,8 @@ jobs:
             package.json
             package-lock.json
             phpcs.xml.dist
+            phpstan.neon.dist
+            SECURITY.md
             phpunit.xml.dist
             playwright.config.js
           ignore-warnings: true
