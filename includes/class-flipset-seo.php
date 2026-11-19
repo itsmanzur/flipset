@@ -14,6 +14,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * PDF text indexing for site search plus social-card meta and schema for PDFs.
+ */
 class Flipset_SEO {
 
 	const META_TEXT    = '_flipset_extracted_text';
@@ -23,6 +26,9 @@ class Flipset_SEO {
 	const MAX_CHARS    = 80000;
 	const MAX_INDEX    = 200000;
 
+	/**
+	 * Register the indexing, search, social-meta and AJAX hooks.
+	 */
 	public function init() {
 		add_action( 'wp_ajax_flipset_save_extracted_text', array( $this, 'ajax_save_extracted_text' ) );
 		add_action( 'save_post', array( $this, 'on_save_post' ), 20, 2 );
@@ -38,6 +44,8 @@ class Flipset_SEO {
 	}
 
 	/**
+	 * Whether the PDF's text has been extracted and stored.
+	 *
 	 * @param int $attachment_id PDF attachment ID.
 	 * @return bool
 	 */
@@ -50,6 +58,8 @@ class Flipset_SEO {
 	}
 
 	/**
+	 * The stored plain text of a PDF, or an empty string.
+	 *
 	 * @param int $attachment_id PDF attachment ID.
 	 * @return string
 	 */
@@ -62,6 +72,11 @@ class Flipset_SEO {
 		return is_string( $text ) ? $text : '';
 	}
 
+	/**
+	 * AJAX: store the text and page count the browser extracted from a PDF.
+	 *
+	 * @return void
+	 */
 	public function ajax_save_extracted_text() {
 		check_ajax_referer( 'flipset_admin', 'nonce' );
 
@@ -122,6 +137,8 @@ class Flipset_SEO {
 	}
 
 	/**
+	 * Rebuild the stored PDF search text of a post when it is saved.
+	 *
 	 * @param int     $post_id Post ID.
 	 * @param WP_Post $post    Post object.
 	 */
@@ -140,6 +157,8 @@ class Flipset_SEO {
 	}
 
 	/**
+	 * Join the search-index meta onto search queries.
+	 *
 	 * @param string   $join  JOIN clause.
 	 * @param WP_Query $query Query.
 	 * @return string
@@ -159,6 +178,8 @@ class Flipset_SEO {
 	}
 
 	/**
+	 * Also match the search term against the search-index meta.
+	 *
 	 * @param string   $search Search SQL.
 	 * @param WP_Query $query  Query.
 	 * @return string
@@ -180,6 +201,8 @@ class Flipset_SEO {
 	}
 
 	/**
+	 * Force DISTINCT on queries that join the search-index meta.
+	 *
 	 * @param string   $distinct DISTINCT clause.
 	 * @param WP_Query $query    Query.
 	 * @return string
@@ -191,6 +214,11 @@ class Flipset_SEO {
 		return $distinct;
 	}
 
+	/**
+	 * Print social-card meta tags for a singular post or attachment that has a PDF.
+	 *
+	 * @return void
+	 */
 	public function output_social_meta() {
 		if ( is_admin() || ! $this->social_enabled() || $this->seo_plugin_handles_og() ) {
 			return;
@@ -337,6 +365,8 @@ class Flipset_SEO {
 	}
 
 	/**
+	 * Whether a query should also search the PDF text.
+	 *
 	 * @param WP_Query $query Query.
 	 * @return bool
 	 */
@@ -368,6 +398,8 @@ class Flipset_SEO {
 	}
 
 	/**
+	 * Rebuild and store the combined PDF text for one post.
+	 *
 	 * @param int    $post_id Post ID.
 	 * @param string $content Post content.
 	 */
@@ -416,6 +448,8 @@ class Flipset_SEO {
 	}
 
 	/**
+	 * Reindex every post that embeds the given PDF.
+	 *
 	 * @param int $attachment_id PDF attachment ID.
 	 */
 	private function rebuild_posts_embedding( $attachment_id ) {
@@ -522,6 +556,8 @@ class Flipset_SEO {
 	}
 
 	/**
+	 * Attachment IDs of the PDFs embedded in some post content.
+	 *
 	 * @param string $content Post content.
 	 * @return int[]
 	 */
@@ -532,7 +568,7 @@ class Flipset_SEO {
 	/**
 	 * Extract PDF URLs from post_content (shortcodes + Gutenberg blocks).
 	 *
-	 * @param string $content
+	 * @param string $content Post content.
 	 * @return string[]
 	 */
 	private function extract_urls_from_content( $content ) {
@@ -600,7 +636,7 @@ class Flipset_SEO {
 	/**
 	 * Extract PDF URLs from Elementor data JSON.
 	 *
-	 * @param string $elementor_json
+	 * @param string $elementor_json Elementor data as a JSON string.
 	 * @return string[]
 	 */
 	private function extract_urls_from_elementor( $elementor_json ) {
@@ -616,8 +652,8 @@ class Flipset_SEO {
 	/**
 	 * Walk Elementor elements array.
 	 *
-	 * @param array    $elements
-	 * @param string[] $urls
+	 * @param array    $elements Elementor elements.
+	 * @param string[] $urls Collected URLs, passed by reference.
 	 */
 	private function walk_elementor_elements( $elements, &$urls ) {
 		if ( ! is_array( $elements ) ) {
@@ -638,7 +674,7 @@ class Flipset_SEO {
 	/**
 	 * Extract PDF URLs from Beaver Builder data.
 	 *
-	 * @param array|object $beaver_data
+	 * @param array|object $beaver_data Beaver Builder layout data.
 	 * @return string[]
 	 */
 	private function extract_urls_from_beaver( $beaver_data ) {
@@ -658,6 +694,8 @@ class Flipset_SEO {
 	}
 
 	/**
+	 * Resolve a file URL to a Media Library attachment ID.
+	 *
 	 * @param string $url File URL.
 	 * @return int
 	 */
@@ -668,6 +706,8 @@ class Flipset_SEO {
 	}
 
 	/**
+	 * Thumbnail URL for the PDF of the current singular view.
+	 *
 	 * @return string
 	 */
 	private function get_singular_pdf_image_url() {
@@ -701,6 +741,8 @@ class Flipset_SEO {
 	}
 
 	/**
+	 * Alt text for the social-card image: the PDF's title.
+	 *
 	 * @return string
 	 */
 	private function get_singular_pdf_image_alt() {
@@ -720,6 +762,8 @@ class Flipset_SEO {
 	}
 
 	/**
+	 * Width and height of the PDF thumbnail used as the social-card image.
+	 *
 	 * @return array{width:int,height:int}
 	 */
 	private function get_singular_pdf_image_size() {
@@ -751,6 +795,8 @@ class Flipset_SEO {
 	}
 
 	/**
+	 * Strip markup and extra whitespace from extracted text and clip it.
+	 *
 	 * @param string $raw Incoming text.
 	 * @return string
 	 */
@@ -764,6 +810,8 @@ class Flipset_SEO {
 	}
 
 	/**
+	 * Cut text to a maximum number of characters.
+	 *
 	 * @param string $text Text.
 	 * @param int    $max  Max characters.
 	 * @return string
@@ -786,6 +834,8 @@ class Flipset_SEO {
 	}
 
 	/**
+	 * Maximum number of characters stored per PDF.
+	 *
 	 * @return int
 	 */
 	private function max_chars() {
@@ -794,6 +844,8 @@ class Flipset_SEO {
 	}
 
 	/**
+	 * Whether PDF text indexing is turned on in the settings.
+	 *
 	 * @return bool
 	 */
 	private function indexing_enabled() {
@@ -802,6 +854,8 @@ class Flipset_SEO {
 	}
 
 	/**
+	 * Whether social-card meta output is turned on in the settings.
+	 *
 	 * @return bool
 	 */
 	private function social_enabled() {
@@ -810,6 +864,8 @@ class Flipset_SEO {
 	}
 
 	/**
+	 * Whether an SEO plugin already prints social-card meta.
+	 *
 	 * @return bool
 	 */
 	private function seo_plugin_handles_og() {

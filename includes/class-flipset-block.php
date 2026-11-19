@@ -16,12 +16,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Registers the Flipset viewer and library blocks and the block patterns.
+ */
 class Flipset_Block {
 
+	/**
+	 * Hook block registration into init.
+	 */
 	public function init() {
 		add_action( 'init', array( $this, 'register_block' ) );
 	}
 
+	/**
+	 * Register the viewer and library blocks with their editor scripts and styles.
+	 */
 	public function register_block() {
 		if ( ! function_exists( 'register_block_type' ) ) {
 			return;

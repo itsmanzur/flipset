@@ -77,6 +77,31 @@
 							onChange: function ( value ) {
 								setAttributes( { search: value } );
 							},
+						} ),
+						el( ToggleControl, {
+							label: __( 'Show sort menu', 'flipset' ),
+							checked: true === attributes.sort_control,
+							onChange: function ( value ) {
+								setAttributes( { sort_control: value } );
+							},
+						} ),
+						el( SelectControl, {
+							label: __( 'Layout', 'flipset' ),
+							value: 'list' === attributes.layout ? 'list' : 'grid',
+							options: [
+								{ label: __( 'Grid', 'flipset' ), value: 'grid' },
+								{ label: __( 'List', 'flipset' ), value: 'list' },
+							],
+							onChange: function ( value ) {
+								setAttributes( { layout: value } );
+							},
+						} ),
+						el( ToggleControl, {
+							label: __( 'Show grid / list switch', 'flipset' ),
+							checked: true === attributes.layout_toggle,
+							onChange: function ( value ) {
+								setAttributes( { layout_toggle: value } );
+							},
 						} )
 					)
 				),

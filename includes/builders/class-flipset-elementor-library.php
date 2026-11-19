@@ -9,28 +9,59 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Elementor widget for the Flipset library.
+ */
 class Flipset_Elementor_Library extends \Elementor\Widget_Base {
 
+	/**
+	 * Widget name used by Elementor.
+	 *
+	 * @return string
+	 */
 	public function get_name() {
 		return 'flipset-library';
 	}
 
+	/**
+	 * Widget title shown in the Elementor panel.
+	 *
+	 * @return string
+	 */
 	public function get_title() {
 		return __( 'Flipset Library', 'flipset' );
 	}
 
+	/**
+	 * Widget icon class.
+	 *
+	 * @return string
+	 */
 	public function get_icon() {
 		return 'eicon-gallery-grid';
 	}
 
+	/**
+	 * Panel categories the widget appears in.
+	 *
+	 * @return string[]
+	 */
 	public function get_categories() {
 		return array( 'flipset', 'general' );
 	}
 
+	/**
+	 * Search keywords for the Elementor panel.
+	 *
+	 * @return string[]
+	 */
 	public function get_keywords() {
 		return array( 'pdf', 'library', 'gallery', 'flipset', 'documents' );
 	}
 
+	/**
+	 * Register the widget controls.
+	 */
 	protected function register_controls() {
 		$this->start_controls_section(
 			'section_grid',
@@ -109,6 +140,9 @@ class Flipset_Elementor_Library extends \Elementor\Widget_Base {
 		$this->end_controls_section();
 	}
 
+	/**
+	 * Render the widget through the shared library renderer.
+	 */
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 		$atts     = array(

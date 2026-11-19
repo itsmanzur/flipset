@@ -26,6 +26,7 @@
 	--flipset-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.05);
 	--flipset-shadow-lift: 0 4px 10px rgba(0, 0, 0, 0.1), 0 10px 24px rgba(0, 0, 0, 0.08);
 	--flipset-target: 40px;
+	--flipset-list-thumb: 72px;
 
 	position: relative;
 	margin-block: var(--flipset-space-3);
@@ -47,6 +48,20 @@
 .flipset-library *::before,
 .flipset-library *::after {
 	box-sizing: border-box;
+}
+
+/* Visually hidden labels and the live region (not every theme ships .screen-reader-text). */
+.flipset-library .screen-reader-text {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	border: 0;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	clip-path: inset(50%);
+	white-space: nowrap;
 }
 
 /* Loading state: dimmed content, an indeterminate bar on top, no clicks. */
@@ -129,6 +144,98 @@
 
 .flipset-library .flipset-library-search-submit:hover {
 	filter: brightness(0.92);
+}
+
+/* Controls row: search / sort form plus the grid-list switch. */
+.flipset-library .flipset-library-controls {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--flipset-space-1);
+	align-items: flex-start;
+	margin: 0 0 var(--flipset-space-2);
+}
+
+.flipset-library .flipset-library-controls .flipset-library-search,
+.flipset-library .flipset-library-controls .flipset-library-sort {
+	flex: 1 1 260px;
+	margin: 0;
+}
+
+/* Sort menu: inside the search form when search is on, on its own when it is off. */
+.flipset-library .flipset-library-search.has-sort {
+	flex-wrap: wrap;
+}
+
+.flipset-library .flipset-library-search.has-sort input[type="search"] {
+	flex: 1 1 160px;
+}
+
+.flipset-library .flipset-library-sort {
+	display: flex;
+	margin: 0 0 var(--flipset-space-2);
+}
+
+.flipset-library .flipset-library-sort-field {
+	display: flex;
+	flex: 1 1 140px;
+	min-width: 0;
+	max-width: 220px;
+}
+
+.flipset-library .flipset-library-sort-select {
+	flex: 1 1 auto;
+	min-width: 0;
+	max-width: 100%;
+	min-height: var(--flipset-target);
+	margin: 0;
+	padding-block: 0;
+	padding-inline: 12px;
+	border: 1px solid var(--flipset-field-border);
+	border-radius: 8px;
+	background-color: var(--flipset-surface);
+	color: inherit;
+	font: inherit;
+	cursor: pointer;
+}
+
+/* The option list is drawn by the browser, so give it system colours that always contrast. */
+.flipset-library .flipset-library-sort-select option {
+	background: Canvas;
+	color: CanvasText;
+}
+
+/* Grid / list switch: two fixed-size buttons, so toggling never moves anything. */
+.flipset-library .flipset-library-layout {
+	display: inline-flex;
+	flex: 0 0 auto;
+	margin-inline-start: auto;
+	border: 1px solid var(--flipset-field-border);
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.flipset-library .flipset-library-layout-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: var(--flipset-target);
+	height: var(--flipset-target);
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-radius: 0;
+	background: transparent;
+	color: inherit;
+	cursor: pointer;
+}
+
+.flipset-library .flipset-library-layout-btn + .flipset-library-layout-btn {
+	border-inline-start: 1px solid var(--flipset-field-border);
+}
+
+.flipset-library .flipset-library-layout-btn[aria-pressed="true"] {
+	background: var(--flipset-accent);
+	color: #fff;
 }
 
 /* Grid: the "columns" attribute is the upper bound (--flipset-cols). Cards never get narrower than
@@ -316,6 +423,38 @@
 	margin-block-start: 0;
 }
 
+/* List layout: one card per row, small 3:4 cover on the inline-start side. Open cards keep the
+   slim header row above. */
+.flipset-library.is-layout-list .flipset-library-grid {
+	grid-template-columns: minmax(0, 1fr);
+}
+
+.flipset-library.is-layout-list .flipset-library-item:not(.is-open) .flipset-library-card {
+	flex-direction: row;
+	align-items: center;
+}
+
+.flipset-library.is-layout-list .flipset-library-item:not(.is-open) .flipset-library-thumb {
+	align-self: flex-start;
+	flex: 0 0 var(--flipset-list-thumb);
+	width: var(--flipset-list-thumb);
+}
+
+.flipset-library.is-layout-list .flipset-library-item:not(.is-open) .flipset-library-body {
+	flex: 1 1 auto;
+	padding: var(--flipset-space-1) var(--flipset-space-2);
+}
+
+.flipset-library.is-layout-list .flipset-library-item:not(.is-open) .flipset-library-meta {
+	margin-block-start: 0;
+}
+
+@media (max-width: 480px) {
+	.flipset-library {
+		--flipset-list-thumb: 56px;
+	}
+}
+
 /* Viewer area */
 .flipset-library .flipset-library-embed {
 	margin: 0;
@@ -399,9 +538,15 @@
 
 /* Keyboard focus for the search controls (the browser default ring is kept off-white themes). */
 .flipset-library .flipset-library-search input[type="search"]:focus-visible,
-.flipset-library .flipset-library-search-submit:focus-visible {
+.flipset-library .flipset-library-search-submit:focus-visible,
+.flipset-library .flipset-library-sort-select:focus-visible {
 	outline: 3px solid var(--flipset-accent);
 	outline-offset: 2px;
+}
+
+.flipset-library .flipset-library-layout-btn:focus-visible {
+	outline: 3px solid var(--flipset-accent);
+	outline-offset: -3px;
 }
 
 /* Empty state */
@@ -434,7 +579,19 @@
 		border-color: CanvasText;
 	}
 
-	.flipset-library .flipset-library-card:focus-visible {
+	.flipset-library .flipset-library-card:focus-visible,
+	.flipset-library .flipset-library-sort-select:focus-visible,
+	.flipset-library .flipset-library-layout-btn:focus-visible {
 		outline-color: Highlight;
+	}
+
+	.flipset-library .flipset-library-sort-select,
+	.flipset-library .flipset-library-layout {
+		border-color: CanvasText;
+	}
+
+	.flipset-library .flipset-library-layout-btn[aria-pressed="true"] {
+		background: Highlight;
+		color: HighlightText;
 	}
 }

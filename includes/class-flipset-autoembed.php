@@ -12,6 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Renders Flipset viewers for pasted .pdf URLs and PDF attachment pages.
+ */
 class Flipset_Autoembed {
 
 	/**

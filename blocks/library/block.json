@@ -28,6 +28,18 @@
 		"search": {
 			"type": "boolean",
 			"default": true
+		},
+		"sort_control": {
+			"type": "boolean",
+			"default": false
+		},
+		"layout": {
+			"type": "string",
+			"default": "grid"
+		},
+		"layout_toggle": {
+			"type": "boolean",
+			"default": false
 		}
 	},
 	"supports": {

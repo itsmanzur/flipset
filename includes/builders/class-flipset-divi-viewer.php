@@ -9,6 +9,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Divi module for the Flipset viewer.
+ */
 class Flipset_Divi_Viewer extends ET_Builder_Module {
 
 	/**
@@ -35,6 +38,9 @@ class Flipset_Divi_Viewer extends ET_Builder_Module {
 		'author_uri' => 'https://thereadscope.com',
 	);
 
+	/**
+	 * Set the module name and settings toggles.
+	 */
 	public function init() {
 		$this->name                   = __( 'Flipset Viewer', 'flipset' );
 		$this->icon_path              = '';
@@ -49,6 +55,11 @@ class Flipset_Divi_Viewer extends ET_Builder_Module {
 		);
 	}
 
+	/**
+	 * Fields shown in the module settings.
+	 *
+	 * @return array
+	 */
 	public function get_fields() {
 		return array(
 			'file'     => array(
@@ -113,6 +124,14 @@ class Flipset_Divi_Viewer extends ET_Builder_Module {
 		);
 	}
 
+	/**
+	 * Render the module through the shared viewer renderer.
+	 *
+	 * @param array  $attrs       Module attributes (unused; values are read from the module props).
+	 * @param string $content     Inner content (unused).
+	 * @param string $render_slug Module slug (unused).
+	 * @return string HTML.
+	 */
 	public function render( $attrs, $content, $render_slug ) {
 		unset( $attrs, $content, $render_slug );
 

@@ -13,6 +13,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Stores and serves the generated thumbnail and the chosen cover image of each PDF.
+ */
 class Flipset_Thumbnails {
 	/** Largest accepted thumbnail, in decoded bytes. */
 	const MAX_BYTES = 2097152;
@@ -29,6 +32,9 @@ class Flipset_Thumbnails {
 	/** Image picked by the site owner as the cover (attachment ID, never deleted by Flipset). */
 	const COVER_META_KEY = '_flipset_cover_id';
 
+	/**
+	 * Register the thumbnail and cover AJAX handlers and the attachment cleanup.
+	 */
 	public function init() {
 		add_action( 'wp_ajax_flipset_save_thumbnail', array( $this, 'ajax_save_thumbnail' ) );
 		add_action( 'wp_ajax_flipset_set_cover', array( $this, 'ajax_set_cover' ) );
@@ -99,6 +105,11 @@ class Flipset_Thumbnails {
 		return absint( get_post_meta( $pdf_attachment_id, self::META_KEY, true ) );
 	}
 
+	/**
+	 * AJAX: save a browser-rendered first-page image as the PDF's thumbnail.
+	 *
+	 * @return void
+	 */
 	public function ajax_save_thumbnail() {
 		check_ajax_referer( 'flipset_admin', 'nonce' );
 

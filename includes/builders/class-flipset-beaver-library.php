@@ -9,8 +9,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Beaver Builder module for the Flipset library.
+ */
 class Flipset_Beaver_Library extends FLBuilderModule {
 
+	/**
+	 * Register the module with Beaver Builder.
+	 */
 	public function __construct() {
 		parent::__construct(
 			array(

@@ -14,16 +14,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Per-PDF accessibility flags: whether a PDF was checked and whether it is a tagged PDF.
+ */
 class Flipset_A11y {
 
 	const META_TAGGED  = '_flipset_pdf_tagged';
 	const META_CHECKED = '_flipset_a11y_checked';
 
+	/**
+	 * Register the AJAX handler that stores the check result.
+	 */
 	public function init() {
 		add_action( 'wp_ajax_flipset_save_a11y', array( $this, 'ajax_save_a11y' ) );
 	}
 
 	/**
+	 * Whether the PDF has been checked for tagged structure.
+	 *
 	 * @param int $attachment_id PDF attachment ID.
 	 * @return bool
 	 */
@@ -36,6 +44,8 @@ class Flipset_A11y {
 	}
 
 	/**
+	 * Whether the PDF is flagged as a tagged PDF.
+	 *
 	 * @param int $attachment_id PDF attachment ID.
 	 * @return bool
 	 */
@@ -58,6 +68,8 @@ class Flipset_A11y {
 	}
 
 	/**
+	 * Whether the PDF accessibility check is enabled in the plugin settings.
+	 *
 	 * @return bool
 	 */
 	public static function checking_enabled() {
@@ -65,6 +77,11 @@ class Flipset_A11y {
 		return ! isset( $settings['check_pdf_a11y'] ) || ! empty( $settings['check_pdf_a11y'] );
 	}
 
+	/**
+	 * AJAX: store the tagged-PDF flag the browser read from a PDF attachment.
+	 *
+	 * @return void
+	 */
 	public function ajax_save_a11y() {
 		check_ajax_referer( 'flipset_admin', 'nonce' );
 

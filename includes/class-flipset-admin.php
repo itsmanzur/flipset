@@ -16,6 +16,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Admin screens: dashboard, shortcode builder, documents, viewer settings and their AJAX handlers.
+ */
 class Flipset_Admin {
 
 	/**
@@ -40,6 +43,9 @@ class Flipset_Admin {
 	 */
 	const FORM_MARKER = '_flipset_form';
 
+	/**
+	 * Register the admin menu, settings, assets and AJAX hooks.
+	 */
 	public function init() {
 		add_action( 'admin_menu', array( $this, 'add_settings_page' ) );
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
@@ -67,6 +73,9 @@ class Flipset_Admin {
 		wp_cache_delete( 'embed_count', 'flipset' );
 	}
 
+	/**
+	 * Add the Flipset menu and its subpages.
+	 */
 	public function add_settings_page() {
 		add_menu_page(
 			__( 'Flipset', 'flipset' ),
@@ -115,6 +124,11 @@ class Flipset_Admin {
 		);
 	}
 
+	/**
+	 * Enqueue the admin styles and scripts on the Flipset screens.
+	 *
+	 * @param string $hook Current admin page hook suffix.
+	 */
 	public function enqueue_admin_assets( $hook ) {
 		$page         = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- admin screen routing.
 		$is_dashboard = ( self::PAGE_SLUG === $page || 'toplevel_page_' . self::PAGE_SLUG === $hook );
@@ -337,6 +351,9 @@ class Flipset_Admin {
 		return FLIPSET_VERSION;
 	}
 
+	/**
+	 * Register the settings option with its sections and fields.
+	 */
 	public function register_settings() {
 		register_setting( self::OPTION_GROUP, self::OPTION_NAME, array( $this, 'sanitize_settings' ) );
 
@@ -580,86 +597,149 @@ class Flipset_Admin {
 		return $fallback;
 	}
 
+	/**
+	 * Intro text of the toolbar settings section.
+	 */
 	public function section_toolbar() {
 		echo '<p class="description">' . esc_html__( 'Enable or disable specific buttons across all embedded PDF viewers. Individual embeds can also customize controls via the "hide" attribute.', 'flipset' ) . '</p>';
 	}
 
+	/**
+	 * Settings field: default theme.
+	 */
 	public function field_default_theme() {
 		$this->render_control( 'default_theme' );
 	}
 
+	/**
+	 * Settings field: show branding.
+	 */
 	public function field_show_branding() {
 		$this->render_control( 'show_branding' );
 	}
 
+	/**
+	 * Settings field: lazy loading.
+	 */
 	public function field_lazy_loading() {
 		$this->render_control( 'lazy_loading' );
 	}
 
+	/**
+	 * Settings field: allow search.
+	 */
 	public function field_allow_search() {
 		$this->render_control( 'allow_search' );
 	}
 
+	/**
+	 * Settings field: allow theme switching.
+	 */
 	public function field_allow_theme() {
 		$this->render_control( 'allow_theme' );
 	}
 
+	/**
+	 * Settings field: allow share.
+	 */
 	public function field_allow_share() {
 		$this->render_control( 'allow_share' );
 	}
 
+	/**
+	 * Settings field: allow keyboard shortcuts.
+	 */
 	public function field_allow_shortcuts() {
 		$this->render_control( 'allow_shortcuts' );
 	}
 
+	/**
+	 * Settings field: allow fullscreen.
+	 */
 	public function field_allow_fullscreen() {
 		$this->render_control( 'allow_fullscreen' );
 	}
 
+	/**
+	 * Settings field: allow presentation mode.
+	 */
 	public function field_allow_presentation() {
 		$this->render_control( 'allow_presentation' );
 	}
 
+	/**
+	 * Settings field: default width.
+	 */
 	public function field_default_width() {
 		$this->render_control( 'default_width' );
 	}
 
+	/**
+	 * Settings field: default height.
+	 */
 	public function field_default_height() {
 		$this->render_control( 'default_height' );
 	}
 
+	/**
+	 * Settings field: allow download.
+	 */
 	public function field_allow_download() {
 		$this->render_control( 'allow_download' );
 	}
 
+	/**
+	 * Settings field: allow print.
+	 */
 	public function field_allow_print() {
 		$this->render_control( 'allow_print' );
 	}
 
+	/**
+	 * Settings field: index PDF text for search.
+	 */
 	public function field_index_pdf_text() {
 		$this->render_control( 'index_pdf_text' );
 	}
 
+	/**
+	 * Settings field: social preview.
+	 */
 	public function field_social_preview() {
 		$this->render_control( 'social_preview' );
 	}
 
+	/**
+	 * Settings field: PDF accessibility check.
+	 */
 	public function field_check_pdf_a11y() {
 		$this->render_control( 'check_pdf_a11y' );
 	}
 
+	/**
+	 * Settings field: auto-embed PDF URLs.
+	 */
 	public function field_autoembed_url() {
 		$this->render_control( 'autoembed_url' );
 	}
 
+	/**
+	 * Settings field: embed PDFs on attachment pages.
+	 */
 	public function field_embed_attachment_pages() {
 		$this->render_control( 'embed_attachment_pages' );
 	}
 
+	/**
+	 * Intro text of the search and sharing settings section.
+	 */
 	public function section_discover() {
 		echo '<p class="description">' . esc_html__( 'Make embedded PDFs findable in WordPress search and nicer when a page is shared.', 'flipset' ) . '</p>';
 	}
 
+	/**
+	 * Render the Flipset dashboard screen.
+	 */
 	public function render_dashboard() {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
@@ -1453,6 +1533,9 @@ class Flipset_Admin {
 		);
 	}
 
+	/**
+	 * Render the viewer settings screen.
+	 */
 	public function render_settings_page() {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
@@ -1719,6 +1802,9 @@ class Flipset_Admin {
 		<?php
 	}
 
+	/**
+	 * Render the Shortcode Builder screen.
+	 */
 	public function render_builder_page() {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
@@ -2335,6 +2421,9 @@ class Flipset_Admin {
 		return 'ready';
 	}
 
+	/**
+	 * Render the Documents screen.
+	 */
 	public function render_documents_page() {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
@@ -3494,6 +3583,11 @@ class Flipset_Admin {
 		<?php
 	}
 
+	/**
+	 * AJAX: remember that the setup shortcode was copied.
+	 *
+	 * @return void
+	 */
 	public function ajax_mark_setup_copied() {
 		check_ajax_referer( 'flipset_admin', 'nonce' );
 		if ( ! current_user_can( 'manage_options' ) ) {
@@ -3510,6 +3604,11 @@ class Flipset_Admin {
 		wp_send_json_success();
 	}
 
+	/**
+	 * AJAX: create or update the Flipset test page for a Media Library PDF.
+	 *
+	 * @return void
+	 */
 	public function ajax_create_test_page() {
 		check_ajax_referer( 'flipset_admin', 'nonce' );
 		if ( ! current_user_can( 'manage_options' ) ) {
@@ -3573,6 +3672,11 @@ class Flipset_Admin {
 		);
 	}
 
+	/**
+	 * AJAX: dismiss the welcome notice for the current user.
+	 *
+	 * @return void
+	 */
 	public function ajax_dismiss_welcome() {
 		check_ajax_referer( 'flipset_admin', 'nonce' );
 		if ( ! current_user_can( 'manage_options' ) ) {
@@ -3583,6 +3687,11 @@ class Flipset_Admin {
 		wp_send_json_success();
 	}
 
+	/**
+	 * URL of the newest PDF in the Media Library.
+	 *
+	 * @return string URL, or an empty string when there is no PDF.
+	 */
 	private function get_latest_pdf_url() {
 		$query = new WP_Query(
 			array(
@@ -3645,6 +3754,11 @@ class Flipset_Admin {
 		return $items;
 	}
 
+	/**
+	 * Number of PDFs in the Media Library.
+	 *
+	 * @return int
+	 */
 	private function count_pdfs() {
 		// wp_count_attachments() is keyed by MIME type (plus 'trash'), not by
 		// post_status, so it can't be read with ->inherit. A direct query also
@@ -3661,6 +3775,11 @@ class Flipset_Admin {
 		return (int) $query->found_posts;
 	}
 
+	/**
+	 * Number of posts and pages that embed Flipset, cached for five minutes.
+	 *
+	 * @return int
+	 */
 	private function count_embeds() {
 		$cached = wp_cache_get( 'embed_count', 'flipset' );
 		if ( false !== $cached ) {

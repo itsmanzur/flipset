@@ -13,8 +13,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Registers the Flipset widgets and modules for Elementor, Divi and Beaver Builder.
+ */
 class Flipset_Builders {
 
+	/**
+	 * Hook each page builder integration.
+	 */
 	public function init() {
 		add_action( 'elementor/widgets/register', array( $this, 'register_elementor_widgets' ) );
 		add_action( 'elementor/widgets/widgets_registered', array( $this, 'register_elementor_widgets_legacy' ) );
@@ -24,6 +30,8 @@ class Flipset_Builders {
 	}
 
 	/**
+	 * Add the Flipset category to the Elementor panel.
+	 *
 	 * @param \Elementor\Elements_Manager $elements_manager Manager.
 	 */
 	public function register_elementor_category( $elements_manager ) {
@@ -53,6 +61,8 @@ class Flipset_Builders {
 	}
 
 	/**
+	 * Register the Flipset widgets with Elementor.
+	 *
 	 * @param \Elementor\Widgets_Manager $widgets_manager Manager.
 	 */
 	public function register_elementor_widgets( $widgets_manager ) {
@@ -75,6 +85,9 @@ class Flipset_Builders {
 		}
 	}
 
+	/**
+	 * Register the Flipset modules once Divi's builder is ready.
+	 */
 	public function register_divi_modules() {
 		if ( ! class_exists( 'ET_Builder_Module' ) ) {
 			return;
@@ -85,6 +98,9 @@ class Flipset_Builders {
 		new Flipset_Divi_Library();
 	}
 
+	/**
+	 * Register the Flipset modules with Beaver Builder.
+	 */
 	public function register_beaver_modules() {
 		if ( ! class_exists( 'FLBuilder' ) ) {
 			return;

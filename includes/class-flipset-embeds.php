@@ -13,11 +13,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Saved embeds: a private custom post type plus its admin AJAX handlers.
+ */
 class Flipset_Embeds {
 
 	const POST_TYPE = 'flipset_embed';
 	const META_KEY  = '_flipset_embed_config';
 
+	/**
+	 * Register the post type and, in the admin, the AJAX handlers.
+	 */
 	public function init() {
 		add_action( 'init', array( $this, 'register_post_type' ) );
 

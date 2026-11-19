@@ -14,8 +14,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Compatibility with translation plugins (WPML, Polylang) and cache/optimizer plugins.
+ */
 class Flipset_Compat {
 
+	/**
+	 * Register the translation and optimizer-exclusion filters.
+	 */
 	public function init() {
 		add_filter( 'flipset/viewer_atts', array( $this, 'localize_viewer_atts' ), 5 );
 		add_filter( 'script_loader_tag', array( $this, 'script_loader_tag' ), 10, 2 );
@@ -73,6 +79,8 @@ class Flipset_Compat {
 	}
 
 	/**
+	 * Find the Media Library attachment that a file URL points to.
+	 *
 	 * @param string $url File URL.
 	 * @return int
 	 */
@@ -117,6 +125,8 @@ class Flipset_Compat {
 	}
 
 	/**
+	 * Resolve the translated version of an attachment for the current language.
+	 *
 	 * @param int $attachment_id Attachment ID.
 	 * @return int
 	 */
@@ -153,6 +163,8 @@ class Flipset_Compat {
 	}
 
 	/**
+	 * Mark Flipset script tags so optimizers leave them alone.
+	 *
 	 * @param string $tag    Script tag.
 	 * @param string $handle Script handle.
 	 * @return string
@@ -195,6 +207,8 @@ class Flipset_Compat {
 	}
 
 	/**
+	 * Add Flipset script paths to an optimizer's exclusion list.
+	 *
 	 * @param string[] $excluded Paths or patterns.
 	 * @return string[]
 	 */
@@ -206,6 +220,8 @@ class Flipset_Compat {
 	}
 
 	/**
+	 * Add Flipset stylesheet paths to an optimizer's exclusion list.
+	 *
 	 * @param string[] $excluded Paths or patterns.
 	 * @return string[]
 	 */
@@ -217,6 +233,8 @@ class Flipset_Compat {
 	}
 
 	/**
+	 * Keep W3 Total Cache from minifying Flipset scripts.
+	 *
 	 * @param bool   $skip   Whether to minify.
 	 * @param string $tag    Tag HTML.
 	 * @param string $file   File URL or path.
@@ -235,6 +253,8 @@ class Flipset_Compat {
 	}
 
 	/**
+	 * Keep W3 Total Cache from minifying Flipset stylesheets.
+	 *
 	 * @param bool   $skip Whether to minify.
 	 * @param string $tag  Tag HTML.
 	 * @param string $file File URL or path.
@@ -250,6 +270,8 @@ class Flipset_Compat {
 	}
 
 	/**
+	 * Add Flipset scripts to Autoptimize's JS exclusion list.
+	 *
 	 * @param string $exclude Comma-separated filenames.
 	 * @return string
 	 */
@@ -260,6 +282,8 @@ class Flipset_Compat {
 	}
 
 	/**
+	 * Add Flipset stylesheets to Autoptimize's CSS exclusion list.
+	 *
 	 * @param string $exclude Comma-separated filenames.
 	 * @return string
 	 */
@@ -270,6 +294,8 @@ class Flipset_Compat {
 	}
 
 	/**
+	 * Add Flipset script handles to SiteGround Optimizer's exclusions.
+	 *
 	 * @param string[] $handles Script handles.
 	 * @return string[]
 	 */
@@ -281,6 +307,8 @@ class Flipset_Compat {
 	}
 
 	/**
+	 * Add Flipset style handles to SiteGround Optimizer's exclusions.
+	 *
 	 * @param string[] $handles Style handles.
 	 * @return string[]
 	 */
@@ -292,6 +320,8 @@ class Flipset_Compat {
 	}
 
 	/**
+	 * Script handles registered by Flipset.
+	 *
 	 * @return string[]
 	 */
 	private function js_handles() {
@@ -304,6 +334,8 @@ class Flipset_Compat {
 	}
 
 	/**
+	 * Script path patterns used in optimizer exclusion lists.
+	 *
 	 * @return string[]
 	 */
 	private function js_path_patterns() {
@@ -318,6 +350,8 @@ class Flipset_Compat {
 	}
 
 	/**
+	 * Stylesheet path patterns used in optimizer exclusion lists.
+	 *
 	 * @return string[]
 	 */
 	private function css_path_patterns() {

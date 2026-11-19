@@ -23,6 +23,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Reports whether an add-on has registered itself with Flipset.
+ */
 class Flipset_Loader {
 
 	/**

@@ -14,6 +14,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Renders the [flipset] viewer and enqueues its PDF.js assets.
+ */
 class Flipset_Viewer {
 
 	use Flipset_Att_Flag;
@@ -26,6 +29,9 @@ class Flipset_Viewer {
 	 */
 	private $assets_enqueued = false;
 
+	/**
+	 * Register the [flipset] shortcode.
+	 */
 	public function init() {
 		add_shortcode( 'flipset', array( $this, 'render_shortcode' ) );
 	}
@@ -632,6 +638,15 @@ class Flipset_Viewer {
 			'label'    => array(
 				'for' => true,
 			),
+			'select'   => array(
+				'name'     => true,
+				'disabled' => true,
+			),
+			'option'   => array(
+				'value'    => true,
+				'selected' => true,
+				'disabled' => true,
+			),
 			'input'    => array(
 				'type'         => true,
 				'name'         => true,
@@ -920,6 +935,12 @@ class Flipset_Viewer {
 	}
 
 
+	/**
+	 * Notice shown to editors only; visitors get nothing.
+	 *
+	 * @param string $message Notice text.
+	 * @return string HTML, or an empty string when the current user cannot edit posts.
+	 */
 	private function admin_notice( $message ) {
 		if ( ! current_user_can( 'edit_posts' ) ) {
 			return '';

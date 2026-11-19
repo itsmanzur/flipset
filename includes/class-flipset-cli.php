@@ -11,6 +11,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * WP-CLI commands for Flipset document and index maintenance.
+ */
 class Flipset_CLI {
 
 	/**
@@ -20,10 +23,10 @@ class Flipset_CLI {
 	 *
 	 *     wp flipset status
 	 *
-	 * @param array $args
-	 * @param array $assoc_args
+	 * @param array $args Positional arguments (unused).
+	 * @param array $assoc_args Associative arguments (unused).
 	 */
-	public function status( $args = array(), $assoc_args = array() ) {
+	public function status( $args = array(), $assoc_args = array() ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed -- WP-CLI always passes both argument lists.
 		$query = new WP_Query(
 			array(
 				'post_type'      => 'attachment',
@@ -71,10 +74,10 @@ class Flipset_CLI {
 	 *
 	 *     wp flipset reindex
 	 *
-	 * @param array $args
-	 * @param array $assoc_args
+	 * @param array $args Positional arguments (unused).
+	 * @param array $assoc_args Associative arguments (unused).
 	 */
-	public function reindex( $args = array(), $assoc_args = array() ) {
+	public function reindex( $args = array(), $assoc_args = array() ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed -- WP-CLI always passes both argument lists.
 		global $wpdb;
 
 		$like_shortcode = '%' . $wpdb->esc_like( '[flipset' ) . '%';
@@ -118,10 +121,10 @@ class Flipset_CLI {
 	 *
 	 *     wp flipset clear_cache
 	 *
-	 * @param array $args
-	 * @param array $assoc_args
+	 * @param array $args Positional arguments (unused).
+	 * @param array $assoc_args Associative arguments (unused).
 	 */
-	public function clear_cache( $args = array(), $assoc_args = array() ) {
+	public function clear_cache( $args = array(), $assoc_args = array() ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed -- WP-CLI always passes both argument lists.
 		wp_cache_delete( 'embed_count', 'flipset' );
 		WP_CLI::success( 'Flipset cache cleared.' );
 	}

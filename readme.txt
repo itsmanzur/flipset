@@ -4,7 +4,7 @@ Tags: pdf, pdf viewer, pdf embed, flipbook, document library
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,37 @@ Embed PDFs with a fast PDF viewer, 3D flipbook and document library. Searchable 
 
 Flipset embeds PDF documents in posts, pages and widgets with a PDF.js build that ships inside the plugin. Use a shortcode, a Gutenberg block, a page-builder widget, or paste a PDF link on its own line. There is no CDN, no external service and no API key: rendering happens in the visitor's browser, from files on your own site.
 
+👉 [Live demo](https://flipset.thereadscope.com) · [Documentation](https://flipset.thereadscope.com/flipset-docs/) · [Quick start](https://flipset.thereadscope.com/flipset-docs/quick-start/) · [Shortcodes](https://flipset.thereadscope.com/flipset-docs/shortcode/) · [Developer hooks](https://flipset.thereadscope.com/flipset-docs/hooks/) · [Support](https://wordpress.org/support/plugin/flipset/) · [GitHub](https://github.com/itsmanzur/flipset)
+
 https://youtu.be/RGBoQxO4mUM
+
+**At a glance**
+
+* **What it is:** a free WordPress PDF viewer, PDF embed plugin, 3D flipbook and PDF document library.
+* **How to add a PDF:** shortcode `[flipset file="https://example.com/document.pdf"]`, the "Flipset Viewer" block, a page-builder widget, or a PDF link pasted on its own line.
+* **View modes:** single page, continuous scroll, two-page spread, 3D flipbook (`view="page|scroll|spread|flip"`).
+* **Document library:** `[flipset_library]` – a grid or list of your Media Library PDFs with search, sort and pagination.
+* **Works with:** Gutenberg, Elementor, Divi, Beaver Builder, WPML, Polylang, WP Rocket, W3 Total Cache, Autoptimize, LiteSpeed Cache, SiteGround Optimizer.
+* **Privacy:** no CDN, no external requests, no cookies, no tracking. PDF.js is bundled.
+* **SEO:** PDF text is searchable in WordPress search; Open Graph / Twitter cover image; Schema.org `DigitalDocument`; plain PDF link when JavaScript is off.
+* **Accessibility:** full keyboard control, screen reader page announcements, reduced-motion support, untagged-PDF check.
+* **Requirements:** WordPress 6.0+, PHP 7.4+.
+
+**Quick start**
+
+1. Install and activate Flipset.
+2. Embed one PDF: `[flipset file="https://example.com/document.pdf"]`
+3. Open it as a 3D flipbook: `[flipset file="https://example.com/document.pdf" view="flip"]`
+4. Show every PDF in your Media Library: `[flipset_library]`
+5. Prefer clicks to code? Use the "Flipset Viewer" or "Flipset Library" block, or Flipset → Shortcode Builder with its live preview.
+
+**Common use cases**
+
+* Brochures, catalogues and menus – a 3D flipbook that opens on the first page.
+* Reports, white papers and e-books – a searchable PDF reader with a document outline and last-page resume.
+* Manuals, forms and price lists – a PDF document library visitors can search and sort.
+* Course material and handouts – an accessible PDF viewer with download and print switched on or off per embed.
+* Magazines and newsletters – a flipbook in spread view with a share dialog.
 
 **Why Flipset?**
 
@@ -48,7 +78,7 @@ https://youtu.be/RGBoQxO4mUM
 
 **Document library**
 
-* `[flipset_library]` shortcode and "Flipset Library" block: a grid of your Media Library PDFs with first-page thumbnails, search and pagination; a document opens in place.
+* `[flipset_library]` shortcode and "Flipset Library" block: a grid or list of your Media Library PDFs with first-page thumbnails, search, an optional sort menu and pagination; a document opens in place.
 * Flipset → Docs & Features lists your PDFs with preview, search-index status and accessibility status, and copies shortcodes.
 * Shortcode Builder with live preview and one-click presets; save an embed once and reuse it as `[flipset id="1"]` or with the block.
 
@@ -76,6 +106,33 @@ https://youtu.be/RGBoQxO4mUM
 * Public filters and actions, and DOM events such as `flipset:ready` and `flipset:pagechange`, documented in `docs/HOOKS.md`.
 * WP-CLI: `wp flipset status`, `wp flipset reindex`, `wp flipset clear_cache`.
 * Clean uninstall: settings and Flipset data are removed, your media is kept.
+
+= Shortcode reference =
+
+**`[flipset]` – PDF viewer.** Only `file` (or `id`) is required.
+
+* `file` – URL of the PDF. `id` – ID of an embed saved in Flipset → Shortcode Builder.
+* `view` – `page` (default), `scroll`, `spread` or `flip` (3D flipbook).
+* `page` – start page (default `1`). `title` – caption for the viewer, also used as its accessible name.
+* `width`, `height` – a number with a CSS unit, for example `100%` or `700px` (defaults come from Flipset → Settings).
+* `theme` – `light`, `dark` or `sepia`.
+* `download`, `print`, `search`, `share`, `fullscreen`, `presentation`, `shortcuts`, `theme_btn` – `true` or `false`; leave out to use the site setting.
+* `hide` – comma-separated controls to hide, for example `hide="share,fullscreen"`.
+* `loading` – `lazy` or `eager`. `hash` – `true` or `false` for `#page=` deep links. `resume` – `true` or `false` to remember the last page read.
+
+Example: `[flipset file="https://example.com/catalogue.pdf" view="flip" theme="dark" height="700px" download="false"]`
+
+**`[flipset_library]` – PDF document library.** No attributes are required.
+
+* `columns` – number of grid columns (default `3`). `per_page` – documents per page (default `12`).
+* `orderby` – `date` (default), `title` or `modified`. `order` – `DESC` (default) or `ASC`.
+* `search` – `true` (default) or `false` for the search field.
+* `sort_control` – `true` shows a Newest / Oldest / Title A–Z / Title Z–A menu (default `false`).
+* `layout` – `grid` (default) or `list`. `layout_toggle` – `true` shows a grid / list switch (default `false`).
+
+Example: `[flipset_library columns="4" per_page="8" sort_control="true" layout_toggle="true"]`
+
+Full reference with every value: https://flipset.thereadscope.com/flipset-docs/shortcode/
 
 = Extending Flipset =
 
@@ -109,6 +166,18 @@ Flipset does not contact any server on its own. It has no analytics, no licence 
 
 == Frequently Asked Questions ==
 
+= How do I embed a PDF in WordPress? =
+
+Add `[flipset file="https://example.com/document.pdf"]` to a post or page, insert the "Flipset Viewer" block and pick a PDF from the Media Library, or paste a direct `.pdf` link on its own line. Step-by-step guide: https://flipset.thereadscope.com/flipset-docs/quick-start/
+
+= Is Flipset a free PDF viewer plugin? =
+
+Yes. The viewer, the 3D flipbook, the document library, PDF text search and the page-builder widgets are all in this plugin. No paid features are sold or locked here.
+
+= Where is the documentation? =
+
+https://flipset.thereadscope.com/flipset-docs/ – with guides for the [shortcode](https://flipset.thereadscope.com/flipset-docs/shortcode/), the [Gutenberg block](https://flipset.thereadscope.com/flipset-docs/gutenberg-block/), the [document library](https://flipset.thereadscope.com/flipset-docs/document-library/), [view modes](https://flipset.thereadscope.com/flipset-docs/view-modes/), [deep links](https://flipset.thereadscope.com/flipset-docs/deep-links/), [accessibility](https://flipset.thereadscope.com/flipset-docs/accessibility/), [page builders](https://flipset.thereadscope.com/flipset-docs/page-builders/), [WP-CLI](https://flipset.thereadscope.com/flipset-docs/wp-cli/), [hooks](https://flipset.thereadscope.com/flipset-docs/hooks/) and [troubleshooting](https://flipset.thereadscope.com/flipset-docs/troubleshooting/).
+
 = Does this send my documents to a third-party server? =
 
 No. Rendering happens in the visitor's browser with the PDF.js library bundled in this plugin. See "External services" above for the few links that open outside sites only when clicked.
@@ -116,6 +185,14 @@ No. Rendering happens in the visitor's browser with the PDF.js library bundled i
 = How do I use the 3D flipbook? =
 
 Use `[flipset file="https://example.com/document.pdf" view="flip"]`, choose "3D FlipBook" in the View setting of the Flipset Viewer block, or switch the view from the More tools menu in the toolbar. On narrow screens (under 640 px) it shows a single page.
+
+= Can I make a PDF flipbook in WordPress? =
+
+Yes, in the free plugin. Add `view="flip"` to the shortcode, or choose "3D FlipBook" in the block's View setting. You get a page curl, a page-turn sound made in the browser and touch swipe. Narrow screens (under 640 px) show a single page.
+
+= Does Flipset work with Elementor, Divi and Beaver Builder? =
+
+Yes. Each has a Flipset Viewer widget and a Flipset Library widget that use the same renderer as the shortcode and block. See https://flipset.thereadscope.com/flipset-docs/page-builders/
 
 = Shortcode or block - which should I use? =
 
@@ -143,7 +220,7 @@ Flipset draws the visible page (or a two-page spread). Continuous scroll renders
 
 = How do I show a gallery of all my PDFs? =
 
-Add `[flipset_library]` to a page, or insert the Flipset Library block. Visitors see a grid of Media Library PDFs and can open any document in the Flipset viewer without leaving the page. Optional attributes: `columns`, `per_page`, `orderby` (`date`, `title` or `modified`), `order` (`ASC` or `DESC`) and `search` (`true` or `false`).
+Add `[flipset_library]` to a page, or insert the Flipset Library block. Visitors see a grid of Media Library PDFs and can open any document in the Flipset viewer without leaving the page. Optional attributes: `columns`, `per_page`, `orderby` (`date`, `title` or `modified`), `order` (`ASC` or `DESC`), `search` (`true` or `false`), `sort_control` (`true` shows a Newest / Oldest / Title A–Z / Title Z–A menu; default `false`), `layout` (`grid` or `list`; default `grid`) and `layout_toggle` (`true` shows a grid / list switch; default `false`).
 
 = How do library thumbnails get generated? =
 
@@ -195,7 +272,7 @@ Use the support forum at https://wordpress.org/support/plugin/flipset/ or open a
 
 == Developer Hooks ==
 
-Add-ons can extend the viewer through public WordPress filters and actions. The full list, parameters and copy-paste examples are in `docs/HOOKS.md` in the GitHub repository: https://github.com/itsmanzur/flipset/blob/main/docs/HOOKS.md
+Add-ons can extend the viewer through public WordPress filters and actions. The full list, parameters and copy-paste examples are in `docs/HOOKS.md` in the GitHub repository: https://github.com/itsmanzur/flipset/blob/main/docs/HOOKS.md – also online at https://flipset.thereadscope.com/flipset-docs/hooks/ (DOM events: https://flipset.thereadscope.com/flipset-docs/dom-events-js/).
 
 == Screenshots ==
 
@@ -220,7 +297,7 @@ What the plugin stores on your site:
 * **Thumbnails** – first-page PNG images generated in your browser and saved in the Media Library.
 * **Admin notice state** – one user meta value per administrator who dismisses the welcome notice, and a short-lived transient used for the redirect after activation.
 
-In the visitor's own browser, Flipset uses `localStorage` (not cookies) to remember the last page read (`flipset:page:<file URL>`) and the chosen reading theme (`flipset_theme`). These values never leave the browser, and the visitor can clear them at any time.
+In the visitor's own browser, Flipset uses `localStorage` (not cookies) to remember the last page read (`flipset:page:<file URL>`), the chosen reading theme (`flipset_theme`) and the chosen library layout, grid or list (`flipset-library-layout`). These values never leave the browser, and the visitor can clear them at any time.
 
 The share feature only builds links; it contacts no one until the visitor clicks a link.
 
@@ -230,13 +307,24 @@ Deleting the plugin from the Plugins screen removes the settings, saved embeds, 
 
 Flipset is developed and maintained by itsmanzur.
 
-Source code: https://github.com/itsmanzur/flipset
-Website: https://flipset.thereadscope.com
-PDF.js by Mozilla (Apache-2.0).
-
-Support / Bug reports: https://wordpress.org/support/plugin/flipset/ and https://github.com/itsmanzur/flipset/issues
+* Website and live demo: https://flipset.thereadscope.com
+* Documentation: https://flipset.thereadscope.com/flipset-docs/
+* Source code: https://github.com/itsmanzur/flipset
+* Support forum: https://wordpress.org/support/plugin/flipset/
+* Bug reports: https://github.com/itsmanzur/flipset/issues
+* Help translate: https://translate.wordpress.org/projects/wp-plugins/flipset/
+* PDF.js by Mozilla (Apache-2.0).
 
 == Changelog ==
+
+= 1.1.2 =
+* New: sort menu for the document library (`sort_control="true"`): Newest, Oldest, Title A–Z and Title Z–A. It re-sorts in place, keeps your search, goes back to page 1 and tells screen readers what changed.
+* New: list layout for the library (`layout="list"`) and an optional grid / list switch for visitors (`layout_toggle="true"`). The visitor's choice is remembered in their own browser; nothing is stored on your site.
+* New: library cards show the page count ("PDF · 12 pages · 198.9 KB") for PDFs whose text has been indexed in Flipset → Docs & Features. Nothing is shown when no page count is stored.
+* New: the Flipset Library block has settings for the sort menu, the layout and the layout switch. Existing pages and blocks are unchanged unless you turn them on.
+* Improved: code documentation and internal quality (every class and method is documented; the plugin passes its coding-standards check).
+* Improved: this readme now has quick links, an at-a-glance summary, a quick start, a shortcode reference and more questions answered.
+* Fixed: an unrecognised value in an on/off shortcode or block attribute (for example `search="maybe"`) fell back to "off" in 1.1.1; it now falls back to that attribute's default again.
 
 = 1.1.1 =
 * Improved: PDF library design. Cards have a consistent 3:4 cover, a two-line title and a muted "PDF · size" line; the grid follows the `columns` setting and drops to 2 columns on tablets and 1 on phones; clearer keyboard focus, hover that respects "reduce motion", RTL support, theme-friendly colours with AA contrast, a loading bar and a "No documents found" state.
@@ -267,6 +355,9 @@ Support / Bug reports: https://wordpress.org/support/plugin/flipset/ and https:/
 * Public hooks and WP-CLI commands for developers.
 
 == Upgrade Notice ==
+
+= 1.1.2 =
+Adds an optional sort menu and a grid / list layout to the document library (both off unless you turn them on). Library cards now also show a page count for PDFs that have one stored.
 
 = 1.1.1 =
 Redesigned document library cards (same shortcode and block settings) plus accessibility and mobile fixes. If your theme styles the `.flipset-library-*` classes, check the library page after updating.

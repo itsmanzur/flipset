@@ -8,7 +8,7 @@
  *
  * Accepted truthy strings  : '1', 'true', 'yes', 'on'
  * Accepted falsy strings   : '0', 'false', 'no', 'off'
- * Empty string or null     : returns $default
+ * Empty string or null     : returns $fallback
  * Boolean passed directly  : returned as-is
  *
  * @package Flipset
@@ -44,6 +44,6 @@ trait Flipset_Att_Flag {
 		if ( in_array( $v, array( '1', 'true', 'yes', 'on' ), true ) ) {
 			return true;
 		}
-		return (bool) $default;
+		return (bool) $fallback;
 	}
 }

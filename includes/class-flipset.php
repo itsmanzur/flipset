@@ -14,68 +14,100 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Plugin bootstrap: a singleton that owns one instance of each Flipset component.
+ */
 class Flipset {
 
 	/**
+	 * The singleton instance.
+	 *
 	 * @var Flipset|null
 	 */
 	private static $instance = null;
 
 	/**
+	 * Viewer renderer.
+	 *
 	 * @var Flipset_Viewer
 	 */
 	public $viewer;
 
 	/**
+	 * Thumbnail and cover storage.
+	 *
 	 * @var Flipset_Thumbnails
 	 */
 	public $thumbnails;
 
 	/**
+	 * PDF text indexing and search.
+	 *
 	 * @var Flipset_SEO
 	 */
 	public $seo;
 
 	/**
+	 * PDF accessibility flags.
+	 *
 	 * @var Flipset_A11y
 	 */
 	public $a11y;
 
 	/**
+	 * Translation and optimizer compatibility.
+	 *
 	 * @var Flipset_Compat
 	 */
 	public $compat;
 
 	/**
+	 * Page builder integrations.
+	 *
 	 * @var Flipset_Builders
 	 */
 	public $builders;
 
 	/**
+	 * Front-end PDF library.
+	 *
 	 * @var Flipset_Library
 	 */
 	public $library;
 
 	/**
+	 * Saved embeds.
+	 *
 	 * @var Flipset_Embeds
 	 */
 	public $embeds;
 
 	/**
+	 * Block registration.
+	 *
 	 * @var Flipset_Block
 	 */
 	public $block;
 
 	/**
+	 * PDF URL auto-embeds.
+	 *
 	 * @var Flipset_Autoembed
 	 */
 	public $autoembed;
 
 	/**
+	 * Admin screens.
+	 *
 	 * @var Flipset_Admin
 	 */
 	public $admin;
 
+	/**
+	 * The shared plugin instance, created on first use.
+	 *
+	 * @return Flipset
+	 */
 	public static function instance() {
 		if ( null === self::$instance ) {
 			self::$instance = new self();
@@ -83,6 +115,9 @@ class Flipset {
 		return self::$instance;
 	}
 
+	/**
+	 * Create the components; use Flipset::instance() instead.
+	 */
 	private function __construct() {
 		$this->viewer     = new Flipset_Viewer();
 		$this->thumbnails = new Flipset_Thumbnails();
