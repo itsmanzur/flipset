@@ -54,6 +54,8 @@ const rootIgnores = new Set([
 	'playwright-report',
 	'test-results',
 	'PRODUCT_ROADMAP.md',
+	'SECURITY.md',
+	'phpstan.neon.dist',
 	'translations-src',
 	'.wordpress-org'
 ]);

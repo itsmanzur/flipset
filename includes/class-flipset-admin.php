@@ -3034,7 +3034,7 @@ class Flipset_Admin {
 									<span class="flipset-type-pill">URL string</span>
 								</td>
 								<td>
-									<p class="flipset-tbl-desc"><?php esc_html_e( 'Direct URL to your PDF document (local Media Library or CORS-enabled remote host).', 'flipset' ); ?></p>
+									<p class="flipset-tbl-desc"><?php esc_html_e( 'Direct http or https URL to your PDF (local Media Library or CORS-enabled remote host). Other address types such as javascript: or data: are refused.', 'flipset' ); ?></p>
 								</td>
 								<td>
 									<div class="flipset-code-chip-copy" data-flipset-copy='file="https://example.com/doc.pdf"'>
@@ -3352,6 +3352,38 @@ class Flipset_Admin {
 								</td>
 								<td><p class="flipset-tbl-desc"><?php esc_html_e( 'Show real-time instant search input box above the document gallery.', 'flipset' ); ?></p></td>
 							</tr>
+							<tr>
+								<td><code class="flipset-param-code">order</code></td>
+								<td>
+									<span class="flipset-type-pill">DESC | ASC</span>
+									<span class="flipset-default-pill">default: "DESC"</span>
+								</td>
+								<td><p class="flipset-tbl-desc"><?php esc_html_e( 'Direction of the sort set by orderby: newest first (DESC) or oldest first (ASC).', 'flipset' ); ?></p></td>
+							</tr>
+							<tr>
+								<td><code class="flipset-param-code">sort_control</code></td>
+								<td>
+									<span class="flipset-type-pill">Boolean</span>
+									<span class="flipset-default-pill">default: false</span>
+								</td>
+								<td><p class="flipset-tbl-desc"><?php esc_html_e( 'Show a sort menu (Newest, Oldest, Title A to Z, Title Z to A) that re-sorts the gallery in place and keeps the current search.', 'flipset' ); ?></p></td>
+							</tr>
+							<tr>
+								<td><code class="flipset-param-code">layout</code></td>
+								<td>
+									<span class="flipset-type-pill">grid | list</span>
+									<span class="flipset-default-pill">default: "grid"</span>
+								</td>
+								<td><p class="flipset-tbl-desc"><?php esc_html_e( 'Show documents as a card grid or as a compact list.', 'flipset' ); ?></p></td>
+							</tr>
+							<tr>
+								<td><code class="flipset-param-code">layout_toggle</code></td>
+								<td>
+									<span class="flipset-type-pill">Boolean</span>
+									<span class="flipset-default-pill">default: false</span>
+								</td>
+								<td><p class="flipset-tbl-desc"><?php esc_html_e( 'Let visitors switch between grid and list. Their choice is remembered in their own browser only.', 'flipset' ); ?></p></td>
+							</tr>
 						</tbody>
 					</table>
 				</div>
@@ -3525,6 +3557,8 @@ class Flipset_Admin {
 					array( __( 'Auto oEmbed:', 'flipset' ), __( 'Simply paste any direct .pdf link on a new line to embed instantly.', 'flipset' ) ),
 					array( __( 'Page Builders Compatibility:', 'flipset' ), __( 'Native widgets for Elementor, Divi and Beaver Builder; the shortcode works everywhere else.', 'flipset' ) ),
 					array( __( 'Documents Library Grid:', 'flipset' ), __( '[flipset_library] shortcode for searchable PDF galleries.', 'flipset' ) ),
+					array( __( 'Library Sort & List Layout:', 'flipset' ), __( 'Optional sort menu and a grid or list layout with a visitor switch; cards show the page count of indexed PDFs.', 'flipset' ) ),
+					array( __( 'Custom Cover Images:', 'flipset' ), __( 'Pick your own cover for any PDF. It is used in the library, social cards and structured data.', 'flipset' ) ),
 					array( __( 'Attachment Pages:', 'flipset' ), __( 'Automatic interactive reader on standard WordPress attachment pages.', 'flipset' ) ),
 				),
 			),
@@ -3538,6 +3572,7 @@ class Flipset_Admin {
 					array( __( 'Social Card Previews:', 'flipset' ), __( 'Open Graph & Twitter Cards cover preview generated from the PDF.', 'flipset' ) ),
 					array( __( 'Accessibility Diagnostics:', 'flipset' ), __( 'Detects untagged PDFs and tells you how to export an accessible one.', 'flipset' ) ),
 					array( __( 'Zero CDN Dependency:', 'flipset' ), __( 'Bundled locally hosted PDF.js, no third-party tracking or remote downtime.', 'flipset' ) ),
+					array( __( 'Safe PDF Handling:', 'flipset' ), __( 'PDF fonts cannot run generated code, and only http, https or site-relative PDF addresses are accepted.', 'flipset' ) ),
 				),
 			),
 		);

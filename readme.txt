@@ -322,6 +322,7 @@ Flipset is developed and maintained by itsmanzur.
 * Security: PDFs can no longer run generated code from their embedded fonts. Flipset now tells the bundled PDF.js not to use it (`isEvalSupported: false`) in the viewer, the thumbnail generator and the block editor preview.
 * Security: a PDF address must be `http`, `https` or a site-relative path. `javascript:`, `data:`, `file:` and other schemes are refused in shortcodes, blocks, saved embeds and filters.
 * Improved: PDF text sent from the browser for indexing is cut to the size limit before it is processed, and the stored page count is capped.
+* Improved: Flipset → Docs & Features now documents the library's `order`, `sort_control`, `layout` and `layout_toggle` settings, the custom cover and sort and list features, and which PDF addresses are accepted.
 * Added: a security policy (`SECURITY.md` on GitHub) with a private way to report vulnerabilities.
 * Developer: new `Flipset_Viewer::sanitize_file_url()`; tests for the address rules and for `isEvalSupported`; a PHPStan job (report only) in CI; `docs/PDFJS.md` tracks the bundled PDF.js version and advisories.
 
