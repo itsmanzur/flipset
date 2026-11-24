@@ -544,7 +544,7 @@ msgstr "কভার আপডেট হয়েছে"
 
 #: includes/class-flipset-admin.php:302
 msgid "Cover reset to the first page"
-msgstr "কভার প্রথম পৃষ্ঠায় ফিরে গেছে"
+msgstr "কভার প্রথম পাতায় ফিরে গেছে"
 
 #: includes/class-flipset-admin.php:303
 msgid "Could not change the cover."
@@ -1092,7 +1092,7 @@ msgstr "শর্টকোড বিল্ডার ও লাইভ প্র�
 
 #: includes/class-flipset-admin.php:1889
 msgid "Visually configure your PDF embed with real-time preview, then save to generate a clean shortcode like [flipset id=\"1\"]."
-msgstr "রিয়েল-টাইম প্রিভিউসহ আপনার PDF এমবেড ভিজ্যুয়ালি কনফিগার করুন, তারপর সেভ করে [flipset id=\"1\"]-এর মতো পরিষ্কার শর্টকোড তৈরি করুন।"
+msgstr "রিয়েল-টাইম প্রিভিউসহ আপনার PDF এমবেড ভিজ্যুয়ালি কনফিগার করুন, তারপর সংরক্ষণ করে [flipset id=\"1\"]-এর মতো পরিষ্কার শর্টকোড তৈরি করুন।"
 
 #: includes/class-flipset-admin.php:1893 includes/class-flipset-admin.php:3515
 msgid "1-Click Presets:"
@@ -2342,7 +2342,7 @@ msgstr "থাম্বনেইল খুব বড়।"
 #: includes/class-flipset-thumbnails.php:188
 #: includes/class-flipset-thumbnails.php:222
 msgid "Could not save the thumbnail."
-msgstr "থাম্বনেইল সেভ করা যায়নি।"
+msgstr "থাম্বনেইল সংরক্ষণ করা যায়নি।"
 
 #. translators: %s: PDF title.
 #: includes/class-flipset-thumbnails.php:210

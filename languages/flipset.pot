@@ -1844,10 +1844,6 @@ msgstr ""
 msgid "Required unless id is set"
 msgstr ""
 
-#: includes/class-flipset-admin.php:3037
-msgid "Direct URL to your PDF document (local Media Library or CORS-enabled remote host)."
-msgstr ""
-
 #: includes/class-flipset-admin.php:3050
 #: includes/class-flipset-admin.php:3077
 #: includes/class-flipset-admin.php:3098
@@ -2901,4 +2897,48 @@ msgstr ""
 #: blocks/viewer/block.json
 msgctxt "block keyword"
 msgid "flipbook"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3561
+msgid "Custom Cover Images:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3561
+msgid "Pick your own cover for any PDF. It is used in the library, social cards and structured data."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3560
+msgid "Library Sort & List Layout:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3560
+msgid "Optional sort menu and a grid or list layout with a visitor switch; cards show the page count of indexed PDFs."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3575
+msgid "Safe PDF Handling:"
+msgstr ""
+
+#: includes/class-flipset-admin.php:3575
+msgid "PDF fonts cannot run generated code, and only http, https or site-relative PDF addresses are accepted."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3037
+msgid "Direct http or https URL to your PDF (local Media Library or CORS-enabled remote host). Other address types such as javascript: or data: are refused."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3361
+msgid "Direction of the sort set by orderby: newest first (DESC) or oldest first (ASC)."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3385
+msgid "Let visitors switch between grid and list. Their choice is remembered in their own browser only."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3369
+msgid "Show a sort menu (Newest, Oldest, Title A to Z, Title Z to A) that re-sorts the gallery in place and keeps the current search."
+msgstr ""
+
+#: includes/class-flipset-admin.php:3377
+msgid "Show documents as a card grid or as a compact list."
 msgstr ""
