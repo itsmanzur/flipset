@@ -420,6 +420,14 @@ class Flipset_Admin {
 		);
 
 		add_settings_field(
+			'poster_mode',
+			__( 'Poster mode', 'flipset' ),
+			array( $this, 'field_poster_mode' ),
+			self::PAGE_SLUG,
+			'flipset_general'
+		);
+
+		add_settings_field(
 			'show_branding',
 			__( 'Credit link', 'flipset' ),
 			array( $this, 'field_show_branding' ),
@@ -630,6 +638,13 @@ class Flipset_Admin {
 	 */
 	public function field_lazy_loading() {
 		$this->render_control( 'lazy_loading' );
+	}
+
+	/**
+	 * Settings field: poster mode.
+	 */
+	public function field_poster_mode() {
+		$this->render_control( 'poster_mode' );
 	}
 
 	/**
@@ -1090,6 +1105,7 @@ class Flipset_Admin {
 	private function flag_defaults() {
 		return array(
 			'lazy_loading'           => false,
+			'poster_mode'            => false,
 			'show_branding'          => false,
 			'allow_download'         => true,
 			'allow_print'            => true,
@@ -1156,6 +1172,12 @@ class Flipset_Admin {
 				'type'  => 'switch',
 				'label' => __( 'Lazy loading', 'flipset' ),
 				'help'  => __( 'Only load PDF documents when they scroll into the visitor viewport (faster initial page load).', 'flipset' ),
+			),
+			'poster_mode'            => array(
+				'type'  => 'switch',
+				'label' => __( 'Poster mode', 'flipset' ),
+				'help'  => __( 'Show the cover and an Open button. The PDF viewer (about 1.5 MB of scripts) and the PDF itself load only when a visitor clicks.', 'flipset' ),
+				'hint'  => 'poster="true"',
 			),
 			'allow_download'         => array(
 				'type'  => 'switch',
@@ -1491,6 +1513,7 @@ class Flipset_Admin {
 				'height'       => $height,
 				'theme'        => $theme,
 				'loading'      => 'eager',
+				'poster'       => 'false',
 				'download'     => 'true',
 				'print'        => 'true',
 				'search'       => 'true',
@@ -1566,7 +1589,7 @@ class Flipset_Admin {
 			'viewer'  => array(
 				'label' => __( 'Viewer defaults', 'flipset' ),
 				'emoji' => '🖥',
-				'keys'  => array( 'allow_download', 'allow_print', 'lazy_loading', 'show_branding' ),
+				'keys'  => array( 'allow_download', 'allow_print', 'lazy_loading', 'poster_mode', 'show_branding' ),
 			),
 			'toolbar' => array(
 				'label' => __( 'Toolbar', 'flipset' ),
@@ -1670,6 +1693,7 @@ class Flipset_Admin {
 								<div class="fa-subhead"><h3><?php esc_html_e( 'Reader', 'flipset' ); ?></h3></div>
 								<?php $this->render_field_row( 'default_theme' ); ?>
 								<?php $this->render_field_row( 'lazy_loading' ); ?>
+								<?php $this->render_field_row( 'poster_mode' ); ?>
 
 								<div class="fa-subhead"><h3><?php esc_html_e( 'Toolbar actions', 'flipset' ); ?></h3></div>
 								<?php $this->render_field_row( 'allow_download' ); ?>
@@ -1881,6 +1905,7 @@ class Flipset_Admin {
 					'shortcuts'    => 'true',
 					'presentation' => 'true',
 					'fullscreen'   => 'true',
+					'poster'       => 'false',
 				)
 			);
 		}
@@ -3246,6 +3271,26 @@ class Flipset_Admin {
 								<td>
 									<div class="flipset-code-chip-copy" data-flipset-copy='hide="download,print,share"'>
 										<code>hide="download,print,share"</code>
+										<span class="dashicons dashicons-admin-page" aria-hidden="true"></span>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="flipset-attr-cell">
+										<code class="flipset-param-code">poster</code>
+										<span class="flipset-pill-opt"><?php esc_html_e( 'Optional', 'flipset' ); ?></span>
+									</div>
+								</td>
+								<td>
+									<span class="flipset-type-pill">Boolean</span>
+								</td>
+								<td>
+									<p class="flipset-tbl-desc"><?php esc_html_e( 'Show the cover and an Open button instead of the viewer. The viewer scripts and the PDF load only when a visitor clicks. Leave it out to use the Settings default.', 'flipset' ); ?></p>
+								</td>
+								<td>
+									<div class="flipset-code-chip-copy" data-flipset-copy='poster="true"'>
+										<code>poster="true"</code>
 										<span class="dashicons dashicons-admin-page" aria-hidden="true"></span>
 									</div>
 								</td>

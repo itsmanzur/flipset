@@ -149,6 +149,19 @@
 								setAttributes( { view: value } );
 							},
 						} ),
+						el( SelectControl, {
+							label: __( 'Poster mode', 'flipset' ),
+							help: __( 'Show the cover and an Open button; the viewer loads only when a visitor clicks.', 'flipset' ),
+							value: 'true' === attributes.poster || 'false' === attributes.poster ? attributes.poster : '',
+							options: [
+								{ label: __( 'Site default', 'flipset' ), value: '' },
+								{ label: __( 'On', 'flipset' ), value: 'true' },
+								{ label: __( 'Off', 'flipset' ), value: 'false' },
+							],
+							onChange: function ( value ) {
+								setAttributes( { poster: value } );
+							},
+						} ),
 						el( ToggleControl, {
 							label: __( 'Remember last page on this device', 'flipset' ),
 							checked: false !== attributes.resume,

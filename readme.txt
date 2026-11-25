@@ -49,7 +49,7 @@ https://youtu.be/RGBoQxO4mUM
 
 **Why Flipset?**
 
-* **Fast and local** – bundled PDF.js, nothing loaded from a CDN, optional lazy loading.
+* **Fast and local** – bundled PDF.js, nothing loaded from a CDN, optional lazy loading, and a poster mode that loads the viewer only when a visitor opens the document.
 * **Accessible** – keyboard controls, screen reader page announcements, and a check that flags PDFs without accessibility tags.
 * **3D flipbook** – page, scroll, spread and flipbook views, all in the free plugin.
 * **Searchable PDF text** – WordPress site search can find words inside your embedded PDFs.
@@ -67,6 +67,7 @@ https://youtu.be/RGBoQxO4mUM
 * Selectable text and working links inside the PDF; password-protected PDFs ask for the password.
 * Light, dark and sepia reading themes.
 * Start page, `#page=4` deep links and last-page resume on the visitor's device.
+* Poster mode: show the cover and an Open button; PDF.js (about 1.5 MB) and the PDF load only on click. Per embed (`poster="true"`) or as a site default.
 * Show or hide download, print, search, share and other controls per embed or site-wide.
 * Share dialog with X, Facebook, LinkedIn, WhatsApp, email and copy link.
 * Clear message with a direct link when a PDF on another domain blocks cross-origin access (CORS).
@@ -129,6 +130,7 @@ https://youtu.be/RGBoQxO4mUM
 * `download`, `print`, `search`, `share`, `fullscreen`, `presentation`, `shortcuts`, `theme_btn` – `true` or `false`; leave out to use the site setting.
 * `hide` – comma-separated controls to hide, for example `hide="share,fullscreen"`.
 * `loading` – `lazy` or `eager`. `hash` – `true` or `false` for `#page=` deep links. `resume` – `true` or `false` to remember the last page read.
+* `poster` – `true` shows the cover and an Open button and loads the viewer only on click; `false` turns it off. Leave out to use Flipset → Settings → Poster mode.
 
 Example: `[flipset file="https://example.com/catalogue.pdf" view="flip" theme="dark" height="700px" download="false"]`
 
@@ -228,7 +230,7 @@ The file URL must allow the page origin to fetch it. Cross-origin PDFs need CORS
 
 = Large PDFs feel slow =
 
-Flipset draws the visible page (or a two-page spread). Continuous scroll renders nearby pages only. Very large files still need to be downloaded once, so keep uploads reasonably sized when you can.
+Flipset draws the visible page (or a two-page spread). Continuous scroll renders nearby pages only. Very large files still need to be downloaded once, so keep uploads reasonably sized when you can. On pages with several PDFs, turn on poster mode (`poster="true"` or Flipset → Settings → Poster mode): each viewer then shows its cover and loads nothing until it is opened.
 
 = Can I keep a PDF out of the library? =
 
@@ -347,6 +349,8 @@ Flipset is developed and maintained by itsmanzur.
 * New: hide any PDF from the document library. Choose "Hide from library" under the file in Flipset → Docs & Features; it is left out of every library that lists all PDFs, including library search. Existing sites keep listing every PDF until a file is hidden.
 * New: `ids` lists only the PDFs you name (`[flipset_library ids="12,34"]`), and `exclude` leaves some out. The Flipset Library block has a matching "Only these PDFs" picker.
 * New: a one-time notice on the Flipset screens explains that the library lists every Media Library PDF and how to change that.
+* New: poster mode. A viewer can show the PDF's cover, its title and an Open button instead of loading straight away; PDF.js and the PDF download only when a visitor clicks. Turn it on per embed (`poster="true"`, or the Poster mode setting of the Flipset Viewer block) or for the whole site under Flipset → Settings. Without JavaScript the button opens the PDF directly.
+* Developer: new `flipset/poster_image_id` filter and `window.FlipsetPoster.init()`.
 
 = 1.1.3 =
 * Security: PDFs can no longer run generated code from their embedded fonts. Flipset now tells the bundled PDF.js not to use it (`isEvalSupported: false`) in the viewer, the thumbnail generator and the block editor preview.

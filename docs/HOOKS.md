@@ -134,6 +134,7 @@ Used by `[flipset]` and by anything that calls `render_shortcode()` (the viewer 
 | `loading` | `eager` (default) or `lazy` |
 | `hash` | `true` (default) — sync `#page=N` in the URL |
 | `resume` | `true` (default) — remember the last page in `localStorage` |
+| `poster` | `true` / `false`; default from Settings → Poster mode. `true` prints the cover and an Open link and loads PDF.js only on click |
 
 Return an array. Non-array values are discarded and treated as empty attributes.
 
@@ -282,6 +283,23 @@ The URL the front-end viewer loads (`data-file`) and the no-JavaScript fallback 
 
 ---
 
+## `flipset/poster_image_id`
+
+**Type:** filter
+**Fired from:** `Flipset_Viewer::render_poster()` in `includes/class-flipset-viewer.php`
+
+Image attachment shown on the poster in poster mode. By default it is the PDF's custom cover or its generated first page, when the file is in the Media Library. Return `0` to show the plain document icon.
+
+**Parameters**
+
+| Name | Type | Meaning |
+|------|------|---------|
+| `$image_id` | `int` | Cover image attachment ID, or `0` |
+| `$attachment_id` | `int` | PDF attachment ID, or `0` when the file is not in the Media Library |
+| `$atts` | `array` | Resolved attributes |
+
+---
+
 ## `flipset/download_url`
 
 **Type:** filter
@@ -338,6 +356,7 @@ document.addEventListener( 'flipset:pagechange', function ( event ) {
 ### JavaScript globals
 
 - `window.FlipsetViewer.bind( element )` binds a `.flipset-viewer` that was added to the page after load.
+- `window.FlipsetPoster.init()` binds `.flipset-poster` elements added after load. On a page that has only posters, `window.FlipsetViewer` exists only after the first poster is opened.
 - `window.Flipset.pdfjsLib` is Flipset's own bundled PDF.js (3.11.174), captured right after its script runs. Use it instead of `window.pdfjsLib`: Flipset puts `window.pdfjsLib` back exactly as it found it (another plugin's copy, or unset) so it never collides with other PDF plugins, and you should not depend on the global either. Set `workerSrc` on this object to Flipset's worker (`FlipsetConfig.workerSrc`).
 
 ---

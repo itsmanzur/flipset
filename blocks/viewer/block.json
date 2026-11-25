@@ -48,6 +48,10 @@
 		"resume": {
 			"type": "boolean",
 			"default": true
+		},
+		"poster": {
+			"type": "string",
+			"default": ""
 		}
 	},
 	"supports": {

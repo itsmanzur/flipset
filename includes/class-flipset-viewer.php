@@ -81,6 +81,7 @@ class Flipset_Viewer {
 				'hash'         => 'true',
 				'view'         => 'page',
 				'resume'       => 'true',
+				'poster'       => ! empty( $settings['poster_mode'] ) ? 'true' : 'false',
 			),
 			$atts,
 			'flipset'
@@ -92,7 +93,7 @@ class Flipset_Viewer {
 		 * Override resolved shortcode/block attributes (every key of the
 		 * shortcode_atts() list: id, file, width, height, mode, page, title, theme,
 		 * download, print, search, theme_btn, share, shortcuts, presentation,
-		 * fullscreen, loading, hide, hash, view, resume) without replacing the
+		 * fullscreen, loading, hide, hash, view, resume, poster) without replacing the
 		 * entire viewer. Runs after defaults are applied and before the
 		 * empty-file check. See docs/HOOKS.md for the value lists.
 		 *
@@ -133,7 +134,14 @@ class Flipset_Viewer {
 			return wp_kses( (string) apply_filters( 'flipset/viewer_html', $pro_output, $atts ), self::allowed_html() );
 		}
 
-		$this->enqueue_assets();
+		// Poster mode: print the cover and an Open link, and load PDF.js and the
+		// viewer script only when the visitor clicks it (assets/js/flipset-poster.js).
+		$poster = $this->att_flag( $atts['poster'] ?? '', ! empty( $settings['poster_mode'] ) );
+		if ( $poster ) {
+			$this->enqueue_poster_assets();
+		} else {
+			$this->enqueue_assets();
+		}
 
 		$instance_id = 'flipset-viewer-' . wp_unique_id();
 
@@ -195,8 +203,10 @@ class Flipset_Viewer {
 
 		$modals = $this->render_modals();
 
+		$poster_html = $poster ? $this->render_poster( $file_src, $title, $atts ) : '';
+
 		$container = sprintf(
-			'<div class="flipset-wrap" style="width:%1$s;" role="region" aria-label="%7$s">%9$s<div class="flipset-shell flipset-theme-%14$s" style="height:%2$s;"><div class="flipset-chrome" style="display:flex;flex-wrap:nowrap;align-items:center;">%3$s%4$s</div><div id="%5$s" class="flipset-viewer" data-file="%6$s" data-page="%10$s" data-hash="%11$s" data-view="%12$s" data-resume="%13$s" data-theme="%14$s" data-loading="%15$s" tabindex="0" role="document" aria-busy="true">%17$s</div>%16$s</div>%8$s</div>',
+			'<div class="flipset-wrap" style="width:%1$s;" role="region" aria-label="%7$s">%9$s<div class="flipset-shell flipset-theme-%14$s%18$s" style="height:%2$s;">%19$s<div class="flipset-chrome" style="display:flex;flex-wrap:nowrap;align-items:center;">%3$s%4$s</div><div id="%5$s" class="flipset-viewer" data-file="%6$s" data-page="%10$s" data-hash="%11$s" data-view="%12$s" data-resume="%13$s" data-theme="%14$s" data-loading="%15$s"%20$s tabindex="0" role="document" aria-busy="true">%17$s</div>%16$s</div>%8$s</div>',
 			esc_attr( $atts['width'] ),
 			esc_attr( $atts['height'] ),
 			$before,
@@ -213,7 +223,10 @@ class Flipset_Viewer {
 			esc_attr( $initial_theme ),
 			$is_lazy ? 'lazy' : 'eager',
 			$modals,
-			$noscript
+			$noscript,
+			$poster ? ' has-poster' : '',
+			$poster_html,
+			$poster ? ' data-flipset-defer="1" data-flipset-poster="1"' : ''
 		);
 
 		/**
@@ -228,6 +241,72 @@ class Flipset_Viewer {
 		// Escape at the single point where the markup leaves the renderer, after
 		// every filter has had its say.
 		return wp_kses( (string) apply_filters( 'flipset/viewer_html', $container, $atts ), self::allowed_html() );
+	}
+
+	/**
+	 * Poster for poster mode: the PDF's cover (custom cover or generated first page, when the
+	 * file is in the Media Library), its title and an Open control. It is a plain link to the
+	 * PDF, so it still opens the document when JavaScript is off; flipset-poster.js turns it
+	 * into an in-place Open button.
+	 *
+	 * @param string $file_src PDF URL as printed in the viewer.
+	 * @param string $title    Title attribute, may be empty.
+	 * @param array  $atts     Resolved attributes.
+	 * @return string HTML.
+	 */
+	private function render_poster( $file_src, $title, $atts ) {
+		$attachment_id = function_exists( 'attachment_url_to_postid' ) ? (int) attachment_url_to_postid( (string) $file_src ) : 0;
+		if ( $attachment_id && 'application/pdf' !== get_post_mime_type( $attachment_id ) ) {
+			$attachment_id = 0;
+		}
+
+		if ( '' === $title && $attachment_id ) {
+			$title = get_the_title( $attachment_id );
+		}
+		if ( '' === $title ) {
+			$title = wp_basename( (string) wp_parse_url( (string) $file_src, PHP_URL_PATH ) );
+		}
+
+		$image_id = $attachment_id ? Flipset_Thumbnails::get_thumbnail_id( $attachment_id ) : 0;
+
+		/**
+		 * Filter: flipset/poster_image_id
+		 *
+		 * Image attachment shown on the poster. Return 0 for the plain document icon.
+		 *
+		 * @param int   $image_id      Cover image ID (custom cover or generated first page), or 0.
+		 * @param int   $attachment_id PDF attachment ID, or 0 when the file is not in the Media Library.
+		 * @param array $atts          Resolved attributes.
+		 */
+		$image_id = absint( apply_filters( 'flipset/poster_image_id', $image_id, $attachment_id, $atts ) );
+
+		$image = '';
+		if ( $image_id ) {
+			$image = wp_get_attachment_image(
+				$image_id,
+				'large',
+				false,
+				array(
+					'class'    => 'flipset-poster-image',
+					'decoding' => 'async',
+					// Decorative: the title is printed next to it inside the same link.
+					'alt'      => '',
+				)
+			);
+		}
+		if ( ! $image ) {
+			$image = '<span class="flipset-poster-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="8" y1="13" x2="16" y2="13" /><line x1="8" y1="17" x2="12" y2="17" /></svg></span>';
+		}
+
+		return sprintf(
+			'<div class="flipset-poster"><a class="flipset-poster-open" href="%1$s" aria-label="%2$s"><span class="flipset-poster-cover">%3$s</span><span class="flipset-poster-title">%4$s</span><span class="flipset-poster-btn">%5$s</span></a></div>',
+			esc_url( $file_src ),
+			/* translators: %s: document title. */
+			esc_attr( sprintf( __( 'Open document: %s', 'flipset' ), $title ) ),
+			$image,
+			esc_html( $title ),
+			esc_html__( 'Open document', 'flipset' )
+		);
 	}
 
 	/**
@@ -695,8 +774,9 @@ class Flipset_Viewer {
 				'alt'      => true,
 				'width'    => true,
 				'height'   => true,
-				'loading'  => true,
-				'decoding' => true,
+				'loading'       => true,
+				'decoding'      => true,
+				'fetchpriority' => true,
 			),
 		);
 
@@ -963,6 +1043,49 @@ class Flipset_Viewer {
 		);
 	}
 
+
+	/**
+	 * Poster mode assets: the viewer stylesheet and the small poster script. PDF.js and the
+	 * viewer script are not enqueued; flipset-poster.js loads them on the first click.
+	 */
+	public function enqueue_poster_assets() {
+		wp_enqueue_style(
+			'flipset-viewer',
+			FLIPSET_URL . 'assets/css/flipset-viewer.css',
+			array(),
+			FLIPSET_VERSION
+		);
+
+		if ( wp_script_is( 'flipset-poster', 'enqueued' ) ) {
+			return;
+		}
+
+		wp_enqueue_script(
+			'flipset-poster',
+			FLIPSET_URL . 'assets/js/flipset-poster.js',
+			array(),
+			FLIPSET_VERSION,
+			true
+		);
+
+		wp_localize_script(
+			'flipset-poster',
+			'FlipsetPosterConfig',
+			array(
+				'pdfjs'        => add_query_arg( 'ver', FLIPSET_VERSION, FLIPSET_URL . 'assets/vendor/pdfjs/pdf.min.js' ),
+				'viewer'       => add_query_arg( 'ver', FLIPSET_VERSION, FLIPSET_URL . 'assets/js/flipset-viewer.js' ),
+				'pdfjsVersion' => self::PDFJS_VERSION,
+				'viewerConfig' => array(
+					'workerSrc' => FLIPSET_URL . 'assets/vendor/pdfjs/pdf.worker.min.js',
+					'isPro'     => Flipset_Loader::is_pro_active(),
+					'i18n'      => self::viewer_i18n(),
+				),
+				'i18n'         => array(
+					'loading' => __( 'Loading document…', 'flipset' ),
+				),
+			)
+		);
+	}
 
 	/**
 	 * Notice shown to editors only; visitors get nothing.

@@ -341,9 +341,11 @@ class Flipset_Library {
 
 		$viewer = Flipset::instance()->viewer->render_shortcode(
 			array(
-				'file'  => $url,
-				'width' => '100%',
-				'hash'  => 'false',
+				'file'   => $url,
+				'width'  => '100%',
+				'hash'   => 'false',
+				// The card already is the poster; the viewer opens as soon as it is clicked.
+				'poster' => 'false',
 			)
 		);
 		$viewer = str_replace( ' class="flipset-viewer"', ' class="flipset-viewer" data-flipset-defer="1"', $viewer );

@@ -1428,3 +1428,112 @@
 	pointer-events: none;
 	z-index: 5;
 }
+
+/* ===================================================================
+   Poster mode: cover + Open link; the viewer loads on click
+   ========================================================================== */
+.flipset-shell.has-poster {
+	position: relative;
+}
+
+/* Everything behind the poster is out of sight and out of the tab order. */
+.flipset-shell.has-poster > :not(.flipset-poster) {
+	visibility: hidden;
+}
+
+.flipset-poster {
+	position: absolute;
+	inset: 0;
+	z-index: 6;
+	display: flex;
+	background: inherit;
+}
+
+.flipset-wrap .flipset-poster-open {
+	display: flex;
+	flex: 1 1 auto;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 14px;
+	min-width: 0;
+	padding: 24px;
+	color: #f0f0f1;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.flipset-shell.flipset-theme-sepia .flipset-poster-open {
+	color: #3c3124;
+}
+
+.flipset-wrap .flipset-poster-open:focus {
+	outline: none;
+}
+
+.flipset-wrap .flipset-poster-open:focus-visible {
+	outline: 3px solid #72aee6;
+	outline-offset: -6px;
+	border-radius: 8px;
+}
+
+.flipset-poster-cover {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 1 auto;
+	min-height: 0;
+	max-width: 100%;
+	max-height: 70%;
+}
+
+.flipset-wrap .flipset-poster-image {
+	display: block;
+	width: auto;
+	height: auto;
+	max-width: 100%;
+	max-height: 100%;
+	margin: 0;
+	border-radius: 4px;
+	box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+	object-fit: contain;
+}
+
+.flipset-poster-icon {
+	display: inline-flex;
+	opacity: 0.7;
+}
+
+.flipset-poster-title {
+	max-width: 36em;
+	font-size: 15px;
+	font-weight: 600;
+	line-height: 1.35;
+	overflow-wrap: anywhere;
+}
+
+.flipset-poster-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 18px;
+	border-radius: 6px;
+	background: #2271b1;
+	color: #fff;
+	font-size: 13px;
+	font-weight: 500;
+	line-height: 1.2;
+}
+
+.flipset-poster-open:hover .flipset-poster-btn {
+	background: #135e96;
+}
+
+.flipset-poster.is-loading .flipset-poster-open {
+	cursor: progress;
+}
+
+.flipset-poster.is-loading .flipset-poster-btn {
+	opacity: 0.8;
+}

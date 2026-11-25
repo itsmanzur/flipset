@@ -220,4 +220,115 @@ class Test_Flipset_Viewer extends Flipset_TestCase {
 			);
 		}
 	}
+	/**
+	 * Forget which viewer assets were enqueued, so a test sees only its own render.
+	 */
+	private function reset_viewer_assets() {
+		$GLOBALS['wp_scripts'] = null;
+		$GLOBALS['wp_styles']  = null;
+		$property              = new ReflectionProperty( 'Flipset_Viewer', 'assets_enqueued' );
+		$property->setAccessible( true );
+		$property->setValue( Flipset::instance()->viewer, false );
+	}
+
+	public function test_poster_is_off_by_default() {
+		delete_option( 'flipset_settings' );
+		$this->reset_viewer_assets();
+		$html = Flipset::instance()->viewer->render_shortcode( array( 'file' => 'https://example.com/a.pdf' ) );
+
+		$this->assertStringNotContainsString( 'flipset-poster', $html );
+		$this->assertStringNotContainsString( 'data-flipset-defer', $html );
+		$this->assertTrue( wp_script_is( 'flipset-viewer', 'enqueued' ) );
+		$this->assertTrue( wp_script_is( 'flipset-pdfjs', 'enqueued' ) );
+	}
+
+	public function test_poster_prints_cover_link_and_defers_viewer() {
+		delete_option( 'flipset_settings' );
+		$this->reset_viewer_assets();
+		$url  = 'https://example.com/docs/catalogue.pdf';
+		$html = Flipset::instance()->viewer->render_shortcode(
+			array(
+				'file'   => $url,
+				'title'  => 'Spring Catalogue',
+				'poster' => 'true',
+			)
+		);
+
+		$this->assertStringContainsString( 'class="flipset-poster"', $html );
+		$this->assertStringContainsString( 'has-poster', $html );
+		$this->assertStringContainsString( 'data-flipset-defer="1"', $html );
+		$this->assertStringContainsString( 'data-flipset-poster="1"', $html );
+		$this->assertMatchesRegularExpression( '#<a class="flipset-poster-open" href="' . preg_quote( esc_url( $url ), '#' ) . '"#', $html );
+		$this->assertStringContainsString( 'aria-label="Open document: Spring Catalogue"', $html );
+		$this->assertStringContainsString( 'flipset-poster-title">Spring Catalogue<', $html );
+		$this->assertStringContainsString( 'flipset-poster-icon', $html );
+
+		// Only the small poster script: PDF.js and the viewer load on click.
+		$this->assertTrue( wp_script_is( 'flipset-poster', 'enqueued' ) );
+		$this->assertFalse( wp_script_is( 'flipset-pdfjs', 'enqueued' ) );
+		$this->assertFalse( wp_script_is( 'flipset-viewer', 'enqueued' ) );
+		$this->assertTrue( wp_style_is( 'flipset-viewer', 'enqueued' ) );
+	}
+
+	public function test_poster_title_falls_back_to_file_name() {
+		$html = Flipset::instance()->viewer->render_shortcode(
+			array(
+				'file'   => 'https://example.com/files/user-guide.pdf?x=1',
+				'poster' => 'true',
+			)
+		);
+		$this->assertStringContainsString( 'flipset-poster-title">user-guide.pdf<', $html );
+	}
+
+	public function test_poster_uses_media_library_title() {
+		$id   = $this->create_pdf_attachment( 'Library Titled PDF' );
+		$html = Flipset::instance()->viewer->render_shortcode(
+			array(
+				'file'   => wp_get_attachment_url( $id ),
+				'poster' => 'true',
+			)
+		);
+		$this->assertStringContainsString( 'flipset-poster-title">Library Titled PDF<', $html );
+	}
+
+	public function test_poster_site_default_and_per_embed_override() {
+		update_option( 'flipset_settings', array( 'poster_mode' => true ) );
+
+		$html = Flipset::instance()->viewer->render_shortcode( array( 'file' => 'https://example.com/a.pdf' ) );
+		$this->assertStringContainsString( 'flipset-poster', $html );
+
+		$html = Flipset::instance()->viewer->render_shortcode(
+			array(
+				'file'   => 'https://example.com/a.pdf',
+				'poster' => 'false',
+			)
+		);
+		$this->assertStringNotContainsString( 'flipset-poster', $html );
+
+		delete_option( 'flipset_settings' );
+	}
+
+	public function test_library_viewers_never_use_poster() {
+		update_option( 'flipset_settings', array( 'poster_mode' => true ) );
+		$this->create_pdf_attachment( 'Poster Off In Library' );
+
+		$html = Flipset::instance()->library->render_shortcode( array( 'search' => 'false' ) );
+		$this->assertStringContainsString( 'Poster Off In Library', $html );
+		$this->assertStringNotContainsString( 'flipset-poster', $html );
+
+		delete_option( 'flipset_settings' );
+	}
+
+	public function test_poster_image_filter_can_force_icon() {
+		add_filter( 'flipset/poster_image_id', '__return_zero' );
+		$html = Flipset::instance()->viewer->render_shortcode(
+			array(
+				'file'   => 'https://example.com/a.pdf',
+				'poster' => 'true',
+			)
+		);
+		remove_filter( 'flipset/poster_image_id', '__return_zero' );
+		$this->assertStringContainsString( 'flipset-poster-icon', $html );
+		$this->assertStringNotContainsString( 'flipset-poster-image', $html );
+	}
 }
