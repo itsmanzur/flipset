@@ -1861,6 +1861,8 @@ class Flipset_Admin {
 			$default_lazy   = 'lazy' === ( $editing_embed['loading'] ?? '' );
 			$default_hash   = 'false' !== ( $editing_embed['hash'] ?? 'true' );
 			$default_resume = 'false' !== ( $editing_embed['resume'] ?? 'true' );
+			$embed_poster   = Flipset_Viewer::sanitize_flag( $editing_embed['poster'] ?? '' );
+			$default_poster = '' === $embed_poster ? ! empty( $settings['poster_mode'] ) : 'true' === $embed_poster;
 		} else {
 			$preview_url   = $this->get_latest_pdf_url();
 			$default_pdf   = $preview_url ? $preview_url : '';
@@ -1885,6 +1887,7 @@ class Flipset_Admin {
 			$default_lazy   = ! empty( $settings['lazy_loading'] );
 			$default_hash   = true;
 			$default_resume = true;
+			$default_poster = ! empty( $settings['poster_mode'] );
 		}
 
 		$initial_preview = '';
@@ -2249,6 +2252,10 @@ class Flipset_Admin {
 										<label class="flipset-check-label">
 											<input type="checkbox" id="flipset-builder-resume" <?php checked( $default_resume ); ?> />
 											<span><strong><?php esc_html_e( 'Remember Last Read Page (resume="true")', 'flipset' ); ?></strong> — <?php esc_html_e( 'Auto-resume where visitor left off.', 'flipset' ); ?></span>
+										</label>
+										<label class="flipset-check-label">
+											<input type="checkbox" id="flipset-builder-poster" data-site="<?php echo empty( $settings['poster_mode'] ) ? '0' : '1'; ?>" <?php checked( $default_poster ); ?> />
+											<span><strong><?php esc_html_e( 'Poster Mode (poster="true")', 'flipset' ); ?></strong> — <?php esc_html_e( 'Show the cover and an Open button; the viewer loads only on click. The preview here always shows the viewer.', 'flipset' ); ?></span>
 										</label>
 									</div>
 								</div>

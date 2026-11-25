@@ -172,6 +172,17 @@ class Flipset_Builders {
 										'false' => __( 'Hide', 'flipset' ),
 									),
 								),
+								'poster'   => array(
+									'type'    => 'select',
+									'label'   => __( 'Poster mode', 'flipset' ),
+									'default' => 'site',
+									'options' => array(
+										'site'  => __( 'Site default', 'flipset' ),
+										'true'  => __( 'On', 'flipset' ),
+										'false' => __( 'Off', 'flipset' ),
+									),
+									'help'    => __( 'Show the cover and an Open button; the viewer loads only when a visitor clicks.', 'flipset' ),
+								),
 							),
 						),
 					),

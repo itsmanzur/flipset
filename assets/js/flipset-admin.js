@@ -900,6 +900,7 @@
 		var lazyCheck = $( '#flipset-builder-lazy' );
 		var hashCheck = $( '#flipset-builder-hash' );
 		var resumeCheck = $( '#flipset-builder-resume' );
+		var posterCheck = $( '#flipset-builder-poster' );
 		var outputArea = $( '#flipset-builder-output' );
 		var saveBtn = $( '#flipset-builder-save' );
 		var saveBtnText = $( '#flipset-save-btn-text' );
@@ -919,6 +920,23 @@
 		function getSelectedView() {
 			var checked = $( 'input[name="flipset_b_view"]:checked' );
 			return checked ? checked.value : 'page';
+		}
+
+		/**
+		 * Poster attribute for the shortcode: only written when it differs from the
+		 * site default, so an embed keeps following Settings unless it was changed.
+		 *
+		 * @return {string} 'true', 'false' or '' (site default).
+		 */
+		function posterValue() {
+			if ( ! posterCheck ) {
+				return '';
+			}
+			var siteOn = '1' === posterCheck.getAttribute( 'data-site' );
+			if ( posterCheck.checked === siteOn ) {
+				return '';
+			}
+			return posterCheck.checked ? 'true' : 'false';
 		}
 
 		function getHiddenTools() {
@@ -993,6 +1011,11 @@
 
 			if ( resumeCheck && ! resumeCheck.checked ) {
 				parts.push( 'resume="false"' );
+			}
+
+			var poster = posterValue();
+			if ( poster ) {
+				parts.push( 'poster="' + poster + '"' );
 			}
 
 			return '[' + parts.join( ' ' ) + ']';
@@ -1119,7 +1142,7 @@
 			}
 		} );
 
-		$$( 'input[name="flipset_b_theme"], input[name="flipset_b_view"], input.flipset-tool-toggle, #flipset-builder-lazy, #flipset-builder-hash, #flipset-builder-resume' ).forEach( function ( el ) {
+		$$( 'input[name="flipset_b_theme"], input[name="flipset_b_view"], input.flipset-tool-toggle, #flipset-builder-lazy, #flipset-builder-hash, #flipset-builder-resume, #flipset-builder-poster' ).forEach( function ( el ) {
 			el.addEventListener( 'change', triggerChange );
 		} );
 
@@ -1411,7 +1434,8 @@
 					hide: getHiddenTools().join( ',' ),
 					loading: ( lazyCheck && lazyCheck.checked ) ? 'lazy' : '',
 					hash: ( hashCheck && ! hashCheck.checked ) ? 'false' : 'true',
-					resume: ( resumeCheck && ! resumeCheck.checked ) ? 'false' : 'true'
+					resume: ( resumeCheck && ! resumeCheck.checked ) ? 'false' : 'true',
+					poster: posterValue()
 				};
 
 				saveBtn.disabled = true;

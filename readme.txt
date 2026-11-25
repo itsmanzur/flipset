@@ -349,7 +349,7 @@ Flipset is developed and maintained by itsmanzur.
 * New: hide any PDF from the document library. Choose "Hide from library" under the file in Flipset → Docs & Features; it is left out of every library that lists all PDFs, including library search. Existing sites keep listing every PDF until a file is hidden.
 * New: `ids` lists only the PDFs you name (`[flipset_library ids="12,34"]`), and `exclude` leaves some out. The Flipset Library block has a matching "Only these PDFs" picker.
 * New: a one-time notice on the Flipset screens explains that the library lists every Media Library PDF and how to change that.
-* New: poster mode. A viewer can show the PDF's cover, its title and an Open button instead of loading straight away; PDF.js and the PDF download only when a visitor clicks. Turn it on per embed (`poster="true"`, or the Poster mode setting of the Flipset Viewer block) or for the whole site under Flipset → Settings. Without JavaScript the button opens the PDF directly.
+* New: poster mode. A viewer can show the PDF's cover, its title and an Open button instead of loading straight away; PDF.js and the PDF download only when a visitor clicks. Turn it on per embed (`poster="true"`, the Shortcode Builder, the Flipset Viewer block, or the Elementor, Divi and Beaver Builder widgets) or for the whole site under Flipset → Settings. Without JavaScript the button opens the PDF directly.
 * Developer: new `flipset/poster_image_id` filter and `window.FlipsetPoster.init()`.
 
 = 1.1.3 =

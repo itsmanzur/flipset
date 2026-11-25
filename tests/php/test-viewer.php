@@ -331,4 +331,29 @@ class Test_Flipset_Viewer extends Flipset_TestCase {
 		$this->assertStringContainsString( 'flipset-poster-icon', $html );
 		$this->assertStringNotContainsString( 'flipset-poster-image', $html );
 	}
+	public function test_saved_embed_keeps_poster_choice() {
+		delete_option( 'flipset_settings' );
+		$on  = Flipset_Embeds::save(
+			array(
+				'file'   => 'https://example.com/a.pdf',
+				'poster' => 'true',
+			)
+		);
+		$off = Flipset_Embeds::save(
+			array(
+				'file'   => 'https://example.com/a.pdf',
+				'poster' => 'maybe',
+			)
+		);
+		$this->assertNotWPError( $on );
+		$this->assertNotWPError( $off );
+		$this->assertSame( 'true', Flipset_Embeds::get( $on )['poster'] );
+		$this->assertSame( '', Flipset_Embeds::get( $off )['poster'] );
+
+		$html = Flipset::instance()->viewer->render_shortcode( array( 'id' => (string) $on ) );
+		$this->assertStringContainsString( 'flipset-poster', $html );
+
+		$html = Flipset::instance()->viewer->render_shortcode( array( 'id' => (string) $off ) );
+		$this->assertStringNotContainsString( 'flipset-poster', $html );
+	}
 }

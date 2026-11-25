@@ -17,6 +17,7 @@ $flipset_atts = array(
 	'title'    => isset( $settings->title ) ? sanitize_text_field( (string) $settings->title ) : '',
 	'download' => isset( $settings->download ) ? sanitize_text_field( (string) $settings->download ) : 'true',
 	'print'    => isset( $settings->print ) ? sanitize_text_field( (string) $settings->print ) : 'true',
+	'poster'   => Flipset_Viewer::sanitize_flag( isset( $settings->poster ) ? (string) $settings->poster : '' ),
 );
 
 echo wp_kses( Flipset::instance()->viewer->render_shortcode( $flipset_atts ), Flipset_Viewer::allowed_html() );

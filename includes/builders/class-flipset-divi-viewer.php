@@ -121,6 +121,19 @@ class Flipset_Divi_Viewer extends ET_Builder_Module {
 				'option_category' => 'layout',
 				'toggle_slug'     => 'layout',
 			),
+			'poster'   => array(
+				'label'           => __( 'Poster mode', 'flipset' ),
+				'type'            => 'select',
+				'options'         => array(
+					'site'  => __( 'Site default', 'flipset' ),
+					'true'  => __( 'On', 'flipset' ),
+					'false' => __( 'Off', 'flipset' ),
+				),
+				'default'         => 'site',
+				'description'     => __( 'Show the cover and an Open button; the viewer loads only when a visitor clicks.', 'flipset' ),
+				'option_category' => 'layout',
+				'toggle_slug'     => 'layout',
+			),
 		);
 	}
 
@@ -144,6 +157,7 @@ class Flipset_Divi_Viewer extends ET_Builder_Module {
 				'title'    => isset( $this->props['title'] ) ? $this->props['title'] : '',
 				'download' => ( isset( $this->props['download'] ) && 'off' === $this->props['download'] ) ? 'false' : 'true',
 				'print'    => ( isset( $this->props['print'] ) && 'off' === $this->props['print'] ) ? 'false' : 'true',
+				'poster'   => Flipset_Viewer::sanitize_flag( isset( $this->props['poster'] ) ? (string) $this->props['poster'] : '' ),
 			)
 		);
 	}

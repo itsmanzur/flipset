@@ -150,6 +150,21 @@ class Flipset_Elementor_Viewer extends \Elementor\Widget_Base {
 			)
 		);
 
+		$this->add_control(
+			'poster',
+			array(
+				'label'       => __( 'Poster mode', 'flipset' ),
+				'type'        => ElementorControls_Manager::SELECT,
+				'default'     => 'site',
+				'options'     => array(
+					'site'  => __( 'Site default', 'flipset' ),
+					'true'  => __( 'On', 'flipset' ),
+					'false' => __( 'Off', 'flipset' ),
+				),
+				'description' => __( 'Show the cover and an Open button; the viewer loads only when a visitor clicks.', 'flipset' ),
+			)
+		);
+
 		$this->end_controls_section();
 	}
 
@@ -171,6 +186,7 @@ class Flipset_Elementor_Viewer extends \Elementor\Widget_Base {
 			'title'    => isset( $settings['title'] ) ? sanitize_text_field( (string) $settings['title'] ) : '',
 			'download' => ( ! isset( $settings['download'] ) || 'yes' === $settings['download'] ) ? 'true' : 'false',
 			'print'    => ( ! isset( $settings['print'] ) || 'yes' === $settings['print'] ) ? 'true' : 'false',
+			'poster'   => Flipset_Viewer::sanitize_flag( isset( $settings['poster'] ) ? (string) $settings['poster'] : '' ),
 		);
 
 		echo wp_kses( Flipset::instance()->viewer->render_shortcode( $atts ), Flipset_Viewer::allowed_html() );
