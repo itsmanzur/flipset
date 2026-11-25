@@ -4,7 +4,7 @@ test.describe( 'Flipset poster mode', () => {
 	test( 'loads PDF.js only after the poster is opened', async ( { page } ) => {
 		const pdfjsRequests = [];
 		page.on( 'request', ( request ) => {
-			if ( /pdf(.worker)?.min.js/.test( request.url() ) ) {
+			if ( /pdf(\.worker)?\.min\.js/.test( request.url() ) ) {
 				pdfjsRequests.push( request.url() );
 			}
 		} );
@@ -22,6 +22,6 @@ test.describe( 'Flipset poster mode', () => {
 		await expect( page.locator( '.flipset-poster' ) ).toHaveCount( 0 );
 		await expect( page.locator( '.flipset-toolbar' ) ).toBeVisible();
 		await expect( page.locator( '.flipset-viewer canvas' ).first() ).toBeVisible( { timeout: 20000 } );
-		expect( pdfjsRequests.some( ( url ) => /pdf.min.js/.test( url ) ) ).toBe( true );
+		expect( pdfjsRequests.some( ( url ) => /pdf\.min\.js/.test( url ) ) ).toBe( true );
 	} );
 } );

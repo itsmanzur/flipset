@@ -154,7 +154,7 @@ class Flipset_Elementor_Viewer extends \Elementor\Widget_Base {
 			'poster',
 			array(
 				'label'       => __( 'Poster mode', 'flipset' ),
-				'type'        => ElementorControls_Manager::SELECT,
+				'type'        => \Elementor\Controls_Manager::SELECT,
 				'default'     => 'site',
 				'options'     => array(
 					'site'  => __( 'Site default', 'flipset' ),
