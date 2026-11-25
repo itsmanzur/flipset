@@ -10,7 +10,7 @@
  *
  * Add-ons extend the page with filters only:
  *   - flipset/welcome/sections      add, move or remove sections
- *   - flipset/welcome/hero_actions  change the hero buttons
+ *   - flipset/welcome/hero_actions  change the hero button and links
  *   - flipset/welcome/after_hero    print something right under the hero
  *
  * @package Flipset
@@ -118,15 +118,15 @@ class Flipset_Welcome {
 	 */
 	public static function link( $key ) {
 		$links = array(
-			'site'       => 'https://flipset.thereadscope.com',
-			'docs'       => 'https://flipset.thereadscope.com/flipset-docs/',
-			'builders'   => 'https://flipset.thereadscope.com/flipset-docs/page-builders/',
-			'video'      => 'https://youtu.be/RGBoQxO4mUM',
-			'support'    => 'https://wordpress.org/support/plugin/flipset/',
-			'review'     => 'https://wordpress.org/support/plugin/flipset/reviews/#new-post',
-			'issues'     => 'https://github.com/itsmanzur/flipset/issues',
-			'security'   => 'https://github.com/itsmanzur/flipset/security/policy',
-			'changelog'  => 'https://wordpress.org/plugins/flipset/#developers',
+			'site'      => 'https://flipset.thereadscope.com',
+			'docs'      => 'https://flipset.thereadscope.com/flipset-docs/',
+			'builders'  => 'https://flipset.thereadscope.com/flipset-docs/page-builders/',
+			'video'     => 'https://youtu.be/RGBoQxO4mUM',
+			'support'   => 'https://wordpress.org/support/plugin/flipset/',
+			'review'    => 'https://wordpress.org/support/plugin/flipset/reviews/#new-post',
+			'issues'    => 'https://github.com/itsmanzur/flipset/issues',
+			'security'  => 'https://github.com/itsmanzur/flipset/security/policy',
+			'changelog' => 'https://wordpress.org/plugins/flipset/#developers',
 		);
 		return isset( $links[ $key ] ) ? $links[ $key ] : '';
 	}
@@ -153,44 +153,44 @@ class Flipset_Welcome {
 	/**
 	 * Sections below the hero, in order.
 	 *
-	 * @return array[] id => { title, sub, kicker, priority, callback }.
+	 * @return array[] id => { title, sub, kicker, priority, callback }. `kicker` is the short name used in the page menu.
 	 */
 	private function sections() {
 		$sections = array(
 			'start'     => array(
-				'kicker'   => __( 'Quick start', 'flipset' ),
-				'title'    => __( 'Four ways to put a PDF on a page', 'flipset' ),
-				'sub'      => __( 'Each one shows the same viewer. Pick the one that fits how you build.', 'flipset' ),
+				'kicker'   => __( 'Add a PDF', 'flipset' ),
+				'title'    => __( 'Add a PDF your way', 'flipset' ),
+				'sub'      => __( 'All of these show the same viewer.', 'flipset' ),
 				'priority' => 10,
 				'callback' => array( $this, 'section_start' ),
 			),
 			'features'  => array(
-				'kicker'   => __( 'In the free plugin', 'flipset' ),
-				'title'    => __( 'What Flipset does', 'flipset' ),
-				'sub'      => '',
+				'kicker'   => __( 'Features', 'flipset' ),
+				'title'    => __( 'Included in Flipset', 'flipset' ),
+				'sub'      => __( 'No paid features are sold or locked in this plugin.', 'flipset' ),
 				'priority' => 20,
 				'callback' => array( $this, 'section_features' ),
 			),
-			'faq'       => array(
-				'kicker'   => __( 'FAQ', 'flipset' ),
-				'title'    => __( 'Common questions', 'flipset' ),
-				'sub'      => '',
+			'changelog' => array(
+				'kicker'   => __( 'What\'s new', 'flipset' ),
+				'title'    => __( 'Recent releases', 'flipset' ),
+				'sub'      => __( 'Read from the changelog in the plugin\'s readme.', 'flipset' ),
 				'priority' => 30,
+				'callback' => array( $this, 'section_changelog' ),
+			),
+			'faq'       => array(
+				'kicker'   => __( 'Answers', 'flipset' ),
+				'title'    => __( 'Quick answers', 'flipset' ),
+				'sub'      => '',
+				'priority' => 40,
 				'callback' => array( $this, 'section_faq' ),
 			),
 			'help'      => array(
 				'kicker'   => __( 'Help', 'flipset' ),
-				'title'    => __( 'Support and feedback', 'flipset' ),
+				'title'    => __( 'Need a hand?', 'flipset' ),
 				'sub'      => '',
-				'priority' => 40,
-				'callback' => array( $this, 'section_help' ),
-			),
-			'changelog' => array(
-				'kicker'   => __( 'Changelog', 'flipset' ),
-				'title'    => __( 'What\'s new in Flipset', 'flipset' ),
-				'sub'      => __( 'The latest releases, from the plugin\'s readme.', 'flipset' ),
 				'priority' => 50,
-				'callback' => array( $this, 'section_changelog' ),
+				'callback' => array( $this, 'section_help' ),
 			),
 		);
 
@@ -220,6 +220,69 @@ class Flipset_Welcome {
 	}
 
 	/**
+	 * Hero button and links.
+	 *
+	 * @return array[]
+	 */
+	private function hero_actions() {
+		$actions = array(
+			array(
+				'label' => __( 'Create your first embed', 'flipset' ),
+				'url'   => admin_url( 'admin.php?page=' . Flipset_Admin::BUILDER_SLUG ),
+				'style' => 'primary',
+				'icon'  => 'plus-alt2',
+			),
+			array(
+				'label'    => __( 'Documentation', 'flipset' ),
+				'url'      => self::link( 'docs' ),
+				'style'    => 'link',
+				'external' => true,
+			),
+			array(
+				'label'    => __( 'Live demo', 'flipset' ),
+				'url'      => self::link( 'site' ),
+				'style'    => 'link',
+				'external' => true,
+			),
+			array(
+				'label'    => __( 'Video on YouTube', 'flipset' ),
+				'url'      => self::link( 'video' ),
+				'style'    => 'link',
+				'external' => true,
+			),
+		);
+		/**
+		 * Filter: flipset/welcome/hero_actions
+		 *
+		 * @param array[] $actions Each: label, url, style (primary|ghost-dark|link), icon, external (bool).
+		 */
+		return (array) apply_filters( 'flipset/welcome/hero_actions', $actions );
+	}
+
+	/**
+	 * Print one hero action.
+	 *
+	 * @param array $action Item from hero_actions().
+	 */
+	private function render_action( $action ) {
+		$style = isset( $action['style'] ) && in_array( $action['style'], array( 'primary', 'ghost-dark', 'link' ), true ) ? $action['style'] : 'link';
+		$class = 'link' === $style ? 'fw-hero__link' : 'fa-btn fa-btn--' . $style;
+		$icon  = isset( $action['icon'] ) ? sanitize_html_class( $action['icon'] ) : '';
+		if ( ! empty( $action['external'] ) ) {
+			self::external_link( $action['url'], $action['label'], $class, $icon );
+			return;
+		}
+		?>
+		<a class="<?php echo esc_attr( $class ); ?>" href="<?php echo esc_url( $action['url'] ); ?>">
+			<?php if ( $icon ) : ?>
+				<span class="dashicons dashicons-<?php echo esc_attr( $icon ); ?>" aria-hidden="true"></span>
+			<?php endif; ?>
+			<?php echo esc_html( $action['label'] ); ?>
+		</a>
+		<?php
+	}
+
+	/**
 	 * Render the Welcome screen.
 	 */
 	public function render() {
@@ -230,100 +293,82 @@ class Flipset_Welcome {
 			update_option( self::SEEN_OPTION, FLIPSET_VERSION, false );
 		}
 
-		$builder_url   = admin_url( 'admin.php?page=' . Flipset_Admin::BUILDER_SLUG );
 		$dashboard_url = admin_url( 'admin.php?page=' . Flipset_Admin::PAGE_SLUG );
 		$sections      = $this->sections();
-
-		$actions = array(
-			array(
-				'label' => __( 'Create your first embed', 'flipset' ),
-				'url'   => $builder_url,
-				'style' => 'primary',
-				'icon'  => 'plus-alt2',
-			),
-			array(
-				'label'    => __( 'Read the docs', 'flipset' ),
-				'url'      => self::link( 'docs' ),
-				'style'    => 'ghost-dark',
-				'icon'     => 'book',
-				'external' => true,
-			),
-			array(
-				'label'    => __( 'See the live demo', 'flipset' ),
-				'url'      => self::link( 'site' ),
-				'style'    => 'ghost-dark',
-				'icon'     => 'visibility',
-				'external' => true,
-			),
+		$buttons       = array();
+		$links         = array();
+		foreach ( $this->hero_actions() as $action ) {
+			if ( empty( $action['label'] ) || empty( $action['url'] ) ) {
+				continue;
+			}
+			if ( isset( $action['style'] ) && in_array( $action['style'], array( 'primary', 'ghost-dark' ), true ) ) {
+				$buttons[] = $action;
+			} else {
+				$links[] = $action;
+			}
+		}
+		$modes = array(
+			'page'   => __( 'Page', 'flipset' ),
+			'scroll' => __( 'Scroll', 'flipset' ),
+			'spread' => __( 'Spread', 'flipset' ),
+			'flip'   => __( '3D flipbook', 'flipset' ),
 		);
-		/**
-		 * Filter: flipset/welcome/hero_actions
-		 *
-		 * @param array[] $actions Each: label, url, style (primary|ghost-dark), icon, external (bool).
-		 */
-		$actions = (array) apply_filters( 'flipset/welcome/hero_actions', $actions );
 		?>
 		<div class="wrap flipset-admin fw-welcome">
 			<hr class="wp-header-end">
 			<div class="fa-hero fw-hero">
 				<div class="fw-hero__grid">
 					<div class="fw-hero__copy">
-						<p class="fa-hero__label"><?php esc_html_e( 'Thanks for installing Flipset', 'flipset' ); ?></p>
 						<div class="fa-hero__kicker">
 							<span class="fa-mark dashicons dashicons-book-alt" aria-hidden="true"></span>
 							<h1 class="fa-hero__title"><?php esc_html_e( 'Welcome to Flipset', 'flipset' ); ?></h1>
-							<span class="fw-version">
-								<?php
-								/* translators: %s: version number. */
-								echo esc_html( sprintf( __( 'Version %s', 'flipset' ), FLIPSET_VERSION ) );
-								?>
-							</span>
 						</div>
 						<p class="fa-hero__lede fw-hero__lede"><?php esc_html_e( 'Embed PDFs with a fast PDF viewer, 3D flipbook and document library. Searchable PDF text, accessible, no CDN. Works with Gutenberg, Elementor, Divi.', 'flipset' ); ?></p>
 						<ul class="fw-facts" aria-label="<?php esc_attr_e( 'At a glance', 'flipset' ); ?>">
-							<li><span class="dashicons dashicons-shield" aria-hidden="true"></span><?php esc_html_e( 'No CDN, no external requests, no cookies, no tracking', 'flipset' ); ?></li>
-							<li><span class="dashicons dashicons-book" aria-hidden="true"></span><?php esc_html_e( 'Page, scroll, spread and 3D flipbook views', 'flipset' ); ?></li>
-							<li><span class="dashicons dashicons-search" aria-hidden="true"></span><?php esc_html_e( 'PDF text is searchable in WordPress search', 'flipset' ); ?></li>
-							<li><span class="dashicons dashicons-universal-access" aria-hidden="true"></span><?php esc_html_e( 'Keyboard control and screen reader page announcements', 'flipset' ); ?></li>
+							<li><?php esc_html_e( 'No CDN, no external requests, no cookies, no tracking', 'flipset' ); ?></li>
+							<li><?php esc_html_e( 'PDF text is searchable in WordPress search', 'flipset' ); ?></li>
+							<li><?php esc_html_e( 'Keyboard control and screen reader page announcements', 'flipset' ); ?></li>
 						</ul>
-						<div class="fa-hero__actions fw-hero__actions">
-							<?php foreach ( $actions as $action ) : ?>
-								<?php
-								if ( empty( $action['label'] ) || empty( $action['url'] ) ) {
-									continue;
-								}
-								$class = 'fa-btn fa-btn--' . ( ( isset( $action['style'] ) && 'primary' === $action['style'] ) ? 'primary' : 'ghost-dark' );
-								$icon  = isset( $action['icon'] ) ? sanitize_html_class( $action['icon'] ) : '';
-								if ( ! empty( $action['external'] ) ) {
-									self::external_link( $action['url'], $action['label'], $class, $icon );
-									continue;
-								}
-								?>
-								<a class="<?php echo esc_attr( $class ); ?>" href="<?php echo esc_url( $action['url'] ); ?>">
-									<?php if ( $icon ) : ?>
-										<span class="dashicons dashicons-<?php echo esc_attr( $icon ); ?>" aria-hidden="true"></span>
-									<?php endif; ?>
-									<?php echo esc_html( $action['label'] ); ?>
-								</a>
-							<?php endforeach; ?>
+						<div class="fw-hero__actions">
+							<?php
+							foreach ( $buttons as $action ) {
+								$this->render_action( $action );
+							}
+							?>
+							<?php if ( $links ) : ?>
+								<span class="fw-hero__links">
+									<?php
+									foreach ( $links as $action ) {
+										$this->render_action( $action );
+									}
+									?>
+								</span>
+							<?php endif; ?>
 						</div>
 					</div>
-					<a class="fw-video" href="<?php echo esc_url( self::link( 'video' ) ); ?>" target="_blank" rel="noopener noreferrer">
-						<span class="fw-video__page fw-video__page--back" aria-hidden="true"></span>
-						<span class="fw-video__page" aria-hidden="true">
-							<span class="fw-video__play dashicons dashicons-controls-play"></span>
-						</span>
-						<span class="fw-video__label">
-							<?php esc_html_e( 'Watch the video on YouTube', 'flipset' ); ?>
-							<span class="screen-reader-text"><?php esc_html_e( '(opens in a new tab)', 'flipset' ); ?></span>
-						</span>
-					</a>
+					<div class="fw-modes">
+						<p class="fw-modes__title" id="fw-modes-title"><?php esc_html_e( 'Four views, one viewer', 'flipset' ); ?></p>
+						<ul class="fw-modes__list" aria-labelledby="fw-modes-title">
+							<?php foreach ( $modes as $mode => $label ) : ?>
+								<li class="fw-mode fw-mode--<?php echo esc_attr( $mode ); ?>">
+									<span class="fw-mode__art" aria-hidden="true"><i></i><i></i><i></i></span>
+									<span class="fw-mode__label"><?php echo esc_html( $label ); ?></span>
+									<code class="fw-mode__code">view="<?php echo esc_html( $mode ); ?>"</code>
+								</li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
 				</div>
 				<div class="fa-hero__divider" role="presentation"></div>
 				<div class="fw-hero__foot">
+					<span class="fw-version">
+						<?php
+						/* translators: %s: version number. */
+						echo esc_html( sprintf( __( 'Version %s', 'flipset' ), FLIPSET_VERSION ) );
+						?>
+					</span>
 					<?php if ( ! empty( $sections ) ) : ?>
 						<nav class="fw-toc" aria-label="<?php esc_attr_e( 'On this page', 'flipset' ); ?>">
-							<span class="fa-hero__label"><?php esc_html_e( 'On this page:', 'flipset' ); ?></span>
 							<?php foreach ( $sections as $id => $section ) : ?>
 								<a class="fa-chip" href="#fw-<?php echo esc_attr( sanitize_key( $id ) ); ?>"><?php echo esc_html( ! empty( $section['kicker'] ) ? $section['kicker'] : $section['title'] ); ?></a>
 							<?php endforeach; ?>
@@ -346,9 +391,6 @@ class Flipset_Welcome {
 				<?php $sid = 'fw-' . sanitize_key( $id ); ?>
 				<section class="fw-section fw-section--<?php echo esc_attr( sanitize_key( $id ) ); ?>" id="<?php echo esc_attr( $sid ); ?>" aria-labelledby="<?php echo esc_attr( $sid ); ?>-title">
 					<header class="fw-section__head">
-						<?php if ( ! empty( $section['kicker'] ) ) : ?>
-							<p class="fw-kicker"><?php echo esc_html( $section['kicker'] ); ?></p>
-						<?php endif; ?>
 						<h2 class="fw-section__title" id="<?php echo esc_attr( $sid ); ?>-title"><?php echo esc_html( $section['title'] ); ?></h2>
 						<?php if ( ! empty( $section['sub'] ) ) : ?>
 							<p class="fw-section__sub"><?php echo esc_html( $section['sub'] ); ?></p>
@@ -362,7 +404,7 @@ class Flipset_Welcome {
 	}
 
 	/**
-	 * Quick start: the four ways readme.txt lists for adding a PDF.
+	 * Ways to add a PDF, as listed in readme.txt, one row each.
 	 */
 	public function section_start() {
 		$settings     = get_option( Flipset_Admin::OPTION_NAME, array() );
@@ -370,44 +412,61 @@ class Flipset_Welcome {
 		$builder_url  = admin_url( 'admin.php?page=' . Flipset_Admin::BUILDER_SLUG );
 		$settings_url = admin_url( 'admin.php?page=' . Flipset_Admin::SETTINGS_SLUG );
 		?>
-		<ol class="fw-steps">
-			<li class="fa-card fw-step">
-				<span class="fa-num" aria-hidden="true">1</span>
-				<h3 class="fw-step__title"><?php esc_html_e( 'Shortcode', 'flipset' ); ?></h3>
-				<p class="fw-step__text"><?php esc_html_e( 'Type it yourself, or build one in the Shortcode Builder with its live preview.', 'flipset' ); ?></p>
-				<code class="fw-step__code">[flipset file="https://example.com/document.pdf"]</code>
-				<a class="fa-btn fa-btn--secondary fa-btn--sm" href="<?php echo esc_url( $builder_url ); ?>"><?php esc_html_e( 'Open the Shortcode Builder', 'flipset' ); ?></a>
+		<ul class="fa-card fw-ways">
+			<li class="fw-way">
+				<span class="fa-tile-icon"><span class="dashicons dashicons-shortcode" aria-hidden="true"></span></span>
+				<div class="fw-way__copy">
+					<h3 class="fw-way__title"><?php esc_html_e( 'Shortcode', 'flipset' ); ?></h3>
+					<p class="fw-way__text"><?php esc_html_e( 'Type it yourself, or build one in the Shortcode Builder with its live preview.', 'flipset' ); ?></p>
+					<code class="fw-way__code">[flipset file="https://example.com/document.pdf"]</code>
+				</div>
+				<a class="fa-btn fa-btn--secondary fa-btn--sm fw-way__action" href="<?php echo esc_url( $builder_url ); ?>"><?php esc_html_e( 'Open the Shortcode Builder', 'flipset' ); ?></a>
 			</li>
-			<li class="fa-card fw-step">
-				<span class="fa-num" aria-hidden="true">2</span>
-				<h3 class="fw-step__title"><?php esc_html_e( 'Block', 'flipset' ); ?></h3>
-				<p class="fw-step__text"><?php esc_html_e( 'Insert the "Flipset Viewer" block and pick a PDF from the Media Library. The editor shows the first page.', 'flipset' ); ?></p>
-				<a class="fa-btn fa-btn--secondary fa-btn--sm" href="<?php echo esc_url( admin_url( 'post-new.php?post_type=page' ) ); ?>"><?php esc_html_e( 'Add a new page', 'flipset' ); ?></a>
+			<li class="fw-way">
+				<span class="fa-tile-icon is-violet"><span class="dashicons dashicons-block-default" aria-hidden="true"></span></span>
+				<div class="fw-way__copy">
+					<h3 class="fw-way__title"><?php esc_html_e( 'Block', 'flipset' ); ?></h3>
+					<p class="fw-way__text"><?php esc_html_e( 'Insert the "Flipset Viewer" block and pick a PDF from the Media Library. The editor shows the first page.', 'flipset' ); ?></p>
+				</div>
+				<a class="fa-btn fa-btn--secondary fa-btn--sm fw-way__action" href="<?php echo esc_url( admin_url( 'post-new.php?post_type=page' ) ); ?>"><?php esc_html_e( 'Add a new page', 'flipset' ); ?></a>
 			</li>
-			<li class="fa-card fw-step">
-				<span class="fa-num" aria-hidden="true">3</span>
-				<h3 class="fw-step__title"><?php esc_html_e( 'Page builder widget', 'flipset' ); ?></h3>
-				<p class="fw-step__text"><?php esc_html_e( 'Elementor, Divi and Beaver Builder each have a Flipset Viewer and a Flipset Library widget.', 'flipset' ); ?></p>
-				<?php self::external_link( self::link( 'builders' ), __( 'Page builder guide', 'flipset' ), 'fa-btn fa-btn--secondary fa-btn--sm' ); ?>
+			<li class="fw-way">
+				<span class="fa-tile-icon is-sky"><span class="dashicons dashicons-layout" aria-hidden="true"></span></span>
+				<div class="fw-way__copy">
+					<h3 class="fw-way__title"><?php esc_html_e( 'Page builder widget', 'flipset' ); ?></h3>
+					<p class="fw-way__text"><?php esc_html_e( 'Elementor, Divi and Beaver Builder each have a Flipset Viewer and a Flipset Library widget.', 'flipset' ); ?></p>
+				</div>
+				<?php self::external_link( self::link( 'builders' ), __( 'Page builder guide', 'flipset' ), 'fa-btn fa-btn--secondary fa-btn--sm fw-way__action' ); ?>
 			</li>
-			<li class="fa-card fw-step">
-				<span class="fa-num" aria-hidden="true">4</span>
-				<h3 class="fw-step__title"><?php esc_html_e( 'Paste a link', 'flipset' ); ?></h3>
-				<p class="fw-step__text"><?php esc_html_e( 'Paste a direct .pdf link on its own line in a post or page.', 'flipset' ); ?></p>
-				<?php if ( $autoembed_on ) : ?>
-					<p class="fw-state is-on"><span class="dashicons dashicons-yes" aria-hidden="true"></span><?php esc_html_e( 'On for this site', 'flipset' ); ?></p>
-				<?php else : ?>
-					<p class="fw-state is-off"><span class="dashicons dashicons-minus" aria-hidden="true"></span><?php esc_html_e( 'Turned off in Settings', 'flipset' ); ?></p>
-					<a class="fa-btn fa-btn--secondary fa-btn--sm" href="<?php echo esc_url( $settings_url ); ?>"><?php esc_html_e( 'Open Settings', 'flipset' ); ?></a>
+			<li class="fw-way">
+				<span class="fa-tile-icon is-green"><span class="dashicons dashicons-admin-links" aria-hidden="true"></span></span>
+				<div class="fw-way__copy">
+					<h3 class="fw-way__title">
+						<?php esc_html_e( 'Paste a link', 'flipset' ); ?>
+						<?php if ( $autoembed_on ) : ?>
+							<span class="fw-state is-on"><?php esc_html_e( 'On for this site', 'flipset' ); ?></span>
+						<?php else : ?>
+							<span class="fw-state is-off"><?php esc_html_e( 'Turned off in Settings', 'flipset' ); ?></span>
+						<?php endif; ?>
+					</h3>
+					<p class="fw-way__text"><?php esc_html_e( 'Paste a direct .pdf link on its own line in a post or page.', 'flipset' ); ?></p>
+				</div>
+				<?php if ( ! $autoembed_on ) : ?>
+					<a class="fa-btn fa-btn--secondary fa-btn--sm fw-way__action" href="<?php echo esc_url( $settings_url ); ?>"><?php esc_html_e( 'Open Settings', 'flipset' ); ?></a>
 				<?php endif; ?>
 			</li>
-		</ol>
-		<p class="fw-note">
-			<?php esc_html_e( 'Want a gallery of all your PDFs?', 'flipset' ); ?>
-			<?php
-			echo Flipset_Readme::inline_html( __( 'Add `[flipset_library]` to a page, or insert the Flipset Library block.', 'flipset' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped inside inline_html().
-			?>
-		</p>
+			<li class="fw-way">
+				<span class="fa-tile-icon"><span class="dashicons dashicons-grid-view" aria-hidden="true"></span></span>
+				<div class="fw-way__copy">
+					<h3 class="fw-way__title"><?php esc_html_e( 'A gallery of all your PDFs', 'flipset' ); ?></h3>
+					<p class="fw-way__text">
+						<?php
+						echo Flipset_Readme::inline_html( __( 'Add `[flipset_library]` to a page, or insert the Flipset Library block.', 'flipset' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped inside inline_html().
+						?>
+					</p>
+				</div>
+			</li>
+		</ul>
 		<?php
 	}
 
@@ -443,82 +502,44 @@ class Flipset_Welcome {
 	 * Short FAQ (items flagged `welcome`), with a way to the full answers.
 	 */
 	public function section_faq() {
-		$items = array_filter(
+		$items     = array_filter(
 			Flipset_Admin::faq_items(),
 			static function ( $item ) {
 				return ! empty( $item['welcome'] );
 			}
 		);
 		$guide_url = admin_url( 'admin.php?page=' . Flipset_Admin::DOCS_SLUG . '&tab=docs' ) . '#guide-faq';
-		Flipset_Admin::render_faq_list( $items, true );
+		Flipset_Admin::render_faq_list( $items, false );
 		?>
-		<div class="fa-card fw-callout">
-			<div class="fw-callout__copy">
-				<h3 class="fw-callout__title"><?php esc_html_e( 'Need more answers?', 'flipset' ); ?></h3>
-				<p><?php esc_html_e( 'The user guide in Docs & Features covers the shortcode settings, the document library, deep links and page builders.', 'flipset' ); ?></p>
-			</div>
-			<div class="fw-callout__actions">
-				<a class="fa-btn fa-btn--secondary fa-btn--sm" href="<?php echo esc_url( $guide_url ); ?>"><?php esc_html_e( 'Open the user guide', 'flipset' ); ?></a>
-				<?php self::external_link( self::link( 'docs' ), __( 'Online documentation', 'flipset' ), 'fa-btn fa-btn--primary fa-btn--sm' ); ?>
-			</div>
-		</div>
+		<p class="fw-more">
+			<a class="fa-link" href="<?php echo esc_url( $guide_url ); ?>"><?php esc_html_e( 'More in the user guide', 'flipset' ); ?> <span aria-hidden="true">&rarr;</span></a>
+			<span class="fw-sep" aria-hidden="true">·</span>
+			<?php self::external_link( self::link( 'docs' ), __( 'Online documentation', 'flipset' ) ); ?>
+		</p>
 		<?php
 	}
 
 	/**
-	 * Support, reviews and bug reports. No ratings or review text are shown or fetched.
+	 * Support, review and bug links in one strip. No ratings or review text are shown or fetched.
 	 */
 	public function section_help() {
-		$cards = array(
-			array(
-				'icon'  => 'sos',
-				'tint'  => '',
-				'title' => __( 'Ask a question', 'flipset' ),
-				'text'  => __( 'Get help in the support forum on WordPress.org.', 'flipset' ),
-				'url'   => self::link( 'support' ),
-				'cta'   => __( 'Support forum', 'flipset' ),
-			),
-			array(
-				'icon'  => 'star-filled',
-				'tint'  => 'is-violet',
-				'title' => __( 'Enjoying Flipset?', 'flipset' ),
-				'text'  => __( 'A review on WordPress.org helps other site owners find the plugin.', 'flipset' ),
-				'url'   => self::link( 'review' ),
-				'cta'   => __( 'Write a review', 'flipset' ),
-			),
-			array(
-				'icon'  => 'lightbulb',
-				'tint'  => 'is-sky',
-				'title' => __( 'Report a bug or ask for a feature', 'flipset' ),
-				'text'  => __( 'Open an issue on GitHub.', 'flipset' ),
-				'url'   => self::link( 'issues' ),
-				'cta'   => __( 'GitHub issues', 'flipset' ),
-			),
-			array(
-				'icon'  => 'lock',
-				'tint'  => 'is-green',
-				'title' => __( 'Found a security problem?', 'flipset' ),
-				'text'  => __( 'Please do not post it in the public forum. Use GitHub\'s private reporting.', 'flipset' ),
-				'url'   => self::link( 'security' ),
-				'cta'   => __( 'Security policy', 'flipset' ),
-			),
+		$links = array(
+			array( __( 'Support forum', 'flipset' ), self::link( 'support' ), 'sos' ),
+			array( __( 'Report a bug or ask for a feature', 'flipset' ), self::link( 'issues' ), 'lightbulb' ),
+			array( __( 'Report a security problem privately', 'flipset' ), self::link( 'security' ), 'lock' ),
+			array( __( 'Leave a review on WordPress.org', 'flipset' ), self::link( 'review' ), 'star-filled' ),
 		);
 		?>
-		<ul class="fw-help">
-			<?php foreach ( $cards as $card ) : ?>
-				<li class="fa-card fw-help__card">
-					<span class="fa-tile-icon <?php echo esc_attr( $card['tint'] ); ?>"><span class="dashicons dashicons-<?php echo esc_attr( $card['icon'] ); ?>" aria-hidden="true"></span></span>
-					<h3 class="fw-help__title"><?php echo esc_html( $card['title'] ); ?></h3>
-					<p class="fw-help__text"><?php echo esc_html( $card['text'] ); ?></p>
-					<?php self::external_link( $card['url'], $card['cta'], 'fa-link fw-help__link' ); ?>
-				</li>
+		<ul class="fa-card fw-help">
+			<?php foreach ( $links as $link ) : ?>
+				<li><?php self::external_link( $link[1], $link[0], 'fw-help__link', $link[2] ); ?></li>
 			<?php endforeach; ?>
 		</ul>
 		<?php
 	}
 
 	/**
-	 * Labels for changelog line types.
+	 * Group names for changelog line types, in display order.
 	 *
 	 * @return string[]
 	 */
@@ -528,19 +549,21 @@ class Flipset_Welcome {
 			'improved'  => __( 'Improved', 'flipset' ),
 			'fixed'     => __( 'Fixed', 'flipset' ),
 			'security'  => __( 'Security', 'flipset' ),
-			'developer' => __( 'Developer', 'flipset' ),
+			'developer' => __( 'For developers', 'flipset' ),
+			''          => __( 'Changes', 'flipset' ),
 		);
 	}
 
 	/**
-	 * Print changelog entries as <details> blocks, the first one open.
+	 * Print changelog entries as <details> blocks (the first open), with the
+	 * lines of each release grouped by type.
 	 *
 	 * @param array[] $entries From Flipset_Readme::changelog().
 	 * @param string  $current Version installed now; marked "Installed".
 	 */
 	public static function render_changelog( $entries, $current = '' ) {
 		if ( empty( $entries ) ) {
-			echo '<p class="fw-note">' . esc_html__( 'No changelog found.', 'flipset' ) . '</p>';
+			echo '<p class="fw-more">' . esc_html__( 'No changelog found.', 'flipset' ) . '</p>';
 			return;
 		}
 		$labels = self::change_labels();
@@ -548,24 +571,29 @@ class Flipset_Welcome {
 		foreach ( array_values( $entries ) as $i => $entry ) {
 			$is_current = ( '' !== $current && $current === $entry['version'] );
 			$is_ahead   = ( '' !== $current && version_compare( $entry['version'], $current, '>' ) );
+			$groups     = array();
+			foreach ( $entry['items'] as $item ) {
+				$type              = isset( $labels[ $item['type'] ] ) ? $item['type'] : '';
+				$groups[ $type ][] = $item['text'];
+			}
+			$groups = array_filter( array_replace( array_fill_keys( array_keys( $labels ), array() ), $groups ) );
 			?>
 			<details class="fa-card fw-release"<?php echo 0 === $i ? ' open' : ''; ?>>
 				<summary class="fw-release__head">
-					<span class="fw-release__version">
-						<?php
-						/* translators: %s: version number. */
-						echo esc_html( sprintf( __( 'Version %s', 'flipset' ), $entry['version'] ) );
-						?>
-					</span>
+					<span class="fw-release__version"><?php echo esc_html( $entry['version'] ); ?></span>
 					<?php if ( $is_current ) : ?>
 						<span class="fa-tag fa-tag--free"><?php esc_html_e( 'Installed', 'flipset' ); ?></span>
 					<?php elseif ( $is_ahead ) : ?>
 						<span class="fa-tag fw-tag--next"><?php esc_html_e( 'In development', 'flipset' ); ?></span>
 					<?php endif; ?>
-					<span class="fw-release__count">
+					<span class="fw-release__summary">
 						<?php
-						/* translators: %d: number of changes in a release. */
-						echo esc_html( sprintf( _n( '%d change', '%d changes', count( $entry['items'] ), 'flipset' ), count( $entry['items'] ) ) );
+						$parts = array();
+						foreach ( $groups as $type => $lines ) {
+							/* translators: 1: number of changes, 2: change group name such as "New" or "Fixed". */
+							$parts[] = sprintf( __( '%1$d %2$s', 'flipset' ), count( $lines ), $labels[ $type ] );
+						}
+						echo esc_html( implode( ' · ', $parts ) );
 						?>
 					</span>
 					<span class="dashicons dashicons-arrow-down-alt2 fw-release__arrow" aria-hidden="true"></span>
@@ -574,18 +602,16 @@ class Flipset_Welcome {
 					<?php foreach ( $entry['notes'] as $note ) : ?>
 						<p class="fw-release__note"><?php echo Flipset_Readme::inline_html( $note ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped inside inline_html(). ?></p>
 					<?php endforeach; ?>
-					<?php if ( ! empty( $entry['items'] ) ) : ?>
-						<ul class="fw-release__list">
-							<?php foreach ( $entry['items'] as $item ) : ?>
-								<li>
-									<?php if ( '' !== $item['type'] && isset( $labels[ $item['type'] ] ) ) : ?>
-										<span class="fw-tag fw-tag--<?php echo esc_attr( $item['type'] ); ?>"><?php echo esc_html( $labels[ $item['type'] ] ); ?></span>
-									<?php endif; ?>
-									<span class="fw-release__text"><?php echo Flipset_Readme::inline_html( $item['text'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped inside inline_html(). ?></span>
-								</li>
-							<?php endforeach; ?>
-						</ul>
-					<?php endif; ?>
+					<?php foreach ( $groups as $type => $lines ) : ?>
+						<div class="fw-group fw-group--<?php echo esc_attr( '' === $type ? 'other' : $type ); ?>">
+							<h3 class="fw-group__title"><?php echo esc_html( $labels[ $type ] ); ?></h3>
+							<ul class="fw-group__list">
+								<?php foreach ( $lines as $line ) : ?>
+									<li><?php echo Flipset_Readme::inline_html( $line ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped inside inline_html(). ?></li>
+								<?php endforeach; ?>
+							</ul>
+						</div>
+					<?php endforeach; ?>
 				</div>
 			</details>
 			<?php

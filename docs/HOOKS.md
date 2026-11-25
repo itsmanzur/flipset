@@ -569,7 +569,7 @@ Sections of the Welcome screen (Flipset → Welcome), below the hero. Add, reord
 
 | Name | Type | Meaning |
 |------|------|---------|
-| `$sections` | `array` | `id => [ 'kicker', 'title', 'sub', 'priority', 'callback' ]`. Built-in ids and priorities: `start` 10, `features` 20, `faq` 30, `help` 40, `changelog` 50 |
+| `$sections` | `array` | `id => [ 'kicker', 'title', 'sub', 'priority', 'callback' ]`. Built-in ids and priorities: `start` 10, `features` 20, `changelog` 30, `faq` 40, `help` 50. `kicker` is the short name in the page menu |
 
 ```php
 add_filter( 'flipset/welcome/sections', function ( $sections ) {
@@ -592,11 +592,11 @@ add_filter( 'flipset/welcome/sections', function ( $sections ) {
 **Type:** filter
 **Fired from:** `Flipset_Welcome::render()`
 
-Buttons in the Welcome screen hero.
+The button and links in the Welcome screen hero. `primary` and `ghost-dark` items are buttons; `link` items are shown as a row of text links.
 
 | Name | Type | Meaning |
 |------|------|---------|
-| `$actions` | `array[]` | Each: `label`, `url`, `style` (`primary` or `ghost-dark`), `icon` (dashicon name without `dashicons-`), `external` (bool, opens in a new tab) |
+| `$actions` | `array[]` | Each: `label`, `url`, `style` (`primary`, `ghost-dark` or `link`), `icon` (dashicon name without `dashicons-`), `external` (bool, opens in a new tab) |
 
 ---
 
