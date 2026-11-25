@@ -530,3 +530,67 @@ Control names accepted in the `hide="..."` list of a saved embed. Unknown names 
 | Name | Type | Meaning |
 |------|------|---------|
 | `$known` | `string[]` | Allowed names (`nav`, `zoom`, `fit`, `rotate`, `view`, `pan`, `download`, `print`, `search`, `theme`, `share`, `shortcuts`, `presentation`, `fullscreen`) |
+
+---
+
+## `flipset/welcome/sections`
+
+**Type:** filter
+**Fired from:** `Flipset_Welcome::sections()` in `includes/class-flipset-welcome.php`
+
+Sections of the Welcome screen (Flipset → Welcome), below the hero. Add, reorder or remove them. Flipset prints each section's `h2` from `title`; the callback prints the body. Sections whose callback is not callable are skipped.
+
+**Parameters**
+
+| Name | Type | Meaning |
+|------|------|---------|
+| `$sections` | `array` | `id => [ 'kicker', 'title', 'sub', 'priority', 'callback' ]`. Built-in ids and priorities: `start` 10, `features` 20, `faq` 30, `help` 40, `changelog` 50 |
+
+```php
+add_filter( 'flipset/welcome/sections', function ( $sections ) {
+	$sections['my-addon'] = array(
+		'kicker'   => 'My add-on',
+		'title'    => 'Getting started with My add-on',
+		'priority' => 15,
+		'callback' => function () {
+			echo '<p>…</p>';
+		},
+	);
+	return $sections;
+} );
+```
+
+---
+
+## `flipset/welcome/hero_actions`
+
+**Type:** filter
+**Fired from:** `Flipset_Welcome::render()`
+
+Buttons in the Welcome screen hero.
+
+| Name | Type | Meaning |
+|------|------|---------|
+| `$actions` | `array[]` | Each: `label`, `url`, `style` (`primary` or `ghost-dark`), `icon` (dashicon name without `dashicons-`), `external` (bool, opens in a new tab) |
+
+---
+
+## `flipset/welcome/after_hero`
+
+**Type:** action
+**Fired from:** `Flipset_Welcome::render()`
+
+Print content right under the Welcome screen hero. No parameters.
+
+---
+
+## `flipset/faq_items`
+
+**Type:** filter
+**Fired from:** `Flipset_Admin::faq_items()` in `includes/class-flipset-admin.php`
+
+Questions shown on Docs & Features → Docs (all items) and on the Welcome screen (items with `welcome` set). Text between backticks in an answer is shown as code; everything else is escaped.
+
+| Name | Type | Meaning |
+|------|------|---------|
+| `$items` | `array[]` | Each: `q` (question), `a` (answer), `welcome` (bool) |

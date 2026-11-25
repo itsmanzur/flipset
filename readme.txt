@@ -174,7 +174,7 @@ Flipset does not contact any server on its own. It has no analytics, no licence 
 == Installation ==
 
 1. Upload the `flipset` folder to `/wp-content/plugins/`, or install the plugin from the Plugins screen.
-2. Activate the plugin. You will land on the Flipset dashboard.
+2. Activate the plugin. The first time, you will land on the Flipset Welcome screen.
 3. Upload a PDF in Media, or open Flipset → Docs & Features.
 4. Copy a shortcode, create a test page, or insert the "Flipset Viewer" block in the editor.
 
@@ -328,7 +328,7 @@ What the plugin stores on your site:
 * **PDF data** – post meta on your PDF attachments (extracted text, page count, indexed flag, accessibility flag, thumbnail ID) and a combined search index on posts and pages that embed a PDF.
 * **Thumbnails** – first-page PNG images generated in your browser and saved in the Media Library.
 * **Library visibility** – a `_flipset_library_hidden` flag on each PDF you hide from the library.
-* **Admin notice state** – one user meta value per administrator who dismisses the welcome notice or the library notice, and a short-lived transient used for the redirect after activation.
+* **Admin notice state** – one user meta value per administrator who dismisses the welcome notice or the library notice, a short-lived transient used for the redirect after activation, and one option, `flipset_welcome_seen`, that records that the Welcome screen was shown so the redirect happens only once.
 
 In the visitor's own browser, Flipset uses `localStorage` (not cookies) to remember the last page read (`flipset:page:<file URL>`), the chosen reading theme (`flipset_theme`) and the chosen library layout, grid or list (`flipset-library-layout`). These values never leave the browser, and the visitor can clear them at any time.
 
@@ -354,6 +354,7 @@ Flipset is developed and maintained by itsmanzur.
 = 1.2.0 =
 * New: hide any PDF from the document library. Choose "Hide from library" under the file in Flipset → Docs & Features; it is left out of every library that lists all PDFs, including library search. Existing sites keep listing every PDF until a file is hidden.
 * New: `ids` lists only the PDFs you name (`[flipset_library ids="12,34"]`), and `exclude` leaves some out. The Flipset Library block has a matching "Only these PDFs" picker.
+* New: a Welcome screen under Flipset → Welcome, with four ways to embed a PDF, the main features, common questions, support links and the latest changes from this readme. It opens once after the first activation; bulk, network and WP-CLI activations and later reactivations do not redirect. Nothing on it is loaded from another site.
 * New: a one-time notice on the Flipset screens explains that the library lists every Media Library PDF and how to change that.
 * New: poster mode. A viewer can show the PDF's cover, its title and an Open button instead of loading straight away; PDF.js and the PDF download only when a visitor clicks. Turn it on per embed (`poster="true"`, the Shortcode Builder, the Flipset Viewer block, or the Elementor, Divi and Beaver Builder widgets) or for the whole site under Flipset → Settings. Without JavaScript the button opens the PDF directly.
 * Improved: faster first page. On a post or page with a viewer that loads straight away, the browser starts fetching PDF.js from the page head instead of waiting for the footer, and fetches the PDF.js worker while idle. The first poster's cover image is fetched with high priority; later covers are lazy-loaded.
@@ -368,6 +369,7 @@ Flipset is developed and maintained by itsmanzur.
 * Fixed: Flipset widgets did not load or start in the Elementor editor preview.
 * Fixed: library covers could fall short of their box when the theme sets `height: auto` on content images.
 * Developer: new `flipset/poster_image_id`, `flipset/resource_hints` and `flipset/progressive_loading` filters and `window.FlipsetPoster.init()`.
+* Developer: new `flipset/welcome/sections`, `flipset/welcome/hero_actions` and `flipset/faq_items` filters and the `flipset/welcome/after_hero` action, so add-ons can add to the Welcome screen.
 
 = 1.1.3 =
 * Security: PDFs can no longer run generated code from their embedded fonts. Flipset now tells the bundled PDF.js not to use it (`isEvalSupported: false`) in the viewer, the thumbnail generator and the block editor preview.

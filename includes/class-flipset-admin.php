@@ -3563,45 +3563,106 @@ class Flipset_Admin {
 						<p class="flipset-guide-subtitle"><?php esc_html_e( 'Answers to frequent configuration questions and hosting best practices:', 'flipset' ); ?></p>
 					</div>
 				</div>
-				<div class="flipset-faq-list">
-					<details class="flipset-faq-item" open>
-						<summary>
-							<span class="flipset-faq-q"><?php esc_html_e( 'How do I resolve CORS (Cross-Origin) errors when loading remote PDFs?', 'flipset' ); ?></span>
-							<span class="dashicons dashicons-arrow-down-alt2 flipset-faq-arrow" aria-hidden="true"></span>
-						</summary>
-						<div class="flipset-faq-answer">
-							<p><?php esc_html_e( 'Browsers block scripts from reading PDFs hosted on other domains unless that remote server allows CORS. The easiest fix is uploading the PDF directly to your WordPress Media Library. If you must use a remote host, configure the header Access-Control-Allow-Origin: * on that remote server.', 'flipset' ); ?></p>
-						</div>
-					</details>
-					<details class="flipset-faq-item">
-						<summary>
-							<span class="flipset-faq-q"><?php esc_html_e( 'Why are PDF.js scripts excluded from cache plugins?', 'flipset' ); ?></span>
-							<span class="dashicons dashicons-arrow-down-alt2 flipset-faq-arrow" aria-hidden="true"></span>
-						</summary>
-						<div class="flipset-faq-answer">
-							<p><?php esc_html_e( 'PDF.js requires its worker script (pdf.worker.min.js) to load in an isolated worker thread. Combining, deferring, or minifying it with other theme JS breaks web worker loading. Flipset automatically sets data-no-optimize rules for WP Rocket, LiteSpeed Cache, Autoptimize, and W3 Total Cache.', 'flipset' ); ?></p>
-						</div>
-					</details>
-					<details class="flipset-faq-item">
-						<summary>
-							<span class="flipset-faq-q"><?php esc_html_e( 'How do thumbnail generation and search indexing work?', 'flipset' ); ?></span>
-							<span class="dashicons dashicons-arrow-down-alt2 flipset-faq-arrow" aria-hidden="true"></span>
-						</summary>
-						<div class="flipset-faq-answer">
-							<p><?php esc_html_e( 'The first time an admin visits the Documents Library tab, the browser renders page 1 of each PDF and saves a high-quality cover thumbnail in your Media Library, while simultaneously extracting text so visitors can search for PDF contents using WordPress site search.', 'flipset' ); ?></p>
-						</div>
-					</details>
-				</div>
+				<?php self::render_faq_list( self::faq_items(), true ); ?>
 			</section>
 		</div>
 		<?php
 	}
 
 	/**
-	 * Render the Features Showcase tab on the Docs & Features page.
+	 * Questions and answers shared by Docs & Features → Docs and the Welcome screen.
+	 *
+	 * Answers follow the readme.txt FAQ. Text between backticks is shown as code.
+	 * `welcome` marks the short list the Welcome screen shows.
+	 *
+	 * @return array[] Each: q, a, welcome (bool).
 	 */
-	public function render_features_tab() {
-		$cards = array(
+	public static function faq_items() {
+		$items = array(
+			array(
+				'q'       => __( 'How do I embed a PDF in WordPress?', 'flipset' ),
+				'a'       => __( 'Add `[flipset file="https://example.com/document.pdf"]` to a post or page, insert the "Flipset Viewer" block and pick a PDF from the Media Library, or paste a direct `.pdf` link on its own line.', 'flipset' ),
+				'welcome' => true,
+			),
+			array(
+				'q'       => __( 'Shortcode or block - which should I use?', 'flipset' ),
+				'a'       => __( 'They render the same viewer. Use the block in the editor if you want a file picker and first-page preview. Use `[flipset file="..."]` in the classic editor, widgets or PHP templates. Elementor, Divi and Beaver Builder have Flipset Viewer and Flipset Library widgets that use the same renderer.', 'flipset' ),
+				'welcome' => true,
+			),
+			array(
+				'q'       => __( 'Can I save an embed and reuse it?', 'flipset' ),
+				'a'       => __( 'Yes. Build it in Flipset → Shortcode Builder, save it, and use `[flipset id="1"]` or the block\'s saved-embed ID. Edit the saved embed later and every page that uses it updates.', 'flipset' ),
+				'welcome' => true,
+			),
+			array(
+				'q'       => __( 'How do I show a gallery of all my PDFs?', 'flipset' ),
+				'a'       => __( 'Add `[flipset_library]` to a page, or insert the Flipset Library block. Visitors see a grid of Media Library PDFs and can open any document in the Flipset viewer without leaving the page.', 'flipset' ),
+				'welcome' => true,
+			),
+			array(
+				'q'       => __( 'Does this send my documents to a third-party server?', 'flipset' ),
+				'a'       => __( 'No. Rendering happens in the visitor\'s browser with the PDF.js library bundled in this plugin. Share links open outside sites only when a visitor clicks them.', 'flipset' ),
+				'welcome' => true,
+			),
+			array(
+				'q'       => __( 'How do I resolve CORS (Cross-Origin) errors when loading remote PDFs?', 'flipset' ),
+				'a'       => __( 'Browsers block scripts from reading PDFs hosted on other domains unless that remote server allows CORS. The easiest fix is uploading the PDF directly to your WordPress Media Library. If you must use a remote host, configure the header Access-Control-Allow-Origin: * on that remote server.', 'flipset' ),
+				'welcome' => false,
+			),
+			array(
+				'q'       => __( 'Why are PDF.js scripts excluded from cache plugins?', 'flipset' ),
+				'a'       => __( 'PDF.js requires its worker script (pdf.worker.min.js) to load in an isolated worker thread. Combining, deferring, or minifying it with other theme JS breaks web worker loading. Flipset automatically sets data-no-optimize rules for WP Rocket, LiteSpeed Cache, Autoptimize, and W3 Total Cache.', 'flipset' ),
+				'welcome' => false,
+			),
+			array(
+				'q'       => __( 'How do thumbnail generation and search indexing work?', 'flipset' ),
+				'a'       => __( 'The first time an admin visits the Documents Library tab, the browser renders page 1 of each PDF and saves a high-quality cover thumbnail in your Media Library, while simultaneously extracting text so visitors can search for PDF contents using WordPress site search.', 'flipset' ),
+				'welcome' => false,
+			),
+		);
+
+		/**
+		 * Filter: flipset/faq_items
+		 *
+		 * Add or change the questions on Docs & Features → Docs and the Welcome screen.
+		 *
+		 * @param array[] $items Each: q, a, welcome (bool).
+		 */
+		return (array) apply_filters( 'flipset/faq_items', $items );
+	}
+
+	/**
+	 * Print FAQ items as native <details> disclosures (keyboard and screen reader friendly without JS).
+	 *
+	 * @param array[] $items      Items from faq_items().
+	 * @param bool    $open_first Open the first answer.
+	 */
+	public static function render_faq_list( $items, $open_first = false ) {
+		if ( empty( $items ) ) {
+			return;
+		}
+		echo '<div class="flipset-faq-list">';
+		foreach ( array_values( $items ) as $i => $item ) {
+			if ( empty( $item['q'] ) || empty( $item['a'] ) ) {
+				continue;
+			}
+			printf(
+				'<details class="flipset-faq-item"%1$s><summary><span class="flipset-faq-q">%2$s</span><span class="dashicons dashicons-arrow-down-alt2 flipset-faq-arrow" aria-hidden="true"></span></summary><div class="flipset-faq-answer"><p>%3$s</p></div></details>',
+				( $open_first && 0 === $i ) ? ' open' : '',
+				esc_html( $item['q'] ),
+				Flipset_Readme::inline_html( $item['a'] ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped inside inline_html().
+			);
+		}
+		echo '</div>';
+	}
+
+	/**
+	 * Feature cards shown on the Features tab and, in short form, on the Welcome screen.
+	 *
+	 * @return array[] Each: icon, tint, title, items (array of [label, text]).
+	 */
+	public static function feature_cards() {
+		return array(
 			array(
 				'icon'  => 'dashicons-book-alt',
 				'tint'  => 'is-indigo',
@@ -3656,6 +3717,13 @@ class Flipset_Admin {
 				),
 			),
 		);
+	}
+
+	/**
+	 * Render the Features Showcase tab on the Docs & Features page.
+	 */
+	public function render_features_tab() {
+		$cards = self::feature_cards();
 		?>
 		<div class="flipset-features-showcase">
 			<section class="fa-card fa-features-intro">

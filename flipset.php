@@ -53,6 +53,8 @@ require_once FLIPSET_DIR . 'includes/class-flipset-block.php';
 require_once FLIPSET_DIR . 'includes/class-flipset-embeds.php';
 require_once FLIPSET_DIR . 'includes/class-flipset-autoembed.php';
 require_once FLIPSET_DIR . 'includes/class-flipset-admin.php';
+require_once FLIPSET_DIR . 'includes/class-flipset-readme.php';
+require_once FLIPSET_DIR . 'includes/class-flipset-welcome.php';
 require_once FLIPSET_DIR . 'includes/class-flipset.php';
 
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
@@ -60,10 +62,12 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 }
 
 /**
- * Activation hook: create default options, flush rewrite rules if we ever
- * add custom endpoints, etc.
+ * Activation hook: create default options and, for a normal one-plugin
+ * activation by a person in wp-admin, ask for the Welcome screen once.
+ *
+ * @param bool $network_wide True when network-activated on multisite.
  */
-function flipset_activate() {
+function flipset_activate( $network_wide = false ) {
 	if ( false === get_option( 'flipset_settings' ) ) {
 		add_option(
 			'flipset_settings',
@@ -75,16 +79,29 @@ function flipset_activate() {
 			)
 		);
 	}
-	set_transient( 'flipset_activation_redirect', 1, 60 );
+	// No redirect for WP-CLI, network activation, bulk activation, or once the Welcome screen has been seen.
+	// phpcs:disable WordPress.Security.NonceVerification.Recommended -- core verifies the bulk action; values are only compared.
+	$bulk = ( isset( $_REQUEST['action'] ) && 'activate-selected' === $_REQUEST['action'] )
+		|| ( isset( $_REQUEST['action2'] ) && 'activate-selected' === $_REQUEST['action2'] );
+	// phpcs:enable WordPress.Security.NonceVerification.Recommended
+	if ( $network_wide || $bulk || ( defined( 'WP_CLI' ) && WP_CLI ) || get_option( 'flipset_welcome_seen' ) ) {
+		return;
+	}
+	// The value is the user who activated, so only that person is redirected.
+	set_transient( 'flipset_activation_redirect', get_current_user_id(), 60 );
 }
 register_activation_hook( FLIPSET_FILE, 'flipset_activate' );
 
 /**
- * One-time redirect to the dashboard after activation so the welcome
- * checklist is the first thing a new site owner sees.
+ * One-time redirect to the Welcome screen after the first activation.
+ *
+ * Runs at most once per site: the transient is deleted on the first admin
+ * request after activation, and the Welcome screen sets `flipset_welcome_seen`
+ * so a later reactivation never redirects again.
  */
 function flipset_maybe_activation_redirect() {
-	if ( ! get_transient( 'flipset_activation_redirect' ) ) {
+	$user_id = (int) get_transient( 'flipset_activation_redirect' );
+	if ( ! $user_id || get_current_user_id() !== $user_id ) {
 		return;
 	}
 	delete_transient( 'flipset_activation_redirect' );
@@ -92,11 +109,14 @@ function flipset_maybe_activation_redirect() {
 	if ( wp_doing_ajax() || wp_doing_cron() || is_network_admin() || isset( $_GET['activate-multi'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- core bulk-activation flag; value is not read.
 		return;
 	}
-	if ( ! current_user_can( 'manage_options' ) ) {
+	if ( ( defined( 'REST_REQUEST' ) && REST_REQUEST ) || ( function_exists( 'wp_is_json_request' ) && wp_is_json_request() ) || headers_sent() ) {
+		return;
+	}
+	if ( ! current_user_can( 'manage_options' ) || get_option( 'flipset_welcome_seen' ) ) {
 		return;
 	}
 
-	wp_safe_redirect( admin_url( 'admin.php?page=flipset-settings' ) );
+	wp_safe_redirect( admin_url( 'admin.php?page=flipset-welcome' ) );
 	exit;
 }
 add_action( 'admin_init', 'flipset_maybe_activation_redirect' );

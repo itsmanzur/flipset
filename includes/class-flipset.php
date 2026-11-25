@@ -104,6 +104,13 @@ class Flipset {
 	public $admin;
 
 	/**
+	 * Welcome screen.
+	 *
+	 * @var Flipset_Welcome
+	 */
+	public $welcome;
+
+	/**
 	 * The shared plugin instance, created on first use.
 	 *
 	 * @return Flipset
@@ -153,6 +160,7 @@ class Flipset {
 		$this->block      = new Flipset_Block();
 		$this->autoembed  = new Flipset_Autoembed();
 		$this->admin      = new Flipset_Admin();
+		$this->welcome    = new Flipset_Welcome();
 	}
 
 	/**
@@ -175,6 +183,7 @@ class Flipset {
 
 		if ( is_admin() ) {
 			$this->admin->init();
+			$this->welcome->init();
 		}
 
 		/**

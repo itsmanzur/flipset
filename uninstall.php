@@ -11,6 +11,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 }
 
 delete_option( 'flipset_settings' );
+delete_option( 'flipset_welcome_seen' );
 delete_transient( 'flipset_activation_redirect' );
 
 // Thumbnails are real image attachments parented to the PDF; the meta key
