@@ -351,6 +351,9 @@ Flipset is developed and maintained by itsmanzur.
 * New: a one-time notice on the Flipset screens explains that the library lists every Media Library PDF and how to change that.
 * New: poster mode. A viewer can show the PDF's cover, its title and an Open button instead of loading straight away; PDF.js and the PDF download only when a visitor clicks. Turn it on per embed (`poster="true"`, the Shortcode Builder, the Flipset Viewer block, or the Elementor, Divi and Beaver Builder widgets) or for the whole site under Flipset → Settings. Without JavaScript the button opens the PDF directly.
 * Improved: faster first page. On a post or page with a viewer that loads straight away, the browser starts fetching PDF.js from the page head instead of waiting for the footer, and fetches the PDF.js worker while idle. The first poster's cover image is fetched with high priority; later covers are lazy-loaded.
+* Improved: lighter page turns. Pages the reader has already skipped past are no longer drawn: pressing Next quickly through seven pages now draws one page instead of seven.
+* Improved: less memory on phones. Pages are drawn at no more than twice the screen's pixel density, with a size limit per page (smaller on phones and tablets), so zooming in on a large page no longer blanks it on iOS Safari or crashes the tab.
+* Improved: the next page (or spread) is prepared while the browser is idle, so turning the page is quicker. Skipped on connections with Data Saver on or 2G.
 * Improved: the library stylesheet now loads only on pages that show a library, not on every page.
 * Fixed: on an HTTPS page, a PDF from your own site saved with an `http://` address (for example from before the site moved to HTTPS) showed a cross-origin error. Flipset now loads it over HTTPS.
 * Fixed: Flipset widgets did not load or start in the Elementor editor preview.

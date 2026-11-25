@@ -25,6 +25,18 @@
 		return ( root || document ).querySelector( sel );
 	}
 
+	/**
+	 * Phones and tablets, which have far less memory for canvases than a desktop.
+	 * iPadOS reports itself as a Mac, so a Mac with a touch screen counts too.
+	 *
+	 * @return {boolean} Whether to use the smaller canvas budget.
+	 */
+	function isLowMemoryDevice() {
+		var nav = window.navigator || {};
+		var ua = nav.userAgent || '';
+		return /Android|iPhone|iPad|iPod/i.test( ua ) || ( /Macintosh/.test( ua ) && nav.maxTouchPoints > 1 );
+	}
+
 	function $$( sel, root ) {
 		return Array.prototype.slice.call( ( root || document ).querySelectorAll( sel ) );
 	}
@@ -880,8 +892,24 @@
 
 		function noop() {}
 
+		// Canvas budget, as in the PDF.js viewer: phones get a smaller one, because a canvas
+		// past the limit draws blank on iOS Safari or gets the tab killed for memory. Above a
+		// pixel ratio of 2 the extra sharpness is hard to see but costs memory as its square.
+		var MAX_OUTPUT_SCALE = 2;
+		var MAX_CANVAS_PIXELS = isLowMemoryDevice() ? 5242880 : 16777216;
+
+		function outputScaleFor( viewport ) {
+			var scale = Math.min( window.devicePixelRatio || 1, MAX_OUTPUT_SCALE );
+			var area = viewport.width * viewport.height;
+			if ( area > 0 && area * scale * scale > MAX_CANVAS_PIXELS ) {
+				scale = Math.sqrt( MAX_CANVAS_PIXELS / area );
+			}
+			return scale;
+		}
+
 		function renderSlot( slot ) {
-			if ( ! state.pdf || ! slot ) {
+			// A retired slot belongs to a page the reader has already left.
+			if ( ! state.pdf || ! slot || slot.retired ) {
 				return Promise.resolve();
 			}
 			var previous = slot.task;
@@ -903,12 +931,12 @@
 			return settled.then( function () {
 				return state.pdf.getPage( slot.pageNum );
 			} ).then( function ( page ) {
-				if ( gen !== slot.renderGen ) {
+				if ( gen !== slot.renderGen || slot.retired ) {
 					return undefined;
 				}
 				var scale = scaleForPage( page );
 				var viewport = page.getViewport( { scale: scale, rotation: state.rotation } );
-				var outputScale = window.devicePixelRatio || 1;
+				var outputScale = outputScaleFor( viewport );
 				slot.canvas.width = Math.floor( viewport.width * outputScale );
 				slot.canvas.height = Math.floor( viewport.height * outputScale );
 				slot.canvas.style.width = Math.floor( viewport.width ) + 'px';
@@ -955,22 +983,32 @@
 			if ( ! slot ) {
 				return;
 			}
-			if ( slot.task && slot.task.cancel ) {
+			var task = slot.task;
+			if ( task && task.cancel ) {
 				try {
-					slot.task.cancel();
+					task.cancel();
 				} catch ( err ) {
 					// Ignore task cancellation error.
 				}
-				slot.task = null;
 			}
-			if ( slot.rendered ) {
-				slot.rendered = false;
+			var wasRendered = slot.rendered;
+			slot.rendered = false;
+			// Free the pixels once the cancelled task has let go of the canvas, also for a
+			// page that was still drawing. slot.task is kept so a later renderSlot() waits
+			// for the same task instead of drawing on a canvas PDF.js is still using.
+			var shrink = function () {
+				if ( slot.task !== task ) {
+					return; // A newer render owns the canvas now.
+				}
 				slot.canvas.width = 1;
 				slot.canvas.height = 1;
-				var ctx = slot.canvas.getContext( '2d' );
-				if ( ctx ) {
-					ctx.clearRect( 0, 0, 1, 1 );
-				}
+			};
+			if ( task && task.promise ) {
+				task.promise.then( shrink, shrink );
+			} else if ( wasRendered ) {
+				shrink();
+			}
+			if ( wasRendered ) {
 				if ( slot.textLayer ) {
 					slot.textLayer.replaceChildren();
 				}
@@ -978,6 +1016,78 @@
 					slot.annotLayer.replaceChildren();
 				}
 			}
+		}
+
+		/**
+		 * Stop every current slot for good: its renders are cancelled, and renderSlot()
+		 * calls still queued for it (a fast reader pressing Next several times) do nothing.
+		 */
+		function retireSlots() {
+			slots.forEach( function ( slot ) {
+				slot.retired = true;
+				slot.renderGen = ( slot.renderGen || 0 ) + 1;
+				releaseSlotCanvas( slot );
+			} );
+			slots = [];
+		}
+
+		// Warm the next page while the browser is idle: PDF.js fetches its data and parses
+		// it in the worker, so turning the page draws sooner. Not in scroll view, where the
+		// observer already renders pages near the viewport, and not on a data-saving link.
+		var prefetched = {};
+		var prefetchHandle = 0;
+
+		function cancelPrefetch() {
+			if ( ! prefetchHandle ) {
+				return;
+			}
+			if ( window.cancelIdleCallback ) {
+				window.cancelIdleCallback( prefetchHandle );
+			} else {
+				window.clearTimeout( prefetchHandle );
+			}
+			prefetchHandle = 0;
+		}
+
+		function prefetchNext() {
+			cancelPrefetch();
+			var mode = viewMode();
+			if ( ! state.pdf || mode === 'scroll' || ! slots.length ) {
+				return;
+			}
+			var conn = window.navigator && window.navigator.connection;
+			if ( conn && ( conn.saveData || /(^|-)2g$/.test( conn.effectiveType || '' ) ) ) {
+				return;
+			}
+			var last = slots[ slots.length - 1 ].pageNum;
+			var count = mode === 'spread' || mode === 'flip' ? 2 : 1;
+			var nums = [];
+			var n;
+			for ( n = last + 1; n <= Math.min( state.numPages, last + count ); n++ ) {
+				if ( ! prefetched[ n ] ) {
+					nums.push( n );
+				}
+			}
+			if ( ! nums.length ) {
+				return;
+			}
+			var run = function () {
+				prefetchHandle = 0;
+				nums.forEach( function ( num ) {
+					if ( prefetched[ num ] || ! state.pdf ) {
+						return;
+					}
+					prefetched[ num ] = true;
+					state.pdf.getPage( num ).then( function ( page ) {
+						return page.getOperatorList ? page.getOperatorList() : undefined;
+					} ).catch( function () {
+						delete prefetched[ num ];
+					} );
+				} );
+			};
+			prefetchHandle = window.requestIdleCallback
+				? window.requestIdleCallback( run, { timeout: 3000 } )
+				: window.setTimeout( run, 500 );
 		}
 
 		function disconnectPageObserver() {
@@ -1279,10 +1389,7 @@
 
 		function rebuildSlots() {
 			disconnectPageObserver();
-			slots.forEach( function ( slot ) {
-				releaseSlotCanvas( slot );
-			} );
-			slots = [];
+			retireSlots();
 			clearChildren( pagesEl );
 			if ( flipStage ) {
 				pagesEl.appendChild( flipStage );
@@ -1429,6 +1536,7 @@
 			return all.then( function () {
 				applyFlipOffsets();
 				updateToolbar();
+				prefetchNext();
 			} ).catch( showRenderError );
 		}
 
@@ -1542,7 +1650,7 @@
 			var next = VIEW_MODES[ ( i + 1 ) % VIEW_MODES.length ];
 			state.viewMode = next;
 			container.setAttribute( 'data-view', next );
-			slots = [];
+			retireSlots();
 			updateViewButton();
 			renderCurrent();
 		}
@@ -2794,7 +2902,7 @@
 				if ( VIEW_MODES.indexOf( nextMode ) !== -1 ) {
 					state.viewMode = nextMode;
 					container.setAttribute( 'data-view', nextMode );
-					slots = [];
+					retireSlots();
 					updateViewButton();
 					renderCurrent();
 				}
@@ -2802,8 +2910,8 @@
 			goTo: goTo,
 			destroy: function () {
 				disconnectPageObserver();
-				slots.forEach( releaseSlotCanvas );
-				slots = [];
+				cancelPrefetch();
+				retireSlots();
 				clearChildren( container );
 				container.removeAttribute( 'data-flipset-bound' );
 				delete container._flipsetInstance;
