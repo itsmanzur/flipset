@@ -4,7 +4,7 @@ Tags: pdf, pdf viewer, pdf embed, flipbook, document library
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.1.3
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -419,6 +419,9 @@ Flipset is developed and maintained by itsmanzur.
 * Public hooks and WP-CLI commands for developers.
 
 == Upgrade Notice ==
+
+= 1.2.0 =
+Faster PDFs (page 1 first, smaller minified files, lighter page turns), poster mode, a Welcome screen and more library controls. No settings change needed.
 
 = 1.1.3 =
 Security hardening for PDF display and PDF addresses. Recommended for every site; no settings change.
