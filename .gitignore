@@ -18,3 +18,8 @@ blob-report
 wp-cli.phar
 composer.phar
 /dist
+# Built by `npm run build` (bin/build-assets.js); the readable files are the source.
+/assets/js/*.min.js
+/assets/js/*.min.js.map
+/assets/css/*.min.css
+/assets/css/*.min.css.map

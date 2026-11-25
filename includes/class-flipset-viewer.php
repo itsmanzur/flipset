@@ -1165,7 +1165,7 @@ class Flipset_Viewer {
 
 		wp_enqueue_style(
 			'flipset-viewer',
-			FLIPSET_URL . 'assets/css/flipset-viewer.css',
+			Flipset::asset_url( 'assets/css/flipset-viewer.css' ),
 			array(),
 			FLIPSET_VERSION
 		);
@@ -1175,7 +1175,7 @@ class Flipset_Viewer {
 
 		wp_enqueue_script(
 			'flipset-viewer',
-			FLIPSET_URL . 'assets/js/flipset-viewer.js',
+			Flipset::asset_url( 'assets/js/flipset-viewer.js' ),
 			array( 'flipset-pdfjs' ),
 			FLIPSET_VERSION,
 			true
@@ -1220,7 +1220,7 @@ class Flipset_Viewer {
 	public function enqueue_poster_assets() {
 		wp_enqueue_style(
 			'flipset-viewer',
-			FLIPSET_URL . 'assets/css/flipset-viewer.css',
+			Flipset::asset_url( 'assets/css/flipset-viewer.css' ),
 			array(),
 			FLIPSET_VERSION
 		);
@@ -1231,7 +1231,7 @@ class Flipset_Viewer {
 
 		wp_enqueue_script(
 			'flipset-poster',
-			FLIPSET_URL . 'assets/js/flipset-poster.js',
+			Flipset::asset_url( 'assets/js/flipset-poster.js' ),
 			array(),
 			FLIPSET_VERSION,
 			true
@@ -1242,7 +1242,7 @@ class Flipset_Viewer {
 			'FlipsetPosterConfig',
 			array(
 				'pdfjs'        => add_query_arg( 'ver', FLIPSET_VERSION, FLIPSET_URL . 'assets/vendor/pdfjs/pdf.min.js' ),
-				'viewer'       => add_query_arg( 'ver', FLIPSET_VERSION, FLIPSET_URL . 'assets/js/flipset-viewer.js' ),
+				'viewer'       => add_query_arg( 'ver', FLIPSET_VERSION, Flipset::asset_url( 'assets/js/flipset-viewer.js' ) ),
 				'pdfjsVersion' => self::PDFJS_VERSION,
 				'viewerConfig' => array(
 					'workerSrc'   => FLIPSET_URL . 'assets/vendor/pdfjs/pdf.worker.min.js',

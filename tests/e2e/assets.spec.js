@@ -28,8 +28,10 @@ test.describe( 'Flipset assets', () => {
 		const urls = watchFlipsetRequests( page );
 		await page.goto( '/flipset-e2e-viewer/' );
 		await expect( page.locator( '.flipset-viewer' ) ).toBeVisible();
-		expect( urls.some( ( url ) => /flipset-viewer\.js/.test( url ) ) ).toBe( true );
-		expect( urls.some( ( url ) => /flipset-library\.(css|js)/.test( url ) ) ).toBe( false );
+		// CI builds the minified files first, as the release zip has them.
+		expect( urls.some( ( url ) => /flipset-viewer\.min\.js/.test( url ) ) ).toBe( true );
+		expect( urls.some( ( url ) => /flipset-viewer\.min\.css/.test( url ) ) ).toBe( true );
+		expect( urls.some( ( url ) => /flipset-library(\.min)?\.(css|js)/.test( url ) ) ).toBe( false );
 	} );
 
 	test( 'only a page with a viewer that loads straight away preloads PDF.js', async ( { page } ) => {

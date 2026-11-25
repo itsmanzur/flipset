@@ -277,7 +277,7 @@ class Flipset_Compat {
 	 */
 	public function autoptimize_js_exclude( $exclude ) {
 		$exclude = is_string( $exclude ) ? $exclude : '';
-		$extra   = 'flipset-viewer.js, flipset-library.js, pdf.min.js, pdf.worker.min.js';
+		$extra   = 'flipset-viewer.js, flipset-viewer.min.js, flipset-library.js, flipset-library.min.js, pdf.min.js, pdf.worker.min.js';
 		return $exclude ? ( $exclude . ', ' . $extra ) : $extra;
 	}
 
@@ -289,7 +289,7 @@ class Flipset_Compat {
 	 */
 	public function autoptimize_css_exclude( $exclude ) {
 		$exclude = is_string( $exclude ) ? $exclude : '';
-		$extra   = 'flipset-viewer.css, flipset-library.css';
+		$extra   = 'flipset-viewer.css, flipset-viewer.min.css, flipset-library.css, flipset-library.min.css';
 		return $exclude ? ( $exclude . ', ' . $extra ) : $extra;
 	}
 
@@ -341,7 +341,9 @@ class Flipset_Compat {
 	private function js_path_patterns() {
 		return array(
 			'wp-content/plugins/flipset/assets/js/flipset-viewer.js',
+			'wp-content/plugins/flipset/assets/js/flipset-viewer.min.js',
 			'wp-content/plugins/flipset/assets/js/flipset-library.js',
+			'wp-content/plugins/flipset/assets/js/flipset-library.min.js',
 			'wp-content/plugins/flipset/assets/vendor/pdfjs/pdf.min.js',
 			'wp-content/plugins/flipset/assets/vendor/pdfjs/pdf.worker.min.js',
 			'(.*)flipset/assets/js/(.*)',
@@ -357,7 +359,9 @@ class Flipset_Compat {
 	private function css_path_patterns() {
 		return array(
 			'wp-content/plugins/flipset/assets/css/flipset-viewer.css',
+			'wp-content/plugins/flipset/assets/css/flipset-viewer.min.css',
 			'wp-content/plugins/flipset/assets/css/flipset-library.css',
+			'wp-content/plugins/flipset/assets/css/flipset-library.min.css',
 			'(.*)flipset/assets/css/(.*)',
 		);
 	}

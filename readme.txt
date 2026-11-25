@@ -302,6 +302,10 @@ Please do not post it in the public forum. Use GitHub's private reporting: https
 
 Add-ons can extend the viewer through public WordPress filters and actions. The full list, parameters and copy-paste examples are in `docs/HOOKS.md` in the GitHub repository: https://github.com/itsmanzur/flipset/blob/main/docs/HOOKS.md – also online at https://flipset.thereadscope.com/flipset-docs/hooks/ (DOM events: https://flipset.thereadscope.com/flipset-docs/dom-events-js/).
 
+= Source code and minified files =
+
+Flipset loads minified scripts and stylesheets (`*.min.js`, `*.min.css`). The readable source of every one of them ships in the same folder (for example `assets/js/flipset-viewer.js` next to `assets/js/flipset-viewer.min.js`), with a source map, and is on GitHub: https://github.com/itsmanzur/flipset. The minified files are built with esbuild by `npm run build` (`bin/build-assets.js`). With `define( 'SCRIPT_DEBUG', true );` in `wp-config.php`, WordPress loads the readable files instead. The bundled PDF.js in `assets/vendor/pdfjs` is Mozilla's own release build.
+
 == Screenshots ==
 
 1. Front-end viewer with the compact toolbar (page, zoom, find, theme, share, fullscreen).
@@ -354,6 +358,7 @@ Flipset is developed and maintained by itsmanzur.
 * New: poster mode. A viewer can show the PDF's cover, its title and an Open button instead of loading straight away; PDF.js and the PDF download only when a visitor clicks. Turn it on per embed (`poster="true"`, the Shortcode Builder, the Flipset Viewer block, or the Elementor, Divi and Beaver Builder widgets) or for the whole site under Flipset → Settings. Without JavaScript the button opens the PDF directly.
 * Improved: faster first page. On a post or page with a viewer that loads straight away, the browser starts fetching PDF.js from the page head instead of waiting for the footer, and fetches the PDF.js worker while idle. The first poster's cover image is fetched with high priority; later covers are lazy-loaded.
 * Improved: page 1 of a large PDF shows sooner. The viewer now downloads only the parts of the file it needs (HTTP range requests) instead of streaming the whole file at the same time; on a slow connection a 1 MB PDF showed its first page in about half the time. Servers without range support still get a full download. The readme FAQ explains how to check your server.
+* Improved: smaller downloads. Scripts and stylesheets now ship minified with source maps (built by esbuild), about 37% smaller in total; the viewer script goes from 94 KB to 46 KB. The readable files ship next to them and load when `SCRIPT_DEBUG` is on.
 * Improved: the flipbook animation adapts to the device. It times each page turn; when frames drop it switches from the 16-strip bending page to 8 strips, then to a single page turned by the browser's own animation engine, which stays smooth on a busy phone. Phones with little memory start at 8 strips. The choice lasts for the browser session.
 * Improved: lighter page turns. Pages the reader has already skipped past are no longer drawn: pressing Next quickly through seven pages now draws one page instead of seven.
 * Improved: less memory on phones. Pages are drawn at no more than twice the screen's pixel density, with a size limit per page (smaller on phones and tablets), so zooming in on a large page no longer blanks it on iOS Safari or crashes the tab.

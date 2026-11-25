@@ -40,7 +40,7 @@ class Flipset_Block {
 
 		wp_register_script(
 			'flipset-block-editor',
-			FLIPSET_URL . 'assets/js/flipset-block.js',
+			Flipset::asset_url( 'assets/js/flipset-block.js' ),
 			array( 'wp-blocks', 'wp-element', 'wp-block-editor', 'wp-components', 'wp-i18n', 'flipset-pdfjs' ),
 			FLIPSET_VERSION,
 			true
@@ -48,7 +48,7 @@ class Flipset_Block {
 
 		wp_register_style(
 			'flipset-block-editor',
-			FLIPSET_URL . 'assets/css/flipset-block-editor.css',
+			Flipset::asset_url( 'assets/css/flipset-block-editor.css' ),
 			array(),
 			FLIPSET_VERSION
 		);
@@ -66,14 +66,14 @@ class Flipset_Block {
 
 		wp_register_style(
 			'flipset-library',
-			FLIPSET_URL . 'assets/css/flipset-library.css',
+			Flipset::asset_url( 'assets/css/flipset-library.css' ),
 			array(),
 			FLIPSET_VERSION
 		);
 
 		wp_register_script(
 			'flipset-library-block-editor',
-			FLIPSET_URL . 'assets/js/flipset-library-block.js',
+			Flipset::asset_url( 'assets/js/flipset-library-block.js' ),
 			array( 'wp-blocks', 'wp-element', 'wp-block-editor', 'wp-components', 'wp-i18n', 'wp-server-side-render' ),
 			FLIPSET_VERSION,
 			true

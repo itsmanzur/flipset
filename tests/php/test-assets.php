@@ -143,6 +143,28 @@ class Test_Flipset_Assets extends Flipset_TestCase {
 		remove_filter( 'flipset/progressive_loading', '__return_false' );
 	}
 
+	public function test_asset_url_uses_the_minified_file_when_built() {
+		$min = FLIPSET_DIR . 'assets/js/flipset-unit-test-asset.min.js';
+		$this->assertSame( FLIPSET_URL . 'assets/js/flipset-unit-test-asset.js', Flipset::asset_url( 'assets/js/flipset-unit-test-asset.js' ) );
+
+		file_put_contents( $min, '/* test */' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+		try {
+			$url = Flipset::asset_url( 'assets/js/flipset-unit-test-asset.js' );
+		} finally {
+			wp_delete_file( $min );
+		}
+		if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
+			$this->assertSame( FLIPSET_URL . 'assets/js/flipset-unit-test-asset.js', $url );
+		} else {
+			$this->assertSame( FLIPSET_URL . 'assets/js/flipset-unit-test-asset.min.js', $url );
+		}
+	}
+
+	public function test_asset_url_leaves_other_paths_alone() {
+		$this->assertSame( FLIPSET_URL . 'assets/vendor/pdfjs/pdf.min.js', Flipset::asset_url( 'assets/vendor/pdfjs/pdf.min.js' ) );
+		$this->assertSame( FLIPSET_URL . 'assets/js/flipset-viewer.min.js', Flipset::asset_url( '/assets/js/flipset-viewer.min.js' ) );
+	}
+
 	public function test_admin_assets_load_only_on_flipset_screens() {
 		$admin = Flipset::instance()->admin;
 

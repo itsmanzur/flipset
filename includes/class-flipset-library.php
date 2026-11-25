@@ -262,7 +262,7 @@ class Flipset_Library {
 		if ( ! $query->have_posts() ) {
 			wp_enqueue_style(
 				'flipset-library',
-				FLIPSET_URL . 'assets/css/flipset-library.css',
+				Flipset::asset_url( 'assets/css/flipset-library.css' ),
 				array(),
 				FLIPSET_VERSION
 			);
@@ -618,14 +618,14 @@ class Flipset_Library {
 
 		wp_enqueue_style(
 			'flipset-library',
-			FLIPSET_URL . 'assets/css/flipset-library.css',
+			Flipset::asset_url( 'assets/css/flipset-library.css' ),
 			array( 'flipset-viewer' ),
 			FLIPSET_VERSION
 		);
 
 		wp_enqueue_script(
 			'flipset-library',
-			FLIPSET_URL . 'assets/js/flipset-library.js',
+			Flipset::asset_url( 'assets/js/flipset-library.js' ),
 			array( 'flipset-viewer' ),
 			FLIPSET_VERSION,
 			true

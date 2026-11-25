@@ -116,6 +116,29 @@ class Flipset {
 	}
 
 	/**
+	 * URL of a plugin script or stylesheet, minified when a build is present.
+	 *
+	 * `npm run build` writes flipset-viewer.min.js (and .min.css) with a source map next
+	 * to each readable file. The release zip always has them; a git checkout has them
+	 * only after a build. The readable file is used when no minified one exists, and
+	 * whenever SCRIPT_DEBUG is on.
+	 *
+	 * @param string $relative Path from the plugin folder, e.g. 'assets/js/flipset-viewer.js'.
+	 * @return string
+	 */
+	public static function asset_url( $relative ) {
+		$relative = ltrim( (string) $relative, '/' );
+		$debug    = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG;
+		if ( ! $debug && preg_match( '/^(assets\/(?:js|css)\/[a-z0-9-]+)\.(js|css)$/', $relative, $m ) ) {
+			$min = $m[1] . '.min.' . $m[2];
+			if ( file_exists( FLIPSET_DIR . $min ) ) {
+				return FLIPSET_URL . $min;
+			}
+		}
+		return FLIPSET_URL . $relative;
+	}
+
+	/**
 	 * Create the components; use Flipset::instance() instead.
 	 */
 	private function __construct() {

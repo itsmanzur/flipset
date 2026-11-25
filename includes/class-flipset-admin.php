@@ -145,14 +145,14 @@ class Flipset_Admin {
 		// Shared admin design system: tokens + fa-* components, used by every Flipset screen.
 		wp_enqueue_style(
 			'flipset-admin-ui',
-			FLIPSET_URL . 'assets/css/flipset-admin-ui.css',
+			Flipset::asset_url( 'assets/css/flipset-admin-ui.css' ),
 			array(),
 			$this->asset_ver( 'assets/css/flipset-admin-ui.css' )
 		);
 
 		wp_enqueue_style(
 			'flipset-admin',
-			FLIPSET_URL . 'assets/css/flipset-admin.css',
+			Flipset::asset_url( 'assets/css/flipset-admin.css' ),
 			array( 'flipset-admin-ui' ),
 			$this->asset_ver( 'assets/css/flipset-admin.css' )
 		);
@@ -160,7 +160,7 @@ class Flipset_Admin {
 		if ( $is_dashboard ) {
 			wp_enqueue_style(
 				'flipset-dashboard',
-				FLIPSET_URL . 'assets/css/flipset-dashboard.css',
+				Flipset::asset_url( 'assets/css/flipset-dashboard.css' ),
 				array( 'flipset-admin-ui' ),
 				$this->asset_ver( 'assets/css/flipset-dashboard.css' )
 			);
@@ -169,7 +169,7 @@ class Flipset_Admin {
 		if ( $is_settings ) {
 			wp_enqueue_style(
 				'flipset-settings',
-				FLIPSET_URL . 'assets/css/flipset-settings.css',
+				Flipset::asset_url( 'assets/css/flipset-settings.css' ),
 				array( 'flipset-admin-ui' ),
 				$this->asset_ver( 'assets/css/flipset-settings.css' )
 			);
@@ -178,7 +178,7 @@ class Flipset_Admin {
 		if ( $is_docs ) {
 			wp_enqueue_style(
 				'flipset-docs',
-				FLIPSET_URL . 'assets/css/flipset-docs.css',
+				Flipset::asset_url( 'assets/css/flipset-docs.css' ),
 				array( 'flipset-admin-ui' ),
 				$this->asset_ver( 'assets/css/flipset-docs.css' )
 			);
@@ -187,7 +187,7 @@ class Flipset_Admin {
 		if ( $is_settings || $is_builder ) {
 			wp_enqueue_style(
 				'flipset-viewer',
-				FLIPSET_URL . 'assets/css/flipset-viewer.css',
+				Flipset::asset_url( 'assets/css/flipset-viewer.css' ),
 				array(),
 				$this->asset_ver( 'assets/css/flipset-viewer.css' )
 			);
@@ -195,7 +195,7 @@ class Flipset_Admin {
 			wp_enqueue_script( 'flipset-pdfjs' );
 			wp_enqueue_script(
 				'flipset-viewer',
-				FLIPSET_URL . 'assets/js/flipset-viewer.js',
+				Flipset::asset_url( 'assets/js/flipset-viewer.js' ),
 				array( 'flipset-pdfjs' ),
 				$this->asset_ver( 'assets/js/flipset-viewer.js' ),
 				true
@@ -216,7 +216,7 @@ class Flipset_Admin {
 			wp_enqueue_script( 'flipset-pdfjs' );
 			wp_enqueue_script(
 				'flipset-thumbnail-gen',
-				FLIPSET_URL . 'assets/js/flipset-thumbnail-gen.js',
+				Flipset::asset_url( 'assets/js/flipset-thumbnail-gen.js' ),
 				array( 'flipset-pdfjs' ),
 				$this->asset_ver( 'assets/js/flipset-thumbnail-gen.js' ),
 				true
@@ -250,7 +250,7 @@ class Flipset_Admin {
 
 		wp_enqueue_script(
 			'flipset-admin',
-			FLIPSET_URL . 'assets/js/flipset-admin.js',
+			Flipset::asset_url( 'assets/js/flipset-admin.js' ),
 			array(),
 			$this->asset_ver( 'assets/js/flipset-admin.js' ),
 			true
@@ -317,7 +317,7 @@ class Flipset_Admin {
 		if ( $is_settings ) {
 			wp_enqueue_script(
 				'flipset-settings',
-				FLIPSET_URL . 'assets/js/flipset-settings.js',
+				Flipset::asset_url( 'assets/js/flipset-settings.js' ),
 				array( 'flipset-viewer' ),
 				$this->asset_ver( 'assets/js/flipset-settings.js' ),
 				true

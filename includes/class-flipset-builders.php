@@ -44,7 +44,7 @@ class Flipset_Builders {
 
 		wp_enqueue_script(
 			'flipset-elementor-preview',
-			FLIPSET_URL . 'assets/js/flipset-elementor-preview.js',
+			Flipset::asset_url( 'assets/js/flipset-elementor-preview.js' ),
 			array( 'jquery', 'flipset-viewer', 'flipset-poster', 'flipset-library' ),
 			FLIPSET_VERSION,
 			true

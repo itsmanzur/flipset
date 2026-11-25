@@ -48,6 +48,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      # Check the plugin as it ships: with the minified files the release zip contains.
+      - run: npm ci
+      - run: npm run build
       - uses: wordpress/plugin-check-action@v1
         with:
           exclude-directories: |
@@ -146,6 +152,8 @@ jobs:
         with:
           node-version: '22'
       - run: npm ci
+      # Test the minified files the release zip ships.
+      - run: npm run build
       - run: npx playwright install --with-deps chromium
       - name: Start wp-env
         run: npx wp-env start
