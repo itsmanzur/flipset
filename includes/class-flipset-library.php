@@ -608,7 +608,7 @@ class Flipset_Library {
 	/**
 	 * Enqueue the viewer, library stylesheet and library script once per request.
 	 */
-	private function enqueue_assets() {
+	public function enqueue_assets() {
 		if ( $this->assets_enqueued ) {
 			return;
 		}

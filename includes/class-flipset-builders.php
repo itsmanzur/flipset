@@ -25,8 +25,30 @@ class Flipset_Builders {
 		add_action( 'elementor/widgets/register', array( $this, 'register_elementor_widgets' ) );
 		add_action( 'elementor/widgets/widgets_registered', array( $this, 'register_elementor_widgets_legacy' ) );
 		add_action( 'elementor/elements/categories_registered', array( $this, 'register_elementor_category' ) );
+		add_action( 'elementor/preview/enqueue_scripts', array( $this, 'enqueue_elementor_preview_assets' ) );
 		add_action( 'et_builder_ready', array( $this, 'register_divi_modules' ) );
 		add_action( 'init', array( $this, 'register_beaver_modules' ), 11 );
+	}
+
+	/**
+	 * Load the viewer, poster and library files in the Elementor editor preview.
+	 *
+	 * The editor renders a widget over AJAX after the preview page has loaded, so the
+	 * files a widget would enqueue while rendering never reach the preview. Load them
+	 * up front instead, plus a small script that starts each widget once Elementor has
+	 * put it on the page. Only the editor preview is affected, not the live site.
+	 */
+	public function enqueue_elementor_preview_assets() {
+		Flipset::instance()->library->enqueue_assets();
+		Flipset::instance()->viewer->enqueue_poster_assets();
+
+		wp_enqueue_script(
+			'flipset-elementor-preview',
+			FLIPSET_URL . 'assets/js/flipset-elementor-preview.js',
+			array( 'jquery', 'flipset-viewer', 'flipset-poster', 'flipset-library' ),
+			FLIPSET_VERSION,
+			true
+		);
 	}
 
 	/**

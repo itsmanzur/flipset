@@ -325,6 +325,8 @@
 		Array.prototype.forEach.call( document.querySelectorAll( '.flipset-library' ), bindLibrary );
 	}
 
+	window.FlipsetLibrary = { init: init, bind: bindLibrary };
+
 	// The script is printed after the markup, so the saved layout can be applied right away,
 	// before first paint, instead of waiting for DOMContentLoaded (no visible jump to list view).
 	Array.prototype.forEach.call( document.querySelectorAll( '.flipset-library' ), applyStoredLayout );

@@ -118,6 +118,19 @@ class Test_Flipset_Assets extends Flipset_TestCase {
 		$this->assertSame( array(), $this->flipset_handles() );
 	}
 
+	public function test_elementor_preview_loads_every_widget_file() {
+		Flipset::instance()->builders->enqueue_elementor_preview_assets();
+		$handles = $this->flipset_handles();
+		foreach ( array( 'flipset-viewer', 'flipset-pdfjs', 'flipset-poster', 'flipset-library', 'flipset-elementor-preview' ) as $handle ) {
+			$this->assertContains( $handle, $handles );
+		}
+	}
+
+	public function test_elementor_preview_files_are_not_loaded_on_the_live_site() {
+		$this->visit_post( '<p>Just text.</p>' );
+		$this->assertNotContains( 'flipset-elementor-preview', $this->flipset_handles() );
+	}
+
 	public function test_admin_assets_load_only_on_flipset_screens() {
 		$admin = Flipset::instance()->admin;
 
