@@ -619,3 +619,16 @@ Questions shown on Docs & Features → Docs (all items) and on the Welcome scree
 | Name | Type | Meaning |
 |------|------|---------|
 | `$items` | `array[]` | Each: `q` (question), `a` (answer), `welcome` (bool) |
+
+---
+
+## `flipset/welcome/readscope_plugins`
+
+**Type:** filter
+**Fired from:** `Flipset_Readscope_Plugins::plugins()` in `includes/class-flipset-readscope-plugins.php`
+
+The "More from The Readscope" list at the end of the Welcome screen. The list ships with the plugin; install state is read from `get_plugins()`. Flipset itself is always left out.
+
+| Name | Type | Meaning |
+|------|------|---------|
+| `$plugins` | `array[]` | Each: `slug` (WordPress.org slug), `file` (main plugin file name), `name`, `text`, `icon` (dashicon name without `dashicons-`) |

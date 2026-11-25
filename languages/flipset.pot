@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Flipset – PDF Viewer, PDF Embed, 3D Flipbook & Document Library 1.1.3\n"
+"Project-Id-Version: Flipset – PDF Viewer, PDF Embed, 3D Flipbook & Document Library 1.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/flipset\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-25T16:27:56+00:00\n"
+"POT-Creation-Date: 2026-11-25T17:02:04+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: flipset\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #. Description of the plugin
 #: flipset.php
-#: includes/class-flipset-welcome.php:326
+#: includes/class-flipset-welcome.php:335
 msgid "Embed PDFs with a fast PDF viewer, 3D flipbook and document library. Searchable PDF text, accessible, no CDN. Works with Gutenberg, Elementor, Divi."
 msgstr ""
 
@@ -872,7 +872,7 @@ msgstr ""
 #: includes/class-flipset-admin.php:2315
 #: includes/class-flipset-admin.php:2374
 #: includes/class-flipset-admin.php:2789
-#: includes/class-flipset-welcome.php:419
+#: includes/class-flipset-welcome.php:428
 msgid "Shortcode"
 msgstr ""
 
@@ -931,7 +931,7 @@ msgid "No saved embeds yet"
 msgstr ""
 
 #: includes/class-flipset-admin.php:1089
-#: includes/class-flipset-welcome.php:230
+#: includes/class-flipset-welcome.php:239
 msgid "Create your first embed"
 msgstr ""
 
@@ -2634,6 +2634,61 @@ msgstr ""
 msgid "Default order"
 msgstr ""
 
+#: includes/class-flipset-readscope-plugins.php:54
+msgid "Free automated WCAG 2.1 & 2.2 accessibility checker + self-hosted click heatmaps + behavior analytics."
+msgstr ""
+
+#: includes/class-flipset-readscope-plugins.php:61
+msgid "Ultra-light Google Consent Mode v2 for WordPress. Simple cookie banner, GTM loading after choice, WooCommerce-ready."
+msgstr ""
+
+#: includes/class-flipset-readscope-plugins.php:68
+msgid "A lightweight WooCommerce helpdesk: tickets, order context for agents, and an optional customer chat widget — all stored locally on your site."
+msgstr ""
+
+#: includes/class-flipset-readscope-plugins.php:75
+msgid "Product documentation, knowledge base, and help center for WordPress — fast, theme-independent, and easy to set up in 5 minutes."
+msgstr ""
+
+#: includes/class-flipset-readscope-plugins.php:82
+msgid "Widgets and blocks for architects, interior designers and builders: quote form, timelines, diagrams, case studies. Elementor, Gutenberg, Divi."
+msgstr ""
+
+#: includes/class-flipset-readscope-plugins.php:89
+msgid "Mosque management for WordPress: prayer times, Jumuah & Minbar, Duas, Quran, Islamic calendar, TV display, events, and notices."
+msgstr ""
+
+#: includes/class-flipset-readscope-plugins.php:96
+msgid "The Next-Gen Travel, Tour & Accommodation Booking Engine for WordPress. Dual-engine architecture for tours and hotel stays."
+msgstr ""
+
+#: includes/class-flipset-readscope-plugins.php:200
+msgid "WordPress.org"
+msgstr ""
+
+#: includes/class-flipset-readscope-plugins.php:218
+msgid "Active"
+msgstr ""
+
+#: includes/class-flipset-readscope-plugins.php:228
+msgid "Activate"
+msgstr ""
+
+#: includes/class-flipset-readscope-plugins.php:232
+#: includes/class-flipset-welcome.php:601
+msgid "Installed"
+msgstr ""
+
+#. translators: %s: plugin name.
+#: includes/class-flipset-readscope-plugins.php:244
+#, php-format
+msgid "Install %s: opens the plugin details"
+msgstr ""
+
+#: includes/class-flipset-readscope-plugins.php:245
+msgid "Install"
+msgstr ""
+
 #: includes/class-flipset-seo.php:88
 msgid "PDF text indexing is turned off."
 msgstr ""
@@ -2723,7 +2778,7 @@ msgid "Previous page"
 msgstr ""
 
 #: includes/class-flipset-viewer.php:568
-#: includes/class-flipset-welcome.php:311
+#: includes/class-flipset-welcome.php:320
 msgid "Page"
 msgstr ""
 
@@ -2984,7 +3039,7 @@ msgid "Site Admin: To enable direct embedding, configure Access-Control-Allow-Or
 msgstr ""
 
 #: includes/class-flipset-welcome.php:73
-#: includes/class-flipset-welcome.php:324
+#: includes/class-flipset-welcome.php:333
 msgid "Welcome to Flipset"
 msgstr ""
 
@@ -2996,251 +3051,259 @@ msgstr ""
 msgid "Welcome & what's new"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:149
+#: includes/class-flipset-welcome.php:151
 msgid "(opens in a new tab)"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:161
+#: includes/class-flipset-welcome.php:163
 msgid "Add a PDF"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:162
+#: includes/class-flipset-welcome.php:164
 msgid "Add a PDF your way"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:163
+#: includes/class-flipset-welcome.php:165
 msgid "All of these show the same viewer."
 msgstr ""
 
-#: includes/class-flipset-welcome.php:168
+#: includes/class-flipset-welcome.php:170
 msgid "Features"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:169
+#: includes/class-flipset-welcome.php:171
 msgid "Included in Flipset"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:170
+#: includes/class-flipset-welcome.php:172
 msgid "No paid features are sold or locked in this plugin."
 msgstr ""
 
-#: includes/class-flipset-welcome.php:175
+#: includes/class-flipset-welcome.php:177
 msgid "What's new"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:176
+#: includes/class-flipset-welcome.php:178
 msgid "Recent releases"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:177
+#: includes/class-flipset-welcome.php:179
 msgid "Read from the changelog in the plugin's readme."
 msgstr ""
 
-#: includes/class-flipset-welcome.php:182
+#: includes/class-flipset-welcome.php:184
 msgid "Answers"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:183
+#: includes/class-flipset-welcome.php:185
 msgid "Quick answers"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:189
+#: includes/class-flipset-welcome.php:191
 msgid "Help"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:190
+#: includes/class-flipset-welcome.php:192
 msgid "Need a hand?"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:236
+#: includes/class-flipset-welcome.php:198
+msgid "More plugins"
+msgstr ""
+
+#: includes/class-flipset-welcome.php:199
+msgid "More from The Readscope"
+msgstr ""
+
+#: includes/class-flipset-welcome.php:200
+msgid "Free plugins by the same team on WordPress.org."
+msgstr ""
+
+#: includes/class-flipset-welcome.php:245
 msgid "Documentation"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:242
+#: includes/class-flipset-welcome.php:251
 msgid "Live demo"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:248
+#: includes/class-flipset-welcome.php:257
 msgid "Video on YouTube"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:312
+#: includes/class-flipset-welcome.php:321
 msgid "Scroll"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:313
+#: includes/class-flipset-welcome.php:322
 msgid "Spread"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:314
+#: includes/class-flipset-welcome.php:323
 msgid "3D flipbook"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:327
+#: includes/class-flipset-welcome.php:336
 msgid "At a glance"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:328
+#: includes/class-flipset-welcome.php:337
 msgid "No CDN, no external requests, no cookies, no tracking"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:329
+#: includes/class-flipset-welcome.php:338
 msgid "PDF text is searchable in WordPress search"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:330
+#: includes/class-flipset-welcome.php:339
 msgid "Keyboard control and screen reader page announcements"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:350
+#: includes/class-flipset-welcome.php:359
 msgid "Four views, one viewer"
 msgstr ""
 
 #. translators: %s: version number.
-#: includes/class-flipset-welcome.php:367
+#: includes/class-flipset-welcome.php:376
 #, php-format
 msgid "Version %s"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:371
+#: includes/class-flipset-welcome.php:380
 msgid "On this page"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:377
+#: includes/class-flipset-welcome.php:386
 msgid "Go to the dashboard"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:420
+#: includes/class-flipset-welcome.php:429
 msgid "Type it yourself, or build one in the Shortcode Builder with its live preview."
 msgstr ""
 
-#: includes/class-flipset-welcome.php:423
+#: includes/class-flipset-welcome.php:432
 msgid "Open the Shortcode Builder"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:428
+#: includes/class-flipset-welcome.php:437
 msgid "Block"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:429
+#: includes/class-flipset-welcome.php:438
 msgid "Insert the \"Flipset Viewer\" block and pick a PDF from the Media Library. The editor shows the first page."
 msgstr ""
 
-#: includes/class-flipset-welcome.php:431
+#: includes/class-flipset-welcome.php:440
 msgid "Add a new page"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:436
+#: includes/class-flipset-welcome.php:445
 msgid "Page builder widget"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:437
+#: includes/class-flipset-welcome.php:446
 msgid "Elementor, Divi and Beaver Builder each have a Flipset Viewer and a Flipset Library widget."
 msgstr ""
 
-#: includes/class-flipset-welcome.php:439
+#: includes/class-flipset-welcome.php:448
 msgid "Page builder guide"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:445
+#: includes/class-flipset-welcome.php:454
 msgid "Paste a link"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:447
+#: includes/class-flipset-welcome.php:456
 msgid "On for this site"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:449
+#: includes/class-flipset-welcome.php:458
 msgid "Turned off in Settings"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:452
+#: includes/class-flipset-welcome.php:461
 msgid "Paste a direct .pdf link on its own line in a post or page."
 msgstr ""
 
-#: includes/class-flipset-welcome.php:455
+#: includes/class-flipset-welcome.php:464
 msgid "Open Settings"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:461
+#: includes/class-flipset-welcome.php:470
 msgid "A gallery of all your PDFs"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:464
+#: includes/class-flipset-welcome.php:473
 msgid "Add `[flipset_library]` to a page, or insert the Flipset Library block."
 msgstr ""
 
-#: includes/class-flipset-welcome.php:497
+#: includes/class-flipset-welcome.php:506
 msgid "See every feature"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:515
+#: includes/class-flipset-welcome.php:524
 msgid "More in the user guide"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:517
+#: includes/class-flipset-welcome.php:526
 msgid "Online documentation"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:527
+#: includes/class-flipset-welcome.php:536
 msgid "Support forum"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:528
+#: includes/class-flipset-welcome.php:537
 msgid "Report a bug or ask for a feature"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:529
+#: includes/class-flipset-welcome.php:538
 msgid "Report a security problem privately"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:530
+#: includes/class-flipset-welcome.php:539
 msgid "Leave a review on WordPress.org"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:548
+#: includes/class-flipset-welcome.php:564
 msgid "New"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:549
+#: includes/class-flipset-welcome.php:565
 msgid "Improved"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:550
+#: includes/class-flipset-welcome.php:566
 msgid "Fixed"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:551
+#: includes/class-flipset-welcome.php:567
 msgid "Security"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:552
+#: includes/class-flipset-welcome.php:568
 msgid "For developers"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:553
+#: includes/class-flipset-welcome.php:569
 msgid "Changes"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:566
+#: includes/class-flipset-welcome.php:582
 msgid "No changelog found."
 msgstr ""
 
-#: includes/class-flipset-welcome.php:585
-msgid "Installed"
-msgstr ""
-
-#: includes/class-flipset-welcome.php:587
+#: includes/class-flipset-welcome.php:603
 msgid "In development"
 msgstr ""
 
 #. translators: 1: number of changes, 2: change group name such as "New" or "Fixed".
-#: includes/class-flipset-welcome.php:594
+#: includes/class-flipset-welcome.php:610
 #, php-format
 msgid "%1$d %2$s"
 msgstr ""
 
-#: includes/class-flipset-welcome.php:628
+#: includes/class-flipset-welcome.php:644
 msgid "Full changelog on WordPress.org"
 msgstr ""
 

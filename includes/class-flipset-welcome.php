@@ -108,6 +108,8 @@ class Flipset_Welcome {
 		// FAQ and feature-card styles are shared with Docs & Features.
 		wp_enqueue_style( 'flipset-docs', Flipset::asset_url( 'assets/css/flipset-docs.css' ), array( 'flipset-admin-ui' ), $ver( 'assets/css/flipset-docs.css' ) );
 		wp_enqueue_style( 'flipset-welcome', Flipset::asset_url( 'assets/css/flipset-welcome.css' ), array( 'flipset-admin-ui', 'flipset-docs' ), $ver( 'assets/css/flipset-welcome.css' ) );
+		// "Install" in the plugin list opens WordPress's own plugin details window.
+		Flipset_Readscope_Plugins::enqueue();
 	}
 
 	/**
@@ -191,6 +193,13 @@ class Flipset_Welcome {
 				'sub'      => '',
 				'priority' => 50,
 				'callback' => array( $this, 'section_help' ),
+			),
+			'family'    => array(
+				'kicker'   => __( 'More plugins', 'flipset' ),
+				'title'    => __( 'More from The Readscope', 'flipset' ),
+				'sub'      => __( 'Free plugins by the same team on WordPress.org.', 'flipset' ),
+				'priority' => 60,
+				'callback' => array( $this, 'section_family' ),
 			),
 		);
 
@@ -536,6 +545,13 @@ class Flipset_Welcome {
 			<?php endforeach; ?>
 		</ul>
 		<?php
+	}
+
+	/**
+	 * The other Readscope plugins, with install state from this site.
+	 */
+	public function section_family() {
+		( new Flipset_Readscope_Plugins( 'flipset' ) )->render();
 	}
 
 	/**

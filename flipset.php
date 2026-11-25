@@ -55,6 +55,7 @@ require_once FLIPSET_DIR . 'includes/class-flipset-autoembed.php';
 require_once FLIPSET_DIR . 'includes/class-flipset-admin.php';
 require_once FLIPSET_DIR . 'includes/class-flipset-readme.php';
 require_once FLIPSET_DIR . 'includes/class-flipset-welcome.php';
+require_once FLIPSET_DIR . 'includes/class-flipset-readscope-plugins.php';
 require_once FLIPSET_DIR . 'includes/class-flipset.php';
 
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
