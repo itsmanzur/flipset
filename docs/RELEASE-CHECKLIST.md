@@ -43,6 +43,7 @@ Docker was unavailable, so these are the items that could not be verified automa
 - [ ] Zip contains no `tests/`, `docs/`, `bin/`, `.github`, hidden files (checked: 64 files, forward-slash paths).
 - [ ] Plugin Check on the uploaded zip shows 0 errors.
 - [ ] `readme.txt` renders correctly in the WordPress.org readme validator.
+- [ ] SVN `assets/` has the files from `.wordpress-org/`, including `blueprints/blueprint.json`. The Live Preview opens the demo page with the flipbook (see `docs/playground/README.md`).
 
 ## What Print should produce
 

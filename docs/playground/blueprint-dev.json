@@ -1,0 +1,48 @@
+{
+	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
+	"meta": {
+		"title": "Flipset demo (development version)",
+		"description": "A page with a Flipset flipbook and a document library, using a sample eight-page PDF.",
+		"author": "itsmanzur",
+		"categories": [
+			"Media"
+		]
+	},
+	"landingPage": "/flipset-demo/",
+	"preferredVersions": {
+		"php": "8.3",
+		"wp": "latest"
+	},
+	"features": {
+		"networking": true
+	},
+	"login": true,
+	"steps": [
+		{
+			"step": "installPlugin",
+			"pluginData": {
+				"resource": "git:directory",
+				"url": "https://github.com/itsmanzur/flipset",
+				"ref": "main",
+				"refType": "branch"
+			},
+			"options": {
+				"activate": true,
+				"targetFolderName": "flipset"
+			}
+		},
+		{
+			"step": "writeFile",
+			"path": "/tmp/flipset-demo.pdf",
+			"data": {
+				"resource": "url",
+				"url": "https://raw.githubusercontent.com/itsmanzur/flipset/main/docs/playground/flipset-demo.pdf",
+				"caption": "Downloading the demo PDF"
+			}
+		},
+		{
+			"step": "runPHP",
+			"code": "<?php\nrequire '/wordpress/wp-load.php';\nrequire_once ABSPATH . 'wp-admin/includes/image.php';\n\n// The demo booklet, added to the Media Library like an uploaded PDF.\n$upload = wp_upload_bits( 'flipset-demo.pdf', null, file_get_contents( '/tmp/flipset-demo.pdf' ) );\n$pdf_id = wp_insert_attachment(\n\tarray(\n\t\t'post_mime_type' => 'application/pdf',\n\t\t'post_title'     => 'Flipset demo booklet',\n\t\t'post_status'    => 'inherit',\n\t),\n\t$upload['file']\n);\nwp_update_attachment_metadata( $pdf_id, wp_generate_attachment_metadata( $pdf_id, $upload['file'] ) );\n$url = wp_get_attachment_url( $pdf_id );\n\nupdate_option( 'permalink_structure', '/%postname%/' );\nflush_rewrite_rules();\n\n$content = '<!-- wp:paragraph --><p>This page was made by the Flipset demo. Turn the pages with the arrows, swipe, or the arrow keys. The toolbar switches between flip, spread, page and scroll views, searches the text and zooms.</p><!-- /wp:paragraph -->'\n\t. '<!-- wp:shortcode -->[flipset file=\"' . esc_url( $url ) . '\" view=\"flip\" title=\"Flipset demo booklet\" height=\"640px\"]<!-- /wp:shortcode -->'\n\t. '<!-- wp:heading --><h2 class=\"wp-block-heading\">Document library</h2><!-- /wp:heading -->'\n\t. '<!-- wp:paragraph --><p>Every PDF in the Media Library, as a grid of covers with search. Upload more PDFs in the dashboard to see them here.</p><!-- /wp:paragraph -->'\n\t. '<!-- wp:shortcode -->[flipset_library]<!-- /wp:shortcode -->';\n\nwp_insert_post(\n\tarray(\n\t\t'post_type'    => 'page',\n\t\t'post_status'  => 'publish',\n\t\t'post_name'    => 'flipset-demo',\n\t\t'post_title'   => 'Flipset demo',\n\t\t'post_content' => $content,\n\t)\n);\n"
+		}
+	]
+}
