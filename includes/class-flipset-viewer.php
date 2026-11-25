@@ -1185,11 +1185,31 @@ class Flipset_Viewer {
 			'flipset-viewer',
 			'FlipsetConfig',
 			array(
-				'workerSrc' => FLIPSET_URL . 'assets/vendor/pdfjs/pdf.worker.min.js',
-				'isPro'     => Flipset_Loader::is_pro_active(),
-				'i18n'      => self::viewer_i18n(),
+				'workerSrc'   => FLIPSET_URL . 'assets/vendor/pdfjs/pdf.worker.min.js',
+				'isPro'       => Flipset_Loader::is_pro_active(),
+				'progressive' => self::progressive_loading() ? '1' : '0',
+				'i18n'        => self::viewer_i18n(),
 			)
 		);
+	}
+
+	/**
+	 * Whether the viewer fetches only the parts of a PDF it needs (HTTP range requests),
+	 * so page 1 shows before the whole file has downloaded. PDF.js falls back to a
+	 * full download by itself when the server does not support ranges.
+	 *
+	 * @return bool
+	 */
+	public static function progressive_loading() {
+		/**
+		 * Filter: flipset/progressive_loading
+		 *
+		 * Return false to download every PDF in full before showing it, for a server or
+		 * CDN that answers range requests wrongly.
+		 *
+		 * @param bool $progressive Default true.
+		 */
+		return (bool) apply_filters( 'flipset/progressive_loading', true );
 	}
 
 
@@ -1225,9 +1245,10 @@ class Flipset_Viewer {
 				'viewer'       => add_query_arg( 'ver', FLIPSET_VERSION, FLIPSET_URL . 'assets/js/flipset-viewer.js' ),
 				'pdfjsVersion' => self::PDFJS_VERSION,
 				'viewerConfig' => array(
-					'workerSrc' => FLIPSET_URL . 'assets/vendor/pdfjs/pdf.worker.min.js',
-					'isPro'     => Flipset_Loader::is_pro_active(),
-					'i18n'      => self::viewer_i18n(),
+					'workerSrc'   => FLIPSET_URL . 'assets/vendor/pdfjs/pdf.worker.min.js',
+					'isPro'       => Flipset_Loader::is_pro_active(),
+					'progressive' => self::progressive_loading() ? '1' : '0',
+					'i18n'        => self::viewer_i18n(),
 				),
 				'i18n'         => array(
 					'loading' => __( 'Loading document…', 'flipset' ),

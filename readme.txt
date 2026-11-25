@@ -230,7 +230,9 @@ The file URL must allow the page origin to fetch it. Cross-origin PDFs need CORS
 
 = Large PDFs feel slow =
 
-Flipset draws the visible page (or a two-page spread). Continuous scroll renders nearby pages only. Very large files still need to be downloaded once, so keep uploads reasonably sized when you can. On pages with several PDFs, turn on poster mode (`poster="true"` or Flipset → Settings → Poster mode): each viewer then shows its cover and loads nothing until it is opened.
+Flipset draws the visible page (or a two-page spread). Continuous scroll renders nearby pages only. The viewer downloads only the parts of the file a page needs, so page 1 shows before a large PDF has fully arrived; later pages are fetched as the reader gets to them. On pages with several PDFs, turn on poster mode (`poster="true"` or Flipset → Settings → Poster mode): each viewer then shows its cover and loads nothing until it is opened.
+
+Partial downloads need the server to answer HTTP range requests. Apache, Nginx, LiteSpeed and most CDNs do this for files in `wp-content/uploads` out of the box. To check, run `curl -I -H "Range: bytes=0-1023" https://your-site.com/wp-content/uploads/file.pdf`: the answer should be `206 Partial Content`. If it is `200`, the whole file is downloaded first (the viewer still works). Common causes are a CDN or plugin that gzip-compresses PDFs, or PDFs served through a PHP script. For a PDF on another domain, the file host must also send `Access-Control-Allow-Headers: Range` and `Access-Control-Expose-Headers: Accept-Ranges, Content-Range, Content-Length`. If a server answers range requests wrongly (pages fail to load), turn partial downloads off with `add_filter( 'flipset/progressive_loading', '__return_false' );`.
 
 = Can I keep a PDF out of the library? =
 
@@ -351,6 +353,7 @@ Flipset is developed and maintained by itsmanzur.
 * New: a one-time notice on the Flipset screens explains that the library lists every Media Library PDF and how to change that.
 * New: poster mode. A viewer can show the PDF's cover, its title and an Open button instead of loading straight away; PDF.js and the PDF download only when a visitor clicks. Turn it on per embed (`poster="true"`, the Shortcode Builder, the Flipset Viewer block, or the Elementor, Divi and Beaver Builder widgets) or for the whole site under Flipset → Settings. Without JavaScript the button opens the PDF directly.
 * Improved: faster first page. On a post or page with a viewer that loads straight away, the browser starts fetching PDF.js from the page head instead of waiting for the footer, and fetches the PDF.js worker while idle. The first poster's cover image is fetched with high priority; later covers are lazy-loaded.
+* Improved: page 1 of a large PDF shows sooner. The viewer now downloads only the parts of the file it needs (HTTP range requests) instead of streaming the whole file at the same time; on a slow connection a 1 MB PDF showed its first page in about half the time. Servers without range support still get a full download. The readme FAQ explains how to check your server.
 * Improved: lighter page turns. Pages the reader has already skipped past are no longer drawn: pressing Next quickly through seven pages now draws one page instead of seven.
 * Improved: less memory on phones. Pages are drawn at no more than twice the screen's pixel density, with a size limit per page (smaller on phones and tablets), so zooming in on a large page no longer blanks it on iOS Safari or crashes the tab.
 * Improved: the next page (or spread) is prepared while the browser is idle, so turning the page is quicker. Skipped on connections with Data Saver on or 2G.
@@ -358,7 +361,7 @@ Flipset is developed and maintained by itsmanzur.
 * Fixed: on an HTTPS page, a PDF from your own site saved with an `http://` address (for example from before the site moved to HTTPS) showed a cross-origin error. Flipset now loads it over HTTPS.
 * Fixed: Flipset widgets did not load or start in the Elementor editor preview.
 * Fixed: library covers could fall short of their box when the theme sets `height: auto` on content images.
-* Developer: new `flipset/poster_image_id` and `flipset/resource_hints` filters and `window.FlipsetPoster.init()`.
+* Developer: new `flipset/poster_image_id`, `flipset/resource_hints` and `flipset/progressive_loading` filters and `window.FlipsetPoster.init()`.
 
 = 1.1.3 =
 * Security: PDFs can no longer run generated code from their embedded fonts. Flipset now tells the bundled PDF.js not to use it (`isEvalSupported: false`) in the viewer, the thumbnail generator and the block editor preview.

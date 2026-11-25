@@ -302,6 +302,25 @@ The first poster on a page gets its cover with `fetchpriority="high"`; the rest 
 
 ---
 
+## `flipset/progressive_loading`
+
+**Type:** filter
+**Fired from:** `Flipset_Viewer::progressive_loading()` in `includes/class-flipset-viewer.php`
+
+Whether the viewer downloads only the parts of a PDF it needs (PDF.js `disableStream` and `disableAutoFetch`, using HTTP range requests), so page 1 shows before the whole file has arrived. Defaults to `true`. PDF.js already falls back to a full download when the server does not support ranges; return `false` only for a server or CDN that answers range requests wrongly.
+
+**Parameters**
+
+| Name | Type | Meaning |
+|------|------|---------|
+| `$progressive` | `bool` | Default `true` |
+
+```php
+add_filter( 'flipset/progressive_loading', '__return_false' );
+```
+
+---
+
 ## `flipset/resource_hints`
 
 **Type:** filter

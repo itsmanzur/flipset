@@ -2737,7 +2737,15 @@
 			pdfjs.GlobalWorkerOptions.workerSrc = config.workerSrc;
 			// isEvalSupported:false stops a PDF's fonts from running generated code
 			// (PDF.js CVE-2024-4367, fixed upstream in 4.2.67; we bundle 3.11.174).
-			var loadingTask = pdfjs.getDocument( { url: fileUrl, isEvalSupported: false } );
+			var params = { url: fileUrl, isEvalSupported: false };
+			if ( String( config.progressive ) !== '0' ) {
+				// Fetch only the byte ranges a page needs, instead of streaming the whole file
+				// first: on a server with range support page 1 shows after the file's index and
+				// that page have arrived. Without range support PDF.js downloads it in full.
+				params.disableStream = true;
+				params.disableAutoFetch = true;
+			}
+			var loadingTask = pdfjs.getDocument( params );
 
 			// Stall watchdog: a huge file or a dead connection must never leave a
 			// silent viewer. After 20 s without progress, say so (the download keeps

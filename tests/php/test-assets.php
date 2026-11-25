@@ -131,6 +131,18 @@ class Test_Flipset_Assets extends Flipset_TestCase {
 		$this->assertNotContains( 'flipset-elementor-preview', $this->flipset_handles() );
 	}
 
+	public function test_viewer_config_turns_progressive_loading_on_by_default() {
+		$this->assertTrue( Flipset_Viewer::progressive_loading() );
+		Flipset::instance()->viewer->enqueue_assets();
+		$this->assertStringContainsString( '"progressive":"1"', (string) wp_scripts()->get_data( 'flipset-viewer', 'data' ) );
+	}
+
+	public function test_progressive_loading_filter_can_turn_it_off() {
+		add_filter( 'flipset/progressive_loading', '__return_false' );
+		$this->assertFalse( Flipset_Viewer::progressive_loading() );
+		remove_filter( 'flipset/progressive_loading', '__return_false' );
+	}
+
 	public function test_admin_assets_load_only_on_flipset_screens() {
 		$admin = Flipset::instance()->admin;
 
