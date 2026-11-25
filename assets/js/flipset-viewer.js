@@ -37,6 +37,70 @@
 		return /Android|iPhone|iPad|iPod/i.test( ua ) || ( /Macintosh/.test( ua ) && nav.maxTouchPoints > 1 );
 	}
 
+	/*
+	 * Flip animation quality, shared by every viewer on the page:
+	 * 3 = 16 bending strips, 2 = 8 strips, 1 = one rigid leaf animated by the browser
+	 * (Web Animations, no per-frame script). A phone with little memory starts at 2.
+	 * After each flip the frame times are checked and a slow device steps down one
+	 * level; the level is kept for the browser session.
+	 */
+	var FLIP_TIER_KEY = 'flipset-flip-tier';
+	var flipTierValue = null;
+
+	function flipTier() {
+		if ( flipTierValue !== null ) {
+			return flipTierValue;
+		}
+		var stored = NaN;
+		try {
+			stored = parseInt( window.sessionStorage.getItem( FLIP_TIER_KEY ), 10 );
+		} catch ( err ) {
+			// Storage blocked: measure again in this page.
+		}
+		if ( stored >= 1 && stored <= 3 ) {
+			flipTierValue = stored;
+		} else {
+			var nav = window.navigator || {};
+			var weak = ( nav.deviceMemory && nav.deviceMemory <= 2 ) ||
+				( isLowMemoryDevice() && nav.hardwareConcurrency && nav.hardwareConcurrency <= 4 );
+			flipTierValue = weak ? 2 : 3;
+		}
+		return flipTierValue;
+	}
+
+	/**
+	 * Step the flip down one level when the last flip dropped frames.
+	 *
+	 * @param {number[]} frames Milliseconds between animation frames of one flip.
+	 */
+	function noteFlipFrames( frames ) {
+		if ( flipTier() <= 1 ) {
+			return;
+		}
+		// The first frames include building the strips, so they are left out.
+		var steady = frames.slice( 2 ).sort( function ( a, b ) {
+			return a - b;
+		} );
+		if ( steady.length < 4 ) {
+			return; // Too few frames to judge.
+		}
+		// Frames hundreds of milliseconds apart mean the browser is throttling a tab or
+		// window that is out of sight, not that the device is slow: ignore such a flip.
+		if ( steady[ Math.floor( steady.length / 2 ) ] > 150 ) {
+			return;
+		}
+		var p75 = steady[ Math.floor( steady.length * 0.75 ) ];
+		if ( p75 <= 25 ) {
+			return; // About 40 frames a second or better.
+		}
+		flipTierValue -= 1;
+		try {
+			window.sessionStorage.setItem( FLIP_TIER_KEY, String( flipTierValue ) );
+		} catch ( err ) {
+			// Storage blocked: keep the level for this page only.
+		}
+	}
+
 	function $$( sel, root ) {
 		return Array.prototype.slice.call( ( root || document ).querySelectorAll( sel ) );
 	}
@@ -288,6 +352,7 @@
 		var flipBusy = false;
 		var flipStage = null;
 		var flipRaf = 0;
+		var flipTimers = [];
 		var pageObserver = null;
 		var thumbObserver = null;
 		var persistTimer = null;
@@ -1183,6 +1248,10 @@
 				window.cancelAnimationFrame( flipRaf );
 				flipRaf = 0;
 			}
+			flipTimers.forEach( function ( id ) {
+				window.clearTimeout( id );
+			} );
+			flipTimers = [];
 			if ( flipStage && flipStage.parentNode ) {
 				flipStage.parentNode.removeChild( flipStage );
 			}
@@ -1205,8 +1274,12 @@
 			if ( ! leafSlot || ! leafSlot.rendered ) {
 				return null;
 			}
-			var frontUrl = canvasUrl( leafSlot.canvas );
-			if ( ! frontUrl ) {
+			var tier = flipTier();
+			// The one-leaf flip copies the canvas directly; strips need it as an image URL
+			// so each strip can show its own slice.
+			var simple = tier <= 1;
+			var frontUrl = simple ? '' : canvasUrl( leafSlot.canvas );
+			if ( ! simple && ! frontUrl ) {
 				return null;
 			}
 			if ( window.getComputedStyle( pagesEl ).position === 'static' ) {
@@ -1216,7 +1289,8 @@
 			var h = state.slotSize.h;
 			var top = leafSlot.wrap.offsetTop;
 			var spine = dir > 0 ? leafSlot.wrap.offsetLeft : leafSlot.wrap.offsetLeft + w;
-			var N = 16; // 16 polygonal sub-strips for silky smooth 3D bending
+			// 16 or 8 sub-strips bend the page; a single strip is a rigid leaf.
+			var N = tier >= 3 ? 16 : ( tier === 2 ? 8 : 1 );
 			var sw = w / N;
 
 			var stage = document.createElement( 'div' );
@@ -1271,13 +1345,17 @@
 				var bHighlight = document.createElement( 'div' );
 				bHighlight.className = 'flipset-flip-highlight';
 
-				front.style.backgroundSize = w + 'px ' + h + 'px';
-				back.style.backgroundSize = w + 'px ' + h + 'px';
-				var sliceF = dir > 0 ? i : N - 1 - i;
-				var sliceB = dir > 0 ? N - 1 - i : i;
-				front.style.backgroundImage = 'url(' + frontUrl + ')';
-				front.style.backgroundPosition = ( -sliceF * sw ) + 'px 0';
-				back.style.backgroundPosition = ( -sliceB * sw ) + 'px 0';
+				if ( simple ) {
+					front.appendChild( snapCanvas( leafSlot.canvas ) );
+				} else {
+					front.style.backgroundSize = w + 'px ' + h + 'px';
+					back.style.backgroundSize = w + 'px ' + h + 'px';
+					var sliceF = dir > 0 ? i : N - 1 - i;
+					var sliceB = dir > 0 ? N - 1 - i : i;
+					front.style.backgroundImage = 'url(' + frontUrl + ')';
+					front.style.backgroundPosition = ( -sliceF * sw ) + 'px 0';
+					back.style.backgroundPosition = ( -sliceB * sw ) + 'px 0';
+				}
 
 				front.appendChild( fShade );
 				front.appendChild( fHighlight );
@@ -1305,7 +1383,7 @@
 			pagesEl.classList.add( 'is-flip-busy' );
 			flipStage = stage;
 			flipBusy = true;
-			var ctx = { dir: dir, stage: stage, strips: strips, cover: cover, cast: cast, N: N, land: null, swapped: false };
+			var ctx = { dir: dir, stage: stage, strips: strips, cover: cover, cast: cast, N: N, simple: simple, land: null, swapped: false };
 			applyLeaf( ctx, 0 );
 			return ctx;
 		}
@@ -1344,19 +1422,32 @@
 			}
 			var nr = slotRoles( slots );
 			var landSlot = ctx.dir > 0 ? nr.left : nr.right;
-			var backUrl = landSlot && landSlot.rendered ? canvasUrl( landSlot.canvas ) : '';
-			ctx.strips.forEach( function ( s ) {
-				if ( backUrl ) {
-					s.back.style.backgroundImage = 'url(' + backUrl + ')';
+			var landReady = landSlot && landSlot.rendered;
+			if ( ctx.simple ) {
+				if ( landReady ) {
+					ctx.strips[ 0 ].back.insertBefore( snapCanvas( landSlot.canvas ), ctx.strips[ 0 ].back.firstChild );
 				}
-			} );
+			} else {
+				var backUrl = landReady ? canvasUrl( landSlot.canvas ) : '';
+				ctx.strips.forEach( function ( s ) {
+					if ( backUrl ) {
+						s.back.style.backgroundImage = 'url(' + backUrl + ')';
+					}
+				} );
+			}
 			ctx.land = landSlot;
 			if ( landSlot ) {
 				landSlot.wrap.classList.add( 'is-flip-hidden' );
 			}
 			pagesEl.classList.remove( 'is-flip-busy' );
+			if ( ctx.simple ) {
+				runSimpleFlip( ctx );
+				return;
+			}
 			var duration = 920; // Silky responsive 920ms flip
 			var start = null;
+			var last = null;
+			var frames = [];
 			function step( now ) {
 				if ( ! flipBusy || flipStage !== ctx.stage ) {
 					return;
@@ -1364,27 +1455,87 @@
 				if ( start === null ) {
 					start = now;
 				}
+				if ( last !== null ) {
+					frames.push( now - last );
+				}
+				last = now;
 				var t = Math.min( 1, ( now - start ) / duration );
 				// Quintic easing for realistic paper inertia and smooth landing
 				var e = t < 0.5 ? 16 * t * t * t * t * t : 1 - Math.pow( -2 * t + 2, 5 ) / 2;
 				applyLeaf( ctx, e );
-				if ( ! ctx.swapped && e >= 0.5 ) {
-					ctx.swapped = true;
-					if ( ctx.cover && ctx.cover.parentNode ) {
-						ctx.cover.parentNode.removeChild( ctx.cover );
-					}
-					if ( ctx.land ) {
-						ctx.land.wrap.classList.remove( 'is-flip-hidden' );
-					}
+				if ( e >= 0.5 ) {
+					swapFlipPages( ctx );
 				}
 				if ( t >= 1 ) {
 					flipRaf = 0;
+					// Only a flip that ran to the end says how fast this device is.
+					if ( ! document.hidden ) {
+						noteFlipFrames( frames );
+					}
 					endFlip();
 					return;
 				}
 				flipRaf = window.requestAnimationFrame( step );
 			}
 			flipRaf = window.requestAnimationFrame( step );
+		}
+
+		// Halfway through, the leaf stands on edge: show the page underneath it.
+		function swapFlipPages( ctx ) {
+			if ( ctx.swapped ) {
+				return;
+			}
+			ctx.swapped = true;
+			if ( ctx.cover && ctx.cover.parentNode ) {
+				ctx.cover.parentNode.removeChild( ctx.cover );
+			}
+			if ( ctx.land ) {
+				ctx.land.wrap.classList.remove( 'is-flip-hidden' );
+			}
+		}
+
+		/**
+		 * The lightest flip: one rigid leaf turned by the browser's own animation engine,
+		 * which runs off the main thread, so a busy phone still gets a smooth turn.
+		 *
+		 * @param {Object} ctx Flip context from beginFlip().
+		 */
+		function runSimpleFlip( ctx ) {
+			var leaf = ctx.strips[ 0 ];
+			var duration = 700;
+			var sgn = ctx.dir > 0 ? -1 : 1;
+			var done = false;
+			function finish() {
+				if ( done ) {
+					return;
+				}
+				done = true;
+				swapFlipPages( ctx );
+				if ( flipBusy && flipStage === ctx.stage ) {
+					endFlip();
+				}
+			}
+			if ( ! leaf.el.animate ) {
+				finish();
+				return;
+			}
+			// Symmetric easing, so the leaf is on edge exactly at half time.
+			var timing = { duration: duration, easing: 'cubic-bezier(0.45, 0.05, 0.55, 0.95)', fill: 'forwards' };
+			var turn = leaf.el.animate(
+				[ { transform: 'rotateY(0deg)' }, { transform: 'rotateY(' + ( sgn * 180 ) + 'deg)' } ],
+				timing
+			);
+			var shade = [ { opacity: 0 }, { opacity: 0.35 }, { opacity: 0 } ];
+			leaf.fShade.animate( shade, timing );
+			leaf.bShade.animate( shade, timing );
+			ctx.cast.animate( [ { opacity: 0 }, { opacity: 0.6 }, { opacity: 0 } ], timing );
+			flipTimers.push( window.setTimeout( function () {
+				swapFlipPages( ctx );
+			}, duration / 2 ) );
+			// finish() also runs from a timer, in case the animation never reports back
+			// (a background tab, or an engine that drops finish events).
+			turn.onfinish = finish;
+			flipTimers.push( window.setTimeout( finish, duration + 250 ) );
 		}
 
 		function rebuildSlots() {
