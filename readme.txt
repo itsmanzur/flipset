@@ -350,7 +350,9 @@ Flipset is developed and maintained by itsmanzur.
 * New: `ids` lists only the PDFs you name (`[flipset_library ids="12,34"]`), and `exclude` leaves some out. The Flipset Library block has a matching "Only these PDFs" picker.
 * New: a one-time notice on the Flipset screens explains that the library lists every Media Library PDF and how to change that.
 * New: poster mode. A viewer can show the PDF's cover, its title and an Open button instead of loading straight away; PDF.js and the PDF download only when a visitor clicks. Turn it on per embed (`poster="true"`, the Shortcode Builder, the Flipset Viewer block, or the Elementor, Divi and Beaver Builder widgets) or for the whole site under Flipset → Settings. Without JavaScript the button opens the PDF directly.
-* Developer: new `flipset/poster_image_id` filter and `window.FlipsetPoster.init()`.
+* Improved: faster first page. On a post or page with a viewer that loads straight away, the browser starts fetching PDF.js from the page head instead of waiting for the footer, and fetches the PDF.js worker while idle. The first poster's cover image is fetched with high priority; later covers are lazy-loaded.
+* Improved: the library stylesheet now loads only on pages that show a library, not on every page.
+* Developer: new `flipset/poster_image_id` and `flipset/resource_hints` filters and `window.FlipsetPoster.init()`.
 
 = 1.1.3 =
 * Security: PDFs can no longer run generated code from their embedded fonts. Flipset now tells the bundled PDF.js not to use it (`isEvalSupported: false`) in the viewer, the thumbnail generator and the block editor preview.

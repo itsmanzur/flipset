@@ -298,6 +298,24 @@ Image attachment shown on the poster in poster mode. By default it is the PDF's 
 | `$attachment_id` | `int` | PDF attachment ID, or `0` when the file is not in the Media Library |
 | `$atts` | `array` | Resolved attributes |
 
+The first poster on a page gets its cover with `fetchpriority="high"`; the rest are lazy-loaded.
+
+---
+
+## `flipset/resource_hints`
+
+**Type:** filter
+**Fired from:** `Flipset_Viewer::print_resource_hints()` in `includes/class-flipset-viewer.php` (on `wp_head`)
+
+Whether to print `<link rel="preload">` for the bundled PDF.js and `<link rel="prefetch">` for its worker in the page head. Defaults to `true` on a single post or page whose content holds a `[flipset]` shortcode or Flipset Viewer block that loads straight away (not a poster, not `loading="lazy"`). Viewers in widgets or templates are not detected; return `true` to add the hints there, or `false` to turn them off.
+
+**Parameters**
+
+| Name | Type | Meaning |
+|------|------|---------|
+| `$print` | `bool` | Whether the post content shows a viewer that loads straight away |
+| `$post` | `WP_Post` | The post being viewed |
+
 ---
 
 ## `flipset/download_url`

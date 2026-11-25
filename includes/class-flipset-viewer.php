@@ -30,10 +30,122 @@ class Flipset_Viewer {
 	private $assets_enqueued = false;
 
 	/**
+	 * Posters rendered in this request. The first one's cover is fetched with high
+	 * priority, the rest lazily.
+	 *
+	 * @var int
+	 */
+	private $posters_rendered = 0;
+
+	/**
 	 * Register the [flipset] shortcode.
 	 */
 	public function init() {
 		add_shortcode( 'flipset', array( $this, 'render_shortcode' ) );
+		add_action( 'wp_head', array( $this, 'print_resource_hints' ), 2 );
+	}
+
+	/**
+	 * Resource hints for the post being viewed. When its content shows a viewer that loads
+	 * straight away (not a poster, not lazy), the browser is asked for PDF.js early (preload)
+	 * and for the PDF.js worker when it is idle (prefetch), instead of discovering both only
+	 * after the footer scripts run. Only the post content is looked at, not widgets or
+	 * templates, so a viewer placed elsewhere simply gets no hint.
+	 */
+	public function print_resource_hints() {
+		if ( ! is_singular() ) {
+			return;
+		}
+		$post = get_queried_object();
+		if ( ! $post instanceof WP_Post ) {
+			return;
+		}
+
+		/**
+		 * Filter: flipset/resource_hints
+		 *
+		 * Whether to print the PDF.js preload and worker prefetch in the page head.
+		 *
+		 * @param bool    $print True when the post content shows a viewer that loads straight away.
+		 * @param WP_Post $post  The post being viewed.
+		 */
+		if ( ! apply_filters( 'flipset/resource_hints', $this->content_has_eager_viewer( (string) $post->post_content ), $post ) ) {
+			return;
+		}
+
+		printf(
+			"<link rel=\"preload\" href=\"%s\" as=\"script\" />\n<link rel=\"prefetch\" href=\"%s\" />\n",
+			esc_url( add_query_arg( 'ver', FLIPSET_VERSION, FLIPSET_URL . 'assets/vendor/pdfjs/pdf.min.js' ) ),
+			esc_url( FLIPSET_URL . 'assets/vendor/pdfjs/pdf.worker.min.js' )
+		);
+	}
+
+	/**
+	 * Whether post content holds a [flipset] shortcode or Flipset Viewer block that loads
+	 * PDF.js as soon as the page opens, that is, one that is neither a poster nor lazy.
+	 *
+	 * @param string $content Post content.
+	 * @return bool
+	 */
+	public function content_has_eager_viewer( $content ) {
+		$content = (string) $content;
+		if ( '' === $content || false === strpos( $content, 'flipset' ) ) {
+			return false;
+		}
+
+		$embeds = array();
+		if ( has_shortcode( $content, 'flipset' ) && preg_match_all( '/' . get_shortcode_regex( array( 'flipset' ) ) . '/', $content, $matches, PREG_SET_ORDER ) ) {
+			foreach ( $matches as $match ) {
+				if ( '[' === $match[1] && ']' === $match[6] ) {
+					continue; // [[flipset]] is printed as text, not rendered.
+				}
+				$atts     = shortcode_parse_atts( $match[3] );
+				$embeds[] = is_array( $atts ) ? $atts : array();
+			}
+		}
+		if ( function_exists( 'has_block' ) && has_block( 'flipset/viewer', $content ) ) {
+			$embeds = array_merge( $embeds, $this->viewer_block_attrs( parse_blocks( $content ) ) );
+		}
+
+		$settings    = get_option( 'flipset_settings', array() );
+		$site_poster = ! empty( $settings['poster_mode'] );
+		$site_lazy   = ! empty( $settings['lazy_loading'] );
+
+		foreach ( $embeds as $atts ) {
+			if ( ! empty( $atts['id'] ) ) {
+				$saved = Flipset_Embeds::get( absint( $atts['id'] ) );
+				if ( is_array( $saved ) ) {
+					$atts = array_merge( $saved, $atts );
+				}
+			}
+			$poster = $this->att_flag( $atts['poster'] ?? '', $site_poster );
+			$lazy   = ( isset( $atts['loading'] ) && '' !== $atts['loading'] )
+				? 'lazy' === strtolower( (string) $atts['loading'] )
+				: $site_lazy;
+			if ( ! $poster && ! $lazy ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Attributes of every Flipset Viewer block, including nested ones.
+	 *
+	 * @param array $blocks Parsed blocks.
+	 * @return array[]
+	 */
+	private function viewer_block_attrs( $blocks ) {
+		$found = array();
+		foreach ( (array) $blocks as $block ) {
+			if ( isset( $block['blockName'] ) && 'flipset/viewer' === $block['blockName'] ) {
+				$found[] = isset( $block['attrs'] ) && is_array( $block['attrs'] ) ? $block['attrs'] : array();
+			}
+			if ( ! empty( $block['innerBlocks'] ) ) {
+				$found = array_merge( $found, $this->viewer_block_attrs( $block['innerBlocks'] ) );
+			}
+		}
+		return $found;
 	}
 
 	/**
@@ -279,20 +391,25 @@ class Flipset_Viewer {
 		 * @param array $atts          Resolved attributes.
 		 */
 		$image_id = absint( apply_filters( 'flipset/poster_image_id', $image_id, $attachment_id, $atts ) );
+		$is_first = 0 === $this->posters_rendered;
+		++$this->posters_rendered;
 
 		$image = '';
 		if ( $image_id ) {
-			$image = wp_get_attachment_image(
-				$image_id,
-				'large',
-				false,
-				array(
-					'class'    => 'flipset-poster-image',
-					'decoding' => 'async',
-					// Decorative: the title is printed next to it inside the same link.
-					'alt'      => '',
-				)
+			$image_attr = array(
+				'class'    => 'flipset-poster-image',
+				'decoding' => 'async',
+				// Decorative: the title is printed next to it inside the same link.
+				'alt'      => '',
 			);
+			if ( $is_first ) {
+				// The first poster is likely the main thing on the page: fetch its cover early.
+				$image_attr['fetchpriority'] = 'high';
+				$image_attr['loading']       = false;
+			} else {
+				$image_attr['loading'] = 'lazy';
+			}
+			$image = wp_get_attachment_image( $image_id, 'large', false, $image_attr );
 		}
 		if ( ! $image ) {
 			$image = '<span class="flipset-poster-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="8" y1="13" x2="16" y2="13" /><line x1="8" y1="17" x2="12" y2="17" /></svg></span>';

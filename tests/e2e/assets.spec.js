@@ -31,4 +31,19 @@ test.describe( 'Flipset assets', () => {
 		expect( urls.some( ( url ) => /flipset-viewer\.js/.test( url ) ) ).toBe( true );
 		expect( urls.some( ( url ) => /flipset-library\.(css|js)/.test( url ) ) ).toBe( false );
 	} );
+
+	test( 'only a page with a viewer that loads straight away preloads PDF.js', async ( { page } ) => {
+		const preload = 'head link[rel="preload"][as="script"][href*="pdf.min.js"]';
+		const prefetch = 'head link[rel="prefetch"][href*="pdf.worker.min.js"]';
+
+		await page.goto( '/flipset-e2e-viewer/' );
+		await expect( page.locator( preload ) ).toHaveCount( 1 );
+		await expect( page.locator( prefetch ) ).toHaveCount( 1 );
+
+		await page.goto( '/flipset-e2e-poster/' );
+		await expect( page.locator( preload ) ).toHaveCount( 0 );
+
+		await page.goto( '/flipset-e2e-plain/' );
+		await expect( page.locator( preload ) ).toHaveCount( 0 );
+	} );
 } );
