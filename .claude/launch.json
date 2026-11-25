@@ -1,0 +1,14 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "wp-env",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "wp-env"
+      ],
+      "port": 8888
+    }
+  ]
+}

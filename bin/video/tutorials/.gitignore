@@ -1,0 +1,10 @@
+# Recorded voiceover audio stays local
+*/vo/*.mp3
+
+# Pro tutorials stay local: the free repo carries no Pro content
+p0-script.md
+steps-p*.js
+specs/p*.js
+p*/
+youtube-p0.md
+p-wave2.md

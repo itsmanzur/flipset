@@ -1,0 +1,627 @@
+# Translation of Plugins - Flipset – PDF Viewer, PDF Embed, 3D Flipbook &amp; Document Library - Stable Readme (latest release) in Bengali (Bangladesh)
+# This file is distributed under the same license as the Plugins - Flipset – PDF Viewer, PDF Embed, 3D Flipbook &amp; Document Library - Stable Readme (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2026-11-05 14:00+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/4.1.0\n"
+"Language: bn_BD\n"
+"Project-Id-Version: Plugins - Flipset – PDF Viewer, PDF Embed, 3D Flipbook &amp; Document Library - Stable Readme (latest release)\n"
+
+#. Short description.
+#, gp-priority: high
+msgid "Embed PDFs with a fast PDF viewer, 3D flipbook and document library. Searchable PDF text, accessible, no CDN. Works with Gutenberg, Elementor, Divi."
+msgstr "দ্রুত PDF ভিউয়ার, 3D ফ্লিপবুক ও ডকুমেন্ট লাইব্রেরি দিয়ে PDF এমবেড করুন। সার্চযোগ্য PDF টেক্সট, অ্যাক্সেসিবল, কোনো CDN নেই। Gutenberg, Elementor ও Divi-এর সঙ্গে কাজ করে।"
+
+#. Plugin name.
+#, gp-priority: high
+msgid "Flipset – PDF Viewer, PDF Embed, 3D Flipbook &amp; Document Library"
+msgstr "Flipset – PDF ভিউয়ার, PDF এমবেড, 3D ফ্লিপবুক ও ডকুমেন্ট লাইব্রেরি"
+
+#. Found in faq paragraph.
+msgid "Yes. Open Flipset → Docs &amp; Features, choose <strong>Change cover</strong> under a document and pick any image from the Media Library. That image is then used in the library grid, as the Open Graph and Twitter image, and in the structured data. <strong>Reset cover</strong> goes back to the generated first page. Your image is never deleted by Flipset."
+msgstr "হ্যাঁ। Flipset → ডক্স ও ফিচার খুলুন, কোনো ডকুমেন্টের নিচে <strong>কভার পরিবর্তন করুন</strong> বেছে নিন এবং মিডিয়া লাইব্রেরি থেকে যেকোনো ছবি বাছুন। সেই ছবিটি লাইব্রেরি গ্রিডে, Open Graph ও Twitter ইমেজ হিসেবে এবং স্ট্রাকচার্ড ডেটায় ব্যবহার হবে। <strong>কভার রিসেট করুন</strong> চাপলে তৈরি-করা প্রথম পাতায় ফিরে যাবে। Flipset আপনার ছবি কখনো মুছে ফেলে না।"
+
+#. Found in faq header.
+msgid "Can I use my own cover image for a PDF?"
+msgstr "আমি কি PDF-এর জন্য নিজের কভার ছবি ব্যবহার করতে পারি?"
+
+#. Found in description paragraph.
+msgid "https://youtu.be/RGBoQxO4mUM"
+msgstr "https://youtu.be/RGBoQxO4mUM"
+
+#. Found in description list item.
+msgid "<strong>Inter</strong> by The Inter Project Authors – SIL Open Font License 1.1. Bundled in <code>assets/fonts/inter/</code> (a Latin-subset, weight-axis-only variable <code>woff2</code> made from the official font with <code>subset-font</code>, plus <code>OFL.txt</code>) and used only on the Flipset screens in wp-admin. Upstream project: https://github.com/rsms/inter – licence text: https://openfontlicense.org"
+msgstr "<strong>Inter</strong> – The Inter Project Authors, SIL Open Font License 1.1। <code>assets/fonts/inter/</code>-এ বান্ডল করা আছে (অফিশিয়াল ফন্ট থেকে <code>subset-font</code> দিয়ে তৈরি শুধু ল্যাটিন সাবসেট ও ওয়েট-অ্যাক্সিসের ভ্যারিয়েবল <code>woff2</code>, সঙ্গে <code>OFL.txt</code>) এবং শুধু wp-admin-এর Flipset স্ক্রিনে ব্যবহৃত হয়। মূল প্রজেক্ট: https://github.com/rsms/inter – লাইসেন্স টেক্সট: https://openfontlicense.org"
+
+#. Found in faq paragraph.
+msgid "Use the support forum at https://wordpress.org/support/plugin/flipset/ or open an issue on GitHub: https://github.com/itsmanzur/flipset/issues"
+msgstr "সাপোর্ট ফোরাম ব্যবহার করুন: https://wordpress.org/support/plugin/flipset/ অথবা GitHub-এ ইস্যু খুলুন: https://github.com/itsmanzur/flipset/issues"
+
+#. Found in faq paragraph.
+msgid "No. There is no tracking pixel, no remote API and no phone-home. See the Privacy section for what is stored."
+msgstr "না। কোনো ট্র্যাকিং পিক্সেল, রিমোট API বা ফোন-হোম নেই। কী সংরক্ষণ হয় তা জানতে প্রাইভেসি অংশ দেখুন।"
+
+#. Found in faq paragraph.
+msgid "No, not unless you ask for it. The credit link is off by default. If you would like to support the plugin, tick Flipset → Settings → Credit link and a small \"Powered by Flipset\" link appears under each viewer."
+msgstr "না, আপনি না চাইলে নয়। ক্রেডিট লিংক ডিফল্টে বন্ধ থাকে। প্লাগিনটিকে সমর্থন করতে চাইলে Flipset → সেটিংস → ক্রেডিট লিংক টিক দিন, তাহলে প্রতিটি ভিউয়ারের নিচে ছোট একটি "Powered by Flipset" লিংক দেখাবে।"
+
+#. Found in faq paragraph.
+msgid "EPUB files are not supported in this version. Flipset focuses on fast, accessible PDF rendering, 3D flipbooks and document libraries."
+msgstr "এই সংস্করণে EPUB ফাইল সমর্থিত নয়। Flipset দ্রুত ও অ্যাক্সেসিবল PDF রেন্ডারিং, 3D ফ্লিপবুক এবং ডকুমেন্ট লাইব্রেরির ওপর মনোযোগ দেয়।"
+
+#. Found in faq paragraph.
+msgid "Yes. Use <code>[flipset file=\"...\" page=\"4\"]</code>, set Start page on the block, or link to the page with <code>#page=4</code>."
+msgstr "হ্যাঁ। <code>[flipset file=\"...\" page=\"4\"]</code> ব্যবহার করুন, ব্লকে শুরুর পাতা ঠিক করুন, অথবা <code>#page=4</code> দিয়ে পাতাটির লিংক দিন।"
+
+#. Found in faq paragraph.
+msgid "Flipset → Settings has checkboxes for the site default. A single embed can override with <code>[flipset file=\"...\" download=\"false\" print=\"false\"]</code>, or use the matching toggles on the block. The <code>hide</code> attribute hides other controls, for example <code>hide=\"share,fullscreen\"</code>."
+msgstr "Flipset → সেটিংসে সাইটের ডিফল্টের জন্য চেকবক্স আছে। একটি এমবেড আলাদাভাবে <code>[flipset file=\"...\" download=\"false\" print=\"false\"]</code> দিয়ে বদলানো যায়, অথবা ব্লকের সংশ্লিষ্ট টগল ব্যবহার করুন। <code>hide</code> অ্যাট্রিবিউট অন্য কন্ট্রোল লুকায়, যেমন <code>hide=\"share,fullscreen\"</code>।"
+
+#. Found in faq paragraph.
+msgid "If the page embeds a Flipset PDF and a first-page thumbnail exists, Flipset adds Open Graph and Twitter image tags using that cover. If Yoast SEO, Rank Math or a similar SEO plugin already sets an image, Flipset does not override it. You can disable this under Flipset → Settings."
+msgstr "পাতায় Flipset PDF এমবেড থাকলে এবং প্রথম পাতার থাম্বনেইল তৈরি থাকলে Flipset সেই কভার ব্যবহার করে Open Graph ও Twitter ইমেজ ট্যাগ যোগ করে। Yoast SEO, Rank Math বা অনুরূপ SEO প্লাগিন আগেই কোনো ছবি ঠিক করে রাখলে Flipset তা বদলায় না। Flipset → সেটিংসে গিয়ে এটি বন্ধ করা যায়।"
+
+#. Found in faq paragraph.
+msgid "Yes. Opening Flipset → Docs &amp; Features extracts text from each PDF (the same visit that generates thumbnails) and stores it so posts and pages that embed those files match in the site search. The library search uses that text too. Password-protected PDFs are skipped, and scanned image-only PDFs have no text to find. Turn it off under Flipset → Settings → Search and sharing."
+msgstr "হ্যাঁ। Flipset → ডক্স ও ফিচার খুললে (থাম্বনেইল তৈরির সেই একই ভিজিটে) প্রতিটি PDF থেকে টেক্সট বের করে সংরক্ষণ করা হয়, ফলে ওই ফাইল এমবেড করা পোস্ট ও পেজ সাইট সার্চে মেলে। লাইব্রেরি সার্চও এই টেক্সট ব্যবহার করে। পাসওয়ার্ড-সুরক্ষিত PDF বাদ যায়, আর শুধু স্ক্যান-করা ছবির PDF-এ খোঁজার মতো টেক্সট থাকে না। Flipset → সেটিংস → সার্চ ও শেয়ারিং থেকে এটি বন্ধ করা যায়।"
+
+#. Found in faq paragraph.
+msgid "Flipset is translation-ready (text domain <code>flipset</code>). Translations are delivered through translate.wordpress.org and installed automatically by WordPress for your site language. Contributions are welcome at https://translate.wordpress.org/projects/wp-plugins/flipset/ ."
+msgstr "Flipset অনুবাদের জন্য প্রস্তুত (টেক্সট ডোমেইন <code>flipset</code>)। অনুবাদ translate.wordpress.org থেকে আসে এবং আপনার সাইটের ভাষা অনুযায়ী WordPress নিজে ইনস্টল করে। অবদান রাখতে স্বাগতম: https://translate.wordpress.org/projects/wp-plugins/flipset/ ।"
+
+#. Found in faq paragraph.
+msgid "The PDF has no accessibility tags (its MarkInfo dictionary is not marked). Screen readers may miss headings and reading order. Export a tagged PDF from Word, InDesign or Acrobat. Flipset does not rewrite the file. You can turn the check off under Flipset → Settings → Search and sharing."
+msgstr "PDF-টিতে অ্যাক্সেসিবিলিটি ট্যাগ নেই (এর MarkInfo ডিকশনারি চিহ্নিত নয়)। স্ক্রিন রিডার শিরোনাম ও পড়ার ক্রম ধরতে না-ও পারে। Word, InDesign বা Acrobat থেকে ট্যাগড PDF এক্সপোর্ট করুন। Flipset ফাইলটি নতুন করে লেখে না। Flipset → সেটিংস → সার্চ ও শেয়ারিং থেকে এই যাচাই বন্ধ করা যায়।"
+
+#. Found in faq paragraph.
+msgid "The first time you open Flipset → Docs &amp; Features, the plugin draws each PDF's first page in your browser (bundled PDF.js) and saves a PNG in the Media Library, parented to that PDF. After that the library reuses the stored image. Thumbnails are not regenerated on every page load."
+msgstr "প্রথমবার Flipset → ডক্স ও ফিচার খুললে প্লাগিন আপনার ব্রাউজারে (বান্ডল করা PDF.js দিয়ে) প্রতিটি PDF-এর প্রথম পাতা এঁকে সেই PDF-এর সন্তান হিসেবে মিডিয়া লাইব্রেরিতে একটি PNG সংরক্ষণ করে। এরপর লাইব্রেরি সংরক্ষিত ছবিটি পুনরায় ব্যবহার করে। প্রতিবার পাতা লোডে থাম্বনেইল নতুন করে তৈরি হয় না।"
+
+#. Found in faq paragraph.
+msgid "Add <code>[flipset_library]</code> to a page, or insert the Flipset Library block. Visitors see a grid of Media Library PDFs and can open any document in the Flipset viewer without leaving the page. Optional attributes: <code>columns</code>, <code>per_page</code>, <code>orderby</code> (<code>date</code>, <code>title</code> or <code>modified</code>), <code>order</code> (<code>ASC</code> or <code>DESC</code>) and <code>search</code> (<code>true</code> or <code>false</code>)."
+msgstr "কোনো পাতায় <code>[flipset_library]</code> যোগ করুন, অথবা Flipset লাইব্রেরি ব্লক বসান। দর্শকেরা মিডিয়া লাইব্রেরির PDF-এর একটি গ্রিড দেখেন এবং পাতা না ছেড়েই যেকোনো ডকুমেন্ট Flipset ভিউয়ারে খুলতে পারেন। ঐচ্ছিক অ্যাট্রিবিউট: <code>columns</code>, <code>per_page</code>, <code>orderby</code> (<code>date</code>, <code>title</code> বা <code>modified</code>), <code>order</code> (<code>ASC</code> বা <code>DESC</code>) এবং <code>search</code> (<code>true</code> বা <code>false</code>)।"
+
+#. Found in faq paragraph.
+msgid "Flipset draws the visible page (or a two-page spread). Continuous scroll renders nearby pages only. Very large files still need to be downloaded once, so keep uploads reasonably sized when you can."
+msgstr "Flipset দৃশ্যমান পাতা (বা দুই-পাতার স্প্রেড) আঁকে। কন্টিনিউয়াস স্ক্রলে শুধু কাছাকাছি পাতাগুলো রেন্ডার হয়। খুব বড় ফাইল তবু একবার ডাউনলোড করতে হয়, তাই সম্ভব হলে আপলোডের আকার যুক্তিসংগত রাখুন।"
+
+#. Found in faq paragraph.
+msgid "The file URL must allow the page origin to fetch it. Cross-origin PDFs need CORS headers (<code>Access-Control-Allow-Origin</code>) on the file host. Files in your own Media Library work without extra setup."
+msgstr "ফাইলের URL-কে পাতার অরিজিনকে সেটি আনার অনুমতি দিতে হবে। ক্রস-অরিজিন PDF-এর জন্য ফাইল হোস্টে CORS হেডার (<code>Access-Control-Allow-Origin</code>) লাগে। আপনার নিজের মিডিয়া লাইব্রেরির ফাইল বাড়তি সেটআপ ছাড়াই কাজ করে।"
+
+#. Found in faq paragraph.
+msgid "Flipset excludes its PDF.js scripts from minify, combine and delay in WP Rocket, W3 Total Cache, Autoptimize, LiteSpeed Cache and SiteGround Optimizer, and marks those tags <code>data-no-optimize</code>. If another optimizer still concatenates them, add <code>flipset-viewer.js</code>, <code>pdf.min.js</code> and <code>pdf.worker.min.js</code> to that plugin's exclude list."
+msgstr "WP Rocket, W3 Total Cache, Autoptimize, LiteSpeed Cache ও SiteGround Optimizer-এ Flipset তার PDF.js স্ক্রিপ্টগুলো মিনিফাই, কম্বাইন ও ডিলে থেকে বাদ রাখে এবং ওই ট্যাগে <code>data-no-optimize</code> চিহ্ন দেয়। অন্য কোনো অপটিমাইজার তবু সেগুলো জুড়ে দিলে সেই প্লাগিনের এক্সক্লুড তালিকায় <code>flipset-viewer.js</code>, <code>pdf.min.js</code> ও <code>pdf.worker.min.js</code> যোগ করুন।"
+
+#. Found in faq paragraph.
+msgid "Yes. Translate the PDF in the Media Library (WPML Media Translation or Polylang's media option). Flipset swaps the file URL to the current language's attachment. You can also put a different PDF on each language's page. <code>wpml-config.xml</code> ships with the plugin so the block's <code>file</code> and <code>title</code> attributes are translatable."
+msgstr "হ্যাঁ। মিডিয়া লাইব্রেরিতে PDF-টি অনুবাদ করুন (WPML Media Translation বা Polylang-এর মিডিয়া অপশন)। Flipset ফাইলের URL বদলে বর্তমান ভাষার অ্যাটাচমেন্ট বসিয়ে দেয়। চাইলে প্রতিটি ভাষার পাতায় আলাদা PDF-ও দিতে পারেন। প্লাগিনের সঙ্গে <code>wpml-config.xml</code> আসে, ফলে ব্লকের <code>file</code> ও <code>title</code> অ্যাট্রিবিউট অনুবাদযোগ্য।"
+
+#. Found in faq paragraph.
+msgid "Yes. Build it in Flipset → Shortcode Builder, save it, and use <code>[flipset id=\"1\"]</code> or the block's saved-embed ID. Edit the saved embed later and every page that uses it updates."
+msgstr "হ্যাঁ। Flipset → শর্টকোড বিল্ডারে বানিয়ে সংরক্ষণ করুন এবং <code>[flipset id=\"1\"]</code> বা ব্লকের সংরক্ষিত-এমবেড ID ব্যবহার করুন। পরে সংরক্ষিত এমবেড সম্পাদনা করলে সেটি ব্যবহার করা প্রতিটি পাতা আপডেট হয়ে যায়।"
+
+#. Found in faq paragraph.
+msgid "They render the same viewer. Use the block in the editor if you want a file picker and first-page preview. Use <code>[flipset file=\"...\"]</code> in the classic editor, widgets or PHP templates. Elementor, Divi and Beaver Builder have Flipset Viewer and Flipset Library widgets that use the same renderer."
+msgstr "দুটোই একই ভিউয়ার রেন্ডার করে। ফাইল পিকার ও প্রথম পাতার প্রিভিউ চাইলে এডিটরে ব্লক ব্যবহার করুন। ক্লাসিক এডিটর, উইজেট বা PHP টেমপ্লেটে <code>[flipset file=\"...\"]</code> ব্যবহার করুন। Elementor, Divi ও Beaver Builder-এ Flipset ভিউয়ার ও Flipset লাইব্রেরি উইজেট আছে, যেগুলো একই রেন্ডারার ব্যবহার করে।"
+
+#. Found in faq paragraph.
+msgid "Use <code>[flipset file=\"https://example.com/document.pdf\" view=\"flip\"]</code>, choose \"3D FlipBook\" in the View setting of the Flipset Viewer block, or switch the view from the More tools menu in the toolbar. On narrow screens (under 640 px) it shows a single page."
+msgstr "<code>[flipset file=\"https://example.com/document.pdf\" view=\"flip\"]</code> ব্যবহার করুন, Flipset ভিউয়ার ব্লকের ভিউ সেটিংয়ে \"3D ফ্লিপবুক\" বেছে নিন, অথবা টুলবারের আরও টুল মেনু থেকে ভিউ বদলান। সরু স্ক্রিনে (৬৪০ px-এর কম) এটি একটি পাতা দেখায়।"
+
+#. Found in faq paragraph.
+msgid "No. Rendering happens in the visitor's browser with the PDF.js library bundled in this plugin. See \"External services\" above for the few links that open outside sites only when clicked."
+msgstr "না। রেন্ডারিং হয় দর্শকের ব্রাউজারে, এই প্লাগিনে বান্ডল করা PDF.js লাইব্রেরি দিয়ে। শুধু ক্লিক করলে বাইরের সাইটে খোলে এমন কয়েকটি লিংকের জন্য উপরের \"বাহ্যিক সেবা\" অংশ দেখুন।"
+
+#. Found in faq header.
+msgid "Where do I get support or report a bug?"
+msgstr "সাপোর্ট কোথায় পাব বা বাগ কীভাবে জানাব?"
+
+#. Found in faq header.
+msgid "Does the free plugin collect analytics?"
+msgstr "ফ্রি প্লাগিন কি অ্যানালিটিক্স সংগ্রহ করে?"
+
+#. Found in faq header.
+msgid "Does Flipset show a \"Powered by\" link?"
+msgstr "Flipset কি \"Powered by\" লিংক দেখায়?"
+
+#. Found in faq header.
+msgid "Can I read EPUB ebooks?"
+msgstr "আমি কি EPUB ইবুক পড়তে পারি?"
+
+#. Found in faq header.
+msgid "Can I open the viewer on a specific page?"
+msgstr "আমি কি ভিউয়ার নির্দিষ্ট একটি পাতায় খুলতে পারি?"
+
+#. Found in faq header.
+msgid "How do I hide download or print?"
+msgstr "ডাউনলোড বা প্রিন্ট কীভাবে লুকাব?"
+
+#. Found in faq header.
+msgid "Why does a shared page show a PDF cover image?"
+msgstr "শেয়ার করা পাতায় কেন PDF-এর কভার ছবি দেখায়?"
+
+#. Found in faq header.
+msgid "Does WordPress search find text inside PDFs?"
+msgstr "WordPress সার্চ কি PDF-এর ভেতরের টেক্সট খুঁজে পায়?"
+
+#. Found in faq header.
+msgid "Does Flipset include translations?"
+msgstr "Flipset কি অনুবাদসহ আসে?"
+
+#. Found in faq header.
+msgid "What does \"Untagged\" mean on the Documents list?"
+msgstr "ডকুমেন্ট তালিকায় \"আনট্যাগড\" মানে কী?"
+
+#. Found in faq header.
+msgid "How do library thumbnails get generated?"
+msgstr "লাইব্রেরির থাম্বনেইল কীভাবে তৈরি হয়?"
+
+#. Found in faq header.
+msgid "How do I show a gallery of all my PDFs?"
+msgstr "আমার সব PDF-এর একটি গ্যালারি কীভাবে দেখাব?"
+
+#. Found in faq header.
+msgid "Large PDFs feel slow"
+msgstr "বড় PDF ধীর মনে হয়"
+
+#. Found in faq header.
+msgid "A PDF loads on my own site but fails from another domain"
+msgstr "PDF আমার নিজের সাইটে লোড হয় কিন্তু অন্য ডোমেইন থেকে ব্যর্থ হয়"
+
+#. Found in faq header.
+msgid "The viewer is blank after enabling a cache plugin"
+msgstr "ক্যাশ প্লাগিন চালু করার পর ভিউয়ার ফাঁকা দেখায়"
+
+#. Found in faq header.
+msgid "Does it work with WPML or Polylang?"
+msgstr "এটি কি WPML বা Polylang-এর সঙ্গে কাজ করে?"
+
+#. Found in faq header.
+msgid "Can I save an embed and reuse it?"
+msgstr "আমি কি একটি এমবেড সংরক্ষণ করে আবার ব্যবহার করতে পারি?"
+
+#. Found in faq header.
+msgid "Shortcode or block - which should I use?"
+msgstr "শর্টকোড নাকি ব্লক – কোনটা ব্যবহার করব?"
+
+#. Found in faq header.
+msgid "How do I use the 3D flipbook?"
+msgstr "3D ফ্লিপবুক কীভাবে ব্যবহার করব?"
+
+#. Found in faq header.
+msgid "Does this send my documents to a third-party server?"
+msgstr "এটি কি আমার ডকুমেন্ট কোনো থার্ড-পার্টি সার্ভারে পাঠায়?"
+
+#. Found in installation list item.
+msgid "Copy a shortcode, create a test page, or insert the \"Flipset Viewer\" block in the editor."
+msgstr "একটি শর্টকোড কপি করুন, টেস্ট পেজ তৈরি করুন, অথবা এডিটরে \"Flipset ভিউয়ার\" ব্লক বসান।"
+
+#. Found in installation list item.
+msgid "Upload a PDF in Media, or open Flipset → Docs &amp; Features."
+msgstr "মিডিয়াতে একটি PDF আপলোড করুন, অথবা Flipset → ডক্স ও ফিচার খুলুন।"
+
+#. Found in installation list item.
+msgid "Activate the plugin. You will land on the Flipset dashboard."
+msgstr "প্লাগিন সক্রিয় করুন। আপনি Flipset ড্যাশবোর্ডে পৌঁছে যাবেন।"
+
+#. Found in installation list item.
+msgid "Upload the <code>flipset</code> folder to <code>/wp-content/plugins/</code>, or install the plugin from the Plugins screen."
+msgstr "<code>flipset</code> ফোল্ডারটি <code>/wp-content/plugins/</code>-এ আপলোড করুন, অথবা প্লাগিন স্ক্রিন থেকে প্লাগিনটি ইনস্টল করুন।"
+
+#. Found in description paragraph.
+msgid "Support / Bug reports: https://wordpress.org/support/plugin/flipset/ and https://github.com/itsmanzur/flipset/issues"
+msgstr "সাপোর্ট / বাগ রিপোর্ট: https://wordpress.org/support/plugin/flipset/ এবং https://github.com/itsmanzur/flipset/issues"
+
+#. Found in description paragraph.
+msgid ""
+"Source code: https://github.com/itsmanzur/flipset\n"
+"Website: https://flipset.thereadscope.com\n"
+"PDF.js by Mozilla (Apache-2.0)."
+msgstr "সোর্স কোড: https://github.com/itsmanzur/flipset\nওয়েবসাইট: https://flipset.thereadscope.com\nPDF.js – Mozilla (Apache-2.0)।"
+
+#. Found in description paragraph.
+msgid "Flipset is developed and maintained by itsmanzur."
+msgstr "Flipset তৈরি ও রক্ষণাবেক্ষণ করেন itsmanzur।"
+
+#. Found in description paragraph.
+msgid "Deleting the plugin from the Plugins screen removes the settings, saved embeds, Flipset post and user meta, the transient and the thumbnails it generated. Your uploaded PDFs and other media are kept."
+msgstr "প্লাগিন স্ক্রিন থেকে প্লাগিন মুছলে সেটিংস, সংরক্ষিত এমবেড, Flipset-এর পোস্ট ও ইউজার মেটা, ট্রানজিয়েন্ট এবং প্লাগিনের তৈরি থাম্বনেইল মুছে যায়। আপনার আপলোড করা PDF ও অন্যান্য মিডিয়া থেকে যায়।"
+
+#. Found in description paragraph.
+msgid "The share feature only builds links; it contacts no one until the visitor clicks a link."
+msgstr "শেয়ার ফিচার শুধু লিংক বানায়; দর্শক কোনো লিংকে ক্লিক না করা পর্যন্ত এটি কারও সঙ্গে যোগাযোগ করে না।"
+
+#. Found in description paragraph.
+msgid "In the visitor's own browser, Flipset uses <code>localStorage</code> (not cookies) to remember the last page read (<code>flipset:page:&lt;file URL&gt;</code>) and the chosen reading theme (<code>flipset_theme</code>). These values never leave the browser, and the visitor can clear them at any time."
+msgstr "দর্শকের নিজের ব্রাউজারে Flipset শেষ পড়া পাতা (<code>flipset:page:&lt;file URL&gt;</code>) এবং বেছে নেওয়া রিডিং থিম (<code>flipset_theme</code>) মনে রাখতে <code>localStorage</code> (কুকি নয়) ব্যবহার করে। এই মানগুলো ব্রাউজারের বাইরে যায় না, আর দর্শক যেকোনো সময় সেগুলো মুছে দিতে পারেন।"
+
+#. Found in description paragraph.
+msgid "What the plugin stores on your site:"
+msgstr "প্লাগিন আপনার সাইটে যা সংরক্ষণ করে:"
+
+#. Found in description paragraph.
+msgid "Flipset does not collect any visitor data, sets no cookies, and has no analytics or tracking. The plugin has no remote requests of its own (see \"External services\")."
+msgstr "Flipset দর্শকের কোনো ডেটা সংগ্রহ করে না, কোনো কুকি সেট করে না, এবং এতে কোনো অ্যানালিটিক্স বা ট্র্যাকিং নেই। প্লাগিনের নিজস্ব কোনো রিমোট রিকোয়েস্ট নেই (\"বাহ্যিক সেবা\" দেখুন)।"
+
+#. Found in description paragraph.
+msgid "Add-ons can extend the viewer through public WordPress filters and actions. The full list, parameters and copy-paste examples are in <code>docs/HOOKS.md</code> in the GitHub repository: https://github.com/itsmanzur/flipset/blob/main/docs/HOOKS.md"
+msgstr "অ্যাড-অন পাবলিক WordPress ফিল্টার ও অ্যাকশনের মাধ্যমে ভিউয়ার বাড়াতে পারে। পূর্ণ তালিকা, প্যারামিটার ও কপি-পেস্ট উদাহরণ GitHub রিপোজিটরির <code>docs/HOOKS.md</code>-এ আছে: https://github.com/itsmanzur/flipset/blob/main/docs/HOOKS.md"
+
+#. Found in description paragraph.
+msgid "Flipset does not contact any server on its own. It has no analytics, no licence check, no update ping and no remote scripts, fonts or images. The visitor's browser opens an outside address only when the visitor clicks one of these links:"
+msgstr "Flipset নিজে থেকে কোনো সার্ভারের সঙ্গে যোগাযোগ করে না। এতে কোনো অ্যানালিটিক্স, লাইসেন্স যাচাই, আপডেট পিং, বা রিমোট স্ক্রিপ্ট, ফন্ট বা ছবি নেই। দর্শক নিচের লিংকগুলোর একটিতে ক্লিক করলেই কেবল দর্শকের ব্রাউজার বাইরের ঠিকানা খোলে:"
+
+#. Found in description paragraph.
+msgid "Flipset exposes public WordPress filters and actions (see Developer Hooks below) so add-ons and themes can extend the viewer without modifying core code. No paid features are sold or locked in this plugin."
+msgstr "Flipset পাবলিক WordPress ফিল্টার ও অ্যাকশন দেয় (নিচে ডেভেলপার হুক দেখুন), যাতে অ্যাড-অন ও থিম কোর কোড না বদলেই ভিউয়ার বাড়াতে পারে। এই প্লাগিনে কোনো পেইড ফিচার বিক্রি বা লক করা নেই।"
+
+#. Found in description paragraph.
+msgid "<strong>Developer friendly</strong>"
+msgstr "<strong>ডেভেলপার-বান্ধব</strong>"
+
+#. Found in description paragraph.
+msgid "<strong>Builders and integrations</strong>"
+msgstr "<strong>বিল্ডার ও ইন্টিগ্রেশন</strong>"
+
+#. Found in description paragraph.
+msgid "<strong>Accessibility</strong>"
+msgstr "<strong>অ্যাক্সেসিবিলিটি</strong>"
+
+#. Found in description paragraph.
+msgid "<strong>SEO and search</strong>"
+msgstr "<strong>SEO ও সার্চ</strong>"
+
+#. Found in description paragraph.
+msgid "<strong>Document library</strong>"
+msgstr "<strong>ডকুমেন্ট লাইব্রেরি</strong>"
+
+#. Found in description paragraph.
+msgid "<strong>Flipbook and view modes</strong>"
+msgstr "<strong>ফ্লিপবুক ও ভিউ মোড</strong>"
+
+#. Found in description paragraph.
+msgid "<strong>Viewer</strong>"
+msgstr "<strong>ভিউয়ার</strong>"
+
+#. Found in description paragraph.
+msgid "<strong>Why Flipset?</strong>"
+msgstr "<strong>কেন Flipset?</strong>"
+
+#. Found in description paragraph.
+msgid "Flipset embeds PDF documents in posts, pages and widgets with a PDF.js build that ships inside the plugin. Use a shortcode, a Gutenberg block, a page-builder widget, or paste a PDF link on its own line. There is no CDN, no external service and no API key: rendering happens in the visitor's browser, from files on your own site."
+msgstr "Flipset প্লাগিনের ভেতরে থাকা PDF.js বিল্ড দিয়ে পোস্ট, পেজ ও উইজেটে PDF ডকুমেন্ট এমবেড করে। শর্টকোড, Gutenberg ব্লক, পেজ-বিল্ডার উইজেট ব্যবহার করুন, অথবা আলাদা লাইনে PDF লিংক পেস্ট করুন। কোনো CDN, বাহ্যিক সেবা বা API কী নেই: রেন্ডারিং হয় দর্শকের ব্রাউজারে, আপনার নিজের সাইটের ফাইল থেকে।"
+
+#. Found in description list item.
+msgid "<strong>Admin notice state</strong> – one user meta value per administrator who dismisses the welcome notice, and a short-lived transient used for the redirect after activation."
+msgstr "<strong>অ্যাডমিন নোটিসের অবস্থা</strong> – যে প্রশাসক স্বাগত নোটিস বন্ধ করেন তাঁর জন্য একটি ইউজার মেটা মান, এবং সক্রিয় করার পর রিডাইরেক্টের জন্য একটি স্বল্পস্থায়ী ট্রানজিয়েন্ট।"
+
+#. Found in description list item.
+msgid "<strong>Thumbnails</strong> – first-page PNG images generated in your browser and saved in the Media Library."
+msgstr "<strong>থাম্বনেইল</strong> – আপনার ব্রাউজারে তৈরি প্রথম পাতার PNG ছবি, মিডিয়া লাইব্রেরিতে সংরক্ষিত।"
+
+#. Found in description list item.
+msgid "<strong>PDF data</strong> – post meta on your PDF attachments (extracted text, page count, indexed flag, accessibility flag, thumbnail ID) and a combined search index on posts and pages that embed a PDF."
+msgstr "<strong>PDF ডেটা</strong> – আপনার PDF অ্যাটাচমেন্টের পোস্ট মেটা (বের করা টেক্সট, পাতার সংখ্যা, ইনডেক্স-করা ফ্ল্যাগ, অ্যাক্সেসিবিলিটি ফ্ল্যাগ, থাম্বনেইল ID) এবং PDF এমবেড করা পোস্ট ও পেজে একটি সম্মিলিত সার্চ ইনডেক্স।"
+
+#. Found in description list item.
+msgid "<strong>Saved embeds</strong> – a private custom post type, <code>flipset_embed</code>, with the embed's configuration in post meta."
+msgstr "<strong>সংরক্ষিত এমবেড</strong> – একটি প্রাইভেট কাস্টম পোস্ট টাইপ, <code>flipset_embed</code>, যার পোস্ট মেটায় এমবেডের কনফিগারেশন থাকে।"
+
+#. Found in description list item.
+msgid "<strong>Settings</strong> – one option, <code>flipset_settings</code>."
+msgstr "<strong>সেটিংস</strong> – একটি অপশন, <code>flipset_settings</code>।"
+
+#. Found in description list item.
+msgid "No other third-party library or font is bundled. The plugin's own JavaScript and CSS are shipped unminified."
+msgstr "আর কোনো থার্ড-পার্টি লাইব্রেরি বা ফন্ট বান্ডল করা নেই। প্লাগিনের নিজস্ব JavaScript ও CSS মিনিফাই না করেই দেওয়া হয়।"
+
+#. Found in description list item.
+msgid "<strong>PDF.js 3.11.174</strong> by Mozilla – Apache License 2.0. Bundled in <code>assets/vendor/pdfjs/</code> as <code>pdf.min.js</code> and <code>pdf.worker.min.js</code>, the official minified build from the <code>pdfjs-dist</code> 3.11.174 release. Upstream project: https://github.com/mozilla/pdf.js – the human-readable source for this version is at https://github.com/mozilla/pdf.js/tree/v3.11.174. Licence text: https://www.apache.org/licenses/LICENSE-2.0"
+msgstr "<strong>PDF.js 3.11.174</strong> – Mozilla, Apache License 2.0। <code>assets/vendor/pdfjs/</code>-এ <code>pdf.min.js</code> ও <code>pdf.worker.min.js</code> হিসেবে বান্ডল করা, <code>pdfjs-dist</code> 3.11.174 রিলিজের অফিশিয়াল মিনিফাইড বিল্ড। মূল প্রজেক্ট: https://github.com/mozilla/pdf.js – এই সংস্করণের পাঠযোগ্য সোর্স: https://github.com/mozilla/pdf.js/tree/v3.11.174। লাইসেন্স টেক্সট: https://www.apache.org/licenses/LICENSE-2.0"
+
+#. Found in description list item.
+msgid "<strong>PDFs hosted on another domain</strong> – if you embed a PDF from another website, the visitor's browser downloads it directly from that host, which receives the visitor's IP address. PDFs in your own Media Library are served by your own site."
+msgstr "<strong>অন্য ডোমেইনে হোস্ট করা PDF</strong> – অন্য ওয়েবসাইটের PDF এমবেড করলে দর্শকের ব্রাউজার সেটি সরাসরি ওই হোস্ট থেকে ডাউনলোড করে, আর হোস্ট দর্শকের IP ঠিকানা পায়। আপনার নিজের মিডিয়া লাইব্রেরির PDF আপনার সাইট থেকেই দেওয়া হয়।"
+
+#. Found in description list item.
+msgid "<strong>\"Powered by Flipset\" credit</strong> – off by default. If an administrator turns it on under Flipset → Settings → Credit link, a normal link to https://flipset.thereadscope.com is shown under each viewer. The plugin sends nothing there; the visitor's browser makes an ordinary page request only if the link is clicked."
+msgstr "<strong>\"Powered by Flipset\" ক্রেডিট</strong> – ডিফল্টে বন্ধ। প্রশাসক Flipset → সেটিংস → ক্রেডিট লিংকে এটি চালু করলে প্রতিটি ভিউয়ারের নিচে https://flipset.thereadscope.com ঠিকানার একটি সাধারণ লিংক দেখায়। প্লাগিন সেখানে কিছু পাঠায় না; লিংকে ক্লিক করলেই কেবল দর্শকের ব্রাউজার একটি সাধারণ পেজ রিকোয়েস্ট করে।"
+
+#. Found in description list item.
+msgid "<strong>Email share</strong> uses a <code>mailto:</code> link and opens the visitor's own email program; no server is involved."
+msgstr "<strong>ইমেইল শেয়ার</strong> একটি <code>mailto:</code> লিংক ব্যবহার করে এবং দর্শকের নিজের ইমেইল প্রোগ্রাম খোলে; কোনো সার্ভার জড়িত নয়।"
+
+#. Found in description list item.
+msgid "WhatsApp, <code>api.whatsapp.com/send</code> – <a href=\"https://www.whatsapp.com/legal/terms-of-service\">Terms</a>, <a href=\"https://www.whatsapp.com/legal/privacy-policy\">Privacy</a>"
+msgstr "WhatsApp, <code>api.whatsapp.com/send</code> – <a href=\"https://www.whatsapp.com/legal/terms-of-service\">শর্তাবলি</a>, <a href=\"https://www.whatsapp.com/legal/privacy-policy\">প্রাইভেসি</a>"
+
+#. Found in description list item.
+msgid "LinkedIn, <code>linkedin.com/sharing/share-offsite</code> – <a href=\"https://www.linkedin.com/legal/user-agreement\">Terms</a>, <a href=\"https://www.linkedin.com/legal/privacy-policy\">Privacy</a>"
+msgstr "LinkedIn, <code>linkedin.com/sharing/share-offsite</code> – <a href=\"https://www.linkedin.com/legal/user-agreement\">শর্তাবলি</a>, <a href=\"https://www.linkedin.com/legal/privacy-policy\">প্রাইভেসি</a>"
+
+#. Found in description list item.
+msgid "Facebook, <code>facebook.com/sharer/sharer.php</code> – <a href=\"https://www.facebook.com/terms.php\">Terms</a>, <a href=\"https://www.facebook.com/privacy/policy/\">Privacy</a>"
+msgstr "Facebook, <code>facebook.com/sharer/sharer.php</code> – <a href=\"https://www.facebook.com/terms.php\">শর্তাবলি</a>, <a href=\"https://www.facebook.com/privacy/policy/\">প্রাইভেসি</a>"
+
+#. Found in description list item.
+msgid "X (Twitter), <code>twitter.com/intent/tweet</code> – <a href=\"https://twitter.com/en/tos\">Terms</a>, <a href=\"https://twitter.com/en/privacy\">Privacy</a>"
+msgstr "X (Twitter), <code>twitter.com/intent/tweet</code> – <a href=\"https://twitter.com/en/tos\">শর্তাবলি</a>, <a href=\"https://twitter.com/en/privacy\">প্রাইভেসি</a>"
+
+#. Found in description list item.
+msgid "<strong>Share dialog (X, Facebook, LinkedIn, WhatsApp)</strong> – the \"Share\" button in the viewer builds share links. Nothing is sent until the visitor clicks one; then the address of the current page (optionally with the page number) and, for X and WhatsApp, the document title are passed to that network in the link:"
+msgstr "<strong>শেয়ার ডায়ালগ (X, Facebook, LinkedIn, WhatsApp)</strong> – ভিউয়ারের \"শেয়ার\" বোতাম শেয়ার লিংক বানায়। দর্শক একটিতে ক্লিক না করা পর্যন্ত কিছু পাঠানো হয় না; ক্লিক করলে বর্তমান পাতার ঠিকানা (ঐচ্ছিকভাবে পাতার নম্বরসহ) এবং X ও WhatsApp-এর ক্ষেত্রে ডকুমেন্টের শিরোনাম লিংকে সেই নেটওয়ার্কে যায়:"
+
+#. Found in description list item.
+msgid "Clean uninstall: settings and Flipset data are removed, your media is kept."
+msgstr "পরিষ্কার আনইনস্টল: সেটিংস ও Flipset-এর ডেটা মুছে যায়, আপনার মিডিয়া থেকে যায়।"
+
+#. Found in description list item.
+msgid "WP-CLI: <code>wp flipset status</code>, <code>wp flipset reindex</code>, <code>wp flipset clear_cache</code>."
+msgstr "WP-CLI: <code>wp flipset status</code>, <code>wp flipset reindex</code>, <code>wp flipset clear_cache</code>।"
+
+#. Found in description list item.
+msgid "Public filters and actions, and DOM events such as <code>flipset:ready</code> and <code>flipset:pagechange</code>, documented in <code>docs/HOOKS.md</code>."
+msgstr "পাবলিক ফিল্টার ও অ্যাকশন, এবং <code>flipset:ready</code> ও <code>flipset:pagechange</code>-এর মতো DOM ইভেন্ট, যা <code>docs/HOOKS.md</code>-এ নথিভুক্ত।"
+
+#. Found in description list item.
+msgid "Script exclusions for WP Rocket, W3 Total Cache, Autoptimize, LiteSpeed Cache and SiteGround Optimizer, so PDF.js is not minified, combined or delayed."
+msgstr "WP Rocket, W3 Total Cache, Autoptimize, LiteSpeed Cache ও SiteGround Optimizer-এর জন্য স্ক্রিপ্ট এক্সক্লুশন, যাতে PDF.js মিনিফাই, কম্বাইন বা ডিলে না হয়।"
+
+#. Found in description list item.
+msgid "WPML and Polylang: a translated Media Library PDF is swapped in for the current language."
+msgstr "WPML ও Polylang: বর্তমান ভাষার জন্য অনুবাদ করা মিডিয়া লাইব্রেরি PDF বসে যায়।"
+
+#. Found in description list item.
+msgid "Native Elementor, Divi and Beaver Builder widgets for the viewer and the library."
+msgstr "ভিউয়ার ও লাইব্রেরির জন্য নেটিভ Elementor, Divi ও Beaver Builder উইজেট।"
+
+#. Found in description list item.
+msgid "Flipset → Docs &amp; Features marks PDFs that are not tagged for accessibility."
+msgstr "Flipset → ডক্স ও ফিচার অ্যাক্সেসিবিলিটির জন্য ট্যাগ-না-করা PDF চিহ্নিত করে।"
+
+#. Found in description list item.
+msgid "Page changes are announced to screen readers; reduced-motion preference is respected."
+msgstr "পাতা বদল স্ক্রিন রিডারকে জানানো হয়; কমানো-মোশনের পছন্দ মানা হয়।"
+
+#. Found in description list item.
+msgid "Labelled toolbar buttons, visible keyboard focus and full keyboard control."
+msgstr "লেবেল-যুক্ত টুলবার বোতাম, দৃশ্যমান কিবোর্ড ফোকাস এবং পূর্ণ কিবোর্ড নিয়ন্ত্রণ।"
+
+#. Found in description list item.
+msgid "A plain link to the PDF is shown when JavaScript is off."
+msgstr "JavaScript বন্ধ থাকলে PDF-এর একটি সাধারণ লিংক দেখানো হয়।"
+
+#. Found in description list item.
+msgid "Schema.org DigitalDocument structured data."
+msgstr "Schema.org DigitalDocument স্ট্রাকচার্ড ডেটা।"
+
+#. Found in description list item.
+msgid "Open Graph and Twitter image from the PDF's first page, unless an SEO plugin already provides one."
+msgstr "PDF-এর প্রথম পাতা থেকে Open Graph ও Twitter ইমেজ, যদি না কোনো SEO প্লাগিন আগেই একটি দেয়।"
+
+#. Found in description list item.
+msgid "PDF text is extracted in your browser from Flipset → Docs &amp; Features and stored on your site, so posts and pages that embed a PDF match in WordPress search."
+msgstr "Flipset → ডক্স ও ফিচার থেকে আপনার ব্রাউজারে PDF টেক্সট বের করে আপনার সাইটে সংরক্ষণ করা হয়, ফলে PDF এমবেড করা পোস্ট ও পেজ WordPress সার্চে মেলে।"
+
+#. Found in description list item.
+msgid "Shortcode Builder with live preview and one-click presets; save an embed once and reuse it as <code>[flipset id=\"1\"]</code> or with the block."
+msgstr "লাইভ প্রিভিউ ও এক-ক্লিক প্রিসেটসহ শর্টকোড বিল্ডার; একটি এমবেড একবার সংরক্ষণ করে <code>[flipset id=\"1\"]</code> হিসেবে বা ব্লকসহ পুনরায় ব্যবহার করুন।"
+
+#. Found in description list item.
+msgid "Flipset → Docs &amp; Features lists your PDFs with preview, search-index status and accessibility status, and copies shortcodes."
+msgstr "Flipset → ডক্স ও ফিচার আপনার PDF-গুলো প্রিভিউ, সার্চ-ইনডেক্স অবস্থা ও অ্যাক্সেসিবিলিটি অবস্থাসহ তালিকাভুক্ত করে এবং শর্টকোড কপি করে।"
+
+#. Found in description list item.
+msgid "<code>[flipset_library]</code> shortcode and \"Flipset Library\" block: a grid of your Media Library PDFs with first-page thumbnails, search and pagination; a document opens in place."
+msgstr "<code>[flipset_library]</code> শর্টকোড ও \"Flipset লাইব্রেরি\" ব্লক: প্রথম পাতার থাম্বনেইল, সার্চ ও পেজিনেশনসহ আপনার মিডিয়া লাইব্রেরির PDF-এর গ্রিড; ডকুমেন্ট একই জায়গায় খোলে।"
+
+#. Found in description list item.
+msgid "Touch support: pinch to zoom and swipe to turn pages."
+msgstr "টাচ সাপোর্ট: জুম করতে পিঞ্চ এবং পাতা ওল্টাতে সোয়াইপ।"
+
+#. Found in description list item.
+msgid "Spread and flipbook fall back to a single page on narrow screens."
+msgstr "সরু স্ক্রিনে স্প্রেড ও ফ্লিপবুক একটি পাতায় ফিরে যায়।"
+
+#. Found in description list item.
+msgid "Realistic page curl with a short page-turn sound generated in the browser, no audio files."
+msgstr "বাস্তবসম্মত পাতা-ভাঁজ, সঙ্গে ব্রাউজারে তৈরি ছোট পাতা-ওল্টানোর শব্দ, কোনো অডিও ফাইল ছাড়াই।"
+
+#. Found in description list item.
+msgid "Single page, continuous scroll, two-page spread and 3D flipbook (<code>view=\"flip\"</code>)."
+msgstr "একক পাতা, কন্টিনিউয়াস স্ক্রল, দুই-পাতার স্প্রেড এবং 3D ফ্লিপবুক (<code>view=\"flip\"</code>)।"
+
+#. Found in description list item.
+msgid "Clear message with a direct link when a PDF on another domain blocks cross-origin access (CORS)."
+msgstr "অন্য ডোমেইনের PDF ক্রস-অরিজিন অ্যাক্সেস (CORS) আটকালে সরাসরি লিংকসহ স্পষ্ট বার্তা।"
+
+#. Found in description list item.
+msgid "Share dialog with X, Facebook, LinkedIn, WhatsApp, email and copy link."
+msgstr "X, Facebook, LinkedIn, WhatsApp, ইমেইল ও লিংক কপিসহ শেয়ার ডায়ালগ।"
+
+#. Found in description list item.
+msgid "Show or hide download, print, search, share and other controls per embed or site-wide."
+msgstr "প্রতিটি এমবেডে বা পুরো সাইটে ডাউনলোড, প্রিন্ট, সার্চ, শেয়ার ও অন্যান্য কন্ট্রোল দেখান বা লুকান।"
+
+#. Found in description list item.
+msgid "Start page, <code>#page=4</code> deep links and last-page resume on the visitor's device."
+msgstr "শুরুর পাতা, <code>#page=4</code> ডিপ লিংক এবং দর্শকের ডিভাইসে শেষ পাতা থেকে পুনরায় শুরু।"
+
+#. Found in description list item.
+msgid "Light, dark and sepia reading themes."
+msgstr "লাইট, ডার্ক ও সেপিয়া রিডিং থিম।"
+
+#. Found in description list item.
+msgid "Selectable text and working links inside the PDF; password-protected PDFs ask for the password."
+msgstr "নির্বাচনযোগ্য টেক্সট এবং PDF-এর ভেতরে কার্যকর লিংক; পাসওয়ার্ড-সুরক্ষিত PDF পাসওয়ার্ড চায়।"
+
+#. Found in description list item.
+msgid "Zoom, fit page or width, rotate, find with match count, page thumbnails, document outline, hand tool, fullscreen, presentation mode, print and download."
+msgstr "জুম, পাতা বা প্রস্থ অনুযায়ী ফিট, ঘোরানো, ম্যাচ সংখ্যাসহ খোঁজা, পাতার থাম্বনেইল, ডকুমেন্ট আউটলাইন, হ্যান্ড টুল, ফুলস্ক্রিন, প্রেজেন্টেশন মোড, প্রিন্ট ও ডাউনলোড।"
+
+#. Found in description list item.
+msgid "Paste a direct <code>.pdf</code> link on its own line to embed it. PDF attachment pages can show the viewer too (a setting)."
+msgstr "আলাদা লাইনে সরাসরি <code>.pdf</code> লিংক পেস্ট করলে সেটি এমবেড হয়। PDF অ্যাটাচমেন্ট পাতাতেও ভিউয়ার দেখানো যায় (একটি সেটিং)।"
+
+#. Found in description list item.
+msgid "Shortcode <code>[flipset file=\"https://example.com/document.pdf\"]</code> and a \"Flipset Viewer\" Gutenberg block with a Media Library picker and first-page preview."
+msgstr "শর্টকোড <code>[flipset file=\"https://example.com/document.pdf\"]</code> এবং মিডিয়া লাইব্রেরি পিকার ও প্রথম পাতার প্রিভিউসহ একটি \"Flipset ভিউয়ার\" Gutenberg ব্লক।"
+
+#. Found in description list item.
+msgid "<strong>Translation-ready</strong> – WPML and Polylang support; translations come from translate.wordpress.org."
+msgstr "<strong>অনুবাদের জন্য প্রস্তুত</strong> – WPML ও Polylang সমর্থন; অনুবাদ আসে translate.wordpress.org থেকে।"
+
+#. Found in description list item.
+msgid "<strong>Works where you build</strong> – Gutenberg, Elementor, Divi and Beaver Builder."
+msgstr "<strong>যেখানে বানান সেখানেই কাজ করে</strong> – Gutenberg, Elementor, Divi ও Beaver Builder।"
+
+#. Found in description list item.
+msgid "<strong>Searchable PDF text</strong> – WordPress site search can find words inside your embedded PDFs."
+msgstr "<strong>সার্চযোগ্য PDF টেক্সট</strong> – WordPress সাইট সার্চ আপনার এমবেড করা PDF-এর ভেতরের শব্দ খুঁজে পায়।"
+
+#. Found in description list item.
+msgid "<strong>3D flipbook</strong> – page, scroll, spread and flipbook views, all in the free plugin."
+msgstr "<strong>3D ফ্লিপবুক</strong> – পাতা, স্ক্রল, স্প্রেড ও ফ্লিপবুক ভিউ, সবই ফ্রি প্লাগিনে।"
+
+#. Found in description list item.
+msgid "<strong>Accessible</strong> – keyboard controls, screen reader page announcements, and a check that flags PDFs without accessibility tags."
+msgstr "<strong>অ্যাক্সেসিবল</strong> – কিবোর্ড কন্ট্রোল, স্ক্রিন রিডারে পাতা ঘোষণা, এবং অ্যাক্সেসিবিলিটি ট্যাগ-ছাড়া PDF চিহ্নিতকারী যাচাই।"
+
+#. Found in description list item.
+msgid "<strong>Fast and local</strong> – bundled PDF.js, nothing loaded from a CDN, optional lazy loading."
+msgstr "<strong>দ্রুত ও লোকাল</strong> – বান্ডল করা PDF.js, CDN থেকে কিছু লোড হয় না, ঐচ্ছিক লেজি লোডিং।"
+
+#. Found in description header.
+msgid "Credits"
+msgstr "ক্রেডিট"
+
+#. Found in description header.
+msgid "Privacy"
+msgstr "প্রাইভেসি"
+
+#. Found in description header.
+msgid "Developer Hooks"
+msgstr "ডেভেলপার হুক"
+
+#. Found in description header.
+msgid "Third-party libraries"
+msgstr "থার্ড-পার্টি লাইব্রেরি"
+
+#. Found in description header.
+msgid "External services"
+msgstr "বাহ্যিক সেবা"
+
+#. Found in description header.
+msgid "Extending Flipset"
+msgstr "Flipset বাড়ানো"
+
+#. Found in description header.
+msgid "Features"
+msgstr "ফিচার"
+
+#. Screenshot description.
+msgid "Front-end document library grid (<code>[flipset_library]</code>)."
+msgstr "ফ্রন্ট-এন্ড ডকুমেন্ট লাইব্রেরি গ্রিড (<code>[flipset_library]</code>)।"
+
+#. Screenshot description.
+msgid "Gutenberg \"Flipset Viewer\" block with a Media Library picker and first-page preview."
+msgstr "মিডিয়া লাইব্রেরি পিকার ও প্রথম পাতার প্রিভিউসহ Gutenberg \"Flipset ভিউয়ার\" ব্লক।"
+
+#. Screenshot description.
+msgid "Settings with a live width and height preview."
+msgstr "লাইভ প্রস্থ ও উচ্চতার প্রিভিউসহ সেটিংস।"
+
+#. Screenshot description.
+msgid "Docs &amp; Features screen listing Media Library PDFs with previews and search/accessibility status."
+msgstr "প্রিভিউ এবং সার্চ/অ্যাক্সেসিবিলিটি অবস্থাসহ মিডিয়া লাইব্রেরির PDF তালিকাভুক্ত করা ডক্স ও ফিচার স্ক্রিন।"
+
+#. Screenshot description.
+msgid "Shortcode Builder with live preview and saved embeds."
+msgstr "লাইভ প্রিভিউ ও সংরক্ষিত এমবেডসহ শর্টকোড বিল্ডার।"
+
+#. Screenshot description.
+msgid "Flipset dashboard with the setup checklist."
+msgstr "সেটআপ চেকলিস্টসহ Flipset ড্যাশবোর্ড।"
+
+#. Screenshot description.
+msgid "The 3D flipbook view."
+msgstr "3D ফ্লিপবুক ভিউ।"
+
+#. Screenshot description.
+msgid "Front-end viewer with the compact toolbar (page, zoom, find, theme, share, fullscreen)."
+msgstr "কমপ্যাক্ট টুলবারসহ (পাতা, জুম, খোঁজা, থিম, শেয়ার, ফুলস্ক্রিন) ফ্রন্ট-এন্ড ভিউয়ার।"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Developer: new <code>Flipset_Thumbnails::get_cover_id()</code> and <code>get_generated_id()</code>; <code>get_thumbnail_id()</code> now returns the custom cover when one is set."
+msgstr "ডেভেলপার: নতুন <code>Flipset_Thumbnails::get_cover_id()</code> ও <code>get_generated_id()</code>; <code>get_thumbnail_id()</code> এখন কাস্টম কভার ঠিক করা থাকলে সেটি ফেরত দেয়।"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Added: an intro video on the plugin page."
+msgstr "যোগ হয়েছে: প্লাগিন পেজে একটি ইন্ট্রো ভিডিও।"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Fixed: tagged PDFs were reported as \"Untagged\" in the accessibility check."
+msgstr "ঠিক করা হয়েছে: অ্যাক্সেসিবিলিটি যাচাইয়ে ট্যাগড PDF ভুলভাবে \"আনট্যাগড\" দেখাচ্ছিল।"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Improved: Shortcode Builder tab labels no longer get cut off, and the cards on the Features screen line up."
+msgstr "উন্নত: শর্টকোড বিল্ডারের ট্যাব লেবেল আর কেটে যায় না, এবং ফিচার স্ক্রিনের কার্ডগুলো সারিবদ্ধ হয়।"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Improved: cleaner admin screens. One type scale, the Inter font bundled with the plugin (no request leaves your site), consistent weights and spacing, and better text contrast."
+msgstr "উন্নত: পরিচ্ছন্ন অ্যাডমিন স্ক্রিন। একটি টাইপ স্কেল, প্লাগিনের সঙ্গে বান্ডল করা Inter ফন্ট (আপনার সাইট থেকে কোনো রিকোয়েস্ট বের হয় না), সামঞ্জস্যপূর্ণ ওজন ও ফাঁকা জায়গা, এবং আরও ভালো টেক্সট কনট্রাস্ট।"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "New: choose your own cover image for any PDF. In Flipset → Docs &amp; Features, use \"Change cover\" (and \"Reset cover\" to go back to the first page). The cover is used in the document library, the Open Graph and Twitter image, and the structured data."
+msgstr "নতুন: যেকোনো PDF-এর জন্য নিজের কভার ছবি বেছে নিন। Flipset → ডক্স ও ফিচারে \"কভার পরিবর্তন করুন\" (এবং প্রথম পাতায় ফিরতে \"কভার রিসেট করুন\") ব্যবহার করুন। কভারটি ডকুমেন্ট লাইব্রেরি, Open Graph ও Twitter ইমেজ এবং স্ট্রাকচার্ড ডেটায় ব্যবহার হয়।"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Public hooks and WP-CLI commands for developers."
+msgstr "ডেভেলপারদের জন্য পাবলিক হুক ও WP-CLI কমান্ড।"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Elementor, Divi and Beaver Builder widgets; WPML and Polylang support; translation-ready."
+msgstr "Elementor, Divi ও Beaver Builder উইজেট; WPML ও Polylang সমর্থন; অনুবাদের জন্য প্রস্তুত।"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Accessibility: keyboard control, screen reader announcements and tagged-PDF check."
+msgstr "অ্যাক্সেসিবিলিটি: কিবোর্ড নিয়ন্ত্রণ, স্ক্রিন রিডার ঘোষণা এবং ট্যাগড-PDF যাচাই।"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "PDF text search in WordPress search, Open Graph image and structured data."
+msgstr "WordPress সার্চে PDF টেক্সট খোঁজা, Open Graph ইমেজ ও স্ট্রাকচার্ড ডেটা।"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Document library shortcode and block, Shortcode Builder with saved embeds, and a Docs &amp; Features screen."
+msgstr "ডকুমেন্ট লাইব্রেরি শর্টকোড ও ব্লক, সংরক্ষিত এমবেডসহ শর্টকোড বিল্ডার, এবং একটি ডক্স ও ফিচার স্ক্রিন।"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Page, continuous scroll, two-page spread and 3D flipbook views; light, dark and sepia themes."
+msgstr "পাতা, কন্টিনিউয়াস স্ক্রল, দুই-পাতার স্প্রেড ও 3D ফ্লিপবুক ভিউ; লাইট, ডার্ক ও সেপিয়া থিম।"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "PDF viewer with a bundled PDF.js build, shortcode, Gutenberg block and direct PDF URL embed."
+msgstr "বান্ডল করা PDF.js বিল্ডসহ PDF ভিউয়ার, শর্টকোড, Gutenberg ব্লক এবং সরাসরি PDF URL এমবেড।"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Initial release."
+msgstr "প্রথম রিলিজ।"
