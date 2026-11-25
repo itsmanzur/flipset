@@ -348,11 +348,14 @@
 	overflow: hidden;
 }
 
-.flipset-library .flipset-library-image {
+/* img + thumb in the selector: themes often set `.content img { height: auto }`, which would
+   otherwise win and leave the cover short of the 3:4 box. */
+.flipset-library .flipset-library-thumb img.flipset-library-image {
 	display: block;
 	width: 100%;
 	height: 100%;
 	max-width: none;
+	max-height: none;
 	margin: 0;
 	object-fit: cover;
 	object-position: top center;
