@@ -356,4 +356,73 @@ class Test_Flipset_Viewer extends Flipset_TestCase {
 		$html = Flipset::instance()->viewer->render_shortcode( array( 'id' => (string) $off ) );
 		$this->assertStringNotContainsString( 'flipset-poster', $html );
 	}
+
+	/**
+	 * Run a callback as if the page was served over HTTPS.
+	 *
+	 * @param callable $callback Callback.
+	 * @return mixed Its return value.
+	 */
+	private function on_https( $callback ) {
+		$had   = array_key_exists( 'HTTPS', $_SERVER );
+		$value = $had ? $_SERVER['HTTPS'] : null;
+		$_SERVER['HTTPS'] = 'on';
+		try {
+			return $callback();
+		} finally {
+			if ( $had ) {
+				$_SERVER['HTTPS'] = $value;
+			} else {
+				unset( $_SERVER['HTTPS'] );
+			}
+		}
+	}
+
+	public function test_same_site_http_pdf_is_loaded_over_https_on_https_pages() {
+		$host = wp_parse_url( home_url(), PHP_URL_HOST );
+		$http = 'http://' . $host . '/wp-content/uploads/a.pdf';
+
+		$this->assertSame(
+			'https://' . $host . '/wp-content/uploads/a.pdf',
+			$this->on_https(
+				function () use ( $http ) {
+					return Flipset_Viewer::match_page_scheme( $http );
+				}
+			)
+		);
+
+		$html = $this->on_https(
+			function () use ( $http ) {
+				return Flipset::instance()->viewer->render_shortcode( array( 'file' => $http ) );
+			}
+		);
+		$this->assertStringContainsString( 'data-file="https://' . $host . '/wp-content/uploads/a.pdf"', $html );
+		$this->assertStringNotContainsString( 'http://' . $host . '/wp-content/uploads/a.pdf', $html );
+	}
+
+	public function test_page_scheme_leaves_other_urls_alone() {
+		$host = wp_parse_url( home_url(), PHP_URL_HOST );
+		$keep = array(
+			'http://other.example/a.pdf',
+			'http://' . $host . ':8080/a.pdf',
+			'https://' . $host . '/a.pdf',
+			'/wp-content/uploads/a.pdf',
+			'',
+		);
+		foreach ( $keep as $url ) {
+			$this->assertSame(
+				$url,
+				$this->on_https(
+					function () use ( $url ) {
+						return Flipset_Viewer::match_page_scheme( $url );
+					}
+				),
+				$url
+			);
+		}
+
+		// On a plain http page nothing changes, not even this site's own address.
+		unset( $_SERVER['HTTPS'] );
+		$this->assertSame( 'http://' . $host . '/a.pdf', Flipset_Viewer::match_page_scheme( 'http://' . $host . '/a.pdf' ) );
+	}
 }

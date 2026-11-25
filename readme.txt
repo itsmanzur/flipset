@@ -352,6 +352,9 @@ Flipset is developed and maintained by itsmanzur.
 * New: poster mode. A viewer can show the PDF's cover, its title and an Open button instead of loading straight away; PDF.js and the PDF download only when a visitor clicks. Turn it on per embed (`poster="true"`, the Shortcode Builder, the Flipset Viewer block, or the Elementor, Divi and Beaver Builder widgets) or for the whole site under Flipset → Settings. Without JavaScript the button opens the PDF directly.
 * Improved: faster first page. On a post or page with a viewer that loads straight away, the browser starts fetching PDF.js from the page head instead of waiting for the footer, and fetches the PDF.js worker while idle. The first poster's cover image is fetched with high priority; later covers are lazy-loaded.
 * Improved: the library stylesheet now loads only on pages that show a library, not on every page.
+* Fixed: on an HTTPS page, a PDF from your own site saved with an `http://` address (for example from before the site moved to HTTPS) showed a cross-origin error. Flipset now loads it over HTTPS.
+* Fixed: Flipset widgets did not load or start in the Elementor editor preview.
+* Fixed: library covers could fall short of their box when the theme sets `height: auto` on content images.
 * Developer: new `flipset/poster_image_id` and `flipset/resource_hints` filters and `window.FlipsetPoster.init()`.
 
 = 1.1.3 =

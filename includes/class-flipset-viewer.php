@@ -223,7 +223,7 @@ class Flipset_Viewer {
 
 		// Only http(s) and site-relative addresses may reach the page, whatever
 		// filter, builder or saved embed supplied them.
-		$atts['file'] = self::sanitize_file_url( $atts['file'] ?? '' );
+		$atts['file'] = self::match_page_scheme( self::sanitize_file_url( $atts['file'] ?? '' ) );
 
 		if ( empty( $atts['file'] ) ) {
 			return $this->admin_notice( __( 'Flipset: no file URL was provided. Use [flipset file="https://example.com/document.pdf"].', 'flipset' ) );
@@ -301,7 +301,7 @@ class Flipset_Viewer {
 			);
 		}
 
-		$file_src = apply_filters( 'flipset/viewer_file_url', $atts['file'], $atts );
+		$file_src = self::match_page_scheme( (string) apply_filters( 'flipset/viewer_file_url', $atts['file'], $atts ) );
 
 		$noscript = sprintf(
 			'<noscript><div class="flipset-noscript"><p><a href="%1$s" target="_blank" rel="noopener noreferrer">%2$s</a></p></div></noscript>',
@@ -736,6 +736,38 @@ class Flipset_Viewer {
 			return '';
 		}
 		return esc_url_raw( $url, array( 'http', 'https' ) );
+	}
+
+	/**
+	 * On an HTTPS page, load a PDF from this site over HTTPS too.
+	 *
+	 * A shortcode, block or saved embed can still hold an http:// address for this site
+	 * (written before the site moved to HTTPS, or while its address setting says http).
+	 * The browser treats http and https as different origins, so PDF.js could not fetch
+	 * the file and the viewer showed a cross-origin error. Only this site's own host is
+	 * changed, and only from http to https; other hosts and relative paths are left as
+	 * they are.
+	 *
+	 * @param string $url PDF URL.
+	 * @return string
+	 */
+	public static function match_page_scheme( $url ) {
+		$url = (string) $url;
+		if ( '' === $url || ! is_ssl() || 0 !== stripos( $url, 'http://' ) ) {
+			return $url;
+		}
+		$parts = wp_parse_url( $url );
+		if ( empty( $parts['host'] ) || ! empty( $parts['port'] ) ) {
+			return $url;
+		}
+		$host = strtolower( $parts['host'] );
+		foreach ( array( home_url(), site_url() ) as $site ) {
+			$site_parts = wp_parse_url( $site );
+			if ( ! empty( $site_parts['host'] ) && strtolower( $site_parts['host'] ) === $host && empty( $site_parts['port'] ) ) {
+				return 'https://' . substr( $url, strlen( 'http://' ) );
+			}
+		}
+		return $url;
 	}
 
 	/**
