@@ -81,6 +81,7 @@ https://youtu.be/RGBoQxO4mUM
 **Document library**
 
 * `[flipset_library]` shortcode and "Flipset Library" block: a grid or list of your Media Library PDFs with first-page thumbnails, search, an optional sort menu and pagination; a document opens in place.
+* Choose what the library shows: hide any PDF with "Hide from library" in Flipset → Docs & Features, list only the PDFs you pick (`ids`, or "Only these PDFs" in the block), or leave some out (`exclude`).
 * Flipset → Docs & Features lists your PDFs with preview, search-index status and accessibility status, and copies shortcodes.
 * Shortcode Builder with live preview and one-click presets; save an embed once and reuse it as `[flipset id="1"]` or with the block.
 
@@ -138,6 +139,8 @@ Example: `[flipset file="https://example.com/catalogue.pdf" view="flip" theme="d
 * `search` – `true` (default) or `false` for the search field.
 * `sort_control` – `true` shows a Newest / Oldest / Title A–Z / Title Z–A menu (default `false`).
 * `layout` – `grid` (default) or `list`. `layout_toggle` – `true` shows a grid / list switch (default `false`).
+* `ids` – list only these PDFs, by Media Library ID, for example `ids="12,34"`. Named PDFs are listed even when hidden. Leave empty to list every PDF that is not hidden.
+* `exclude` – leave these PDFs out, for example `exclude="56"`.
 
 Example: `[flipset_library columns="4" per_page="8" sort_control="true" layout_toggle="true"]`
 
@@ -227,6 +230,10 @@ The file URL must allow the page origin to fetch it. Cross-origin PDFs need CORS
 
 Flipset draws the visible page (or a two-page spread). Continuous scroll renders nearby pages only. Very large files still need to be downloaded once, so keep uploads reasonably sized when you can.
 
+= Can I keep a PDF out of the library? =
+
+Yes. In Flipset → Docs & Features, choose **Hide from library** under the file. It no longer appears in any library that lists every PDF, including its search. The file itself stays in your Media Library and can still be embedded on its own. To list only certain PDFs, use `[flipset_library ids="12,34"]` or "Only these PDFs" in the Flipset Library block; to leave a few out, use `exclude="56"`.
+
 = How do I show a gallery of all my PDFs? =
 
 Add `[flipset_library]` to a page, or insert the Flipset Library block. Visitors see a grid of Media Library PDFs and can open any document in the Flipset viewer without leaving the page. Optional attributes: `columns`, `per_page`, `orderby` (`date`, `title` or `modified`), `order` (`ASC` or `DESC`), `search` (`true` or `false`), `sort_control` (`true` shows a Newest / Oldest / Title A–Z / Title Z–A menu; default `false`), `layout` (`grid` or `list`; default `grid`) and `layout_toggle` (`true` shows a grid / list switch; default `false`).
@@ -312,7 +319,8 @@ What the plugin stores on your site:
 * **Saved embeds** – a private custom post type, `flipset_embed`, with the embed's configuration in post meta.
 * **PDF data** – post meta on your PDF attachments (extracted text, page count, indexed flag, accessibility flag, thumbnail ID) and a combined search index on posts and pages that embed a PDF.
 * **Thumbnails** – first-page PNG images generated in your browser and saved in the Media Library.
-* **Admin notice state** – one user meta value per administrator who dismisses the welcome notice, and a short-lived transient used for the redirect after activation.
+* **Library visibility** – a `_flipset_library_hidden` flag on each PDF you hide from the library.
+* **Admin notice state** – one user meta value per administrator who dismisses the welcome notice or the library notice, and a short-lived transient used for the redirect after activation.
 
 In the visitor's own browser, Flipset uses `localStorage` (not cookies) to remember the last page read (`flipset:page:<file URL>`), the chosen reading theme (`flipset_theme`) and the chosen library layout, grid or list (`flipset-library-layout`). These values never leave the browser, and the visitor can clear them at any time.
 
@@ -334,6 +342,11 @@ Flipset is developed and maintained by itsmanzur.
 * PDF.js by Mozilla (Apache-2.0).
 
 == Changelog ==
+
+= 1.2.0 =
+* New: hide any PDF from the document library. Choose "Hide from library" under the file in Flipset → Docs & Features; it is left out of every library that lists all PDFs, including library search. Existing sites keep listing every PDF until a file is hidden.
+* New: `ids` lists only the PDFs you name (`[flipset_library ids="12,34"]`), and `exclude` leaves some out. The Flipset Library block has a matching "Only these PDFs" picker.
+* New: a one-time notice on the Flipset screens explains that the library lists every Media Library PDF and how to change that.
 
 = 1.1.3 =
 * Security: PDFs can no longer run generated code from their embedded fonts. Flipset now tells the bundled PDF.js not to use it (`isEvalSupported: false`) in the viewer, the thumbnail generator and the block editor preview.

@@ -714,6 +714,60 @@
 		} );
 	}
 
+	/** Hide a PDF row from libraries that list every PDF, or show it again. */
+	function bindDocLibraryToggle() {
+		$$( '.flipset-doc-library-toggle' ).forEach( function ( button ) {
+			button.addEventListener( 'click', function ( e ) {
+				e.preventDefault();
+				var row = button.closest( 'tr' );
+				if ( ! row || button.disabled ) {
+					return;
+				}
+				var hide = '1' !== row.getAttribute( 'data-library-hidden' );
+				button.disabled = true;
+				post(
+					'flipset_set_library_hidden',
+					{ attachment_id: row.getAttribute( 'data-pdf-id' ) || '0', hidden: hide ? '1' : '0' },
+					function ( data ) {
+						var hidden = !! data.hidden;
+						var badge = row.querySelector( '.flipset-doc-hidden-badge' );
+						button.disabled = false;
+						row.setAttribute( 'data-library-hidden', hidden ? '1' : '0' );
+						button.setAttribute( 'aria-pressed', hidden ? 'true' : 'false' );
+						button.textContent = hidden
+							? t( 'showLibrary', 'Show in library' )
+							: t( 'hideLibrary', 'Hide from library' );
+						if ( badge ) {
+							badge.hidden = ! hidden;
+						}
+						toast( hidden ? t( 'libraryHidden', 'Hidden from the library' ) : t( 'libraryShown', 'Shown in the library again' ) );
+					},
+					function () {
+						button.disabled = false;
+						toast( t( 'libraryFailed', 'Could not change the library setting.' ) );
+					}
+				);
+			} );
+		} );
+	}
+
+	/** Dismiss the one-time library notice for the current user. */
+	function bindLibraryNotice() {
+		var notice = $( '.flipset-library-notice' );
+		if ( ! notice ) {
+			return;
+		}
+		notice.addEventListener( 'click', function ( e ) {
+			if ( e.target && e.target.closest && e.target.closest( '.notice-dismiss, .flipset-library-notice-dismiss' ) ) {
+				post( 'flipset_dismiss_library_notice', {}, function () {}, function () {} );
+				if ( e.target.closest( '.flipset-library-notice-dismiss' ) ) {
+					e.preventDefault();
+					notice.remove();
+				}
+			}
+		} );
+	}
+
 	/** Collapsible "4 ways to embed" card; the state is a per-browser convenience. */
 	function bindHowto() {
 		var card = $( '#fa-howto' );
@@ -824,6 +878,8 @@
 		} );
 		bindDocCreateTestPage();
 		bindDocCover();
+		bindDocLibraryToggle();
+		bindLibraryNotice();
 		bindHowto();
 		bindGuideSpy();
 	}

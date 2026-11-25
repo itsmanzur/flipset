@@ -306,6 +306,124 @@ class Test_Flipset_Library extends Flipset_TestCase {
 		$this->assertStringContainsString( '<option value="a" selected="selected">A</option>', $html );
 	}
 
+	public function test_hidden_pdf_is_left_out_of_full_library() {
+		$this->create_pdf_attachment( 'Public Brochure' );
+		$secret = $this->create_pdf_attachment( 'Private Payroll' );
+
+		Flipset_Library::set_hidden( $secret, true );
+		$this->assertTrue( Flipset_Library::is_hidden( $secret ) );
+
+		$html = Flipset::instance()->library->render_shortcode( array( 'search' => 'false' ) );
+		$this->assertStringContainsString( 'Public Brochure', $html );
+		$this->assertStringNotContainsString( 'Private Payroll', $html );
+
+		Flipset_Library::set_hidden( $secret, false );
+		$this->assertFalse( Flipset_Library::is_hidden( $secret ) );
+		$this->assertSame( '', get_post_meta( $secret, Flipset_Library::META_HIDDEN, true ) );
+
+		$html = Flipset::instance()->library->render_shortcode( array( 'search' => 'false' ) );
+		$this->assertStringContainsString( 'Private Payroll', $html );
+	}
+
+	public function test_hidden_pdf_is_left_out_of_library_search() {
+		$secret = $this->create_pdf_attachment( 'Hidden Findable' );
+		Flipset_Library::set_hidden( $secret, true );
+
+		$next                         = $this->next_library_uid();
+		$_GET[ 'flipset_q_' . $next ] = 'Findable';
+		$html                         = Flipset::instance()->library->render_shortcode( array( 'search' => 'true' ) );
+		unset( $_GET[ 'flipset_q_' . $next ] );
+
+		$this->assertStringNotContainsString( 'Hidden Findable', $html );
+		$this->assertStringContainsString( 'No documents matched that search', $html );
+	}
+
+	public function test_ids_lists_only_those_pdfs_in_any_hidden_state() {
+		$a = $this->create_pdf_attachment( 'Alpha Doc' );
+		$this->create_pdf_attachment( 'Beta Doc' );
+		$c = $this->create_pdf_attachment( 'Gamma Doc' );
+		Flipset_Library::set_hidden( $c, true );
+
+		$html = Flipset::instance()->library->render_shortcode(
+			array(
+				'search' => 'false',
+				'ids'    => $a . ', ' . $c,
+			)
+		);
+		$this->assertStringContainsString( 'Alpha Doc', $html );
+		$this->assertStringContainsString( 'Gamma Doc', $html );
+		$this->assertStringNotContainsString( 'Beta Doc', $html );
+	}
+
+	public function test_ids_from_block_array_and_non_pdf_ids_are_ignored() {
+		$a    = $this->create_pdf_attachment( 'Block Picked' );
+		$post = self::factory()->post->create( array( 'post_title' => 'Plain Post Not PDF' ) );
+
+		$html = Flipset::instance()->library->render_shortcode(
+			array(
+				'search' => 'false',
+				'ids'    => array( $a, $post ),
+			)
+		);
+		$this->assertStringContainsString( 'Block Picked', $html );
+		$this->assertStringNotContainsString( 'Plain Post Not PDF', $html );
+	}
+
+	public function test_exclude_removes_pdfs_with_and_without_ids() {
+		$a = $this->create_pdf_attachment( 'Keep Me' );
+		$b = $this->create_pdf_attachment( 'Drop Me' );
+
+		$html = Flipset::instance()->library->render_shortcode(
+			array(
+				'search'  => 'false',
+				'exclude' => (string) $b,
+			)
+		);
+		$this->assertStringContainsString( 'Keep Me', $html );
+		$this->assertStringNotContainsString( 'Drop Me', $html );
+
+		$html = Flipset::instance()->library->render_shortcode(
+			array(
+				'search'  => 'false',
+				'ids'     => $a . ',' . $b,
+				'exclude' => (string) $b,
+			)
+		);
+		$this->assertStringContainsString( 'Keep Me', $html );
+		$this->assertStringNotContainsString( 'Drop Me', $html );
+	}
+
+	public function test_ids_that_are_all_excluded_show_nothing() {
+		$this->create_pdf_attachment( 'Other Doc' );
+		$b = $this->create_pdf_attachment( 'Only Doc' );
+
+		$html = Flipset::instance()->library->render_shortcode(
+			array(
+				'search'  => 'false',
+				'ids'     => (string) $b,
+				'exclude' => (string) $b,
+			)
+		);
+		$this->assertStringNotContainsString( 'Only Doc', $html );
+		$this->assertStringNotContainsString( 'Other Doc', $html );
+		$this->assertStringContainsString( 'No documents found', $html );
+	}
+
+	public function test_parse_ids() {
+		$this->assertSame( array( 12, 34, 56 ), Flipset_Library::parse_ids( '12, 34 56' ) );
+		$this->assertSame( array( 12, 34 ), Flipset_Library::parse_ids( '12,12,34' ) );
+		$this->assertSame( array( 7 ), Flipset_Library::parse_ids( array( 7, '7', 'x', -3, 0 ) ) );
+		$this->assertSame( array(), Flipset_Library::parse_ids( '' ) );
+		$this->assertSame( array(), Flipset_Library::parse_ids( 'abc, 1.5, -2' ) );
+		$this->assertSame( array(), Flipset_Library::parse_ids( null ) );
+		$this->assertCount( Flipset_Library::MAX_IDS, Flipset_Library::parse_ids( implode( ',', range( 1, Flipset_Library::MAX_IDS + 50 ) ) ) );
+	}
+
+	public function test_set_hidden_ignores_zero_id() {
+		Flipset_Library::set_hidden( 0, true );
+		$this->assertFalse( Flipset_Library::is_hidden( 0 ) );
+	}
+
 	public function test_att_flag_falls_back_for_unrecognised_values() {
 		$this->assertTrue( $this->call_private( 'att_flag', 'maybe', true ) );
 		$this->assertFalse( $this->call_private( 'att_flag', 'maybe', false ) );

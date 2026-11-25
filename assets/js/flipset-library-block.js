@@ -14,7 +14,81 @@
 	var RangeControl = components.RangeControl;
 	var SelectControl = components.SelectControl;
 	var ToggleControl = components.ToggleControl;
+	var Button = components.Button;
+	var MediaUpload = blockEditor.MediaUpload;
+	var MediaUploadCheck = blockEditor.MediaUploadCheck;
 	var ServerSideRender = serverSideRender;
+
+	/**
+	 * "Only these PDFs": pick PDFs from the Media Library. An empty list means every PDF
+	 * that is not hidden in Docs & Features.
+	 *
+	 * @param {Object}   attributes    Block attributes.
+	 * @param {Function} setAttributes Attribute setter.
+	 * @return {Object} Element.
+	 */
+	function selectionPanel( attributes, setAttributes ) {
+		var ids = Array.isArray( attributes.ids ) ? attributes.ids : [];
+		var count = ids.length;
+
+		return el(
+			PanelBody,
+			{ title: __( 'Which PDFs', 'flipset' ), initialOpen: count > 0 },
+			el(
+				'p',
+				{ className: 'components-base-control__help' },
+				count
+					? i18n.sprintf(
+							/* translators: %d: number of PDFs picked for the library. */
+							i18n._n( 'Only %d PDF is listed.', 'Only %d PDFs are listed.', count, 'flipset' ),
+							count
+					  )
+					: __( 'Every PDF in the Media Library is listed, except the ones hidden in Flipset → Docs & Features.', 'flipset' )
+			),
+			el(
+				MediaUploadCheck,
+				null,
+				el( MediaUpload, {
+					title: __( 'Only these PDFs', 'flipset' ),
+					allowedTypes: [ 'application/pdf' ],
+					multiple: true,
+					gallery: false,
+					value: ids,
+					onSelect: function ( media ) {
+						var picked = ( Array.isArray( media ) ? media : [ media ] )
+							.map( function ( item ) {
+								return parseInt( item && item.id, 10 );
+							} )
+							.filter( function ( id ) {
+								return id > 0;
+							} );
+						setAttributes( { ids: picked } );
+					},
+					render: function ( obj ) {
+						return el(
+							Button,
+							{ variant: 'secondary', onClick: obj.open },
+							count ? __( 'Change PDFs', 'flipset' ) : __( 'Only these PDFs…', 'flipset' )
+						);
+					},
+				} )
+			),
+			count
+				? el(
+						Button,
+						{
+							variant: 'link',
+							isDestructive: true,
+							style: { marginLeft: '8px' },
+							onClick: function () {
+								setAttributes( { ids: [] } );
+							},
+						},
+						__( 'List every PDF', 'flipset' )
+				  )
+				: null
+		);
+	}
 
 	registerBlockType( 'flipset/library', {
 		edit: function ( props ) {
@@ -103,7 +177,8 @@
 								setAttributes( { layout_toggle: value } );
 							},
 						} )
-					)
+					),
+					selectionPanel( attributes, setAttributes )
 				),
 				el( ServerSideRender, {
 					block: 'flipset/library',

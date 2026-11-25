@@ -54,6 +54,8 @@ class Flipset_Admin {
 		add_action( 'wp_ajax_flipset_create_test_page', array( $this, 'ajax_create_test_page' ) );
 		add_action( 'wp_ajax_flipset_settings_preview', array( $this, 'ajax_settings_preview' ) );
 		add_action( 'wp_ajax_flipset_dismiss_welcome', array( $this, 'ajax_dismiss_welcome' ) );
+		add_action( 'wp_ajax_flipset_dismiss_library_notice', array( $this, 'ajax_dismiss_library_notice' ) );
+		add_action( 'admin_notices', array( $this, 'render_library_notice' ) );
 		// Invalidate the embed-count cache whenever a post is saved, trashed,
 		// restored, or deleted so the Dashboard metric stays accurate without
 		// waiting for the 5-minute TTL. count_embeds() only counts
@@ -301,6 +303,11 @@ class Flipset_Admin {
 					'coverSaved'      => __( 'Cover updated', 'flipset' ),
 					'coverReset'      => __( 'Cover reset to the first page', 'flipset' ),
 					'coverFailed'     => __( 'Could not change the cover.', 'flipset' ),
+					'hideLibrary'     => __( 'Hide from library', 'flipset' ),
+					'showLibrary'     => __( 'Show in library', 'flipset' ),
+					'libraryHidden'   => __( 'Hidden from the library', 'flipset' ),
+					'libraryShown'    => __( 'Shown in the library again', 'flipset' ),
+					'libraryFailed'   => __( 'Could not change the library setting.', 'flipset' ),
 				),
 				'uploadNonce' => wp_create_nonce( 'media-form' ),
 				'canUpload'   => current_user_can( 'upload_files' ),
@@ -2770,9 +2777,11 @@ class Flipset_Admin {
 							$a11y_done   = Flipset_A11y::is_checked( $attachment->ID );
 							$a11y_tagged = $a11y_done && Flipset_A11y::is_tagged( $attachment->ID );
 							$open_url    = add_query_arg( 'pdf_id', (int) $attachment->ID, $builder_url );
+							$lib_hidden  = Flipset_Library::is_hidden( $attachment->ID );
 							?>
 							<tr
 								data-pdf-id="<?php echo esc_attr( (string) $attachment->ID ); ?>"
+								data-library-hidden="<?php echo $lib_hidden ? '1' : '0'; ?>"
 								data-pdf-url="<?php echo esc_url( $url ); ?>"
 								data-pdf-title="<?php echo esc_attr( $title ); ?>"
 								data-needs-thumb="<?php echo $thumb_id ? '0' : '1'; ?>"
@@ -2805,12 +2814,14 @@ class Flipset_Admin {
 								<td class="fa-col-doc">
 									<a class="fa-doc__title" href="<?php echo esc_url( $edit ); ?>" title="<?php echo esc_attr( $title ); ?>"><?php echo esc_html( $title ); ?></a>
 									<span class="fa-doc__meta"><?php echo esc_html( $size . ' · ' . get_the_date( '', $attachment ) ); ?></span>
+									<span class="fa-status is-empty flipset-doc-hidden-badge" title="<?php esc_attr_e( 'Not listed in document libraries that show every PDF. It can still be embedded on its own or listed with ids.', 'flipset' ); ?>"<?php echo $lib_hidden ? '' : ' hidden'; ?>><?php esc_html_e( 'Hidden from library', 'flipset' ); ?></span>
 									<div class="fa-row-actions">
 										<button type="button" class="fa-link flipset-doc-create-test-btn" data-pdf-url="<?php echo esc_url( $url ); ?>"><?php esc_html_e( 'Create test page', 'flipset' ); ?></button>
 										<a class="fa-link" href="<?php echo esc_url( $open_url ); ?>"><?php esc_html_e( 'Open in Builder', 'flipset' ); ?></a>
 										<?php if ( current_user_can( 'upload_files' ) ) : ?>
 											<button type="button" class="fa-link flipset-doc-cover-btn"><?php esc_html_e( 'Change cover', 'flipset' ); ?></button>
 											<button type="button" class="fa-link flipset-doc-cover-reset"<?php echo $has_cover ? '' : ' hidden'; ?>><?php esc_html_e( 'Reset cover', 'flipset' ); ?></button>
+											<button type="button" class="fa-link flipset-doc-library-toggle" aria-pressed="<?php echo $lib_hidden ? 'true' : 'false'; ?>"><?php echo $lib_hidden ? esc_html__( 'Show in library', 'flipset' ) : esc_html__( 'Hide from library', 'flipset' ); ?></button>
 										<?php endif; ?>
 										<a class="fa-link" href="<?php echo esc_url( $edit ); ?>"><?php esc_html_e( 'View in Media', 'flipset' ); ?></a>
 										<a class="fa-link" href="<?php echo esc_url( $url ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Open file', 'flipset' ); ?></a>
@@ -3384,6 +3395,22 @@ class Flipset_Admin {
 								</td>
 								<td><p class="flipset-tbl-desc"><?php esc_html_e( 'Let visitors switch between grid and list. Their choice is remembered in their own browser only.', 'flipset' ); ?></p></td>
 							</tr>
+							<tr>
+								<td><code class="flipset-param-code">ids</code></td>
+								<td>
+									<span class="flipset-type-pill">IDs</span>
+									<span class="flipset-default-pill">default: ""</span>
+								</td>
+								<td><p class="flipset-tbl-desc"><?php esc_html_e( 'List only these PDFs, by Media Library ID, for example ids="12,34". Hidden PDFs are listed when you name them here. Empty lists every PDF that is not hidden.', 'flipset' ); ?></p></td>
+							</tr>
+							<tr>
+								<td><code class="flipset-param-code">exclude</code></td>
+								<td>
+									<span class="flipset-type-pill">IDs</span>
+									<span class="flipset-default-pill">default: ""</span>
+								</td>
+								<td><p class="flipset-tbl-desc"><?php esc_html_e( 'Leave these PDFs out, by Media Library ID, for example exclude="56". To hide a PDF from every library, use "Hide from library" under it on the Documents tab.', 'flipset' ); ?></p></td>
+							</tr>
 						</tbody>
 					</table>
 				</div>
@@ -3559,6 +3586,7 @@ class Flipset_Admin {
 					array( __( 'Documents Library Grid:', 'flipset' ), __( '[flipset_library] shortcode for searchable PDF galleries.', 'flipset' ) ),
 					array( __( 'Library Sort & List Layout:', 'flipset' ), __( 'Optional sort menu and a grid or list layout with a visitor switch; cards show the page count of indexed PDFs.', 'flipset' ) ),
 					array( __( 'Custom Cover Images:', 'flipset' ), __( 'Pick your own cover for any PDF. It is used in the library, social cards and structured data.', 'flipset' ) ),
+					array( __( 'Library Privacy:', 'flipset' ), __( 'Hide any PDF from the library, list only the PDFs you choose with ids, or leave some out with exclude.', 'flipset' ) ),
 					array( __( 'Attachment Pages:', 'flipset' ), __( 'Automatic interactive reader on standard WordPress attachment pages.', 'flipset' ) ),
 				),
 			),
@@ -3719,6 +3747,52 @@ class Flipset_Admin {
 		}
 
 		update_user_meta( get_current_user_id(), 'flipset_welcome_dismissed', 1 );
+		wp_send_json_success();
+	}
+
+	/**
+	 * One-time notice on the Flipset screens: the document library lists every Media Library
+	 * PDF unless a file is hidden or the library names its PDFs with ids. Shown until the
+	 * administrator dismisses it.
+	 *
+	 * @return void
+	 */
+	public function render_library_notice() {
+		$page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- admin screen routing.
+		if ( ! in_array( $page, array( self::PAGE_SLUG, self::BUILDER_SLUG, self::SETTINGS_SLUG, self::DOCS_SLUG ), true ) ) {
+			return;
+		}
+		if ( ! current_user_can( 'manage_options' ) || get_user_meta( get_current_user_id(), 'flipset_library_notice_dismissed', true ) ) {
+			return;
+		}
+
+		$docs_url = admin_url( 'admin.php?page=' . self::DOCS_SLUG );
+		?>
+		<div class="notice notice-info is-dismissible flipset-library-notice">
+			<p>
+				<strong><?php esc_html_e( 'The document library lists every PDF in your Media Library.', 'flipset' ); ?></strong>
+				<?php esc_html_e( 'This is how [flipset_library] and the Flipset Library block have always worked. To keep a file out, choose "Hide from library" under it in Docs & Features. To list only certain PDFs, use ids, for example [flipset_library ids="12,34"], or "Only these PDFs" in the block.', 'flipset' ); ?>
+			</p>
+			<p>
+				<a class="button button-secondary" href="<?php echo esc_url( $docs_url ); ?>"><?php esc_html_e( 'Review my PDFs', 'flipset' ); ?></a>
+				<button type="button" class="button-link flipset-library-notice-dismiss"><?php esc_html_e( 'Got it', 'flipset' ); ?></button>
+			</p>
+		</div>
+		<?php
+	}
+
+	/**
+	 * AJAX: dismiss the library notice for the current user.
+	 *
+	 * @return void
+	 */
+	public function ajax_dismiss_library_notice() {
+		check_ajax_referer( 'flipset_admin', 'nonce' );
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Forbidden.', 'flipset' ) ), 403 );
+		}
+
+		update_user_meta( get_current_user_id(), 'flipset_library_notice_dismissed', 1 );
 		wp_send_json_success();
 	}
 

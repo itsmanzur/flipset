@@ -21,6 +21,17 @@ class Flipset_Library {
 	use Flipset_Att_Flag;
 
 	/**
+	 * Post meta on a PDF attachment: '1' keeps it out of every library that lists all PDFs.
+	 * Only '1' is ever stored; showing the file again deletes the meta.
+	 */
+	const META_HIDDEN = '_flipset_library_hidden';
+
+	/**
+	 * Most IDs read from an ids or exclude attribute.
+	 */
+	const MAX_IDS = 200;
+
+	/**
 	 * Whether the library assets were already enqueued in this request.
 	 *
 	 * @var bool
@@ -40,11 +51,131 @@ class Flipset_Library {
 	 */
 	public function init() {
 		add_shortcode( 'flipset_library', array( $this, 'render_shortcode' ) );
+		add_action( 'wp_ajax_flipset_set_library_hidden', array( $this, 'ajax_set_hidden' ) );
+	}
+
+	/**
+	 * Whether a PDF is hidden from libraries that list every PDF.
+	 *
+	 * @param int $attachment_id PDF attachment ID.
+	 * @return bool
+	 */
+	public static function is_hidden( $attachment_id ) {
+		return '1' === (string) get_post_meta( absint( $attachment_id ), self::META_HIDDEN, true );
+	}
+
+	/**
+	 * Hide a PDF from libraries that list every PDF, or show it again.
+	 *
+	 * @param int  $attachment_id PDF attachment ID.
+	 * @param bool $hidden        True to hide, false to show.
+	 */
+	public static function set_hidden( $attachment_id, $hidden ) {
+		$attachment_id = absint( $attachment_id );
+		if ( ! $attachment_id ) {
+			return;
+		}
+		if ( $hidden ) {
+			update_post_meta( $attachment_id, self::META_HIDDEN, '1' );
+		} else {
+			delete_post_meta( $attachment_id, self::META_HIDDEN );
+		}
+	}
+
+	/**
+	 * AJAX: hide a PDF from the library or show it again (Docs & Features).
+	 */
+	public function ajax_set_hidden() {
+		check_ajax_referer( 'flipset_admin', 'nonce' );
+
+		if ( ! current_user_can( 'upload_files' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Forbidden.', 'flipset' ) ), 403 );
+		}
+
+		$pdf_id = isset( $_POST['attachment_id'] ) ? absint( wp_unslash( $_POST['attachment_id'] ) ) : 0;
+		$pdf    = $pdf_id ? get_post( $pdf_id ) : null;
+
+		if ( ! $pdf || 'attachment' !== $pdf->post_type || 'application/pdf' !== $pdf->post_mime_type ) {
+			wp_send_json_error( array( 'message' => __( 'That file is not a PDF attachment.', 'flipset' ) ) );
+		}
+
+		if ( ! current_user_can( 'edit_post', $pdf_id ) ) {
+			wp_send_json_error( array( 'message' => __( 'Forbidden.', 'flipset' ) ), 403 );
+		}
+
+		$hidden = isset( $_POST['hidden'] ) && '1' === sanitize_key( wp_unslash( $_POST['hidden'] ) );
+		self::set_hidden( $pdf_id, $hidden );
+
+		wp_send_json_success( array( 'hidden' => self::is_hidden( $pdf_id ) ) );
+	}
+
+	/**
+	 * Read a list of attachment IDs from an attribute: "12, 34 56" or an array.
+	 *
+	 * @param mixed $value Raw attribute value.
+	 * @return int[] Unique positive IDs, in the order given, at most MAX_IDS.
+	 */
+	public static function parse_ids( $value ) {
+		if ( is_array( $value ) ) {
+			$parts = $value;
+		} elseif ( is_scalar( $value ) ) {
+			$parts = preg_split( '/[\s,]+/', (string) $value, -1, PREG_SPLIT_NO_EMPTY );
+		} else {
+			$parts = array();
+		}
+
+		$ids = array();
+		foreach ( (array) $parts as $part ) {
+			if ( ! is_scalar( $part ) || ! preg_match( '/^\d+$/', trim( (string) $part ) ) ) {
+				continue;
+			}
+			$id = absint( $part );
+			if ( $id && ! in_array( $id, $ids, true ) ) {
+				$ids[] = $id;
+			}
+			if ( count( $ids ) >= self::MAX_IDS ) {
+				break;
+			}
+		}
+		return $ids;
+	}
+
+	/**
+	 * Which PDFs the library query may return.
+	 *
+	 * With ids, exactly those PDFs are listed (minus any in exclude), whether or not they are
+	 * hidden: naming a file is an explicit choice. Without ids, every PDF is listed except the
+	 * ones in exclude and the ones hidden in Docs & Features.
+	 *
+	 * @param int[] $ids     IDs from the ids attribute.
+	 * @param int[] $exclude IDs from the exclude attribute.
+	 * @return array WP_Query arguments.
+	 */
+	private function selection_args( $ids, $exclude ) {
+		if ( ! empty( $ids ) ) {
+			$ids = array_values( array_diff( $ids, $exclude ) );
+			// post__in with an empty array lists everything, so ask for a post that cannot exist.
+			return array( 'post__in' => empty( $ids ) ? array( 0 ) : $ids );
+		}
+
+		$args = array(
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- one NOT EXISTS join on a short meta key.
+			'meta_query' => array(
+				array(
+					'key'     => self::META_HIDDEN,
+					'compare' => 'NOT EXISTS',
+				),
+			),
+		);
+		if ( ! empty( $exclude ) ) {
+			$args['post__not_in'] = $exclude; // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in -- a short list the site owner typed.
+		}
+		return $args;
 	}
 
 	/**
 	 * [flipset_library columns="3" per_page="12" orderby="date" order="DESC" search="true"
-	 * sort_control="false" layout="grid" layout_toggle="false"]
+	 * sort_control="false" layout="grid" layout_toggle="false" ids="" exclude=""]
 	 *
 	 * @param array $atts Shortcode attributes.
 	 * @return string
@@ -60,6 +191,8 @@ class Flipset_Library {
 				'sort_control'  => 'false',
 				'layout'        => 'grid',
 				'layout_toggle' => 'false',
+				'ids'           => '',
+				'exclude'       => '',
 			),
 			$atts,
 			'flipset_library'
@@ -106,17 +239,20 @@ class Flipset_Library {
 		}
 
 		$query = new WP_Query(
-			array(
-				'post_type'              => 'attachment',
-				'post_status'            => 'inherit',
-				'post_mime_type'         => 'application/pdf',
-				'posts_per_page'         => $per_page,
-				'paged'                  => $paged,
-				'orderby'                => $orderby,
-				'order'                  => $order,
-				's'                      => $search,
-				'no_found_rows'          => false,
-				'flipset_content_search' => ( '' !== $search ),
+			array_merge(
+				array(
+					'post_type'              => 'attachment',
+					'post_status'            => 'inherit',
+					'post_mime_type'         => 'application/pdf',
+					'posts_per_page'         => $per_page,
+					'paged'                  => $paged,
+					'orderby'                => $orderby,
+					'order'                  => $order,
+					's'                      => $search,
+					'no_found_rows'          => false,
+					'flipset_content_search' => ( '' !== $search ),
+				),
+				$this->selection_args( self::parse_ids( $atts['ids'] ), self::parse_ids( $atts['exclude'] ) )
 			)
 		);
 

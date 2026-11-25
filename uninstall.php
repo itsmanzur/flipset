@@ -43,4 +43,6 @@ delete_post_meta_by_key( '_flipset_a11y_checked' );
 delete_post_meta_by_key( '_flipset_thumbnail_id' );
 delete_post_meta_by_key( '_flipset_cover_id' ); // The images stay in the Media Library; only the link is removed.
 delete_post_meta_by_key( '_flipset_embed_config' );
+delete_post_meta_by_key( '_flipset_library_hidden' );
 delete_metadata( 'user', 0, 'flipset_welcome_dismissed', '', true );
+delete_metadata( 'user', 0, 'flipset_library_notice_dismissed', '', true );
