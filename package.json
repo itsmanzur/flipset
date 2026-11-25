@@ -11,6 +11,7 @@
 		"phpcs": "phpcs -n"
 	},
 	"devDependencies": {
+		"@lhci/cli": "0.15.1",
 		"@playwright/test": "^1.49.0",
 		"@wordpress/env": "^10.17.0",
 		"esbuild": "0.24.2"

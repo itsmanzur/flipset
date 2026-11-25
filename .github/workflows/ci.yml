@@ -169,3 +169,31 @@ jobs:
             playwright-report
             test-results
           retention-days: 7
+
+  lighthouse:
+    name: Lighthouse budget
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - run: npm run build
+      - name: Start wp-env
+        run: npx wp-env start
+      # A classic theme renders the content after the page head, the harder case:
+      # files a viewer asks for while rendering would land in the footer.
+      - name: Use a classic theme
+        run: npx wp-env run cli wp theme install twentytwentyone --activate
+      - name: Run Lighthouse
+        env:
+          LHCI_BASE_URL: http://localhost:8888
+        run: npx lhci autorun --config=tests/lighthouse/lighthouserc.js
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-reports
+          path: .lighthouseci
+          include-hidden-files: true
+          retention-days: 14

@@ -37,6 +37,7 @@ composer.phar
 playwright.config.js
 playwright-report
 test-results
+.lighthouseci
 .editorconfig
 .gitattributes
 PRODUCT_ROADMAP.md

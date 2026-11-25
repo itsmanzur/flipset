@@ -367,8 +367,9 @@ Flipset is developed and maintained by itsmanzur.
 * Improved: the library stylesheet now loads only on pages that show a library, not on every page.
 * Fixed: on an HTTPS page, a PDF from your own site saved with an `http://` address (for example from before the site moved to HTTPS) showed a cross-origin error. Flipset now loads it over HTTPS.
 * Fixed: Flipset widgets did not load or start in the Elementor editor preview.
+* Fixed: on classic themes and Elementor pages the page jumped while a viewer or library loaded, because its stylesheet arrived in the page footer. It now loads in the page head. On a test page with five viewers the layout shift score fell from 0.44 to under 0.05.
 * Fixed: library covers could fall short of their box when the theme sets `height: auto` on content images.
-* Developer: new `flipset/poster_image_id`, `flipset/resource_hints` and `flipset/progressive_loading` filters and `window.FlipsetPoster.init()`.
+* Developer: new `flipset/poster_image_id`, `flipset/resource_hints`, `flipset/progressive_loading` and `flipset/head_styles` filters and `window.FlipsetPoster.init()`.
 * Developer: new `flipset/welcome/sections`, `flipset/welcome/hero_actions` and `flipset/faq_items` filters and the `flipset/welcome/after_hero` action, so add-ons can add to the Welcome screen.
 
 = 1.1.3 =

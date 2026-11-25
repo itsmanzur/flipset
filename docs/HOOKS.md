@@ -337,6 +337,31 @@ Whether to print `<link rel="preload">` for the bundled PDF.js and `<link rel="p
 
 ---
 
+## `flipset/head_styles`
+
+**Type:** filter
+**Fired from:** `Flipset_Viewer::enqueue_head_styles()` in `includes/class-flipset-viewer.php` (on `wp_enqueue_scripts`)
+
+Which Flipset stylesheets to load in the page head. A shortcode or widget enqueues its files while it renders, which in a classic theme is after the head, so without this the stylesheet would print in the footer and the page would jump once it arrives. By default, on a single post or page, the viewer stylesheet is loaded when the content (or the page's Elementor data) holds a `[flipset]` shortcode, a Flipset Viewer block or widget, poster or not, and the library stylesheet when it holds a library. Viewers in widgets or templates are not detected; set a key to `true` to load the stylesheet there.
+
+**Parameters**
+
+| Name | Type | Meaning |
+|------|------|---------|
+| `$found` | `array` | `viewer` and `library`, each `bool`: what the post shows |
+| `$post` | `WP_Post` | The post being viewed |
+
+```php
+add_filter( 'flipset/head_styles', function ( $found, $post ) {
+	if ( 'manual' === $post->post_name ) {
+		$found['viewer'] = true; // A viewer placed by the theme template.
+	}
+	return $found;
+}, 10, 2 );
+```
+
+---
+
 ## `flipset/download_url`
 
 **Type:** filter

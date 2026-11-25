@@ -131,6 +131,81 @@ class Test_Flipset_Assets extends Flipset_TestCase {
 		$this->assertNotContains( 'flipset-elementor-preview', $this->flipset_handles() );
 	}
 
+	/**
+	 * Open a post and run only the enqueue hook, so what is queued is what the head prints.
+	 *
+	 * @param string $content Post content.
+	 * @param array  $meta    Post meta.
+	 * @return string[] Flipset handles queued before the content renders.
+	 */
+	private function head_handles( $content, $meta = array() ) {
+		$post_id = self::factory()->post->create( array( 'post_content' => $content ) );
+		foreach ( $meta as $key => $value ) {
+			update_post_meta( $post_id, $key, wp_slash( $value ) );
+		}
+		$this->go_to( get_permalink( $post_id ) );
+		do_action( 'wp_enqueue_scripts' );
+		return $this->flipset_handles();
+	}
+
+	public function test_viewer_stylesheet_loads_in_the_head() {
+		$this->assertSame( array( 'flipset-viewer' ), $this->head_handles( '[flipset file="https://example.com/a.pdf"]' ) );
+		$this->forget_enqueued();
+		$this->assertSame( array( 'flipset-viewer' ), $this->head_handles( '[flipset file="https://example.com/a.pdf" poster="true"]' ) );
+		$this->forget_enqueued();
+		$this->assertSame( array( 'flipset-viewer' ), $this->head_handles( '<!-- wp:flipset/viewer {"file":"https://example.com/a.pdf"} /-->' ) );
+	}
+
+	public function test_library_stylesheet_loads_in_the_head() {
+		$this->assertSame( array( 'flipset-library' ), $this->head_handles( '[flipset_library]' ) );
+		$this->assertTrue( wp_style_is( 'flipset-viewer', 'registered' ), 'The library stylesheet depends on the viewer one.' );
+	}
+
+	public function test_no_stylesheet_in_the_head_without_a_viewer() {
+		$this->assertSame( array(), $this->head_handles( '<p>No PDF. [flipset_unknown]</p>' ) );
+	}
+
+	public function test_elementor_widgets_load_stylesheets_in_the_head() {
+		$data = wp_json_encode(
+			array(
+				array(
+					'elType'     => 'widget',
+					'widgetType' => 'flipset-viewer',
+					'settings'   => array( 'file' => 'https://example.com/a.pdf' ),
+				),
+			)
+		);
+		$this->assertSame(
+			array( 'flipset-viewer' ),
+			$this->head_handles( '', array( '_elementor_edit_mode' => 'builder', '_elementor_data' => $data ) )
+		);
+		$this->forget_enqueued();
+
+		$data = wp_json_encode( array( array( 'widgetType' => 'shortcode', 'settings' => array( 'shortcode' => '[flipset_library]' ) ) ) );
+		$this->assertSame(
+			array( 'flipset-library' ),
+			$this->head_handles( '', array( '_elementor_edit_mode' => 'builder', '_elementor_data' => $data ) )
+		);
+	}
+
+	public function test_elementor_data_is_ignored_when_elementor_does_not_build_the_page() {
+		$data = wp_json_encode( array( array( 'widgetType' => 'flipset-viewer' ) ) );
+		$this->assertSame( array(), $this->head_handles( '<p>Text.</p>', array( '_elementor_data' => $data ) ) );
+	}
+
+	public function test_head_styles_filter() {
+		$off = function () {
+			return array(
+				'viewer'  => false,
+				'library' => false,
+			);
+		};
+		add_filter( 'flipset/head_styles', $off );
+		$handles = $this->head_handles( '[flipset file="https://example.com/a.pdf"]' );
+		remove_filter( 'flipset/head_styles', $off );
+		$this->assertSame( array(), $handles );
+	}
+
 	public function test_viewer_config_turns_progressive_loading_on_by_default() {
 		$this->assertTrue( Flipset_Viewer::progressive_loading() );
 		Flipset::instance()->viewer->enqueue_assets();

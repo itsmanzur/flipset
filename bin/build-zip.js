@@ -53,6 +53,7 @@ const rootIgnores = new Set([
 	'playwright.config.js',
 	'playwright-report',
 	'test-results',
+	'.lighthouseci',
 	'PRODUCT_ROADMAP.md',
 	'SECURITY.md',
 	'phpstan.neon.dist',

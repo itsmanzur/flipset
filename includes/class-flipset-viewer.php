@@ -43,6 +43,73 @@ class Flipset_Viewer {
 	public function init() {
 		add_shortcode( 'flipset', array( $this, 'render_shortcode' ) );
 		add_action( 'wp_head', array( $this, 'print_resource_hints' ), 2 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_head_styles' ) );
+	}
+
+	/**
+	 * Load the stylesheets in the page head when the post being viewed shows a viewer or a
+	 * library. A shortcode or widget only enqueues its files while it renders, which in a
+	 * classic theme is after the head, so the stylesheet would land in the footer: the page
+	 * first paints without it and then jumps (layout shift). Scripts still load in the footer.
+	 */
+	public function enqueue_head_styles() {
+		if ( ! is_singular() ) {
+			return;
+		}
+		$post = get_queried_object();
+		if ( ! $post instanceof WP_Post ) {
+			return;
+		}
+
+		/**
+		 * Filter: flipset/head_styles
+		 *
+		 * Which Flipset stylesheets to load in the page head for the post being viewed.
+		 *
+		 * @param array   $found { @type bool $viewer, @type bool $library } What the post shows.
+		 * @param WP_Post $post  The post being viewed.
+		 */
+		$found = (array) apply_filters( 'flipset/head_styles', self::post_shows( $post ), $post );
+
+		// Registered either way: the library stylesheet depends on it.
+		wp_register_style( 'flipset-viewer', Flipset::asset_url( 'assets/css/flipset-viewer.css' ), array(), FLIPSET_VERSION );
+		if ( ! empty( $found['viewer'] ) ) {
+			wp_enqueue_style( 'flipset-viewer' );
+		}
+		if ( ! empty( $found['library'] ) ) {
+			wp_enqueue_style( 'flipset-library', Flipset::asset_url( 'assets/css/flipset-library.css' ), array( 'flipset-viewer' ), FLIPSET_VERSION );
+		}
+	}
+
+	/**
+	 * Whether a post shows a Flipset viewer (shortcode, block or Elementor widget, poster or
+	 * not) or a library, judged from its content and its Elementor data.
+	 *
+	 * @param WP_Post $post Post.
+	 * @return array{viewer: bool, library: bool}
+	 */
+	public static function post_shows( $post ) {
+		$content = (string) $post->post_content;
+		$found   = array(
+			'viewer'  => false,
+			'library' => false,
+		);
+
+		if ( false !== strpos( $content, 'flipset' ) ) {
+			$found['viewer']  = has_shortcode( $content, 'flipset' ) || ( function_exists( 'has_block' ) && has_block( 'flipset/viewer', $content ) );
+			$found['library'] = has_shortcode( $content, 'flipset_library' ) || ( function_exists( 'has_block' ) && has_block( 'flipset/library', $content ) );
+		}
+
+		if ( 'builder' === get_post_meta( $post->ID, '_elementor_edit_mode', true ) ) {
+			$data = get_post_meta( $post->ID, '_elementor_data', true );
+			$data = is_string( $data ) ? $data : (string) wp_json_encode( $data );
+			if ( false !== strpos( $data, 'flipset' ) ) {
+				$found['viewer']  = $found['viewer'] || false !== strpos( $data, '"widgetType":"flipset-viewer"' ) || (bool) preg_match( '/\[flipset[\s\]]/', $data );
+				$found['library'] = $found['library'] || false !== strpos( $data, '"widgetType":"flipset-library"' ) || false !== strpos( $data, '[flipset_library' );
+			}
+		}
+
+		return $found;
 	}
 
 	/**
