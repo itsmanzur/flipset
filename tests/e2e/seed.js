@@ -46,6 +46,7 @@ function seed() {
 
 	upsertPage( 'flipset-e2e-viewer', 'Flipset E2E Viewer', `[flipset file="${ url }"]` );
 	upsertPage( 'flipset-e2e-library', 'Flipset E2E Library', '[flipset_library]' );
+	upsertPage( 'flipset-e2e-plain', 'Flipset E2E Plain', '<!-- wp:paragraph --><p>A page with no PDF.</p><!-- /wp:paragraph -->' );
 	upsertPage( 'flipset-e2e-poster', 'Flipset E2E Poster', `[flipset file="${ url }" poster="true" title="Poster sample"]` );
 	wp( 'rewrite structure "/%postname%/" --hard' );
 }

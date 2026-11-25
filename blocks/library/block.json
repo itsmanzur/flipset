@@ -54,6 +54,5 @@
 		"align": [ "wide", "full" ]
 	},
 	"editorScript": "flipset-library-block-editor",
-	"editorStyle": "flipset-library",
-	"style": "flipset-library"
+	"editorStyle": "flipset-library"
 }
